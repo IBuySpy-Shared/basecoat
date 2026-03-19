@@ -69,6 +69,8 @@ try {
         if ($LASTEXITCODE -eq 0) {
             throw 'Commit message scanner test failed: expected failure for sensitive commit message'
         }
+
+        $global:LASTEXITCODE = 0
     }
     else {
         Write-Host 'Skipping commit message scanner execution test: bash not available in environment.'

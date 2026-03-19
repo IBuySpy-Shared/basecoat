@@ -2,6 +2,11 @@
 
 All notable changes to this repository should be recorded in this file.
 
+## 0.4.2 - 2026-03-19
+
+- Fixed Windows PowerShell test runner to clear expected nonzero scanner exit codes
+- Stabilized the tag-triggered packaging workflow so release validation can complete on both runners
+
 ## 0.4.1 - 2026-03-19
 
 - Fixed commit-message scanner negative tests to scan the actual latest sensitive commit
