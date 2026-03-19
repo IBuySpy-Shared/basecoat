@@ -19,7 +19,7 @@ patterns=(
 )
 
 for regex in "${patterns[@]}"; do
-  if grep -Eiq "$regex" "$message_file"; then
+  if grep -Eiq -- "$regex" "$message_file"; then
     echo "Commit message appears to include sensitive content. Commit blocked." >&2
     echo "Remove secrets/PII from commit message and retry." >&2
     exit 1
