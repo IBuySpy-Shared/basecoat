@@ -34,6 +34,9 @@ jobs:
     needs: package
     runs-on: ubuntu-latest
     steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
       - name: Download package artifacts
         uses: actions/download-artifact@v4
         with:
@@ -45,7 +48,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           if gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1; then
-            gh release upload "$GITHUB_REF_NAME" dist/* --clobber
+            gh release upload "$GITHUB_REF_NAME" dist/* --clobber --repo "${{ github.repository }}"
           else
-            gh release create "$GITHUB_REF_NAME" dist/* --title "Base Coat $GITHUB_REF_NAME" --generate-notes
+            gh release create "$GITHUB_REF_NAME" dist/* --title "Base Coat $GITHUB_REF_NAME" --generate-notes --repo "${{ github.repository }}"
           fi
