@@ -1,0 +1,26 @@
+# Changelog
+
+All notable changes to this repository should be recorded in this file.
+
+## 0.3.0 - 2026-03-19
+
+- Added sample Azure, naming, Terraform, and Bicep instruction files
+- Added authoring skills for creating new skills and instructions
+- Added sample workflow agents for customization creation and repo rollout
+- Added enterprise packaging and validation scripts for PowerShell and bash
+- Added GitHub Actions workflows for validation and release packaging
+- Added example consumer workflows and starter IaC examples for Azure with Bicep and Terraform
+
+## 0.2.0 - 2026-03-19
+
+- Added YAML frontmatter to starter customization files for better discovery and validity
+- Expanded instructions with common best-practice sets for security, reliability, and documentation
+- Added a refactoring skill and a bugfix prompt
+- Updated inventory and README to reflect the broader base set
+
+## 0.1.0 - 2026-03-19
+
+- Initial repository scaffold
+- Added sync scripts for PowerShell and bash consumers
+- Added starter instructions, prompts, skills, and agent files
+- Added inventory and version metadata

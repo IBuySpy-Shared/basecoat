@@ -1,0 +1,79 @@
+# Inventory
+
+This catalog helps teams discover what exists in Base Coat and when to use it.
+
+## Instructions
+
+| File                                         | Use For                                               | Keywords                                                           |
+| -------------------------------------------- | ----------------------------------------------------- | ------------------------------------------------------------------ |
+| `instructions/backend.instructions.md`       | API, services, data access, backend guardrails        | backend, api, refactor, service, reliability                       |
+| `instructions/frontend.instructions.md`      | UI, accessibility, responsiveness, frontend changes   | frontend, ui, css, accessibility, react                            |
+| `instructions/testing.instructions.md`       | test expectations with positive and negative coverage | tests, unit test, integration test, regression, positive, negative |
+| `instructions/security.instructions.md`      | secure coding, auth boundaries, secret handling       | security, auth, secrets, validation, unsafe                        |
+| `instructions/reliability.instructions.md`   | resilience, failure modes, observability              | reliability, retry, timeout, logging, resilience                   |
+| `instructions/documentation.instructions.md` | docs updates and operational notes                    | docs, readme, changelog, migration, usage                          |
+| `instructions/azure.instructions.md`         | Azure application and service guidance                | azure, managed identity, key vault, app service                    |
+| `instructions/terraform.instructions.md`     | Terraform authoring for Azure and shared IaC          | terraform, azurerm, modules, providers, state                      |
+| `instructions/bicep.instructions.md`         | Bicep authoring, parameters, and deployment hygiene   | bicep, bicepparam, module, symbolic name                           |
+| `instructions/naming.instructions.md`        | consistent naming across code and infrastructure      | naming, convention, style, files, resources                        |
+| `instructions/mcp.instructions.md`           | MCP server/tool governance and safe integration rules | mcp, tools, server, governance, allowlist                          |
+
+## Skills
+
+| File                                    | Use For                                                 | Keywords                                     |
+| --------------------------------------- | ------------------------------------------------------- | -------------------------------------------- |
+| `skills/performance-profiling/SKILL.md` | isolate and measure slow code paths                     | profiling, performance, latency, hot path    |
+| `skills/code-review/SKILL.md`           | review changes for risk, regressions, and missing tests | review, bug risk, regression, findings       |
+| `skills/refactoring/SKILL.md`           | restructure code without changing behavior              | refactor, cleanup, simplify, extract, rename |
+| `skills/create-skill/SKILL.md`          | create a new reusable skill with proper frontmatter     | create skill, skill template, customization  |
+| `skills/create-instruction/SKILL.md`    | create a new instruction file for a domain              | create instruction, applyTo, frontmatter     |
+
+## Prompts
+
+| File                            | Use For                                              | Keywords                              |
+| ------------------------------- | ---------------------------------------------------- | ------------------------------------- |
+| `prompts/architect.prompt.md`   | break down a system or feature before implementation | architecture, design, tradeoffs, plan |
+| `prompts/code-review.prompt.md` | initiate a focused code review workflow              | review, pull request, findings        |
+| `prompts/bugfix.prompt.md`      | investigate and fix a bug at the root cause          | bugfix, incident, regression, failure |
+
+## Agents
+
+| File                                | Use For                                        | Keywords                                  |
+| ----------------------------------- | ---------------------------------------------- | ----------------------------------------- |
+| `agents/code-review.agent.md`       | multi-step repository review process           | agent, review, repo scan, risk            |
+| `agents/new-customization.agent.md` | choose and create the right customization type | agent, customization, instruction, prompt |
+| `agents/rollout-basecoat.agent.md`  | onboard a repo to a pinned Base Coat release   | agent, rollout, bootstrap, enterprise     |
+
+## Documentation Assets
+
+| File                                      | Use For                                                 | Keywords                           |
+| ----------------------------------------- | ------------------------------------------------------- | ---------------------------------- |
+| `docs/documentation-heading-scaffolds.md` | shared heading templates for common documentation types | docs, headings, template, scaffold |
+| `docs/prd-and-spec-guidance.md`           | guidance and templates for PRDs and technical specs     | prd, spec, requirements, design    |
+
+## Operational Assets
+
+| File                                                | Use For                                                     | Keywords                              |
+| --------------------------------------------------- | ----------------------------------------------------------- | ------------------------------------- |
+| `scripts/validate-basecoat.sh`                      | local and CI validation on macOS and Linux                  | validate, bash, ci, frontmatter       |
+| `scripts/validate-basecoat.ps1`                     | local and CI validation on Windows                          | validate, powershell, ci, frontmatter |
+| `scripts/install-git-hooks.sh`                      | configure local git hooks for guardrail enforcement         | hooks, git, security, pre-commit      |
+| `scripts/install-git-hooks.ps1`                     | configure local git hooks for guardrail enforcement         | hooks, git, security, pre-commit      |
+| `scripts/scan-commit-messages.sh`                   | scan commit messages for secrets and PII patterns           | commit-msg, security, secrets, pii    |
+| `.githooks/commit-msg`                              | block commits when message contains sensitive data          | hook, commit-msg, security, pii       |
+| `scripts/package-basecoat.sh`                       | create release artifacts on macOS and Linux                 | package, tar.gz, zip, checksum        |
+| `scripts/package-basecoat.ps1`                      | create release artifacts on Windows                         | package, zip, checksum, powershell    |
+| `.github/workflows/validate-basecoat.yml`           | validate repo structure on push and pull request            | workflow, ci, validation              |
+| `.github/workflows/prd-spec-gate.yml`               | enforce PRD/spec references on risky or large pull requests | workflow, prd, spec, governance       |
+| `.github/workflows/package-basecoat.yml`            | package and publish release artifacts                       | workflow, release, package, artifact  |
+| `.github/PULL_REQUEST_TEMPLATE.md`                  | pull request template with PRD/spec reference fields        | pull request, template, prd, spec     |
+| `examples/workflows/bootstrap-from-release.yml`     | install a pinned Base Coat release into a new repo          | workflow, bootstrap, pinned release   |
+| `examples/workflows/validate-basecoat-consumer.yml` | validate a consumer repo keeps Base Coat present            | workflow, consumer, drift, validation |
+
+## Test Assets
+
+| File                  | Use For                                                                                      | Keywords                           |
+| --------------------- | -------------------------------------------------------------------------------------------- | ---------------------------------- |
+| `tests/run-tests.ps1` | smoke tests for validation, packaging, hooks, and commit-message scanning on Windows         | test, powershell, smoke, packaging |
+| `tests/run-tests.sh`  | smoke tests for validation, packaging, hooks, and commit-message scanning on macOS and Linux | test, bash, smoke, packaging       |
+| `tests/README.md`     | test suite scope and execution commands                                                      | tests, docs, usage                 |

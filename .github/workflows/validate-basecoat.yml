@@ -1,0 +1,58 @@
+name: Validate Base Coat
+
+on:
+  workflow_call:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  validate-commit-messages:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Scan commit messages for secrets and PII
+        run: |
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            range="origin/${{ github.base_ref }}..HEAD"
+            git fetch origin "${{ github.base_ref }}" --depth=1
+          elif [[ "${{ github.event_name }}" == "push" && "${{ github.event.before }}" != "0000000000000000000000000000000000000000" ]]; then
+            range="${{ github.event.before }}..${{ github.sha }}"
+          else
+            range="HEAD~20..HEAD"
+          fi
+
+          echo "Scanning commit messages in range: $range"
+          bash scripts/scan-commit-messages.sh "$range"
+
+  validate-unix:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Validate with bash
+        run: bash scripts/validate-basecoat.sh
+
+      - name: Run bash test suite
+        run: bash tests/run-tests.sh
+
+  validate-windows:
+    runs-on: windows-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Validate with PowerShell
+        shell: pwsh
+        run: ./scripts/validate-basecoat.ps1
+
+      - name: Run PowerShell test suite
+        shell: pwsh
+        run: ./tests/run-tests.ps1
