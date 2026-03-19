@@ -61,7 +61,7 @@ try {
     git commit -m 'safe commit message' | Out-Null
     Set-Content -Path 'test.txt' -Value 'updated'
     git add test.txt
-    git commit -m 'api_key=supersecret12345' | Out-Null
+    git commit -m '-----BEGIN PRIVATE KEY-----' | Out-Null
 
     $scanScript = Join-Path $repoRoot 'scripts/scan-commit-messages.sh'
     if (Get-Command bash -ErrorAction SilentlyContinue) {

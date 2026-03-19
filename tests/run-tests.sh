@@ -54,7 +54,7 @@ git add test.txt
 git commit -m "safe commit message" >/dev/null
 echo "updated" > test.txt
 git add test.txt
-git commit -m "api_key=supersecret12345" >/dev/null
+git commit -m "-----BEGIN PRIVATE KEY-----" >/dev/null
 
 if bash "$REPO_ROOT/scripts/scan-commit-messages.sh" HEAD~2..HEAD >/dev/null 2>&1; then
   echo "Commit message scanner test failed: expected failure for sensitive commit message" >&2

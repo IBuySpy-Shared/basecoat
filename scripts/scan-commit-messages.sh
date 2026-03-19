@@ -33,7 +33,7 @@ while IFS= read -r commit; do
   for entry in "${patterns[@]}"; do
     label="${entry%%:::*}"
     regex="${entry#*:::}"
-    if grep -Eiq "$regex" <<<"$message"; then
+    if grep -Eiq -- "$regex" <<<"$message"; then
       echo "[SECURITY] $label detected in commit message for $commit" >&2
       echo "$message" >&2
       failed=1
