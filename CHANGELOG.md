@@ -2,6 +2,11 @@
 
 All notable changes to this repository should be recorded in this file.
 
+## 0.4.1 - 2026-03-19
+
+- Fixed commit-message scanner negative tests to scan the actual latest sensitive commit
+- Stabilized GitHub Actions validation for packaging and release workflows
+
 ## 0.4.0 - 2026-03-19
 
 - Added MCP standards guidance for server allowlisting, tool safety, and governance

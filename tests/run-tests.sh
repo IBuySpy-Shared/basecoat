@@ -56,7 +56,7 @@ echo "updated" > test.txt
 git add test.txt
 git commit -m "-----BEGIN PRIVATE KEY-----" >/dev/null
 
-if bash "$REPO_ROOT/scripts/scan-commit-messages.sh" HEAD~2..HEAD >/dev/null 2>&1; then
+if bash "$REPO_ROOT/scripts/scan-commit-messages.sh" HEAD~1..HEAD >/dev/null 2>&1; then
   echo "Commit message scanner test failed: expected failure for sensitive commit message" >&2
   exit 1
 fi

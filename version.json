@@ -1,6 +1,6 @@
 {
     "name": "base-coat",
-    "version": "0.4.0",
+    "version": "0.4.1",
     "releaseDate": "2026-03-19",
-    "notes": "Added MCP guidance, repo template standards, sample repo template enforcement, and template validation workflow."
+    "notes": "Fixed commit-message scanner negative tests and stabilized the release validation pipeline."
 }

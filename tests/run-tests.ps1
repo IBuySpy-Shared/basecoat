@@ -65,7 +65,7 @@ try {
 
     $scanScript = Join-Path $repoRoot 'scripts/scan-commit-messages.sh'
     if (Get-Command bash -ErrorAction SilentlyContinue) {
-        $output = & bash $scanScript 'HEAD~2..HEAD' 2>&1
+        $output = & bash $scanScript 'HEAD~1..HEAD' 2>&1
         if ($LASTEXITCODE -eq 0) {
             throw 'Commit message scanner test failed: expected failure for sensitive commit message'
         }
