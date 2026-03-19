@@ -46,29 +46,34 @@ This catalog helps teams discover what exists in Base Coat and when to use it.
 
 ## Documentation Assets
 
-| File                                      | Use For                                                 | Keywords                           |
-| ----------------------------------------- | ------------------------------------------------------- | ---------------------------------- |
-| `docs/documentation-heading-scaffolds.md` | shared heading templates for common documentation types | docs, headings, template, scaffold |
-| `docs/prd-and-spec-guidance.md`           | guidance and templates for PRDs and technical specs     | prd, spec, requirements, design    |
+| File                                      | Use For                                                         | Keywords                                 |
+| ----------------------------------------- | --------------------------------------------------------------- | ---------------------------------------- |
+| `docs/documentation-heading-scaffolds.md` | shared heading templates for common documentation types         | docs, headings, template, scaffold       |
+| `docs/prd-and-spec-guidance.md`           | guidance and templates for PRDs and technical specs             | prd, spec, requirements, design          |
+| `docs/repo-template-standard.md`          | standard for bootstrapping and enforcing Base Coat in templates | template, governance, drift, enforcement |
 
 ## Operational Assets
 
-| File                                                | Use For                                                     | Keywords                              |
-| --------------------------------------------------- | ----------------------------------------------------------- | ------------------------------------- |
-| `scripts/validate-basecoat.sh`                      | local and CI validation on macOS and Linux                  | validate, bash, ci, frontmatter       |
-| `scripts/validate-basecoat.ps1`                     | local and CI validation on Windows                          | validate, powershell, ci, frontmatter |
-| `scripts/install-git-hooks.sh`                      | configure local git hooks for guardrail enforcement         | hooks, git, security, pre-commit      |
-| `scripts/install-git-hooks.ps1`                     | configure local git hooks for guardrail enforcement         | hooks, git, security, pre-commit      |
-| `scripts/scan-commit-messages.sh`                   | scan commit messages for secrets and PII patterns           | commit-msg, security, secrets, pii    |
-| `.githooks/commit-msg`                              | block commits when message contains sensitive data          | hook, commit-msg, security, pii       |
-| `scripts/package-basecoat.sh`                       | create release artifacts on macOS and Linux                 | package, tar.gz, zip, checksum        |
-| `scripts/package-basecoat.ps1`                      | create release artifacts on Windows                         | package, zip, checksum, powershell    |
-| `.github/workflows/validate-basecoat.yml`           | validate repo structure on push and pull request            | workflow, ci, validation              |
-| `.github/workflows/prd-spec-gate.yml`               | enforce PRD/spec references on risky or large pull requests | workflow, prd, spec, governance       |
-| `.github/workflows/package-basecoat.yml`            | package and publish release artifacts                       | workflow, release, package, artifact  |
-| `.github/PULL_REQUEST_TEMPLATE.md`                  | pull request template with PRD/spec reference fields        | pull request, template, prd, spec     |
-| `examples/workflows/bootstrap-from-release.yml`     | install a pinned Base Coat release into a new repo          | workflow, bootstrap, pinned release   |
-| `examples/workflows/validate-basecoat-consumer.yml` | validate a consumer repo keeps Base Coat present            | workflow, consumer, drift, validation |
+| File                                                                       | Use For                                                     | Keywords                               |
+| -------------------------------------------------------------------------- | ----------------------------------------------------------- | -------------------------------------- |
+| `scripts/validate-basecoat.sh`                                             | local and CI validation on macOS and Linux                  | validate, bash, ci, frontmatter        |
+| `scripts/validate-basecoat.ps1`                                            | local and CI validation on Windows                          | validate, powershell, ci, frontmatter  |
+| `scripts/install-git-hooks.sh`                                             | configure local git hooks for guardrail enforcement         | hooks, git, security, pre-commit       |
+| `scripts/install-git-hooks.ps1`                                            | configure local git hooks for guardrail enforcement         | hooks, git, security, pre-commit       |
+| `scripts/scan-commit-messages.sh`                                          | scan commit messages for secrets and PII patterns           | commit-msg, security, secrets, pii     |
+| `.githooks/commit-msg`                                                     | block commits when message contains sensitive data          | hook, commit-msg, security, pii        |
+| `scripts/package-basecoat.sh`                                              | create release artifacts on macOS and Linux                 | package, tar.gz, zip, checksum         |
+| `scripts/package-basecoat.ps1`                                             | create release artifacts on Windows                         | package, zip, checksum, powershell     |
+| `.github/workflows/validate-basecoat.yml`                                  | validate repo structure on push and pull request            | workflow, ci, validation               |
+| `.github/workflows/validate-repo-template-sample.yml`                      | validate sample repository template assets and contracts    | workflow, template, governance, ci     |
+| `.github/workflows/prd-spec-gate.yml`                                      | enforce PRD/spec references on risky or large pull requests | workflow, prd, spec, governance        |
+| `.github/workflows/package-basecoat.yml`                                   | package and publish release artifacts                       | workflow, release, package, artifact   |
+| `.github/PULL_REQUEST_TEMPLATE.md`                                         | pull request template with PRD/spec reference fields        | pull request, template, prd, spec      |
+| `examples/workflows/bootstrap-from-release.yml`                            | install a pinned Base Coat release into a new repo          | workflow, bootstrap, pinned release    |
+| `examples/workflows/validate-basecoat-consumer.yml`                        | validate a consumer repo keeps Base Coat present            | workflow, consumer, drift, validation  |
+| `examples/repo-template/.github/base-coat.lock.json`                       | lock file contract for template-based Base Coat pinning     | template, lock, pinned version         |
+| `examples/repo-template/.github/workflows/bootstrap-basecoat-template.yml` | bootstrap Base Coat in a new repo from lock file            | template, bootstrap, release, checksum |
+| `examples/repo-template/.github/workflows/enforce-basecoat-template.yml`   | enforce lock/version consistency and block unsafe drift     | template, enforcement, drift, policy   |
 
 ## Test Assets
 

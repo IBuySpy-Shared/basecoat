@@ -2,6 +2,14 @@
 
 All notable changes to this repository should be recorded in this file.
 
+## 0.4.0 - 2026-03-19
+
+- Added MCP standards guidance for server allowlisting, tool safety, and governance
+- Added repository template standard for lock-based bootstrap and drift enforcement
+- Added a sample repository template with bootstrap and enforcement workflows
+- Added CI validation for the sample repository template assets
+- Fixed PowerShell packaging and hook-install scripts to remove duplicated execution blocks
+
 ## 0.3.0 - 2026-03-19
 
 - Added sample Azure, naming, Terraform, and Bicep instruction files

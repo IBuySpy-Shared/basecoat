@@ -1,6 +1,6 @@
 {
     "name": "base-coat",
-    "version": "0.3.0",
+    "version": "0.4.0",
     "releaseDate": "2026-03-19",
-    "notes": "Added Azure, naming, Terraform, and Bicep starter guidance plus enterprise packaging, validation, and rollout workflows."
+    "notes": "Added MCP guidance, repo template standards, sample repo template enforcement, and template validation workflow."
 }

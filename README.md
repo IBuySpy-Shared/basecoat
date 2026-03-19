@@ -58,8 +58,12 @@ basecoat/
 - [docs/enterprise-rollout.md](/c:/git/basecoat/docs/enterprise-rollout.md): release, governance, and safe rollout guidance
 - [docs/documentation-heading-scaffolds.md](/c:/git/basecoat/docs/documentation-heading-scaffolds.md): reusable heading templates for README, runbooks, ADRs, and change notes
 - [docs/prd-and-spec-guidance.md](/c:/git/basecoat/docs/prd-and-spec-guidance.md): guidance and templates for product requirements docs and technical specs
+- [docs/repo-template-standard.md](/c:/git/basecoat/docs/repo-template-standard.md): standard for enforcing Base Coat in new repository templates
 - [examples/iac/README.md](/c:/git/basecoat/examples/iac/README.md): sample Azure IaC layouts for Bicep and Terraform
 - [examples/workflows/bootstrap-from-release.yml](/c:/git/basecoat/examples/workflows/bootstrap-from-release.yml): consumer workflow that installs a pinned release
+- [examples/repo-template/README.md](/c:/git/basecoat/examples/repo-template/README.md): sample repository template with lock-based bootstrap and enforcement
+- [.github/workflows/validate-repo-template-sample.yml](/c:/git/basecoat/.github/workflows/validate-repo-template-sample.yml): CI validation for the sample repository template assets
+- [examples/repo-template/README.md](/c:/git/basecoat/examples/repo-template/README.md): sample repository template with lock-based bootstrap and enforcement workflows
 
 ## Adoption Options
 

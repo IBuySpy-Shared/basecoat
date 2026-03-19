@@ -1,0 +1,72 @@
+name: Enforce Base Coat Template
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  enforce-basecoat-template:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Validate lock file and installed baseline
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          lock_path = Path('.github/base-coat.lock.json')
+          if not lock_path.exists():
+              raise SystemExit('Missing .github/base-coat.lock.json')
+
+          lock = json.loads(lock_path.read_text(encoding='utf-8'))
+          required = ['baseCoatRepo', 'version', 'installPath', 'checksumRequired']
+          missing = [k for k in required if k not in lock]
+          if missing:
+              raise SystemExit(f'Lock file missing keys: {", ".join(missing)}')
+
+          install_path = Path(lock['installPath'])
+          version_path = install_path / 'version.json'
+          if not version_path.exists():
+              raise SystemExit(f'Missing installed version file: {version_path}')
+
+          installed = json.loads(version_path.read_text(encoding='utf-8'))
+          installed_version = f"v{installed['version']}"
+          if installed_version != lock['version']:
+              raise SystemExit(
+                  f"Installed Base Coat version {installed_version} does not match lock {lock['version']}"
+              )
+
+          for folder in ['instructions', 'skills', 'prompts', 'agents']:
+              if not (install_path / folder).is_dir():
+                  raise SystemExit(f'Missing required baseline folder: {install_path / folder}')
+
+          print('Lock and baseline validation passed')
+          PY
+
+      - name: Block unsafe Base Coat edits on pull requests
+        if: github.event_name == 'pull_request'
+        run: |
+          git fetch origin "${{ github.base_ref }}" --depth=1
+          changed=$(git diff --name-only "origin/${{ github.base_ref }}...HEAD")
+          echo "$changed"
+
+          if echo "$changed" | grep -Eq '^\.github/base-coat/'; then
+            allowed='^\.github/base-coat/version.json$|^\.github/base-coat\.lock.json$|^\.github/base-coat/CHANGELOG.md$'
+            disallowed=$(echo "$changed" | grep -E '^\.github/base-coat/' | grep -Ev "$allowed" || true)
+            if [ -n "$disallowed" ]; then
+              echo "Direct Base Coat edits detected outside approved upgrade files:" >&2
+              echo "$disallowed" >&2
+              exit 1
+            fi
+          fi
+
+      - name: Enforcement completed
+        run: echo "Base Coat template enforcement passed"

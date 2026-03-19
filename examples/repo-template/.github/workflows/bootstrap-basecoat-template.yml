@@ -1,0 +1,62 @@
+name: Bootstrap Base Coat From Lock
+
+on:
+  workflow_dispatch:
+
+jobs:
+  bootstrap:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Read lock file
+        id: lock
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          lock = json.loads(Path('.github/base-coat.lock.json').read_text(encoding='utf-8'))
+          print(f"repo={lock['baseCoatRepo']}")
+          print(f"version={lock['version']}")
+          print(f"install_path={lock['installPath']}")
+          PY
+          {
+            echo "repo=$(python -c \"import json;print(json.load(open('.github/base-coat.lock.json'))['baseCoatRepo'])\")"
+            echo "version=$(python -c \"import json;print(json.load(open('.github/base-coat.lock.json'))['version'])\")"
+            echo "install_path=$(python -c \"import json;print(json.load(open('.github/base-coat.lock.json'))['installPath'])\")"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Download pinned Base Coat release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p .basecoat-download
+          gh release download "${{ steps.lock.outputs.version }}" \
+            --repo "${{ steps.lock.outputs.repo }}" \
+            --pattern 'base-coat-*.tar.gz' \
+            --pattern 'SHA256SUMS.txt' \
+            --dir .basecoat-download
+
+      - name: Verify and extract package
+        run: |
+          archive=$(find .basecoat-download -name 'base-coat-*.tar.gz' | head -n 1)
+          checksum_file=.basecoat-download/SHA256SUMS.txt
+          (cd .basecoat-download && sha256sum -c "$(basename "$checksum_file")")
+          install_path="${{ steps.lock.outputs.install_path }}"
+          mkdir -p "$(dirname "$install_path")"
+          rm -rf "$install_path"
+          tar -xzf "$archive"
+          mv base-coat "$install_path"
+
+      - name: Verify baseline directories
+        run: |
+          install_path="${{ steps.lock.outputs.install_path }}"
+          test -d "$install_path/instructions"
+          test -d "$install_path/skills"
+          test -d "$install_path/prompts"
+          test -d "$install_path/agents"
+
+      - name: Show installed version
+        run: cat "${{ steps.lock.outputs.install_path }}/version.json"

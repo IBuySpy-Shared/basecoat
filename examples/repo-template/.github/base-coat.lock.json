@@ -1,0 +1,6 @@
+{
+    "baseCoatRepo": "YOUR-ORG/basecoat",
+    "version": "v0.3.0",
+    "installPath": ".github/base-coat",
+    "checksumRequired": true
+}
