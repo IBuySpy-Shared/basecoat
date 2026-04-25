@@ -121,6 +121,11 @@ Trigger conditions:
 | Message handler with no idempotency check | `tech-debt,middleware,reliability` |
 | Missing distributed trace propagation across a service boundary | `tech-debt,middleware,observability` |
 
+## Model
+**Recommended:** gpt-5.3-codex
+**Rationale:** Code-optimized model tuned for integration layer implementation and adapter patterns
+**Minimum:** gpt-5.4-mini
+
 ## Output Format
 
 - Deliver adapters and message handlers with inline comments explaining resilience decisions.

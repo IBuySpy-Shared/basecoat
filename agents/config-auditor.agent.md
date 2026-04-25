@@ -161,6 +161,11 @@ config/settings.local.json
 EOF
 ```
 
+## Model
+**Recommended:** claude-haiku-4.5
+**Rationale:** Routine scanning with well-defined patterns — speed and cost matter most
+**Minimum:** gpt-5.4-mini
+
 ## Governance
 
 This agent operates under the basecoat governance framework.

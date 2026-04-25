@@ -69,6 +69,11 @@ For each session, produce a charter following `skills/manual-test-strategy/chart
 
 After the session, produce a brief findings summary with filed GitHub Issues for automation candidates.
 
+## Model
+**Recommended:** claude-sonnet-4.6
+**Rationale:** Structured thinking and edge case identification for exploratory testing sessions
+**Minimum:** claude-haiku-4.5
+
 ## Governance
 
 This agent operates under the basecoat governance framework.

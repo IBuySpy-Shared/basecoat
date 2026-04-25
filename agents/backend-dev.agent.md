@@ -124,6 +124,11 @@ Trigger conditions:
 | Hardcoded value that should be config | `tech-debt,backend` |
 | Endpoint missing authentication or authorization check | `tech-debt,backend,security` |
 
+## Model
+**Recommended:** gpt-5.3-codex
+**Rationale:** Code-optimized model tuned for API implementation, service layers, and data access patterns
+**Minimum:** gpt-5.4-mini
+
 ## Output Format
 
 - Deliver code with inline comments explaining non-obvious decisions.

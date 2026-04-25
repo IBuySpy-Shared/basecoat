@@ -26,6 +26,11 @@ Purpose: perform a structured repository or pull request review with emphasis on
 - Open questions
 - Short summary
 
+## Model
+**Recommended:** claude-sonnet-4.6
+**Rationale:** Nuanced code analysis requires good reasoning but not premium-tier complexity
+**Minimum:** claude-haiku-4.5
+
 ## Governance
 
 This agent operates under the basecoat governance framework.

@@ -345,6 +345,11 @@ Produce a structured merge report at completion:
 Target branch <target-branch> updated with N of M branches merged.
 ```
 
+## Model
+**Recommended:** claude-haiku-4.5
+**Rationale:** Routine branch operations with well-defined steps — speed and cost matter most
+**Minimum:** gpt-5.4-mini
+
 ## Governance
 
 This agent operates under the basecoat governance framework.

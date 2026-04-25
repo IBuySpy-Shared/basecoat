@@ -172,17 +172,24 @@ Specifically:
 
 ---
 
-## 10. Token and Model Awareness (Stub — Sprint 6)
+## 10. Token and Model Awareness
 
-> **This section is a placeholder. Full implementation is tracked in Issue #44.**
+> **Token budget and cost attribution are tracked in Issue #44. Model selection guidance is now available.**
 
-Planned for Sprint 6:
-- Token budget awareness: agents should track approximate context usage and warn when approaching limits
-- Model selection guidance: which tasks warrant which model tier (fast/cheap vs. standard vs. premium)
-- Context window management: how to chunk large tasks to avoid truncation
-- Cost attribution: tagging agent-driven API calls for cost tracking
+### Model Selection — Match Model to Task Complexity
 
-Until Issue #44 is implemented, agents should:
+Every agent should run on the model tier that matches its cognitive demand:
+
+- **Premium** (`claude-opus-4.6`) — for security analysis and architecture decisions where mistakes are costly
+- **Reasoning** (`claude-sonnet-4.6`) — for code review, test strategy, planning, and research
+- **Code** (`gpt-5.3-codex`) — for code generation, refactoring, and implementation tasks
+- **Fast** (`claude-haiku-4.5` / `gpt-5.4-mini`) — for routine automation, scanning, and simple operations
+
+Each agent's `.agent.md` file includes a `## Model` section with the recommended model, rationale, and minimum viable model. See `docs/MODEL_OPTIMIZATION.md` for the full tier matrix, override guidance, and cost considerations.
+
+### General Token Guidance
+
+Until Issue #44 is fully implemented, agents should:
 - Prefer concise, targeted prompts over large context dumps
 - Break large tasks into discrete issues and PRs rather than one massive context
 - Flag when a task feels too large for a single context window

@@ -27,6 +27,11 @@ Purpose: turn a broad customization request into the right asset with the right 
 - Validation notes
 - Suggested follow-up assets
 
+## Model
+**Recommended:** claude-sonnet-4.6
+**Rationale:** Choosing the right customization primitive requires structured reasoning about scope and reuse
+**Minimum:** claude-haiku-4.5
+
 ## Governance
 
 This agent operates under the basecoat governance framework.

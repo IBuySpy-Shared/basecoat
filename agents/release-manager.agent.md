@@ -248,6 +248,11 @@ DRY RUN — Release v<NEXT_VERSION>
 | CHANGELOG.md missing | Create it with the standard header before adding the entry |
 | Dirty working tree | Stop with error — require clean state |
 
+## Model
+**Recommended:** claude-sonnet-4.6
+**Rationale:** Version classification, changelog generation, and release decisions need good reasoning
+**Minimum:** claude-haiku-4.5
+
 ## Governance
 
 This agent operates under the basecoat governance framework.

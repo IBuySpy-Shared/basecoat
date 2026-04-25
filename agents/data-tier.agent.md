@@ -135,6 +135,11 @@ Trigger conditions:
 | Migration with no `down` / rollback block | `tech-debt,data,reliability` |
 | Hardcoded ID or environment-specific value in a query or migration | `tech-debt,data` |
 
+## Model
+**Recommended:** gpt-5.3-codex
+**Rationale:** Code-optimized model tuned for schema design, migrations, and query optimization
+**Minimum:** gpt-5.4-mini
+
 ## Output Format
 
 - Deliver schema DDL and migration files with inline comments explaining design decisions.
