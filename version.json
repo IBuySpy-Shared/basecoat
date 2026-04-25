@@ -1,6 +1,6 @@
 {
     "name": "base-coat",
-    "version": "0.4.2",
+    "version": "0.5.0",
     "releaseDate": "2026-03-19",
-    "notes": "Fixed Windows CI exit handling for the commit-message scanner negative test and stabilized release packaging."
+    "notes": "Added manual test strategy agents, skill, and templates. Updated testing instructions with Manual Test Strategy section."
 }

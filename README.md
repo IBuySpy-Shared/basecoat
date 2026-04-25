@@ -44,6 +44,7 @@ basecoat/
 - [instructions/bicep.instructions.md](/c:/git/basecoat/instructions/bicep.instructions.md): Bicep authoring guidance and validation practices
 - [instructions/naming.instructions.md](/c:/git/basecoat/instructions/naming.instructions.md): naming conventions across repos, code, and infrastructure
 - [instructions/mcp.instructions.md](/c:/git/basecoat/instructions/mcp.instructions.md): MCP server and tool governance, safety, and enforcement guidance
+- [skills/manual-test-strategy/SKILL.md](/c:/git/basecoat/skills/manual-test-strategy/SKILL.md): workflow for defining manual scope, producing charters, checklists, and automation handoff artifacts
 - [skills/performance-profiling/SKILL.md](/c:/git/basecoat/skills/performance-profiling/SKILL.md): workflow for profiling slow paths
 - [skills/code-review/SKILL.md](/c:/git/basecoat/skills/code-review/SKILL.md): review-first workflow focused on risk detection
 - [skills/refactoring/SKILL.md](/c:/git/basecoat/skills/refactoring/SKILL.md): workflow for safe structural cleanup
@@ -52,6 +53,9 @@ basecoat/
 - [prompts/architect.prompt.md](/c:/git/basecoat/prompts/architect.prompt.md): architecture planning starter
 - [prompts/code-review.prompt.md](/c:/git/basecoat/prompts/code-review.prompt.md): code review starter
 - [prompts/bugfix.prompt.md](/c:/git/basecoat/prompts/bugfix.prompt.md): root-cause bugfix starter
+- [agents/manual-test-strategy.agent.md](/c:/git/basecoat/agents/manual-test-strategy.agent.md): produce a complete manual test strategy with rubric, charter, checklist, defect template, and automation backlog
+- [agents/exploratory-charter.agent.md](/c:/git/basecoat/agents/exploratory-charter.agent.md): generate time-boxed exploratory sessions with evidence capture and GitHub Issue filing
+- [agents/strategy-to-automation.agent.md](/c:/git/basecoat/agents/strategy-to-automation.agent.md): convert manual paths into tiered automation candidates with a GitHub Issue filed for every one
 - [agents/code-review.agent.md](/c:/git/basecoat/agents/code-review.agent.md): multi-step review agent definition draft
 - [agents/new-customization.agent.md](/c:/git/basecoat/agents/new-customization.agent.md): workflow for creating the right customization primitive
 - [agents/rollout-basecoat.agent.md](/c:/git/basecoat/agents/rollout-basecoat.agent.md): workflow for onboarding a repo to a pinned Base Coat release
