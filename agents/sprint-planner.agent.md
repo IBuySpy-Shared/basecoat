@@ -176,6 +176,11 @@ List any of the following detected during planning:
   of the assigned agent.
 - Do not estimate hours or story points unless the user explicitly requests it.
 
+## Model
+**Recommended:** claude-sonnet-4.6
+**Rationale:** Goal decomposition, dependency mapping, and wave planning require good reasoning depth
+**Minimum:** claude-haiku-4.5
+
 ## Governance
 
 This agent operates under the basecoat governance framework.

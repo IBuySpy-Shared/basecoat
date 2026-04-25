@@ -89,6 +89,11 @@ Produce a summary table at the end:
 - Do not assume a particular runner, language, or CI toolchain.
 - Do not defer issue filing — every candidate gets an issue before the session ends.
 
+## Model
+**Recommended:** claude-sonnet-4.6
+**Rationale:** Converting manual paths to automation specs requires structured thinking and edge case analysis
+**Minimum:** claude-haiku-4.5
+
 ## Governance
 
 This agent operates under the basecoat governance framework.

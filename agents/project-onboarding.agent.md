@@ -378,6 +378,11 @@ This agent is safe to re-run on an existing repository:
 - **Issue templates** — only created if the `.github/ISSUE_TEMPLATE/` directory is missing.
 - **Sprint-1 issue** — a new issue is created each run. Check for duplicates before re-running if this is undesirable.
 
+## Model
+**Recommended:** claude-sonnet-4.6
+**Rationale:** Repo scaffolding decisions and sprint goal decomposition need good reasoning depth
+**Minimum:** claude-haiku-4.5
+
 ## Governance
 
 This agent operates under the basecoat governance framework.

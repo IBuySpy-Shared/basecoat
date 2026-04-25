@@ -120,6 +120,11 @@ Trigger conditions:
 | Component has no loading state for async data | `tech-debt,frontend` |
 | Inline style object defined inside render function | `tech-debt,frontend,performance` |
 
+## Model
+**Recommended:** gpt-5.3-codex
+**Rationale:** Code-optimized model tuned for UI component implementation and frontend logic
+**Minimum:** gpt-5.4-mini
+
 ## Output Format
 
 - Deliver components with inline comments explaining accessibility decisions and non-obvious state logic.
