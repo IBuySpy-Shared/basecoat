@@ -1,0 +1,178 @@
+name: PR Validation
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  markdown-lint:
+    name: Markdown lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Run markdown lint on changed markdown files
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin "${{ github.base_ref }}" --depth=1
+          mapfile -t md_files < <(git diff --name-only "origin/${{ github.base_ref }}...HEAD" -- '*.md')
+
+          if [[ ${#md_files[@]} -eq 0 ]]; then
+            echo "No markdown files changed in this PR."
+            exit 0
+          fi
+
+          printf '%s\n' "Markdown files to lint:" "${md_files[@]}"
+          npm install --global markdownlint-cli@0.39.0
+          markdownlint "${md_files[@]}"
+
+  gitleaks-scan:
+    name: Gitleaks secret scan (warn only)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install gitleaks
+        env:
+          GITLEAKS_VERSION: "8.18.4"
+        run: |
+          curl -sSfL \
+            "https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz" \
+            | tar -xz -C /usr/local/bin gitleaks
+          gitleaks version
+
+      - name: Run gitleaks scan
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin "${{ github.base_ref }}" --depth=1
+          set +e
+          gitleaks detect \
+            --config .gitleaks.toml \
+            --source . \
+            --log-opts "origin/${{ github.base_ref }}..HEAD" \
+            --report-format sarif \
+            --report-path gitleaks-pr-validation.sarif \
+            --no-banner \
+            --redact \
+            --exit-code 1
+          EXIT_CODE=$?
+          set -e
+
+          if [[ $EXIT_CODE -ne 0 ]]; then
+            echo "::warning::Gitleaks detected potential secrets. Review gitleaks-pr-validation.sarif."
+          else
+            echo "No secrets detected by gitleaks."
+          fi
+
+      - name: Upload gitleaks artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gitleaks-pr-validation-report
+          path: gitleaks-pr-validation.sarif
+          if-no-files-found: warn
+          retention-days: 7
+
+  validate-agent-files:
+    name: Validate agent file structure
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Validate required sections in agents/*.agent.md
+        shell: bash
+        run: |
+          set -euo pipefail
+          shopt -s nullglob
+
+          files=(agents/*.agent.md)
+          if [[ ${#files[@]} -eq 0 ]]; then
+            echo "No agent files found under agents/. Nothing to validate."
+            exit 0
+          fi
+
+          for file in "${files[@]}"; do
+            echo "Validating $file"
+
+            if [[ "$(sed -n '1p' "$file")" != "---" ]]; then
+              echo "Missing frontmatter start ('---') in $file" >&2
+              exit 1
+            fi
+
+            if ! sed -n '1,25p' "$file" | grep -qi '^description:'; then
+              echo "Missing description in frontmatter for $file" >&2
+              exit 1
+            fi
+
+            if ! grep -Eq '^## Inputs$' "$file"; then
+              echo "Missing required section '## Inputs' in $file" >&2
+              exit 1
+            fi
+
+            if ! grep -Eq '^## (Process|Workflow)$' "$file"; then
+              echo "Missing required section '## Process' or '## Workflow' in $file" >&2
+              exit 1
+            fi
+
+            if ! grep -Eq '^## .*(Output|Report)\b' "$file"; then
+              echo "Missing required output/report section in $file." >&2
+              exit 1
+            fi
+          done
+
+          echo "Agent file structure validation passed."
+
+  sync-dry-run:
+    name: Sync script dry-run
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Execute sync.sh in an isolated temp repo
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          tmp_root="$(mktemp -d)"
+          trap 'rm -rf "$tmp_root"' EXIT
+
+          consumer_repo="$tmp_root/consumer"
+          mkdir -p "$consumer_repo"
+          git -C "$consumer_repo" init -q
+          git -C "$consumer_repo" config user.name "pr-validation"
+          git -C "$consumer_repo" config user.email "pr-validation@example.com"
+          touch "$consumer_repo/README.md"
+          git -C "$consumer_repo" add README.md
+          git -C "$consumer_repo" commit -m "init" -q
+
+          (
+            cd "$consumer_repo"
+            BASECOAT_REPO="https://github.com/${{ github.repository }}.git" \
+            BASECOAT_REF="main" \
+            BASECOAT_TARGET_DIR=".github/base-coat" \
+            bash "$GITHUB_WORKSPACE/sync.sh"
+          )
+
+          test -f "$consumer_repo/.github/base-coat/README.md"
+          test -d "$consumer_repo/.github/base-coat/agents"
+          test -d "$consumer_repo/.github/base-coat/instructions"
+          echo "sync.sh dry-run passed."
