@@ -22,6 +22,7 @@ This catalog helps teams discover what exists in Base Coat and when to use it.
 
 | File                                    | Use For                                                 | Keywords                                     |
 | --------------------------------------- | ------------------------------------------------------- | -------------------------------------------- |
+| `skills/manual-test-strategy/SKILL.md`  | define manual scope, produce charters, checklists, and handoff artifacts | manual testing, exploratory, charter, regression, defect, automation handoff |
 | `skills/performance-profiling/SKILL.md` | isolate and measure slow code paths                     | profiling, performance, latency, hot path    |
 | `skills/code-review/SKILL.md`           | review changes for risk, regressions, and missing tests | review, bug risk, regression, findings       |
 | `skills/refactoring/SKILL.md`           | restructure code without changing behavior              | refactor, cleanup, simplify, extract, rename |
@@ -40,6 +41,9 @@ This catalog helps teams discover what exists in Base Coat and when to use it.
 
 | File                                | Use For                                        | Keywords                                  |
 | ----------------------------------- | ---------------------------------------------- | ----------------------------------------- |
+| `agents/manual-test-strategy.agent.md`  | produce a full manual test strategy with rubric, charter, checklist, defect template, and automation backlog | agent, manual testing, strategy, exploratory, automation candidate |
+| `agents/exploratory-charter.agent.md`   | generate time-boxed exploratory sessions with scope, evidence capture, and GitHub Issue filing              | agent, exploratory, charter, session, findings |
+| `agents/strategy-to-automation.agent.md`| convert manual paths into tiered automation candidates and file GitHub Issues for every one                | agent, automation, smoke, regression, integration, candidate |
 | `agents/code-review.agent.md`       | multi-step repository review process           | agent, review, repo scan, risk            |
 | `agents/new-customization.agent.md` | choose and create the right customization type | agent, customization, instruction, prompt |
 | `agents/rollout-basecoat.agent.md`  | onboard a repo to a pinned Base Coat release   | agent, rollout, bootstrap, enterprise     |
