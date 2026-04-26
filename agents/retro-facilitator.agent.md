@@ -53,7 +53,7 @@ gh pr list \
   --repo <owner>/<repo> \
   --state merged \
   --json number,title,mergedAt,body,labels \
-  --jq "[.[] | select(.mergedAt >= \"<start-date>\" and .mergedAt <= \"<end-date>\")]" \
+  --jq '[.[] | select(.mergedAt >= "<start>" and .mergedAt <= "<end>")]' \
   > /tmp/retro-merged-prs.json
 
 # Any issues still open that were labeled for this sprint (spillover)
@@ -112,7 +112,9 @@ Review issue titles, bodies, and PR descriptions for recurring themes.
 Categorize each observation into one of three buckets:
 
 #### Went Well (keep doing)
+
 Patterns where the sprint made smooth progress:
+
 - Issues closed without retries
 - PRs merged clean on first attempt
 - Agent-to-agent handoffs that worked without manual intervention
@@ -120,7 +122,9 @@ Patterns where the sprint made smooth progress:
 - Governance rules that prevented errors (no secrets, no direct pushes)
 
 #### To Improve (address next sprint)
+
 Patterns where friction or failure occurred:
+
 - Issues that required more than one attempt (retry pattern)
 - PRs that sat open for more than the sprint average cycle time
 - Merge conflicts that required manual resolution
@@ -130,7 +134,9 @@ Patterns where friction or failure occurred:
 - Context window saturation or agent confusion signals
 
 #### Action Items (concrete next steps)
+
 For each "Improve" item, produce a concrete action:
+
 - If Basecoat is missing a capability → file a Basecoat improvement issue
 - If a local convention needs updating → file a local issue
 - If an agent needs a new workflow step → file a Basecoat issue for the agent
@@ -186,7 +192,10 @@ Impacted agent: <agent-name or 'general'>"
 ```bash
 gh issue list --repo <basecoat-repo> --state open \
   --search "<key phrase from proposed title>" \
-  --json number,title | python3 -c "import sys,json; [print(i['number'], i['title']) for i in json.load(sys.stdin)]"
+  --json number,title \
+  | python3 -c "import sys, json
+for i in json.load(sys.stdin):
+    print(i['number'], i['title'])"
 ```
 
 ### Step 5 — Update Sprint Notes in the Project Repo
@@ -250,8 +259,7 @@ gh pr create --title "docs(retro): Sprint <N> retrospective" --base main
 
 Output the complete retrospective to the console for immediate review:
 
-```
-═══════════════════════════════════════════════════════════
+```text
   Sprint <N> Retrospective — <date>
 ═══════════════════════════════════════════════════════════
 
@@ -293,8 +301,8 @@ When writing Basecoat improvement issues:
 
 | ❌ Avoid | ✅ Use Instead |
 |---------|--------------|
-| Mentions of your project's name | "the consuming project" or "the project repo" |
-| Stack-specific details (e.g. `.NET 8`, `Azure Blob`) | "the target runtime" or "the storage layer" |
+| Your project name | "the consuming project" or "the project repo" |
+| Stack or runtime specifics | "the target runtime" or "the storage layer" |
 | Specific people or teams | "the developer" or "the agent operator" |
 | Internal URLs or hostnames | Omit entirely |
 | Sprint-specific dates | "observed across multiple sprints" |
