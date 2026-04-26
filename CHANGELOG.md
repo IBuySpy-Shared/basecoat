@@ -2,6 +2,18 @@
 
 All notable changes to this repository should be recorded in this file.
 
+## 0.7.0 - 2026-04-26
+
+- Added `agents/sprint-planner.agent.md`: goal-to-issues decomposition with wave dependency mapping, agent assignment recommendations, acceptance criteria generation, and sprint board output
+- Added `agents/project-onboarding.agent.md`: single-invocation new repo setup — creates repo, syncs Basecoat at pinned version, places sync scripts, configures .gitignore and issue templates, logs Sprint 1 issue, and scaffolds README
+- Added `agents/release-manager.agent.md`: automated versioned release workflow — reads merged PRs, bumps version.json (semver), writes CHANGELOG entry, creates git tag, and publishes GitHub release; supports dry-run and PR-or-direct mode
+- Added `agents/retro-facilitator.agent.md`: end-of-sprint retrospective — collects sprint artifacts, computes metrics, identifies patterns (Went Well / Improve / Action Items), files generic Basecoat improvement issues, and persists retro doc via PR
+- Added `docs/MODEL_OPTIMIZATION.md`: model-per-role recommendations with tier matrix (Premium / Reasoning / Code / Fast), when-to-override guidance, cost considerations, and consumer configuration patterns
+- Added `docs/RELEASE_PROCESS.md`: step-by-step release guide covering version artifact sync, semver rules, manual and agent-driven release processes, tag immutability policy, rollback procedure, and CI integration table
+- Updated all 15 `agents/*.agent.md` files: added `## Model` section to every agent with recommended model, rationale, and minimum viable model
+- Updated `instructions/governance.instructions.md`: Section 10 implemented — model selection guidance, token budget awareness rules, and cost attribution pattern (replaces stub)
+- Fixed `README.md`: sync consumption pattern moved to top with Quick Start section, anti-pattern callout, and environment variables table
+
 ## 0.6.0 - 2026-03-19
 
 - Added `agents/backend-dev.agent.md`: designs and implements REST/GraphQL APIs, service layers, and data access patterns; files GitHub Issues with `tech-debt,backend` labels for N+1 risk, missing validation, unhandled error paths, hardcoded values, and missing auth

@@ -1,6 +1,6 @@
 {
     "name": "base-coat",
-    "version": "0.6.0",
-    "releaseDate": "2026-03-19",
-    "notes": "Sprint 1: Added backend-dev, frontend-dev, middleware-dev, and data-tier agents with matching skills and development.instructions.md."
+    "version": "0.7.0",
+    "releaseDate": "2026-04-26",
+    "notes": "Sprint 7: Added project-onboarding, release-manager, retro-facilitator, and sprint-planner agents; model optimization guide with per-role recommendations; updated all 15 agents with Model sections; governance Section 10 implemented; RELEASE_PROCESS.md added; README sync pattern moved to top."
 }
