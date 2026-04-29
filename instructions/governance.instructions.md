@@ -228,6 +228,14 @@ See [`docs/guardrails/env-example.md`](docs/guardrails/env-example.md) for the f
 
 ---
 
+## 12. Database Deployment Concurrency
+
+Any GitHub Actions workflow that runs database migrations or schema changes **must** set `cancel-in-progress: false` in its concurrency group. Cancelling a running DB deploy can leave the database in a partially-migrated, corrupted state that requires manual intervention.
+
+See [`docs/guardrails/db-deployment-concurrency.md`](docs/guardrails/db-deployment-concurrency.md) for the full guardrail, required patterns, and remediation steps.
+
+---
+
 ## Quick Reference Card
 
 | Rule | Action |
@@ -242,4 +250,6 @@ See [`docs/guardrails/env-example.md`](docs/guardrails/env-example.md) for the f
 | Azure auth in Actions | OIDC only — no client secrets |
 | Container image tag | Must include full git SHA |
 | Azure resource naming | CAF conventions — see guardrail |
+| Env vars undocumented | Add to `.env.example` |
+| DB migration workflow | `cancel-in-progress: false` — always |
 | Governance change needed | Issue → PR → approval |
