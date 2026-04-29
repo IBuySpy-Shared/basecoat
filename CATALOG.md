@@ -9,34 +9,40 @@
 
 | Name | File | Description | Paired Skills | Model Recommendation |
 |---|---|---|---|---|
-| agent-designer | `agents/agent-designer.agent.md` | Designs and authors Copilot agent definitions | agent-design | GPT-4o / Claude Sonnet |
-| api-designer | `agents/api-designer.agent.md` | API design for OpenAPI, REST, GraphQL, and governance | api-design | GPT-4o / Claude Sonnet |
+| | **🔨 Development** | | | |
 | backend-dev | `agents/backend-dev.agent.md` | APIs, service layers, business logic, and data access | backend-dev | GPT-4o / Claude Sonnet |
-| code-review | `agents/code-review.agent.md` | Structured multi-step code review workflow | code-review | GPT-4o / Claude Sonnet |
-| config-auditor | `agents/config-auditor.agent.md` | Scans for committed or unprotected config secrets | security | GPT-4o / Claude Sonnet |
-| data-tier | `agents/data-tier.agent.md` | Schema design, migrations, query optimization, data access | data-tier | GPT-4o / Claude Sonnet |
-| devops-engineer | `agents/devops-engineer.agent.md` | CI/CD, IaC, deployment, rollback, and observability | devops | GPT-4o / Claude Sonnet |
-| exploratory-charter | `agents/exploratory-charter.agent.md` | Time-boxed exploratory testing charters with evidence capture | manual-test-strategy | GPT-4o / Claude Sonnet |
 | frontend-dev | `agents/frontend-dev.agent.md` | UI components, responsive layouts, state, accessibility | frontend-dev | GPT-4o / Claude Sonnet |
-| issue-triage | `agents/issue-triage.agent.md` | Triage, classify, label, and prioritize GitHub issues | sprint-management | GPT-4o-mini / Claude Haiku |
-| manual-test-strategy | `agents/manual-test-strategy.agent.md` | Manual testing strategy with rubric, charter, checklist, and automation backlog | manual-test-strategy | GPT-4o / Claude Sonnet |
-| mcp-developer | `agents/mcp-developer.agent.md` | MCP servers, tools, and integrations | mcp-development | GPT-4o / Claude Sonnet |
-| merge-coordinator | `agents/merge-coordinator.agent.md` | Parallel branch merge coordination | — | GPT-4o-mini / Claude Haiku |
 | middleware-dev | `agents/middleware-dev.agent.md` | API gateways, integration layers, event-driven architectures | — | GPT-4o / Claude Sonnet |
-| new-customization | `agents/new-customization.agent.md` | Creates or updates Base Coat customization assets | create-skill, create-instruction | GPT-4o / Claude Sonnet |
-| performance-analyst | `agents/performance-analyst.agent.md` | Profiling, load testing, and performance optimization | performance-profiling | GPT-4o / Claude Sonnet |
-| product-manager | `agents/product-manager.agent.md` | Requirements, user stories, acceptance criteria, roadmaps | sprint-management | GPT-4o / Claude Sonnet |
-| project-onboarding | `agents/project-onboarding.agent.md` | Base Coat repository onboarding and setup | — | GPT-4o-mini / Claude Haiku |
-| prompt-engineer | `agents/prompt-engineer.agent.md` | Prompt and system-prompt optimization | — | GPT-4o / Claude Sonnet |
-| release-manager | `agents/release-manager.agent.md` | Versioned release workflow, changelog, tagging, and publishing | — | GPT-4o-mini / Claude Haiku |
-| retro-facilitator | `agents/retro-facilitator.agent.md` | Sprint retrospective summary and improvement issue creation | sprint-management | GPT-4o / Claude Sonnet |
-| rollout-basecoat | `agents/rollout-basecoat.agent.md` | Enterprise Base Coat onboarding and rollout | — | GPT-4o-mini / Claude Haiku |
-| security-analyst | `agents/security-analyst.agent.md` | Vulnerability assessment, threat modeling, secure code review | security | GPT-4o / Claude Sonnet |
+| data-tier | `agents/data-tier.agent.md` | Schema design, migrations, query optimization, data access | data-tier | GPT-4o / Claude Sonnet |
+| | **🏗️ Architecture** | | | |
 | solution-architect | `agents/solution-architect.agent.md` | System design, C4 diagrams, ADRs, and technology selection | architecture | GPT-4o / Claude Sonnet |
-| sprint-planner | `agents/sprint-planner.agent.md` | Sprint goal-to-issues breakdown and wave planning | sprint-management | GPT-4o / Claude Sonnet |
-| strategy-to-automation | `agents/strategy-to-automation.agent.md` | Converts manual test paths into tiered automation candidates | manual-test-strategy | GPT-4o / Claude Sonnet |
-| tech-writer | `agents/tech-writer.agent.md` | Technical docs, runbooks, tutorials, and changelogs | documentation | GPT-4o / Claude Sonnet |
+| api-designer | `agents/api-designer.agent.md` | API design for OpenAPI, REST, GraphQL, and governance | api-design | GPT-4o / Claude Sonnet |
 | ux-designer | `agents/ux-designer.agent.md` | Journey mapping, wireframes, and accessibility audits | ux | GPT-4o / Claude Sonnet |
+| | **🔍 Quality** | | | |
+| code-review | `agents/code-review.agent.md` | Structured multi-step code review workflow | code-review | GPT-4o / Claude Sonnet |
+| security-analyst | `agents/security-analyst.agent.md` | Vulnerability assessment, threat modeling, secure code review | security | GPT-4o / Claude Sonnet |
+| performance-analyst | `agents/performance-analyst.agent.md` | Profiling, load testing, and performance optimization | performance-profiling | GPT-4o / Claude Sonnet |
+| config-auditor | `agents/config-auditor.agent.md` | Scans for committed or unprotected config secrets | security | GPT-4o / Claude Sonnet |
+| manual-test-strategy | `agents/manual-test-strategy.agent.md` | Manual testing strategy with rubric, charter, checklist, and automation backlog | manual-test-strategy | GPT-4o / Claude Sonnet |
+| exploratory-charter | `agents/exploratory-charter.agent.md` | Time-boxed exploratory testing charters with evidence capture | manual-test-strategy | GPT-4o / Claude Sonnet |
+| strategy-to-automation | `agents/strategy-to-automation.agent.md` | Converts manual test paths into tiered automation candidates | manual-test-strategy | GPT-4o / Claude Sonnet |
+| | **🚀 DevOps** | | | |
+| devops-engineer | `agents/devops-engineer.agent.md` | CI/CD, IaC, deployment, rollback, and observability | devops | GPT-4o / Claude Sonnet |
+| release-manager | `agents/release-manager.agent.md` | Versioned release workflow, changelog, tagging, and publishing | — | GPT-4o-mini / Claude Haiku |
+| rollout-basecoat | `agents/rollout-basecoat.agent.md` | Enterprise Base Coat onboarding and rollout | — | GPT-4o-mini / Claude Haiku |
+| | **📋 Process** | | | |
+| sprint-planner | `agents/sprint-planner.agent.md` | Sprint goal-to-issues breakdown and wave planning | sprint-management | GPT-4o / Claude Sonnet |
+| product-manager | `agents/product-manager.agent.md` | Requirements, user stories, acceptance criteria, roadmaps | sprint-management | GPT-4o / Claude Sonnet |
+| issue-triage | `agents/issue-triage.agent.md` | Triage, classify, label, and prioritize GitHub issues | sprint-management | GPT-4o-mini / Claude Haiku |
+| retro-facilitator | `agents/retro-facilitator.agent.md` | Sprint retrospective summary and improvement issue creation | sprint-management | GPT-4o / Claude Sonnet |
+| project-onboarding | `agents/project-onboarding.agent.md` | Base Coat repository onboarding and setup | — | GPT-4o-mini / Claude Haiku |
+| | **🧰 Meta** | | | |
+| agent-designer | `agents/agent-designer.agent.md` | Designs and authors Copilot agent definitions | agent-design | GPT-4o / Claude Sonnet |
+| prompt-engineer | `agents/prompt-engineer.agent.md` | Prompt and system-prompt optimization | — | GPT-4o / Claude Sonnet |
+| mcp-developer | `agents/mcp-developer.agent.md` | MCP servers, tools, and integrations | mcp-development | GPT-4o / Claude Sonnet |
+| tech-writer | `agents/tech-writer.agent.md` | Technical docs, runbooks, tutorials, and changelogs | documentation | GPT-4o / Claude Sonnet |
+| new-customization | `agents/new-customization.agent.md` | Creates or updates Base Coat customization assets | create-skill, create-instruction | GPT-4o / Claude Sonnet |
+| merge-coordinator | `agents/merge-coordinator.agent.md` | Parallel branch merge coordination | — | GPT-4o-mini / Claude Haiku |
 
 ---
 
