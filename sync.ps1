@@ -32,6 +32,19 @@ try {
         Copy-Item -Path (Join-Path $sourcePath $item) -Destination $destination -Recurse -Force
     }
 
+    # Copy Copilot-discoverable directories to their standard paths
+    $githubDir = Join-Path $repoRoot '.github'
+    foreach ($copilotDir in @('agents', 'instructions', 'prompts')) {
+        $source = Join-Path $fullTargetDir $copilotDir
+        $dest = Join-Path $githubDir $copilotDir
+        if (Test-Path $source) {
+            if (Test-Path $dest) {
+                Remove-Item -Path $dest -Recurse -Force
+            }
+            Copy-Item -Path $source -Destination $dest -Recurse -Force
+        }
+    }
+
     Write-Host "Base Coat synced into $targetDir"
 }
 finally {

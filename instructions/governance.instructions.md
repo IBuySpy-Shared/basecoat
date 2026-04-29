@@ -41,6 +41,8 @@ You must never write the following to any file, commit message, PR description, 
 
 **If a task requires a secret to proceed:** stop. Ask the human operator to supply it through a secrets manager, environment variable, or GitHub Secret. Do not embed it inline.
 
+**Workflow-specific rule:** GitHub Actions workflow files must never contain literal secrets in `env`, `with`, or `run` blocks. All sensitive values must use `${{ secrets.SECRET_NAME }}`. See [`docs/guardrails/secrets-in-workflows.md`](/docs/guardrails/secrets-in-workflows.md) for examples and audit steps.
+
 **If you accidentally generate a secret in output:** flag it immediately. Do not commit it.
 
 ---
@@ -193,6 +195,14 @@ Until Issue #44 is fully implemented, agents should:
 - Prefer concise, targeted prompts over large context dumps
 - Break large tasks into discrete issues and PRs rather than one massive context
 - Flag when a task feels too large for a single context window
+
+---
+
+## 11. OIDC Federation — No Stored Azure Credentials
+
+All GitHub Actions workflows that authenticate to Azure must use OIDC federated credentials (`azure/login@v2` with `client-id`, `tenant-id`, `subscription-id`). Storing service principal client secrets as GitHub Secrets is a policy violation equivalent to committing a secret to source control.
+
+See [`docs/guardrails/oidc-federation.md`](docs/guardrails/oidc-federation.md) for the complete guardrail, bootstrap pattern, and rationale.
 
 ---
 
