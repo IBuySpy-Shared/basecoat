@@ -2,7 +2,9 @@
 name: merge-coordinator
 description: "Parallel branch merge coordinator. Use when multiple feature branches need to be merged into a target branch without interactive git editors hanging automated pipelines. Handles conflict detection, safe resolution, and ordered PR merging."
 tools: [read_file, write_file, list_dir, run_terminal_command, create_github_issue]
----# Merge Coordinator Agent
+---
+
+# Merge Coordinator Agent
 
 Purpose: accept a list of feature branches and a target branch, detect conflicts, resolve them non-interactively, and merge PRs in dependency order — all without ever opening an interactive git editor.
 
