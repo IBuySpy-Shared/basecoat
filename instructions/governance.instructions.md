@@ -217,4 +217,5 @@ See [`docs/guardrails/oidc-federation.md`](docs/guardrails/oidc-federation.md) f
 | Scope expanded | Stop, ask if new issue needed |
 | Ambiguous requirement | Stop, ask for clarification |
 | CI failing | Fix before merge |
+| Azure auth in Actions | OIDC only — no client secrets |
 | Governance change needed | Issue → PR → approval |
