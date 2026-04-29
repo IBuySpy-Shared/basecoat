@@ -23,7 +23,7 @@ jobs:
               continue
             fi
             # Find closing --- within first 30 lines
-            if ! sed -n '2,30p' "$file" | grep -qx '---'; then
+            if ! sed -n '2,30p' "$file" | grep -qxF -- '---'; then
               echo "::error file=$file::Missing YAML frontmatter closing '---' within first 30 lines"
               status=1
               continue
