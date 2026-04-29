@@ -10,31 +10,42 @@ Base Coat provides a curated library of agents, skills, instructions, and prompt
 
 ## Quick Start
 
-Run the sync script from the root of your consumer repository. This is the **only supported way** to adopt Base Coat.
+### Method 1: Manual Copy (simplest)
 
-**Windows PowerShell:**
+```bash
+# Download latest release
+curl -L https://github.com/IBuySpy-Shared/basecoat/releases/latest/download/basecoat-ghcp.zip -o basecoat.zip
+unzip basecoat.zip -d .github/base-coat/
 
-```powershell
-$env:BASECOAT_REPO = 'https://github.com/YOUR-ORG/basecoat.git'
-irm https://raw.githubusercontent.com/YOUR-ORG/basecoat/main/sync.ps1 | iex
+# Copy Copilot-discoverable files
+cp -r .github/base-coat/agents .github/agents
+cp -r .github/base-coat/instructions .github/instructions
+cp -r .github/base-coat/prompts .github/prompts
 ```
+
+### Method 2: Sync Script (recommended for updates)
 
 **macOS / Linux:**
 
 ```bash
-export BASECOAT_REPO='https://github.com/YOUR-ORG/basecoat.git'
-curl -fsSL https://raw.githubusercontent.com/YOUR-ORG/basecoat/main/sync.sh | bash
+BASECOAT_REPO=https://github.com/IBuySpy-Shared/basecoat.git ./sync.sh
+```
+
+**Windows PowerShell:**
+
+```powershell
+$env:BASECOAT_REPO = 'https://github.com/IBuySpy-Shared/basecoat.git'; .\sync.ps1
 ```
 
 **Pin to a release tag (recommended for production):**
 
 ```powershell
-$env:BASECOAT_REPO = 'https://github.com/YOUR-ORG/basecoat.git'
+$env:BASECOAT_REPO = 'https://github.com/IBuySpy-Shared/basecoat.git'
 $env:BASECOAT_REF  = 'v1.0.0'
-irm https://raw.githubusercontent.com/YOUR-ORG/basecoat/$env:BASECOAT_REF/sync.ps1 | iex
+irm https://raw.githubusercontent.com/IBuySpy-Shared/basecoat/$env:BASECOAT_REF/sync.ps1 | iex
 ```
 
-The script clones Base Coat into a temp directory, copies the standard assets into your repo at `.github/base-coat/`, and cleans up. The whole process takes under a minute.
+The sync script clones Base Coat, copies the standard assets into `.github/base-coat/`, and cleans up. The whole process takes under a minute.
 
 ### Environment Variables
 
