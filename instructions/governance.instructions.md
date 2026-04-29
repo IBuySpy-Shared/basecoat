@@ -189,6 +189,10 @@ Every agent should run on the model tier that matches its cognitive demand:
 
 Each agent's `.agent.md` file includes a `## Model` section with the recommended model, rationale, and minimum viable model. See `docs/MODEL_OPTIMIZATION.md` for the full tier matrix, override guidance, and cost considerations.
 
+### Token Optimization
+
+Agents must manage context window usage deliberately — load only what is needed, compress handoffs, and respect per-role token budgets. See [`docs/token-optimization.md`](/docs/token-optimization.md) for strategies on prompt compression, context handoff patterns, caching, and measurement.
+
 ### General Token Guidance
 
 Until Issue #44 is fully implemented, agents should:
