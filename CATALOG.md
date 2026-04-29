@@ -44,6 +44,7 @@
 
 | Name | Directory | Templates Included | Paired Agents |
 |---|---|---|---|
+| **basecoat** | `skills/basecoat/` | *(router — discovery + delegation)* | **all agents** |
 | agent-design | `skills/agent-design/` | `agent-template.md`, `instruction-template.md`, `skill-template.md` | agent-designer |
 | api-design | `skills/api-design/` | `openapi-template.md`, `api-governance-checklist.md`, `breaking-change-checklist.md`, `versioning-decision-tree.md` | api-designer |
 | architecture | `skills/architecture/` | `adr-template.md`, `c4-diagram-template.md`, `risk-register-template.md`, `tech-selection-matrix-template.md` | solution-architect |
