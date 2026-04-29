@@ -33,4 +33,12 @@ for item in README.md CHANGELOG.md INVENTORY.md version.json instructions skills
   cp -R "$TMP_DIR/source/$item" "$REPO_ROOT/$TARGET_DIR/$item"
 done
 
+# Copy Copilot-discoverable directories to their standard paths
+for copilot_dir in agents instructions prompts; do
+  if [[ -d "$REPO_ROOT/$TARGET_DIR/$copilot_dir" ]]; then
+    rm -rf "$REPO_ROOT/.github/$copilot_dir"
+    cp -R "$REPO_ROOT/$TARGET_DIR/$copilot_dir" "$REPO_ROOT/.github/$copilot_dir"
+  fi
+done
+
 echo "Base Coat synced into $TARGET_DIR"
