@@ -26,6 +26,14 @@ Use this instruction for any change that touches trust boundaries, data handling
 - Does the commit message contain any secret-like data or PII?
 - Does the change expand attack surface through deserialization, shelling out, dynamic code, or unsafe parsing?
 
+## Workflow Secrets
+
+GitHub Actions workflow files (`*.yml` / `*.yaml` in `.github/workflows/`) must never contain hardcoded secrets, tokens, passwords, or connection strings — not in `env` blocks, `with` parameters, or `run` scripts.
+
+- All sensitive values must be referenced via `${{ secrets.SECRET_NAME }}`.
+- Treat any literal credential in a workflow file as a leaked secret — rotate immediately.
+- See the full guardrail document: [`docs/guardrails/secrets-in-workflows.md`](/docs/guardrails/secrets-in-workflows.md).
+
 ## Commit Message Guardrails
 
 - Keep commit messages descriptive but non-sensitive.

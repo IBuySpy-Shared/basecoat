@@ -41,6 +41,8 @@ You must never write the following to any file, commit message, PR description, 
 
 **If a task requires a secret to proceed:** stop. Ask the human operator to supply it through a secrets manager, environment variable, or GitHub Secret. Do not embed it inline.
 
+**Workflow-specific rule:** GitHub Actions workflow files must never contain literal secrets in `env`, `with`, or `run` blocks. All sensitive values must use `${{ secrets.SECRET_NAME }}`. See [`docs/guardrails/secrets-in-workflows.md`](/docs/guardrails/secrets-in-workflows.md) for examples and audit steps.
+
 **If you accidentally generate a secret in output:** flag it immediately. Do not commit it.
 
 ---
