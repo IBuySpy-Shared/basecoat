@@ -23,6 +23,16 @@ jobs:
       - name: Package release artifacts
         run: bash scripts/package-basecoat.sh
 
+      - name: Create GHCP ZIP
+        run: |
+          zip -r dist/basecoat-ghcp.zip \
+            agents/ \
+            skills/ \
+            instructions/ \
+            prompts/ \
+            basecoat-metadata.json \
+            CATALOG.md
+
       - name: Upload package artifacts
         uses: actions/upload-artifact@v4
         with:
