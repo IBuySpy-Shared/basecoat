@@ -206,6 +206,12 @@ See [`docs/guardrails/oidc-federation.md`](docs/guardrails/oidc-federation.md) f
 
 ---
 
+## 12. Container Image Tags — SHA Required
+
+Every container image pushed from CI/CD must be tagged with the full git commit SHA. Pushing only `:latest` is a policy violation. See [`docs/guardrails/container-image-tags.md`](docs/guardrails/container-image-tags.md) for the pattern, examples, and verification steps.
+
+---
+
 ## Quick Reference Card
 
 | Rule | Action |
@@ -218,4 +224,5 @@ See [`docs/guardrails/oidc-federation.md`](docs/guardrails/oidc-federation.md) f
 | Ambiguous requirement | Stop, ask for clarification |
 | CI failing | Fix before merge |
 | Azure auth in Actions | OIDC only — no client secrets |
+| Container image tag | Must include full git SHA |
 | Governance change needed | Issue → PR → approval |
