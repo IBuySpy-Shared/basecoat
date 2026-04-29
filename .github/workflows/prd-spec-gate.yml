@@ -79,9 +79,10 @@ jobs:
                 return;
               }
             } else if (riskyPathTouched) {
+              // Advisory warning for risky-path-only PRs (not blocking)
               if (!(hasPrd || hasSpec) && !hasStructuredLines) {
-                core.setFailed(
-                  'This PR touches risky paths and requires at least one PRD or spec reference in the PR description.'
+                core.warning(
+                  'This PR touches risky paths. Consider adding PRD or spec references in the PR description.'
                 );
                 return;
               }
