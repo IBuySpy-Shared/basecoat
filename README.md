@@ -1,6 +1,12 @@
 # Base Coat
 
-Base Coat is a shared repository for GitHub Copilot customizations that teams can reuse across repositories.
+**Enterprise-grade shared repository for GitHub Copilot customizations.**
+
+Base Coat provides a curated library of agents, skills, instructions, and prompts that teams adopt across repositories through a single sync command. Instead of every team writing Copilot customizations from scratch, Base Coat gives you production-ready assets that enforce consistent standards, accelerate development workflows, and scale across an entire GitHub Enterprise organization.
+
+**28 agents** · **18 skills** · **19 instruction files** · **3 prompt starters** · **6 guardrail policies**
+
+---
 
 ## Quick Start
 
@@ -24,7 +30,7 @@ curl -fsSL https://raw.githubusercontent.com/YOUR-ORG/basecoat/main/sync.sh | ba
 
 ```powershell
 $env:BASECOAT_REPO = 'https://github.com/YOUR-ORG/basecoat.git'
-$env:BASECOAT_REF  = 'v0.3.0'
+$env:BASECOAT_REF  = 'v1.0.0'
 irm https://raw.githubusercontent.com/YOUR-ORG/basecoat/$env:BASECOAT_REF/sync.ps1 | iex
 ```
 
@@ -46,34 +52,151 @@ The sync script copies these items into `BASECOAT_TARGET_DIR`:
 
 Everything else (tests, scripts, CI workflows, examples) stays in the source repo and is **not** copied into consumers.
 
-## ⚠️ Do Not Copy Files Manually
+### ⚠️ Do Not Copy Files Manually
 
-Manually copying files from this repository is an **anti-pattern** that leads to:
-
-- **Stale assets** — no mechanism to pull upstream updates.
-- **Missing files** — easy to forget items or copy the wrong directory structure.
-- **Wrong target path** — consumers must place files in `.github/base-coat/`, not `.basecoat/` or another location, for Copilot to discover them.
-
-Always use `sync.ps1` (Windows) or `sync.sh` (macOS/Linux). The scripts handle cloning, copying, and cleanup in a single idempotent operation.
+Always use `sync.ps1` or `sync.sh`. Manual copying leads to stale assets, missing files, and incorrect target paths. The scripts handle cloning, copying, and cleanup in a single idempotent operation.
 
 ---
 
-## Overview
+## Architecture Overview
 
-It provides four customization types:
+Base Coat is built on four GitHub Copilot customization primitives:
 
-- Instructions for coding standards and guardrails
-- Skills for repeatable workflows
-- Prompts for quick task entry points
-- Agents for longer multi-step flows
+```text
+┌─────────────────────────────────────────────────────┐
+│                    Base Coat                         │
+├──────────┬──────────┬───────────────┬───────────────┤
+│  Agents  │  Skills  │ Instructions  │   Prompts     │
+│ (28)     │ (18)     │ (19)          │   (3)         │
+│          │          │               │               │
+│ Multi-   │ Reusable │ Coding        │ Quick task    │
+│ step     │ workflow │ standards &   │ entry points  │
+│ flows    │ recipes  │ guardrails    │               │
+└──────────┴──────────┴───────────────┴───────────────┘
+        ▲                    ▲
+        │   Agents reference │ Instructions are
+        │   skills for       │ auto-loaded by
+        │   templates        │ Copilot in every
+        └────────────────────┘ conversation
+```
 
-The files in this repository are authored as actual customization assets, with descriptive frontmatter so teams can copy them directly into their repos and refine them instead of rewriting from scratch.
+- **Agents** (`agents/`) — Multi-step workflow definitions for complex tasks like backend development, code review, sprint planning, and security analysis. Each agent has a defined role, instructions, and often references paired skills.
+- **Skills** (`skills/`) — Reusable workflow recipes with templates. A skill contains a `SKILL.md` workflow definition plus template files (checklists, specs, scaffolds) that agents and users invoke during work.
+- **Instructions** (`instructions/`) — Coding standards and guardrails that Copilot loads automatically. These govern how code is written, reviewed, tested, and deployed across every conversation.
+- **Prompts** (`prompts/`) — Quick-start entry points for common tasks like architecture planning, code review, and bugfixing.
+
+---
+
+## Agent Catalog
+
+| Agent | Description |
+|---|---|
+| [agent-designer](agents/agent-designer.agent.md) | Designs and authors Copilot agent definitions |
+| [api-designer](agents/api-designer.agent.md) | API design for OpenAPI, REST, GraphQL, and governance |
+| [backend-dev](agents/backend-dev.agent.md) | APIs, service layers, business logic, and data access |
+| [code-review](agents/code-review.agent.md) | Structured multi-step code review workflow |
+| [config-auditor](agents/config-auditor.agent.md) | Scans for committed or unprotected config secrets |
+| [data-tier](agents/data-tier.agent.md) | Schema design, migrations, query optimization, data access |
+| [devops-engineer](agents/devops-engineer.agent.md) | CI/CD, IaC, deployment, rollback, and observability |
+| [exploratory-charter](agents/exploratory-charter.agent.md) | Time-boxed exploratory testing charters with evidence capture |
+| [frontend-dev](agents/frontend-dev.agent.md) | UI components, responsive layouts, state, accessibility |
+| [issue-triage](agents/issue-triage.agent.md) | Triage, classify, label, and prioritize GitHub issues |
+| [manual-test-strategy](agents/manual-test-strategy.agent.md) | Manual testing strategy with rubric, charter, checklist, and automation backlog |
+| [mcp-developer](agents/mcp-developer.agent.md) | MCP servers, tools, and integrations |
+| [merge-coordinator](agents/merge-coordinator.agent.md) | Parallel branch merge coordination |
+| [middleware-dev](agents/middleware-dev.agent.md) | API gateways, integration layers, event-driven architectures |
+| [new-customization](agents/new-customization.agent.md) | Creates or updates Base Coat customization assets |
+| [performance-analyst](agents/performance-analyst.agent.md) | Profiling, load testing, and performance optimization |
+| [product-manager](agents/product-manager.agent.md) | Requirements, user stories, acceptance criteria, roadmaps |
+| [project-onboarding](agents/project-onboarding.agent.md) | Base Coat repository onboarding and setup |
+| [prompt-engineer](agents/prompt-engineer.agent.md) | Prompt and system-prompt optimization |
+| [release-manager](agents/release-manager.agent.md) | Versioned release workflow, changelog, tagging, and publishing |
+| [retro-facilitator](agents/retro-facilitator.agent.md) | Sprint retrospective summary and improvement issue creation |
+| [rollout-basecoat](agents/rollout-basecoat.agent.md) | Enterprise Base Coat onboarding and rollout |
+| [security-analyst](agents/security-analyst.agent.md) | Vulnerability assessment, threat modeling, secure code review |
+| [solution-architect](agents/solution-architect.agent.md) | System design, C4 diagrams, ADRs, and technology selection |
+| [sprint-planner](agents/sprint-planner.agent.md) | Sprint goal-to-issues breakdown and wave planning |
+| [strategy-to-automation](agents/strategy-to-automation.agent.md) | Converts manual test paths into tiered automation candidates |
+| [tech-writer](agents/tech-writer.agent.md) | Technical docs, runbooks, tutorials, and changelogs |
+| [ux-designer](agents/ux-designer.agent.md) | Journey mapping, wireframes, and accessibility audits |
+
+> Full machine-readable catalog with skill pairings and model recommendations: [`CATALOG.md`](CATALOG.md)
+
+---
+
+## Skill Catalog
+
+| Skill | Templates | Paired Agent(s) |
+|---|---|---|
+| [agent-design](skills/agent-design/) | agent-template, instruction-template, skill-template | agent-designer |
+| [api-design](skills/api-design/) | openapi-template, governance-checklist, breaking-change-checklist, versioning-decision-tree | api-designer |
+| [architecture](skills/architecture/) | adr-template, c4-diagram-template, risk-register-template, tech-selection-matrix-template | solution-architect |
+| [backend-dev](skills/backend-dev/) | api-spec-template, error-catalog-template, repository-pattern-template, service-template | backend-dev |
+| [code-review](skills/code-review/) | SKILL.md workflow | code-review |
+| [create-instruction](skills/create-instruction/) | SKILL.md workflow | new-customization |
+| [create-skill](skills/create-skill/) | SKILL.md workflow | new-customization |
+| [data-tier](skills/data-tier/) | schema-design-template, migration-template, query-review-checklist, data-dictionary-template | data-tier |
+| [devops](skills/devops/) | deployment-checklist, environment-promotion-template, github-actions-template, rollback-runbook-template | devops-engineer |
+| [documentation](skills/documentation/) | readme-template, runbook-template, adr-template | tech-writer |
+| [frontend-dev](skills/frontend-dev/) | component-spec-template, accessibility-checklist, state-management-template | frontend-dev |
+| [manual-test-strategy](skills/manual-test-strategy/) | charter-template, checklist-template, defect-template, rubric-template | manual-test-strategy, exploratory-charter |
+| [mcp-development](skills/mcp-development/) | mcp-server-template, tool-definition-template, transport-config-template | mcp-developer |
+| [performance-profiling](skills/performance-profiling/) | SKILL.md workflow | performance-analyst |
+| [refactoring](skills/refactoring/) | SKILL.md workflow | — |
+| [security](skills/security/) | owasp-checklist, stride-threat-model-template, vulnerability-report-template, dependency-audit-template | security-analyst |
+| [sprint-management](skills/sprint-management/) | sprint-planning-template, backlog-grooming-template, retrospective-template | sprint-planner, retro-facilitator |
+| [ux](skills/ux/) | user-journey-template, wireframe-spec-template, component-spec-template, accessibility-audit-checklist | ux-designer |
+
+---
+
+## Instruction Files
+
+Instructions are automatically loaded by GitHub Copilot to enforce standards across every conversation.
+
+| Instruction | Scope |
+|---|---|
+| [agents](instructions/agents.instructions.md) | Agent authoring standards |
+| [architecture](instructions/architecture.instructions.md) | Architecture, API, and design-diagram guidance |
+| [azure](instructions/azure.instructions.md) | Azure service, SDK, and deployment guidance |
+| [backend](instructions/backend.instructions.md) | Backend APIs, services, workers, and data access |
+| [bicep](instructions/bicep.instructions.md) | Azure Bicep authoring and validation |
+| [config](instructions/config.instructions.md) | Config file safety and secrets prevention |
+| [development](instructions/development.instructions.md) | Shared dev standards for all dev-core agents |
+| [documentation](instructions/documentation.instructions.md) | Documentation and change-note expectations |
+| [frontend](instructions/frontend.instructions.md) | Frontend, UI, state management, and accessibility |
+| [governance](instructions/governance.instructions.md) | Repository-wide AI governance rules |
+| [mcp](instructions/mcp.instructions.md) | MCP server, tooling, and trust-boundary guidance |
+| [naming](instructions/naming.instructions.md) | Naming conventions across repos, code, and infrastructure |
+| [process](instructions/process.instructions.md) | Delivery lifecycle, sprint, triage, and release process |
+| [quality](instructions/quality.instructions.md) | PR review, security, performance, and coverage gates |
+| [reliability](instructions/reliability.instructions.md) | Retries, uptime, background work, and dependency failure |
+| [security](instructions/security.instructions.md) | Secure coding, auth, authz, secrets, and input handling |
+| [terraform](instructions/terraform.instructions.md) | Terraform guidance for Azure-oriented IaC |
+| [testing](instructions/testing.instructions.md) | Testing best practices and validation expectations |
+| [ux](instructions/ux.instructions.md) | UX, accessibility, and design-system guidance |
+
+---
+
+## Guardrails
+
+Guardrail policies in [`docs/guardrails/`](docs/guardrails/) enforce non-negotiable standards:
+
+| Guardrail | Purpose |
+|---|---|
+| [caf-naming](docs/guardrails/caf-naming.md) | CAF naming conventions for Azure resources |
+| [container-image-tags](docs/guardrails/container-image-tags.md) | Container image tags must include Git SHA |
+| [db-deployment-concurrency](docs/guardrails/db-deployment-concurrency.md) | Database deployment concurrency rules |
+| [env-example](docs/guardrails/env-example.md) | `.env.example` required for every repo |
+| [oidc-federation](docs/guardrails/oidc-federation.md) | GitHub Actions to Azure OIDC federation |
+| [secrets-in-workflows](docs/guardrails/secrets-in-workflows.md) | No hardcoded secrets in workflow files |
+
+Additional security docs: [`docs/security/BRANCH_PROTECTION.md`](docs/security/BRANCH_PROTECTION.md) · [`docs/security/SECRET_SCANNING.md`](docs/security/SECRET_SCANNING.md)
+
+---
 
 ## Governance
 
-Base Coat operates under a lightweight enterprise governance framework that applies to all contributions and all agent definitions in this repository.
-
-Key rules:
+Base Coat operates under a lightweight enterprise governance framework:
 
 - **Issue-first**: All changes must be backed by a logged GitHub issue.
 - **PRs only**: Never commit directly to `main`. Open a pull request; self-approval is permitted.
@@ -82,227 +205,80 @@ Key rules:
 
 Full reference: [`docs/GOVERNANCE.md`](docs/GOVERNANCE.md) · Contributing: [`CONTRIBUTING.md`](CONTRIBUTING.md)
 
-> ℹ️ `docs/GOVERNANCE.md` and `CONTRIBUTING.md` are introduced in the companion PR `feature/43-governance-docs` and will be available once that PR merges.
+---
 
 ## Repository Layout
 
 ```text
 basecoat/
-├── .github/workflows/
-├── CHANGELOG.md
-├── INVENTORY.md
-├── README.md
-├── docs/
-├── examples/
-├── scripts/
-├── version.json
-├── sync.ps1
-├── sync.sh
-├── instructions/
-├── skills/
-├── prompts/
-└── agents/
+├── agents/              # 28 agent definitions
+├── skills/              # 18 skill directories with templates
+├── instructions/        # 19 instruction files (auto-loaded)
+├── prompts/             # 3 prompt starters
+├── docs/                # Governance, guardrails, security, guides
+│   ├── guardrails/      # 6 guardrail policies
+│   └── security/        # Branch protection, secret scanning
+├── examples/            # IaC samples, workflows, repo templates
+├── scripts/             # Packaging, validation, hook installers
+├── tests/               # Smoke tests
+├── .github/workflows/   # CI/CD pipelines
+├── sync.ps1             # Windows sync script
+├── sync.sh              # macOS/Linux sync script
+├── CATALOG.md           # Machine-readable asset registry
+├── CHANGELOG.md         # Release history
+├── CONTRIBUTING.md      # Contribution guidelines
+├── INVENTORY.md         # Asset inventory
+└── version.json         # Current version metadata
 ```
 
-## What Is Included
-
-- [instructions/backend.instructions.md](/c:/git/basecoat/instructions/backend.instructions.md): baseline backend engineering guidance
-- [instructions/frontend.instructions.md](/c:/git/basecoat/instructions/frontend.instructions.md): UI and frontend guardrails
-- [instructions/testing.instructions.md](/c:/git/basecoat/instructions/testing.instructions.md): expectations for tests and validation
-- [instructions/security.instructions.md](/c:/git/basecoat/instructions/security.instructions.md): baseline secure coding and secret-handling practices
-- [instructions/reliability.instructions.md](/c:/git/basecoat/instructions/reliability.instructions.md): failure handling and operability guardrails
-- [instructions/documentation.instructions.md](/c:/git/basecoat/instructions/documentation.instructions.md): documentation and change-note expectations
-- [instructions/development.instructions.md](/c:/git/basecoat/instructions/development.instructions.md): shared development standards for all four dev core agents — code style, error handling, security, logging, testing, and agent collaboration
-- [instructions/azure.instructions.md](/c:/git/basecoat/instructions/azure.instructions.md): Azure coding, auth, and service-integration guidance
-- [instructions/terraform.instructions.md](/c:/git/basecoat/instructions/terraform.instructions.md): Terraform guidance for Azure-oriented IaC changes
-- [instructions/bicep.instructions.md](/c:/git/basecoat/instructions/bicep.instructions.md): Bicep authoring guidance and validation practices
-- [instructions/naming.instructions.md](/c:/git/basecoat/instructions/naming.instructions.md): naming conventions across repos, code, and infrastructure
-- [instructions/mcp.instructions.md](/c:/git/basecoat/instructions/mcp.instructions.md): MCP server and tool governance, safety, and enforcement guidance
-- [skills/backend-dev/SKILL.md](/c:/git/basecoat/skills/backend-dev/SKILL.md): workflow for designing APIs, scaffolding service layers, defining error catalogs, and building data access repositories
-- [skills/frontend-dev/SKILL.md](/c:/git/basecoat/skills/frontend-dev/SKILL.md): workflow for building accessible components, auditing WCAG 2.1 AA compliance, and designing state management
-- [skills/data-tier/SKILL.md](/c:/git/basecoat/skills/data-tier/SKILL.md): workflow for schema design, migration authoring, query review, and data dictionary documentation
-- [skills/manual-test-strategy/SKILL.md](/c:/git/basecoat/skills/manual-test-strategy/SKILL.md): workflow for defining manual scope, producing charters, checklists, and automation handoff artifacts
-- [skills/performance-profiling/SKILL.md](/c:/git/basecoat/skills/performance-profiling/SKILL.md): workflow for profiling slow paths
-- [skills/code-review/SKILL.md](/c:/git/basecoat/skills/code-review/SKILL.md): review-first workflow focused on risk detection
-- [skills/refactoring/SKILL.md](/c:/git/basecoat/skills/refactoring/SKILL.md): workflow for safe structural cleanup
-- [skills/create-skill/SKILL.md](/c:/git/basecoat/skills/create-skill/SKILL.md): starter workflow for creating new reusable skills
-- [skills/create-instruction/SKILL.md](/c:/git/basecoat/skills/create-instruction/SKILL.md): starter workflow for creating new instruction files
-- [prompts/architect.prompt.md](/c:/git/basecoat/prompts/architect.prompt.md): architecture planning starter
-- [prompts/code-review.prompt.md](/c:/git/basecoat/prompts/code-review.prompt.md): code review starter
-- [prompts/bugfix.prompt.md](/c:/git/basecoat/prompts/bugfix.prompt.md): root-cause bugfix starter
-- [agents/backend-dev.agent.md](/c:/git/basecoat/agents/backend-dev.agent.md): design and implement APIs, service layers, and data access patterns with security, observability, and auto issue filing
-- [agents/frontend-dev.agent.md](/c:/git/basecoat/agents/frontend-dev.agent.md): build accessible, performant UI components with WCAG 2.1 AA compliance, Core Web Vitals targets, and auto issue filing
-- [agents/middleware-dev.agent.md](/c:/git/basecoat/agents/middleware-dev.agent.md): design integration layers, message contracts, API gateways, and event-driven architectures with resilience patterns and auto issue filing
-- [agents/data-tier.agent.md](/c:/git/basecoat/agents/data-tier.agent.md): design schemas, write reversible migrations, optimize queries, and establish data access patterns with auto issue filing
-- [agents/manual-test-strategy.agent.md](/c:/git/basecoat/agents/manual-test-strategy.agent.md): produce a complete manual test strategy with rubric, charter, checklist, defect template, and automation backlog
-- [agents/exploratory-charter.agent.md](/c:/git/basecoat/agents/exploratory-charter.agent.md): generate time-boxed exploratory sessions with evidence capture and GitHub Issue filing
-- [agents/strategy-to-automation.agent.md](/c:/git/basecoat/agents/strategy-to-automation.agent.md): convert manual paths into tiered automation candidates with a GitHub Issue filed for every one
-- [agents/code-review.agent.md](/c:/git/basecoat/agents/code-review.agent.md): multi-step review agent definition draft
-- [agents/new-customization.agent.md](/c:/git/basecoat/agents/new-customization.agent.md): workflow for creating the right customization primitive
-- [agents/rollout-basecoat.agent.md](/c:/git/basecoat/agents/rollout-basecoat.agent.md): workflow for onboarding a repo to a pinned Base Coat release
-- [docs/enterprise-rollout.md](/c:/git/basecoat/docs/enterprise-rollout.md): release, governance, and safe rollout guidance
-- [docs/documentation-heading-scaffolds.md](/c:/git/basecoat/docs/documentation-heading-scaffolds.md): reusable heading templates for README, runbooks, ADRs, and change notes
-- [docs/prd-and-spec-guidance.md](/c:/git/basecoat/docs/prd-and-spec-guidance.md): guidance and templates for product requirements docs and technical specs
-- [docs/repo-template-standard.md](/c:/git/basecoat/docs/repo-template-standard.md): standard for enforcing Base Coat in new repository templates
-- [examples/iac/README.md](/c:/git/basecoat/examples/iac/README.md): sample Azure IaC layouts for Bicep and Terraform
-- [examples/workflows/bootstrap-from-release.yml](/c:/git/basecoat/examples/workflows/bootstrap-from-release.yml): consumer workflow that installs a pinned release
-- [examples/repo-template/README.md](/c:/git/basecoat/examples/repo-template/README.md): sample repository template with lock-based bootstrap and enforcement
-- [.github/workflows/validate-repo-template-sample.yml](/c:/git/basecoat/.github/workflows/validate-repo-template-sample.yml): CI validation for the sample repository template assets
-- [examples/repo-template/README.md](/c:/git/basecoat/examples/repo-template/README.md): sample repository template with lock-based bootstrap and enforcement workflows
+---
 
 ## Adoption Options
 
-### Option 1: Pull With a Sync Script
-
-Use this when teams want a lightweight, on-demand way to copy the shared standards into a repository.
-
-For enterprise rollout, prefer a pinned tag or release artifact instead of `main`.
-
-Linux and macOS:
+### Option 1 — Sync Script (Recommended)
 
 ```bash
+# macOS / Linux
 curl -fsSL https://raw.githubusercontent.com/YOUR-ORG/basecoat/main/sync.sh | bash
-```
 
-Windows PowerShell:
-
-```powershell
+# Windows PowerShell
 irm https://raw.githubusercontent.com/YOUR-ORG/basecoat/main/sync.ps1 | iex
 ```
 
-Both scripts support overrides through environment variables:
-
-- `BASECOAT_REPO`: source git URL
-- `BASECOAT_REF`: branch or tag to sync
-- `BASECOAT_TARGET_DIR`: target directory inside the consumer repo
-
-Default target directory is `.github/base-coat`.
-
-### Option 1A: Enterprise Bootstrap From A Pinned Release
-
-Use this when Base Coat is the approved starting point for new repositories and changes must roll out safely.
-
-Windows PowerShell:
-
-```powershell
-$tag = 'v0.3.0'
-irm https://raw.githubusercontent.com/YOUR-ORG/basecoat/$tag/sync.ps1 | iex
-```
-
-macOS and Linux:
+### Option 2 — Pinned Release (Enterprise)
 
 ```bash
-tag=v0.3.0
+tag=v1.0.0
 curl -fsSL https://raw.githubusercontent.com/YOUR-ORG/basecoat/${tag}/sync.sh | bash
 ```
 
-GitHub CLI:
-
-```bash
-gh release download v0.3.0 --repo YOUR-ORG/basecoat --pattern "base-coat-*"
-```
-
-For stricter environments, publish checksums with the release and require verification before install.
-
-### Option 2: Git Submodule
-
-Use this when teams want explicit version pinning and are comfortable managing submodules.
+### Option 3 — Git Submodule
 
 ```bash
 git submodule add https://github.com/YOUR-ORG/basecoat.git .github/base-coat
-git submodule update --remote --merge
 ```
 
-## Recommended Rollout
+---
 
-1. Validate every change in CI before packaging.
-2. Publish versioned release artifacts and checksums.
-3. Start new repositories from a pinned Base Coat release, not an unpinned branch.
-4. Roll changes through approval rings before broad adoption.
-5. Keep `INVENTORY.md` current so teams can discover what exists without reading every file.
+## Enterprise Setup
 
-## Release Management
+For GitHub Enterprise onboarding, organization-level configuration, and custom agent development, see the **[Enterprise Setup Guide](docs/enterprise-setup.md)**.
 
-- Use semantic tags such as `v0.1.0`, `v0.2.0`, `v1.0.0`.
-- Keep [version.json](/c:/git/basecoat/version.json) aligned with the latest published tag.
-- Record breaking changes in [CHANGELOG.md](/c:/git/basecoat/CHANGELOG.md).
-- Use the packaging and validation scripts in [scripts](/c:/git/basecoat/scripts) and the GitHub Actions definitions in [.github/workflows](/c:/git/basecoat/.github/workflows).
-- Run the scaffold test suite in [tests](/c:/git/basecoat/tests) before publishing releases.
-
-## Enterprise Distribution
-
-Base Coat can be distributed through three channels:
-
-- Windows: versioned `.zip` release artifact plus `sync.ps1`
-- macOS and Linux: versioned `.tar.gz` release artifact plus `sync.sh`
-- CLI: GitHub CLI or an internal artifact mirror that downloads pinned release assets
-
-The recommended enterprise model is:
-
-1. Validate on every change.
-2. Package on approved tags.
-3. Publish checksums.
-4. Mirror approved artifacts internally if internet egress is restricted.
-5. Use example onboarding workflows from [examples/workflows](/c:/git/basecoat/examples/workflows).
-
-## Commit Message Security
-
-Base Coat supports hard enforcement so commit messages do not leak secrets or PII.
-
-- Local enforcement: `commit-msg` hook in `.githooks/commit-msg`
-- CI enforcement: commit message scan job in [.github/workflows/validate-basecoat.yml](/c:/git/basecoat/.github/workflows/validate-basecoat.yml)
-
-Install hooks in a local repo:
-
-Windows PowerShell:
-
-```powershell
-./scripts/install-git-hooks.ps1
-```
-
-macOS and Linux:
-
-```bash
-bash scripts/install-git-hooks.sh
-```
-
-Run commit-message scan manually:
-
-```bash
-bash scripts/scan-commit-messages.sh HEAD~20..HEAD
-```
-
-## PRD and Spec Gate
-
-Base Coat includes PR governance for documentation quality:
-
-- Workflow: [.github/workflows/prd-spec-gate.yml](/c:/git/basecoat/.github/workflows/prd-spec-gate.yml)
-- PR template: [.github/PULL_REQUEST_TEMPLATE.md](/c:/git/basecoat/.github/PULL_REQUEST_TEMPLATE.md)
-
-Gate behavior:
-
-- High-change pull requests require both PRD and spec references.
-- Risky-path pull requests require at least one PRD or spec reference.
+---
 
 ## Test Suite
 
-Run the repository smoke tests:
-
-PowerShell:
-
 ```powershell
-./tests/run-tests.ps1
+./tests/run-tests.ps1          # Windows
+bash tests/run-tests.sh        # macOS / Linux
 ```
 
-Bash:
+---
 
-```bash
-bash tests/run-tests.sh
-```
+## Contributing
 
-## Next Additions
+See [`CONTRIBUTING.md`](CONTRIBUTING.md) for guidelines on adding agents, skills, instructions, and prompts.
 
-- Validation for customization file structure in CI
-- More language- and stack-specific instruction files
-- Additional skills with examples and templates
-- Organization-specific prompts and agents
+## License
+
+See [`LICENSE`](LICENSE) if present, or contact your organization's open-source program office for licensing terms.
