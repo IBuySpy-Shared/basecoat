@@ -206,6 +206,14 @@ See [`docs/guardrails/oidc-federation.md`](docs/guardrails/oidc-federation.md) f
 
 ---
 
+## 12. Environment Variables — `.env.example` Required
+
+Every repository that requires environment variables must include a `.env.example` at the root documenting all required variables with placeholder values and description comments. Real values (`.env`, `.env.local`) are gitignored; only `.env.example` is committed.
+
+See [`docs/guardrails/env-example.md`](docs/guardrails/env-example.md) for the full guardrail, minimum Azure variables, and developer workflow.
+
+---
+
 ## Quick Reference Card
 
 | Rule | Action |
@@ -218,4 +226,5 @@ See [`docs/guardrails/oidc-federation.md`](docs/guardrails/oidc-federation.md) f
 | Ambiguous requirement | Stop, ask for clarification |
 | CI failing | Fix before merge |
 | Azure auth in Actions | OIDC only — no client secrets |
+| Env vars undocumented | Add to `.env.example` |
 | Governance change needed | Issue → PR → approval |
