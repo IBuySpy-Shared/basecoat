@@ -2,6 +2,40 @@
 
 All notable changes to this repository should be recorded in this file.
 
+## 2.0.0 - 2026-04-28
+
+### Added
+- `/basecoat` router skill (`skills/basecoat/SKILL.md`) — single entry point with dual-mode UX: discovery (`/basecoat`) and delegation (`/basecoat [discipline] [prompt]`)
+- `basecoat-metadata.json` — machine-readable registry of all 28 agents with categories, keywords, aliases, argument hints, and paired skills
+- `PRODUCT.md` — project identity document defining audience, principles, and architecture
+- `PHILOSOPHY.md` — explains the agents + skills + instructions design and how they compose
+- Categorized agent table in `CATALOG.md` with emoji groupings (🔨🏗️🔍🚀📋🧰)
+- `argumentHint` field for all 28 agents in metadata registry
+- `basecoat-ghcp.zip` release artifact for 1-step GitHub Copilot installation
+- Quick Start section in README with manual copy and sync script install methods
+
+### Changed
+- `sync.ps1` and `sync.sh` now distribute `basecoat-metadata.json` to consuming repos
+- `package-basecoat.yml` workflow produces GHCP ZIP alongside existing artifacts
+
+## 1.0.0 - 2026-04-28
+
+### Added
+- 28 agents covering full SDLC: development, architecture, quality, DevOps, process, meta
+- 19 skills with templates and knowledge packs
+- 19 instruction files for ambient governance
+- 3 reusable prompts and 6 guardrails
+- CI workflow with frontmatter validation and CATALOG sync checks
+- Post-deploy smoke tests
+- Enterprise setup guide and token optimization docs
+- `CATALOG.md` machine-readable asset registry
+
+### Fixed
+- CI `grep` treating `---` as option flag (#94)
+- Package workflow uploading directories (#95)
+- PRD gate too aggressive for framework repos (#96)
+- merge-coordinator.agent.md missing newline after frontmatter (#98)
+
 ## 0.7.0 - 2026-04-26
 
 - Added `agents/sprint-planner.agent.md`: goal-to-issues decomposition with wave dependency mapping, agent assignment recommendations, acceptance criteria generation, and sprint board output
