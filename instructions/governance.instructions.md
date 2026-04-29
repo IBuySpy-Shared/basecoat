@@ -206,6 +206,28 @@ See [`docs/guardrails/oidc-federation.md`](docs/guardrails/oidc-federation.md) f
 
 ---
 
+## 12. CAF Naming Conventions for Azure Resources
+
+All Azure resources must follow Cloud Adoption Framework (CAF) naming conventions (e.g., `rg-{workload}-{env}`, `ca-{workload}-{env}-{location}-{instance}`). Non-compliant names must be flagged during code review.
+
+See [`docs/guardrails/caf-naming.md`](docs/guardrails/caf-naming.md) for the full naming table, validation rules, and references.
+
+---
+
+## 12. Container Image Tags — SHA Required
+
+Every container image pushed from CI/CD must be tagged with the full git commit SHA. Pushing only `:latest` is a policy violation. See [`docs/guardrails/container-image-tags.md`](docs/guardrails/container-image-tags.md) for the pattern, examples, and verification steps.
+
+---
+
+## 12. Environment Variables — `.env.example` Required
+
+Every repository that requires environment variables must include a `.env.example` at the root documenting all required variables with placeholder values and description comments. Real values (`.env`, `.env.local`) are gitignored; only `.env.example` is committed.
+
+See [`docs/guardrails/env-example.md`](docs/guardrails/env-example.md) for the full guardrail, minimum Azure variables, and developer workflow.
+
+---
+
 ## Quick Reference Card
 
 | Rule | Action |
@@ -218,4 +240,6 @@ See [`docs/guardrails/oidc-federation.md`](docs/guardrails/oidc-federation.md) f
 | Ambiguous requirement | Stop, ask for clarification |
 | CI failing | Fix before merge |
 | Azure auth in Actions | OIDC only — no client secrets |
+| Container image tag | Must include full git SHA |
+| Azure resource naming | CAF conventions — see guardrail |
 | Governance change needed | Issue → PR → approval |
