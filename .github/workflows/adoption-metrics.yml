@@ -23,8 +23,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           COPILOT_METRICS_TOKEN: ${{ secrets.COPILOT_METRICS_TOKEN || secrets.GITHUB_TOKEN }}
-          DASHBOARD_ORG: ${{ secrets.DASHBOARD_ORG }}
-          DASHBOARD_REPOS: ${{ secrets.DASHBOARD_REPOS }}
+          DASHBOARD_ORG: ${{ secrets.DASHBOARD_ORG || github.repository_owner }}
+          DASHBOARD_REPOS: ${{ secrets.DASHBOARD_REPOS || format('["{0}"]', github.repository) }}
           OUTPUT_DIR: dashboard/metrics
         run: python scripts/metrics/collect-metrics.py
 
