@@ -55,3 +55,27 @@ jobs:
               --body "$SUMMARY" \
               --label "metrics"
           fi
+
+      - name: File degradation alerts
+        if: github.event_name == 'schedule'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          ALERTS_FILE="dashboard/metrics/alerts.json"
+          if [ -f "$ALERTS_FILE" ] && [ "$(cat "$ALERTS_FILE")" != "[]" ]; then
+            ALERT_COUNT=$(python3 -c "import json; print(len(json.load(open('$ALERTS_FILE'))))")
+            ALERT_BODY=$(python3 -c "
+          import json
+          alerts = json.load(open('$ALERTS_FILE'))
+          lines = ['# Degradation Alerts\n']
+          for a in alerts:
+              icon = '⚠️' if a['severity'] == 'warning' else 'ℹ️'
+              lines.append(f\"- {icon} **{a['type']}**: {a['message']}\")
+          print('\n'.join(lines))
+          ")
+            gh issue create \
+              --repo ${{ github.repository }} \
+              --title "⚠️ Metrics Degradation Alert — $(date +%Y-%m-%d)" \
+              --body "$ALERT_BODY" \
+              --label "metrics,degradation"
+          fi

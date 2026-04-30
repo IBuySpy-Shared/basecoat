@@ -179,6 +179,58 @@ def collect_basecoat_coverage(repo, token):
     return coverage
 
 
+def detect_degradation(current, history):
+    """Compare current metrics to recent history and flag regressions."""
+    alerts = []
+    if len(history) < 2:
+        return alerts
+
+    prev = history[-1]
+
+    # Check Copilot acceptance rate drop
+    if current["copilot"]["available"] and prev.get("copilot", {}).get("available"):
+        curr_rate = current["copilot"].get("acceptance_rate", 0)
+        prev_rate = prev["copilot"].get("acceptance_rate", 0)
+        if prev_rate > 0 and curr_rate < prev_rate * 0.9:
+            alerts.append({
+                "type": "copilot_acceptance_drop",
+                "severity": "warning",
+                "message": f"Copilot acceptance rate dropped from {prev_rate:.1f}% to {curr_rate:.1f}%",
+                "previous": prev_rate,
+                "current": curr_rate
+            })
+
+    # Check per-repo CI success rate drop
+    for repo, data in current.get("repos", {}).items():
+        prev_repo = prev.get("repos", {}).get(repo, {})
+        curr_ci = data.get("ci", {}).get("success_rate", 100)
+        prev_ci = prev_repo.get("ci", {}).get("success_rate", 100)
+        if prev_ci > 0 and curr_ci < prev_ci - 15:
+            alerts.append({
+                "type": "ci_success_drop",
+                "severity": "warning",
+                "repo": repo,
+                "message": f"CI success rate for {repo} dropped from {prev_ci}% to {curr_ci}%",
+                "previous": prev_ci,
+                "current": curr_ci
+            })
+
+        # Check PR cycle time increase (>50% slower)
+        curr_cycle = data.get("pull_requests", {}).get("cycle_time_median_hours", 0)
+        prev_cycle = prev_repo.get("pull_requests", {}).get("cycle_time_median_hours", 0)
+        if prev_cycle > 0 and curr_cycle > prev_cycle * 1.5:
+            alerts.append({
+                "type": "cycle_time_increase",
+                "severity": "info",
+                "repo": repo,
+                "message": f"PR cycle time for {repo} increased from {prev_cycle}h to {curr_cycle}h",
+                "previous": prev_cycle,
+                "current": curr_cycle
+            })
+
+    return alerts
+
+
 def main():
     print("Base Coat Adoption Metrics Collector")
     print("=" * 40)
@@ -234,6 +286,16 @@ def main():
     with open(history_path, "w") as f:
         json.dump(history, f, indent=2)
     print(f"✓ History updated ({len(history)} data points)")
+
+    # Check for degradation signals and output alerts
+    alerts = detect_degradation(metrics, history)
+    alerts_path = os.path.join(output_dir, "alerts.json")
+    with open(alerts_path, "w") as f:
+        json.dump(alerts, f, indent=2)
+    if alerts:
+        print(f"⚠ {len(alerts)} degradation alert(s) detected")
+    else:
+        print("✓ No degradation signals")
 
     # Generate summary markdown
     summary_path = os.path.join(output_dir, "SUMMARY.md")
