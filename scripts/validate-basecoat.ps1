@@ -24,7 +24,7 @@ foreach ($file in $files) {
         throw "Missing description in frontmatter for $($file.FullName)"
     }
 
-    if ($file.Name -eq 'SKILL.md' -and -not ($lines | Select-String -Pattern '^name:' -Quiet)) {
+    if (($file.Name -eq 'SKILL.md' -or $file.Name -like '*.agent.md') -and -not ($lines | Select-String -Pattern '^name:' -Quiet)) {
         throw "Missing name in frontmatter for $($file.FullName)"
     }
 }

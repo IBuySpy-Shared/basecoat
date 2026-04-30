@@ -151,6 +151,29 @@ pwsh scripts/install-git-hooks.ps1
 
 All new agents, skills, and instructions require an issue before implementation.
 
+### Agent Frontmatter Schema
+
+Every agent file (`agents/<name>.agent.md`) must begin with YAML frontmatter containing at minimum the required fields below.
+
+| Field | Required | Description |
+|---|---|---|
+| `name` | ✅ Yes | Identifier for the agent (typically matches filename without extension) |
+| `description` | ✅ Yes | One-line summary of what the agent does and when to use it |
+| `tools` | ❌ Optional | List of tools the agent may invoke |
+| `model` | ❌ Optional | Model override (e.g., `gpt-4o`, `claude-sonnet-4`) |
+
+**Example:**
+
+```yaml
+---
+name: backend-dev
+description: "Backend development agent for APIs, services, and business logic."
+tools: [read_file, write_file, list_dir, run_terminal_command]
+---
+```
+
+The `name` and `description` fields are validated by `scripts/validate-basecoat.ps1` and CI.
+
 ---
 
 ## Merge Policy & Build Verification

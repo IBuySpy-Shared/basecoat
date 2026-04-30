@@ -50,8 +50,11 @@ paths = [
   # Test fixtures directory — known-fake data
   '''(^|/)test[s]?/fixtures/''',
   '''(^|/)test[s]?/data/''',
-  # Documentation — may contain sanitised examples
-  '''(^|/)docs/''',
+  # Documentation — specific files that may contain sanitised examples
+  '''(^|/)docs/templates/''',
+  '''(^|/)docs/CONFIG_PATTERN\.md$''',
+  '''(^|/)docs/enterprise-setup\.md$''',
+  '''(^|/)docs/HOOKS\.md$''',
   # This file itself — contains regex patterns that look like secrets
   '''(^|/)\.gitleaks\.toml$''',
 ]
