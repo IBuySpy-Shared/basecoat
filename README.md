@@ -103,6 +103,7 @@ Base Coat is built on four GitHub Copilot customization primitives:
 | Agent | Description |
 |---|---|
 | [agent-designer](agents/agent-designer.agent.md) | Designs and authors Copilot agent definitions |
+| [agentops](agents/agentops.agent.md) | Agent lifecycle, versioning, rollout, health monitoring, and rollback |
 | [api-designer](agents/api-designer.agent.md) | API design for OpenAPI, REST, GraphQL, and governance |
 | [backend-dev](agents/backend-dev.agent.md) | APIs, service layers, business logic, and data access |
 | [code-review](agents/code-review.agent.md) | Structured multi-step code review workflow |
