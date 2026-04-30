@@ -1,0 +1,235 @@
+name: Copilot Implement Issue
+
+on:
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: 'Issue number to implement'
+        required: true
+        type: number
+
+  issues:
+    types: [labeled]
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  implement:
+    # Run on workflow_dispatch OR when 'copilot-agent' label is added
+    if: |
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'issues' && github.event.label.name == 'copilot-agent')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Resolve issue number
+        id: issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const num = context.eventName === 'workflow_dispatch'
+              ? context.payload.inputs.issue_number
+              : context.payload.issue.number;
+            core.setOutput('number', num);
+
+            const { data: issue } = await github.rest.issues.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: Number(num)
+            });
+            core.setOutput('title', issue.title);
+            core.setOutput('body', issue.body || '');
+
+            // Determine type from labels
+            const labels = issue.labels.map(l => l.name);
+            let type = 'instruction';
+            if (labels.includes('agent')) type = 'agent';
+            else if (labels.includes('skill')) type = 'skill';
+            core.setOutput('type', type);
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Create feature branch
+        id: branch
+        run: |
+          ISSUE_NUM="${{ steps.issue.outputs.number }}"
+          SLUG=$(echo "${{ steps.issue.outputs.title }}" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g' | sed 's/--*/-/g' | cut -c1-40)
+          BRANCH="feat/${ISSUE_NUM}-${SLUG}"
+          git checkout -b "$BRANCH"
+          echo "name=$BRANCH" >> "$GITHUB_OUTPUT"
+
+      - name: Generate implementation
+        uses: actions/github-script@v7
+        env:
+          ISSUE_TYPE: ${{ steps.issue.outputs.type }}
+          ISSUE_TITLE: ${{ steps.issue.outputs.title }}
+          ISSUE_BODY: ${{ steps.issue.outputs.body }}
+          ISSUE_NUM: ${{ steps.issue.outputs.number }}
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+            const type = process.env.ISSUE_TYPE;
+            const title = process.env.ISSUE_TITLE;
+            const body = process.env.ISSUE_BODY;
+            const num = process.env.ISSUE_NUM;
+
+            // Extract name slug from title
+            const nameMatch = title.match(/(?:add|create)\s+(.+?)(?:\s+(?:agent|skill|instruction))?$/i);
+            const rawName = nameMatch ? nameMatch[1] : title;
+            const slug = rawName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+
+            // Parse sections from issue body
+            const sections = {};
+            let currentSection = 'description';
+            sections[currentSection] = [];
+            for (const line of body.split('\n')) {
+              const heading = line.match(/^##\s+(.+)/);
+              if (heading) {
+                currentSection = heading[1].toLowerCase().trim();
+                sections[currentSection] = [];
+              } else {
+                (sections[currentSection] = sections[currentSection] || []).push(line);
+              }
+            }
+
+            let filePath, content;
+
+            if (type === 'agent') {
+              filePath = `agents/${slug}.agent.md`;
+              const tools = (sections['tools / skills'] || sections['tools'] || []).join('\n');
+              const behavior = (sections['behavior'] || sections['expected behavior'] || []).join('\n');
+              content = [
+                `---`,
+                `name: "${rawName.trim()}"`,
+                `description: "Copilot agent for ${rawName.trim()}"`,
+                `tools: ["filesystem", "terminal"]`,
+                `---`,
+                ``,
+                `# ${rawName.trim()} Agent`,
+                ``,
+                `## Purpose`,
+                ``,
+                (sections['description'] || []).join('\n').trim() || `Implements the ${rawName.trim()} functionality.`,
+                ``,
+                `## Behavior`,
+                ``,
+                behavior.trim() || `Follow the instructions in this file to assist with ${rawName.trim()} tasks.`,
+                ``,
+                `## Tools`,
+                ``,
+                tools.trim() || `- filesystem: Read and write project files\n- terminal: Execute shell commands`,
+                ``
+              ].join('\n');
+            } else if (type === 'skill') {
+              const skillDir = `skills/${slug}`;
+              filePath = `${skillDir}/SKILL.md`;
+              fs.mkdirSync(skillDir, { recursive: true });
+              const steps = (sections['implementation steps'] || sections['steps'] || []).join('\n');
+              content = [
+                `---`,
+                `name: "${rawName.trim()}"`,
+                `description: "Copilot skill for ${rawName.trim()}"`,
+                `---`,
+                ``,
+                `# ${rawName.trim()} Skill`,
+                ``,
+                `## Overview`,
+                ``,
+                (sections['description'] || []).join('\n').trim() || `Provides ${rawName.trim()} capabilities.`,
+                ``,
+                `## Steps`,
+                ``,
+                steps.trim() || `1. Analyze the current project context\n2. Apply ${rawName.trim()} patterns\n3. Validate the output`,
+                ``
+              ].join('\n');
+            } else {
+              filePath = `instructions/${slug}.instructions.md`;
+              const guidance = (sections['guidance'] || sections['rules'] || sections['instructions'] || []).join('\n');
+              content = [
+                `---`,
+                `name: "${rawName.trim()}"`,
+                `description: "Copilot instruction for ${rawName.trim()}"`,
+                `applyTo: "**/*"`,
+                `---`,
+                ``,
+                `# ${rawName.trim()}`,
+                ``,
+                `## Context`,
+                ``,
+                (sections['description'] || []).join('\n').trim() || `Guidelines for ${rawName.trim()}.`,
+                ``,
+                `## Rules`,
+                ``,
+                guidance.trim() || `Follow best practices for ${rawName.trim()}.`,
+                ``
+              ].join('\n');
+            }
+
+            // Ensure directory exists
+            const dir = path.dirname(filePath);
+            if (dir !== '.') fs.mkdirSync(dir, { recursive: true });
+
+            fs.writeFileSync(filePath, content);
+            core.setOutput('file', filePath);
+            core.info(`Generated: ${filePath}`);
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "feat(${{ steps.issue.outputs.type }}): ${{ steps.issue.outputs.title }}
+
+          Closes #${{ steps.issue.outputs.number }}
+
+          Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>"
+          git push origin "${{ steps.branch.outputs.name }}"
+
+      - name: Create Pull Request
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = await github.rest.issues.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: Number('${{ steps.issue.outputs.number }}')
+            });
+
+            const { data: pr } = await github.rest.pulls.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `feat(${{ steps.issue.outputs.type }}): ${{ steps.issue.outputs.title }}`,
+              head: '${{ steps.branch.outputs.name }}',
+              base: 'main',
+              body: [
+                `## Summary`,
+                ``,
+                `Auto-generated implementation for #${{ steps.issue.outputs.number }}.`,
+                ``,
+                `## Type: \`${{ steps.issue.outputs.type }}\``,
+                ``,
+                `> Review the generated content and merge if it meets requirements.`,
+                `> If changes are needed, push commits to the branch or close and re-implement manually.`,
+                ``,
+                `Closes #${{ steps.issue.outputs.number }}`
+              ].join('\n')
+            });
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: Number('${{ steps.issue.outputs.number }}'),
+              body: `🤖 **Implementation PR created:** #${pr.number}\n\nReview and merge when ready.`
+            });
