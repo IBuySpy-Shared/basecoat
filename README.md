@@ -146,6 +146,7 @@ Base Coat is built on four GitHub Copilot customization primitives:
 | [api-design](skills/api-design/) | openapi-template, governance-checklist, breaking-change-checklist, versioning-decision-tree | api-designer |
 | [azure-waf-review](skills/azure-waf-review/) | waf-assessment-report-template, pillar-scoring-rubric, remediation-action-plan-template | solution-architect, security-analyst, devops-engineer |
 | [architecture](skills/architecture/) | adr-template, c4-diagram-template, risk-register-template, tech-selection-matrix-template | solution-architect |
+| [azure-networking](skills/azure-networking/) | hub-spoke-topology, cidr-allocation, private-endpoint-dns-zones, nsg-rule-matrix | solution-architect, devops-engineer |
 | [backend-dev](skills/backend-dev/) | api-spec-template, error-catalog-template, repository-pattern-template, service-template | backend-dev |
 | [code-review](skills/code-review/) | SKILL.md workflow | code-review |
 | [create-instruction](skills/create-instruction/) | SKILL.md workflow | new-customization |
