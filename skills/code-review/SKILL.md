@@ -26,3 +26,7 @@ Use this skill when the task is to review code rather than write it.
 
 - Do not rewrite the code just because there is a different style preference.
 - Do not bury real risks under a long summary.
+
+## Related Guardrails
+
+- [Code Review Escalation](../../docs/guardrails/code-review-escalation.md) — When and how to escalate findings to blocking issues vs inline comments
