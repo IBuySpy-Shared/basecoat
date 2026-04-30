@@ -32,6 +32,7 @@ Both test runners are designed to fail fast with clear messages.
 ### `adoption-scanner-tests.ps1`
 
 Tests for `scripts/adoption/detect-basecoat.ps1` covering:
+
 - Parameter validation (Org, BasecoatRepo, OutputFormat)
 - Output format structures (table, json, markdown)
 - Asset type detection (agent, instruction, prompt)
@@ -41,6 +42,7 @@ Tests for `scripts/adoption/detect-basecoat.ps1` covering:
 - Copilot seat data structures
 
 **Key tests:**
+
 - OutputFormat must be one of: table, json, markdown
 - JSON output must include scan_date, org, source, repos, copilot_seats
 - Markdown output must include table format with repo summary
@@ -50,6 +52,7 @@ Tests for `scripts/adoption/detect-basecoat.ps1` covering:
 ### `workflow-guardrails-tests.ps1`
 
 Tests for workflow compliance in `.github/workflows/*.yml` covering:
+
 - **timeout-minutes**: All jobs have explicit timeout settings
 - **concurrency**: Workflows define concurrency groups with cancel-in-progress
 - **SHA pinning**: All action `uses:` statements pin to commit SHAs (not @main/@v)
