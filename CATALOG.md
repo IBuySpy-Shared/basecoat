@@ -20,6 +20,7 @@
 | ux-designer | `agents/ux-designer.agent.md` | Journey mapping, wireframes, and accessibility audits | ux | GPT-4o / Claude Sonnet |
 | | **🔍 Quality** | | | |
 | code-review | `agents/code-review.agent.md` | Structured multi-step code review workflow | code-review | GPT-4o / Claude Sonnet |
+| guardrail | `agents/guardrail.agent.md` | Post-processing validation for safety, quality, compliance, and formatting | — | Claude Sonnet |
 | security-analyst | `agents/security-analyst.agent.md` | Vulnerability assessment, threat modeling, secure code review | security | GPT-4o / Claude Sonnet |
 | performance-analyst | `agents/performance-analyst.agent.md` | Profiling, load testing, and performance optimization | performance-profiling | GPT-4o / Claude Sonnet |
 | config-auditor | `agents/config-auditor.agent.md` | Scans for committed or unprotected config secrets | security | GPT-4o / Claude Sonnet |
