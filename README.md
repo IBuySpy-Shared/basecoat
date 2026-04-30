@@ -105,32 +105,49 @@ Base Coat is built on four GitHub Copilot customization primitives:
 | [agent-designer](agents/agent-designer.agent.md) | Designs and authors Copilot agent definitions |
 | [agentops](agents/agentops.agent.md) | Agent lifecycle, versioning, rollout, health monitoring, and rollback |
 | [api-designer](agents/api-designer.agent.md) | API design for OpenAPI, REST, GraphQL, and governance |
+| [app-inventory](agents/app-inventory.agent.md) | Legacy app scanning for dependencies, tech stacks, and migration complexity |
+| [azure-landing-zone](agents/azure-landing-zone.agent.md) | Azure Landing Zone scaffolding following Cloud Adoption Framework |
 | [backend-dev](agents/backend-dev.agent.md) | APIs, service layers, business logic, and data access |
+| [chaos-engineer](agents/chaos-engineer.agent.md) | Fault injection, game days, resilience scoring, and recovery validation |
 | [code-review](agents/code-review.agent.md) | Structured multi-step code review workflow |
 | [config-auditor](agents/config-auditor.agent.md) | Scans for committed or unprotected config secrets |
+| [containerization-planner](agents/containerization-planner.agent.md) | Containerization readiness assessment and deployment configuration |
 | [data-tier](agents/data-tier.agent.md) | Schema design, migrations, query optimization, data access |
+| [dataops](agents/dataops.agent.md) | Data quality, lineage, governance, orchestration, and drift detection |
+| [dependency-lifecycle](agents/dependency-lifecycle.agent.md) | Dependency updates, breaking changes, upgrade paths, and migration guides |
 | [devops-engineer](agents/devops-engineer.agent.md) | CI/CD, IaC, deployment, rollback, and observability |
 | [exploratory-charter](agents/exploratory-charter.agent.md) | Time-boxed exploratory testing charters with evidence capture |
+| [feedback-loop](agents/feedback-loop.agent.md) | User feedback collection, prompt effectiveness tracking, and A/B testing |
 | [frontend-dev](agents/frontend-dev.agent.md) | UI components, responsive layouts, state, accessibility |
 | [guardrail](agents/guardrail.agent.md) | Post-processing validation for safety, quality, compliance, and formatting |
 | [identity-architect](agents/identity-architect.agent.md) | Azure RBAC, managed identities, Entra ID app registrations, conditional access, and workload identity federation |
+| [incident-responder](agents/incident-responder.agent.md) | Incident classification, mitigation, communications, and post-incident learning |
+| [infrastructure-deploy](agents/infrastructure-deploy.agent.md) | Azure infrastructure deployments using Bicep with rollback strategies |
 | [issue-triage](agents/issue-triage.agent.md) | Triage, classify, label, and prioritize GitHub issues |
+| [legacy-modernization](agents/legacy-modernization.agent.md) | Web Forms to Razor Pages migration using the strangler fig pattern |
+| [llmops](agents/llmops.agent.md) | Prompt deployment pipelines, model gateway configuration, and inference monitoring |
 | [manual-test-strategy](agents/manual-test-strategy.agent.md) | Manual testing strategy with rubric, charter, checklist, and automation backlog |
 | [mcp-developer](agents/mcp-developer.agent.md) | MCP servers, tools, and integrations |
+| [memory-curator](agents/memory-curator.agent.md) | Cross-session knowledge extraction, deduplication, and retrieval |
 | [merge-coordinator](agents/merge-coordinator.agent.md) | Parallel branch merge coordination |
 | [middleware-dev](agents/middleware-dev.agent.md) | API gateways, integration layers, event-driven architectures |
+| [mlops](agents/mlops.agent.md) | Model lifecycle, experiment tracking, deployment automation, and drift monitoring |
 | [new-customization](agents/new-customization.agent.md) | Creates or updates Base Coat customization assets |
 | [performance-analyst](agents/performance-analyst.agent.md) | Profiling, load testing, and performance optimization |
+| [policy-as-code-compliance](agents/policy-as-code-compliance.agent.md) | Policy-as-code validation, exception management, and audit-ready compliance reports |
 | [product-manager](agents/product-manager.agent.md) | Requirements, user stories, acceptance criteria, roadmaps |
 | [project-onboarding](agents/project-onboarding.agent.md) | Base Coat repository onboarding and setup |
-| [prompt-engineer](agents/prompt-engineer.agent.md) | Prompt and system-prompt optimization |
 | [prompt-coach](agents/prompt-coach.agent.md) | Interactive prompt review, scoring, and refinement coaching |
+| [prompt-engineer](agents/prompt-engineer.agent.md) | Prompt and system-prompt optimization |
+| [release-impact-advisor](agents/release-impact-advisor.agent.md) | Release readiness assessment, blast radius analysis, and rollback planning |
 | [release-manager](agents/release-manager.agent.md) | Versioned release workflow, changelog, tagging, and publishing |
 | [retro-facilitator](agents/retro-facilitator.agent.md) | Sprint retrospective summary and improvement issue creation |
 | [rollout-basecoat](agents/rollout-basecoat.agent.md) | Enterprise Base Coat onboarding and rollout |
 | [security-analyst](agents/security-analyst.agent.md) | Vulnerability assessment, threat modeling, secure code review |
+| [self-healing-ci](agents/self-healing-ci.agent.md) | CI failure analysis, log parsing, flaky test detection, and pipeline remediation |
 | [solution-architect](agents/solution-architect.agent.md) | System design, C4 diagrams, ADRs, and technology selection |
 | [sprint-planner](agents/sprint-planner.agent.md) | Sprint goal-to-issues breakdown and wave planning |
+| [sre-engineer](agents/sre-engineer.agent.md) | SLOs, error budgets, incident response, chaos engineering, and toil reduction |
 | [strategy-to-automation](agents/strategy-to-automation.agent.md) | Converts manual test paths into tiered automation candidates |
 | [tech-writer](agents/tech-writer.agent.md) | Technical docs, runbooks, tutorials, and changelogs |
 | [ux-designer](agents/ux-designer.agent.md) | Journey mapping, wireframes, and accessibility audits |
@@ -145,24 +162,33 @@ Base Coat is built on four GitHub Copilot customization primitives:
 |---|---|---|
 | [agent-design](skills/agent-design/) | agent-template, instruction-template, skill-template | agent-designer |
 | [api-design](skills/api-design/) | openapi-template, governance-checklist, breaking-change-checklist, versioning-decision-tree | api-designer |
-| [azure-waf-review](skills/azure-waf-review/) | waf-assessment-report-template, pillar-scoring-rubric, remediation-action-plan-template | solution-architect, security-analyst, devops-engineer |
-| [azure-policy](skills/azure-policy/) | policy-definition-template, initiative-definition-template, remediation-task-template, compliance-report-template | policy-as-code-compliance |
+| [app-inventory](skills/app-inventory/) | inventory-report-template, complexity-scoring-template | app-inventory |
 | [architecture](skills/architecture/) | adr-template, c4-diagram-template, risk-register-template, tech-selection-matrix-template | solution-architect |
-| [azure-networking](skills/azure-networking/) | hub-spoke-topology, cidr-allocation, private-endpoint-dns-zones, nsg-rule-matrix | solution-architect, devops-engineer |
+| [azure-container-apps](skills/azure-container-apps/) | SKILL.md workflow | devops-engineer |
 | [azure-identity](skills/azure-identity/) | rbac-role-assignment-template, managed-identity-mapping-template, app-registration-checklist, workload-identity-federation-template, conditional-access-policy-template | identity-architect |
+| [azure-landing-zone](skills/azure-landing-zone/) | adr-template, hub-networking-template, landing-zone-vending-template, platform-subscription-template, policy-assignment-template, policy-exemption-template | azure-landing-zone |
+| [azure-networking](skills/azure-networking/) | hub-spoke-topology, cidr-allocation, private-endpoint-dns-zones, nsg-rule-matrix | solution-architect, devops-engineer |
+| [azure-policy](skills/azure-policy/) | policy-definition-template, initiative-definition-template, remediation-task-template, compliance-report-template | policy-as-code-compliance |
+| [azure-waf-review](skills/azure-waf-review/) | waf-assessment-report-template, pillar-scoring-rubric, remediation-action-plan-template | solution-architect, security-analyst, devops-engineer |
 | [backend-dev](skills/backend-dev/) | api-spec-template, error-catalog-template, repository-pattern-template, service-template | backend-dev |
+| [basecoat](skills/basecoat/) | SKILL.md workflow | — |
 | [code-review](skills/code-review/) | SKILL.md workflow | code-review |
 | [create-instruction](skills/create-instruction/) | SKILL.md workflow | new-customization |
 | [create-skill](skills/create-skill/) | SKILL.md workflow | new-customization |
 | [data-tier](skills/data-tier/) | schema-design-template, migration-template, query-review-checklist, data-dictionary-template | data-tier |
 | [devops](skills/devops/) | deployment-checklist, environment-promotion-template, github-actions-template, rollback-runbook-template | devops-engineer |
 | [documentation](skills/documentation/) | readme-template, runbook-template, adr-template | tech-writer |
+| [environment-bootstrap](skills/environment-bootstrap/) | SKILL.md workflow | devops-engineer |
 | [frontend-dev](skills/frontend-dev/) | component-spec-template, accessibility-checklist, state-management-template | frontend-dev |
+| [handoff](skills/handoff/) | handoff-template | — |
+| [human-in-the-loop](skills/human-in-the-loop/) | SKILL.md workflow | — |
+| [identity-migration](skills/identity-migration/) | SKILL.md workflow | legacy-modernization |
 | [manual-test-strategy](skills/manual-test-strategy/) | charter-template, checklist-template, defect-template, rubric-template | manual-test-strategy, exploratory-charter |
 | [mcp-development](skills/mcp-development/) | mcp-server-template, tool-definition-template, transport-config-template | mcp-developer |
 | [performance-profiling](skills/performance-profiling/) | SKILL.md workflow | performance-analyst |
 | [refactoring](skills/refactoring/) | SKILL.md workflow | — |
 | [security](skills/security/) | owasp-checklist, stride-threat-model-template, vulnerability-report-template, dependency-audit-template | security-analyst |
+| [service-bus-migration](skills/service-bus-migration/) | SKILL.md workflow | middleware-dev |
 | [sprint-management](skills/sprint-management/) | sprint-planning-template, backlog-grooming-template, retrospective-template | sprint-planner, retro-facilitator |
 | [ux](skills/ux/) | user-journey-template, wireframe-spec-template, component-spec-template, accessibility-audit-checklist | ux-designer |
 
@@ -174,6 +200,7 @@ Instructions are automatically loaded by GitHub Copilot to enforce standards acr
 
 | Instruction | Scope |
 |---|---|
+| [agent-behavior](instructions/agent-behavior.instructions.md) | Retry loops, edit thrashing, and escalation guardrails |
 | [agents](instructions/agents.instructions.md) | Agent authoring standards |
 | [architecture](instructions/architecture.instructions.md) | Architecture, API, and design-diagram guidance |
 | [azure](instructions/azure.instructions.md) | Azure service, SDK, and deployment guidance |
@@ -182,17 +209,28 @@ Instructions are automatically loaded by GitHub Copilot to enforce standards acr
 | [config](instructions/config.instructions.md) | Config file safety and secrets prevention |
 | [development](instructions/development.instructions.md) | Shared dev standards for all dev-core agents |
 | [documentation](instructions/documentation.instructions.md) | Documentation and change-note expectations |
+| [drift-monitor](instructions/drift-monitor.instructions.md) | Infrastructure-as-Code drift detection and remediation |
+| [error-kb](instructions/error-kb.instructions.md) | Error knowledge base classification and pattern reuse |
 | [frontend](instructions/frontend.instructions.md) | Frontend, UI, state management, and accessibility |
 | [governance](instructions/governance.instructions.md) | Repository-wide AI governance rules |
 | [mcp](instructions/mcp.instructions.md) | MCP server, tooling, and trust-boundary guidance |
 | [naming](instructions/naming.instructions.md) | Naming conventions across repos, code, and infrastructure |
+| [nextjs-react19](instructions/nextjs-react19.instructions.md) | Next.js and React 19 Server Components and App Router patterns |
+| [npm-workspaces](instructions/npm-workspaces.instructions.md) | npm workspaces and monorepo management |
+| [output-style](instructions/output-style.instructions.md) | Concise agent responses with full-fidelity code output |
+| [plan-first](instructions/plan-first.instructions.md) | Explore-plan-implement-verify workflow for multi-step tasks |
 | [process](instructions/process.instructions.md) | Delivery lifecycle, sprint, triage, and release process |
 | [quality](instructions/quality.instructions.md) | PR review, security, performance, and coverage gates |
 | [reliability](instructions/reliability.instructions.md) | Retries, uptime, background work, and dependency failure |
 | [security](instructions/security.instructions.md) | Secure coding, auth, authz, secrets, and input handling |
+| [session-hygiene](instructions/session-hygiene.instructions.md) | Context hygiene, session rotation, and clean-state practices |
+| [tailwind-v4](instructions/tailwind-v4.instructions.md) | Tailwind CSS v4 patterns and migration guidance |
 | [terraform](instructions/terraform.instructions.md) | Terraform guidance for Azure-oriented IaC |
 | [testing](instructions/testing.instructions.md) | Testing best practices and validation expectations |
+| [token-economics](instructions/token-economics.instructions.md) | Cost-aware model routing and token budget discipline |
+| [tool-minimization](instructions/tool-minimization.instructions.md) | Selective tool enablement and MCP server discipline |
 | [ux](instructions/ux.instructions.md) | UX, accessibility, and design-system guidance |
+| [verification](instructions/verification.instructions.md) | Success criteria before coding and verification before done |
 
 ---
 
