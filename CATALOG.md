@@ -62,6 +62,7 @@
 | azure-landing-zone | `skills/azure-landing-zone/` | `adr-template.md`, `platform-subscription-template.bicep`, `hub-networking-template.bicep`, `policy-assignment-template.json`, `policy-exemption-template.json`, `landing-zone-vending-template.bicep` | azure-landing-zone |
 | api-design | `skills/api-design/` | `openapi-template.md`, `api-governance-checklist.md`, `breaking-change-checklist.md`, `versioning-decision-tree.md` | api-designer |
 | azure-waf-review | `skills/azure-waf-review/` | `waf-assessment-report-template.md`, `pillar-scoring-rubric.md`, `remediation-action-plan-template.md` | solution-architect, security-analyst, devops-engineer |
+| azure-policy | `skills/azure-policy/` | `policy-definition-template.md`, `initiative-definition-template.md`, `remediation-task-template.md`, `compliance-report-template.md` | policy-as-code-compliance |
 | architecture | `skills/architecture/` | `adr-template.md`, `c4-diagram-template.md`, `risk-register-template.md`, `tech-selection-matrix-template.md` | solution-architect |
 | azure-container-apps | `skills/azure-container-apps/` | *(workflow only)* | devops-engineer |
 | azure-networking | `skills/azure-networking/` | `hub-spoke-topology.md`, `cidr-allocation.md`, `private-endpoint-dns-zones.md`, `nsg-rule-matrix.md` | solution-architect, devops-engineer |
