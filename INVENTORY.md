@@ -60,6 +60,8 @@ This catalog helps teams discover what exists in Base Coat and when to use it.
 | `agents/rollout-basecoat.agent.md`  | onboard a repo to a pinned Base Coat release   | agent, rollout, bootstrap, enterprise     |
 | `agents/merge-coordinator.agent.md` | merge multiple feature branches into a target without interactive git editor hangs | agent, merge, conflict, parallel, branches, rebase, no-edit |
 | `agents/prompt-coach.agent.md` | iteratively score, critique, and improve prompts through coaching and revision comparison | agent, prompt, coaching, scoring, critique, token efficiency, iteration |
+| `agents/app-inventory.agent.md` | scan legacy apps for project files, NuGet/npm/maven packages, connection strings, external services, framework versions, and migration complexity scores | agent, inventory, legacy, migration, dependencies, csproj, packages, scanning |
+| `agents/legacy-modernization.agent.md` | guide Web Forms to Razor Pages migration using the strangler fig pattern for incremental modernization | agent, legacy, modernization, web forms, razor pages, strangler fig, migration |
 
 ## Documentation Assets
 
@@ -69,6 +71,8 @@ This catalog helps teams discover what exists in Base Coat and when to use it.
 | `docs/prd-and-spec-guidance.md`           | guidance and templates for PRDs and technical specs             | prd, spec, requirements, design          |
 | `docs/repo-template-standard.md`          | standard for bootstrapping and enforcing Base Coat in templates | template, governance, drift, enforcement |
 | `docs/MULTI_AGENT_WORKFLOWS.md`           | structure parallel agent sprints to minimize merge conflicts; branch naming; merge order; fresh clone principle | multi-agent, parallel, sprint, merge, conflict, branch |
+| `docs/app-inventory.md`                   | conceptual guide for legacy app scanning: parameters, complexity scoring, output formats, and downstream integration | inventory, legacy, scanning, dependencies, complexity, migration |
+| `docs/treatment-matrix.md`                | decision framework mapping complexity scores and strategic value to Retire/Rehost/Replatform/Refactor/Rebuild/Replace treatment paths | treatment, migration, retire, rehost, replatform, refactor, rebuild, replace |
 
 ## Operational Assets
 
