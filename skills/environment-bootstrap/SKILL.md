@@ -360,7 +360,7 @@ jobs:
 
 Enable pod-level authentication in AKS using Azure Workload Identity.
 
-### Prerequisites
+### Prerequisites for AKS
 
 - Azure Kubernetes Service cluster
 - Azure CLI and kubectl configured
