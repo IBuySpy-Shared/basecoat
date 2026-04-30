@@ -320,4 +320,4 @@ See [`CONTRIBUTING.md`](CONTRIBUTING.md) for guidelines on adding agents, skills
 
 ## License
 
-See [`LICENSE`](LICENSE) if present, or contact your organization's open-source program office for licensing terms.
+This project is for internal use. Contact your organization's open-source program office for licensing terms.
