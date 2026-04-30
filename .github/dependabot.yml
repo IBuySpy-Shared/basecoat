@@ -10,3 +10,7 @@ updates:
       - "copilot"
     commit-message:
       prefix: "chore(deps)"
+    # We pin actions to commit SHAs for security.
+    # Dependabot detects version tag updates but PRs need manual
+    # SHA verification before merging.
+    open-pull-requests-limit: 5

@@ -14,19 +14,37 @@ $files = Get-ChildItem instructions, prompts, agents, skills -Recurse -File | Wh
     $_.Name -eq 'SKILL.md' -or $_.Name -eq 'AGENT.md' -or $_.Name -like '*.instructions.md' -or $_.Name -like '*.prompt.md' -or $_.Name -like '*.agent.md'
 }
 
+$errors = 0
+
 foreach ($file in $files) {
     $lines = Get-Content $file.FullName -TotalCount 20
     if ($lines.Count -eq 0 -or $lines[0] -ne '---') {
-        throw "Missing frontmatter start in $($file.FullName)"
+        Write-Host "ERROR: Missing frontmatter start in $($file.FullName)" -ForegroundColor Red
+        $errors++
+        continue
     }
 
+    # Common: all assets require description
     if (-not ($lines | Select-String -Pattern '^description:' -Quiet)) {
-        throw "Missing description in frontmatter for $($file.FullName)"
+        Write-Host "ERROR: $($file.Name) missing 'description' in frontmatter" -ForegroundColor Red
+        $errors++
     }
 
+    # Agents and Skills require name
     if (($file.Name -eq 'SKILL.md' -or $file.Name -like '*.agent.md') -and -not ($lines | Select-String -Pattern '^name:' -Quiet)) {
-        throw "Missing name in frontmatter for $($file.FullName)"
+        Write-Host "ERROR: $($file.Name) missing 'name' in frontmatter" -ForegroundColor Red
+        $errors++
     }
+
+    # Instructions require applyTo
+    if ($file.Name -like '*.instructions.md' -and -not ($lines | Select-String -Pattern '^applyTo:' -Quiet)) {
+        Write-Host "ERROR: $($file.Name) missing 'applyTo' in frontmatter" -ForegroundColor Red
+        $errors++
+    }
+}
+
+if ($errors -gt 0) {
+    throw "Validation failed with $errors error(s)"
 }
 
 Write-Host 'Base Coat validation passed'
