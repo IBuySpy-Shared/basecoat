@@ -241,6 +241,88 @@ This is intentional — catching a broken build post-merge is significantly more
 
 ---
 
+## Adoption Tooling
+
+Base Coat provides tools to track, measure, and monitor asset adoption across your GitHub organization.
+
+### 1. Adoption Scanner (`scripts/adoption/detect-basecoat.ps1`)
+
+Scans all repositories in your organization to detect which ones have synced Base Coat assets, including version alignment and custom modifications.
+
+**Usage:**
+
+```powershell
+# Scan default org (IBuySpy-Shared) and output as table
+./scripts/adoption/detect-basecoat.ps1
+
+# Scan specific org and output as JSON
+./scripts/adoption/detect-basecoat.ps1 -Org "MyOrg" -OutputFormat json
+
+# Output as markdown (good for reports)
+./scripts/adoption/detect-basecoat.ps1 -OutputFormat markdown
+```
+
+**What it reports:**
+
+- Which repos have synced assets (agents, instructions, prompts, skills)
+- How many assets are **current** vs. **stale** (version drift)
+- Custom assets (local modifications not from Base Coat)
+- Overall **coverage %** — how many Base Coat assets are present
+- Active Copilot seats in the organization
+
+**Output formats:**
+
+- `table` (default) — Human-readable terminal output
+- `json` — Machine-readable for integration with dashboards
+- `markdown` — Formatted for GitHub issues, reports, or email
+
+### 2. Metrics Collector (`scripts/metrics/collect-metrics.py`)
+
+Continuously collects and tracks metrics for Base Coat adoption alongside development metrics (PR velocity, CI success, issue resolution).
+
+**Usage:**
+
+```bash
+export GITHUB_TOKEN="<your-token>"
+export DASHBOARD_ORG="IBuySpy-Shared"
+export DASHBOARD_REPOS='["org/repo1", "org/repo2"]'
+python scripts/metrics/collect-metrics.py
+```
+
+**Collected metrics:**
+
+- Base Coat coverage per repository (% of assets synced)
+- Copilot usage trends (active users, acceptance rate)
+- PR cycle time (median and p95)
+- CI/CD success rate
+- Issue resolution times
+- Degradation alerts (acceptance rate drops, CI failures, cycle time increases)
+
+**Output:**
+
+- `metrics/latest.json` — Current metrics snapshot
+- `metrics/history.json` — Time-series data (up to 52 weeks)
+- `metrics/alerts.json` — Active degradation signals
+- `metrics/SUMMARY.md` — Human-readable summary
+
+**Integration:** Use with GitHub Actions to run daily and feed a dashboard or reporting system.
+
+### 3. Tracking Inventory
+
+The `INVENTORY.md` and `CATALOG.md` files document all available assets (agents, skills, instructions, prompts) with descriptions, keywords, and use cases. Keep these updated when adding or removing assets.
+
+**When to update:**
+
+- Add new agent, skill, or instruction file → add entry to `INVENTORY.md` and `CATALOG.md`
+- Remove deprecated asset → remove from both files
+- Change description or functionality → update both files
+
+**Format:**
+
+Both files follow Markdown table format with columns for name, file path, description, and keywords. See existing entries for the expected style.
+
+---
+
 ## Questions
 
 Open an issue with the `question` label. Do not DM maintainers for things that belong in the open.
