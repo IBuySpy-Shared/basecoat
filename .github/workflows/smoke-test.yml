@@ -3,6 +3,9 @@ name: Post-Deploy Smoke Test
 on:
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   smoke-test:
     name: ${{ matrix.os }} smoke test

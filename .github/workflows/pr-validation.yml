@@ -52,9 +52,16 @@ jobs:
         env:
           GITLEAKS_VERSION: "8.18.4"
         run: |
+          FILENAME="gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz"
           curl -sSfL \
-            "https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz" \
-            | tar -xz -C /usr/local/bin gitleaks
+            "https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/${FILENAME}" \
+            -o "${FILENAME}"
+          curl -sSfL \
+            "https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/gitleaks_${GITLEAKS_VERSION}_checksums.txt" \
+            -o checksums.txt
+          grep "$FILENAME" checksums.txt | sha256sum --check
+          tar -xzf "${FILENAME}" -C /usr/local/bin gitleaks
+          rm -f "${FILENAME}" checksums.txt
           gitleaks version
 
       - name: Run gitleaks scan
