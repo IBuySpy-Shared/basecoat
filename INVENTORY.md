@@ -54,6 +54,7 @@ This catalog helps teams discover what exists in Base Coat and when to use it.
 | `agents/strategy-to-automation.agent.md`| convert manual paths into tiered automation candidates and file GitHub Issues for every one                | agent, automation, smoke, regression, integration, candidate |
 | `agents/code-review.agent.md`       | multi-step repository review process           | agent, review, repo scan, risk            |
 | `agents/guardrail.agent.md`         | validate outputs against safety, quality, compliance, and formatting rules before delivery | agent, guardrail, validation, safety, compliance, quality |
+| `agents/policy-as-code-compliance.agent.md` | validate policy-as-code rules, automated compliance checks, exceptions, and audit-ready evidence | agent, compliance, policy-as-code, governance, audit, exceptions |
 | `agents/agentops.agent.md`          | manage agent lifecycle, versioning, rollout health, rollback, and retirement | agent, operations, versioning, canary, blue-green, rollback, telemetry |
 | `agents/new-customization.agent.md` | choose and create the right customization type | agent, customization, instruction, prompt |
 | `agents/rollout-basecoat.agent.md`  | onboard a repo to a pinned Base Coat release   | agent, rollout, bootstrap, enterprise     |
