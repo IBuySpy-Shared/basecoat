@@ -11,7 +11,7 @@ foreach ($item in $required) {
 }
 
 $files = Get-ChildItem instructions, prompts, agents, skills -Recurse -File | Where-Object {
-    $_.Name -eq 'SKILL.md' -or $_.Name -like '*.instructions.md' -or $_.Name -like '*.prompt.md' -or $_.Name -like '*.agent.md'
+    $_.Name -eq 'SKILL.md' -or $_.Name -eq 'AGENT.md' -or $_.Name -like '*.instructions.md' -or $_.Name -like '*.prompt.md' -or $_.Name -like '*.agent.md'
 }
 
 foreach ($file in $files) {
