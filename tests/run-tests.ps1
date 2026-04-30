@@ -49,9 +49,9 @@ Assert-Equal -Actual $hooksPath -Expected '.githooks' -Message 'Hook installatio
 
 Write-Host 'Running commit message scanner negative test...'
 $tempRepo = Join-Path ([System.IO.Path]::GetTempPath()) ("basecoat-test-" + [System.Guid]::NewGuid().ToString())
-New-Item -ItemType Directory -Path $tempRepo | Out-Null
 
 try {
+    New-Item -ItemType Directory -Path $tempRepo | Out-Null
     Push-Location $tempRepo
     git init | Out-Null
     git config user.name 'basecoat-test'

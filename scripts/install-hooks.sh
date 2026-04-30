@@ -122,6 +122,14 @@ install_gitleaks() {
   curl -sSfL "$URL" -o "${TMP_DIR}/${FILENAME}" \
     || die "Failed to download gitleaks. Check your internet connection or install manually: https://github.com/gitleaks/gitleaks#installing"
 
+  # Verify binary integrity using published checksums
+  local CHECKSUMS_URL="https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/gitleaks_${GITLEAKS_VERSION}_checksums.txt"
+  info "Verifying checksum..."
+  curl -sSfL "$CHECKSUMS_URL" -o "${TMP_DIR}/checksums.txt" \
+    || die "Failed to download checksums file for integrity verification."
+  (cd "$TMP_DIR" && grep "$FILENAME" checksums.txt | sha256sum --check --status) \
+    || die "Checksum verification failed for gitleaks binary. The download may be corrupted."
+
   info "Extracting..."
   tar -xzf "${TMP_DIR}/${FILENAME}" -C "$TMP_DIR"
 

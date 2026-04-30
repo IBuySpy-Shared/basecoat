@@ -8,6 +8,9 @@ on:
       - main
   pull_request:
 
+permissions:
+  contents: read
+
 jobs:
   validate-commit-messages:
     runs-on: ubuntu-latest
