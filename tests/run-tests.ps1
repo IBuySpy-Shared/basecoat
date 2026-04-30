@@ -83,4 +83,7 @@ finally {
     }
 }
 
+Write-Host 'Running sync process tests...'
+& pwsh -NoProfile -File (Join-Path $PSScriptRoot 'sync-tests.ps1')
+
 Write-Host 'All PowerShell tests passed'
