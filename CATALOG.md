@@ -39,6 +39,7 @@
 | | **🧰 Meta** | | | |
 | agent-designer | `agents/agent-designer.agent.md` | Designs and authors Copilot agent definitions | agent-design | GPT-4o / Claude Sonnet |
 | prompt-engineer | `agents/prompt-engineer.agent.md` | Prompt and system-prompt optimization | — | GPT-4o / Claude Sonnet |
+| prompt-coach | `agents/prompt-coach.agent.md` | Interactive prompt review, scoring, and refinement coaching | — | GPT-4o / Claude Sonnet |
 | mcp-developer | `agents/mcp-developer.agent.md` | MCP servers, tools, and integrations | mcp-development | GPT-4o / Claude Sonnet |
 | tech-writer | `agents/tech-writer.agent.md` | Technical docs, runbooks, tutorials, and changelogs | documentation | GPT-4o / Claude Sonnet |
 | new-customization | `agents/new-customization.agent.md` | Creates or updates Base Coat customization assets | create-skill, create-instruction | GPT-4o / Claude Sonnet |
