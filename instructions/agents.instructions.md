@@ -34,7 +34,7 @@ tools: [read_file, write_file, list_dir, run_terminal_command, create_github_iss
 
 ## Required Sections Checklist
 
-Every agent file must contain the following sections in order. Omitting a section is a review-blocking finding.
+Sections 1–8 are required. Omitting any of them is a review-blocking finding. Section 9 is optional but strongly recommended.
 
 1. **Title** — H1 heading: `# <Role> Agent`.
 2. **Purpose** — One to two sentences immediately below the title stating what the agent does and why it exists.
@@ -44,6 +44,32 @@ Every agent file must contain the following sections in order. Omitting a sectio
 6. **GitHub Issue Filing** — Standard `gh issue create` template with labeled trigger conditions table. Agents must file issues inline — deferral is never acceptable.
 7. **Model** — Recommended and minimum model with rationale (see Model Selection Guide below).
 8. **Output Format** — What the agent delivers: code, reports, filed issues, or structured artifacts. Must include reference to issue numbers in deliverables.
+9. **Allowed Skills** *(optional but strongly recommended)* — Allow-list of skills the agent may invoke at runtime. See the Allowed Skills Section below.
+
+## Allowed Skills Section
+
+Every agent file **should** include an `## Allowed Skills` section declaring the skills the agent is permitted to invoke at runtime.
+
+- List each skill by its folder name (e.g., `agent-design`, `api-design`). One entry per line.
+- If the agent does not invoke any skills, include the section with `*(none)*` as the only content.
+- The `## Allowed Skills` section is the authoritative allow-list. An agent must not invoke any skill that is not listed there, even if that skill is shown in the `<available_skills>` context.
+- If the agent's primary tool is unavailable, the agent must stop and report the blocker — it must not search unrelated skills as a workaround.
+- Use a negative constraint sentence after the list when the scope exclusion is non-obvious, for example: `This agent requires GitHub issue tools only. Do not invoke design, code-generation, or infrastructure skills.`
+
+```markdown
+## Allowed Skills
+
+*(none)*
+```
+
+```markdown
+## Allowed Skills
+
+- agent-design
+- create-skill
+
+This agent creates and validates agent definitions only. Do not invoke development, deployment, or testing skills.
+```
 
 ## Agent-to-Skill Pairing
 
@@ -167,6 +193,10 @@ File a GitHub Issue immediately when problems are discovered.
 - Deliver code or artifacts with inline comments.
 - Reference filed issue numbers in output.
 - Provide a summary of work completed and issues filed.
+
+## Allowed Skills
+
+*(none)*
 ```
 
 Use this skeleton as a starting point. Expand the Domain Standards section to match the agent's area of expertise. Refer to `agents/backend-dev.agent.md` and `agents/security-analyst.agent.md` for examples of fully fleshed-out agents.
