@@ -110,3 +110,7 @@ pip-self-check.json
 # Gitleaks report output (contains redacted but still sensitive metadata)
 gitleaks-report.json
 gitleaks-report.sarif
+
+# Dashboard local config cache (secrets stored via gh CLI)
+.dashboard-repos-cache.json
+

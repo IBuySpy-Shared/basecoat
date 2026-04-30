@@ -1,0 +1,57 @@
+name: Adoption Metrics
+
+on:
+  schedule:
+    - cron: '0 9 * * 1'  # Every Monday at 9am UTC
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Collect metrics
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          COPILOT_METRICS_TOKEN: ${{ secrets.COPILOT_METRICS_TOKEN || secrets.GITHUB_TOKEN }}
+          DASHBOARD_ORG: ${{ secrets.DASHBOARD_ORG }}
+          DASHBOARD_REPOS: ${{ secrets.DASHBOARD_REPOS }}
+          OUTPUT_DIR: dashboard/metrics
+        run: python scripts/metrics/collect-metrics.py
+
+      - name: Deploy to gh-pages
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git fetch origin gh-pages || git checkout --orphan gh-pages
+          git checkout gh-pages
+
+          # Copy metrics and dashboard files
+          cp -r dashboard/metrics/ . 2>/dev/null || true
+
+          git add -A
+          git diff --cached --quiet || git commit -m "chore: update adoption metrics [skip ci]"
+          git push origin gh-pages
+
+      - name: Post weekly summary
+        if: github.event_name == 'schedule'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if [ -f dashboard/metrics/SUMMARY.md ]; then
+            SUMMARY=$(cat dashboard/metrics/SUMMARY.md)
+            gh issue create \
+              --repo ${{ github.repository }} \
+              --title "Weekly Adoption Metrics — $(date +%Y-%m-%d)" \
+              --body "$SUMMARY" \
+              --label "metrics"
+          fi
