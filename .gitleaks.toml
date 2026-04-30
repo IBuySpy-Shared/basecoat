@@ -50,10 +50,15 @@ paths = [
   # Test fixtures directory — known-fake data
   '''(^|/)test[s]?/fixtures/''',
   '''(^|/)test[s]?/data/''',
-  # Documentation — specific files that may contain sanitised examples
-  '''(^|/)docs/templates/''',
+  # Documentation templates — contain placeholder tokens for issue/PR/gitignore scaffolding
+  '''(^|/)docs/templates/PRD_TEMPLATE\.md$''',
+  '''(^|/)docs/templates/ISSUE_TEMPLATE\.md$''',
+  '''(^|/)docs/templates/GITIGNORE_TEMPLATE\.md$''',
+  # Config pattern guide — includes sanitised example connection strings
   '''(^|/)docs/CONFIG_PATTERN\.md$''',
+  # Enterprise setup guide — contains example Azure/Entra config blocks
   '''(^|/)docs/enterprise-setup\.md$''',
+  # Git hooks guide — shows example pre-commit script with sample tokens
   '''(^|/)docs/HOOKS\.md$''',
   # This file itself — contains regex patterns that look like secrets
   '''(^|/)\.gitleaks\.toml$''',
