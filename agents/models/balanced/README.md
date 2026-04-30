@@ -1,0 +1,33 @@
+# Balanced-Tier Agents
+
+General-purpose agents suitable for sonnet-class models.
+Handle standard implementation, review, and workflow tasks.
+
+- [agent-designer](../../agent-designer.agent.md)
+- [agentops](../../agentops.agent.md)
+- [app-inventory](../../app-inventory.agent.md)
+- [backend-dev](../../backend-dev.agent.md)
+- [chaos-engineer](../../chaos-engineer.agent.md)
+- [code-review](../../code-review.agent.md)
+- [data-tier](../../data-tier.agent.md)
+- [dataops](../../dataops.agent.md)
+- [devops-engineer](../../devops-engineer.agent.md)
+- [exploratory-charter](../../exploratory-charter.agent.md)
+- [frontend-dev](../../frontend-dev.agent.md)
+- [llmops](../../llmops.agent.md)
+- [manual-test-strategy](../../manual-test-strategy.agent.md)
+- [mcp-developer](../../mcp-developer.agent.md)
+- [middleware-dev](../../middleware-dev.agent.md)
+- [mlops](../../mlops.agent.md)
+- [performance-analyst](../../performance-analyst.agent.md)
+- [project-onboarding](../../project-onboarding.agent.md)
+- [prompt-coach](../../prompt-coach.agent.md)
+- [prompt-engineer](../../prompt-engineer.agent.md)
+- [release-impact-advisor](../../release-impact-advisor.agent.md)
+- [release-manager](../../release-manager.agent.md)
+- [retro-facilitator](../../retro-facilitator.agent.md)
+- [rollout-basecoat](../../rollout-basecoat.agent.md)
+- [sprint-planner](../../sprint-planner.agent.md)
+- [sre-engineer](../../sre-engineer.agent.md)
+- [tech-writer](../../tech-writer.agent.md)
+- [ux-designer](../../ux-designer.agent.md)
