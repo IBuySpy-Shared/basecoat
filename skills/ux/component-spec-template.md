@@ -22,7 +22,7 @@ Use this template to specify a reusable UI component's design in a Figma-compati
 
 Describe the structural parts of the component. Use an ASCII diagram or labeled list.
 
-```
+```text
 +----------------------------------+
 | [Icon]  Label Text  [Trailing]   |
 +----------------------------------+
