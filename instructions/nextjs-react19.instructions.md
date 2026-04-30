@@ -27,6 +27,7 @@ export default async function UserProfile({ id }: { id: string }) {
 ```
 
 Server Components provide:
+
 - Direct access to backend resources
 - Secure credential storage (API keys, tokens)
 - Large dependency handling without increasing bundle size
@@ -120,7 +121,7 @@ Structure your application using the App Router with the following conventions:
 
 ### Route Organization
 
-```
+```text
 app/
   layout.tsx              # Root layout
   page.tsx                # Home page
@@ -156,7 +157,7 @@ export default async function PostPage({ params }: { params: { id: string } }) {
 
 Use `@slot` naming convention for parallel routes in complex layouts:
 
-```
+```text
 app/
   dashboard/
     layout.tsx
@@ -327,6 +328,7 @@ export default nextConfig;
 ```
 
 The compiler eliminates the need for manual optimization utilities in most cases:
+
 - Automatic `useMemo()` insertion
 - Automatic `useCallback()` insertion
 - Automatic value memoization
@@ -519,6 +521,7 @@ async function getPosts() {
 ## Performance Optimization
 
 Apply these patterns to optimize performance:
+
 - Use Server Components by default to reduce JavaScript shipped to the browser
 - Implement Suspense boundaries for progressive rendering
 - Enable React Compiler for automatic optimization
