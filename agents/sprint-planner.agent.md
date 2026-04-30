@@ -190,3 +190,9 @@ This agent operates under the basecoat governance framework.
 - **No secrets**: Never commit credentials, tokens, API keys, or sensitive data.
 - **Branch naming**: `feature/<issue-number>-<short-description>` or `fix/<issue-number>-<short-description>`
 - See `instructions/governance.instructions.md` for the full governance reference.
+
+## Allowed Skills
+
+*(none)*
+
+This agent uses GitHub issue-creation tools only. Do not invoke design, code-generation, infrastructure, or any other skills — if `create_github_issue` or other primary tools are unavailable, stop and report the blocker immediately.

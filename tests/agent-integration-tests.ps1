@@ -203,6 +203,39 @@ if ($promptCount -gt 0) {
 }
 
 # ============================================================================
+# Test 6: Allowed Skills section validation
+# ============================================================================
+Write-Host "`nTest 6: Allowed Skills section validation" -ForegroundColor Yellow
+
+$skillDirNames = (Get-ChildItem skills -Directory).Name
+$agentsWithAllowedSkills = 0
+
+foreach ($file in $agentFiles) {
+    $testCount++
+    $content = Get-ContentAfterFrontmatter $file.FullName
+
+    # Extract the ## Allowed Skills section (content between this heading and the next ##)
+    if ($content -match '(?ms)##\s+Allowed Skills\s*\r?\n(.*?)(?=\r?\n##\s|\z)') {
+        $agentsWithAllowedSkills++
+        $sectionBody = $matches[1]
+
+        # Parse skill names from list items (lines starting with "- ").
+        # Capture the first word after "- " to allow trailing comments or descriptions.
+        $listedSkills = $sectionBody -split "`n" |
+            Where-Object { $_ -match '^\s*-\s+(\S+)' } |
+            ForEach-Object { if ($_ -match '^\s*-\s+(\S+)') { $matches[1] } }
+
+        foreach ($skillName in $listedSkills) {
+            if ($skillName -notin $skillDirNames) {
+                $failures += "$($file.Name): Allowed Skills lists '$skillName' but no matching skills/$skillName/ directory exists"
+            }
+        }
+    }
+}
+
+Write-Host "  Checked $($agentFiles.Count) agent files for Allowed Skills section ($agentsWithAllowedSkills had the section)" -ForegroundColor Green
+
+# ============================================================================
 # Summary
 # ============================================================================
 Write-Host "`n`n================================================" -ForegroundColor Cyan

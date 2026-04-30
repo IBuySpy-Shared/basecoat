@@ -78,3 +78,12 @@ Trigger conditions:
 - <Describe the deliverable format.>
 - <Describe any required metadata or summaries.>
 - <Describe how issues should be referenced in output.>
+
+## Allowed Skills
+
+*(none)*
+
+<!-- List skills by folder name if this agent is permitted to invoke them, e.g.:
+- agent-design
+- api-design
+If this agent does not invoke any skills, keep "*(none)*" above and add a negative constraint sentence below. -->
