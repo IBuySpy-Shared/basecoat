@@ -57,8 +57,17 @@ jobs:
               labels: ['approved', 'copilot-agent']
             });
 
-            // Trigger implementation workflow (label addition triggers copilot-implement.yml)
-            // The 'copilot-agent' label added above will auto-trigger the implement workflow
+            // Assign to copilot (the coding agent picks up assigned issues)
+            try {
+              await github.rest.issues.addAssignees({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                assignees: ['copilot']
+              });
+            } catch (e) {
+              core.warning(`Could not assign to copilot: ${e.message}`);
+            }
 
             // Acknowledge
             await github.rest.issues.createComment({
@@ -66,9 +75,9 @@ jobs:
               repo: context.repo.repo,
               issue_number: issue.number,
               body: [
-                '✅ **Approved** — Implementation workflow triggered.',
+                '✅ **Approved** — Issue assigned to Copilot coding agent.',
                 '',
-                'The `copilot-implement` workflow will generate a PR from this issue.',
+                'Copilot will analyze this issue and create a draft PR with the implementation.',
                 'Review the PR when ready and merge if it passes CI.',
               ].join('\n')
             });
