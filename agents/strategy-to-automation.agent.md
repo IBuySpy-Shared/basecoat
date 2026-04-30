@@ -1,4 +1,5 @@
 ---
+name: strategy-to-automation
 description: "Use when converting manual test paths into automation candidates. Maps paths to smoke tests, regression tiers, or agent specs. ALWAYS files a GitHub Issue for every automation candidate identified."
 ---
 

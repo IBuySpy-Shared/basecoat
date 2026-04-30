@@ -39,11 +39,13 @@ if [[ "$hooks_path" != ".githooks" ]]; then
 fi
 
 echo "Running commit message scanner negative test..."
-temp_repo="$(mktemp -d)"
 cleanup() {
-  rm -rf "$temp_repo"
+  if [[ -n "${temp_repo:-}" ]]; then
+    rm -rf "$temp_repo"
+  fi
 }
 trap cleanup EXIT
+temp_repo="$(mktemp -d)"
 
 pushd "$temp_repo" >/dev/null
 git init >/dev/null

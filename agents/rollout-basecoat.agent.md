@@ -1,4 +1,5 @@
 ---
+name: rollout-basecoat
 description: "Use when onboarding a repository to Base Coat in an enterprise setting. Focuses on pinned versions, safe rollout, installation method, and validation steps."
 ---
 
