@@ -118,9 +118,9 @@ az storage container create \
 az storage account blob-service-properties update \
   --account-name "$STORAGE_ACCOUNT" \
   --enable-versioning
-
-# Bicep template for Terraform backend
 ```
+
+Bicep template for Terraform backend:
 
 ```bicep
 param storageAccountName string
