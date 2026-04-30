@@ -18,6 +18,8 @@
 | solution-architect | `agents/solution-architect.agent.md` | System design, C4 diagrams, ADRs, and technology selection | architecture | GPT-4o / Claude Sonnet |
 | api-designer | `agents/api-designer.agent.md` | API design for OpenAPI, REST, GraphQL, and governance | api-design | GPT-4o / Claude Sonnet |
 | ux-designer | `agents/ux-designer.agent.md` | Journey mapping, wireframes, and accessibility audits | ux | GPT-4o / Claude Sonnet |
+| app-inventory | `agents/app-inventory.agent.md` | Scan legacy apps for project files, NuGet/npm dependencies, connection strings, framework versions, and migration complexity scores | app-inventory | GPT-4o / Claude Sonnet |
+| legacy-modernization | `agents/legacy-modernization.agent.md` | Guides Web Forms → Razor Pages migration using the strangler fig pattern | — | GPT-4o / Claude Sonnet |
 | | **🔍 Quality** | | | |
 | code-review | `agents/code-review.agent.md` | Structured multi-step code review workflow | code-review | GPT-4o / Claude Sonnet |
 | guardrail | `agents/guardrail.agent.md` | Post-processing validation for safety, quality, compliance, and formatting | — | Claude Sonnet |
@@ -55,6 +57,7 @@
 |---|---|---|---|
 | **basecoat** | `skills/basecoat/` | *(router — discovery + delegation)* | **all agents** |
 | agent-design | `skills/agent-design/` | `agent-template.md`, `instruction-template.md`, `skill-template.md` | agent-designer |
+| app-inventory | `skills/app-inventory/` | `inventory-report-template.md`, `complexity-scoring-template.md` | app-inventory |
 | api-design | `skills/api-design/` | `openapi-template.md`, `api-governance-checklist.md`, `breaking-change-checklist.md`, `versioning-decision-tree.md` | api-designer |
 | architecture | `skills/architecture/` | `adr-template.md`, `c4-diagram-template.md`, `risk-register-template.md`, `tech-selection-matrix-template.md` | solution-architect |
 | backend-dev | `skills/backend-dev/` | `api-spec-template.md`, `error-catalog-template.md`, `repository-pattern-template.md`, `service-template.md` | backend-dev |
