@@ -57,6 +57,7 @@
 | agent-design | `skills/agent-design/` | `agent-template.md`, `instruction-template.md`, `skill-template.md` | agent-designer |
 | api-design | `skills/api-design/` | `openapi-template.md`, `api-governance-checklist.md`, `breaking-change-checklist.md`, `versioning-decision-tree.md` | api-designer |
 | architecture | `skills/architecture/` | `adr-template.md`, `c4-diagram-template.md`, `risk-register-template.md`, `tech-selection-matrix-template.md` | solution-architect |
+| azure-container-apps | `skills/azure-container-apps/` | *(workflow only)* | devops-engineer |
 | backend-dev | `skills/backend-dev/` | `api-spec-template.md`, `error-catalog-template.md`, `repository-pattern-template.md`, `service-template.md` | backend-dev |
 | code-review | `skills/code-review/` | *(workflow only)* | code-review |
 | create-instruction | `skills/create-instruction/` | *(workflow only)* | new-customization |

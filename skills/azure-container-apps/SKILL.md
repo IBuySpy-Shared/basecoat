@@ -23,19 +23,43 @@ az containerapp create \
   --target-port 8080
 ```
 
-### Using Azure Container Registry
+### Using Azure Container Registry with Managed Identity
 
-Configure authentication with ACR:
+Pull images from ACR using a user-assigned managed identity (preferred over credentials):
 
 ```bash
+# Create user-assigned managed identity
+az identity create \
+  --name myapp-identity \
+  --resource-group myResourceGroup
+
+# Retrieve identity resource ID and client ID in a single call
+IDENTITY_ID=$(az identity show \
+  --name myapp-identity \
+  --resource-group myResourceGroup \
+  --query id -o tsv)
+
+IDENTITY_CLIENT_ID=$(az identity show \
+  --name myapp-identity \
+  --resource-group myResourceGroup \
+  --query clientId -o tsv)
+
+# Grant AcrPull role to the identity on the registry
+ACR_ID=$(az acr show --name myregistry --query id -o tsv)
+az role assignment create \
+  --assignee $IDENTITY_CLIENT_ID \
+  --role AcrPull \
+  --scope $ACR_ID
+
+# Create container app with managed identity for ACR
 az containerapp create \
   --name myapp \
   --resource-group myResourceGroup \
   --image myregistry.azurecr.io/myapp:latest \
   --environment myEnvironment \
+  --user-assigned $IDENTITY_ID \
   --registry-server myregistry.azurecr.io \
-  --registry-username <username> \
-  --registry-password <password> \
+  --registry-identity $IDENTITY_ID \
   --ingress external \
   --target-port 8080
 ```
@@ -274,6 +298,37 @@ az role assignment create \
   --scope /subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.KeyVault/vaults/<vault-name>
 ```
 
+### Grant AcrPull to System-Assigned Identity
+
+Allow the container app to pull images from ACR without stored credentials. Enable the system-assigned identity first if not already done:
+
+```bash
+# Enable system-assigned managed identity (if not already enabled)
+az containerapp identity assign \
+  --name myapp \
+  --resource-group myResourceGroup \
+  --system-assigned
+
+PRINCIPAL_ID=$(az containerapp identity show \
+  --name myapp \
+  --resource-group myResourceGroup \
+  --query principalId -o tsv)
+
+ACR_ID=$(az acr show --name myregistry --query id -o tsv)
+
+az role assignment create \
+  --assignee $PRINCIPAL_ID \
+  --role AcrPull \
+  --scope $ACR_ID
+
+# Update the app to use system-assigned identity for the registry
+az containerapp registry set \
+  --name myapp \
+  --resource-group myResourceGroup \
+  --server myregistry.azurecr.io \
+  --identity system
+```
+
 ### Access Azure Key Vault
 
 Use managed identity to securely access Key Vault secrets:
@@ -283,6 +338,148 @@ az containerapp secrets set \
   --name myapp \
   --resource-group myResourceGroup \
   --secrets keyvault-secret=keyvault-ref
+```
+
+## Health Probes
+
+### Liveness Probe
+
+Restart a container when it becomes unresponsive:
+
+```bash
+az containerapp create \
+  --name myapp \
+  --resource-group myResourceGroup \
+  --image myregistry.azurecr.io/myapp:latest \
+  --environment myEnvironment \
+  --ingress external \
+  --target-port 8080 \
+  --liveness-probe-path /health/live \
+  --liveness-probe-period 10 \
+  --liveness-probe-threshold 3
+```
+
+### Readiness Probe
+
+Delay traffic until the container is ready to serve requests:
+
+```bash
+az containerapp create \
+  --name myapp \
+  --resource-group myResourceGroup \
+  --image myregistry.azurecr.io/myapp:latest \
+  --environment myEnvironment \
+  --ingress external \
+  --target-port 8080 \
+  --readiness-probe-path /health/ready \
+  --readiness-probe-period 5 \
+  --readiness-probe-threshold 2
+```
+
+### Health Probes via YAML
+
+Define all three probe types (liveness, readiness, startup) in a container app YAML spec:
+
+```yaml
+properties:
+  template:
+    containers:
+      - name: myapp
+        image: myregistry.azurecr.io/myapp:latest
+        probes:
+          - type: liveness
+            httpGet:
+              path: /health/live
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            failureThreshold: 3
+          - type: readiness
+            httpGet:
+              path: /health/ready
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            failureThreshold: 2
+          - type: startup
+            httpGet:
+              path: /health/startup
+              port: 8080
+            initialDelaySeconds: 0
+            periodSeconds: 10
+            failureThreshold: 30
+```
+
+Apply the YAML spec to an existing container app:
+
+```bash
+az containerapp update \
+  --name myapp \
+  --resource-group myResourceGroup \
+  --yaml @containerapp.yaml
+```
+
+### Health Probes in Bicep
+
+Embed probe definitions directly in a Bicep template:
+
+```bicep
+param containerAppName string
+param containerImage string
+param environmentName string
+param location string = resourceGroup().location
+
+resource containerEnv 'Microsoft.App/managedEnvironments@2023-05-01' existing = {
+  name: environmentName
+}
+
+resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
+  name: containerAppName
+  location: location
+  properties: {
+    managedEnvironmentId: containerEnv.id
+    template: {
+      containers: [
+        {
+          name: containerAppName
+          image: containerImage
+          probes: [
+            {
+              type: 'liveness'
+              httpGet: {
+                path: '/health/live'
+                port: 8080
+              }
+              initialDelaySeconds: 10
+              periodSeconds: 10
+              failureThreshold: 3
+            }
+            {
+              type: 'readiness'
+              httpGet: {
+                path: '/health/ready'
+                port: 8080
+              }
+              initialDelaySeconds: 5
+              periodSeconds: 5
+              failureThreshold: 2
+            }
+            {
+              type: 'startup'
+              httpGet: {
+                path: '/health/startup'
+                port: 8080
+              }
+              initialDelaySeconds: 0
+              periodSeconds: 10
+              failureThreshold: 30
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
 ```
 
 ## Azure Container Apps Jobs
@@ -380,14 +577,18 @@ Define infrastructure as code using Bicep:
 ```bicep
 param containerAppName string
 param containerImage string
-param environment string
+param environmentName string
 param location string = resourceGroup().location
+
+resource containerEnv 'Microsoft.App/managedEnvironments@2023-05-01' existing = {
+  name: environmentName
+}
 
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
   name: containerAppName
   location: location
   properties: {
-    managedEnvironmentId: resourceId('Microsoft.App/managedEnvironments', environment)
+    managedEnvironmentId: containerEnv.id
     configuration: {
       ingress: {
         external: true
@@ -431,14 +632,18 @@ Define a container app with Dapr components:
 param containerAppName string
 param containerImage string
 param daprAppId string
-param environment string
+param environmentName string
 param location string = resourceGroup().location
+
+resource containerEnv 'Microsoft.App/managedEnvironments@2023-05-01' existing = {
+  name: environmentName
+}
 
 resource containerAppWithDapr 'Microsoft.App/containerApps@2023-05-01' = {
   name: containerAppName
   location: location
   properties: {
-    managedEnvironmentId: resourceId('Microsoft.App/managedEnvironments', environment)
+    managedEnvironmentId: containerEnv.id
     configuration: {
       dapr: {
         enabled: true
@@ -485,7 +690,7 @@ az deployment group create \
     containerAppName=myapp \
     containerImage=myregistry.azurecr.io/myapp:latest \
     daprAppId=myapp \
-    environment=myEnvironment
+    environmentName=myEnvironment
 ```
 
 ## Related Topics
