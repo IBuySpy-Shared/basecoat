@@ -4,7 +4,7 @@
 
 Base Coat provides a curated library of agents, skills, instructions, and prompts that teams adopt across repositories through a single sync command. Instead of every team writing Copilot customizations from scratch, Base Coat gives you production-ready assets that enforce consistent standards, accelerate development workflows, and scale across an entire GitHub Enterprise organization.
 
-**28 agents** · **18 skills** · **19 instruction files** · **3 prompt starters** · **6 guardrail policies**
+**29 agents** · **18 skills** · **19 instruction files** · **3 prompt starters** · **6 guardrail policies**
 
 ---
 
@@ -78,7 +78,7 @@ Base Coat is built on four GitHub Copilot customization primitives:
 │                    Base Coat                         │
 ├──────────┬──────────┬───────────────┬───────────────┤
 │  Agents  │  Skills  │ Instructions  │   Prompts     │
-│ (28)     │ (18)     │ (19)          │   (3)         │
+│ (29)     │ (18)     │ (19)          │   (3)         │
 │          │          │               │               │
 │ Multi-   │ Reusable │ Coding        │ Quick task    │
 │ step     │ workflow │ standards &   │ entry points  │
@@ -111,6 +111,7 @@ Base Coat is built on four GitHub Copilot customization primitives:
 | [devops-engineer](agents/devops-engineer.agent.md) | CI/CD, IaC, deployment, rollback, and observability |
 | [exploratory-charter](agents/exploratory-charter.agent.md) | Time-boxed exploratory testing charters with evidence capture |
 | [frontend-dev](agents/frontend-dev.agent.md) | UI components, responsive layouts, state, accessibility |
+| [guardrail](agents/guardrail.agent.md) | Post-processing validation for safety, quality, compliance, and formatting |
 | [issue-triage](agents/issue-triage.agent.md) | Triage, classify, label, and prioritize GitHub issues |
 | [manual-test-strategy](agents/manual-test-strategy.agent.md) | Manual testing strategy with rubric, charter, checklist, and automation backlog |
 | [mcp-developer](agents/mcp-developer.agent.md) | MCP servers, tools, and integrations |
@@ -222,7 +223,7 @@ Full reference: [`docs/GOVERNANCE.md`](docs/GOVERNANCE.md) · Contributing: [`CO
 
 ```text
 basecoat/
-├── agents/              # 28 agent definitions
+├── agents/              # 29 agent definitions
 ├── skills/              # 18 skill directories with templates
 ├── instructions/        # 19 instruction files (auto-loaded)
 ├── prompts/             # 3 prompt starters
