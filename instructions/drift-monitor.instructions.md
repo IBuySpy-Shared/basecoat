@@ -58,6 +58,7 @@ terraform plan -detailed-exitcode
 ```
 
 Exit codes:
+
 - `0`: No changes
 - `1`: Error
 - `2`: Changes detected (drift)
