@@ -1,0 +1,89 @@
+name: Approve Issue for Copilot Agent
+
+on:
+  issue_comment:
+    types: [created]
+
+permissions:
+  issues: write
+  contents: read
+
+jobs:
+  approve:
+    if: |
+      !github.event.issue.pull_request &&
+      contains(github.event.comment.body, '/approve')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify commenter has write access
+        uses: actions/github-script@v7
+        id: check-access
+        with:
+          script: |
+            const { data: perm } = await github.rest.repos.getCollaboratorPermissionLevel({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              username: context.payload.comment.user.login
+            });
+            const allowed = ['admin', 'write'].includes(perm.permission);
+            if (!allowed) {
+              core.setFailed(`User ${context.payload.comment.user.login} does not have write access`);
+            }
+            return allowed;
+
+      - name: Assign to Copilot and update labels
+        if: steps.check-access.outputs.result == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = context.payload.issue;
+
+            // Remove triage label, add approved
+            try {
+              await github.rest.issues.removeLabel({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                name: 'triage'
+              });
+            } catch (e) {
+              // Label might not exist
+            }
+
+            await github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue.number,
+              labels: ['approved', 'copilot-agent']
+            });
+
+            // Assign to copilot (the coding agent picks up assigned issues)
+            try {
+              await github.rest.issues.addAssignees({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                assignees: ['copilot']
+              });
+            } catch (e) {
+              // If copilot user can't be assigned, leave a comment
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                body: '⚠️ Could not auto-assign to `@copilot`. Please assign manually via the issue sidebar → Assignees → "copilot".'
+              });
+            }
+
+            // Acknowledge
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue.number,
+              body: [
+                '✅ **Approved** — Issue assigned to Copilot coding agent.',
+                '',
+                'Copilot will analyze this issue and create a draft PR with the implementation.',
+                'Review the PR when ready and merge if it passes CI.',
+              ].join('\n')
+            });
