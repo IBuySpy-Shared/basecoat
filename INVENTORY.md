@@ -25,6 +25,7 @@ This catalog helps teams discover what exists in Base Coat and when to use it.
 | --------------------------------------- | ------------------------------------------------------- | -------------------------------------------- |
 | `skills/backend-dev/SKILL.md`           | design and implement APIs, service layers, and data access repositories | backend, api, service, repository, error catalog                     |
 | `skills/azure-container-apps/SKILL.md`  | deploy, scale, and manage containers on Azure Container Apps with managed identity, health probes, and traffic splitting | azure, container apps, aca, ingress, scale, revision, health probes, managed identity |
+| `skills/azure-waf-review/SKILL.md`      | assess Azure workloads against the five WAF pillars and produce scored findings with remediation templates | azure, well-architected, WAF, reliability, security, cost, performance, operations |
 | `skills/frontend-dev/SKILL.md`          | build accessible, responsive UI components and manage client state       | frontend, ui, component, accessibility, state management             |
 | `skills/data-tier/SKILL.md`             | design schemas, write migrations, review queries, build data dictionaries | data, schema, migration, query, indexing                            |
 | `skills/manual-test-strategy/SKILL.md`  | define manual scope, produce charters, checklists, and handoff artifacts | manual testing, exploratory, charter, regression, defect, automation handoff |
