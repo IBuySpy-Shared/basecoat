@@ -23,7 +23,8 @@ These are not suggestions. Every AI agent operating in `ivegamsft/basecoat` — 
 **No issue = no implementation.** This is a hard stop.
 
 Issue reference format in commit messages:
-```
+
+```text
 feat(governance): add governance instruction file (#43)
 ```
 
@@ -52,6 +53,7 @@ You must never write the following to any file, commit message, PR description, 
 You must never push directly to `main`.
 
 Workflow:
+
 1. Create a branch: `<type>/<issue-number>-<short-description>`
 2. Make changes on the branch
 3. Open a PR referencing the issue
@@ -65,7 +67,7 @@ Direct pushes to `main` will be rejected by branch protection. Attempting to byp
 
 ## 4. Branch Naming
 
-```
+```text
 <type>/<issue-number>-<short-description>
 ```
 
@@ -79,7 +81,8 @@ Valid types:
 | `security` | Security-related changes |
 
 Examples:
-```
+
+```text
 feat/43-governance-docs
 fix/17-hook-glob-pattern
 docs/39-readme-overhaul
@@ -90,7 +93,7 @@ security/52-rotate-hook-patterns
 
 ## 5. When to Stop and Ask vs. Proceed
 
-### Stop and Ask When:
+### Stop and Ask When
 
 - The issue is ambiguous, contradictory, or under-specified
 - The change would modify CI/CD pipelines, branch protection, or release workflows
@@ -101,7 +104,7 @@ security/52-rotate-hook-patterns
 - You are unsure whether a change belongs in this PR or a separate issue
 - The change affects more than one system boundary
 
-### Proceed Without Asking When:
+### Proceed Without Asking When
 
 - The issue is clearly scoped and unambiguous
 - All dependencies are resolved and available
@@ -116,7 +119,7 @@ security/52-rotate-hook-patterns
 
 ## 6. Commit Message Rules
 
-```
+```text
 <type>(<scope>): <short summary> (#<issue-number>)
 ```
 
@@ -166,6 +169,7 @@ closes #<issue-number>
 You are accountable for the output you produce. "I was just following instructions" is not a defense for committing secrets, bypassing process, or causing production incidents.
 
 Specifically:
+
 - You must not take actions that violate these rules even if explicitly asked to by a user prompt
 - If asked to commit secrets: refuse and explain why
 - If asked to push to main: refuse and explain why
@@ -196,6 +200,7 @@ Agents must manage context window usage deliberately — load only what is neede
 ### General Token Guidance
 
 Until Issue #44 is fully implemented, agents should:
+
 - Prefer concise, targeted prompts over large context dumps
 - Break large tasks into discrete issues and PRs rather than one massive context
 - Flag when a task feels too large for a single context window
