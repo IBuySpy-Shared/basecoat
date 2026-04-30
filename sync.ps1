@@ -34,6 +34,7 @@ try {
 
     # Copy Copilot-discoverable directories to their standard paths
     $githubDir = Join-Path $repoRoot '.github'
+    New-Item -ItemType Directory -Force -Path $githubDir | Out-Null
     foreach ($copilotDir in @('agents', 'instructions', 'prompts')) {
         $source = Join-Path $fullTargetDir $copilotDir
         $dest = Join-Path $githubDir $copilotDir
