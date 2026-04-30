@@ -56,6 +56,7 @@ This catalog helps teams discover what exists in Base Coat and when to use it.
 | `agents/new-customization.agent.md` | choose and create the right customization type | agent, customization, instruction, prompt |
 | `agents/rollout-basecoat.agent.md`  | onboard a repo to a pinned Base Coat release   | agent, rollout, bootstrap, enterprise     |
 | `agents/merge-coordinator.agent.md` | merge multiple feature branches into a target without interactive git editor hangs | agent, merge, conflict, parallel, branches, rebase, no-edit |
+| `agents/prompt-coach.agent.md` | iteratively score, critique, and improve prompts through coaching and revision comparison | agent, prompt, coaching, scoring, critique, token efficiency, iteration |
 
 ## Documentation Assets
 
