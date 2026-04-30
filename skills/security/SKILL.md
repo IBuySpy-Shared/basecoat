@@ -36,3 +36,7 @@ Reference this skill by attaching `skills/security/SKILL.md` to your agent conte
 This skill is designed to be used alongside the `security-analyst` agent. The agent drives the audit workflow; this skill provides the reference templates and checklists.
 
 For backend-specific security concerns, pair with the `backend-dev` agent's security defaults. For frontend-specific concerns (CSP, XSS, CORS), pair with the `frontend-dev` agent.
+
+## Related Guardrails
+
+- [Security Findings Triage](../../docs/guardrails/security-findings-triage.md) — SLA-based triage process for severity classification, ownership, and remediation tracking
