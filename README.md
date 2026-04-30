@@ -4,7 +4,7 @@
 
 Base Coat provides a curated library of agents, skills, instructions, and prompts that teams adopt across repositories through a single sync command. Instead of every team writing Copilot customizations from scratch, Base Coat gives you production-ready assets that enforce consistent standards, accelerate development workflows, and scale across an entire GitHub Enterprise organization.
 
-**29 agents** · **18 skills** · **19 instruction files** · **3 prompt starters** · **6 guardrail policies**
+**29 agents** · **19 skills** · **19 instruction files** · **3 prompt starters** · **6 guardrail policies**
 
 ---
 
@@ -144,6 +144,7 @@ Base Coat is built on four GitHub Copilot customization primitives:
 |---|---|---|
 | [agent-design](skills/agent-design/) | agent-template, instruction-template, skill-template | agent-designer |
 | [api-design](skills/api-design/) | openapi-template, governance-checklist, breaking-change-checklist, versioning-decision-tree | api-designer |
+| [azure-waf-review](skills/azure-waf-review/) | waf-assessment-report-template, pillar-scoring-rubric, remediation-action-plan-template | solution-architect, security-analyst, devops-engineer |
 | [architecture](skills/architecture/) | adr-template, c4-diagram-template, risk-register-template, tech-selection-matrix-template | solution-architect |
 | [backend-dev](skills/backend-dev/) | api-spec-template, error-catalog-template, repository-pattern-template, service-template | backend-dev |
 | [code-review](skills/code-review/) | SKILL.md workflow | code-review |
