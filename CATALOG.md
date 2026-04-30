@@ -25,6 +25,7 @@
 | code-review | `agents/code-review.agent.md` | Structured multi-step code review workflow | code-review | GPT-4o / Claude Sonnet |
 | guardrail | `agents/guardrail.agent.md` | Post-processing validation for safety, quality, compliance, and formatting | — | Claude Sonnet |
 | security-analyst | `agents/security-analyst.agent.md` | Vulnerability assessment, threat modeling, secure code review | security | GPT-4o / Claude Sonnet |
+| identity-architect | `agents/identity-architect.agent.md` | Azure RBAC, managed identities, Entra ID app registrations, conditional access, and workload identity federation | azure-identity | GPT-4o / Claude Sonnet |
 | performance-analyst | `agents/performance-analyst.agent.md` | Profiling, load testing, and performance optimization | performance-profiling | GPT-4o / Claude Sonnet |
 | config-auditor | `agents/config-auditor.agent.md` | Scans for committed or unprotected config secrets | security | GPT-4o / Claude Sonnet |
 | manual-test-strategy | `agents/manual-test-strategy.agent.md` | Manual testing strategy with rubric, charter, checklist, and automation backlog | manual-test-strategy | GPT-4o / Claude Sonnet |
@@ -66,6 +67,7 @@
 | architecture | `skills/architecture/` | `adr-template.md`, `c4-diagram-template.md`, `risk-register-template.md`, `tech-selection-matrix-template.md` | solution-architect |
 | azure-container-apps | `skills/azure-container-apps/` | *(workflow only)* | devops-engineer |
 | azure-networking | `skills/azure-networking/` | `hub-spoke-topology.md`, `cidr-allocation.md`, `private-endpoint-dns-zones.md`, `nsg-rule-matrix.md` | solution-architect, devops-engineer |
+| azure-identity | `skills/azure-identity/` | `rbac-role-assignment-template.md`, `managed-identity-mapping-template.md`, `app-registration-checklist.md`, `workload-identity-federation-template.md`, `conditional-access-policy-template.md` | identity-architect |
 | backend-dev | `skills/backend-dev/` | `api-spec-template.md`, `error-catalog-template.md`, `repository-pattern-template.md`, `service-template.md` | backend-dev |
 | code-review | `skills/code-review/` | *(workflow only)* | code-review |
 | create-instruction | `skills/create-instruction/` | *(workflow only)* | new-customization |
