@@ -19,7 +19,7 @@ Purpose: design, author, and validate Copilot agent definitions — including fr
 
 1. **Clarify scope** — confirm the agent's bounded responsibility. A single agent should own one workflow or domain. If the scope spans multiple domains, design a multi-agent coordination pattern instead.
 2. **Survey existing agents** — list current agents in the repository and identify overlap. If an existing agent covers ≥70 % of the need, extend it rather than creating a new one.
-3. **Draft frontmatter** — write YAML frontmatter with `name`, `description`, and `tools`. The description must contain trigger phrases so discovery works correctly.
+3. **Draft frontmatter** — write YAML frontmatter with `name`, `description`, `tools`, and `allowed_skills`. The description must contain trigger phrases so discovery works correctly. Set `allowed_skills` to the minimum set of skills the agent actually invokes; use `[]` for agents that need no skills.
 4. **Write instruction body** — author the purpose, inputs, workflow steps, domain-specific guidance, issue-filing triggers, model recommendation, and output format sections.
 5. **Compose skills** — identify which skills the agent should reference or invoke. Link them explicitly in the body so operators know the dependency graph.
 6. **Validate** — check frontmatter schema, verify all referenced skills exist, and run any available linters.
@@ -45,17 +45,29 @@ Purpose: design, author, and validate Copilot agent definitions — including fr
 
 - `name` — lowercase kebab-case, matching the filename without `.agent.md`.
 - `description` — a quoted string under 200 characters that includes trigger phrases for discovery.
-- `tools` — a YAML list of tool identifiers the agent needs at runtime.
-- Do not add fields beyond `name`, `description`, and `tools` unless the schema explicitly supports them.
+- `tools` — a YAML list of tool identifiers the agent needs at runtime. **Enforced**: the agent can only call tools listed here.
+- `allowed_skills` — an optional YAML list of skill folder names the agent may invoke. Omit to inherit all available skills. Set to `[]` to block all skill access. **Enforced**: only skills in this list appear in the agent's `<available_skills>` context.
+- The `## Model` section heading in the agent body is binding: the platform uses the **Recommended** model identifier as the actual model selection.
+
+When an agent has `allowed_skills: []`, its workflow must not reference or invoke any skill. Confirm this during design.
 
 ## Tool Selection
 
 - Only grant tools the agent actually needs. Principle of least privilege applies.
+- `tools:` is enforced at runtime — the agent cannot call any tool not declared in this list.
 - `read_file` and `list_dir` are safe defaults for read-only agents.
 - Add `write_file` only when the agent produces or modifies files.
 - Add `run_terminal_command` only when the workflow requires CLI execution (linting, testing, git).
 - Add `create_github_issue` when the agent has issue-filing triggers.
 - Document why each tool is included in a comment or in the agent body if the choice is non-obvious.
+
+## Skill Allow-List
+
+- `allowed_skills:` is enforced at runtime — only listed skills appear in the agent's `<available_skills>` context.
+- Enumerate only the skills the agent's workflow explicitly invokes.
+- Use `allowed_skills: []` for agents that are fully self-contained and must not invoke any skill.
+- If `allowed_skills` is omitted, the agent inherits the full skill catalog (legacy behavior — avoid for new agents).
+- Verify every skill name in `allowed_skills` corresponds to a directory under `skills/`.
 
 ## Multi-Agent Coordination Patterns
 
@@ -108,7 +120,9 @@ Trigger conditions:
 |---|---|
 | Agent scope overlaps >70 % with an existing agent | `agent-design,tech-debt` |
 | Referenced skill does not exist | `agent-design,missing-skill` |
+| Skill listed in `allowed_skills` does not exist under `skills/` | `agent-design,missing-skill` |
 | Frontmatter missing required field or invalid YAML | `agent-design,tech-debt` |
+| `allowed_skills` omitted — agent inherits unfiltered skill catalog | `agent-design,tech-debt` |
 | Ambiguous workflow step that could produce divergent behavior | `agent-design,tech-debt` |
 | Multi-agent hand-off with no defined input/output contract | `agent-design,tech-debt` |
 

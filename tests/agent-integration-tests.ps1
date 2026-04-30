@@ -50,6 +50,72 @@ function Get-YamlField {
     return $null
 }
 
+# Helper: check whether a YAML field is present (including with an empty value)
+function Test-YamlFieldPresent {
+    param(
+        [string]$Content,
+        [string]$FieldName
+    )
+    
+    $normalizedContent = $Content -replace "`r", ""
+    $lines = $normalizedContent -split "`n"
+    
+    foreach ($line in $lines) {
+        if ($line -match "^$([regex]::Escape($FieldName))\s*:") {
+            return $true
+        }
+    }
+    return $false
+}
+
+# Helper: extract inline YAML array items from a field like "tools: [a, b, c]"
+# Also supports multi-line YAML list syntax:
+#   tools:
+#     - a
+#     - b
+# Returns $null if the field is absent; returns an empty array for "field: []"
+function Get-YamlArrayField {
+    param(
+        [string]$Content,
+        [string]$FieldName
+    )
+    
+    $normalizedContent = $Content -replace "`r", ""
+    $lines = $normalizedContent -split "`n"
+    
+    $fieldIndex = -1
+    for ($i = 0; $i -lt $lines.Count; $i++) {
+        if ($lines[$i] -match "^$([regex]::Escape($FieldName))\s*:\s*(.*)$") {
+            $fieldIndex = $i
+            $raw = $matches[1].Trim()
+
+            # Empty value or empty inline brackets — field is present with empty list
+            if ([string]::IsNullOrWhiteSpace($raw) -or $raw -eq '[]') {
+                # Check if the next lines have "  - item" entries
+                $items = @()
+                for ($j = $i + 1; $j -lt $lines.Count; $j++) {
+                    if ($lines[$j] -match '^\s+-\s+(.+)$') {
+                        $items += $matches[1].Trim()
+                    } elseif ($lines[$j] -match '^\S') {
+                        break  # Next top-level key reached
+                    }
+                }
+                return $items
+            }
+
+            # Inline array: [a, b, c]
+            if ($raw -match '^\[(.+)\]$') {
+                $inner = $matches[1]
+                return @($inner -split '\s*,\s*' | ForEach-Object { $_.Trim() } | Where-Object { $_ -ne '' })
+            }
+
+            # Scalar value — not a valid array format
+            return $null
+        }
+    }
+    return $null  # Field not present
+}
+
 Write-Host 'Starting agent integration tests...' -ForegroundColor Cyan
 
 # ============================================================================
@@ -75,6 +141,61 @@ foreach ($file in $agentFiles) {
 }
 
 Write-Host "  Checked $($agentFiles.Count) agent files for frontmatter" -ForegroundColor Green
+
+# ============================================================================
+# Test 1b: Agent tools field must be a valid array when present
+# ============================================================================
+Write-Host "`nTest 1b: Agent 'tools' field array validation" -ForegroundColor Yellow
+
+$toolsChecked = 0
+foreach ($file in $agentFiles) {
+    $testCount++
+    $frontmatter = Get-Frontmatter $file.FullName
+    if ($null -eq $frontmatter) { continue }
+
+    if (Test-YamlFieldPresent $frontmatter 'tools') {
+        $toolsChecked++
+        $tools = Get-YamlArrayField $frontmatter 'tools'
+        if ($null -eq $tools) {
+            $failures += "$($file.Name): 'tools' field is present but is not a valid YAML array (expected inline array like [tool1, tool2] or [])"
+        }
+    }
+}
+
+Write-Host "  Checked $toolsChecked agent files with 'tools' field for array format" -ForegroundColor Green
+
+# ============================================================================
+# Test 1c: Agent allowed_skills field must be a valid array when present,
+#          and every named skill must correspond to a directory under skills/
+# ============================================================================
+Write-Host "`nTest 1c: Agent 'allowed_skills' field validation" -ForegroundColor Yellow
+
+$allowedSkillsChecked = 0
+$skillDirNames = (Get-ChildItem skills -Directory).Name
+
+foreach ($file in $agentFiles) {
+    $testCount++
+    $frontmatter = Get-Frontmatter $file.FullName
+    if ($null -eq $frontmatter) { continue }
+
+    if (-not (Test-YamlFieldPresent $frontmatter 'allowed_skills')) { continue }
+
+    $allowedSkillsChecked++
+    $skills = Get-YamlArrayField $frontmatter 'allowed_skills'
+
+    if ($null -eq $skills) {
+        $failures += "$($file.Name): 'allowed_skills' field is present but is not a valid YAML array (expected inline array like [skill1, skill2] or [])"
+        continue
+    }
+
+    foreach ($skill in $skills) {
+        if ($skill -notin $skillDirNames) {
+            $failures += "$($file.Name): 'allowed_skills' references '$skill' but no matching directory exists under skills/"
+        }
+    }
+}
+
+Write-Host "  Checked $allowedSkillsChecked agent files with 'allowed_skills' field" -ForegroundColor Green
 
 # ============================================================================
 # Test 2: Agent required sections (Inputs, Workflow/Process, Output/Report)

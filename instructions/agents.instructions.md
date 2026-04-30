@@ -23,6 +23,7 @@ Every agent file must start with a YAML frontmatter block containing these field
 name: kebab-case-agent-name
 description: "One-sentence description of the agent's purpose. Start with the role noun and state when to invoke it."
 tools: [read_file, write_file, list_dir, run_terminal_command, create_github_issue]
+allowed_skills: [skill-name-a, skill-name-b]
 ---
 ```
 
@@ -30,7 +31,14 @@ tools: [read_file, write_file, list_dir, run_terminal_command, create_github_iss
 |---|---|---|
 | `name` | Yes | Must match the filename (without `.agent.md`). |
 | `description` | Yes | One sentence. Begin with the role, end with trigger guidance ("Use when …"). |
-| `tools` | Yes | Array of tool identifiers the agent needs. Follow least-privilege — include only tools the agent actually uses. |
+| `tools` | Yes | Array of tool identifiers the agent needs. Enforced at runtime — the agent cannot call any tool not in this list. Follow least-privilege — include only tools the agent actually uses. |
+| `allowed_skills` | No | Array of skill folder names the agent may invoke. Omit to inherit all available skills (legacy behavior). Use `allowed_skills: []` to block all skill invocations. The runtime filters the `<available_skills>` list to this allow-list before injecting it into the agent context. |
+
+### Runtime Enforcement Semantics
+
+- **`tools:` is a whitelist.** At runtime the agent session is restricted to exactly the tools declared. Any tool not listed is unavailable, regardless of what the parent session has enabled.
+- **`allowed_skills:` is a filter.** The platform injects only the skills named in this list into `<available_skills>`. An agent with `allowed_skills: []` receives an empty skill catalog and must stop immediately if its workflow depends on a skill.
+- **`## Model` is binding.** The model named in the agent's **Model** section is used as the actual model selection when the agent is invoked, not merely a suggestion. Specify the recommended model using the identifier exactly as it appears in the platform's model registry.
 
 ## Required Sections Checklist
 
@@ -100,14 +108,15 @@ Agents operate within finite context windows. Follow these rules to stay within 
 
 Before merging a new or modified agent, verify the following:
 
-1. **Frontmatter valid** — YAML parses without errors. `name` matches filename. `description` is a single sentence. `tools` is a valid array.
+1. **Frontmatter valid** — YAML parses without errors. `name` matches filename. `description` is a single sentence. `tools` is a valid array. `allowed_skills`, if present, is a YAML array (may be empty).
 2. **All required sections present** — Walk the Required Sections Checklist above. Every section exists and is non-empty.
-3. **Skill references resolve** — Every template or checklist path referenced in the agent file exists on disk.
+3. **Skill references resolve** — Every template or checklist path referenced in the agent file exists on disk. Every skill name in `allowed_skills` must correspond to a directory under `skills/`.
 4. **Issue filing template works** — Copy the `gh issue create` block, substitute sample values, and confirm it produces a valid command.
 5. **Workflow is executable** — Each numbered step is actionable and unambiguous. A different person (or agent) should be able to follow the workflow without external context.
-6. **Model section complete** — Recommended model, minimum model, and rationale are all present.
+6. **Model section complete** — Recommended model, minimum model, and rationale are all present. The recommended model identifier must match a known platform model.
 7. **No orphaned agents** — If the agent replaces or deprecates an existing agent, the old file is removed and any references are updated.
 8. **Dry-run the agent** — Execute the agent against a representative input and confirm it produces output matching the Output Format section.
+9. **Skill isolation check** — If `allowed_skills: []`, confirm the agent's workflow does not invoke any skills. If `allowed_skills` is a non-empty list, confirm all referenced skills are included.
 
 ## Versioning and Deprecation
 
@@ -126,6 +135,7 @@ Below is a minimal but complete agent skeleton that satisfies all requirements:
 name: example-agent
 description: "Example agent for demonstrating structure. Use when creating a new agent from scratch."
 tools: [read_file, write_file, list_dir, run_terminal_command, create_github_issue]
+allowed_skills: [example-skill]
 ---
 
 # Example Agent
