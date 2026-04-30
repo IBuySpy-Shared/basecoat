@@ -2,6 +2,24 @@
 
 All notable changes to this repository should be recorded in this file.
 
+## Unreleased
+
+### Added
+- `skills/azure-container-apps/SKILL.md` — ACA skill covering:
+  - Environment config and multi-container environments
+  - Revision management and traffic splitting
+  - Ingress configuration (external, internal, custom domain)
+  - HTTP, KEDA, and Event Hub scale rules
+  - Health probes (liveness, readiness, startup) via CLI, YAML, and Bicep
+  - Managed identity for ACR (user-assigned and system-assigned patterns)
+  - Managed identity for Key Vault
+  - Dapr integration and state management
+  - Azure Container Apps Jobs (scheduled and event-driven)
+  - Bicep templates with symbolic `existing` resource references
+
+### Changed
+- Updated `CATALOG.md` and `INVENTORY.md` to include the `azure-container-apps` skill
+
 ## 2.0.0 - 2026-04-28
 
 ### Added
