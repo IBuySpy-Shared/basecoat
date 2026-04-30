@@ -60,7 +60,7 @@ curl -fsSL https://raw.githubusercontent.com/YOUR-ORG/basecoat/main/sync.sh | ba
 irm https://raw.githubusercontent.com/YOUR-ORG/basecoat/main/sync.ps1 | iex
 ```
 
-This copies Base Coat assets into `.github/base-coat/` in the consumer repo. Copilot automatically discovers files in this path.
+This copies Base Coat assets into `.github/base-coat/` and also copies agents, instructions, and prompts to `.github/agents/`, `.github/instructions/`, and `.github/prompts/` — the paths that GitHub Copilot auto-discovers.
 
 ### Step 4 — Pin to a Release Tag
 
@@ -259,7 +259,8 @@ See [`docs/enterprise-rollout.md`](enterprise-rollout.md) for detailed rollout g
 
 ### Copilot doesn't pick up instructions or agents
 
-- Verify files are in `.github/base-coat/` (the Copilot discovery path).
+- Verify instruction files exist at `.github/instructions/`, agents at `.github/agents/`, and prompts at `.github/prompts/`. These are the paths that GitHub Copilot auto-discovers — not `.github/base-coat/`.
+- If those directories are missing, re-run the sync script. It copies from `.github/base-coat/` into the Copilot-discoverable paths automatically.
 - Check that the `BASECOAT_TARGET_DIR` variable was not overridden to a non-standard path.
 - Ensure the Copilot organization policy allows custom instructions from repositories.
 
