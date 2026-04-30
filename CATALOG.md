@@ -9,7 +9,6 @@
 
 | Name | File | Description | Paired Skills | Model Recommendation |
 |---|---|---|---|---|
-| identity-architect | `agents/identity-architect.agent.md` | Azure RBAC, managed identities, Entra ID app registrations, conditional access, and workload identity federation | azure-identity | GPT-4o / Claude Sonnet |
 | | **🔨 Development** | | | |
 | backend-dev | `agents/backend-dev.agent.md` | APIs, service layers, business logic, and data access | backend-dev | GPT-4o / Claude Sonnet |
 | frontend-dev | `agents/frontend-dev.agent.md` | UI components, responsive layouts, state, accessibility | frontend-dev | GPT-4o / Claude Sonnet |
@@ -26,6 +25,7 @@
 | code-review | `agents/code-review.agent.md` | Structured multi-step code review workflow | code-review | GPT-4o / Claude Sonnet |
 | guardrail | `agents/guardrail.agent.md` | Post-processing validation for safety, quality, compliance, and formatting | — | Claude Sonnet |
 | security-analyst | `agents/security-analyst.agent.md` | Vulnerability assessment, threat modeling, secure code review | security | GPT-4o / Claude Sonnet |
+| identity-architect | `agents/identity-architect.agent.md` | Azure RBAC, managed identities, Entra ID app registrations, conditional access, and workload identity federation | azure-identity | GPT-4o / Claude Sonnet |
 | performance-analyst | `agents/performance-analyst.agent.md` | Profiling, load testing, and performance optimization | performance-profiling | GPT-4o / Claude Sonnet |
 | config-auditor | `agents/config-auditor.agent.md` | Scans for committed or unprotected config secrets | security | GPT-4o / Claude Sonnet |
 | manual-test-strategy | `agents/manual-test-strategy.agent.md` | Manual testing strategy with rubric, charter, checklist, and automation backlog | manual-test-strategy | GPT-4o / Claude Sonnet |

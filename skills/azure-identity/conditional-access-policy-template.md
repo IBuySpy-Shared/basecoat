@@ -31,7 +31,7 @@ Before creating any policies, verify break-glass accounts are excluded.
 |---|---|---|
 | Break-glass accounts exist (minimum 2) | ☐ | |
 | Break-glass accounts use long, randomised passwords (24+ chars) | ☐ | |
-| Break-glass accounts have no MFA registered (hardware FIDO2 key only) | ☐ | |
+| Break-glass accounts do not have standard MFA registered (authenticator app or SMS) — access uses a FIDO2 hardware security key stored physically offline | ☐ | |
 | Break-glass accounts are excluded from all CA policies | ☐ | |
 | Break-glass account usage triggers an alert | ☐ | |
 
