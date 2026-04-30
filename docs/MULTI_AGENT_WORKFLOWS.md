@@ -15,6 +15,7 @@ This guide captures the patterns that work.
 > **Always clone fresh. Never reuse a dirty working directory.**
 
 A working directory from a previous agent run may carry:
+
 - Unresolved conflict markers (`<<<<<<< HEAD`)
 - A detached HEAD state from an aborted rebase
 - Uncommitted changes that corrupt subsequent merges
@@ -43,12 +44,13 @@ Consistent names let tooling (and humans) understand scope and order at a glance
 
 ### Parallel sprint branches
 
-```
+```text
 feature/sprint-{N}-{app-or-area}
 ```
 
 Examples:
-```
+
+```text
 feature/sprint-3-api
 feature/sprint-3-ui
 feature/sprint-3-data
@@ -62,13 +64,13 @@ feature/sprint-3-docs
 
 ### Hotfix branches
 
-```
+```text
 hotfix/{issue-number}-{short-description}
 ```
 
 ### Agent-specific branches (non-sprint)
 
-```
+```text
 feature/{issue-number}-{short-description}
 ```
 
@@ -112,7 +114,7 @@ If two agents need to change the same config file, use a feature-flag pattern: e
 
 Build a directed acyclic graph (DAG) of which branches depend on each other. Merge leaves first, roots last.
 
-```
+```text
 feature/sprint-3-schema
     └──► feature/sprint-3-api
               └──► feature/sprint-3-ui
@@ -122,6 +124,7 @@ feature/sprint-3-schema
 Merge order: `schema → api → ui → tests`
 
 To detect dependencies programmatically:
+
 1. For each branch, list changed files
 2. Check if any other branch imports/requires those files
 3. If branch B imports something introduced in branch A → A must merge before B
@@ -242,3 +245,57 @@ done
 - `instructions/governance.instructions.md` — governance rules (priority:1)
 - `docs/CONFIG_PATTERN.md` — local config pattern to avoid committing secrets
 - Issue #51 — merge-coordinator origin story (parallel 5-agent sprint, rebase hang)
+
+---
+
+## Parallel Agent Execution
+
+### When to Parallelize
+
+- Independent research threads, such as exploring multiple modules simultaneously
+- Non-overlapping file modifications across different services or components
+- Multiple test suites or validation passes that can run independently
+- Fan-out investigation before fan-in synthesis
+
+### When NOT to Parallelize
+
+- Tasks with data dependencies where the output of one step feeds another
+- Overlapping file modifications where merge conflicts are guaranteed
+- Sequential workflows such as build → test → deploy
+- Tasks that require shared context accumulation in one place
+
+### Patterns
+
+#### Fan-Out / Fan-In
+
+- Decompose a task into `N` independent subtasks
+- Dispatch `N` agents simultaneously
+- Collect results, resolve conflicts, and synthesize the final output
+- Use for: code exploration, multi-file implementation, parallel testing
+
+#### Subagent Isolation
+
+- Launch subagents for research or investigation
+- Keep the main context clean by summarizing subagent findings back into the parent workflow
+- Use for: understanding unfamiliar code, exploring alternatives, impact analysis
+
+#### Parallel Implementation with Conflict Detection
+
+- Assign non-overlapping file sets to each agent
+- Use separate git branches, one per agent
+- Merge sequentially with conflict detection between each merge
+- If conflicts appear, resolve them manually or assign them to a merge-coordinator agent
+
+#### Result Aggregation
+
+- Define the expected output format before dispatching agents
+- Collect all results into a single synthesis
+- Handle partial failures: if 1 of `N` agents fails, continue with the remaining `N-1` results where possible
+- Report which agents succeeded, which failed, and why
+
+### Anti-Patterns
+
+- Do not parallelize and then duplicate work by re-investigating what subagents already found
+- Do not launch speculative agents "just in case" — they waste resources
+- Do not fan out without a clear fan-in strategy
+- Do not parallelize tasks that share mutable state
