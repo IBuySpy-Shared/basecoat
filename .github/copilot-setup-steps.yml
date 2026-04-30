@@ -1,0 +1,26 @@
+# Copilot Coding Agent Setup Steps
+# This file configures the environment for GitHub Copilot's coding agent.
+# When issues are assigned to @copilot, it uses these steps to set up its workspace.
+
+steps:
+  - name: Install dependencies
+    run: |
+      # PowerShell for validation scripts
+      pwsh --version || true
+
+      # Python for metrics collector
+      python3 --version || true
+
+      # Node.js for any JS tooling
+      node --version || true
+
+  - name: Verify repository structure
+    run: |
+      echo "Validating basecoat repo structure..."
+      ls agents/ instructions/ skills/ prompts/ docs/ || true
+
+  - name: Run validation suite
+    run: |
+      if [ -f tests/run-tests.ps1 ]; then
+        pwsh tests/run-tests.ps1 || true
+      fi
