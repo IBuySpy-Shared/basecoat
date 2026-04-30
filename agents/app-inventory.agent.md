@@ -226,7 +226,7 @@ portfolio_category: Modernize
 
 ### Markdown Report Example
 
-```markdown
+```text
 # App Inventory Report: CustomerPortal
 
 ## Overview
