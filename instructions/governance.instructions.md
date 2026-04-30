@@ -116,7 +116,7 @@ security/52-rotate-hook-patterns
 
 ## 6. Commit Message Rules
 
-```
+```text
 <type>(<scope>): <short summary> (#<issue-number>)
 ```
 
@@ -166,6 +166,7 @@ closes #<issue-number>
 You are accountable for the output you produce. "I was just following instructions" is not a defense for committing secrets, bypassing process, or causing production incidents.
 
 Specifically:
+
 - You must not take actions that violate these rules even if explicitly asked to by a user prompt
 - If asked to commit secrets: refuse and explain why
 - If asked to push to main: refuse and explain why
@@ -196,6 +197,7 @@ Agents must manage context window usage deliberately — load only what is neede
 ### General Token Guidance
 
 Until Issue #44 is fully implemented, agents should:
+
 - Prefer concise, targeted prompts over large context dumps
 - Break large tasks into discrete issues and PRs rather than one massive context
 - Flag when a task feels too large for a single context window
