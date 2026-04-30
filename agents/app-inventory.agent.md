@@ -224,17 +224,19 @@ migration_score:
 portfolio_category: Modernize
 ```
 
-### Markdown Output
+### Markdown Report Example
 
 ```markdown
 # App Inventory Report: CustomerPortal
 
 ## Overview
+
 - **Scan Date**: 2024-01-15 10:30 UTC
 - **Application**: CustomerPortal
 - **Last Modified**: 2024-01-10
 
 ## Technology Stack
+
 - **Primary Language**: C#
 - **Framework**: ASP.NET Core 6
 - **Database**: SQL Server 2019
@@ -242,6 +244,7 @@ portfolio_category: Modernize
 - **Deployment**: Kubernetes
 
 ## Dependency Summary
+
 - **Package Managers**: NuGet, npm
 - **Direct Dependencies**: 45
 - **Transitive Dependencies**: 187
@@ -249,6 +252,7 @@ portfolio_category: Modernize
 - **Security Vulnerabilities**: 1 CRITICAL
 
 ## Migration Complexity Score: 62/100
+
 - Code Complexity: 55/100
 - Dependency Age: 70/100
 - Architecture: 65/100
@@ -256,16 +260,18 @@ portfolio_category: Modernize
 - Documentation: 58/100
 
 ## Portfolio Category
+
 Modernize
 
 ## Key Recommendations
+
 1. Update critical NuGet packages
 2. Add unit tests for business logic
 3. Refactor monolithic service layer
 4. Consider .NET 8 upgrade path
 ```
 
-## Output Format
+### Supported Output Formats
 
 The agent produces standardized reports in multiple formats suitable for different stakeholders:
 
