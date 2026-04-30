@@ -34,6 +34,7 @@ for item in README.md CHANGELOG.md INVENTORY.md version.json basecoat-metadata.j
 done
 
 # Copy Copilot-discoverable directories to their standard paths
+mkdir -p "$REPO_ROOT/.github"
 for copilot_dir in agents instructions prompts; do
   if [[ -d "$REPO_ROOT/$TARGET_DIR/$copilot_dir" ]]; then
     rm -rf "$REPO_ROOT/.github/$copilot_dir"
