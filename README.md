@@ -4,7 +4,6 @@
 
 Base Coat provides a curated library of agents, skills, instructions, and prompts that teams adopt across repositories through a single sync command. Instead of every team writing Copilot customizations from scratch, Base Coat gives you production-ready assets that enforce consistent standards, accelerate development workflows, and scale across an entire GitHub Enterprise organization.
 
-**29 agents** · **19 skills** · **19 instruction files** · **3 prompt starters** · **6 guardrail policies**
 **30 agents** · **19 skills** · **19 instruction files** · **3 prompt starters** · **6 guardrail policies**
 
 ---
@@ -46,7 +45,7 @@ $env:BASECOAT_REF  = 'v1.0.0'
 irm https://raw.githubusercontent.com/IBuySpy-Shared/basecoat/$env:BASECOAT_REF/sync.ps1 | iex
 ```
 
-The sync script clones Base Coat, copies the standard assets into `.github/base-coat/`, and cleans up. The whole process takes under a minute.
+The sync script clones Base Coat, copies the standard assets into `.github/base-coat/`, then copies agents, instructions, and prompts to `.github/agents/`, `.github/instructions/`, and `.github/prompts/` so that GitHub Copilot auto-discovers them. The whole process takes under a minute.
 
 ### Environment Variables
 
@@ -277,6 +276,26 @@ curl -fsSL https://raw.githubusercontent.com/YOUR-ORG/basecoat/${tag}/sync.sh | 
 ```bash
 git submodule add https://github.com/YOUR-ORG/basecoat.git .github/base-coat
 ```
+
+After adding the submodule, copy the assets to the Copilot-discoverable paths:
+
+```bash
+# macOS / Linux
+rm -rf .github/agents .github/instructions .github/prompts
+cp -r .github/base-coat/agents .github/agents
+cp -r .github/base-coat/instructions .github/instructions
+cp -r .github/base-coat/prompts .github/prompts
+```
+
+```powershell
+# Windows PowerShell
+Remove-Item -Recurse -Force -ErrorAction SilentlyContinue .github/agents, .github/instructions, .github/prompts
+Copy-Item -Recurse .github/base-coat/agents .github/agents
+Copy-Item -Recurse .github/base-coat/instructions .github/instructions
+Copy-Item -Recurse .github/base-coat/prompts .github/prompts
+```
+
+Repeat the copy step whenever you update the submodule, or use the sync scripts instead to automate this.
 
 ---
 
