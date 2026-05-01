@@ -35,12 +35,36 @@ Purpose: onboard a repository or portfolio to Base Coat using safe, repeatable r
 **Rationale:** Repeatable rollout steps with well-defined validation — speed and cost matter most
 **Minimum:** gpt-5.4-mini
 
+## Distribution Channels
+
+| Channel | When to Use | Command |
+|---|---|---|
+| GitHub Release ZIP | Air-gapped / restricted egress | Download from releases page, extract to `.github/` |
+| Sync script (PowerShell) | Windows CI / local dev | `pwsh sync.ps1 -Version v2.1.1` |
+| Sync script (Bash) | Linux/macOS CI | `./sync.sh --version v2.1.1` |
+
+## Validation Checklist
+
+After installation, verify:
+
+- [ ] `agents/*.agent.md` files are present (no taxonomy subdirs)
+- [ ] `instructions/*.instructions.md` files are present
+- [ ] `skills/*/SKILL.md` directories are intact
+- [ ] `prompts/*.prompt.md` files are present
+- [ ] No duplicate `agents/` directories in the consumer repo
+- [ ] `pwsh scripts/validate-basecoat.ps1` passes (if available)
+
+## GitHub Issue Filing
+
+File issues for rollout failures:
+
+```bash
+gh issue create \
+  --title "fix(rollout): <failure summary>" \
+  --label "bug,infrastructure" \
+  --body "<description with version, channel, and error output>"
+```
+
 ## Governance
 
-This agent operates under the basecoat governance framework.
-
-- **Issue-first**: Do not make code changes without a logged GitHub issue.
-- **PRs only**: Never commit directly to `main`. Open a PR, self-approve if needed.
-- **No secrets**: Never commit credentials, tokens, API keys, or sensitive data.
-- **Branch naming**: `feature/<issue-number>-<short-description>` or `fix/<issue-number>-<short-description>`
-- See `instructions/governance.instructions.md` for the full governance reference.
+This agent follows the basecoat governance framework. See `instructions/governance.instructions.md`.

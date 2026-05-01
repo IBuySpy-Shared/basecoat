@@ -1,12 +1,12 @@
 ---
-name: Legacy Modernization Agent
+name: legacy-modernization
 description: Guides teams through Web Forms to Razor Pages migration using the strangler fig pattern for incremental modernization of legacy ASP.NET applications.
 model: claude-sonnet-4.6
 tools:
-  - code-analyzer
-  - dependency-mapper
-  - migration-planner
-  - modernization-assessment
+  - grep
+  - glob
+  - view
+  - powershell
 ---
 
 # Legacy Modernization Agent

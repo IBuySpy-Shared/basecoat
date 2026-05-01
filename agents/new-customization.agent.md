@@ -34,12 +34,35 @@ Purpose: turn a broad customization request into the right asset with the right 
 **Rationale:** Choosing the right customization primitive requires structured reasoning about scope and reuse
 **Minimum:** claude-haiku-4.5
 
+## Customization Type Decision Tree
+
+| Question | If Yes → | If No → |
+|---|---|---|
+| Should it always apply without invocation? | **Instruction** | Continue ↓ |
+| Is it a reusable prompt template? | **Prompt** | Continue ↓ |
+| Does it need domain knowledge + templates? | **Skill** | Continue ↓ |
+| Does it need a multi-step workflow with a persona? | **Agent** | Re-evaluate scope |
+
+## File Placement Rules
+
+| Type | Directory | Naming | Frontmatter |
+|---|---|---|---|
+| Instruction | `instructions/` | `<name>.instructions.md` | `description`, `applyTo` |
+| Prompt | `prompts/` | `<name>.prompt.md` | `name`, `description` |
+| Skill | `skills/<name>/` | `SKILL.md` | `name`, `description` |
+| Agent | `agents/` | `<name>.agent.md` | `name`, `description`, `model`, `tools` |
+
+## GitHub Issue Filing
+
+When validation reveals issues with existing assets, file issues inline:
+
+```bash
+gh issue create \
+  --title "fix(<type>): <issue summary>" \
+  --label "enhancement" \
+  --body "<description with specific file references>"
+```
+
 ## Governance
 
-This agent operates under the basecoat governance framework.
-
-- **Issue-first**: Do not make code changes without a logged GitHub issue.
-- **PRs only**: Never commit directly to `main`. Open a PR, self-approve if needed.
-- **No secrets**: Never commit credentials, tokens, API keys, or sensitive data.
-- **Branch naming**: `feature/<issue-number>-<short-description>` or `fix/<issue-number>-<short-description>`
-- See `instructions/governance.instructions.md` for the full governance reference.
+This agent follows the basecoat governance framework. See `instructions/governance.instructions.md`.
