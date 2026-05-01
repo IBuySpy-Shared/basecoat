@@ -1,6 +1,6 @@
 {
     "name": "base-coat",
-    "version": "2.2.0",
+    "version": "2.3.0",
     "releaseDate": "2026-05-01",
-    "notes": "v2.2.0: Sprint 7 — resolve conflicting guidance, standardize agent format, add AGENTS.md, add context:fork to large skills."
+    "notes": "v2.3.0: Sprint 8 — 6 guardrail instruction files for infrastructure automation patterns."
 }
