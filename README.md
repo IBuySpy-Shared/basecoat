@@ -4,7 +4,7 @@
 
 Base Coat provides a curated library of agents, skills, instructions, and prompts that teams adopt across repositories through a single sync command. Instead of every team writing Copilot customizations from scratch, Base Coat gives you production-ready assets that enforce consistent standards, accelerate development workflows, and scale across an entire GitHub Enterprise organization.
 
-**49 agents** · **31 skills** · **32 instruction files** · **3 prompt starters**
+**50 agents** · **33 skills** · **34 instruction files** · **3 prompt starters**
 
 ---
 
@@ -78,7 +78,7 @@ Base Coat is built on four GitHub Copilot customization primitives:
 │                    Base Coat                         │
 ├──────────┬──────────┬───────────────┬───────────────┤
 │  Agents  │  Skills  │ Instructions  │   Prompts     │
-│ (49)     │ (31)     │ (32)          │   (3)         │
+│ (50)     │ (33)     │ (34)          │   (3)         │
 │          │          │               │               │
 │ Multi-   │ Reusable │ Coding        │ Quick task    │
 │ step     │ workflow │ standards &   │ entry points  │
@@ -147,6 +147,7 @@ Base Coat is built on four GitHub Copilot customization primitives:
 | [self-healing-ci](agents/self-healing-ci.agent.md) | CI failure analysis, log parsing, flaky test detection, and pipeline remediation |
 | [solution-architect](agents/solution-architect.agent.md) | System design, C4 diagrams, ADRs, and technology selection |
 | [sprint-planner](agents/sprint-planner.agent.md) | Sprint goal-to-issues breakdown and wave planning |
+| [sprint-retrospective](agents/sprint-retrospective.agent.md) | Reconstructs repo history for sprint retrospectives with metrics and tips |
 | [sre-engineer](agents/sre-engineer.agent.md) | SLOs, error budgets, incident response, chaos engineering, and toil reduction |
 | [strategy-to-automation](agents/strategy-to-automation.agent.md) | Converts manual test paths into tiered automation candidates |
 | [tech-writer](agents/tech-writer.agent.md) | Technical docs, runbooks, tutorials, and changelogs |
