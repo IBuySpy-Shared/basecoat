@@ -1,6 +1,7 @@
 ---
 name: environment-bootstrap
 description: Automated setup for OIDC federation, state storage, Key Vault, and environment promotion in Azure CI/CD pipelines
+context: fork
 ---
 
 # Environment Bootstrap Skill

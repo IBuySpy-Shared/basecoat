@@ -1,6 +1,7 @@
 ---
 name: azure-container-apps
 description: Deploy, scale, and manage containerized applications on Azure Container Apps with Dapr, revision management, and advanced networking.
+context: fork
 ---
 
 # Azure Container Apps Skill

@@ -1,6 +1,7 @@
 ---
 name: service-bus-migration
 description: "Migrate from MSMQ to Azure Service Bus with patterns for topic/subscription mapping, dead-letter handling, message serialization, retry policies, transactional messaging, and hybrid bridge architecture during migration."
+context: fork
 ---
 
 # Service Bus Migration Skill
