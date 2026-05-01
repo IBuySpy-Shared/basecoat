@@ -4,6 +4,17 @@ All notable changes to this repository should be recorded in this file.
 
 ## Unreleased
 
+## 2.1.1 - 2026-05-01
+
+### Fixed
+- Sync scripts no longer copy agent taxonomy subdirs (`models/`, `orchestrator/`, `tasks/`, `types/`) to consumer repos — these contained only index READMEs with broken relative links
+- `.github/agents/` Copilot discovery path now receives only flat `*.agent.md` files (no subdirs)
+- Package Base Coat workflow no longer skips jobs on tag push — `validate-basecoat.yml` now accepts a `concurrency_group` input to prevent collisions with simultaneous push-to-main validate runs
+
+### Changed
+- `docs/GOALS.md` — updated for v2.1.0 (agent counts, model frontmatter, process discipline)
+- `docs/repo_history/2026-05-01-story-of-basecoat.md` — added Chapter 8 (Sprint 6, v2.1.0, post-release fixes)
+
 ## 2.1.0 - 2026-05-01
 
 ### Added
