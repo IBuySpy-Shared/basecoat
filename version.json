@@ -1,6 +1,6 @@
 {
     "name": "base-coat",
-    "version": "2.3.0",
+    "version": "2.4.0",
     "releaseDate": "2026-05-01",
-    "notes": "v2.3.0: Sprint 8 — 6 guardrail instruction files for infrastructure automation patterns."
+    "notes": "v2.4.0: Sprint 9 — prompt frontmatter, browser security, REST resilience, Azure DevOps REST skill."
 }
