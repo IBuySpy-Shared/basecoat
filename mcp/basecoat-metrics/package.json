@@ -1,0 +1,22 @@
+{
+  "name": "basecoat-metrics-mcp",
+  "version": "1.0.0",
+  "description": "MCP server exposing Base Coat adoption metrics to AI agents",
+  "type": "module",
+  "bin": {
+    "basecoat-metrics-mcp": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "node --loader ts-node/esm src/index.ts",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.29.0",
+    "zod": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.4.0"
+  }
+}
