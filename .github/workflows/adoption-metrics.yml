@@ -43,6 +43,7 @@ jobs:
           # Stash metrics output before switching branches
           mkdir -p /tmp/metrics-output
           cp -r dashboard/metrics/. /tmp/metrics-output/
+          rm -rf dashboard/metrics
 
           # Create or switch to gh-pages branch
           if git fetch origin gh-pages 2>/dev/null; then
