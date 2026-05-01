@@ -4,6 +4,15 @@ All notable changes to this repository should be recorded in this file.
 
 ## Unreleased
 
+## 2.4.0 - 2026-05-01
+
+### Added
+- `model` and `tools` frontmatter fields to all 3 prompt files for VS Code routing (#321)
+- Browser storage threat model section in `security.instructions.md` (#344)
+- Security headers section in `nextjs-react19.instructions.md` with CSP baseline (#344)
+- `instructions/rest-client-resilience.instructions.md` — timeouts, retries, 429 handling, semaphores, structured failure logging (#347)
+- `skills/azure-devops-rest/SKILL.md` — auth, PAT scopes, pagination, throttling, endpoint taxonomy (#345)
+
 ## 2.3.0 - 2026-05-01
 
 ### Added
