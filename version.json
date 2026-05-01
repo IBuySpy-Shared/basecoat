@@ -1,6 +1,6 @@
 {
     "name": "base-coat",
-    "version": "2.0.0",
-    "releaseDate": "2026-04-28",
-    "notes": "v2.0.0: /basecoat router skill, metadata registry, 1-step install, PRODUCT.md, PHILOSOPHY.md, categorized CATALOG, argument hints."
+    "version": "2.1.0",
+    "releaseDate": "2026-05-01",
+    "notes": "v2.1.0: VS Code skill discovery, agent model frontmatter, sprint-retrospective agent, doc cleanup."
 }
