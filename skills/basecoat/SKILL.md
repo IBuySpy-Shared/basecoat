@@ -1,6 +1,7 @@
 ---
 name: basecoat
 description: "The Base Coat router — your single entry point for 28 agents across 6 disciplines. Use /basecoat to discover agents or /basecoat [discipline] [prompt] to delegate directly."
+context: fork
 ---
 
 # Base Coat Router
