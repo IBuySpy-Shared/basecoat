@@ -547,3 +547,46 @@ export default function Page() {
   );
 }
 ```
+
+## Security Headers
+
+Configure baseline security headers in `next.config.ts` to protect against common web vulnerabilities:
+
+```typescript
+const securityHeaders = [
+  { key: "X-Content-Type-Options", value: "nosniff" },
+  { key: "X-Frame-Options", value: "DENY" },
+  { key: "X-XSS-Protection", value: "0" },
+  { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+  { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
+  {
+    key: "Content-Security-Policy",
+    value: [
+      "default-src 'self'",
+      "script-src 'self' 'unsafe-inline'",
+      "style-src 'self' 'unsafe-inline'",
+      "img-src 'self' data: https:",
+      "font-src 'self'",
+      "connect-src 'self'",
+      "frame-ancestors 'none'",
+    ].join("; "),
+  },
+];
+```
+
+Apply in `next.config.ts`:
+
+```typescript
+const nextConfig: NextConfig = {
+  async headers() {
+    return [{ source: "/(.*)", headers: securityHeaders }];
+  },
+};
+```
+
+### Header Expectations
+
+- **Every** Next.js app must set `X-Content-Type-Options: nosniff` and `X-Frame-Options: DENY` at minimum.
+- CSP must start restrictive and widen only with documented justification.
+- `Strict-Transport-Security` (HSTS) should be set at the hosting layer (Azure Front Door, Vercel, etc.) rather than in `next.config.ts`.
+- Review CSP violations in browser console during development to tune policy before production.

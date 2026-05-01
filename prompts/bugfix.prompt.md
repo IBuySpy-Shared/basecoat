@@ -1,5 +1,7 @@
 ---
 description: "Use when investigating a bug, regression, or production failure. Focuses on root-cause analysis, a minimal safe fix, and validation."
+model: claude-sonnet-4.6
+tools: ["changes", "codebase", "terminal", "githubRepo"]
 ---
 
 # Fix A Bug
