@@ -1,6 +1,7 @@
 ---
 name: mcp-developer
 description: "MCP server development agent for building Model Context Protocol servers, tools, and integrations. Use when designing, implementing, or reviewing MCP servers, tool definitions, transport configurations, and client integrations."
+model: claude-sonnet-4
 tools: [read_file, write_file, list_dir, run_terminal_command, create_github_issue]
 ---
 

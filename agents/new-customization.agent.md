@@ -1,6 +1,7 @@
 ---
 name: new-customization
 description: "Use when creating or updating a customization asset such as an instruction, skill, prompt, or agent. Chooses the right primitive, authors the file, and validates frontmatter and placement."
+model: claude-sonnet-4.6
 ---
 
 # New Customization Agent

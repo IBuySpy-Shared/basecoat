@@ -1,6 +1,7 @@
 ---
 name: project-onboarding
 description: "Single-invocation new repo setup with Basecoat integration. Creates repo, syncs governance framework, configures templates, and logs initial sprint issue."
+model: claude-sonnet-4.6
 tools: [run_terminal_command, read_file, write_file, list_dir, create_github_issue]
 ---
 

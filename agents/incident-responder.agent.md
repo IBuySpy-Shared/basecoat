@@ -1,6 +1,7 @@
 ---
 name: incident-responder
 description: "Structured incident response and recovery agent for classifying incidents, guiding mitigation, coordinating communications, verifying recovery, and facilitating post-incident learning."
+model: claude-sonnet-4.6
 tools: [run_terminal_command, read_file, write_file, list_dir, create_github_issue]
 ---
 

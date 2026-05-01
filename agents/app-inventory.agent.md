@@ -1,6 +1,7 @@
 ---
 name: App Inventory Agent
 description: Scans legacy applications to discover dependencies, identify technology stacks, assess migration complexity, and generate architecture diagrams for portfolio analysis.
+model: claude-sonnet-4.6
 tools:
   - grep
   - glob

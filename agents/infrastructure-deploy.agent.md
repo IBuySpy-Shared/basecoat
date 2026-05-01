@@ -1,6 +1,7 @@
 ---
 name: Infrastructure Deploy Agent
 description: Orchestrates Azure infrastructure deployments using Bicep, handles resource group management, parameter validation, and rollback strategies
+model: claude-sonnet-4.6
 tools:
   - azure-deploy
   - azure-validate

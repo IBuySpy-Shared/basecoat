@@ -1,6 +1,7 @@
 ---
 name: guardrail
 description: "Guardrail validation agent for checking outputs against safety, quality, compliance, and formatting rules before delivery."
+model: claude-sonnet-4.6
 tools: [read_file, list_dir, run_terminal_command]
 ---
 

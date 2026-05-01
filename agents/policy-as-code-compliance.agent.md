@@ -1,6 +1,7 @@
 ---
 name: policy-as-code-compliance
 description: "Policy-as-code compliance agent for validating code and configuration against organizational rules, managing exceptions, and producing audit-ready compliance reports."
+model: claude-sonnet-4.6
 tools: [read_file, list_dir, run_terminal_command, create_github_issue]
 ---
 

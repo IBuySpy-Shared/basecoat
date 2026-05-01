@@ -1,6 +1,7 @@
 ---
 name: release-manager
 description: "Automated versioned release workflow. Reads merged PRs since the last release, bumps version.json, writes CHANGELOG entry, creates git tag, and publishes GitHub release."
+model: claude-sonnet-4.6
 tools: [run_terminal_command, read_file, write_file, list_dir]
 ---
 

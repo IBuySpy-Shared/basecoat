@@ -1,6 +1,7 @@
 ---
 name: memory-curator
 description: "Use when extracting, deduplicating, validating, and retrieving cross-session knowledge with the SQLite memory layer, including conflict resolution, decay, and context injection."
+model: claude-sonnet-4.6
 tools: [read_file, list_dir, run_terminal_command]
 ---
 

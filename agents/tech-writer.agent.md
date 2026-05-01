@@ -1,6 +1,7 @@
 ---
 name: tech-writer
 description: "Use when creating or improving technical documentation, API docs, runbooks, tutorials, ADRs, changelogs, or implementing docs-as-code workflows."
+model: claude-sonnet-4.6
 tools: [run_terminal_command, read_file, write_file, list_dir]
 ---
 
