@@ -37,6 +37,7 @@ This catalog helps teams discover what exists in Base Coat and when to use it.
 | `skills/refactoring/SKILL.md`           | restructure code without changing behavior              | refactor, cleanup, simplify, extract, rename |
 | `skills/create-skill/SKILL.md`          | create a new reusable skill with proper frontmatter     | create skill, skill template, customization  |
 | `skills/create-instruction/SKILL.md`    | create a new instruction file for a domain              | create instruction, applyTo, frontmatter     |
+| `skills/copilot-usage-analytics/SKILL.md` | estimate per-session Copilot CLI cost, analyze model-routing efficiency, and document available usage APIs | copilot, usage, analytics, cost, model routing, session, token, roi |
 
 ## Prompts
 
