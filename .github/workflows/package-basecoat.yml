@@ -16,6 +16,8 @@ concurrency:
 jobs:
   validate:
     uses: ./.github/workflows/validate-basecoat.yml
+    with:
+      concurrency_group: "Package-Base-Coat-validate-${{ github.ref }}"
 
   package:
     needs: validate
