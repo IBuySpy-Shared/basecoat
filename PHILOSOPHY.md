@@ -46,7 +46,7 @@ Agents alone can't enforce cross-cutting standards. Instructions are **ambient**
 apply to ALL agents and even raw Copilot chat. Without instructions, every agent would
 need to duplicate security rules, naming conventions, and quality gates.
 
-Consider: you have 28 agents. A new security policy drops. With instructions, you update
+Consider: you have 50 agents. A new security policy drops. With instructions, you update
 one file and every agent inherits it. With agents-only, you'd edit 28 files and hope
 you didn't miss one.
 

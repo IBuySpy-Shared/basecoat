@@ -7,6 +7,7 @@ This folder documents the evolution of the Base Coat repository through sprint s
 | Date | Story | Summary |
 |------|-------|---------|
 | 2026-04-30 | [Sprint: Hygiene & Security Hardening](2026-04-30-sprint-hygiene.md) | Resolved 11 issues in 90 min using fleet-mode parallel agents |
+| 2026-05-01 | [The Story of Base Coat](2026-05-01-story-of-basecoat.md) | Full repo narrative: inception through v2.0.0+, 168 issues, 120+ PRs |
 
 ## Guides
 

@@ -2,7 +2,7 @@
 
 ## What is Base Coat?
 
-Base Coat is a full-SDLC agent framework for GitHub Copilot. It provides 28 specialized agents, 18 skills, and 19 instruction sets that cover the entire software development lifecycle — from architecture and coding to testing, security, DevOps, and project management.
+Base Coat is a full-SDLC agent framework for GitHub Copilot. It provides 50 specialized agents, 33 skills, and 34 instruction sets that cover the entire software development lifecycle — from architecture and coding to testing, security, DevOps, and project management.
 
 ## Who is it for?
 
@@ -13,14 +13,14 @@ Base Coat is a full-SDLC agent framework for GitHub Copilot. It provides 28 spec
 ## Core Principles
 
 1. **Full SDLC coverage** — Not just code generation. Architecture, testing, security, DevOps, docs, and PM too.
-2. **One entry point** — `/basecoat` routes to any of 28 agents. No need to memorize agent names.
+2. **One entry point** — `/basecoat` routes to any of 50 agents. No need to memorize agent names.
 3. **Opinionated but extensible** — Ships with battle-tested defaults. Every agent, skill, and instruction can be customized.
 4. **Framework, not a product** — Base Coat is infrastructure for your agents, not a hosted service.
 5. **Governance built in** — Instructions enforce security, quality, and naming standards automatically.
 
 ## How it differs from single-domain tools
 
-Tools like Impeccable focus on one discipline (UI/design) with deep expertise. Base Coat covers 6 disciplines with 28 agents:
+Tools like Impeccable focus on one discipline (UI/design) with deep expertise. Base Coat covers 6 disciplines with 50 agents:
 
 - 🔨 **Development** (4 agents) — backend, frontend, middleware, data
 - 🏗️ **Architecture** (3 agents) — system design, API design, UX
@@ -33,9 +33,9 @@ Tools like Impeccable focus on one discipline (UI/design) with deep expertise. B
 
 ```
 /basecoat (router)
-├── agents/        28 agent definitions (.agent.md)
-├── skills/        19 skill packages with templates
-├── instructions/  19 instruction files (.instructions.md)
+├── agents/        50 agent definitions (.agent.md)
+├── skills/        33 skill packages with templates
+├── instructions/  34 instruction files (.instructions.md)
 ├── prompts/       3 reusable prompt files
 └── basecoat-metadata.json  (machine-readable registry)
 ```

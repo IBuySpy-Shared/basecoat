@@ -1,4 +1,4 @@
----
+﻿---
 description: "Base Coat repository context and conventions for GitHub Copilot"
 applyTo: "**/*"
 ---
