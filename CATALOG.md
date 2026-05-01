@@ -83,6 +83,7 @@
 | security | `skills/security/` | `owasp-checklist.md`, `stride-threat-model-template.md`, `vulnerability-report-template.md`, `dependency-audit-template.md` | security-analyst, config-auditor |
 | sprint-management | `skills/sprint-management/` | `sprint-planning-template.md`, `backlog-grooming-template.md`, `retrospective-template.md` | sprint-planner, retro-facilitator, product-manager, issue-triage |
 | ux | `skills/ux/` | `user-journey-template.md`, `wireframe-spec-template.md`, `component-spec-template.md`, `accessibility-audit-checklist.md` | ux-designer |
+| copilot-usage-analytics | `skills/copilot-usage-analytics/` | `templates/session-cost-estimate-template.md`, `templates/model-routing-recommendation-template.md`, `templates/api-landscape.md` | agentops, performance-analyst, sprint-planner |
 
 ---
 
