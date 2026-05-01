@@ -1,6 +1,6 @@
 {
     "name": "base-coat",
-    "version": "2.1.1",
+    "version": "2.2.0",
     "releaseDate": "2026-05-01",
-    "notes": "v2.1.1: Fix sync scripts shipping taxonomy subdirs to consumers, fix Package workflow concurrency, update docs."
+    "notes": "v2.2.0: Sprint 7 — resolve conflicting guidance, standardize agent format, add AGENTS.md, add context:fork to large skills."
 }
