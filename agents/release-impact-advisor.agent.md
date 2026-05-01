@@ -2,7 +2,7 @@
 name: release-impact-advisor
 description: "Comprehensive agent for assessing release readiness, analyzing change impacts, estimating blast radius, planning rollbacks, and guiding safe deployment strategies with feature flags, canary deployments, and changelog generation."
 model: claude-sonnet-4.6
-tools: [read_file, analyze_code, check_dependencies, run_terminal_command, generate_report]
+tools: [grep, glob, view, powershell, edit, create]
 ---
 
 # Release Impact Advisor Agent

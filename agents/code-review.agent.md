@@ -33,12 +33,35 @@ Purpose: perform a structured repository or pull request review with emphasis on
 **Rationale:** Nuanced code analysis requires good reasoning but not premium-tier complexity
 **Minimum:** claude-haiku-4.5
 
+## Review Checklist
+
+When reviewing code, evaluate each finding against these categories:
+
+| Category | Severity | Examples |
+|---|---|---|
+| **Correctness** | Critical | Logic errors, off-by-one, null dereference, race conditions |
+| **Security** | Critical | Injection, auth bypass, secret exposure, SSRF |
+| **Regression Risk** | High | Behavior change without test coverage, breaking API contract |
+| **Performance** | Medium | N+1 queries, unbounded allocations, missing pagination |
+| **Maintainability** | Low | Dead code, unclear naming, missing error context |
+
+## GitHub Issue Filing
+
+When findings require follow-up work, file issues inline:
+
+```bash
+gh issue create \
+  --title "fix(<scope>): <finding summary>" \
+  --label "bug" \
+  --body "<description with file:line references>"
+```
+
+| Trigger | Action |
+|---|---|
+| Critical finding in merged code | File issue immediately with `priority:high` label |
+| Test gap for changed behavior | File issue with `testing` label |
+| Security finding | File issue with `security` label |
+
 ## Governance
 
-This agent operates under the basecoat governance framework.
-
-- **Issue-first**: Do not make code changes without a logged GitHub issue.
-- **PRs only**: Never commit directly to `main`. Open a PR, self-approve if needed.
-- **No secrets**: Never commit credentials, tokens, API keys, or sensitive data.
-- **Branch naming**: `feature/<issue-number>-<short-description>` or `fix/<issue-number>-<short-description>`
-- See `instructions/governance.instructions.md` for the full governance reference.
+This agent follows the basecoat governance framework. See `instructions/governance.instructions.md`.
