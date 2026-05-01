@@ -40,6 +40,10 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
+          # Stash metrics output before switching branches
+          mkdir -p /tmp/metrics-output
+          cp -r dashboard/metrics/. /tmp/metrics-output/
+
           # Create or switch to gh-pages branch
           if git fetch origin gh-pages 2>/dev/null; then
             git checkout gh-pages
@@ -48,9 +52,10 @@ jobs:
             git rm -rf . 2>/dev/null
           fi
 
-          # Copy dashboard and metrics files
+          # Restore dashboard HTML and metrics
           git checkout main -- dashboard/index.html
-          cp -r dashboard/metrics/ .
+          mkdir -p dashboard/metrics
+          cp -r /tmp/metrics-output/. dashboard/metrics/
 
           git add -A
           git diff --cached --quiet || git commit -m "chore: update adoption metrics [skip ci]"
