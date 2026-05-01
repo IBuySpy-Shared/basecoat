@@ -13,7 +13,6 @@ This catalog helps teams discover what exists in Base Coat and when to use it.
 | `instructions/backend.instructions.md`       | API, services, data access, backend guardrails        | backend, api, refactor, service, reliability                       |
 | `instructions/bicep.instructions.md`         | Bicep authoring, parameters, and deployment hygiene   | bicep, bicepparam, module, symbolic name                           |
 | `instructions/config.instructions.md`        | config file safety and secrets prevention | config, secrets, safety, environment |
-| `instructions/data-science.instructions.md`  | Python data science, notebook hygiene, and ML workflow patterns | data science, python, notebook, ml, pandas, reproducibility |
 | `instructions/development.instructions.md`   | shared standards for backend-dev, frontend-dev, middleware-dev, data-tier agents | development, code style, error handling, security, logging, testing, collaboration |
 | `instructions/documentation.instructions.md` | docs updates and operational notes                    | docs, readme, changelog, migration, usage                          |
 | `instructions/drift-monitor.instructions.md` | detect and prevent configuration drift across environments | drift, monitor, config, environment, consistency |
@@ -28,7 +27,6 @@ This catalog helps teams discover what exists in Base Coat and when to use it.
 | `instructions/output-style.instructions.md`  | agent output formatting and style guidance | output, style, formatting, markdown |
 | `instructions/plan-first.instructions.md`    | plan-first workflow for agents — think before coding | plan, workflow, think, design, before-coding |
 | `instructions/process.instructions.md`       | delivery lifecycle, sprint, triage, and release process | process, sprint, triage, release, delivery |
-| `instructions/python.instructions.md`        | Python coding standards, type hints, linting, packaging | python, type-hints, linting, ruff, mypy, packaging |
 | `instructions/quality.instructions.md`       | PR review, security, performance, and coverage gates | quality, review, security, performance, coverage |
 | `instructions/reliability.instructions.md`   | resilience, failure modes, observability              | reliability, retry, timeout, logging, resilience                   |
 | `instructions/security.instructions.md`      | secure coding, auth boundaries, secret handling       | security, auth, secrets, validation, unsafe                        |
@@ -58,7 +56,6 @@ This catalog helps teams discover what exists in Base Coat and when to use it.
 | `skills/backend-dev/SKILL.md`           | design and implement APIs, service layers, and data access repositories | backend, api, service, repository, error catalog                     |
 | `skills/basecoat/SKILL.md`              | /basecoat router — discovery and delegation entry point | basecoat, router, discovery, delegation |
 | `skills/code-review/SKILL.md`           | review changes for risk, regressions, and missing tests | review, bug risk, regression, findings       |
-| `skills/copilot-cli-usage-analytics/SKILL.md` | per-session Copilot cost breakdown and usage analytics | copilot, usage, analytics, cost, session |
 | `skills/create-instruction/SKILL.md`    | create a new instruction file for a domain              | create instruction, applyTo, frontmatter     |
 | `skills/create-skill/SKILL.md`          | create a new reusable skill with proper frontmatter     | create skill, skill template, customization  |
 | `skills/data-tier/SKILL.md`             | design schemas, write migrations, review queries, build data dictionaries | data, schema, migration, query, indexing                            |

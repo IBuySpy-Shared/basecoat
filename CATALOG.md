@@ -86,7 +86,6 @@
 | azure-identity | `skills/azure-identity/` | `rbac-role-assignment-template.md`, `managed-identity-mapping-template.md`, `app-registration-checklist.md`, `workload-identity-federation-template.md`, `conditional-access-policy-template.md` | identity-architect |
 | backend-dev | `skills/backend-dev/` | `api-spec-template.md`, `error-catalog-template.md`, `repository-pattern-template.md`, `service-template.md` | backend-dev |
 | code-review | `skills/code-review/` | *(workflow only)* | code-review |
-| copilot-cli-usage-analytics | `skills/copilot-cli-usage-analytics/` | *(workflow only)* | — |
 | create-instruction | `skills/create-instruction/` | *(workflow only)* | new-customization |
 | create-skill | `skills/create-skill/` | *(workflow only)* | new-customization |
 | data-tier | `skills/data-tier/` | `schema-design-template.md`, `migration-template.md`, `query-review-checklist.md`, `data-dictionary-template.md` | data-tier |
@@ -121,7 +120,6 @@
 | backend | `instructions/backend.instructions.md` | Backend APIs, services, workers, and data access |
 | bicep | `instructions/bicep.instructions.md` | Azure Bicep authoring and validation |
 | config | `instructions/config.instructions.md` | Config file safety and secrets prevention |
-| data-science | `instructions/data-science.instructions.md` | Conventions for data science, ML, and notebook-driven projects |
 | development | `instructions/development.instructions.md` | Shared dev standards for all dev-core agents |
 | documentation | `instructions/documentation.instructions.md` | Documentation and change-note expectations |
 | drift-monitor | `instructions/drift-monitor.instructions.md` | Infrastructure-as-Code drift detection and remediation strategies |
@@ -136,7 +134,6 @@
 | output-style | `instructions/output-style.instructions.md` | Concise agent responses while preserving clarity and full-fidelity code |
 | plan-first | `instructions/plan-first.instructions.md` | Explore-plan-implement-verify workflow for multi-step tasks |
 | process | `instructions/process.instructions.md` | Delivery lifecycle, sprint, triage, and release process |
-| python | `instructions/python.instructions.md` | Conventions for Python-centric projects including data science and ML |
 | quality | `instructions/quality.instructions.md` | PR review, security, performance, and coverage gates |
 | reliability | `instructions/reliability.instructions.md` | Retries, uptime, background work, and dependency failure |
 | security | `instructions/security.instructions.md` | Secure coding, auth, authz, secrets, and input handling |
