@@ -19,7 +19,7 @@ Use this instruction for any work that introduces, changes, or evaluates archite
 
 ### ADR Format
 
-Every ADR lives in `docs/adrs/` and follows this structure:
+Every ADR lives in `docs/adr/` and follows this structure:
 
 ```markdown
 # ADR-<NNN>: <Title>

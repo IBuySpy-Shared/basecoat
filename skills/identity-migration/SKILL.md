@@ -240,7 +240,6 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     "Instance": "https://login.microsoftonline.com/",
     "TenantId": "common",
     "ClientId": "your-app-id-here",
-    "ClientSecret": "your-client-secret",
     "Audience": "api://your-api-app-id",
     "CallbackPath": "/signin-oidc"
   }
@@ -328,12 +327,14 @@ public void ConfigureServices(IServiceCollection services)
         .AddMicrosoftAccount(options =>
         {
             options.ClientId = Configuration["Authentication:Microsoft:ClientId"];
-            options.ClientSecret = Configuration["Authentication:Microsoft:ClientSecret"];
+            // Never store secrets in config files — use Azure Key Vault, environment variables, or managed identity
+            options.ClientSecret = Configuration["Authentication:Microsoft:ClientSecret"]; // load from Key Vault or env var
         })
         .AddGoogle(options =>
         {
             options.ClientId = Configuration["Authentication:Google:ClientId"];
-            options.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
+            // Never store secrets in config files — use Azure Key Vault, environment variables, or managed identity
+            options.ClientSecret = Configuration["Authentication:Google:ClientSecret"]; // load from Key Vault or env var
         });
 }
 ```
@@ -352,7 +353,9 @@ public class OidcTokenHandler
         {
             Address = discoveryDocument.TokenEndpoint,
             ClientId = "your-app-id",
-            ClientSecret = "your-client-secret",
+            // WARNING: Prefer certificate credentials or managed identity over client secrets.
+            // If a secret is required, load it from Key Vault or environment variable — never hardcode.
+            ClientSecret = Environment.GetEnvironmentVariable("OIDC_CLIENT_SECRET"),
             RefreshToken = refreshToken
         };
 

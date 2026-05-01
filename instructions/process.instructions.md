@@ -50,18 +50,18 @@ Triage → Backlog → Sprint → In Progress → In Review → Done
 
 ### Branch Naming
 
-Use the pattern: `<type>/<short-description>`
+Use the pattern from [`governance.instructions.md`](governance.instructions.md): `<type>/<issue-number>-<short-description>`
 
 | Type | Use |
 |---|---|
-| `feature/` | New functionality |
-| `fix/` | Bug fixes |
+| `feat/` | New features, content, agents, skills |
+| `fix/` | Bug fixes, correctness corrections |
 | `chore/` | Tooling, config, dependency updates |
 | `docs/` | Documentation-only changes |
 | `refactor/` | Code restructuring with no behavior change |
-| `sprint<N>/` | Sprint-scoped work combining multiple concerns |
+| `security/` | Security-related changes |
 
-Examples: `feature/user-search-api`, `fix/null-ref-on-login`, `chore/upgrade-eslint`.
+Examples: `feat/43-user-search-api`, `fix/17-null-ref-on-login`, `chore/88-upgrade-eslint`.
 
 ### Commit Conventions
 
@@ -86,7 +86,7 @@ Follow Conventional Commits:
 - PRs touching security-sensitive code require approval from the security-analyst agent (see `quality.instructions.md`).
 - PRs touching CI/CD or infrastructure require approval from the devops agent.
 - Review comments must be resolved or explicitly deferred with a tracking issue before merge.
-- Self-merge is not permitted. The reviewer merges after final approval.
+- Self-merge is permitted only when the repo policy explicitly allows it (e.g., solo maintainer repos). Otherwise, the reviewer merges after final approval.
 
 ### Merge Strategy
 

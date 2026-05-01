@@ -213,11 +213,12 @@ public class MessageSerializationAdapter
 
     private static object DeserializeBinary(byte[] data)
     {
-        // Use BinaryFormatter with caution in production
+        // WARNING: BinaryFormatter is banned (RCE vulnerability, see SYSLIB0011).
+        // Use System.Text.Json for new code. This helper exists only for
+        // reading legacy MSMQ messages during migration; remove after cutover.
         using (var ms = new MemoryStream(data))
         {
-            var formatter = new BinaryFormatter();
-            return formatter.Deserialize(ms);
+            return System.Text.Json.JsonSerializer.Deserialize<object>(ms);
         }
     }
 }
