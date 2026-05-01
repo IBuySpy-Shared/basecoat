@@ -145,7 +145,7 @@ Choose `runs-on` based on what the job actually needs. Defaulting all jobs to `u
 
 ### Decision tree
 
-```
+```text
 Does the job need a managed identity, private network, or Key Vault?
   YES → self-hosted runner group
   NO  → Does it do heavy compute (image build, large compile)?
