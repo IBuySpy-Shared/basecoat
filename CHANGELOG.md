@@ -4,21 +4,26 @@ All notable changes to this repository should be recorded in this file.
 
 ## Unreleased
 
+## 2.1.0 - 2026-05-01
+
 ### Added
-- `skills/azure-container-apps/SKILL.md` — ACA skill covering:
-  - Environment config and multi-container environments
-  - Revision management and traffic splitting
-  - Ingress configuration (external, internal, custom domain)
-  - HTTP, KEDA, and Event Hub scale rules
-  - Health probes (liveness, readiness, startup) via CLI, YAML, and Bicep
-  - Managed identity for ACR (user-assigned and system-assigned patterns)
-  - Managed identity for Key Vault
-  - Dapr integration and state management
-  - Azure Container Apps Jobs (scheduled and event-driven)
-  - Bicep templates with symbolic `existing` resource references
+- `agents/sprint-retrospective.agent.md` — new agent for generating structured sprint retrospectives with metrics, timelines, and actionable tips
+- `skills/sprint-retrospective/SKILL.md` — companion skill with document templates, metrics formulas, and tips taxonomy
+- `docs/GOALS.md` — 8 primary project goals, non-goals, and success criteria
+- `docs/repo_history/2026-05-01-story-of-basecoat.md` — 7-chapter narrative of repo evolution
+- `model` field added to all 50 agent YAML frontmatter blocks for VS Code model routing (27 claude-sonnet-4.6, 16 gpt-5.3-codex, 3 claude-haiku-4.5, 2 claude-sonnet-4-5, 1 claude-sonnet-4, 1 default)
+
+### Fixed
+- `sync.ps1` / `sync.sh` now copy `skills/` to `.github/skills/` for VS Code auto-discovery (was missing — 33 skills were invisible to VS Code)
+- `sync.ps1` / `sync.sh` now sync `docs/` to consumer repos (fixes broken guardrail doc references)
+- Removed premature CATALOG/INVENTORY entries referencing uncommitted files
 
 ### Changed
-- Updated `CATALOG.md` and `INVENTORY.md` to include the `azure-container-apps` skill
+- `CATALOG.md` — added 15 agents, 7 skills, 15 instructions
+- `INVENTORY.md` — complete rewrite with all 51 agents, 34 skills, 34 instructions
+- `README.md` — updated asset counts (50→51 agents, 33→34 skills, 32→34 instructions)
+- `PRODUCT.md` — updated 6 stale count references
+- `PHILOSOPHY.md` — updated agent count
 
 ## 2.0.0 - 2026-04-28
 
