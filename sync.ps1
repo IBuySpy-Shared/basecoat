@@ -23,7 +23,7 @@ try {
     $fullTargetDir = Join-Path $repoRoot $targetDir
     New-Item -ItemType Directory -Force -Path $fullTargetDir | Out-Null
 
-    foreach ($item in @('README.md', 'CHANGELOG.md', 'INVENTORY.md', 'version.json', 'basecoat-metadata.json', 'instructions', 'skills', 'prompts', 'agents')) {
+    foreach ($item in @('README.md', 'CHANGELOG.md', 'INVENTORY.md', 'version.json', 'basecoat-metadata.json', 'instructions', 'skills', 'prompts', 'agents', 'docs')) {
         $destination = Join-Path $fullTargetDir $item
         if (Test-Path $destination) {
             Remove-Item -Path $destination -Recurse -Force
@@ -35,7 +35,7 @@ try {
     # Copy Copilot-discoverable directories to their standard paths
     $githubDir = Join-Path $repoRoot '.github'
     New-Item -ItemType Directory -Force -Path $githubDir | Out-Null
-    foreach ($copilotDir in @('agents', 'instructions', 'prompts')) {
+    foreach ($copilotDir in @('agents', 'instructions', 'prompts', 'skills')) {
         $source = Join-Path $fullTargetDir $copilotDir
         $dest = Join-Path $githubDir $copilotDir
         if (Test-Path $source) {

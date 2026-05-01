@@ -28,14 +28,14 @@ git clone --depth 1 --branch "$SOURCE_REF" "$SOURCE_REPO" "$TMP_DIR/source" >/de
 
 mkdir -p "$REPO_ROOT/$TARGET_DIR"
 
-for item in README.md CHANGELOG.md INVENTORY.md version.json basecoat-metadata.json instructions skills prompts agents; do
+for item in README.md CHANGELOG.md INVENTORY.md version.json basecoat-metadata.json instructions skills prompts agents docs; do
   rm -rf "$REPO_ROOT/$TARGET_DIR/$item"
   cp -R "$TMP_DIR/source/$item" "$REPO_ROOT/$TARGET_DIR/$item"
 done
 
 # Copy Copilot-discoverable directories to their standard paths
 mkdir -p "$REPO_ROOT/.github"
-for copilot_dir in agents instructions prompts; do
+for copilot_dir in agents instructions prompts skills; do
   if [[ -d "$REPO_ROOT/$TARGET_DIR/$copilot_dir" ]]; then
     rm -rf "$REPO_ROOT/.github/$copilot_dir"
     cp -R "$REPO_ROOT/$TARGET_DIR/$copilot_dir" "$REPO_ROOT/.github/$copilot_dir"
