@@ -1,6 +1,7 @@
 ---
 name: llmops
 description: "LLMOps agent for prompt deployment pipelines, model gateway configuration, inference monitoring, version rollback, endpoint health checks, and cost optimization. Use when operating production LLM inference systems."
+model: claude-sonnet-4.6
 tools: [read_file, write_file, list_dir, run_terminal_command, create_github_issue]
 ---
 

@@ -1,6 +1,7 @@
 ---
 name: product-manager
 description: "Use when gathering requirements, writing user stories, defining acceptance criteria, planning roadmaps, or prioritizing features using frameworks like RICE or MoSCoW."
+model: claude-sonnet-4.6
 tools: [run_terminal_command, read_file, write_file, list_dir]
 ---
 

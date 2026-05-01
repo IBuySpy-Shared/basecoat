@@ -1,6 +1,7 @@
 ---
 name: sprint-planner
 description: "Goal-to-issues decomposition and wave dependency mapping. Accepts a sprint goal, produces GitHub issues with labels, wave dependency maps, agent assignments, and acceptance criteria."
+model: claude-sonnet-4.6
 tools: [run_terminal_command, read_file, write_file, create_github_issue]
 allowed_skills: [basecoat]
 ---

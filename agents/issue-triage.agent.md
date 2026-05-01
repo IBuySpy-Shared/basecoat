@@ -1,6 +1,7 @@
 ---
 name: issue-triage
 description: "Use when triaging GitHub issues — classifying type, assigning priority (P0-P3), applying labels, detecting duplicates, tracking SLAs, and recommending sprint placement."
+model: claude-sonnet-4.6
 tools: [run_terminal_command, read_file, write_file, list_dir]
 ---
 

@@ -1,6 +1,7 @@
 ---
 name: devops-engineer
 description: "DevOps engineer agent for CI/CD pipelines, infrastructure as code, container strategy, environment promotion, rollback procedures, and observability. Use when designing or improving deployment workflows."
+model: gpt-5.3-codex
 tools: [read_file, write_file, list_dir, run_terminal_command, create_github_issue]
 ---
 

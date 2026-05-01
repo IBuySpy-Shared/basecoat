@@ -1,6 +1,7 @@
 ---
 name: feedback-loop
 description: Continuous learning and optimization through user feedback collection, prompt effectiveness tracking, outcome measurement, A/B testing, regression detection, and instruction refinement
+model: claude-sonnet-4.6
 tools: [read_file, write_file, list_dir, run_terminal_command, create_github_issue]
 ---
 

@@ -1,6 +1,7 @@
 ---
 name: self-healing-ci
 description: Automated CI failure analysis, log parsing, and pipeline remediation with retry strategies, flaky test detection, dependency resolution, and cache invalidation
+model: claude-sonnet-4.6
 tools: [run_terminal_command, read_file, write_file, create_github_issue, list_dir]
 ---
 

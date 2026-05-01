@@ -1,6 +1,7 @@
 ---
 name: config-auditor
 description: "Use when you need to scan a repository for committed or unprotected configuration files that contain secrets, credentials, or sensitive environment-specific values. Produces a findings report with remediation steps."
+model: claude-haiku-4.5
 tools: [read_file, list_dir, run_terminal_command, create_github_issue]
 ---
 

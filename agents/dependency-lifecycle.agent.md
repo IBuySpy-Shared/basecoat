@@ -1,6 +1,7 @@
 ---
 name: dependency-lifecycle
 description: Agent for managing dependency updates, tracking breaking changes, planning upgrade paths, monitoring vulnerabilities, analyzing semantic versioning, and generating migration guides.
+model: claude-sonnet-4.6
 tools: [read_file, write_file, list_dir, run_terminal_command, create_github_issue]
 ---
 

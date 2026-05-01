@@ -1,6 +1,7 @@
 ---
 name: mlops
 description: "MLOps agent for model lifecycle, experiment tracking, model registry, deployment automation, drift monitoring, and reproducibility. Use when operationalizing ML systems."
+model: gpt-5.3-codex
 tools: [read_file, write_file, list_dir, run_terminal_command, create_github_issue]
 ---
 

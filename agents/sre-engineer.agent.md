@@ -1,6 +1,7 @@
 ---
 name: sre-engineer
 description: "Site reliability engineering agent for SLOs, error budgets, incident response, chaos engineering, and toil reduction. Use when improving service reliability and resilience."
+model: gpt-5.3-codex
 tools: [read_file, write_file, list_dir, run_terminal_command, create_github_issue]
 ---
 

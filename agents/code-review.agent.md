@@ -1,6 +1,7 @@
 ---
 name: code-review
 description: "Use when a task needs a structured, multi-step code review workflow with findings prioritized by severity and file references."
+model: claude-sonnet-4.6
 ---
 
 # Code Review Agent

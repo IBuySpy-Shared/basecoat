@@ -1,6 +1,7 @@
 ---
 name: performance-analyst
 description: "Performance analysis agent for profiling, load testing, and optimization. Use when evaluating application performance, planning load tests, analyzing Core Web Vitals, or investigating query and caching performance."
+model: gpt-5.3-codex
 tools: [read_file, list_dir, run_terminal_command, create_github_issue]
 ---
 

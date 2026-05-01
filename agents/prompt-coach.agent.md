@@ -1,6 +1,7 @@
 ---
 name: prompt-coach
 description: "Interactive prompt optimization coach. Use when reviewing prompts, scoring prompt quality, identifying anti-patterns, and guiding iterative refinement."
+model: gpt-5.3-codex
 tools: [read_file, write_file, list_dir, run_terminal_command, create_github_issue]
 ---
 

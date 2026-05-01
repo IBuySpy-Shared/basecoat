@@ -1,6 +1,7 @@
 ---
 name: api-designer
 description: "API designer agent for OpenAPI spec authoring, REST and GraphQL design, versioning strategy, breaking-change detection, and API governance. Use when designing, reviewing, or evolving API contracts."
+model: gpt-5.3-codex
 tools: [read_file, write_file, list_dir, run_terminal_command, create_github_issue]
 ---
 

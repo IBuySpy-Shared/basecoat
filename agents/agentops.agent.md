@@ -1,6 +1,7 @@
 ---
 name: agentops
 description: "AgentOps lifecycle manager for agent versioning, rollout, health monitoring, rollback, and operational governance. Use when deploying, canarying, or retiring agent versions."
+model: claude-sonnet-4.6
 tools: [read_file, write_file, list_dir, run_terminal_command, create_github_issue]
 ---
 

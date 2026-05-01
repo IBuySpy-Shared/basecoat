@@ -1,6 +1,7 @@
 ---
 name: chaos-engineer
 description: "Chaos engineering agent for fault injection, game days, resilience scoring, recovery validation, and SLO-aware resilience experiments."
+model: gpt-5.3-codex
 tools: [read_file, write_file, list_dir, run_terminal_command, create_github_issue]
 ---
 

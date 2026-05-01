@@ -1,6 +1,7 @@
 ---
 name: prompt-engineer
 description: "Prompt optimization and system prompt engineering agent. Use when designing system prompts, optimizing token usage, crafting few-shot examples, or structuring chain-of-thought instructions."
+model: gpt-5.3-codex
 tools: [read_file, write_file, list_dir, run_terminal_command, create_github_issue]
 ---
 
