@@ -4,6 +4,25 @@ All notable changes to this repository should be recorded in this file.
 
 ## Unreleased
 
+## 2.2.0 - 2026-05-01
+
+### Fixed
+- **CRITICAL**: Skill invocation self-contradiction in `agents.instructions.md` — clarified that omitting `allowed_skills` inherits all skills, and the `## Allowed Skills` section filters when present
+- Branch naming conflict between governance and process instructions — `process.instructions.md` now defers to governance (`feat/<issue>-desc` pattern)
+- Model routing table in `agents.instructions.md` aligned with `model-routing.instructions.md` (claude-sonnet-4.6 for standard tier)
+- `azure/login@v1` → `@v2` in environment-bootstrap skill
+- BinaryFormatter (RCE vector) replaced with System.Text.Json in service-bus-migration skill
+- ClientSecret patterns in identity-migration skill now include security warnings and use env vars
+- ADR path standardized to `docs/adr/` in architecture.instructions.md
+- Self-merge policy clarified — permitted when repo policy allows
+- 4 agent name mismatches fixed (Title Case → kebab-case): app-inventory, containerization-planner, infrastructure-deploy, legacy-modernization
+- 3 agents with fictional tools replaced with real platform tools: legacy-modernization, infrastructure-deploy, release-impact-advisor
+
+### Added
+- `AGENTS.md` — root-level file listing all 50 agents for cross-tool AI agent discovery
+- `context: fork` frontmatter added to 6 large skills (>5KB) for efficient VS Code context management
+- Domain-specific sections added to 3 stub agents: code-review (review checklist), new-customization (decision tree), rollout-basecoat (distribution channels)
+
 ## 2.1.1 - 2026-05-01
 
 ### Fixed
