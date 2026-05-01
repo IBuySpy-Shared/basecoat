@@ -2,6 +2,12 @@ name: Validate Base Coat
 
 on:
   workflow_call:
+    inputs:
+      concurrency_group:
+        description: 'Concurrency group override — callers can pass a distinct value to avoid collisions with push-to-main validate runs'
+        required: false
+        type: string
+        default: ''
   workflow_dispatch:
   push:
     branches:
@@ -12,7 +18,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+  group: ${{ inputs.concurrency_group || format('{0}-{1}', github.workflow, github.ref) }}
   cancel-in-progress: true
 
 jobs:
