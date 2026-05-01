@@ -32,10 +32,20 @@ try {
         Copy-Item -Path (Join-Path $sourcePath $item) -Destination $destination -Recurse -Force
     }
 
+    # Remove agent taxonomy subdirs from staging — they contain only index
+    # READMEs with relative links that break outside the source repo
+    foreach ($taxDir in @('models', 'orchestrator', 'tasks', 'types')) {
+        $taxPath = Join-Path $fullTargetDir "agents/$taxDir"
+        if (Test-Path $taxPath) {
+            Remove-Item -Path $taxPath -Recurse -Force
+        }
+    }
+
     # Copy Copilot-discoverable directories to their standard paths
+    # Only copy flat agent/instruction/prompt/skill files — not taxonomy subdirs
     $githubDir = Join-Path $repoRoot '.github'
     New-Item -ItemType Directory -Force -Path $githubDir | Out-Null
-    foreach ($copilotDir in @('agents', 'instructions', 'prompts', 'skills')) {
+    foreach ($copilotDir in @('instructions', 'prompts', 'skills')) {
         $source = Join-Path $fullTargetDir $copilotDir
         $dest = Join-Path $githubDir $copilotDir
         if (Test-Path $source) {
@@ -43,6 +53,19 @@ try {
                 Remove-Item -Path $dest -Recurse -Force
             }
             Copy-Item -Path $source -Destination $dest -Recurse -Force
+        }
+    }
+
+    # Agents: copy only *.agent.md files (skip taxonomy subdirs like models/, tasks/, types/)
+    $agentSource = Join-Path $fullTargetDir 'agents'
+    $agentDest = Join-Path $githubDir 'agents'
+    if (Test-Path $agentSource) {
+        if (Test-Path $agentDest) {
+            Remove-Item -Path $agentDest -Recurse -Force
+        }
+        New-Item -ItemType Directory -Force -Path $agentDest | Out-Null
+        Get-ChildItem -Path $agentSource -Filter '*.agent.md' | ForEach-Object {
+            Copy-Item -Path $_.FullName -Destination $agentDest -Force
         }
     }
 

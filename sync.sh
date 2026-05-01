@@ -33,13 +33,27 @@ for item in README.md CHANGELOG.md INVENTORY.md version.json basecoat-metadata.j
   cp -R "$TMP_DIR/source/$item" "$REPO_ROOT/$TARGET_DIR/$item"
 done
 
+# Remove agent taxonomy subdirs from staging — they contain only index
+# READMEs with relative links that break outside the source repo
+for tax_dir in models orchestrator tasks types; do
+  rm -rf "$REPO_ROOT/$TARGET_DIR/agents/$tax_dir"
+done
+
 # Copy Copilot-discoverable directories to their standard paths
+# Only copy flat agent/instruction/prompt/skill files — not taxonomy subdirs
 mkdir -p "$REPO_ROOT/.github"
-for copilot_dir in agents instructions prompts skills; do
+for copilot_dir in instructions prompts skills; do
   if [[ -d "$REPO_ROOT/$TARGET_DIR/$copilot_dir" ]]; then
     rm -rf "$REPO_ROOT/.github/$copilot_dir"
     cp -R "$REPO_ROOT/$TARGET_DIR/$copilot_dir" "$REPO_ROOT/.github/$copilot_dir"
   fi
 done
+
+# Agents: copy only *.agent.md files (skip taxonomy subdirs like models/, tasks/, types/)
+if [[ -d "$REPO_ROOT/$TARGET_DIR/agents" ]]; then
+  rm -rf "$REPO_ROOT/.github/agents"
+  mkdir -p "$REPO_ROOT/.github/agents"
+  find "$REPO_ROOT/$TARGET_DIR/agents" -maxdepth 1 -name '*.agent.md' -exec cp {} "$REPO_ROOT/.github/agents/" \;
+fi
 
 echo "Base Coat synced into $TARGET_DIR"
