@@ -32,7 +32,7 @@ allowed_skills: [skill-name-a, skill-name-b]
 | `name` | Yes | Must match the filename (without `.agent.md`). |
 | `description` | Yes | One sentence. Begin with the role, end with trigger guidance ("Use when …"). |
 | `tools` | Yes | Array of tool identifiers the agent needs. Enforced at runtime — the agent cannot call any tool not in this list. Follow least-privilege — include only tools the agent actually uses. |
-| `allowed_skills` | No | Array of skill folder names the agent may invoke. Omit to inherit all available skills (legacy behavior). Use `allowed_skills: []` to block all skill invocations. The runtime filters the `<available_skills>` list to this allow-list before injecting it into the agent context. |
+| `allowed_skills` | No | Array of skill folder names the agent may invoke. When omitted, the agent inherits all available skills (legacy behavior). Use `allowed_skills: []` to block all skill invocations. When present, the runtime filters the `<available_skills>` list to this allow-list before injecting it into the agent context. |
 
 ### Runtime Enforcement Semantics
 
@@ -60,7 +60,7 @@ Every agent file **should** include an `## Allowed Skills` section declaring the
 
 - List each skill by its folder name (e.g., `agent-design`, `api-design`). One entry per line.
 - If the agent does not invoke any skills, include the section with `*(none)*` as the only content.
-- The `## Allowed Skills` section is the authoritative allow-list. An agent must not invoke any skill that is not listed there, even if that skill is shown in the `<available_skills>` context.
+- When present, the `## Allowed Skills` section is the authoritative allow-list. An agent must not invoke any skill that is not listed there, even if that skill is shown in the `<available_skills>` context. This is consistent with the `allowed_skills` frontmatter field — both mechanisms filter the available skills to only those explicitly listed.
 - If the agent's primary tool is unavailable, the agent must stop and report the blocker — it must not search unrelated skills as a workaround.
 - Use a negative constraint sentence after the list when the scope exclusion is non-obvious, for example: `This agent requires GitHub issue tools only. Do not invoke design, code-generation, or infrastructure skills.`
 
@@ -112,10 +112,10 @@ Choose the model based on the agent's primary workload. Document the choice in t
 
 | Agent Role | Recommended Model | Minimum Model | Rationale |
 |---|---|---|---|
-| Code-heavy (backend-dev, frontend-dev, data-tier) | gpt-5.3-codex | gpt-5.4-mini | Code-optimized for implementation, refactoring, and test generation. |
-| Analysis / review (security-analyst, code-review, performance-analyst) | gpt-5.3-codex | gpt-5.4-mini | Pattern recognition across large diffs and dependency trees. |
-| Architecture / design (solution-architect, api-designer) | gpt-5.3-codex | gpt-5.4-mini | Broad reasoning for trade-off analysis and system design. |
-| Planning / coordination (sprint-planner, release-manager) | gpt-5.4-mini | gpt-5.4-mini | Lower token demand; primarily structured output and list management. |
+| Code-heavy (backend-dev, frontend-dev, data-tier) | claude-sonnet-4.6 | gpt-5.4-mini | Multi-file implementation and refactoring with strong code generation. |
+| Analysis / review (security-analyst, code-review, performance-analyst) | claude-sonnet-4.6 | gpt-5.4-mini | Pattern recognition across large diffs; security review benefits from reasoning depth. |
+| Architecture / design (solution-architect, api-designer) | claude-sonnet-4.6 | gpt-5.4-mini | Broad reasoning for trade-off analysis and system design. Use Premium tier (Opus) when cross-cutting decisions span multiple services. |
+| Planning / coordination (sprint-planner, release-manager) | claude-haiku-4.5 | gpt-5.4-mini | Lower token demand; primarily structured output and list management. |
 
 - Always state the **Recommended** model, the **Minimum** model, and a one-line **Rationale**.
 - If a task requires extended context (e.g., reviewing an entire codebase), prefer models with larger context windows and note the requirement.
