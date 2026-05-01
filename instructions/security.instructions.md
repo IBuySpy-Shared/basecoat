@@ -47,3 +47,19 @@ GitHub Actions workflow files (`*.yml` / `*.yaml` in `.github/workflows/`) must 
 - Keep commit messages descriptive but non-sensitive.
 - Reference issue IDs or work items instead of embedding payloads, tokens, emails, or credentials.
 - If a commit message accidentally contains sensitive content, rewrite history immediately and rotate affected credentials.
+
+## Browser Storage Threat Model
+
+Client-side storage (`localStorage`, `sessionStorage`, `IndexedDB`, cookies) is accessible to any script running in the page origin — including XSS payloads and malicious dependencies.
+
+- **Never** store authentication tokens (JWTs, access tokens, refresh tokens) in `localStorage` or `sessionStorage`.
+- **Never** store secrets, API keys, or PII in any browser storage mechanism.
+- Prefer `httpOnly` + `secure` + `SameSite=Strict` cookies for session tokens — they are inaccessible to JavaScript.
+- If client-side storage is unavoidable for non-secret data, treat every read as untrusted input and validate/sanitize before use.
+- Clear sensitive storage on logout: call `localStorage.clear()`, `sessionStorage.clear()`, and revoke server sessions.
+
+### Review Lens — Browser Storage
+
+- Does any client-side code write tokens, secrets, or PII to `localStorage`, `sessionStorage`, or `IndexedDB`?
+- Are session tokens stored in `httpOnly` cookies rather than JavaScript-accessible storage?
+- Is stored data validated on read, not assumed safe?
