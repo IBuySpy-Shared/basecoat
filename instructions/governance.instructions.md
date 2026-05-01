@@ -245,6 +245,21 @@ See [`docs/guardrails/db-deployment-concurrency.md`](docs/guardrails/db-deployme
 
 ---
 
+## 13. Deployment Cancellation Pre-Flight Check
+
+Before stopping or cancelling **any** in-progress infrastructure deployment (Bicep, Terraform, Azure CLI, azd, Fabric REST), you **must** run a pre-flight check:
+
+1. Identify what is running and its current progress.
+2. Assess the blast radius — list resources already created and operations still in-flight.
+3. Check for dependent downstream systems that consume deployment outputs.
+4. Make an explicit go / no-go decision based on the findings.
+
+Cancelling mid-flight can leave Azure resources in a partially-provisioned, locked, or billing-active state that requires manual cleanup.
+
+See [`docs/guardrails/deployment-cancellation.md`](docs/guardrails/deployment-cancellation.md) for the full checklist, tool-specific commands, and remediation steps.
+
+---
+
 ## Quick Reference Card
 
 | Rule | Action |
@@ -261,4 +276,5 @@ See [`docs/guardrails/db-deployment-concurrency.md`](docs/guardrails/db-deployme
 | Azure resource naming | CAF conventions — see guardrail |
 | Env vars undocumented | Add to `.env.example` |
 | DB migration workflow | `cancel-in-progress: false` — always |
+| Stop deployment in-progress | Pre-flight check required — see guardrail |
 | Governance change needed | Issue → PR → approval |
