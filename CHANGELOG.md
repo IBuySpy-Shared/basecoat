@@ -4,6 +4,16 @@ All notable changes to this repository should be recorded in this file.
 
 ## Unreleased
 
+## 2.3.0 - 2026-05-01
+
+### Added
+- `instructions/terraform-init.instructions.md` — always use `-reconfigure` in bootstrap and CI/CD (#353)
+- `instructions/bootstrap-autodetect.instructions.md` — auto-detect values via param → env → CLI cascade, no prompts (#348)
+- `instructions/bootstrap-github-secrets.instructions.md` — auto-push secrets/variables via `gh` CLI (#350)
+- `instructions/ci-firewall.instructions.md` — single-job runner IP firewall pattern with guaranteed cleanup (#351)
+- `instructions/bootstrap-structure.instructions.md` — decomposed, idempotent, documented bootstrap scripts (#349)
+- `instructions/rbac-authentication.instructions.md` — RBAC-only Azure auth, disable shared keys/SAS/access policies (#352)
+
 ## 2.2.0 - 2026-05-01
 
 ### Fixed
