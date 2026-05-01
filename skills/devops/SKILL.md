@@ -31,6 +31,12 @@ Reference this skill by attaching `skills/devops/SKILL.md` to your agent context
 | `rollback-runbook-template.md` | Step-by-step rollback runbook template with decision criteria |
 | `environment-promotion-template.md` | Environment promotion path definition with gates and approval rules |
 
+## Related Guardrails
+
+| Guardrail | When to apply |
+|---|---|
+| [`runner-routing.md`](../../docs/guardrails/runner-routing.md) | Choosing self-hosted vs GitHub-hosted runners; routing patterns and fallback strategy |
+
 ## Agent Pairing
 
 This skill is designed to be used alongside the `devops-engineer` agent. The agent drives the workflow; this skill provides the reference templates and standards.

@@ -139,6 +139,46 @@ jobs:
         run: echo "Send deployment notification"
 ```
 
+## Runner Selection (`runs-on`)
+
+Choose `runs-on` based on what the job actually needs. Defaulting all jobs to `ubuntu-latest` wastes self-hosted capacity and accumulates GitHub-hosted minutes unnecessarily.
+
+### Decision tree
+
+```text
+Does the job need a managed identity, private network, or Key Vault?
+  YES → self-hosted runner group
+  NO  → Does it do heavy compute (image build, large compile)?
+          YES → self-hosted runner group
+          NO  → GitHub-hosted (ubuntu-latest)
+```
+
+### Routing patterns
+
+```yaml
+# Lightweight CI (lint, test, scan) — fast cold-start, no private network needed
+runs-on: ubuntu-latest
+
+# Deployment / cloud access — managed identity required
+runs-on:
+  group: <runner-group-name>
+  labels: [self-hosted, linux, x64]
+
+# Configurable via repository variable — set USE_SELF_HOSTED=true to engage self-hosted pool.
+# fromJson() is required because GitHub Actions expressions must evaluate to a single
+# scalar or object; the object form of runs-on cannot be written as a plain string.
+runs-on: >-
+  ${{
+    vars.USE_SELF_HOSTED == 'true'
+      && fromJson('{"group":"<runner-group-name>","labels":["self-hosted","linux","x64"]}')
+      || 'ubuntu-latest'
+  }}
+```
+
+Always add `timeout-minutes` to self-hosted jobs so the workflow fails fast when the runner pool is scaled to zero rather than waiting indefinitely.
+
+See [docs/guardrails/runner-routing.md](../../docs/guardrails/runner-routing.md) for the full decision matrix, hybrid pipeline patterns, and anti-patterns.
+
 ## Customization Notes
 
 - **Pin all action versions** to full commit SHAs, not tags. Example: `actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29` instead of `actions/checkout@v4`.
