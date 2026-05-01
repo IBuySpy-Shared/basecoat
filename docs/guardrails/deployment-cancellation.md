@@ -50,8 +50,11 @@ az deployment sub list \
   --query "[].{name:name, state:properties.provisioningState, timestamp:properties.timestamp}" \
   --output table
 
-# For Terraform — show what apply is doing
-terraform show -json | jq '.values.root_module.resources[] | {address, status: .sensitive_values}'
+# For Terraform — list resources tracked in state
+terraform state list
+
+# Show current resource details (type, address, provider)
+terraform show -json | jq '.values.root_module.resources[] | {address, type, provider_name}'
 
 # For azd
 azd env list
