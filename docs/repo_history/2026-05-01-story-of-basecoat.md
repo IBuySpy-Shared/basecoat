@@ -1,7 +1,7 @@
 # The Story of Base Coat
 
-**Generated:** 2026-05-01
-**Scope:** Repository inception through v2.0.0+, covering 168 closed issues, 143 PRs, and the evolution from a simple scaffold to a full-SDLC agent framework.
+**Generated:** 2026-05-01 (updated after v2.1.0 release)
+**Scope:** Repository inception through v2.1.0, covering 174 closed issues, 150 PRs, and the evolution from a simple scaffold to a full-SDLC agent framework.
 
 ---
 
@@ -203,9 +203,9 @@ agents and patterns — the framework eating its own dogfood.
 
 ---
 
-## Chapter 7: Refinement and Open Frontiers (May 2026)
+## Chapter 7: Refinement and Open Frontiers (Early May 2026)
 
-The latest PRs focus on refinement and closing gaps:
+The latest PRs before v2.1.0 focused on refinement and closing gaps:
 
 - **Copilot usage analytics skill** (PR #312) — per-session cost breakdown
 - **Runner routing guardrail** (PR #313) — self-hosted vs GitHub-hosted decisions
@@ -213,17 +213,64 @@ The latest PRs focus on refinement and closing gaps:
 - **Improved copilot-instructions** (PR #315) — session learnings baked in
 - **Basecoat metrics MCP server** (PR #316) — programmatic access to adoption data
 
+---
+
+## Chapter 8: Sprint 6 and v2.1.0 (May 1, 2026)
+
+Sprint 6 focused on a single theme: **making Base Coat fully discoverable in VS Code
+Copilot**. An audit of the VS Code customization docs revealed that 33 skills were
+invisible to VS Code (not synced to `.github/skills/`), 50 agents were routed to
+the wrong model (VS Code ignores `## Model` sections), and docs weren't delivered
+to consumer repos.
+
+### The Sprint
+
+Seven issues were filed from the VS Code audit (#317–#323) and four more from an
+evaluation of the [Agent Skills spec](https://agentskills.io) (#327–#330). The sprint
+was scoped to 5 VS Code-priority items, with cross-client work deferred to backlog.
+
+Five PRs landed in rapid succession:
+
+1. **PR #332** — Doc cleanup: corrected stale asset counts across README, PRODUCT,
+   PHILOSOPHY; complete rewrite of INVENTORY and CATALOG
+2. **PR #333** — Sync fix: `sync.ps1`/`sync.sh` now copy `skills/` to
+   `.github/skills/` for VS Code auto-discovery, plus `docs/` to staging
+3. **PR #334** — Agent model frontmatter: added `model:` field to all 50 agent
+   YAML blocks so VS Code routes each to the correct model
+4. **PR #335** — Sprint-retrospective agent and skill: structured retrospective
+   generation from GitHub API data
+5. **PR #336** — CI fix: removed premature CATALOG/INVENTORY entries for
+   uncommitted files
+
+### The Release
+
+v2.1.0 was tagged and released with the full changelog auto-extracted. The Release
+workflow succeeded, though the Package workflow's validate job collided with a
+simultaneous push-to-main validate (same SHA, same concurrency group). This was
+diagnosed and fixed immediately via PR #339 — the Copilot coding agent's first
+contribution to Base Coat, adding a `concurrency_group` input to the reusable
+validate workflow.
+
+### Post-Release
+
+An audit of GitHub org/repo security APIs confirmed that secret scanning, code
+scanning, Dependabot, rulesets, and code security configurations are all accessible
+with standard token scopes. Issue #340 was filed for a `github-security-posture`
+agent and skill to provide one-command security audits.
+
 ### Open Issues
 
-Five issues remain open, pointing to Base Coat's next frontiers:
+Sixteen issues remain open, organized by theme:
 
-| Issue | Theme |
-|---|---|
-| #275 | Python / Data Science / Notebook instruction coverage |
-| #276 | Sync scripts don't deliver `docs/` to consumer repos |
-| #277 | Sprint-retrospective agent for on-demand repo history |
-| #282 | Enterprise Copilot usage metrics policy enablement |
-| #283 | Track GitHub API for per-model premium billing data |
+| Theme | Issues | Summary |
+|---|---|---|
+| **Agent Skills spec** | #327, #328, #329, #330 | Cross-client skill interop (`.agents/skills/`, frontmatter, validator, progressive disclosure) |
+| **VS Code stretch** | #319, #321, #323 | Agent handoffs, prompt frontmatter, context:fork for large skills |
+| **Cross-tool compat** | #322 | AGENTS.md for Claude Code, Cursor, Windsurf |
+| **Data workloads** | #275, #324, #325, #326 | Python/DS instructions, data-pipeline agent, test suite |
+| **Metrics & tracking** | #282, #283 | Enterprise Copilot usage metrics, per-model billing API |
+| **Security** | #340 | GitHub security posture agent (org/repo policy auditing) |
+| **Sprint tracking** | #331 | Sprint 6 tracking (close pending) |
 
 ---
 
@@ -231,16 +278,16 @@ Five issues remain open, pointing to Base Coat's next frontiers:
 
 | Metric | Value |
 |---|---|
-| Total issues filed | 173+ |
-| Issues closed | 168 |
-| Pull requests merged | 120+ |
-| Agents | 49 |
-| Skills | 31 |
-| Instruction files | 32 |
+| Total issues filed | 190+ |
+| Issues closed | 174 |
+| Pull requests merged | 129 |
+| Agents | 50 |
+| Skills | 34 |
+| Instruction files | 34 |
 | Prompts | 3 |
 | Guardrails | 6+ |
-| Releases | 3 major (v0.x, v1.0.0, v2.0.0) |
-| Time from scaffold to v2.0.0 | ~5 weeks |
+| Releases | 4 (v0.7.0, v1.0.0, v2.0.0, v2.1.0) |
+| Time from scaffold to v2.1.0 | ~6 weeks |
 | Contributors | Human + AI agents (Copilot coding agent, Copilot CLI) |
 
 ---
@@ -284,8 +331,10 @@ while keeping the core framework cloud-agnostic.
 
 Based on open issues and trajectory:
 
-- **Python and Data Science coverage** — closing the gap for ML/notebook workflows
-- **Sync script improvements** — delivering docs to consumers, not just agents
-- **Sprint-retrospective agent** — automated repo history documentation (like this file)
-- **Copilot metrics integration** — once enterprise policy and API access are enabled
-- **Per-model cost optimization** — tracking and routing based on billing data
+- **Cross-client skill interop** — `.agents/skills/` path for Claude Code, Cursor, Windsurf (#329)
+- **Agent Skills spec compliance** — optional frontmatter fields, validator in CI, progressive disclosure (#327, #328, #330)
+- **Python and Data Science coverage** — closing the gap for ML/notebook workflows (#275, #324–#326)
+- **GitHub security posture** — org/repo policy auditing via native APIs (#340)
+- **VS Code advanced features** — agent handoffs, prompt frontmatter, context:fork (#319, #321, #323)
+- **AGENTS.md cross-tool compatibility** — single discovery file for all AI tools (#322)
+- **Copilot metrics integration** — once enterprise policy and per-model billing API are available (#282, #283)

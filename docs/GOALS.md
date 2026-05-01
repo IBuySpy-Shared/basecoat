@@ -14,7 +14,7 @@ Provide specialized AI agents for every phase of the software development lifecy
 not just code generation. Base Coat covers architecture, coding, testing, security,
 DevOps, process management, and meta-tooling (agent design, prompt engineering, MCP).
 
-**Current state:** 50 agents across 6 disciplines:
+**Current state:** 50 agents across 6 disciplines (v2.1.0):
 
 | Discipline | Agents | Examples |
 |---|---|---|
@@ -22,13 +22,13 @@ DevOps, process management, and meta-tooling (agent design, prompt engineering, 
 | 🏗️ Architecture | 5 | solution-architect, api-designer, ux-designer, app-inventory, legacy-modernization |
 | 🔍 Quality | 10 | code-review, security-analyst, guardrail, performance-analyst, chaos-engineer |
 | 🚀 DevOps | 4 | devops-engineer, agentops, release-manager, self-healing-ci |
-| 📋 Process | 5 | sprint-planner, product-manager, issue-triage, retro-facilitator |
+| 📋 Process | 6 | sprint-planner, product-manager, issue-triage, retro-facilitator, sprint-retrospective |
 | 🧰 Meta | 6+ | agent-designer, prompt-engineer, mcp-developer, tech-writer, memory-curator |
 
 ### 2. One Entry Point, Zero Memorization
 
 The `/basecoat` router skill provides a single entry point that routes to any of
-the 49 agents. Users say `/basecoat backend build a REST API` and the router resolves
+the 50 agents. Users say `/basecoat backend build a REST API` and the router resolves
 the right agent, attaches paired skills, and ensures ambient instructions are active.
 
 **Design philosophy:** Users should never need to memorize agent names. Discovery mode
@@ -78,9 +78,13 @@ Beyond individual agents, Base Coat supports multi-agent orchestration:
 
 ### 7. Cost-Aware Model Routing
 
-Every agent carries a model recommendation (Premium / Reasoning / Code / Fast tier)
-with rationale and minimum viable model. Token economics instructions guide budget-aware
-model selection so organizations can optimize cost without sacrificing quality.
+Every agent carries a `model` field in YAML frontmatter for direct VS Code integration
+plus a `## Model` section with rationale and minimum viable model. Token economics
+instructions guide budget-aware model selection so organizations can optimize cost
+without sacrificing quality.
+
+**Model distribution (v2.1.0):** claude-sonnet-4.6 (28), gpt-5.3-codex (16),
+claude-haiku-4.5 (3), claude-sonnet-4-5 (2), claude-sonnet-4 (1).
 
 ### 8. Adoption Measurement and Feedback Loops
 
