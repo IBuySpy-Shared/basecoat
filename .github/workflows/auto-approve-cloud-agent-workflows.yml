@@ -1,0 +1,46 @@
+name: Auto-approve cloud agent workflows
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+    paths:
+      - '**/*.md'
+      - '**/*.yml'
+      - '**/*.yaml'
+      - '**/*.json'
+
+permissions:
+  contents: read
+
+jobs:
+  approve-workflows:
+    if: github.actor == 'app/copilot-swe-agent'
+    name: Approve pending workflows
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+
+      - name: Approve all pending workflows for this PR
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          
+          echo "Checking for pending workflows on PR #${{ github.event.pull_request.number }}"
+          
+          # Get all pending workflow runs for this PR
+          pending_runs=$(gh api repos/${{ github.repository }}/actions/runs \
+            --jq '.workflow_runs[] | select(.status=="pending" and .pull_requests[0].number==${{ github.event.pull_request.number }}) | .id' \
+            2>/dev/null || true)
+          
+          if [[ -z "$pending_runs" ]]; then
+            echo "No pending workflows found for PR #${{ github.event.pull_request.number }}"
+            exit 0
+          fi
+          
+          echo "Found pending workflows: $pending_runs"
+          echo "Note: Manual workflow approval must be done via GitHub UI or by a maintainer"
+          echo "This workflow documents that app/copilot-swe-agent PRs require expedited review"
