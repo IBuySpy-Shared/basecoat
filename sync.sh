@@ -49,6 +49,13 @@ for copilot_dir in instructions prompts skills; do
   fi
 done
 
+# Also copy skills to .agents/skills/ for cross-client interop (Agent Skills spec)
+if [[ -d "$REPO_ROOT/$TARGET_DIR/skills" ]]; then
+  mkdir -p "$REPO_ROOT/.agents"
+  rm -rf "$REPO_ROOT/.agents/skills"
+  cp -R "$REPO_ROOT/$TARGET_DIR/skills" "$REPO_ROOT/.agents/skills"
+fi
+
 # Agents: copy only *.agent.md files (skip taxonomy subdirs like models/, tasks/, types/)
 if [[ -d "$REPO_ROOT/$TARGET_DIR/agents" ]]; then
   rm -rf "$REPO_ROOT/.github/agents"
