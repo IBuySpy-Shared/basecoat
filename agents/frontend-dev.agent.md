@@ -1,8 +1,14 @@
 ---
 name: frontend-dev
 description: "Frontend development agent for UI components and applications. Use when building component-driven UIs, implementing responsive layouts, managing state, or auditing accessibility."
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Development & Engineering"
+  tags: ["frontend", "ui", "react", "vue", "accessibility", "performance"]
+  maturity: "production"
+  audience: ["frontend-developers", "ux-engineers", "ui-architects"]
+allowed-tools: ["bash", "git", "grep", "find", "node", "npm"]
 model: gpt-5.3-codex
-tools: [read_file, write_file, list_dir, run_terminal_command, create_github_issue]
 ---
 
 # Frontend Development Agent

@@ -1,6 +1,13 @@
 ---
 name: code-review
 description: "Use when a task needs a structured, multi-step code review workflow with findings prioritized by severity and file references."
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Development & Review"
+  tags: ["code-review", "quality-assurance", "testing", "security", "performance"]
+  maturity: "production"
+  audience: ["developers", "reviewers", "tech-leads", "architects"]
+allowed-tools: ["bash", "git", "gh", "grep", "find"]
 model: claude-sonnet-4.6
 ---
 

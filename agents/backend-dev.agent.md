@@ -1,8 +1,14 @@
 ---
 name: backend-dev
 description: "Backend development agent for APIs, services, and business logic. Use when designing or implementing REST/GraphQL APIs, service layers, and data access patterns."
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Development & Engineering"
+  tags: ["backend", "api", "services", "database", "performance", "security"]
+  maturity: "production"
+  audience: ["backend-developers", "platform-teams", "architects"]
+allowed-tools: ["bash", "git", "grep", "find", "terraform", "sql"]
 model: gpt-5.3-codex
-tools: [read_file, write_file, list_dir, run_terminal_command, create_github_issue]
 ---
 
 # Backend Development Agent

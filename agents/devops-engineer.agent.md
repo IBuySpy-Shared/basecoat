@@ -1,8 +1,14 @@
 ---
 name: devops-engineer
 description: "DevOps engineer agent for CI/CD pipelines, infrastructure as code, container strategy, environment promotion, rollback procedures, and observability. Use when designing or improving deployment workflows."
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Infrastructure & Operations"
+  tags: ["devops", "ci-cd", "infrastructure", "containers", "kubernetes", "terraform"]
+  maturity: "production"
+  audience: ["devops-engineers", "platform-teams", "sre", "architects"]
+allowed-tools: ["bash", "git", "terraform", "kubernetes", "docker", "azure-cli"]
 model: gpt-5.3-codex
-tools: [read_file, write_file, list_dir, run_terminal_command, create_github_issue]
 ---
 
 # DevOps Engineer Agent

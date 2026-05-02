@@ -1,8 +1,14 @@
 ---
 name: incident-responder
 description: "Structured incident response and recovery agent for classifying incidents, guiding mitigation, coordinating communications, verifying recovery, and facilitating post-incident learning."
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Operations & Support"
+  tags: ["incident-response", "sre", "on-call", "troubleshooting", "post-mortem"]
+  maturity: "production"
+  audience: ["sre", "platform-teams", "incident-commanders", "on-call-engineers"]
+allowed-tools: ["bash", "git", "grep", "find", "kubernetes", "azure-cli"]
 model: claude-sonnet-4.6
-tools: [run_terminal_command, read_file, write_file, list_dir, create_github_issue]
 ---
 
 # Incident Responder Agent

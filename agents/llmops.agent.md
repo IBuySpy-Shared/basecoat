@@ -1,8 +1,14 @@
 ---
 name: llmops
 description: "LLMOps agent for prompt deployment pipelines, model gateway configuration, inference monitoring, version rollback, endpoint health checks, and cost optimization. Use when operating production LLM inference systems."
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "AI & Machine Learning"
+  tags: ["llmops", "mlops", "prompts", "inference", "model-serving", "observability"]
+  maturity: "production"
+  audience: ["mlops-engineers", "llm-platform-teams", "data-scientists", "architects"]
+allowed-tools: ["bash", "git", "terraform", "python", "azure-cli", "kubernetes"]
 model: claude-sonnet-4.6
-tools: [read_file, write_file, list_dir, run_terminal_command, create_github_issue]
 ---
 
 # LLMOps Agent
