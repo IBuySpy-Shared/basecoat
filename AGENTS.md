@@ -2,7 +2,7 @@
 
 This file lists all available agents in the Base Coat framework.
 
-> **50 agents** available
+> **51 agents** available
 
 | Agent | Description |
 |---|---|
@@ -23,6 +23,7 @@ This file lists all available agents in the Base Coat framework.
 | [exploratory-charter](agents/exploratory-charter.agent.md) | Use when you need time-boxed exploratory testing sessions. Generates mission-driven charters with scope, triage routing, and evidence capture. Automatically files GitHub Issues for automation candidates found during exploration. |
 | [feedback-loop](agents/feedback-loop.agent.md) | Continuous learning and optimization through user feedback collection, prompt effectiveness tracking, outcome measurement, A/B testing, regression detection, and instruction refinement |
 | [frontend-dev](agents/frontend-dev.agent.md) | Frontend development agent for UI components and applications. Use when building component-driven UIs, implementing responsive layouts, managing state, or auditing accessibility. |
+| [github-security-posture](agents/github-security-posture.agent.md) | GitHub security posture auditor for org and repository policy checks. Use when auditing GitHub organization code security configurations, repository rulesets, secret scanning alerts, Dependabot configuration, or branch protection rules. |
 | [guardrail](agents/guardrail.agent.md) | Guardrail validation agent for checking outputs against safety, quality, compliance, and formatting rules before delivery. |
 | [identity-architect](agents/identity-architect.agent.md) | Identity architecture agent for Azure RBAC design, managed identity configuration, Entra ID app registrations, conditional access policies, and workload identity federation. Use when designing identity and access management for Azure workloads or enforcing zero trust principles. |
 | [incident-responder](agents/incident-responder.agent.md) | Structured incident response and recovery agent for classifying incidents, guiding mitigation, coordinating communications, verifying recovery, and facilitating post-incident learning. |

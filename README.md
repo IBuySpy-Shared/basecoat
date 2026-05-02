@@ -4,7 +4,7 @@
 
 Base Coat provides a curated library of agents, skills, instructions, and prompts that teams adopt across repositories through a single sync command. Instead of every team writing Copilot customizations from scratch, Base Coat gives you production-ready assets that enforce consistent standards, accelerate development workflows, and scale across an entire GitHub Enterprise organization.
 
-**50 agents** · **33 skills** · **34 instruction files** · **3 prompt starters**
+**51 agents** · **34 skills** · **34 instruction files** · **3 prompt starters**
 
 ---
 
@@ -119,6 +119,7 @@ Base Coat is built on four GitHub Copilot customization primitives:
 | [exploratory-charter](agents/exploratory-charter.agent.md) | Time-boxed exploratory testing charters with evidence capture |
 | [feedback-loop](agents/feedback-loop.agent.md) | User feedback collection, prompt effectiveness tracking, and A/B testing |
 | [frontend-dev](agents/frontend-dev.agent.md) | UI components, responsive layouts, state, accessibility |
+| [github-security-posture](agents/github-security-posture.agent.md) | GitHub org and repo security posture auditing: code security configs, rulesets, secret scanning, Dependabot, and branch protection |
 | [guardrail](agents/guardrail.agent.md) | Post-processing validation for safety, quality, compliance, and formatting |
 | [identity-architect](agents/identity-architect.agent.md) | Azure RBAC, managed identities, Entra ID app registrations, conditional access, and workload identity federation |
 | [incident-responder](agents/incident-responder.agent.md) | Incident classification, mitigation, communications, and post-incident learning |
@@ -189,6 +190,7 @@ Base Coat is built on four GitHub Copilot customization primitives:
 | [performance-profiling](skills/performance-profiling/) | SKILL.md workflow | performance-analyst |
 | [refactoring](skills/refactoring/) | SKILL.md workflow | — |
 | [security](skills/security/) | owasp-checklist, stride-threat-model-template, vulnerability-report-template, dependency-audit-template | security-analyst |
+| [github-security-posture](skills/github-security-posture/) | posture-report-template | github-security-posture |
 | [service-bus-migration](skills/service-bus-migration/) | SKILL.md workflow | middleware-dev |
 | [sprint-management](skills/sprint-management/) | sprint-planning-template, backlog-grooming-template, retrospective-template | sprint-planner, retro-facilitator |
 | [ux](skills/ux/) | user-journey-template, wireframe-spec-template, component-spec-template, accessibility-audit-checklist | ux-designer |

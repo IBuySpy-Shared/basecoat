@@ -71,6 +71,7 @@ This catalog helps teams discover what exists in Base Coat and when to use it.
 | `skills/performance-profiling/SKILL.md` | isolate and measure slow code paths                     | profiling, performance, latency, hot path    |
 | `skills/refactoring/SKILL.md`           | restructure code without changing behavior              | refactor, cleanup, simplify, extract, rename |
 | `skills/security/SKILL.md`              | OWASP checklist, STRIDE threat model, and vulnerability templates | security, owasp, stride, threat-model, vulnerability |
+| `skills/github-security-posture/SKILL.md` | audit GitHub org and repo security configurations with traffic-light scoring and remediation commands | github, security, posture, audit, rulesets, secret-scanning, dependabot, branch-protection, codeowners |
 | `skills/service-bus-migration/SKILL.md` | Azure Service Bus migration patterns and guidance | service-bus, migration, messaging, azure |
 | `skills/sprint-management/SKILL.md`     | sprint planning, backlog grooming, and retrospective templates | sprint, planning, backlog, retrospective |
 | `skills/sprint-retrospective/SKILL.md`  | repo history reconstruction and sprint retrospective templates | sprint, retrospective, history, metrics, tips |
@@ -106,6 +107,7 @@ This catalog helps teams discover what exists in Base Coat and when to use it.
 | `agents/exploratory-charter.agent.md`   | generate time-boxed exploratory sessions with scope, evidence capture, and GitHub Issue filing              | agent, exploratory, charter, session, findings |
 | `agents/feedback-loop.agent.md`     | user feedback collection, prompt effectiveness tracking, and A/B testing | agent, feedback, effectiveness, tracking, a-b-testing |
 | `agents/frontend-dev.agent.md`          | build accessible component-driven UIs with Core Web Vitals targets     | agent, frontend, ui, component, accessibility, wcag, state, performance |
+| `agents/github-security-posture.agent.md` | audit GitHub org and repo security settings: code security configs, rulesets, secret scanning, Dependabot alerts, and branch protection | agent, security, github, posture, audit, rulesets, secret-scanning, dependabot, branch-protection |
 | `agents/guardrail.agent.md`         | validate outputs against safety, quality, compliance, and formatting rules before delivery | agent, guardrail, validation, safety, compliance, quality |
 | `agents/identity-architect.agent.md` | Azure RBAC, managed identities, Entra ID app registrations, conditional access, and workload identity federation | agent, identity, rbac, entra, managed-identity, zero-trust |
 | `agents/incident-responder.agent.md` | incident classification, mitigation, communications, and post-incident learning | agent, incident, response, mitigation, postmortem |

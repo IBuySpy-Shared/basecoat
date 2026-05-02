@@ -25,6 +25,7 @@
 | chaos-engineer | `agents/chaos-engineer.agent.md` | Chaos engineering for fault injection, game days, resilience scoring, and recovery validation | — | GPT-4o / Claude Sonnet |
 | code-review | `agents/code-review.agent.md` | Structured multi-step code review workflow | code-review | GPT-4o / Claude Sonnet |
 | config-auditor | `agents/config-auditor.agent.md` | Scans for committed or unprotected config secrets | security | GPT-4o / Claude Sonnet |
+| github-security-posture | `agents/github-security-posture.agent.md` | Audits GitHub org and repo security settings: code security configs, rulesets, secret scanning, Dependabot, and branch protection | github-security-posture | Claude Sonnet |
 | exploratory-charter | `agents/exploratory-charter.agent.md` | Time-boxed exploratory testing charters with evidence capture | manual-test-strategy | GPT-4o / Claude Sonnet |
 | guardrail | `agents/guardrail.agent.md` | Post-processing validation for safety, quality, compliance, and formatting | — | Claude Sonnet |
 | identity-architect | `agents/identity-architect.agent.md` | Azure RBAC, managed identities, Entra ID app registrations, conditional access, and workload identity federation | azure-identity | GPT-4o / Claude Sonnet |
@@ -102,6 +103,7 @@
 | performance-profiling | `skills/performance-profiling/` | *(workflow only)* | performance-analyst |
 | refactoring | `skills/refactoring/` | *(workflow only)* | — |
 | security | `skills/security/` | `owasp-checklist.md`, `stride-threat-model-template.md`, `vulnerability-report-template.md`, `dependency-audit-template.md` | security-analyst, config-auditor |
+| github-security-posture | `skills/github-security-posture/` | `posture-report-template.md` | github-security-posture |
 | service-bus-migration | `skills/service-bus-migration/` | *(workflow only)* | — |
 | sprint-management | `skills/sprint-management/` | `sprint-planning-template.md`, `backlog-grooming-template.md`, `retrospective-template.md` | sprint-planner, retro-facilitator, product-manager, issue-triage |
 | sprint-retrospective | `skills/sprint-retrospective/` | *(workflow only)* | sprint-retrospective |
