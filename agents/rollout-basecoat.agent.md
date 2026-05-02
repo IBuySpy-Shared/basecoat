@@ -1,6 +1,13 @@
 ---
 name: rollout-basecoat
 description: "Use when onboarding a repository to Base Coat in an enterprise setting. Focuses on pinned versions, safe rollout, installation method, and validation steps."
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Onboarding & Deployment"
+  tags: ["basecoat", "rollout", "onboarding", "enterprise", "deployment"]
+  maturity: "production"
+  audience: ["platform-teams", "devops-engineers", "architects"]
+allowed-tools: ["bash", "git", "gh"]
 model: claude-haiku-4.5
 ---
 

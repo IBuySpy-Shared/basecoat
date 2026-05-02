@@ -1,8 +1,14 @@
 ---
 name: agentops
 description: "AgentOps lifecycle manager for agent versioning, rollout, health monitoring, rollback, and operational governance. Use when deploying, canarying, or retiring agent versions."
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "AI & Operations"
+  tags: ["agentops", "lifecycle-management", "deployment", "monitoring"]
+  maturity: "production"
+  audience: ["platform-teams", "devops-engineers", "ai-engineers"]
+allowed-tools: ["bash", "git", "gh"]
 model: claude-sonnet-4.6
-tools: [read_file, write_file, list_dir, run_terminal_command, create_github_issue]
 ---
 
 # AgentOps Agent

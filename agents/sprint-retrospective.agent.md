@@ -1,6 +1,13 @@
 ---
 name: sprint-retrospective
 description: "Reconstructs repository history for sprint retrospectives, generating structured markdown with metrics, timelines, and actionable development tips."
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Project Management & Planning"
+  tags: ["retrospective", "sprint-review", "metrics", "analysis"]
+  maturity: "production"
+  audience: ["scrum-masters", "team-leads", "agile-coaches"]
+allowed-tools: ["bash", "git"]
 model: claude-sonnet-4.6
 ---
 

@@ -1,8 +1,14 @@
 ---
 name: middleware-dev
 description: "Middleware and integration layer development agent. Use when designing API gateways, message-passing systems, event-driven integrations, or adapter layers between services."
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Development & Engineering"
+  tags: ["middleware", "integration", "api-gateway", "event-driven", "messaging"]
+  maturity: "production"
+  audience: ["backend-developers", "architects", "platform-teams"]
+allowed-tools: ["bash", "git", "grep", "python", "node"]
 model: gpt-5.3-codex
-tools: [read_file, write_file, list_dir, run_terminal_command, create_github_issue]
 ---
 
 # Middleware Development Agent

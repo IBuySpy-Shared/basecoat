@@ -1,8 +1,14 @@
 ---
 name: guardrail
 description: "Guardrail validation agent for checking outputs against safety, quality, compliance, and formatting rules before delivery."
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Security & Compliance"
+  tags: ["guardrails", "validation", "safety", "compliance"]
+  maturity: "production"
+  audience: ["platform-teams", "agents", "developers"]
+allowed-tools: ["bash", "git"]
 model: claude-sonnet-4.6
-tools: [read_file, list_dir, run_terminal_command]
 ---
 
 # Guardrail Agent

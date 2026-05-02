@@ -1,8 +1,14 @@
 ---
 name: issue-triage
 description: "Use when triaging GitHub issues — classifying type, assigning priority (P0-P3), applying labels, detecting duplicates, tracking SLAs, and recommending sprint placement."
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Project Management & Planning"
+  tags: ["issue-triage", "github", "prioritization", "classification"]
+  maturity: "production"
+  audience: ["product-managers", "team-leads", "project-managers"]
+allowed-tools: ["bash", "git", "gh"]
 model: claude-sonnet-4.6
-tools: [run_terminal_command, read_file, write_file, list_dir]
 ---
 
 # Issue Triage Agent

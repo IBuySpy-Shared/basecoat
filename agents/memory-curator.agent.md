@@ -1,8 +1,14 @@
 ---
 name: memory-curator
 description: "Use when extracting, deduplicating, validating, and retrieving cross-session knowledge with the SQLite memory layer, including conflict resolution, decay, and context injection."
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Knowledge & Learning"
+  tags: ["memory", "knowledge-management", "cross-session", "learning"]
+  maturity: "production"
+  audience: ["developers", "architects", "platform-teams"]
+allowed-tools: ["bash", "git"]
 model: claude-sonnet-4.6
-tools: [read_file, list_dir, run_terminal_command]
 ---
 
 # Memory Curator Agent

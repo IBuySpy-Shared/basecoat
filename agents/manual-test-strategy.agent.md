@@ -1,6 +1,13 @@
 ---
 name: manual-test-strategy
 description: "Use when you need a structured manual testing strategy for a feature or risk inventory. Produces a decision rubric, exploratory charter, regression checklist, defect template, and automation backlog. Automatically files GitHub Issues for automation candidates."
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Testing & Quality"
+  tags: ["test-strategy", "manual-testing", "qa", "testing"]
+  maturity: "production"
+  audience: ["qa-engineers", "testers", "test-leads"]
+allowed-tools: ["bash", "git", "gh"]
 model: claude-sonnet-4.6
 ---
 

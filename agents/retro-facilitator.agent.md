@@ -1,8 +1,14 @@
 ---
 name: retro-facilitator
 description: "End-of-sprint retrospective agent. Reviews closed issues and merged PRs for the sprint, produces a structured Went Well / Improve / Action Items summary, logs improvement issues framed generically for Basecoat, and updates sprint notes in the project repo."
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Project Management & Planning"
+  tags: ["retrospective", "sprint-review", "agile", "continuous-improvement"]
+  maturity: "production"
+  audience: ["scrum-masters", "team-leads", "agile-coaches"]
+allowed-tools: ["bash", "git", "gh"]
 model: claude-sonnet-4.6
-tools: [run_terminal_command, read_file, write_file, create_github_issue]
 ---
 
 # Retro Facilitator Agent

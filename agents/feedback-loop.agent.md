@@ -1,8 +1,14 @@
 ---
 name: feedback-loop
-description: Continuous learning and optimization through user feedback collection, prompt effectiveness tracking, outcome measurement, A/B testing, regression detection, and instruction refinement
+description: "Continuous learning and optimization through user feedback collection, prompt effectiveness tracking, outcome measurement, A/B testing, regression detection, and instruction refinement."
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "AI & Learning"
+  tags: ["feedback", "optimization", "learning", "a-b-testing", "metrics"]
+  maturity: "production"
+  audience: ["ai-engineers", "platform-teams", "agents"]
+allowed-tools: ["bash", "git", "gh"]
 model: claude-sonnet-4.6
-tools: [read_file, write_file, list_dir, run_terminal_command, create_github_issue]
 ---
 
 # Feedback Loop Agent
