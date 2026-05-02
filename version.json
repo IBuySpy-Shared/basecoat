@@ -1,6 +1,6 @@
 {
     "name": "base-coat",
-    "version": "2.6.0",
+    "version": "2.7.0",
     "releaseDate": "2026-05-02",
-    "notes": "v2.6.0: Security + Operations foundation, Data architecture patterns, Desktop & Fabric development."
+    "notes": "v2.7.0: Ecosystem completion - supply chain security, skill refactoring guidance, blocked issues documentation."
 }

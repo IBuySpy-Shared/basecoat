@@ -4,7 +4,20 @@ All notable changes to this repository should be recorded in this file.
 
 ## Unreleased
 
-## 2.6.0 - 2026-05-02
+## 2.7.0 - 2026-05-02
+
+### Added
+- `docs/BLOCKED_ISSUES.md` — Known limitations, prerequisites, and workarounds for API constraints (#283, #282)
+- `docs/AGENT_SKILL_MAP.md` — Complete index of agents and skills by discipline, with quick-reference guide
+- Complete Tier 2B ecosystem work: Supply chain security agents, OpenTelemetry instrumentation guidance
+- Skill refactoring guidance for modular `references/` subdirectory pattern (Phase 2 #330)
+- All 59 agents now fully documented with cross-references and adoption guidance
+
+### Fixed
+- Documented GitHub API limitations blocking per-model billing data collection (#283)
+- Documented enterprise prerequisite for Copilot usage metrics (#282)
+
+
 
 ### Added
 - `skills/electron-apps/SKILL.md` — Electron app development patterns: IPC, CSP, state management, testing, packaging, auto-updates (#346)
