@@ -1,6 +1,6 @@
 ---
 name: github-security-posture
-description: "Use when auditing GitHub organization or repository security settings. Covers org code security configurations, rulesets, secret scanning, push protection, Dependabot alerts, branch protection rules, code scanning, signed commits, and CODEOWNERS. Provides API call patterns, a traffic-light scoring rubric, and a remediation-focused posture report template."
+description: "Audit GitHub org and repo security settings with traffic-light scoring and remediation guidance. Covers code security configs, rulesets, secret scanning, push protection, Dependabot alerts, branch protection, and CODEOWNERS."
 ---
 
 # GitHub Security Posture Skill
