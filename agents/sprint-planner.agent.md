@@ -10,6 +10,15 @@ metadata:
 allowed-tools: ["bash", "git", "gh", "grep"]
 model: claude-sonnet-4.6
 allowed_skills: [basecoat]
+handoffs:
+  - label: Begin Backend Sprint Work
+    agent: backend-dev
+    prompt: Begin implementation for the backend issues from this sprint plan. Use the wave dependency map and acceptance criteria defined above as your guide.
+    send: false
+  - label: Begin Frontend Sprint Work
+    agent: frontend-dev
+    prompt: Begin implementation for the frontend issues from this sprint plan. Use the wave dependency map and acceptance criteria defined above as your guide.
+    send: false
 ---
 
 # Sprint Planner Agent

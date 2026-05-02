@@ -9,6 +9,11 @@ metadata:
   audience: ["qa-engineers", "testers", "test-leads"]
 allowed-tools: ["bash", "git", "gh"]
 model: claude-sonnet-4.6
+handoffs:
+  - label: Convert to Automation
+    agent: strategy-to-automation
+    prompt: Convert the manual test strategy above into automation candidates. Map the test paths to smoke tests, regression tiers, or agent specs as appropriate, and file GitHub Issues for each automation candidate.
+    send: false
 ---
 
 # Manual Test Strategy Agent

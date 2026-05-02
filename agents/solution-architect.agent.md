@@ -9,6 +9,16 @@ metadata:
   audience: ["architects", "tech-leads", "platform-teams"]
 allowed-tools: ["bash", "git", "grep", "find", "terraform", "azure-cli"]
 model: claude-sonnet-4-5
+tools: [read_file, write_file, list_dir, run_terminal_command, create_github_issue]
+handoffs:
+  - label: Start Backend Implementation
+    agent: backend-dev
+    prompt: Implement the architecture defined above. Focus on the service layer, API contracts, and data access patterns described in the ADRs and C4 diagrams.
+    send: false
+  - label: Start Frontend Implementation
+    agent: frontend-dev
+    prompt: Implement the frontend components described in the architecture above. Follow the component boundaries, state management patterns, and API contracts defined in the design.
+    send: false
 ---
 
 # Solution Architect Agent

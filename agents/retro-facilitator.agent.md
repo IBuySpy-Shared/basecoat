@@ -9,6 +9,12 @@ metadata:
   audience: ["scrum-masters", "team-leads", "agile-coaches"]
 allowed-tools: ["bash", "git", "gh"]
 model: claude-sonnet-4.6
+tools: [run_terminal_command, read_file, write_file, create_github_issue]
+handoffs:
+  - label: Plan Next Sprint
+    agent: sprint-planner
+    prompt: Use the action items and improvement areas from the retrospective above as input for the next sprint. Decompose the improvement actions into GitHub issues with labels, wave dependency maps, and acceptance criteria.
+    send: false
 ---
 
 # Retro Facilitator Agent
