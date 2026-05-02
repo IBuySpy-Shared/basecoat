@@ -56,6 +56,17 @@ try {
         }
     }
 
+    # Also copy skills to .agents/skills/ for cross-client interop (Agent Skills spec)
+    $skillsSource = Join-Path $fullTargetDir 'skills'
+    $agentSkillsDest = Join-Path $repoRoot '.agents' 'skills'
+    if (Test-Path $skillsSource) {
+        New-Item -ItemType Directory -Force -Path $agentSkillsDest | Out-Null
+        if (Test-Path $agentSkillsDest) {
+            Remove-Item -Path $agentSkillsDest -Recurse -Force
+        }
+        Copy-Item -Path $skillsSource -Destination $agentSkillsDest -Recurse -Force
+    }
+
     # Agents: copy only *.agent.md files (skip taxonomy subdirs like models/, tasks/, types/)
     $agentSource = Join-Path $fullTargetDir 'agents'
     $agentDest = Join-Path $githubDir 'agents'
