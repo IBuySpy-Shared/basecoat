@@ -1,6 +1,6 @@
 {
     "name": "base-coat",
-    "version": "2.5.0",
+    "version": "2.6.0",
     "releaseDate": "2026-05-02",
-    "notes": "v2.5.0: Cloud agent coordination — data-pipeline, github-security-posture, VS Code handoff workflows."
+    "notes": "v2.6.0: Security + Operations foundation, Data architecture patterns, Desktop & Fabric development."
 }

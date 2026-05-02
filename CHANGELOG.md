@@ -4,7 +4,27 @@ All notable changes to this repository should be recorded in this file.
 
 ## Unreleased
 
-## 2.5.0 - 2026-05-02
+## 2.6.0 - 2026-05-02
+
+### Added
+- `skills/electron-apps/SKILL.md` — Electron app development patterns: IPC, CSP, state management, testing, packaging, auto-updates (#346)
+- `instructions/fabric-notebooks.instructions.md` — Medallion architecture for Fabric notebooks, lakehouse integration, CI/CD automation, governance (#377)
+- `agents/security-operations.agent.md` — SOC playbook, threat detection, incident response, secrets rotation, audit logging (#360)
+- `agents/penetration-test.agent.md` — Penetration testing workflows, OWASP Testing Guide alignment, finding templates (#364)
+- `agents/production-readiness.agent.md` — PRR gates, business continuity planning, disaster recovery, FMEA analysis (#363)
+- `agents/ha-architect.agent.md` — High availability patterns, resilience review, SRE/chaos engineering (#362)
+- `agents/contract-testing.agent.md` — Consumer-driven contracts, Pact, mutation testing, integration test orchestration (#361)
+- `agents/data-architect.agent.md` — Medallion architecture, data governance, ETL/ELT patterns, performance optimization (#365)
+- `agents/database-migration.agent.md` — Zero-downtime migrations, schema evolution, dual-write strategies (#365)
+- `agents/gitops-engineer.agent.md` — Argo CD, Flux v2, drift detection, disaster recovery patterns (#365)
+- All supporting skills for Tier 1B security, operations, and data agents
+- Agent Skills spec validator integration (Phase 2 #327)
+- Cross-client interop sync paths for `.agents/skills/` (Phase 2 #329)
+
+### Fixed
+- Agent Skills spec frontmatter adoption for all 59 agents (100% coverage)
+
+
 
 ### Added
 - `agents/data-pipeline.agent.md` — orchestrates data ingestion, transformation, quality validation workflows (#379)
