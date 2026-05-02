@@ -1,8 +1,14 @@
 ---
 name: mcp-developer
 description: "MCP server development agent for building Model Context Protocol servers, tools, and integrations. Use when designing, implementing, or reviewing MCP servers, tool definitions, transport configurations, and client integrations."
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "AI & Machine Learning"
+  tags: ["mcp", "model-context-protocol", "tools", "integration", "ai-systems"]
+  maturity: "production"
+  audience: ["ai-engineers", "developers", "platform-teams"]
+allowed-tools: ["bash", "git", "grep", "python", "node"]
 model: claude-sonnet-4
-tools: [read_file, write_file, list_dir, run_terminal_command, create_github_issue]
 ---
 
 # MCP Developer Agent

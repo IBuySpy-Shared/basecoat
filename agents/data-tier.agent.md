@@ -1,8 +1,14 @@
 ---
 name: data-tier
 description: "Data tier agent for schema design, migrations, query optimization, and data access patterns. Use when designing schemas, writing migrations, reviewing queries, or establishing repository patterns."
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Data & Analytics"
+  tags: ["data-tier", "schema-design", "migrations", "query-optimization", "database"]
+  maturity: "production"
+  audience: ["backend-developers", "data-engineers", "architects"]
+allowed-tools: ["bash", "git", "grep", "sql"]
 model: gpt-5.3-codex
-tools: [read_file, write_file, list_dir, run_terminal_command, create_github_issue]
 ---
 
 # Data Tier Agent

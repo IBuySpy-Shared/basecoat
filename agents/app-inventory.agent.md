@@ -1,13 +1,14 @@
 ---
 name: app-inventory
-description: Scans legacy applications to discover dependencies, identify technology stacks, assess migration complexity, and generate architecture diagrams for portfolio analysis.
+description: "Scans legacy applications to discover dependencies, identify technology stacks, assess migration complexity, and generate architecture diagrams for portfolio analysis."
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Modernization & Migration"
+  tags: ["app-discovery", "inventory", "legacy-systems", "technology-stack", "assessment"]
+  maturity: "production"
+  audience: ["architects", "devops-engineers", "platform-teams"]
+allowed-tools: ["bash", "git", "grep", "powershell"]
 model: claude-sonnet-4.6
-tools:
-  - grep
-  - glob
-  - view
-  - bash
-  - powershell
 ---
 
 # App Inventory Agent

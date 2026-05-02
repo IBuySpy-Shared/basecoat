@@ -1,8 +1,14 @@
 ---
 name: prompt-coach
 description: "Interactive prompt optimization coach. Use when reviewing prompts, scoring prompt quality, identifying anti-patterns, and guiding iterative refinement."
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "AI & Machine Learning"
+  tags: ["prompt-coaching", "prompt-optimization", "llm", "ai-development"]
+  maturity: "production"
+  audience: ["prompt-engineers", "ai-engineers", "developers"]
+allowed-tools: ["bash", "git", "grep"]
 model: gpt-5.3-codex
-tools: [read_file, write_file, list_dir, run_terminal_command, create_github_issue]
 ---
 
 # Prompt Coach Agent

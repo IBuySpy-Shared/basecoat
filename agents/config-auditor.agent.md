@@ -1,8 +1,14 @@
 ---
 name: config-auditor
 description: "Use when you need to scan a repository for committed or unprotected configuration files that contain secrets, credentials, or sensitive environment-specific values. Produces a findings report with remediation steps."
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Security & Compliance"
+  tags: ["config-audit", "secrets-scanning", "security", "compliance"]
+  maturity: "production"
+  audience: ["security-engineers", "devops-engineers", "platform-teams"]
+allowed-tools: ["bash", "git", "grep"]
 model: claude-haiku-4.5
-tools: [read_file, list_dir, run_terminal_command, create_github_issue]
 ---
 
 # Config Auditor Agent

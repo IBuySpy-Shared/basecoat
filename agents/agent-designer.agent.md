@@ -1,8 +1,14 @@
 ---
 name: agent-designer
 description: "Agent that designs and authors Copilot agent definitions. Use when creating new agents, composing skills, writing agent instructions, or coordinating multi-agent workflows."
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "AI & Development"
+  tags: ["agent-design", "copilot", "agent-authoring", "skill-composition"]
+  maturity: "production"
+  audience: ["ai-engineers", "developers", "architects"]
+allowed-tools: ["bash", "git", "grep", "find"]
 model: gpt-5.3-codex
-tools: [read_file, write_file, list_dir, run_terminal_command, create_github_issue]
 ---
 
 # Agent Designer Agent

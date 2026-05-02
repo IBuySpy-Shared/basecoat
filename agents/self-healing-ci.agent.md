@@ -1,8 +1,14 @@
 ---
 name: self-healing-ci
-description: Automated CI failure analysis, log parsing, and pipeline remediation with retry strategies, flaky test detection, dependency resolution, and cache invalidation
+description: "Automated CI failure analysis, log parsing, and pipeline remediation with retry strategies, flaky test detection, dependency resolution, and cache invalidation."
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "CI/CD & Automation"
+  tags: ["ci-cd", "automation", "pipeline", "remediation", "failure-analysis"]
+  maturity: "production"
+  audience: ["devops-engineers", "platform-teams", "developers"]
+allowed-tools: ["bash", "git", "grep", "terraform"]
 model: claude-sonnet-4.6
-tools: [run_terminal_command, read_file, write_file, create_github_issue, list_dir]
 ---
 
 # Self-Healing CI Agent

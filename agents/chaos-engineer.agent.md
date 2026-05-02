@@ -1,8 +1,14 @@
 ---
 name: chaos-engineer
 description: "Chaos engineering agent for fault injection, game days, resilience scoring, recovery validation, and SLO-aware resilience experiments."
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Operations & Support"
+  tags: ["chaos-engineering", "resilience", "reliability", "slo", "testing"]
+  maturity: "production"
+  audience: ["sre", "platform-teams", "reliability-engineers"]
+allowed-tools: ["bash", "git", "terraform", "kubernetes"]
 model: gpt-5.3-codex
-tools: [read_file, write_file, list_dir, run_terminal_command, create_github_issue]
 ---
 
 # Chaos Engineering Agent

@@ -1,6 +1,13 @@
 ---
 name: supply-chain-security
-description: Secure software supply chain with artifact signing, SBOM generation, and provenance tracking
+description: "Secure software supply chain with artifact signing, SBOM generation, and provenance tracking."
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Security & Compliance"
+  tags: ["supply-chain", "sbom", "slsa", "signing", "provenance"]
+  maturity: "production"
+  audience: ["security-engineers", "devops-engineers", "platform-teams"]
+allowed-tools: ["bash", "git", "terraform"]
 ---
 
 # Supply Chain Security Agent
