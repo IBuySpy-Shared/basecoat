@@ -26,63 +26,13 @@ The Environment Bootstrap Skill provides a complete setup for establishing secur
 
 ## OIDC Federation Setup for CI/CD
 
-OpenID Connect (OIDC) federation allows GitHub Actions to authenticate to Azure without storing service principal credentials as secrets.
-
-### Prerequisites
-
-Before setting up OIDC federation, ensure you have:
-
-- Azure subscription with Owner or Contributor access
-- GitHub repository with Actions enabled
-- Azure CLI installed locally
-- Permissions to create Entra ID applications and federated credentials
-
-### Step 1: Create an Entra ID Application
-
-```bash
-# Create the Entra ID app registration
-az ad app create --display-name "github-actions-ci"
-
-# Get the application ID
-APP_ID=$(az ad app list --query "[?displayName=='github-actions-ci'].appId" -o tsv)
-echo "Application ID: $APP_ID"
-
-# Create a service principal for the app
-az ad sp create --id $APP_ID
-```
-
-### Step 2: Configure Federated Credentials
-
-```bash
-# Set variables
-TENANT_ID=$(az account show --query tenantId -o tsv)
-REPO_OWNER="IBuySpy-Shared"
-REPO_NAME="basecoat"
-GITHUB_ENTITY="repo:${REPO_OWNER}/${REPO_NAME}:ref:refs/heads/main"
-
-# Create federated credential for main branch
-az ad app federated-credential create \
-  --id $APP_ID \
-  --parameters '{
-    "name": "github-main",
-    "issuer": "https://token.actions.githubusercontent.com",
-    "subject": "'$GITHUB_ENTITY'",
-    "audiences": ["api://AzureADTokenExchange"]
-  }'
-```
-
-### Step 3: Assign Azure RBAC Roles
-
-```bash
-# Get subscription ID
-SUBSCRIPTION_ID=$(az account show --query id -o tsv)
-
-# Assign Contributor role to service principal
-az role assignment create \
-  --role "Contributor" \
-  --assignee-object-id $(az ad sp show --id $APP_ID --query id -o tsv) \
-  --scope "/subscriptions/$SUBSCRIPTION_ID"
-```
+See [`references/oidc-federation.md`](references/oidc-federation.md) for complete OIDC federation setup instructions including:
+- Creating Entra ID applications
+- Configuring federated credentials
+- Assigning RBAC roles
+- GitHub Actions OIDC token exchange
+- Multi-environment federation
+- Troubleshooting guide
 
 ## Terraform and Bicep State Storage Configuration
 
