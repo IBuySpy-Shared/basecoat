@@ -1,7 +1,13 @@
 ---
 name: azure-container-apps
-description: Deploy, scale, and manage containerized applications on Azure Container Apps with Dapr, revision management, and advanced networking.
-context: fork
+title: Azure Container Apps Deployment & Operations
+description: Deploy, scale, and manage containerized applications on Azure Container Apps with Dapr, revision management, and advanced networking
+compatibility: ["agent:containerization-planner", "agent:devops-engineer"]
+metadata:
+  domain: infrastructure
+  maturity: production
+  audience: [devops-engineer, backend-engineer, platform-engineer]
+allowed-tools: [bash, azure-cli, docker, kubectl, terraform]
 ---
 
 # Azure Container Apps Skill

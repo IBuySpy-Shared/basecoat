@@ -1,7 +1,13 @@
 ---
 name: basecoat
-description: "The Base Coat router — your single entry point for 28 agents across 6 disciplines. Use /basecoat to discover agents or /basecoat [discipline] [prompt] to delegate directly."
-context: fork
+title: Base Coat Router & Agent Discovery
+description: Single entry point for 28+ agents across 6 disciplines—discover or delegate across Development, Architecture, Quality, DevOps, Process, and Meta
+compatibility: ["agent:*"]
+metadata:
+  domain: framework
+  maturity: production
+  audience: [all]
+allowed-tools: [bash, curl, git]
 ---
 
 # Base Coat Router

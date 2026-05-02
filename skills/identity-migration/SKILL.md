@@ -1,7 +1,13 @@
 ---
 name: identity-migration
-description: Migrate ASP.NET Membership to ASP.NET Core Identity with Entra ID integration, claims-based authentication, and role/password management
-context: fork
+title: Identity Migration to ASP.NET Core & Entra ID
+description: Migrate legacy authentication to ASP.NET Core Identity with Entra ID integration, claims-based authentication, and role/password management
+compatibility: ["agent:backend-dev"]
+metadata:
+  domain: identity
+  maturity: production
+  audience: [backend-engineer, devops-engineer, architect]
+allowed-tools: [bash, powershell, docker]
 ---
 
 # Identity Migration Skill

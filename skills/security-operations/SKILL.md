@@ -1,11 +1,13 @@
 ---
 name: security-operations
-description: "Use when building detection patterns, secrets management systems, and audit logging infrastructure. Covers threat modeling, SIEM rules, credential rotation, log aggregation, and incident response automation."
-compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+title: Security Operations & Threat Detection
+description: Threat detection patterns, SIEM rules, secrets management, audit logging, and incident response automation
+compatibility: ["agent:security-operations"]
 metadata:
-  category: "Security Operations"
-  tags: ["siem", "detection", "secrets", "audit", "threat-detection", "incident-response", "compliance"]
-allowed-tools: ["bash", "terraform", "kubectl", "azure-cli", "docker"]
+  domain: security
+  maturity: production
+  audience: [sre, security-engineer, devops-engineer]
+allowed-tools: [bash, terraform, kubectl, azure-cli, docker]
 ---
 
 # Security Operations Skill
