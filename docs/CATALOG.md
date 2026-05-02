@@ -2,7 +2,7 @@
 
 This is the master index of all Base Coat assets, including 44 agents, 27 instructions, 21 skills, 3 prompts, and 23 documentation files. Use this catalog to navigate, discover, and understand the Base Coat framework's components.
 
-## Agents (43)
+## Agents (44)
 
 Agents are autonomous AI workers that specialize in specific roles. Each agent is designed to perform a particular function within the software development lifecycle.
 
