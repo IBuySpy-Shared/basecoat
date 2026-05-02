@@ -4,6 +4,28 @@ All notable changes to this repository should be recorded in this file.
 
 ## Unreleased
 
+## 2.8.0 - 2026-05-02
+
+### Added
+- `agents/dotnet-modernization-advisor.agent.md` — Three-stage .NET framework upgrade orchestration (assessment, planning, execution) with decision support and validation (#392)
+- `skills/dotnet-modernization/SKILL.md` — Comprehensive .NET upgrade workflow with project inventory, dependency analysis, test baselines, and execution patterns (14+ KB)
+- `skills/dotnet-modernization/references/breaking-changes.md` — Catalog of .NET breaking changes (.NET 4.8→8/10 & Core 3.1→8/10) with code examples and migration strategies (11+ KB)
+- `skills/entity-framework-migration/SKILL.md` — Complete EF6→EF Core migration guide covering DbContext, LINQ, relationships, inheritance, migrations, testing (18+ KB)
+- `instructions/dotnet-upgrade-planning.instructions.md` — Pre-upgrade assessment, strategy selection, project prioritization, timeline planning, go/no-go gates (10+ KB)
+- `instructions/dotnet-dependency-analysis.instructions.md` — NuGet audit, transitive dependency resolution, security scanning, alternative package evaluation (12+ KB)
+- `instructions/dotnet-test-strategy.instructions.md` — Test baseline, regression testing, performance validation, security testing, post-upgrade reporting (16+ KB)
+- `docs/DOTNET_MODERNIZATION.md` — Architecture guide with three-stage overview, strategy matrix, real-world scenarios, effort estimation (14+ KB)
+- `docs/DOTNET_DECISION_TREE.md` — Interactive decision flowchart for strategy selection with go/no-go gates and escalation paths (13+ KB)
+- Updated `docs/AGENT_SKILL_MAP.md` with .NET modernization agent and skills entries
+
+### Features
+- Three upgrade strategies: Big-Bang (1-3 weeks), Phased (2-8 weeks), Incremental (4-12 weeks)
+- Breaking changes reference with 20+ categories (System.Web, AppDomains, EF, async, LINQ, serialization, etc.)
+- Entity Framework migration patterns (DbContext, lazy loading, relationships, inheritance, migrations)
+- Test baseline establishment, regression testing, performance validation workflows
+- Security vulnerability assessment and transitive dependency resolution
+- Real-world scenarios: ASP.NET Classic, microservices, line-of-business apps
+
 ## 2.7.0 - 2026-05-02
 
 ### Added
