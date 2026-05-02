@@ -1,6 +1,6 @@
 {
     "name": "base-coat",
-    "version": "2.4.0",
-    "releaseDate": "2026-05-01",
-    "notes": "v2.4.0: Sprint 9 — prompt frontmatter, browser security, REST resilience, Azure DevOps REST skill."
+    "version": "2.5.0",
+    "releaseDate": "2026-05-02",
+    "notes": "v2.5.0: Cloud agent coordination — data-pipeline, github-security-posture, VS Code handoff workflows."
 }

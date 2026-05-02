@@ -4,6 +4,14 @@ All notable changes to this repository should be recorded in this file.
 
 ## Unreleased
 
+## 2.5.0 - 2026-05-02
+
+### Added
+- `agents/data-pipeline.agent.md` — orchestrates data ingestion, transformation, quality validation workflows (#379)
+- `agents/github-security-posture.agent.md` — analyzes org/repo security settings, permissions, branch protections, secret scanning (#381)
+- `agents/vs-code-handoff.agent.md` — seamless skill/agent handoff workflows between VS Code Copilot and other tools (#382)
+- Cloud agent coordination workflows with auto-approval and self-merge for continuous delivery (#379-382)
+
 ## 2.4.0 - 2026-05-01
 
 ### Added
