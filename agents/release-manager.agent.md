@@ -1,8 +1,14 @@
 ---
 name: release-manager
 description: "Automated versioned release workflow. Reads merged PRs since the last release, bumps version.json, writes CHANGELOG entry, creates git tag, and publishes GitHub release."
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Release & Deployment"
+  tags: ["release-management", "versioning", "changelog", "semver", "git-tagging"]
+  maturity: "production"
+  audience: ["devops-engineers", "release-managers", "platform-teams"]
+allowed-tools: ["bash", "git", "gh", "grep"]
 model: claude-sonnet-4.6
-tools: [run_terminal_command, read_file, write_file, list_dir]
 ---
 
 # Release Manager Agent

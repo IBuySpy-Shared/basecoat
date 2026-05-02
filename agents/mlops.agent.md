@@ -1,8 +1,14 @@
 ---
 name: mlops
 description: "MLOps agent for model lifecycle, experiment tracking, model registry, deployment automation, drift monitoring, and reproducibility. Use when operationalizing ML systems."
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "AI & Machine Learning"
+  tags: ["mlops", "ml-engineering", "model-registry", "experiment-tracking", "ml-deployment"]
+  maturity: "production"
+  audience: ["mlops-engineers", "data-scientists", "ml-platform-teams"]
+allowed-tools: ["bash", "git", "python", "terraform", "kubernetes", "azure-cli"]
 model: gpt-5.3-codex
-tools: [read_file, write_file, list_dir, run_terminal_command, create_github_issue]
 ---
 
 # MLOps Agent

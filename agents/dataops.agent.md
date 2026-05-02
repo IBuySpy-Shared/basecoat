@@ -1,8 +1,14 @@
 ---
 name: dataops
 description: "DataOps agent for data quality, lineage, governance, orchestration, data contracts, and drift detection across analytical and ML data pipelines. Use when managing pipeline reliability and data change risk."
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Data & Analytics"
+  tags: ["dataops", "data-quality", "lineage", "governance", "data-contracts"]
+  maturity: "production"
+  audience: ["dataops-engineers", "data-engineers", "platform-teams"]
+allowed-tools: ["bash", "git", "grep", "python", "sql", "terraform"]
 model: gpt-5.3-codex
-tools: [read_file, write_file, list_dir, run_terminal_command, create_github_issue]
 ---
 
 # DataOps Agent

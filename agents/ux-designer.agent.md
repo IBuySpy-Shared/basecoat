@@ -1,8 +1,14 @@
 ---
 name: ux-designer
 description: "UX design agent for user journey mapping, wireframe specs, component design, and accessibility audits. Use when designing user experiences, evaluating usability, or auditing interfaces for WCAG compliance."
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Design & UX"
+  tags: ["ux-design", "user-experience", "accessibility", "wireframes", "ui-design"]
+  maturity: "production"
+  audience: ["ux-designers", "ui-designers", "product-teams"]
+allowed-tools: ["bash", "git", "grep"]
 model: claude-sonnet-4-5
-tools: [read_file, write_file, list_dir, run_terminal_command, create_github_issue]
 ---
 
 # UX Designer Agent

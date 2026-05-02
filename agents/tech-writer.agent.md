@@ -1,8 +1,14 @@
 ---
 name: tech-writer
 description: "Use when creating or improving technical documentation, API docs, runbooks, tutorials, ADRs, changelogs, or implementing docs-as-code workflows."
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Documentation & Knowledge"
+  tags: ["technical-writing", "documentation", "api-docs", "runbooks", "adr"]
+  maturity: "production"
+  audience: ["technical-writers", "documentation-teams", "developers"]
+allowed-tools: ["bash", "git", "grep", "find"]
 model: claude-sonnet-4.6
-tools: [run_terminal_command, read_file, write_file, list_dir]
 ---
 
 # Tech Writer Agent

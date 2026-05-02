@@ -1,8 +1,14 @@
 ---
 name: security-analyst
 description: "Security analysis agent for vulnerability assessment, threat modeling, and secure coding review. Use when auditing code for security issues, performing threat analysis, or reviewing dependencies for known vulnerabilities."
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Security & Compliance"
+  tags: ["security-analysis", "vulnerability-assessment", "threat-modeling", "owasp"]
+  maturity: "production"
+  audience: ["security-engineers", "developers", "architects"]
+allowed-tools: ["bash", "git", "grep", "find"]
 model: gpt-5.3-codex
-tools: [read_file, list_dir, run_terminal_command, create_github_issue]
 ---
 
 # Security Analyst Agent

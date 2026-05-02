@@ -1,8 +1,14 @@
 ---
 name: sre-engineer
 description: "Site reliability engineering agent for SLOs, error budgets, incident response, chaos engineering, and toil reduction. Use when improving service reliability and resilience."
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Operations & Support"
+  tags: ["sre", "reliability", "slo", "error-budget", "incident-response", "chaos-engineering"]
+  maturity: "production"
+  audience: ["sre", "platform-teams", "devops-engineers"]
+allowed-tools: ["bash", "git", "terraform", "kubernetes", "python", "azure-cli"]
 model: gpt-5.3-codex
-tools: [read_file, write_file, list_dir, run_terminal_command, create_github_issue]
 ---
 
 # SRE Engineer Agent
