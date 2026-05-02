@@ -13,7 +13,7 @@ Complete reference guide for all 56 GitHub Copilot agents and 45 customization s
 
 ## Agents by Discipline
 
-### Development (15 agents)
+### Development (16 agents)
 
 | Agent | Domain | Purpose |
 |-------|--------|---------|
@@ -25,6 +25,7 @@ Complete reference guide for all 56 GitHub Copilot agents and 45 customization s
 | containerization-planner | Infrastructure | Container strategy and Docker/Kubernetes |
 | dependency-lifecycle | Development | Dependency management and version upgrades |
 | code-review | Quality | Code review and quality assessment |
+| dotnet-modernization | Development | .NET framework upgrades, assessment, planning, execution |
 
 ### Architecture (12 agents)
 
@@ -108,13 +109,15 @@ Complete reference guide for all 56 GitHub Copilot agents and 45 customization s
 | domain-driven-design | Architecture patterns | DDD, CQRS, event sourcing, aggregates |
 | data-science | ML workflows | Notebooks, feature engineering, model training |
 
-### Development & Tools (10 skills)
+### Development & Tools (12 skills)
 
 | Skill | Focus | Primary Use Case |
 |-------|-------|-----------------|
 | electron-apps | Desktop applications | Secure IPC, CSP, state management, packaging |
 | fabric-notebooks | Analytics notebooks | Medallion architecture, builtin modules, CI/CD |
 | basecoat | Framework routing | Agent discovery, delegation patterns |
+| dotnet-modernization | Framework upgrade | .NET assessment, planning, three-stage workflow |
+| entity-framework-migration | Data access | EF6→EF Core migration, DbContext patterns, testing |
 
 ### Quality & Testing (4 skills)
 
@@ -171,6 +174,13 @@ Complete reference guide for all 56 GitHub Copilot agents and 45 customization s
 - environment-bootstrap
 - ha-resilience
 - otel-instrumentation
+
+### .NET Modernization Advisor Agent
+**Compatible Skills:**
+- dotnet-modernization (primary)
+- entity-framework-migration
+- contract-testing (for E2E validation)
+- production-readiness (for PRR checklist)
 
 ---
 
