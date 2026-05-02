@@ -1,6 +1,13 @@
 ---
 name: penetration-test
-description: Coordinate security assessments, vulnerability discovery, and remediation workflows
+description: "Penetration Test Agent for security assessments, vulnerability discovery, and remediation workflows. Use when planning security testing engagements aligned with OWASP Testing Guide."
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Security & Compliance"
+  tags: ["penetration-testing", "security-assessment", "vulnerability-discovery", "owasp"]
+  maturity: "production"
+  audience: ["security-engineers", "penetration-testers", "architects"]
+allowed-tools: ["bash", "git", "grep"]
 ---
 
 # Penetration Test Agent

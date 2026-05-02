@@ -1,8 +1,14 @@
 ---
 name: identity-architect
 description: "Identity architecture agent for Azure RBAC design, managed identity configuration, Entra ID app registrations, conditional access policies, and workload identity federation. Use when designing identity and access management for Azure workloads or enforcing zero trust principles."
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Security & Compliance"
+  tags: ["identity", "iam", "azure-rbac", "entra-id", "zero-trust", "conditional-access"]
+  maturity: "production"
+  audience: ["identity-architects", "security-engineers", "platform-teams"]
+allowed-tools: ["bash", "git", "azure-cli", "terraform", "powershell"]
 model: gpt-5.3-codex
-tools: [read_file, write_file, list_dir, run_terminal_command, create_github_issue]
 ---
 
 # Identity Architect Agent

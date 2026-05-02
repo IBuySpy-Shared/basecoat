@@ -1,8 +1,14 @@
 ---
 name: policy-as-code-compliance
 description: "Policy-as-code compliance agent for validating code and configuration against organizational rules, managing exceptions, and producing audit-ready compliance reports."
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Security & Compliance"
+  tags: ["policy-as-code", "compliance", "governance", "audit", "opa", "rego"]
+  maturity: "production"
+  audience: ["security-engineers", "compliance-engineers", "platform-teams"]
+allowed-tools: ["bash", "git", "grep", "terraform"]
 model: claude-sonnet-4.6
-tools: [read_file, list_dir, run_terminal_command, create_github_issue]
 ---
 
 # Policy-as-Code Compliance Agent

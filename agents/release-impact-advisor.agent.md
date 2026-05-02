@@ -1,8 +1,14 @@
 ---
 name: release-impact-advisor
 description: "Comprehensive agent for assessing release readiness, analyzing change impacts, estimating blast radius, planning rollbacks, and guiding safe deployment strategies with feature flags, canary deployments, and changelog generation."
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Release & Deployment"
+  tags: ["release-management", "impact-analysis", "deployment-strategy", "rollback", "canary"]
+  maturity: "production"
+  audience: ["release-managers", "devops-engineers", "platform-teams"]
+allowed-tools: ["bash", "git", "grep", "powershell"]
 model: claude-sonnet-4.6
-tools: [grep, glob, view, powershell, edit, create]
 ---
 
 # Release Impact Advisor Agent

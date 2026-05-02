@@ -1,6 +1,13 @@
 ---
 name: contract-testing
-description: Coordinate consumer-driven contract testing, E2E testing strategy, and mutation testing for distributed systems
+description: "Contract Testing Agent for consumer-driven contracts, E2E testing strategy, and mutation testing for distributed systems."
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Testing & Quality"
+  tags: ["contract-testing", "cdc", "integration-testing", "testing", "e2e-testing"]
+  maturity: "production"
+  audience: ["developers", "qa-engineers", "platform-teams"]
+allowed-tools: ["bash", "git", "grep"]
 ---
 
 # Contract Testing Agent

@@ -1,6 +1,13 @@
 ---
 name: ha-architect
-description: Design high-availability, resilience, and chaos testing strategies for distributed systems
+description: "Design high-availability, resilience, and chaos testing strategies for distributed systems."
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Architecture & Design"
+  tags: ["high-availability", "resilience", "disaster-recovery", "chaos-engineering", "sre"]
+  maturity: "production"
+  audience: ["architects", "sre", "platform-teams"]
+allowed-tools: ["bash", "git", "terraform", "kubernetes"]
 ---
 
 # High-Availability & Resilience Architect Agent

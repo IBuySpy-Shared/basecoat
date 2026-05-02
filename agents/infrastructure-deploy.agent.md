@@ -1,14 +1,14 @@
 ---
 name: infrastructure-deploy
-description: Orchestrates Azure infrastructure deployments using Bicep, handles resource group management, parameter validation, and rollback strategies
+description: "Orchestrates Azure infrastructure deployments using Bicep, handles resource group management, parameter validation, and rollback strategies."
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Infrastructure & Operations"
+  tags: ["infrastructure", "azure", "bicep", "deployment", "iac"]
+  maturity: "production"
+  audience: ["infrastructure-engineers", "devops-engineers", "platform-teams"]
+allowed-tools: ["bash", "git", "grep", "powershell", "terraform", "azure-cli"]
 model: claude-sonnet-4.6
-tools:
-  - grep
-  - glob
-  - view
-  - powershell
-  - edit
-  - create
 ---
 
 # Infrastructure Deploy Agent
