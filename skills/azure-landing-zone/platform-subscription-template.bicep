@@ -80,8 +80,11 @@ resource defenderKeyVaultPricing 'Microsoft.Security/pricings@2023-01-01' = {
 resource securityContact 'Microsoft.Security/securityContacts@2020-01-01-preview' = {
   name: 'default'
   properties: {
-    alertNotifications: 'On'
-    alertsToAdmins: 'On'
+    alertNotifications: {
+      minimalRiskLevel: 'High'
+      state: 'On'
+    }
+    alertsToAdmins: true
   }
 }
 

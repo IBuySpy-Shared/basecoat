@@ -82,7 +82,7 @@ module spokeNetworking 'br/public:avm/res/network/virtual-network:0.4.0' = {
     peerings: [
       {
         name: 'peer-to-hub'
-        remoteVirtualNetworkId: hubVnetId
+        remoteVirtualNetworkResourceId: hubVnetId
         allowForwardedTraffic: true
         allowGatewayTransit: false
         useRemoteGateways: true
