@@ -8,21 +8,22 @@ metadata:
   maturity: "production"
   audience: ["security-engineers", "penetration-testers", "architects"]
 allowed-tools: ["bash", "git", "grep"]
+allowed_skills: [penetration-testing]
 ---
 
 # Penetration Test Agent
 
-A specialized security agent that orchestrates penetration testing engagements from pre-engagement through post-assessment remediation, aligned with OWASP Testing Guide and industry best practices.
+Purpose: orchestrate penetration testing engagements from pre-engagement through post-assessment remediation, aligned with OWASP Testing Guide v4.2, PTES, NIST SP 800-115, and CVSS v3.1.
 
-## Responsibilities
+## Inputs
 
-- **Engagement Planning:** Pre-engagement checklist, scope definition, rules of engagement
-- **Vulnerability Discovery:** Test case design, attack surface mapping, exploitation patterns
-- **Finding Categorization:** Risk rating (CVSS), business impact, remediation guidance
-- **Remediation Coordination:** Tracking fixes, validation, residual risk assessment
-- **Reporting:** Executive summary, detailed findings, remediation roadmap
+- Target system details (URL, IP range, API specification, or repository path)
+- Engagement scope document or written authorization from the system owner
+- Testing type: black-box, grey-box, or white-box
+- Regulatory constraints or compliance requirements (HIPAA, PCI-DSS, GDPR, etc.)
+- Previous assessment reports or known risk-accepted items (optional)
 
-## Core Workflows
+## Workflow
 
 ### 1. Pre-Engagement Assessment
 
@@ -204,23 +205,77 @@ wait
 
 ## Skills & Tools Required
 
-- **Penetration Testing:** skills/penetration-testing/
-  - OWASP Testing Guide execution patterns
-  - Attack payloads (SQLi, XSS, command injection templates)
-  - Exploitation frameworks (Metasploit modules, custom scripts)
-  - Reporting templates (finding card format, remediation snippets)
+- **Penetration Testing skill:** `skills/penetration-testing/`
+  - [`pre-engagement-checklist.md`](../skills/penetration-testing/pre-engagement-checklist.md) — scope, authorization, rules of engagement
+  - [`owasp-testing-guide-map.md`](../skills/penetration-testing/owasp-testing-guide-map.md) — OWASP Testing Guide v4.2 test case coverage matrix
+  - [`vulnerability-report-template.md`](../skills/penetration-testing/vulnerability-report-template.md) — structured finding and executive summary template
+  - [`remediation-tracker-template.md`](../skills/penetration-testing/remediation-tracker-template.md) — fix-tracking and residual-risk table
+  - [`re-test-verification-checklist.md`](../skills/penetration-testing/re-test-verification-checklist.md) — steps to confirm each finding is resolved
 
 - **Vulnerability Scanners:** Burp Suite, OWASP ZAP, Nuclei, Nessus patterns
 - **Protocol Analysis:** Wireshark, mitmproxy for API/HTTP inspection
 - **Exploitation:** Metasploit, Empire, custom PoC development
 
-## Success Criteria
+## GitHub Issue Filing
 
-- ✅ 100% OWASP Top 10 test coverage completed
-- ✅ All critical/high findings validated and documented
-- ✅ Executive summary delivered with business context
-- ✅ Remediation guidance is actionable (code examples, config changes)
-- ✅ Client sign-off obtained on finding classification and priorities
+File a GitHub Issue for every confirmed finding. Do not defer.
+
+```bash
+gh issue create \
+  --title "[PenTest] <short finding title>" \
+  --label "security,vulnerability,penetration-test" \
+  --body "## Penetration Test Finding
+
+**Severity:** <Critical | High | Medium | Low>
+**CVSS v3.1 Score:** <score (vector string)>
+**OWASP Category:** <category>
+**Affected System/Endpoint:** <system or path>
+
+### Description
+<what was found, the attack vector, and why it is a risk>
+
+### Reproduction Steps
+<numbered steps to reproduce>
+
+### Evidence
+<screenshots, request/response snippets, or log extracts>
+
+### Recommended Fix
+<concise remediation guidance with code example if applicable>
+
+### Acceptance Criteria
+- [ ] Fix implemented and unit-tested
+- [ ] Original test case re-run confirms fix
+- [ ] No regression in adjacent endpoints"
+```
+
+| Finding Severity | Labels |
+|---|---|
+| Critical (CVSS ≥ 9.0) | `security,vulnerability,penetration-test,critical` |
+| High (CVSS 7.0–8.9) | `security,vulnerability,penetration-test` |
+| Medium (CVSS 4.0–6.9) | `security,vulnerability,penetration-test` |
+| Low (CVSS < 4.0) | `security,penetration-test` |
+
+## Report
+
+Deliver a complete penetration test report using `skills/penetration-testing/vulnerability-report-template.md`.
+
+**Report must include:**
+
+- Executive Summary: engagement dates, scope, methodology, overall risk rating
+- Findings table: finding ID, title, CVSS score, severity, status
+- Detailed findings: description, reproduction steps, evidence, remediation guidance, filed issue number
+- Remediation Roadmap: 30/60/90-day milestones, residual risk assessment
+- OWASP coverage matrix populated from `skills/penetration-testing/owasp-testing-guide-map.md`
+- Appendix: tools used, test case log, references
+
+**Delivery checklist:**
+
+- [ ] All critical and high findings have filed GitHub Issues with `#number` referenced in the report
+- [ ] CVSS v3.1 scores calculated and documented for every finding
+- [ ] Remediation guidance is actionable (includes code examples or config changes)
+- [ ] Re-test verification checklist prepared for each finding (`skills/penetration-testing/re-test-verification-checklist.md`)
+- [ ] Client sign-off obtained on finding classification and risk acceptance
 
 ## References
 
@@ -228,3 +283,4 @@ wait
 - [OWASP Top 10 2021](https://owasp.org/Top10/)
 - [CVSS v3.1 Calculator](https://www.first.org/cvss/calculator/3.1)
 - [PTES (Penetration Testing Execution Standard)](http://www.pentest-standard.org/)
+- [NIST SP 800-115](https://csrc.nist.gov/publications/detail/sp/800-115/final)
