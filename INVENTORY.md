@@ -56,11 +56,13 @@ This catalog helps teams discover what exists in Base Coat and when to use it.
 | `skills/backend-dev/SKILL.md`           | design and implement APIs, service layers, and data access repositories | backend, api, service, repository, error catalog                     |
 | `skills/basecoat/SKILL.md`              | /basecoat router — discovery and delegation entry point | basecoat, router, discovery, delegation |
 | `skills/code-review/SKILL.md`           | review changes for risk, regressions, and missing tests | review, bug risk, regression, findings       |
+| `skills/contract-testing/SKILL.md`      | consumer-driven contracts with Pact, provider verification, mutation testing, and integration test orchestration | contract-testing, pact, cdc, mutation-testing, provider, consumer, api-compatibility |
 | `skills/create-instruction/SKILL.md`    | create a new instruction file for a domain              | create instruction, applyTo, frontmatter     |
 | `skills/create-skill/SKILL.md`          | create a new reusable skill with proper frontmatter     | create skill, skill template, customization  |
 | `skills/data-tier/SKILL.md`             | design schemas, write migrations, review queries, build data dictionaries | data, schema, migration, query, indexing                            |
 | `skills/devops/SKILL.md`                | CI/CD pipeline, deployment, and rollback templates | devops, cicd, deployment, rollback, github-actions |
 | `skills/documentation/SKILL.md`         | README, runbook, and ADR templates | documentation, readme, runbook, adr |
+| `skills/e2e-testing/SKILL.md`           | design E2E tests with Playwright, Cypress, or Selenium; selector strategy, flakiness prevention, cross-browser matrix, and CI pipeline integration | e2e-testing, playwright, cypress, selenium, flakiness, cross-browser, selectors, ci |
 | `skills/environment-bootstrap/SKILL.md` | environment setup and bootstrap configuration | environment, bootstrap, setup, configuration |
 | `skills/frontend-dev/SKILL.md`          | build accessible, responsive UI components and manage client state       | frontend, ui, component, accessibility, state management             |
 | `skills/handoff/SKILL.md`               | structured agent-to-agent handoff protocols | handoff, agent, protocol, transition |
@@ -98,12 +100,14 @@ This catalog helps teams discover what exists in Base Coat and when to use it.
 | `agents/chaos-engineer.agent.md`    | fault injection, game days, resilience scoring, and recovery validation | agent, chaos, resilience, fault-injection, game-day |
 | `agents/code-review.agent.md`       | multi-step repository review process           | agent, review, repo scan, risk            |
 | `agents/config-auditor.agent.md`    | scan for committed or unprotected config secrets | agent, config, secrets, audit, security |
+| `agents/contract-testing.agent.md`  | consumer-driven contracts (Pact), provider verification in CI, mutation testing, and integration risk assessment for distributed systems | agent, contract-testing, pact, cdc, mutation-testing, integration, api-compatibility |
 | `agents/containerization-planner.agent.md` | containerization readiness assessment and deployment configuration | agent, container, docker, kubernetes, migration |
 | `agents/data-tier.agent.md`             | design schemas, write migrations, optimize queries, and define data access | agent, data, schema, migration, query, indexing, repository         |
 | `agents/data-pipeline.agent.md`     | medallion lakehouse pipelines (bronze/silver/gold), data quality gates, feature store integration, and ML pipeline orchestration | agent, data-pipeline, medallion, bronze, silver, gold, delta-lake, feature-store, ml-pipeline, notebook |
 | `agents/dataops.agent.md`           | data quality, lineage, governance, orchestration, and drift detection | agent, data, quality, lineage, governance, pipeline |
 | `agents/dependency-lifecycle.agent.md` | dependency updates, breaking changes, upgrade paths, and migration guides | agent, dependency, update, upgrade, breaking-change |
 | `agents/devops-engineer.agent.md`   | CI/CD, IaC, deployment, rollback, and observability | agent, devops, cicd, iac, deployment, observability |
+| `agents/e2e-test-strategy.agent.md` | design E2E test coverage with Playwright, Cypress, or Selenium; critical-path selection, flakiness prevention, cross-browser matrices, and CI pipeline integration | agent, e2e-testing, playwright, cypress, selenium, cross-browser, flakiness, ci |
 | `agents/exploratory-charter.agent.md`   | generate time-boxed exploratory sessions with scope, evidence capture, and GitHub Issue filing              | agent, exploratory, charter, session, findings |
 | `agents/feedback-loop.agent.md`     | user feedback collection, prompt effectiveness tracking, and A/B testing | agent, feedback, effectiveness, tracking, a-b-testing |
 | `agents/frontend-dev.agent.md`          | build accessible component-driven UIs with Core Web Vitals targets     | agent, frontend, ui, component, accessibility, wcag, state, performance |

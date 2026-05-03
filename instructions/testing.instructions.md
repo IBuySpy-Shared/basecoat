@@ -76,3 +76,53 @@ See `skills/manual-test-strategy/rubric-template.md` for the full scoring matrix
 - Automation candidates are never left implicit. Every identified candidate is filed as a GitHub Issue with labels `testing` and `automation-candidate`.
 - Defect evidence records include an automation handoff section so future scripted coverage is easier to prioritize.
 - Keep all strategy artifacts stack-agnostic: no framework-specific references belong in rubrics, charters, or checklists.
+
+## Mutation Testing
+
+Line coverage is a weak proxy for test quality — it confirms that a line was executed, not that the test would catch a bug on that line. Mutation testing answers the stronger question: *do my tests actually detect defects?*
+
+### When to Run Mutation Testing
+
+- After a test suite reaches the minimum line-coverage threshold and you want to verify quality, not just quantity.
+- When adding tests to a high-risk module (authentication, payment, data access).
+- As a one-time audit when inheriting a legacy test suite with unknown effectiveness.
+
+### How It Works
+
+A mutation testing tool makes small, deliberate changes to production code — mutants — then re-runs the test suite. A mutant is *killed* if at least one test fails; it *survives* if all tests still pass. A high survival rate means the tests are not detecting the bugs the mutants represent.
+
+**Mutation score** = (killed mutants ÷ total mutants) × 100
+
+### Tool Guidance
+
+| Language / Framework | Recommended Tool | Run Command |
+| --- | --- | --- |
+| JavaScript / TypeScript | [Stryker Mutator](https://stryker-mutator.io/) | `npx stryker run` |
+| Python | [mutmut](https://mutmut.readthedocs.io/) or [Cosmic Ray](https://cosmic-ray.readthedocs.io/) | `mutmut run` |
+| Java | [PIT (Pitest)](https://pitest.org/) | `mvn org.pitest:pitest-maven:mutationCoverage` |
+| C# / .NET | [Stryker.NET](https://stryker-mutator.io/docs/stryker-net/introduction/) | `dotnet stryker` |
+| Go | [go-mutesting](https://github.com/zimmski/go-mutesting) | `go-mutesting ./...` |
+
+### Thresholds
+
+| Scope | Minimum Mutation Score | Enforcement |
+| --- | --- | --- |
+| High-risk modules (auth, payment, data access) | ≥ 85 % | CI advisory gate |
+| New code in changed files | ≥ 80 % | PR comment |
+| Overall project baseline | ≥ 70 % | Tracked as tech-debt issue |
+
+These thresholds complement, not replace, the line-coverage gates in `instructions/quality.instructions.md`.
+
+### Reducing Noise
+
+- Exclude generated code, migration files, configuration, and serialisation boilerplate from mutation runs.
+- Use equivalent mutant detection or survivor allowlists sparingly; document every exclusion with a reason.
+- Run mutation testing on a targeted module or file set during development; run full-suite scans in scheduled CI only (not every PR) to keep feedback loops fast.
+
+### When a Mutant Survives
+
+A surviving mutant is a signal, not a guaranteed bug. Treat each survivor as follows:
+
+1. **Write a test that kills it** if the mutant represents a realistic defect.
+2. **Acknowledge and document** if the mutant is an equivalent mutant (the code change produces identical behaviour).
+3. **File a GitHub Issue** if fixing requires a non-trivial test or design change, labelled `testing` and `mutation-survivor`.

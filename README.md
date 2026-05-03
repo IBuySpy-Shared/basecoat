@@ -111,11 +111,13 @@ Base Coat is built on four GitHub Copilot customization primitives:
 | [chaos-engineer](agents/chaos-engineer.agent.md) | Fault injection, game days, resilience scoring, and recovery validation |
 | [code-review](agents/code-review.agent.md) | Structured multi-step code review workflow |
 | [config-auditor](agents/config-auditor.agent.md) | Scans for committed or unprotected config secrets |
+| [contract-testing](agents/contract-testing.agent.md) | Consumer-driven contracts, provider verification, and mutation testing |
 | [containerization-planner](agents/containerization-planner.agent.md) | Containerization readiness assessment and deployment configuration |
 | [data-tier](agents/data-tier.agent.md) | Schema design, migrations, query optimization, data access |
 | [dataops](agents/dataops.agent.md) | Data quality, lineage, governance, orchestration, and drift detection |
 | [dependency-lifecycle](agents/dependency-lifecycle.agent.md) | Dependency updates, breaking changes, upgrade paths, and migration guides |
 | [devops-engineer](agents/devops-engineer.agent.md) | CI/CD, IaC, deployment, rollback, and observability |
+| [e2e-test-strategy](agents/e2e-test-strategy.agent.md) | E2E test strategy with Playwright/Cypress/Selenium, critical-path selection, flakiness prevention, and CI integration |
 | [exploratory-charter](agents/exploratory-charter.agent.md) | Time-boxed exploratory testing charters with evidence capture |
 | [feedback-loop](agents/feedback-loop.agent.md) | User feedback collection, prompt effectiveness tracking, and A/B testing |
 | [frontend-dev](agents/frontend-dev.agent.md) | UI components, responsive layouts, state, accessibility |
@@ -175,11 +177,13 @@ Base Coat is built on four GitHub Copilot customization primitives:
 | [backend-dev](skills/backend-dev/) | api-spec-template, error-catalog-template, repository-pattern-template, service-template | backend-dev |
 | [basecoat](skills/basecoat/) | SKILL.md workflow | — |
 | [code-review](skills/code-review/) | SKILL.md workflow | code-review |
+| [contract-testing](skills/contract-testing/) | SKILL.md workflow | contract-testing |
 | [create-instruction](skills/create-instruction/) | SKILL.md workflow | new-customization |
 | [create-skill](skills/create-skill/) | SKILL.md workflow | new-customization |
 | [data-tier](skills/data-tier/) | schema-design-template, migration-template, query-review-checklist, data-dictionary-template | data-tier |
 | [devops](skills/devops/) | deployment-checklist, environment-promotion-template, github-actions-template, rollback-runbook-template | devops-engineer |
 | [documentation](skills/documentation/) | readme-template, runbook-template, adr-template | tech-writer |
+| [e2e-testing](skills/e2e-testing/) | SKILL.md workflow | e2e-test-strategy |
 | [environment-bootstrap](skills/environment-bootstrap/) | SKILL.md workflow | devops-engineer |
 | [frontend-dev](skills/frontend-dev/) | component-spec-template, accessibility-checklist, state-management-template | frontend-dev |
 | [handoff](skills/handoff/) | handoff-template | — |

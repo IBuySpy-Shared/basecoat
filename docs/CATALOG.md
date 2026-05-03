@@ -1,8 +1,8 @@
 # Base Coat Asset Catalog
 
-This is the master index of all Base Coat assets, including 44 agents, 27 instructions, 21 skills, 3 prompts, and 23 documentation files. Use this catalog to navigate, discover, and understand the Base Coat framework's components.
+This is the master index of all Base Coat assets, including 46 agents, 27 instructions, 23 skills, 3 prompts, and 23 documentation files. Use this catalog to navigate, discover, and understand the Base Coat framework's components.
 
-## Agents (44)
+## Agents (46)
 
 Agents are autonomous AI workers that specialize in specific roles. Each agent is designed to perform a particular function within the software development lifecycle.
 
@@ -15,11 +15,13 @@ Agents are autonomous AI workers that specialize in specific roles. Each agent i
 | [chaos-engineer](../agents/chaos-engineer.agent.md) | Runs resilience and fault-injection experiments. |
 | [code-review](../agents/code-review.agent.md) | Performs structured, risk-focused code reviews. |
 | [config-auditor](../agents/config-auditor.agent.md) | Finds unsafe or secret-bearing config files. |
+| [contract-testing](../agents/contract-testing.agent.md) | Consumer-driven contracts, provider verification, and mutation testing for distributed systems. |
 | [data-pipeline](../agents/data-pipeline.agent.md) | Builds medallion lakehouse pipelines and ML workflows. |
 | [data-tier](../agents/data-tier.agent.md) | Designs schemas, migrations, and queries. |
 | [dataops](../agents/dataops.agent.md) | Manages data pipeline quality and governance. |
 | [dependency-lifecycle](../agents/dependency-lifecycle.agent.md) | Tracks and upgrades dependencies safely. |
 | [devops-engineer](../agents/devops-engineer.agent.md) | Designs CI/CD, IaC, and deployment workflows. |
+| [e2e-test-strategy](../agents/e2e-test-strategy.agent.md) | E2E test strategy with Playwright, Cypress, and Selenium for critical-path coverage, flakiness prevention, and CI integration. |
 | [exploratory-charter](../agents/exploratory-charter.agent.md) | Creates guided exploratory testing charters. |
 | [feedback-loop](../agents/feedback-loop.agent.md) | Improves prompts from user feedback and results. |
 | [frontend-dev](../agents/frontend-dev.agent.md) | Builds UI components and client apps. |
@@ -87,7 +89,7 @@ Instructions provide behavioral guidance to agents and AI systems. They establis
 | [ux](../instructions/ux.instructions.md) | Guides UX, accessibility, and journey mapping. |
 | [verification](../instructions/verification.instructions.md) | Requires explicit success criteria and evidence. |
 
-## Skills (21)
+## Skills (23)
 
 Skills are reusable, task-specific modules that extend agent capabilities. Each skill encapsulates specialized knowledge and workflows.
 
@@ -99,11 +101,13 @@ Skills are reusable, task-specific modules that extend agent capabilities. Each 
 | [backend-dev](../skills/backend-dev/) | Builds APIs, services, and data access. |
 | [basecoat](../skills/basecoat/) | Routes requests to the right Base Coat agent. |
 | [code-review](../skills/code-review/) | Reviews code and diffs for risks. |
+| [contract-testing](../skills/contract-testing/) | Consumer-driven contract tests, Pact patterns, provider verification, and mutation testing. |
 | [create-instruction](../skills/create-instruction/) | Creates new instruction files. |
 | [create-skill](../skills/create-skill/) | Creates new reusable skills. |
 | [data-tier](../skills/data-tier/) | Designs schemas, migrations, and queries. |
 | [devops](../skills/devops/) | Plans CI/CD, deployments, and observability. |
 | [documentation](../skills/documentation/) | Writes and improves technical documentation. |
+| [e2e-testing](../skills/e2e-testing/) | End-to-end test design with Playwright, Cypress, and Selenium including cross-browser matrices and CI integration. |
 | [frontend-dev](../skills/frontend-dev/) | Builds UI components and responsive layouts. |
 | [handoff](../skills/handoff/) | Structures session handoffs between agents. |
 | [human-in-the-loop](../skills/human-in-the-loop/) | Adds human approval and escalation gates. |

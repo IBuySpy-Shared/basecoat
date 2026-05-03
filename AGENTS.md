@@ -2,7 +2,7 @@
 
 This file lists all available agents in the Base Coat framework.
 
-> **51 agents** available
+> **53 agents** available
 
 | Agent | Description |
 |---|---|
@@ -14,6 +14,7 @@ This file lists all available agents in the Base Coat framework.
 | [backend-dev](agents/backend-dev.agent.md) | Backend development agent for APIs, services, and business logic. Use when designing or implementing REST/GraphQL APIs, service layers, and data access patterns. |
 | [chaos-engineer](agents/chaos-engineer.agent.md) | Chaos engineering agent for fault injection, game days, resilience scoring, recovery validation, and SLO-aware resilience experiments. |
 | [code-review](agents/code-review.agent.md) | Use when a task needs a structured, multi-step code review workflow with findings prioritized by severity and file references. |
+| [contract-testing](agents/contract-testing.agent.md) | Contract Testing agent for consumer-driven contracts (Pact), provider verification, E2E testing strategy, and mutation testing for distributed systems. Use when establishing API contracts between services, verifying provider compatibility in CI, or measuring test effectiveness. |
 | [config-auditor](agents/config-auditor.agent.md) | Use when you need to scan a repository for committed or unprotected configuration files that contain secrets, credentials, or sensitive environment-specific values. Produces a findings report with remediation steps. |
 | [containerization-planner](agents/containerization-planner.agent.md) | Helps assess containerization readiness, choose deployment platforms (Docker/AKS/ACA), and generate container configurations including Dockerfiles, multi-stage builds, health probes, resource limits, and deployment manifests |
 | [data-tier](agents/data-tier.agent.md) | Data tier agent for schema design, migrations, query optimization, and data access patterns. Use when designing schemas, writing migrations, reviewing queries, or establishing repository patterns. |
@@ -21,6 +22,7 @@ This file lists all available agents in the Base Coat framework.
 | [dependency-lifecycle](agents/dependency-lifecycle.agent.md) | Agent for managing dependency updates, tracking breaking changes, planning upgrade paths, monitoring vulnerabilities, analyzing semantic versioning, and generating migration guides. |
 | [devops-engineer](agents/devops-engineer.agent.md) | DevOps engineer agent for CI/CD pipelines, infrastructure as code, container strategy, environment promotion, rollback procedures, and observability. Use when designing or improving deployment workflows. |
 | [exploratory-charter](agents/exploratory-charter.agent.md) | Use when you need time-boxed exploratory testing sessions. Generates mission-driven charters with scope, triage routing, and evidence capture. Automatically files GitHub Issues for automation candidates found during exploration. |
+| [e2e-test-strategy](agents/e2e-test-strategy.agent.md) | E2E test strategy agent for Playwright, Cypress, and Selenium orchestration, critical-path selection, flakiness prevention, cross-browser matrices, and CI pipeline integration. Use when designing or auditing end-to-end test coverage for web and API workflows. |
 | [feedback-loop](agents/feedback-loop.agent.md) | Continuous learning and optimization through user feedback collection, prompt effectiveness tracking, outcome measurement, A/B testing, regression detection, and instruction refinement |
 | [frontend-dev](agents/frontend-dev.agent.md) | Frontend development agent for UI components and applications. Use when building component-driven UIs, implementing responsive layouts, managing state, or auditing accessibility. |
 | [github-security-posture](agents/github-security-posture.agent.md) | GitHub security posture auditor for org and repository policy checks. Use when auditing GitHub organization code security configurations, repository rulesets, secret scanning alerts, Dependabot configuration, or branch protection rules. |

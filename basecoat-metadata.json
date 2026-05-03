@@ -33,6 +33,8 @@
         "security-analyst",
         "performance-analyst",
         "config-auditor",
+        "contract-testing",
+        "e2e-test-strategy",
         "manual-test-strategy",
         "exploratory-charter",
         "strategy-to-automation"
