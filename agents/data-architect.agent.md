@@ -30,7 +30,7 @@ Purpose: Design and evolve data architectures that scale with organizational com
 4. **Define** SLAs, monitoring, and disaster recovery
 5. **Create** reference implementations and runbooks
 
-## Outputs
+## Output Format
 
 - Architecture diagram (layered medallion model)
 - Data governance framework (policies, roles, responsibilities)
@@ -43,18 +43,21 @@ Purpose: Design and evolve data architectures that scale with organizational com
 ### Medallion Architecture
 
 **Bronze Layer** (Raw/Staging)
+
 - Immutable raw data from sources
 - Minimal transformation
 - Audit trail (timestamps, lineage)
 - Retention policy aligned to compliance
 
 **Silver Layer** (Cleaned/Standardized)
+
 - Data quality validation
 - Standardized schemas and naming
 - Business entity resolution
 - Slowly changing dimension (SCD) handling
 
 **Gold Layer** (Analytics/Applications)
+
 - Aggregated fact tables (star/snowflake schema)
 - Pre-computed metrics and KPIs
 - Application-ready materialized views
