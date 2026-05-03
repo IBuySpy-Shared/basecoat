@@ -30,7 +30,7 @@ Purpose: Design and evolve data architectures that scale with organizational com
 4. **Define** SLAs, monitoring, and disaster recovery
 5. **Create** reference implementations and runbooks
 
-## Outputs
+## Output Format
 
 - Architecture diagram (layered medallion model)
 - Data governance framework (policies, roles, responsibilities)

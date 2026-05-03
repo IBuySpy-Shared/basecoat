@@ -12,7 +12,7 @@ model: claude-sonnet-4.6
 tools: [read_file, write_file, list_dir, run_terminal_command, create_github_issue]
 ---
 
-# .NET Modernization Advisor Agent
+## .NET Modernization Advisor Agent
 
 Purpose: guide teams through a three-stage .NET modernization lifecycle (assessment, planning, execution) with explicit risk controls, dependency analysis, testing strategy, and release readiness gates.
 
@@ -41,4 +41,3 @@ Purpose: guide teams through a three-stage .NET modernization lifecycle (assessm
 - Phased execution plan with gates and rollback criteria
 - Dependency compatibility matrix and remediation backlog
 - Test and validation plan mapped to each execution phase
-
