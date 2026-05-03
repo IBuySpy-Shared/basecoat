@@ -55,26 +55,33 @@ This catalog helps teams discover what exists in Base Coat and when to use it.
 | `skills/azure-waf-review/SKILL.md`      | assess Azure workloads against the five WAF pillars and produce scored findings with remediation templates | azure, well-architected, WAF, reliability, security, cost, performance, operations |
 | `skills/backend-dev/SKILL.md`           | design and implement APIs, service layers, and data access repositories | backend, api, service, repository, error catalog                     |
 | `skills/basecoat/SKILL.md`              | /basecoat router — discovery and delegation entry point | basecoat, router, discovery, delegation |
+| `skills/chaos-engineering/SKILL.md`     | design chaos experiments, perform FMEA, plan game days, and validate resilience | chaos engineering, FMEA, experiment, game day, resilience, blast radius |
 | `skills/code-review/SKILL.md`           | review changes for risk, regressions, and missing tests | review, bug risk, regression, findings       |
 | `skills/create-instruction/SKILL.md`    | create a new instruction file for a domain              | create instruction, applyTo, frontmatter     |
 | `skills/create-skill/SKILL.md`          | create a new reusable skill with proper frontmatter     | create skill, skill template, customization  |
+| `skills/data-integrity/SKILL.md`        | review ACID compliance, eventual consistency, conflict resolution, and backup verification | data integrity, ACID, eventual consistency, conflict resolution, backup, replication |
 | `skills/data-tier/SKILL.md`             | design schemas, write migrations, review queries, build data dictionaries | data, schema, migration, query, indexing                            |
 | `skills/devops/SKILL.md`                | CI/CD pipeline, deployment, and rollback templates | devops, cicd, deployment, rollback, github-actions |
 | `skills/documentation/SKILL.md`         | README, runbook, and ADR templates | documentation, readme, runbook, adr |
 | `skills/environment-bootstrap/SKILL.md` | environment setup and bootstrap configuration | environment, bootstrap, setup, configuration |
 | `skills/frontend-dev/SKILL.md`          | build accessible, responsive UI components and manage client state       | frontend, ui, component, accessibility, state management             |
+| `skills/ha-resilience/SKILL.md`         | HA and resilience code patterns — circuit breakers, retries, bulkheads, error budgets | high availability, resilience, circuit breaker, retry, bulkhead |
 | `skills/handoff/SKILL.md`               | structured agent-to-agent handoff protocols | handoff, agent, protocol, transition |
+| `skills/hardening/SKILL.md`             | CIS Benchmark and DISA STIG hardening checklists for containers, Kubernetes, databases, Linux, and supply chain | hardening, CIS, STIG, container, kubernetes, linux, supply chain |
+| `skills/high-availability/SKILL.md`     | HA topology design, active-active/active-passive selection, replication strategy, RTO/RPO templates, failover runbooks | high availability, HA, active-active, replication, RTO, RPO, failover |
 | `skills/human-in-the-loop/SKILL.md`     | human approval gates and intervention patterns | human, approval, gate, intervention, review |
 | `skills/identity-migration/SKILL.md`    | identity and authentication migration patterns | identity, migration, auth, entra, modernization |
 | `skills/manual-test-strategy/SKILL.md`  | define manual scope, produce charters, checklists, and handoff artifacts | manual testing, exploratory, charter, regression, defect, automation handoff |
 | `skills/mcp-development/SKILL.md`       | MCP server, tool definition, and transport templates | mcp, server, tool, transport, integration |
 | `skills/performance-profiling/SKILL.md` | isolate and measure slow code paths                     | profiling, performance, latency, hot path    |
 | `skills/refactoring/SKILL.md`           | restructure code without changing behavior              | refactor, cleanup, simplify, extract, rename |
+| `skills/resilience-patterns/SKILL.md`   | review and configure circuit breakers, timeout hierarchies, bulkheads, load shedding, and rate limiting | resilience, circuit breaker, timeout, bulkhead, load shedding, rate limiting |
 | `skills/security/SKILL.md`              | OWASP checklist, STRIDE threat model, and vulnerability templates | security, owasp, stride, threat-model, vulnerability |
 | `skills/github-security-posture/SKILL.md` | audit GitHub org and repo security configurations with traffic-light scoring and remediation commands | github, security, posture, audit, rulesets, secret-scanning, dependabot, branch-protection, codeowners |
 | `skills/service-bus-migration/SKILL.md` | Azure Service Bus migration patterns and guidance | service-bus, migration, messaging, azure |
 | `skills/sprint-management/SKILL.md`     | sprint planning, backlog grooming, and retrospective templates | sprint, planning, backlog, retrospective |
 | `skills/sprint-retrospective/SKILL.md`  | repo history reconstruction and sprint retrospective templates | sprint, retrospective, history, metrics, tips |
+| `skills/sre/SKILL.md`                   | SLO definition, error budget policy, blameless post-mortems, toil register, and on-call policy | SRE, SLO, error budget, post-mortem, toil, on-call |
 | `skills/ux/SKILL.md`                    | user journey, wireframe, and accessibility audit templates | ux, journey, wireframe, accessibility, audit |
 
 ## Prompts

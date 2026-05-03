@@ -2,7 +2,7 @@
 
 This file lists all available agents in the Base Coat framework.
 
-> **51 agents** available
+> **55 agents** available
 
 | Agent | Description |
 |---|---|
@@ -16,6 +16,7 @@ This file lists all available agents in the Base Coat framework.
 | [code-review](agents/code-review.agent.md) | Use when a task needs a structured, multi-step code review workflow with findings prioritized by severity and file references. |
 | [config-auditor](agents/config-auditor.agent.md) | Use when you need to scan a repository for committed or unprotected configuration files that contain secrets, credentials, or sensitive environment-specific values. Produces a findings report with remediation steps. |
 | [containerization-planner](agents/containerization-planner.agent.md) | Helps assess containerization readiness, choose deployment platforms (Docker/AKS/ACA), and generate container configurations including Dockerfiles, multi-stage builds, health probes, resource limits, and deployment manifests |
+| [data-integrity](agents/data-integrity.agent.md) | Distributed data integrity agent for ACID compliance review, eventual consistency strategies, conflict resolution patterns, and backup verification. Use when assessing or designing data integrity controls in distributed or multi-database systems. |
 | [data-tier](agents/data-tier.agent.md) | Data tier agent for schema design, migrations, query optimization, and data access patterns. Use when designing schemas, writing migrations, reviewing queries, or establishing repository patterns. |
 | [dataops](agents/dataops.agent.md) | DataOps agent for data quality, lineage, governance, orchestration, data contracts, and drift detection across analytical and ML data pipelines. Use when managing pipeline reliability and data change risk. |
 | [dependency-lifecycle](agents/dependency-lifecycle.agent.md) | Agent for managing dependency updates, tracking breaking changes, planning upgrade paths, monitoring vulnerabilities, analyzing semantic versioning, and generating migration guides. |
@@ -25,6 +26,8 @@ This file lists all available agents in the Base Coat framework.
 | [frontend-dev](agents/frontend-dev.agent.md) | Frontend development agent for UI components and applications. Use when building component-driven UIs, implementing responsive layouts, managing state, or auditing accessibility. |
 | [github-security-posture](agents/github-security-posture.agent.md) | GitHub security posture auditor for org and repository policy checks. Use when auditing GitHub organization code security configurations, repository rulesets, secret scanning alerts, Dependabot configuration, or branch protection rules. |
 | [guardrail](agents/guardrail.agent.md) | Guardrail validation agent for checking outputs against safety, quality, compliance, and formatting rules before delivery. |
+| [ha-architect](agents/ha-architect.agent.md) | High-availability architect agent for active-active/active-passive design, quorum patterns, replication strategies, and HA topology templates. Use when designing or reviewing distributed systems for zero-downtime availability. |
+| [hardening-advisor](agents/hardening-advisor.agent.md) | CIS/STIG hardening advisor for reviewing Dockerfiles, Kubernetes manifests, database configs, and OS configurations against benchmark checklists. Use when assessing or enforcing platform hardening baselines. |
 | [identity-architect](agents/identity-architect.agent.md) | Identity architecture agent for Azure RBAC design, managed identity configuration, Entra ID app registrations, conditional access policies, and workload identity federation. Use when designing identity and access management for Azure workloads or enforcing zero trust principles. |
 | [incident-responder](agents/incident-responder.agent.md) | Structured incident response and recovery agent for classifying incidents, guiding mitigation, coordinating communications, verifying recovery, and facilitating post-incident learning. |
 | [infrastructure-deploy](agents/infrastructure-deploy.agent.md) | Orchestrates Azure infrastructure deployments using Bicep, handles resource group management, parameter validation, and rollback strategies |
@@ -46,6 +49,7 @@ This file lists all available agents in the Base Coat framework.
 | [prompt-engineer](agents/prompt-engineer.agent.md) | Prompt optimization and system prompt engineering agent. Use when designing system prompts, optimizing token usage, crafting few-shot examples, or structuring chain-of-thought instructions. |
 | [release-impact-advisor](agents/release-impact-advisor.agent.md) | Comprehensive agent for assessing release readiness, analyzing change impacts, estimating blast radius, planning rollbacks, and guiding safe deployment strategies with feature flags, canary deployments, and changelog generation. |
 | [release-manager](agents/release-manager.agent.md) | Automated versioned release workflow. Reads merged PRs since the last release, bumps version.json, writes CHANGELOG entry, creates git tag, and publishes GitHub release. |
+| [resilience-reviewer](agents/resilience-reviewer.agent.md) | Code-level resilience reviewer for circuit breaker configuration, timeout hierarchies, bulkhead isolation, load shedding, and rate limiting implementation. Use when reviewing or improving graceful degradation patterns in production code. |
 | [retro-facilitator](agents/retro-facilitator.agent.md) | End-of-sprint retrospective agent. Reviews closed issues and merged PRs for the sprint, produces a structured Went Well / Improve / Action Items summary, logs improvement issues framed generically for Basecoat, and updates sprint notes in the project repo. |
 | [rollout-basecoat](agents/rollout-basecoat.agent.md) | Use when onboarding a repository to Base Coat in an enterprise setting. Focuses on pinned versions, safe rollout, installation method, and validation steps. |
 | [security-analyst](agents/security-analyst.agent.md) | Security analysis agent for vulnerability assessment, threat modeling, and secure coding review. Use when auditing code for security issues, performing threat analysis, or reviewing dependencies for known vulnerabilities. |

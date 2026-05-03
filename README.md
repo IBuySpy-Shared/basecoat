@@ -112,6 +112,7 @@ Base Coat is built on four GitHub Copilot customization primitives:
 | [code-review](agents/code-review.agent.md) | Structured multi-step code review workflow |
 | [config-auditor](agents/config-auditor.agent.md) | Scans for committed or unprotected config secrets |
 | [containerization-planner](agents/containerization-planner.agent.md) | Containerization readiness assessment and deployment configuration |
+| [data-integrity](agents/data-integrity.agent.md) | ACID compliance review, eventual consistency strategies, conflict resolution, and backup verification |
 | [data-tier](agents/data-tier.agent.md) | Schema design, migrations, query optimization, data access |
 | [dataops](agents/dataops.agent.md) | Data quality, lineage, governance, orchestration, and drift detection |
 | [dependency-lifecycle](agents/dependency-lifecycle.agent.md) | Dependency updates, breaking changes, upgrade paths, and migration guides |
@@ -121,6 +122,8 @@ Base Coat is built on four GitHub Copilot customization primitives:
 | [frontend-dev](agents/frontend-dev.agent.md) | UI components, responsive layouts, state, accessibility |
 | [github-security-posture](agents/github-security-posture.agent.md) | GitHub org and repo security posture auditing: code security configs, rulesets, secret scanning, Dependabot, and branch protection |
 | [guardrail](agents/guardrail.agent.md) | Post-processing validation for safety, quality, compliance, and formatting |
+| [ha-architect](agents/ha-architect.agent.md) | Active-active/active-passive topology design, quorum patterns, replication strategies, and HA templates |
+| [hardening-advisor](agents/hardening-advisor.agent.md) | CIS/STIG hardening review for Dockerfiles, Kubernetes manifests, databases, Linux hosts, and supply chain |
 | [identity-architect](agents/identity-architect.agent.md) | Azure RBAC, managed identities, Entra ID app registrations, conditional access, and workload identity federation |
 | [incident-responder](agents/incident-responder.agent.md) | Incident classification, mitigation, communications, and post-incident learning |
 | [infrastructure-deploy](agents/infrastructure-deploy.agent.md) | Azure infrastructure deployments using Bicep with rollback strategies |
@@ -142,6 +145,7 @@ Base Coat is built on four GitHub Copilot customization primitives:
 | [prompt-engineer](agents/prompt-engineer.agent.md) | Prompt and system-prompt optimization |
 | [release-impact-advisor](agents/release-impact-advisor.agent.md) | Release readiness assessment, blast radius analysis, and rollback planning |
 | [release-manager](agents/release-manager.agent.md) | Versioned release workflow, changelog, tagging, and publishing |
+| [resilience-reviewer](agents/resilience-reviewer.agent.md) | Code-level review of circuit breakers, timeouts, bulkheads, load shedding, and rate limiting |
 | [retro-facilitator](agents/retro-facilitator.agent.md) | Sprint retrospective summary and improvement issue creation |
 | [rollout-basecoat](agents/rollout-basecoat.agent.md) | Enterprise Base Coat onboarding and rollout |
 | [security-analyst](agents/security-analyst.agent.md) | Vulnerability assessment, threat modeling, secure code review |
@@ -174,25 +178,32 @@ Base Coat is built on four GitHub Copilot customization primitives:
 | [azure-waf-review](skills/azure-waf-review/) | waf-assessment-report-template, pillar-scoring-rubric, remediation-action-plan-template | solution-architect, security-analyst, devops-engineer |
 | [backend-dev](skills/backend-dev/) | api-spec-template, error-catalog-template, repository-pattern-template, service-template | backend-dev |
 | [basecoat](skills/basecoat/) | SKILL.md workflow | — |
+| [chaos-engineering](skills/chaos-engineering/) | fmea-template, experiment-plan-template, game-day-runsheet-template | chaos-engineer |
 | [code-review](skills/code-review/) | SKILL.md workflow | code-review |
 | [create-instruction](skills/create-instruction/) | SKILL.md workflow | new-customization |
 | [create-skill](skills/create-skill/) | SKILL.md workflow | new-customization |
+| [data-integrity](skills/data-integrity/) | acid-review-checklist, consistency-strategy-template, conflict-resolution-template, backup-verification-checklist | data-integrity, data-tier |
 | [data-tier](skills/data-tier/) | schema-design-template, migration-template, query-review-checklist, data-dictionary-template | data-tier |
 | [devops](skills/devops/) | deployment-checklist, environment-promotion-template, github-actions-template, rollback-runbook-template | devops-engineer |
 | [documentation](skills/documentation/) | readme-template, runbook-template, adr-template | tech-writer |
 | [environment-bootstrap](skills/environment-bootstrap/) | SKILL.md workflow | devops-engineer |
 | [frontend-dev](skills/frontend-dev/) | component-spec-template, accessibility-checklist, state-management-template | frontend-dev |
+| [ha-resilience](skills/ha-resilience/) | SKILL.md workflow | ha-architect, devops-engineer |
 | [handoff](skills/handoff/) | handoff-template | — |
+| [hardening](skills/hardening/) | cis-container-checklist, cis-kubernetes-checklist, database-hardening-checklist, linux-hardening-checklist, supply-chain-hardening-checklist, hardening-report-template | hardening-advisor, security-analyst |
+| [high-availability](skills/high-availability/) | ha-topology-template, failover-runbook-template, replication-config-template | ha-architect |
 | [human-in-the-loop](skills/human-in-the-loop/) | SKILL.md workflow | — |
 | [identity-migration](skills/identity-migration/) | SKILL.md workflow | legacy-modernization |
 | [manual-test-strategy](skills/manual-test-strategy/) | charter-template, checklist-template, defect-template, rubric-template | manual-test-strategy, exploratory-charter |
 | [mcp-development](skills/mcp-development/) | mcp-server-template, tool-definition-template, transport-config-template | mcp-developer |
 | [performance-profiling](skills/performance-profiling/) | SKILL.md workflow | performance-analyst |
 | [refactoring](skills/refactoring/) | SKILL.md workflow | — |
+| [resilience-patterns](skills/resilience-patterns/) | circuit-breaker-review-checklist, timeout-hierarchy-template, bulkhead-config-template, load-shedding-config-template | resilience-reviewer, ha-architect |
 | [security](skills/security/) | owasp-checklist, stride-threat-model-template, vulnerability-report-template, dependency-audit-template | security-analyst |
 | [github-security-posture](skills/github-security-posture/) | posture-report-template | github-security-posture |
 | [service-bus-migration](skills/service-bus-migration/) | SKILL.md workflow | middleware-dev |
 | [sprint-management](skills/sprint-management/) | sprint-planning-template, backlog-grooming-template, retrospective-template | sprint-planner, retro-facilitator |
+| [sre](skills/sre/) | slo-template, error-budget-policy, post-mortem-template, toil-register-template, on-call-policy-template | sre-engineer |
 | [ux](skills/ux/) | user-journey-template, wireframe-spec-template, component-spec-template, accessibility-audit-checklist | ux-designer |
 
 ---

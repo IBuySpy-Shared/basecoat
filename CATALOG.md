@@ -19,10 +19,12 @@
 | api-designer | `agents/api-designer.agent.md` | API design for OpenAPI, REST, GraphQL, and governance | api-design | GPT-4o / Claude Sonnet |
 | ux-designer | `agents/ux-designer.agent.md` | Journey mapping, wireframes, and accessibility audits | ux | GPT-4o / Claude Sonnet |
 | app-inventory | `agents/app-inventory.agent.md` | Scan legacy apps for project files, NuGet/npm dependencies, connection strings, framework versions, and migration complexity scores | app-inventory | GPT-4o / Claude Sonnet |
+| ha-architect | `agents/ha-architect.agent.md` | Active-active/active-passive topology design, replication strategy, quorum patterns, and HA templates | high-availability, ha-resilience | GPT-5.3-Codex |
 | legacy-modernization | `agents/legacy-modernization.agent.md` | Guides Web Forms → Razor Pages migration using the strangler fig pattern | — | GPT-4o / Claude Sonnet |
 | azure-landing-zone | `agents/azure-landing-zone.agent.md` | Enterprise-scale landing zone scaffolding following CAF/ESLZ: management groups, hub networking, policy baselines, and landing zone vending | azure-landing-zone | Claude Sonnet |
 | | **🔍 Quality** | | | |
-| chaos-engineer | `agents/chaos-engineer.agent.md` | Chaos engineering for fault injection, game days, resilience scoring, and recovery validation | — | GPT-4o / Claude Sonnet |
+| chaos-engineer | `agents/chaos-engineer.agent.md` | Chaos engineering for fault injection, game days, resilience scoring, and recovery validation | chaos-engineering | GPT-4o / Claude Sonnet |
+| resilience-reviewer | `agents/resilience-reviewer.agent.md` | Code-level review of circuit breakers, timeout hierarchies, bulkheads, load shedding, and rate limiting | resilience-patterns, ha-resilience | GPT-5.3-Codex |
 | code-review | `agents/code-review.agent.md` | Structured multi-step code review workflow | code-review | GPT-4o / Claude Sonnet |
 | config-auditor | `agents/config-auditor.agent.md` | Scans for committed or unprotected config secrets | security | GPT-4o / Claude Sonnet |
 | github-security-posture | `agents/github-security-posture.agent.md` | Audits GitHub org and repo security settings: code security configs, rulesets, secret scanning, Dependabot, and branch protection | github-security-posture | Claude Sonnet |
@@ -44,7 +46,7 @@
 | release-manager | `agents/release-manager.agent.md` | Versioned release workflow, changelog, tagging, and publishing | — | GPT-4o-mini / Claude Haiku |
 | rollout-basecoat | `agents/rollout-basecoat.agent.md` | Enterprise Base Coat onboarding and rollout | — | GPT-4o-mini / Claude Haiku |
 | self-healing-ci | `agents/self-healing-ci.agent.md` | Automated CI failure analysis, log parsing, flaky test detection, and pipeline remediation | — | GPT-4o / Claude Sonnet |
-| sre-engineer | `agents/sre-engineer.agent.md` | Site reliability engineering for SLOs, error budgets, incident response, chaos engineering, and toil reduction | — | GPT-4o / Claude Sonnet |
+| sre-engineer | `agents/sre-engineer.agent.md` | Site reliability engineering for SLOs, error budgets, incident response, chaos engineering, and toil reduction | sre | GPT-4o / Claude Sonnet |
 | | **📋 Process** | | | |
 | issue-triage | `agents/issue-triage.agent.md` | Triage, classify, label, and prioritize GitHub issues | sprint-management | GPT-4o-mini / Claude Haiku |
 | product-manager | `agents/product-manager.agent.md` | Requirements, user stories, acceptance criteria, roadmaps | sprint-management | GPT-4o / Claude Sonnet |
@@ -64,8 +66,10 @@
 | prompt-engineer | `agents/prompt-engineer.agent.md` | Prompt and system-prompt optimization | — | GPT-4o / Claude Sonnet |
 | tech-writer | `agents/tech-writer.agent.md` | Technical docs, runbooks, tutorials, and changelogs | documentation | GPT-4o / Claude Sonnet |
 | | **⚙️ Ops** | | | |
+| data-integrity | `agents/data-integrity.agent.md` | ACID compliance review, eventual consistency strategies, conflict resolution, and backup verification for distributed systems | data-integrity, data-tier | GPT-5.3-Codex |
 | data-pipeline | `agents/data-pipeline.agent.md` | Medallion lakehouse pipelines (bronze/silver/gold), data quality, feature store integration, and ML pipeline orchestration | — | Claude Sonnet |
 | dataops | `agents/dataops.agent.md` | DataOps for data quality, lineage, governance, orchestration, and drift detection across pipelines | — | GPT-4o / Claude Sonnet |
+| hardening-advisor | `agents/hardening-advisor.agent.md` | CIS/STIG hardening review for Dockerfiles, Kubernetes manifests, databases, Linux hosts, and supply chain | hardening, security | GPT-5.3-Codex |
 | llmops | `agents/llmops.agent.md` | LLMOps for prompt deployment pipelines, model gateway configuration, inference monitoring, and cost optimization | — | GPT-4o / Claude Sonnet |
 | mlops | `agents/mlops.agent.md` | MLOps for model lifecycle, experiment tracking, model registry, deployment automation, and drift monitoring | — | GPT-4o / Claude Sonnet |
 
@@ -87,26 +91,33 @@
 | azure-networking | `skills/azure-networking/` | `hub-spoke-topology.md`, `cidr-allocation.md`, `private-endpoint-dns-zones.md`, `nsg-rule-matrix.md` | solution-architect, devops-engineer |
 | azure-identity | `skills/azure-identity/` | `rbac-role-assignment-template.md`, `managed-identity-mapping-template.md`, `app-registration-checklist.md`, `workload-identity-federation-template.md`, `conditional-access-policy-template.md` | identity-architect |
 | backend-dev | `skills/backend-dev/` | `api-spec-template.md`, `error-catalog-template.md`, `repository-pattern-template.md`, `service-template.md` | backend-dev |
+| chaos-engineering | `skills/chaos-engineering/` | `fmea-template.md`, `experiment-plan-template.md`, `game-day-runsheet-template.md` | chaos-engineer |
 | code-review | `skills/code-review/` | *(workflow only)* | code-review |
 | create-instruction | `skills/create-instruction/` | *(workflow only)* | new-customization |
 | create-skill | `skills/create-skill/` | *(workflow only)* | new-customization |
+| data-integrity | `skills/data-integrity/` | `acid-review-checklist.md`, `consistency-strategy-template.md`, `conflict-resolution-template.md`, `backup-verification-checklist.md` | data-integrity, data-tier |
 | data-tier | `skills/data-tier/` | `schema-design-template.md`, `migration-template.md`, `query-review-checklist.md`, `data-dictionary-template.md` | data-tier |
 | devops | `skills/devops/` | `deployment-checklist.md`, `environment-promotion-template.md`, `github-actions-template.md`, `rollback-runbook-template.md` | devops-engineer |
 | documentation | `skills/documentation/` | `readme-template.md`, `runbook-template.md`, `adr-template.md` | tech-writer |
 | environment-bootstrap | `skills/environment-bootstrap/` | *(workflow only)* | devops-engineer |
 | frontend-dev | `skills/frontend-dev/` | `component-spec-template.md`, `accessibility-checklist.md`, `state-management-template.md` | frontend-dev |
+| ha-resilience | `skills/ha-resilience/` | *(workflow only)* | ha-architect, devops-engineer |
 | handoff | `skills/handoff/` | *(workflow only)* | — |
+| hardening | `skills/hardening/` | `cis-container-checklist.md`, `cis-kubernetes-checklist.md`, `database-hardening-checklist.md`, `linux-hardening-checklist.md`, `supply-chain-hardening-checklist.md`, `hardening-report-template.md` | hardening-advisor, security-analyst |
+| high-availability | `skills/high-availability/` | `ha-topology-template.md`, `failover-runbook-template.md`, `replication-config-template.md` | ha-architect |
 | human-in-the-loop | `skills/human-in-the-loop/` | *(workflow only)* | — |
 | identity-migration | `skills/identity-migration/` | *(workflow only)* | identity-architect |
 | manual-test-strategy | `skills/manual-test-strategy/` | `charter-template.md`, `checklist-template.md`, `defect-template.md`, `rubric-template.md` | manual-test-strategy, exploratory-charter, strategy-to-automation |
 | mcp-development | `skills/mcp-development/` | `mcp-server-template.md`, `tool-definition-template.md`, `transport-config-template.md` | mcp-developer |
 | performance-profiling | `skills/performance-profiling/` | *(workflow only)* | performance-analyst |
 | refactoring | `skills/refactoring/` | *(workflow only)* | — |
+| resilience-patterns | `skills/resilience-patterns/` | `circuit-breaker-review-checklist.md`, `timeout-hierarchy-template.md`, `bulkhead-config-template.md`, `load-shedding-config-template.md` | resilience-reviewer, ha-architect |
 | security | `skills/security/` | `owasp-checklist.md`, `stride-threat-model-template.md`, `vulnerability-report-template.md`, `dependency-audit-template.md` | security-analyst, config-auditor |
 | github-security-posture | `skills/github-security-posture/` | `posture-report-template.md` | github-security-posture |
 | service-bus-migration | `skills/service-bus-migration/` | *(workflow only)* | — |
 | sprint-management | `skills/sprint-management/` | `sprint-planning-template.md`, `backlog-grooming-template.md`, `retrospective-template.md` | sprint-planner, retro-facilitator, product-manager, issue-triage |
 | sprint-retrospective | `skills/sprint-retrospective/` | *(workflow only)* | sprint-retrospective |
+| sre | `skills/sre/` | `slo-template.md`, `error-budget-policy.md`, `post-mortem-template.md`, `toil-register-template.md`, `on-call-policy-template.md` | sre-engineer |
 | ux | `skills/ux/` | `user-journey-template.md`, `wireframe-spec-template.md`, `component-spec-template.md`, `accessibility-audit-checklist.md` | ux-designer |
 | copilot-usage-analytics | `skills/copilot-usage-analytics/` | `templates/session-cost-estimate-template.md`, `templates/model-routing-recommendation-template.md`, `templates/api-landscape.md` | agentops, performance-analyst, sprint-planner |
 
