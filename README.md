@@ -69,6 +69,33 @@ Always use `sync.ps1` or `sync.sh`. Manual copying leads to stale assets, missin
 
 ---
 
+## 🏷️ Issue Labels
+
+Base Coat uses a consistent label taxonomy for issue triage, discovery, and sprint management.
+
+### Label Categories
+
+| Category | Labels | Purpose |
+|---|---|---|
+| **Asset Type** | `agent`, `skill`, `instruction`, `prompt` | Identifies the type of customization asset for filtering and discovery |
+| **Issue Type** | `bug`, `enhancement`, `documentation`, `question`, `chore`, `security` | Classifies the issue by its primary type |
+| **Priority** | `priority:high`, `priority:medium`, `priority:low` | Indicates urgency and SLA (high = 1hr, medium = 4hr, low = 1 week) |
+| **Sprint** | `sprint-1`, `sprint-2`, `sprint-3`, `sprint-4` | Assigns issue to a sprint milestone |
+| **Status** | `blocked`, `spec-required`, `governance` | Indicates blocking conditions or special handling |
+| **Technology** | `azure`, `dotnet`, `kubernetes`, `python`, `terraform`, etc. | Domain or technology focus |
+| **Approval** | `approved`, `copilot-agent` | Applied when issue is approved for agent implementation |
+
+### Quick Discovery
+
+- Find all agents: `is:issue label:agent`
+- Find Sprint 3 skills: `is:issue label:sprint-3 label:skill`
+- Find high-priority bugs: `is:issue label:priority:high label:bug`
+- Find blocked issues: `is:issue label:blocked`
+
+**For complete label reference:** [`docs/LABEL_TAXONOMY.md`](docs/LABEL_TAXONOMY.md) · [`GOVERNANCE.md`](docs/GOVERNANCE.md#labels)
+
+---
+
 ## Architecture Overview
 
 Base Coat is built on four GitHub Copilot customization primitives:

@@ -142,6 +142,43 @@ pwsh scripts/install-git-hooks.ps1
 
 ---
 
+## Issue Labeling Standards
+
+All issues MUST include at least one label for discoverability and sprint tracking.
+
+### Required Labels
+
+Every issue should include:
+
+- **One asset type label** (if applicable): `agent`, `skill`, `instruction`, `prompt`
+- **One issue type label**: `bug`, `enhancement`, `documentation`, `question`, `chore`, `security`
+- **One sprint label** (if assigned to a sprint): `sprint-1`, `sprint-2`, `sprint-3`, `sprint-4`
+
+### Recommended Labels
+
+- **Priority**: `priority:high` (1hr SLA), `priority:medium` (4hr SLA), `priority:low` (1 week SLA)
+- **Technology/Domain**: `azure`, `dotnet`, `kubernetes`, `python`, `terraform`, etc.
+- **Blocking**: `blocked` (if waiting on a dependency), `spec-required` (if needs PRD before work starts)
+
+### Labeling Workflow
+
+1. **When creating an issue:** Apply at least one label from each required category
+2. **When starting work:** Add sprint label (e.g., `sprint-3`) and priority if not already set
+3. **When blocked:** Add `blocked` label and explain in a comment
+4. **When closing:** Labels carry forward to related issues for tracking
+
+### Label Taxonomy Reference
+
+Complete reference: [`docs/LABEL_TAXONOMY.md`](../docs/LABEL_TAXONOMY.md)
+
+GitHub search examples:
+
+- `is:issue label:agent` — Find all agent-related issues
+- `is:issue label:sprint-3 label:enhancement` — Find Sprint 3 enhancements
+- `is:issue label:priority:high is:open` — Find open high-priority issues
+
+---
+
 ## Adding Agents, Skills, and Instructions
 
 - **Agents** go in `agents/`. Use existing agents as templates.

@@ -37,7 +37,7 @@ basecoat uses a sprint model aligned to GitHub milestones.
 
 ### Sprint Lifecycle
 
-```
+```text
 Backlog → Sprint Planning → Active Sprint → Review → Release → Retrospective
 ```
 
@@ -60,13 +60,64 @@ Backlog → Sprint Planning → Active Sprint → Review → Release → Retrosp
 | `security` | Security-related change |
 | `v1.0.0` | Targeting v1.0.0 release |
 
+#### Asset Type Labels (Custom)
+
+These labels identify the type of customization asset and enable discovery/filtering:
+
+| Label | Meaning | File Location |
+|---|---|---|
+| `agent` | Copilot agent definition | `agents/*.agent.md` |
+| `skill` | Reusable skill or template collection | `skills/*/SKILL.md` |
+| `instruction` | Custom instruction file | `instructions/*.instructions.md` |
+| `prompt` | Prompt template or starter | `prompts/*.prompt.md` |
+
+**Usage:** Apply the asset type label to all issues related to creating, updating, or fixing that asset type. This enables filtering by asset type in issue discovery (e.g., `is:issue label:agent` to find all agent-related work).
+
+#### Issue Type Labels
+
+These labels classify the nature of the issue:
+
+| Label | Meaning |
+|---|---|
+| `bug` | Unexpected behavior, error, or regression |
+| `enhancement` | New feature request or improvement |
+| `documentation` | Missing or incorrect documentation |
+| `question` | Question or clarification request |
+| `chore` | Maintenance, refactoring, or tech debt |
+| `security` | Vulnerability or security concern |
+
+#### Priority Labels
+
+| Label | SLA | Criteria |
+|---|---|---|
+| `priority:high` | 1 hour | Blocking work, data loss risk, security breach |
+| `priority:medium` | 4 hours | Major feature impact, significant user frustration |
+| `priority:low` | 1 week | Cosmetic, nice-to-have, or minor improvement |
+
+#### Approval Status Labels
+
+| Label | Meaning |
+|---|---|
+| `approved` | Issue has been approved for implementation |
+| `copilot-agent` | Issue is assigned to and being worked on by a Copilot agent |
+
+#### Discovery Patterns
+
+Common search patterns for issue discovery:
+
+- `is:issue label:agent` — Find all agent-related issues
+- `is:issue label:sprint-3 label:skill` — Find Sprint 3 skill work
+- `is:issue label:bug label:priority:high` — Find high-priority bugs
+- `is:issue label:blocked is:open` — Find open blocked issues
+- `is:issue label:documentation` — Find documentation work
+
 ---
 
 ## Versioning
 
 basecoat follows [Semantic Versioning 2.0.0](https://semver.org/).
 
-```
+```text
 MAJOR.MINOR.PATCH
 ```
 
