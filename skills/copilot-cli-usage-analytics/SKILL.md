@@ -3,7 +3,7 @@ name: "copilot-cli-usage-analytics"
 description: "Copilot CLI usage analytics skill. Trigger: 'Copilot CLI usage', 'session cost', 'model dispatch breakdown', 'Copilot CLI cost', 'Copilot CLI analytics'."
 compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
 metadata:
-  category: "Observability & Analytics"
+  category: "Meta & Customization"
   tags: ["copilot", "analytics", "usage", "cost", "model-routing"]
 allowed-tools: ["bash", "curl", "jq"]
 ---

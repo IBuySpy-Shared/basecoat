@@ -6,15 +6,6 @@ metadata:
   tags: ["soc", "incident-response", "threat-detection", "secrets-management", "audit-logging"]
   maturity: "production"
   audience: ["security-engineers", "soc-analysts", "incident-responders"]
-maturity: production
-category: security
-tags:
-  - soc
-  - incident-response
-  - threat-detection
-  - secrets-management
-  - audit-logging
-audience: security-engineers, soc-analysts, incident-responders
 compatibility:
   - vscode
   - github-copilot-chat
