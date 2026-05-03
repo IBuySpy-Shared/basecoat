@@ -212,6 +212,7 @@ Instructions are automatically loaded by GitHub Copilot to enforce standards acr
 | [config](instructions/config.instructions.md) | Config file safety and secrets prevention |
 | [development](instructions/development.instructions.md) | Shared dev standards for all dev-core agents |
 | [documentation](instructions/documentation.instructions.md) | Documentation and change-note expectations |
+| [dotnet-test-strategy](instructions/dotnet-test-strategy.instructions.md) | .NET upgrade testing, regression coverage, test data refresh, and CI/CD gate configuration |
 | [drift-monitor](instructions/drift-monitor.instructions.md) | Infrastructure-as-Code drift detection and remediation |
 | [error-kb](instructions/error-kb.instructions.md) | Error knowledge base classification and pattern reuse |
 | [frontend](instructions/frontend.instructions.md) | Frontend, UI, state management, and accessibility |
