@@ -1,6 +1,11 @@
 ---
 name: your-skill-name
 description: "Use when [specific repeated task]. Include common trigger phrases and keywords people will actually type."
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Development & Engineering"
+  tags: ["tag1", "tag2", "tag3"]
+allowed-tools: ["bash", "git"]
 ---
 
 # Skill Title

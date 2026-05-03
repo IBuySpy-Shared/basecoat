@@ -1,6 +1,11 @@
+param(
+    [string]$RootDir = '',
+    [int]$WarningBudget = 0
+)
+
 $ErrorActionPreference = 'Stop'
 
-$rootDir = if ($args.Count -gt 0) { $args[0] } else { (Get-Location).Path }
+$rootDir = if ($RootDir -ne '') { $RootDir } else { (Get-Location).Path }
 Set-Location $rootDir
 
 $required = @('README.md', 'CHANGELOG.md', 'INVENTORY.md', 'version.json', 'sync.sh', 'sync.ps1', 'instructions', 'skills', 'prompts', 'agents')
@@ -93,6 +98,9 @@ if ($errors -gt 0) {
 
 if ($warnings -gt 0) {
     Write-Host "Base Coat validation passed with $warnings warning(s)" -ForegroundColor Yellow
+    if ($warnings -gt $WarningBudget) {
+        throw "Warning budget exceeded: $warnings warning(s) found, budget is $WarningBudget. Backfill missing optional frontmatter fields to reduce warnings."
+    }
 } else {
     Write-Host 'Base Coat validation passed' -ForegroundColor Green
 }
