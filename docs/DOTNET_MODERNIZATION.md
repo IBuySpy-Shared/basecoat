@@ -205,7 +205,7 @@ upgrade-assistant upgrade MySolution.sln --target-tfm-support LTS
 
 ### Scenario A — Internal Line-of-Business Web Forms App
 
-### Profile
+### Profile (Scenario A)
 
 - 80 Web Forms pages, 45 000 lines of C#
 - .NET Framework 4.6, no unit tests
