@@ -4,6 +4,20 @@ All notable changes to this repository should be recorded in this file.
 
 ## Unreleased
 
+## 2.8.0 - 2026-05-03
+
+### Added
+- `agents/dotnet-modernization-advisor.agent.md` — .NET modernization advisor workflow for assessment, planning, and execution gates (#392)
+- `skills/dotnet-modernization/SKILL.md` — .NET upgrade and modernization orchestration skill (#393)
+- `skills/dotnet-modernization/references/breaking-changes.md` — .NET breaking-change tracking guidance for migration waves (#394)
+- `skills/entity-framework-migration/SKILL.md` — EF legacy-to-EF Core migration guidance (#395)
+- `instructions/dotnet-upgrade-planning.instructions.md` — phased upgrade planning instruction (#396)
+- `instructions/dotnet-dependency-analysis.instructions.md` — dependency compatibility/remediation instruction (#397)
+- `instructions/dotnet-test-strategy.instructions.md` — modernization regression-gate instruction (#398)
+- `docs/DOTNET_MODERNIZATION.md` — modernization framework and lifecycle guidance (#399)
+- `docs/DOTNET_DECISION_TREE.md` — decision tree for selecting migration path and sequencing (#399)
+- `docs/AGENT_SKILL_MAP.md` updates for .NET modernization mappings and catalog references (#400)
+
 ## 2.7.0 - 2026-05-02
 
 ### Added
