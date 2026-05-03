@@ -1,5 +1,5 @@
 ---
-name: Entity Framework Migration
+name: entity-framework-migration
 description: Guide for migrating from Entity Framework 6 to EF Core with code patterns, configuration, and testing strategies
 maturity: beta
 category: data-access

@@ -1,5 +1,5 @@
 ---
-name: .NET Modernization
+name: dotnet-modernization
 description: Comprehensive guidance for upgrading .NET applications through assessment, planning, and execution phases
 maturity: beta
 category: infrastructure
