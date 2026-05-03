@@ -220,3 +220,4 @@ if ($seatInfo[0].login -ne "user1" -or -not $seatInfo[0].last_activity) {
 Write-Host '    ✓ Copilot seat data structure is valid'
 
 Write-Host 'All adoption scanner tests passed'
+exit 0

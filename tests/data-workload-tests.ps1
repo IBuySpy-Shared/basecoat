@@ -311,3 +311,4 @@ catch {
 }
 
 Write-Host 'Data workload tests completed successfully'
+exit 0

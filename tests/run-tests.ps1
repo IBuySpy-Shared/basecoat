@@ -85,14 +85,31 @@ finally {
 
 Write-Host 'Running sync process tests...'
 & pwsh -NoProfile -File (Join-Path $PSScriptRoot 'sync-tests.ps1')
+if ($LASTEXITCODE -ne 0) {
+    Write-Host 'Sync process tests failed' -ForegroundColor Red
+    exit 1
+}
 
 Write-Host 'Running adoption scanner tests...'
 & pwsh -NoProfile -File (Join-Path $PSScriptRoot 'adoption-scanner-tests.ps1')
+if ($LASTEXITCODE -ne 0) {
+    Write-Host 'Adoption scanner tests failed' -ForegroundColor Red
+    exit 1
+}
 
 Write-Host 'Running workflow guardrails tests...'
 & pwsh -NoProfile -File (Join-Path $PSScriptRoot 'workflow-guardrails-tests.ps1')
+if ($LASTEXITCODE -ne 0) {
+    Write-Host 'Workflow guardrails tests failed' -ForegroundColor Red
+    exit 1
+}
 
 Write-Host 'Running data workload tests...'
 & pwsh -NoProfile -File (Join-Path $PSScriptRoot 'data-workload-tests.ps1')
+if ($LASTEXITCODE -ne 0) {
+    Write-Host 'Data workload tests failed' -ForegroundColor Red
+    exit 1
+}
 
 Write-Host 'All PowerShell tests passed'
+exit 0

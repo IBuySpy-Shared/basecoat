@@ -332,3 +332,4 @@ else {
 }
 
 Write-Host 'All workflow guardrails tests completed'
+exit 0

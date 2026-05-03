@@ -248,3 +248,4 @@ if ($failures.Count -gt 0) {
 }
 
 Write-Host "`nAll sync tests passed ($testCount checks)" -ForegroundColor Green
+exit 0
