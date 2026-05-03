@@ -1,8 +1,16 @@
 ---
+
 name: Data Integrity Architect
 description: >
   Distributed data integrity patterns — eventual consistency strategies,
   conflict resolution, ACID compliance, backup verification, and data recovery procedures.
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Uncategorized"
+  tags: ["uncategorized"]
+  maturity: "beta"
+  audience: ["developers"]
+allowed-tools: ["bash", "git", "grep", "find"]
 ---
 
 # Data Integrity Architect Agent

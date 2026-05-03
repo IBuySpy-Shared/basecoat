@@ -1,6 +1,14 @@
 ---
+
 name: github-security-posture
 description: "Audit GitHub org and repo security settings with traffic-light scoring and remediation guidance. Covers code security configs, rulesets, secret scanning, push protection, Dependabot alerts, branch protection, and CODEOWNERS."
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Uncategorized"
+  tags: ["uncategorized"]
+  maturity: "beta"
+  audience: ["developers"]
+allowed-tools: ["bash", "git", "grep", "find"]
 ---
 
 # GitHub Security Posture Skill

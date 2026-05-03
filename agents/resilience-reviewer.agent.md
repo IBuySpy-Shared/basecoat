@@ -1,8 +1,16 @@
 ---
+
 name: Resilience Reviewer
 description: >
   Code-level resilience pattern review — circuit breakers, timeouts,
   bulkhead isolation, graceful degradation, retry logic, and load shedding implementation.
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Uncategorized"
+  tags: ["uncategorized"]
+  maturity: "beta"
+  audience: ["developers"]
+allowed-tools: ["bash", "git", "grep", "find"]
 ---
 
 # Resilience Reviewer Agent

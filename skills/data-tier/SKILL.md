@@ -1,6 +1,14 @@
 ---
+
 name: data-tier
 description: "Use when designing schemas, writing migrations, reviewing queries, or establishing data access patterns. Provides schema design, migration, query review, and data dictionary templates."
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Uncategorized"
+  tags: ["uncategorized"]
+  maturity: "beta"
+  audience: ["developers"]
+allowed-tools: ["bash", "git", "grep", "find"]
 ---
 
 # Data Tier Skill

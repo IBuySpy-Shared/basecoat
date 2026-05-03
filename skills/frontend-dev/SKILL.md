@@ -1,6 +1,14 @@
 ---
+
 name: frontend-dev
 description: "Use when building UI components, implementing responsive layouts, auditing accessibility, or designing state management. Provides component spec, accessibility checklist, and state management templates."
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Uncategorized"
+  tags: ["uncategorized"]
+  maturity: "beta"
+  audience: ["developers"]
+allowed-tools: ["bash", "git", "grep", "find"]
 ---
 
 # Frontend Development Skill

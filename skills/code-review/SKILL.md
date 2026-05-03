@@ -1,6 +1,14 @@
 ---
+
 name: code-review
 description: "Use when reviewing code, pull requests, or diffs. Covers best practices for risk-focused review, severity ordering, and identifying missing tests or regressions."
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Uncategorized"
+  tags: ["uncategorized"]
+  maturity: "beta"
+  audience: ["developers"]
+allowed-tools: ["bash", "git", "grep", "find"]
 ---
 
 # Code Review

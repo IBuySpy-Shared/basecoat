@@ -1,4 +1,5 @@
 ---
+
 name: security-operations
 description: Provide SOC (Security Operations Center) playbook guidance for threat detection, incident response, secrets rotation, audit logging, and operational security.
 maturity: production
@@ -17,6 +18,11 @@ allowed-tools:
   - terminal
   - file-editor
   - search-code
+metadata:
+  category: "Uncategorized"
+  tags: ["uncategorized"]
+  maturity: "beta"
+  audience: ["developers"]
 ---
 
 # Security Operations Agent

@@ -1,6 +1,14 @@
 ---
+
 name: observability
 description: "Guidance for instrumentation, telemetry design, and operational visibility."
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Uncategorized"
+  tags: ["uncategorized"]
+  maturity: "beta"
+  audience: ["developers"]
+allowed-tools: ["bash", "git", "grep", "find"]
 ---
 
 # Observability Skill

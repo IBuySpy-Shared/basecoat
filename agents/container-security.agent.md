@@ -1,8 +1,16 @@
 ---
+
 name: Container Security
 description: >
   Container and Kubernetes security — Pod Security Standards, runtime security,
   CSPM findings, image scanning, and supply chain security for containerized workloads.
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Uncategorized"
+  tags: ["uncategorized"]
+  maturity: "beta"
+  audience: ["developers"]
+allowed-tools: ["bash", "git", "grep", "find"]
 ---
 
 # Container Security Agent

@@ -1,6 +1,14 @@
 ---
+
 name: human-in-the-loop
 description: "Patterns for incorporating human judgment into agent workflows — confirmation gates, escalation triggers, approval workflows, and graceful degradation when human input is unavailable."
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Uncategorized"
+  tags: ["uncategorized"]
+  maturity: "beta"
+  audience: ["developers"]
+allowed-tools: ["bash", "git", "grep", "find"]
 ---
 
 # Human-in-the-Loop

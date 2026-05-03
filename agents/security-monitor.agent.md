@@ -1,9 +1,17 @@
 ---
+
 name: Security Monitor
 description: >
   Detection engineering and SIEM configuration for security operations.
   Maps MITRE ATT&CK tactics to detection rules, builds alerting baselines,
   and operationalizes NIST CSF Detect function.
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Uncategorized"
+  tags: ["uncategorized"]
+  maturity: "beta"
+  audience: ["developers"]
+allowed-tools: ["bash", "git", "grep", "find"]
 ---
 
 # Security Monitor Agent

@@ -1,6 +1,14 @@
 ---
+
 name: app-inventory
 description: Scan legacy applications to discover project structure, NuGet/npm dependencies, database connection strings, external service bindings, framework versions, and migration complexity scores. Produces structured JSON, YAML, or Markdown inventory reports.
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Uncategorized"
+  tags: ["uncategorized"]
+  maturity: "beta"
+  audience: ["developers"]
+allowed-tools: ["bash", "git", "grep", "find"]
 ---
 
 # App Inventory Skill

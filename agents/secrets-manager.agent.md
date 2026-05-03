@@ -1,8 +1,16 @@
 ---
+
 name: Secrets Manager
 description: >
   Secrets lifecycle management — discovery, rotation, expiry scanning,
   emergency revocation, and Vault patterns for infrastructure and application secrets.
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Uncategorized"
+  tags: ["uncategorized"]
+  maturity: "beta"
+  audience: ["developers"]
+allowed-tools: ["bash", "git", "grep", "find"]
 ---
 
 # Secrets Manager Agent

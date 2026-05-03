@@ -1,9 +1,17 @@
 ---
+
 name: github-security-posture
 description: "GitHub security posture auditor for org and repository policy checks. Use when auditing GitHub organization code security configurations, repository rulesets, secret scanning alerts, Dependabot configuration, or branch protection rules."
 model: claude-sonnet-4.5
 tools: [run_terminal_command, create_github_issue]
 allowed_skills: [github-security-posture, security]
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Uncategorized"
+  tags: ["uncategorized"]
+  maturity: "beta"
+  audience: ["developers"]
+allowed-tools: ["bash", "git", "grep", "find"]
 ---
 
 # GitHub Security Posture Agent

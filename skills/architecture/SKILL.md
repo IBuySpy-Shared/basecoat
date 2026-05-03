@@ -1,6 +1,14 @@
 ---
+
 name: architecture
 description: "Use when designing systems, recording architecture decisions, evaluating technologies, or assessing architectural risks. Provides C4 diagram templates, ADR format, technology selection matrices, and risk registers."
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Uncategorized"
+  tags: ["uncategorized"]
+  maturity: "beta"
+  audience: ["developers"]
+allowed-tools: ["bash", "git", "grep", "find"]
 ---
 
 # Architecture Skill

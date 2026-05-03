@@ -1,6 +1,14 @@
 ---
+
 name: documentation
 description: "Use when writing or improving technical documentation, READMEs, ADRs, runbooks, or implementing docs-as-code practices. Provides templates for common documentation types."
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Uncategorized"
+  tags: ["uncategorized"]
+  maturity: "beta"
+  audience: ["developers"]
+allowed-tools: ["bash", "git", "grep", "find"]
 ---
 
 # Documentation Skill

@@ -1,6 +1,14 @@
 ---
+
 name: ux
 description: "Use when designing user experiences, mapping user journeys, specifying wireframes or components, or auditing accessibility. Provides journey mapping templates, wireframe specs, component design specs, and WCAG 2.1 AA checklists."
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Uncategorized"
+  tags: ["uncategorized"]
+  maturity: "beta"
+  audience: ["developers"]
+allowed-tools: ["bash", "git", "grep", "find"]
 ---
 
 # UX Design Skill

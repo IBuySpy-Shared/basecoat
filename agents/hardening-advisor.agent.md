@@ -1,8 +1,16 @@
 ---
+
 name: Hardening Advisor
 description: >
   CIS Benchmarks and STIG hardening advisor for Dockerfiles, Kubernetes
   manifests, databases, and infrastructure configurations against security standards.
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Uncategorized"
+  tags: ["uncategorized"]
+  maturity: "beta"
+  audience: ["developers"]
+allowed-tools: ["bash", "git", "grep", "find"]
 ---
 
 # Hardening Advisor Agent

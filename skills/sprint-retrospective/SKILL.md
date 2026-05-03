@@ -1,6 +1,14 @@
 ---
+
 name: sprint-retrospective
 description: "Templates, metrics patterns, and tips taxonomy for generating sprint retrospective documents."
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Uncategorized"
+  tags: ["uncategorized"]
+  maturity: "beta"
+  audience: ["developers"]
+allowed-tools: ["bash", "git", "grep", "find"]
 ---
 
 # Sprint Retrospective Skill

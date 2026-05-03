@@ -1,6 +1,14 @@
 ---
+
 name: azure-networking
 description: "Use when designing Azure networking architectures: hub-spoke VNet topologies, private endpoints, Private DNS zones, NSG rules, Azure Firewall policies, and route tables for hybrid or multi-region connectivity."
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Uncategorized"
+  tags: ["uncategorized"]
+  maturity: "beta"
+  audience: ["developers"]
+allowed-tools: ["bash", "git", "grep", "find"]
 ---
 
 # Azure Networking Skill

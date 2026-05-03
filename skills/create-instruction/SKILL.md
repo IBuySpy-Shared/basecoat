@@ -1,6 +1,14 @@
 ---
+
 name: create-instruction
 description: "Use when creating a new instruction file for a domain, language, or workflow. Covers frontmatter, applyTo patterns, naming, and writing practical guardrails."
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Uncategorized"
+  tags: ["uncategorized"]
+  maturity: "beta"
+  audience: ["developers"]
+allowed-tools: ["bash", "git", "grep", "find"]
 ---
 
 # Create An Instruction
