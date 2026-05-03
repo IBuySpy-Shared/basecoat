@@ -52,6 +52,7 @@ Agents are classified across three dimensions:
 | exploratory-charter | balanced | test | collaborative |
 | feedback-loop | fast | operate | reactive |
 | frontend-dev | balanced | build | collaborative |
+| github-security-posture | balanced | operate | collaborative |
 | guardrail | fast | test | reactive |
 | incident-responder | reasoning | operate | reactive |
 | infrastructure-deploy | balanced | deploy | autonomous |
