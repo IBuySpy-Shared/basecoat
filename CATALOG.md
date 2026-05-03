@@ -63,6 +63,7 @@
 | prompt-engineer | `agents/prompt-engineer.agent.md` | Prompt and system-prompt optimization | — | GPT-4o / Claude Sonnet |
 | tech-writer | `agents/tech-writer.agent.md` | Technical docs, runbooks, tutorials, and changelogs | documentation | GPT-4o / Claude Sonnet |
 | | **⚙️ Ops** | | | |
+| data-pipeline | `agents/data-pipeline.agent.md` | Medallion lakehouse pipelines (bronze/silver/gold), data quality, feature store integration, and ML pipeline orchestration | — | Claude Sonnet |
 | dataops | `agents/dataops.agent.md` | DataOps for data quality, lineage, governance, orchestration, and drift detection across pipelines | — | GPT-4o / Claude Sonnet |
 | llmops | `agents/llmops.agent.md` | LLMOps for prompt deployment pipelines, model gateway configuration, inference monitoring, and cost optimization | — | GPT-4o / Claude Sonnet |
 | mlops | `agents/mlops.agent.md` | MLOps for model lifecycle, experiment tracking, model registry, deployment automation, and drift monitoring | — | GPT-4o / Claude Sonnet |

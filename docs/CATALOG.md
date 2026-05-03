@@ -1,8 +1,8 @@
 # Base Coat Asset Catalog
 
-This is the master index of all Base Coat assets, including 43 agents, 27 instructions, 21 skills, 3 prompts, and 23 documentation files. Use this catalog to navigate, discover, and understand the Base Coat framework's components.
+This is the master index of all Base Coat assets, including 44 agents, 27 instructions, 21 skills, 3 prompts, and 23 documentation files. Use this catalog to navigate, discover, and understand the Base Coat framework's components.
 
-## Agents (43)
+## Agents (44)
 
 Agents are autonomous AI workers that specialize in specific roles. Each agent is designed to perform a particular function within the software development lifecycle.
 
@@ -15,6 +15,7 @@ Agents are autonomous AI workers that specialize in specific roles. Each agent i
 | [chaos-engineer](../agents/chaos-engineer.agent.md) | Runs resilience and fault-injection experiments. |
 | [code-review](../agents/code-review.agent.md) | Performs structured, risk-focused code reviews. |
 | [config-auditor](../agents/config-auditor.agent.md) | Finds unsafe or secret-bearing config files. |
+| [data-pipeline](../agents/data-pipeline.agent.md) | Builds medallion lakehouse pipelines and ML workflows. |
 | [data-tier](../agents/data-tier.agent.md) | Designs schemas, migrations, and queries. |
 | [dataops](../agents/dataops.agent.md) | Manages data pipeline quality and governance. |
 | [dependency-lifecycle](../agents/dependency-lifecycle.agent.md) | Tracks and upgrades dependencies safely. |

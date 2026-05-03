@@ -99,6 +99,7 @@ This catalog helps teams discover what exists in Base Coat and when to use it.
 | `agents/config-auditor.agent.md`    | scan for committed or unprotected config secrets | agent, config, secrets, audit, security |
 | `agents/containerization-planner.agent.md` | containerization readiness assessment and deployment configuration | agent, container, docker, kubernetes, migration |
 | `agents/data-tier.agent.md`             | design schemas, write migrations, optimize queries, and define data access | agent, data, schema, migration, query, indexing, repository         |
+| `agents/data-pipeline.agent.md`     | medallion lakehouse pipelines (bronze/silver/gold), data quality gates, feature store integration, and ML pipeline orchestration | agent, data-pipeline, medallion, bronze, silver, gold, delta-lake, feature-store, ml-pipeline, notebook |
 | `agents/dataops.agent.md`           | data quality, lineage, governance, orchestration, and drift detection | agent, data, quality, lineage, governance, pipeline |
 | `agents/dependency-lifecycle.agent.md` | dependency updates, breaking changes, upgrade paths, and migration guides | agent, dependency, update, upgrade, breaking-change |
 | `agents/devops-engineer.agent.md`   | CI/CD, IaC, deployment, rollback, and observability | agent, devops, cicd, iac, deployment, observability |
