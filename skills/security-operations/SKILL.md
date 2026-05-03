@@ -1,13 +1,13 @@
 ---
 name: security-operations
-title: Security Operations & Threat Detection
 description: Threat detection patterns, SIEM rules, secrets management, audit logging, and incident response automation
-compatibility: ["agent:security-operations"]
+license: MIT
+compatibility: "Requires SIEM and cloud CLI access. Works with VS Code Copilot, GitHub Copilot CLI, and Claude Code."
 metadata:
-  domain: security
-  maturity: production
-  audience: [sre, security-engineer, devops-engineer]
-allowed-tools: [bash, terraform, kubectl, azure-cli, docker]
+  category: quality
+  keywords: "security-operations, siem, threat-detection, secrets, audit-logging, incident-response"
+  model-tier: premium
+allowed-tools: "search/codebase web/fetch"
 ---
 
 # Security Operations Skill

@@ -1,6 +1,13 @@
 ---
 name: sprint-management
 description: "Use when planning sprints, running retrospectives, grooming backlogs, or managing sprint ceremonies. Provides templates for sprint planning, retrospectives, and backlog refinement."
+license: MIT
+compatibility: "Works with VS Code Copilot, GitHub Copilot CLI, and Claude Code."
+metadata:
+  category: process
+  keywords: "sprint, planning, retrospective, backlog, agile, scrum, ceremony"
+  model-tier: standard
+allowed-tools: "search/codebase"
 ---
 
 # Sprint Management Skill

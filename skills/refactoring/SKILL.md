@@ -1,6 +1,13 @@
 ---
 name: refactoring
 description: "Use when simplifying structure without intentionally changing behavior. Covers common refactoring best practices for preserving behavior, reducing risk, and validating changes."
+license: MIT
+compatibility: "Works with VS Code Copilot, GitHub Copilot CLI, and Claude Code."
+metadata:
+  category: development
+  keywords: "refactoring, simplification, code-quality, behavior-preservation, structure"
+  model-tier: standard
+allowed-tools: "search/codebase"
 ---
 
 # Refactoring

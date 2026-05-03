@@ -1,13 +1,13 @@
 ---
 name: azure-container-apps
-title: Azure Container Apps Deployment & Operations
 description: Deploy, scale, and manage containerized applications on Azure Container Apps with Dapr, revision management, and advanced networking
-compatibility: ["agent:containerization-planner", "agent:devops-engineer"]
+license: MIT
+compatibility: "Requires Azure CLI and Docker. Works with VS Code Copilot, GitHub Copilot CLI, and Claude Code."
 metadata:
-  domain: infrastructure
-  maturity: production
-  audience: [devops-engineer, backend-engineer, platform-engineer]
-allowed-tools: [bash, azure-cli, docker, kubectl, terraform]
+  category: devops
+  keywords: "azure, container-apps, aca, dapr, kubernetes, serverless, containers"
+  model-tier: standard
+allowed-tools: "search/codebase run_terminal_command"
 ---
 
 # Azure Container Apps Skill

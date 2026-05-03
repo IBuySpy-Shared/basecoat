@@ -1,13 +1,13 @@
 ---
 name: penetration-testing
-title: Penetration Testing & Vulnerability Discovery Patterns
 description: Test case execution, OWASP Top 10 coverage, exploitation techniques, and finding reporting
-compatibility: ["agent:penetration-test"]
+license: MIT
+compatibility: "Requires penetration testing tools. Works with VS Code Copilot and Claude Code."
 metadata:
-  domain: security
-  maturity: production
-  audience: [security-engineer, red-team, bug-bounty]
-allowed-tools: [bash, curl, python, docker, git]
+  category: quality
+  keywords: "pentest, penetration-testing, owasp, exploitation, vulnerability, reporting"
+  model-tier: premium
+allowed-tools: "search/codebase web/fetch run_terminal_command"
 ---
 
 # Penetration Testing Skill

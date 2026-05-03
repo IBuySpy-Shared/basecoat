@@ -1,13 +1,13 @@
 ---
 name: domain-driven-design
-title: Domain-Driven Design & CQRS Patterns
 description: Event sourcing, aggregate patterns, bounded contexts, CQRS implementation, and distributed systems patterns
-compatibility: ["agent:architecture"]
+license: MIT
+compatibility: "Works with VS Code Copilot, GitHub Copilot CLI, and Claude Code."
 metadata:
-  domain: architecture
-  maturity: production
-  audience: [architect, backend-engineer]
-allowed-tools: [python, javascript, java]
+  category: architecture
+  keywords: "ddd, domain, bounded-context, aggregate, event-sourcing, cqrs, microservices"
+  model-tier: premium
+allowed-tools: "search/codebase"
 ---
 
 # Domain-Driven Design Skill

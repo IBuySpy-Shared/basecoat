@@ -1,6 +1,13 @@
 ---
 name: backend-dev
 description: "Use when implementing APIs, service layers, or data access patterns. Provides API spec templates, service scaffolds, error catalog structure, and repository pattern boilerplate."
+license: MIT
+compatibility: "Works with VS Code Copilot, GitHub Copilot CLI, and Claude Code."
+metadata:
+  category: development
+  keywords: "backend, api, rest, graphql, service, repository-pattern, error-handling"
+  model-tier: standard
+allowed-tools: "search/codebase"
 ---
 
 # Backend Development Skill

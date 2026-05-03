@@ -1,7 +1,13 @@
 ---
 name: azure-waf-review
 description: "Use when performing an Azure Well-Architected Framework (WAF) assessment against a workload, IaC templates, or architecture description. Covers all five pillars: Reliability, Security, Cost Optimization, Operational Excellence, and Performance Efficiency. Produces scored assessments, prioritized findings, and Bicep/Terraform remediation snippets."
-context: fork
+license: MIT
+compatibility: "Requires Azure CLI. Works with VS Code Copilot, GitHub Copilot CLI, and Claude Code."
+metadata:
+  category: quality
+  keywords: "azure, waf, well-architected, reliability, security, cost, performance"
+  model-tier: premium
+allowed-tools: "search/codebase"
 ---
 
 # Azure Well-Architected Framework Review Skill

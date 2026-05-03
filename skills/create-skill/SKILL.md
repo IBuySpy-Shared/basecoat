@@ -1,6 +1,13 @@
 ---
 name: create-skill
 description: "Use when creating a new reusable skill for instructions, workflows, or domain guidance. Covers folder layout, frontmatter, discovery language, templates, and validation steps."
+license: MIT
+compatibility: "Works with VS Code Copilot, GitHub Copilot CLI, and Claude Code."
+metadata:
+  category: meta
+  keywords: "skill, create, template, scaffold, frontmatter, workflow"
+  model-tier: standard
+allowed-tools: "search/codebase read_file write_file"
 ---
 
 # Create A Skill

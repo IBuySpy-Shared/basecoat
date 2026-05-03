@@ -1,6 +1,13 @@
 ---
 name: create-instruction
 description: "Use when creating a new instruction file for a domain, language, or workflow. Covers frontmatter, applyTo patterns, naming, and writing practical guardrails."
+license: MIT
+compatibility: "Works with VS Code Copilot, GitHub Copilot CLI, and Claude Code."
+metadata:
+  category: meta
+  keywords: "instruction, create, frontmatter, applyTo, workflow, guardrails"
+  model-tier: standard
+allowed-tools: "search/codebase read_file write_file"
 ---
 
 # Create An Instruction

@@ -1,6 +1,13 @@
 ---
 name: agent-design
 description: "Use when designing Copilot agents, authoring agent definitions, creating skill folders, or scaffolding instruction files. Provides templates and conventions for the agent ecosystem."
+license: MIT
+compatibility: "Works with VS Code Copilot, GitHub Copilot CLI, and Claude Code."
+metadata:
+  category: meta
+  keywords: "agent, design, scaffold, template, instruction, copilot"
+  model-tier: standard
+allowed-tools: "search/codebase"
 ---
 
 # Agent Design Skill

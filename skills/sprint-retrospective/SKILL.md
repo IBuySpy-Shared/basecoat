@@ -1,6 +1,13 @@
 ---
 name: sprint-retrospective
 description: "Templates, metrics patterns, and tips taxonomy for generating sprint retrospective documents."
+license: MIT
+compatibility: "Works with VS Code Copilot, GitHub Copilot CLI, and Claude Code."
+metadata:
+  category: process
+  keywords: "retrospective, sprint, metrics, timeline, history, improvements"
+  model-tier: standard
+allowed-tools: "search/codebase"
 ---
 
 # Sprint Retrospective Skill

@@ -1,6 +1,13 @@
 ---
 name: human-in-the-loop
 description: "Patterns for incorporating human judgment into agent workflows — confirmation gates, escalation triggers, approval workflows, and graceful degradation when human input is unavailable."
+license: MIT
+compatibility: "Works with VS Code Copilot, GitHub Copilot CLI, and Claude Code."
+metadata:
+  category: meta
+  keywords: "human-in-the-loop, approval, escalation, confirmation, oversight, gate"
+  model-tier: standard
+allowed-tools: "search/codebase"
 ---
 
 # Human-in-the-Loop

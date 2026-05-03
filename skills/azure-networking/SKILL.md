@@ -1,6 +1,13 @@
 ---
 name: azure-networking
 description: "Use when designing Azure networking architectures: hub-spoke VNet topologies, private endpoints, Private DNS zones, NSG rules, Azure Firewall policies, and route tables for hybrid or multi-region connectivity."
+license: MIT
+compatibility: "Requires Azure CLI. Works with VS Code Copilot, GitHub Copilot CLI, and Claude Code."
+metadata:
+  category: architecture
+  keywords: "azure, networking, vnet, hub-spoke, private-endpoint, dns, firewall"
+  model-tier: premium
+allowed-tools: "search/codebase"
 ---
 
 # Azure Networking Skill

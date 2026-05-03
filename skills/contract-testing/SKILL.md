@@ -1,13 +1,13 @@
 ---
 name: contract-testing
-title: Contract Testing & Integration Patterns
 description: Consumer-driven contracts, Pact, E2E testing, mutation testing, and integration test orchestration
-compatibility: ["agent:contract-testing"]
+license: MIT
+compatibility: "Requires Docker. Works with VS Code Copilot, GitHub Copilot CLI, and Claude Code."
 metadata:
-  domain: testing
-  maturity: production
-  audience: [qa-engineer, developer, architect]
-allowed-tools: [python, docker, bash, java, javascript]
+  category: quality
+  keywords: "contract, testing, pact, consumer-driven, integration, mutation"
+  model-tier: standard
+allowed-tools: "search/codebase"
 ---
 
 # Contract Testing Skill

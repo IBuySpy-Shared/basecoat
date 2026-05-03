@@ -1,6 +1,13 @@
 ---
 name: azure-identity
 description: "Use when designing Azure identity architectures — RBAC role assignments, managed identities, Entra ID app registrations, conditional access policies, or workload identity federation for CI/CD. Covers zero trust patterns, PIM, and GitHub OIDC."
+license: MIT
+compatibility: "Requires Azure CLI. Works with VS Code Copilot, GitHub Copilot CLI, and Claude Code."
+metadata:
+  category: architecture
+  keywords: "azure, identity, rbac, managed-identity, entra, zero-trust, pim"
+  model-tier: premium
+allowed-tools: "search/codebase web/fetch"
 ---
 
 # Azure Identity & Entra ID Skill

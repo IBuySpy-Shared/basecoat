@@ -1,6 +1,13 @@
 ---
 name: api-design
 description: "Use when designing, reviewing, or evolving API contracts. Provides OpenAPI templates, breaking-change checklists, versioning decision trees, and governance checklists."
+license: MIT
+compatibility: "Works with VS Code Copilot, GitHub Copilot CLI, and Claude Code."
+metadata:
+  category: architecture
+  keywords: "api, openapi, rest, graphql, spec, versioning, governance"
+  model-tier: premium
+allowed-tools: "search/codebase web/fetch"
 ---
 
 # API Design Skill

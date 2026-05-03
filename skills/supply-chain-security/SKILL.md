@@ -1,13 +1,13 @@
 ---
 name: supply-chain-security
-title: Supply Chain Security - SLSA, SBOM, Sigstore
 description: Artifact signing, SBOM generation, provenance tracking, and vulnerability scanning
-compatibility: ["agent:supply-chain-security"]
+license: MIT
+compatibility: "Requires Docker and artifact signing tools. Works with VS Code Copilot, GitHub Copilot CLI, and Claude Code."
 metadata:
-  domain: security
-  maturity: production
-  audience: [devops-engineer, security-engineer, release-manager]
-allowed-tools: [bash, python, docker, kubernetes]
+  category: devops
+  keywords: "supply-chain, sbom, signing, provenance, vulnerability, scanning, slsa"
+  model-tier: premium
+allowed-tools: "search/codebase web/fetch run_terminal_command"
 ---
 
 # Supply Chain Security Skill

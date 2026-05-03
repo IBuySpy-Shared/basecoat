@@ -1,6 +1,13 @@
 ---
 name: performance-profiling
 description: "Use when code is slow, latency regressed, or a hot path needs measurement. Covers profiling best practices, baseline capture, bottleneck isolation, and post-fix verification."
+license: MIT
+compatibility: "Works with VS Code Copilot, GitHub Copilot CLI, and Claude Code."
+metadata:
+  category: quality
+  keywords: "performance, profiling, latency, benchmark, optimization, bottleneck"
+  model-tier: standard
+allowed-tools: "search/codebase"
 ---
 
 # Performance Profiling

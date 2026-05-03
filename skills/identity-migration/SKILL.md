@@ -1,13 +1,13 @@
 ---
 name: identity-migration
-title: Identity Migration to ASP.NET Core & Entra ID
 description: Migrate legacy authentication to ASP.NET Core Identity with Entra ID integration, claims-based authentication, and role/password management
-compatibility: ["agent:backend-dev"]
+license: MIT
+compatibility: "Requires Azure CLI and .NET SDK. Works with VS Code Copilot, GitHub Copilot CLI, and Claude Code."
 metadata:
-  domain: identity
-  maturity: production
-  audience: [backend-engineer, devops-engineer, architect]
-allowed-tools: [bash, powershell, docker]
+  category: development
+  keywords: "identity, migration, aspnet, entra, claims, authentication, roles"
+  model-tier: standard
+allowed-tools: "search/codebase"
 ---
 
 # Identity Migration Skill

@@ -1,6 +1,13 @@
 ---
 name: mcp-development
 description: "Use when building MCP servers, defining tools, or configuring transports. Provides server scaffolds, tool definition templates, and transport configuration boilerplate."
+license: MIT
+compatibility: "Works with VS Code Copilot, GitHub Copilot CLI, and Claude Code."
+metadata:
+  category: development
+  keywords: "mcp, model-context-protocol, server, tools, transport, integration"
+  model-tier: standard
+allowed-tools: "search/codebase read_file write_file"
 ---
 
 # MCP Development Skill

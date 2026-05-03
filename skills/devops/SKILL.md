@@ -1,6 +1,13 @@
 ---
 name: devops
 description: "Use when designing CI/CD pipelines, writing IaC templates, planning deployments, or setting up observability. Provides workflow templates, deployment checklists, rollback runbooks, and environment promotion guides."
+license: MIT
+compatibility: "Works with VS Code Copilot, GitHub Copilot CLI, and Claude Code."
+metadata:
+  category: devops
+  keywords: "devops, ci-cd, pipeline, deployment, iac, observability, rollback"
+  model-tier: standard
+allowed-tools: "search/codebase"
 ---
 
 # DevOps Skill

@@ -1,6 +1,13 @@
 ---
 name: frontend-dev
 description: "Use when building UI components, implementing responsive layouts, auditing accessibility, or designing state management. Provides component spec, accessibility checklist, and state management templates."
+license: MIT
+compatibility: "Works with VS Code Copilot, GitHub Copilot CLI, and Claude Code."
+metadata:
+  category: development
+  keywords: "frontend, ui, components, accessibility, state-management, responsive"
+  model-tier: standard
+allowed-tools: "search/codebase"
 ---
 
 # Frontend Development Skill

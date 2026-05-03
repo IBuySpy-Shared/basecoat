@@ -1,12 +1,13 @@
 ---
 name: environment-bootstrap
 description: Automated setup for OIDC federation, state storage, Key Vault, and environment promotion in Azure CI/CD pipelines. Now includes Fabric workspace service principal access automation.
-context: fork
-compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+license: MIT
+compatibility: "Requires Azure CLI and Terraform. Works with VS Code Copilot, GitHub Copilot CLI, and Claude Code."
 metadata:
-  category: "Infrastructure & DevOps"
-  tags: ["azure", "oidc", "terraform", "bicep", "keyvault", "fabric", "aks"]
-allowed-tools: ["bash", "azure-cli", "terraform", "kubectl", "curl"]
+  category: devops
+  keywords: "environment, bootstrap, oidc, azure, terraform, key-vault, ci-cd"
+  model-tier: standard
+allowed-tools: "search/codebase run_terminal_command"
 ---
 
 # Environment Bootstrap Skill

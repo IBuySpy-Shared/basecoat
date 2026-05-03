@@ -1,13 +1,13 @@
 ---
 name: api-security
-title: OWASP API Security Top 10 Patterns
 description: API authentication, authorization, input validation, rate limiting, and protection patterns
-compatibility: ["agent:api-security"]
+license: MIT
+compatibility: "Works with VS Code Copilot, GitHub Copilot CLI, and Claude Code."
 metadata:
-  domain: security
-  maturity: production
-  audience: [api-developer, security-engineer, architect]
-allowed-tools: [python, javascript, bash, docker]
+  category: quality
+  keywords: "api, security, authentication, authorization, rate-limiting, owasp"
+  model-tier: premium
+allowed-tools: "search/codebase web/fetch"
 ---
 
 # API Security Skill

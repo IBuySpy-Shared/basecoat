@@ -1,6 +1,13 @@
 ---
 name: copilot-usage-analytics
 description: "Use when estimating per-session Copilot CLI cost, analyzing model-routing efficiency, tracking agent dispatch patterns, or documenting which GitHub Copilot usage APIs exist. Covers session cost estimation, model selection recommendations, and API landscape mapping."
+license: MIT
+compatibility: "Requires GitHub Copilot CLI access. Works with VS Code Copilot, GitHub Copilot CLI, and Claude Code."
+metadata:
+  category: meta
+  keywords: "copilot, usage, analytics, cost, model-routing, api, telemetry"
+  model-tier: standard
+allowed-tools: "web/fetch"
 ---
 
 # Copilot Usage Analytics Skill

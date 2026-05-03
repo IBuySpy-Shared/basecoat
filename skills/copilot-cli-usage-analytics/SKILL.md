@@ -1,6 +1,13 @@
 ---
 name: "copilot-cli-usage-analytics"
 description: "Copilot CLI usage analytics skill. Trigger: 'Copilot CLI usage', 'session cost', 'model dispatch breakdown', 'Copilot CLI cost', 'Copilot CLI analytics'."
+license: MIT
+compatibility: "Requires GitHub Copilot CLI. Works with VS Code Copilot, GitHub Copilot CLI, and Claude Code."
+metadata:
+  category: meta
+  keywords: "copilot, cli, analytics, usage, cost, session, model"
+  model-tier: standard
+allowed-tools: "web/fetch"
 ---
 
 # Copilot CLI Usage Analytics

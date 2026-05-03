@@ -1,6 +1,13 @@
 ---
 name: azure-landing-zone
 description: "Use when designing or scaffolding Azure enterprise-scale landing zones (ESLZ) following the Cloud Adoption Framework. Provides IaC templates for management groups, hub networking, policy assignments, and landing zone vending."
+license: MIT
+compatibility: "Requires Azure CLI and Bicep CLI. Works with VS Code Copilot, GitHub Copilot CLI, and Claude Code."
+metadata:
+  category: architecture
+  keywords: "azure, landing-zone, eslz, caf, bicep, policy, management-groups"
+  model-tier: premium
+allowed-tools: "search/codebase"
 ---
 
 # Azure Landing Zone Skill

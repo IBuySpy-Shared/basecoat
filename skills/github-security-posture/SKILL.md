@@ -1,6 +1,13 @@
 ---
 name: github-security-posture
 description: "Audit GitHub org and repo security settings with traffic-light scoring and remediation guidance. Covers code security configs, rulesets, secret scanning, push protection, Dependabot alerts, branch protection, and CODEOWNERS."
+license: MIT
+compatibility: "Requires GitHub CLI or API access. Works with VS Code Copilot, GitHub Copilot CLI, and Claude Code."
+metadata:
+  category: quality
+  keywords: "github, security, posture, branch-protection, dependabot, secret-scanning, codeowners"
+  model-tier: premium
+allowed-tools: "search/codebase web/fetch"
 ---
 
 # GitHub Security Posture Skill

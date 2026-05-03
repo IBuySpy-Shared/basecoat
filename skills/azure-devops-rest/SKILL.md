@@ -1,7 +1,13 @@
 ---
 name: azure-devops-rest
 description: "Azure DevOps REST API patterns — authentication, scopes, pagination, throttling, and endpoint taxonomy for work items, pipelines, repos, and artifacts."
-context: fork
+license: MIT
+compatibility: "Requires Azure DevOps access. Works with VS Code Copilot, GitHub Copilot CLI, and Claude Code."
+metadata:
+  category: devops
+  keywords: "azure-devops, rest-api, pipelines, work-items, authentication, pat"
+  model-tier: standard
+allowed-tools: "search/codebase web/fetch"
 ---
 
 # Azure DevOps REST API Skill

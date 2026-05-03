@@ -1,6 +1,13 @@
 ---
 name: code-review
 description: "Use when reviewing code, pull requests, or diffs. Covers best practices for risk-focused review, severity ordering, and identifying missing tests or regressions."
+license: MIT
+compatibility: "Works with VS Code Copilot, GitHub Copilot CLI, and Claude Code."
+metadata:
+  category: quality
+  keywords: "review, pull-request, diff, code-quality, bugs, security"
+  model-tier: premium
+allowed-tools: "search/codebase"
 ---
 
 # Code Review

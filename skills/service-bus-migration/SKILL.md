@@ -1,13 +1,13 @@
 ---
 name: service-bus-migration
-title: MSMQ to Azure Service Bus Migration
 description: Migrate enterprise messaging from MSMQ to Azure Service Bus with patterns for mapping, serialization, resilience, and hybrid bridge architecture
-compatibility: ["agent:backend-dev", "agent:devops-engineer"]
+license: MIT
+compatibility: "Requires Azure CLI and .NET SDK. Works with VS Code Copilot, GitHub Copilot CLI, and Claude Code."
 metadata:
-  domain: infrastructure
-  maturity: production
-  audience: [backend-engineer, devops-engineer, architect]
-allowed-tools: [csharp, azure-cli, docker]
+  category: development
+  keywords: "service-bus, migration, msmq, azure, messaging, resilience, serialization"
+  model-tier: standard
+allowed-tools: "search/codebase"
 ---
 
 # Service Bus Migration Skill

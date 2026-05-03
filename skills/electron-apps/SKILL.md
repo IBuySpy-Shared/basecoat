@@ -1,6 +1,13 @@
 ---
 name: electron-apps
 description: Build secure, production-ready Electron desktop applications with best practices for IPC, CSP, state management, testing, packaging, and auto-updates.
+license: MIT
+compatibility: "Requires Node.js and Electron. Works with VS Code Copilot, GitHub Copilot CLI, and Claude Code."
+metadata:
+  category: development
+  keywords: "electron, desktop, ipc, csp, packaging, auto-update, security"
+  model-tier: standard
+allowed-tools: "search/codebase"
 applyTo: agent-electron-developer, agent-desktop-engineer
 ---
 

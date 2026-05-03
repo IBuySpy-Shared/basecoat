@@ -1,13 +1,13 @@
 ---
 name: ha-resilience
-title: High-Availability & Resilience Design Patterns
 description: Multi-AZ/region architectures, circuit breakers, retries, chaos testing, and SRE practices
-compatibility: ["agent:ha-architect"]
+license: MIT
+compatibility: "Works with VS Code Copilot, GitHub Copilot CLI, and Claude Code."
 metadata:
-  domain: infrastructure
-  maturity: production
-  audience: [architect, sre, devops-engineer]
-allowed-tools: [terraform, kubernetes, python, bash, docker]
+  category: architecture
+  keywords: "ha, resilience, multi-az, circuit-breaker, chaos, sre, availability"
+  model-tier: premium
+allowed-tools: "search/codebase"
 ---
 
 # HA & Resilience Skill

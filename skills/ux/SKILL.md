@@ -1,6 +1,13 @@
 ---
 name: ux
 description: "Use when designing user experiences, mapping user journeys, specifying wireframes or components, or auditing accessibility. Provides journey mapping templates, wireframe specs, component design specs, and WCAG 2.1 AA checklists."
+license: MIT
+compatibility: "Works with VS Code Copilot, GitHub Copilot CLI, and Claude Code."
+metadata:
+  category: architecture
+  keywords: "ux, user-experience, journey-mapping, wireframe, accessibility, wcag, components"
+  model-tier: standard
+allowed-tools: "search/codebase"
 ---
 
 # UX Design Skill

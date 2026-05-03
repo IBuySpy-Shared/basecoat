@@ -1,6 +1,13 @@
 ---
 name: azure-policy
 description: "Use when authoring custom Azure Policy definitions, bundling initiatives, designing DeployIfNotExists remediation tasks, generating KQL compliance dashboard queries, or mapping policies to regulatory frameworks (CIS, NIST 800-53, ISO 27001). Covers policy-as-code authoring, parameter design, initiative composition, and compliance reporting."
+license: MIT
+compatibility: "Requires Azure CLI. Works with VS Code Copilot, GitHub Copilot CLI, and Claude Code."
+metadata:
+  category: devops
+  keywords: "azure, policy, compliance, governance, bicep, regulatory, cis, nist"
+  model-tier: premium
+allowed-tools: "search/codebase web/fetch"
 ---
 
 # Azure Policy & Governance Skill

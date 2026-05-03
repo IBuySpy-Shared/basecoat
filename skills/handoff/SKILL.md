@@ -1,6 +1,13 @@
 ---
 name: handoff
 description: "Use when ending a session, rotating context, or transferring work to another agent. Provides structured handoff templates that preserve both reasoning and mechanical state."
+license: MIT
+compatibility: "Works with VS Code Copilot, GitHub Copilot CLI, and Claude Code."
+metadata:
+  category: meta
+  keywords: "handoff, context, session, transfer, continuity, state"
+  model-tier: standard
+allowed-tools: "read_file write_file"
 ---
 
 # Handoff Skill

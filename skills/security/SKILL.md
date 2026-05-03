@@ -1,6 +1,13 @@
 ---
 name: security
 description: "Use when performing security audits, threat modeling, vulnerability assessments, or dependency reviews. Provides OWASP checklists, STRIDE templates, vulnerability report structures, and dependency audit formats."
+license: MIT
+compatibility: "Works with VS Code Copilot, GitHub Copilot CLI, and Claude Code."
+metadata:
+  category: quality
+  keywords: "security, owasp, threat-modeling, stride, vulnerability, cve, dependency-audit"
+  model-tier: premium
+allowed-tools: "search/codebase web/fetch"
 ---
 
 # Security Skill

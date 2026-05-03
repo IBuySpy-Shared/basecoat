@@ -1,6 +1,13 @@
 ---
 name: architecture
 description: "Use when designing systems, recording architecture decisions, evaluating technologies, or assessing architectural risks. Provides C4 diagram templates, ADR format, technology selection matrices, and risk registers."
+license: MIT
+compatibility: "Works with VS Code Copilot, GitHub Copilot CLI, and Claude Code."
+metadata:
+  category: architecture
+  keywords: "architecture, c4, adr, system-design, technology, risk"
+  model-tier: premium
+allowed-tools: "search/codebase"
 ---
 
 # Architecture Skill

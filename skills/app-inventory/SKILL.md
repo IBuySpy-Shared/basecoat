@@ -1,6 +1,13 @@
 ---
 name: app-inventory
 description: Scan legacy applications to discover project structure, NuGet/npm dependencies, database connection strings, external service bindings, framework versions, and migration complexity scores. Produces structured JSON, YAML, or Markdown inventory reports.
+license: MIT
+compatibility: "Works with VS Code Copilot, GitHub Copilot CLI, and Claude Code."
+metadata:
+  category: architecture
+  keywords: "inventory, legacy, migration, dependencies, assessment, modernization"
+  model-tier: standard
+allowed-tools: "search/codebase read_file"
 ---
 
 # App Inventory Skill

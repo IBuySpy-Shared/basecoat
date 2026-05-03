@@ -1,13 +1,13 @@
 ---
 name: basecoat
-title: Base Coat Router & Agent Discovery
 description: Single entry point for 28+ agents across 6 disciplines—discover or delegate across Development, Architecture, Quality, DevOps, Process, and Meta
-compatibility: ["agent:*"]
+license: MIT
+compatibility: "Works with VS Code Copilot, GitHub Copilot CLI, and Claude Code."
 metadata:
-  domain: framework
-  maturity: production
-  audience: [all]
-allowed-tools: [bash, curl, git]
+  category: meta
+  keywords: "router, discovery, delegation, basecoat, agents, skills"
+  model-tier: standard
+allowed-tools: "search/codebase"
 ---
 
 # Base Coat Router

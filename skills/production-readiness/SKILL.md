@@ -1,13 +1,13 @@
 ---
 name: production-readiness
-title: Production Readiness Review & Release Management
 description: PRR gates, business continuity planning, disaster recovery procedures, and FMEA templates
-compatibility: ["agent:production-readiness"]
+license: MIT
+compatibility: "Works with VS Code Copilot, GitHub Copilot CLI, and Claude Code."
 metadata:
-  domain: operations
-  maturity: production
-  audience: [release-manager, sre, architect]
-allowed-tools: [python, bash, terraform, kubernetes]
+  category: devops
+  keywords: "production, readiness, prr, bcdr, disaster-recovery, fmea, slo"
+  model-tier: premium
+allowed-tools: "search/codebase"
 ---
 
 # Production Readiness Skill

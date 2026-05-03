@@ -1,6 +1,13 @@
 ---
 name: documentation
 description: "Use when writing or improving technical documentation, READMEs, ADRs, runbooks, or implementing docs-as-code practices. Provides templates for common documentation types."
+license: MIT
+compatibility: "Works with VS Code Copilot, GitHub Copilot CLI, and Claude Code."
+metadata:
+  category: meta
+  keywords: "documentation, readme, adr, runbook, docs-as-code, technical-writing"
+  model-tier: standard
+allowed-tools: "search/codebase read_file write_file"
 ---
 
 # Documentation Skill

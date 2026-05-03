@@ -1,6 +1,13 @@
 ---
 name: manual-test-strategy
 description: "Use when defining where human judgment is still required, how exploratory work is captured, and which repeated checks should graduate into automation. Provides templates for decision rubrics, exploratory charters, regression checklists, and defect evidence."
+license: MIT
+compatibility: "Works with VS Code Copilot, GitHub Copilot CLI, and Claude Code."
+metadata:
+  category: quality
+  keywords: "manual-testing, exploratory, regression, test-strategy, automation, charter"
+  model-tier: premium
+allowed-tools: "search/codebase"
 ---
 
 # Manual Test Strategy

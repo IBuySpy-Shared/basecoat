@@ -1,6 +1,13 @@
 ---
 name: data-tier
 description: "Use when designing schemas, writing migrations, reviewing queries, or establishing data access patterns. Provides schema design, migration, query review, and data dictionary templates."
+license: MIT
+compatibility: "Works with VS Code Copilot, GitHub Copilot CLI, and Claude Code."
+metadata:
+  category: development
+  keywords: "data, database, schema, migration, query, repository, sql"
+  model-tier: standard
+allowed-tools: "search/codebase"
 ---
 
 # Data Tier Skill
