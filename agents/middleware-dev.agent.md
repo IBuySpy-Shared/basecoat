@@ -138,8 +138,6 @@ A service mesh (e.g., Istio, Linkerd, Dapr) provides cross-cutting traffic manag
 - Dapr sidecar injects into every pod; ensure resource limits are set on the sidecar container.
 - Use Dapr's outbox pattern support (`outbox` component) for transactional message publishing without manual outbox table management.
 
-
-
 These patterns apply regardless of the broker (Kafka, Azure Service Bus, RabbitMQ, Amazon SQS, or any other):
 
 - **Producers** set a `messageId`, `correlationId`, `timestamp`, `eventType`, and schema version on every message.
