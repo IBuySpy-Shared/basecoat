@@ -60,7 +60,7 @@ try {
     $skillsSource = Join-Path $fullTargetDir 'skills'
     $agentSkillsDest = Join-Path $repoRoot '.agents' 'skills'
     if (Test-Path $skillsSource) {
-        New-Item -ItemType Directory -Force -Path $agentSkillsDest | Out-Null
+        New-Item -ItemType Directory -Force -Path (Join-Path $repoRoot '.agents') | Out-Null
         if (Test-Path $agentSkillsDest) {
             Remove-Item -Path $agentSkillsDest -Recurse -Force
         }
