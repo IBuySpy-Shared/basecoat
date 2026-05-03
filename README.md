@@ -134,6 +134,7 @@ Base Coat is built on four GitHub Copilot customization primitives:
 | [middleware-dev](agents/middleware-dev.agent.md) | API gateways, integration layers, event-driven architectures |
 | [mlops](agents/mlops.agent.md) | Model lifecycle, experiment tracking, deployment automation, and drift monitoring |
 | [new-customization](agents/new-customization.agent.md) | Creates or updates Base Coat customization assets |
+| [observability-engineer](agents/observability-engineer.agent.md) | OTEL instrumentation, structured logging, distributed tracing, metrics naming, and dashboard-as-code |
 | [performance-analyst](agents/performance-analyst.agent.md) | Profiling, load testing, and performance optimization |
 | [policy-as-code-compliance](agents/policy-as-code-compliance.agent.md) | Policy-as-code validation, exception management, and audit-ready compliance reports |
 | [product-manager](agents/product-manager.agent.md) | Requirements, user stories, acceptance criteria, roadmaps |
@@ -187,6 +188,7 @@ Base Coat is built on four GitHub Copilot customization primitives:
 | [identity-migration](skills/identity-migration/) | SKILL.md workflow | legacy-modernization |
 | [manual-test-strategy](skills/manual-test-strategy/) | charter-template, checklist-template, defect-template, rubric-template | manual-test-strategy, exploratory-charter |
 | [mcp-development](skills/mcp-development/) | mcp-server-template, tool-definition-template, transport-config-template | mcp-developer |
+| [observability](skills/observability/) | otel-setup-guide, structured-log-schema-template, span-design-template, metrics-naming-convention, dashboard-as-code-template, correlation-id-pattern | observability-engineer |
 | [performance-profiling](skills/performance-profiling/) | SKILL.md workflow | performance-analyst |
 | [refactoring](skills/refactoring/) | SKILL.md workflow | — |
 | [security](skills/security/) | owasp-checklist, stride-threat-model-template, vulnerability-report-template, dependency-audit-template | security-analyst |
@@ -220,6 +222,7 @@ Instructions are automatically loaded by GitHub Copilot to enforce standards acr
 | [naming](instructions/naming.instructions.md) | Naming conventions across repos, code, and infrastructure |
 | [nextjs-react19](instructions/nextjs-react19.instructions.md) | Next.js and React 19 Server Components and App Router patterns |
 | [npm-workspaces](instructions/npm-workspaces.instructions.md) | npm workspaces and monorepo management |
+| [observability](instructions/observability.instructions.md) | OpenTelemetry SDK setup, structured logging, tracing, metrics, and dashboard-as-code |
 | [output-style](instructions/output-style.instructions.md) | Concise agent responses with full-fidelity code output |
 | [plan-first](instructions/plan-first.instructions.md) | Explore-plan-implement-verify workflow for multi-step tasks |
 | [process](instructions/process.instructions.md) | Delivery lifecycle, sprint, triage, and release process |

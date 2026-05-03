@@ -60,6 +60,7 @@
 | memory-curator | `agents/memory-curator.agent.md` | Cross-session knowledge extraction, deduplication, validation, and context injection via SQLite memory layer | — | GPT-4o / Claude Sonnet |
 | merge-coordinator | `agents/merge-coordinator.agent.md` | Parallel branch merge coordination | — | GPT-4o-mini / Claude Haiku |
 | new-customization | `agents/new-customization.agent.md` | Creates or updates Base Coat customization assets | create-skill, create-instruction | GPT-4o / Claude Sonnet |
+| observability-engineer | `agents/observability-engineer.agent.md` | OpenTelemetry instrumentation, structured logging, distributed tracing, metrics naming, correlation ID propagation, and dashboard-as-code | observability | GPT-4o / Claude Sonnet |
 | prompt-coach | `agents/prompt-coach.agent.md` | Interactive prompt review, scoring, and refinement coaching | — | GPT-4o / Claude Sonnet |
 | prompt-engineer | `agents/prompt-engineer.agent.md` | Prompt and system-prompt optimization | — | GPT-4o / Claude Sonnet |
 | tech-writer | `agents/tech-writer.agent.md` | Technical docs, runbooks, tutorials, and changelogs | documentation | GPT-4o / Claude Sonnet |
@@ -100,6 +101,7 @@
 | identity-migration | `skills/identity-migration/` | *(workflow only)* | identity-architect |
 | manual-test-strategy | `skills/manual-test-strategy/` | `charter-template.md`, `checklist-template.md`, `defect-template.md`, `rubric-template.md` | manual-test-strategy, exploratory-charter, strategy-to-automation |
 | mcp-development | `skills/mcp-development/` | `mcp-server-template.md`, `tool-definition-template.md`, `transport-config-template.md` | mcp-developer |
+| observability | `skills/observability/` | `otel-setup-guide.md`, `structured-log-schema-template.md`, `span-design-template.md`, `metrics-naming-convention.md`, `dashboard-as-code-template.md`, `correlation-id-pattern.md` | observability-engineer |
 | performance-profiling | `skills/performance-profiling/` | *(workflow only)* | performance-analyst |
 | refactoring | `skills/refactoring/` | *(workflow only)* | — |
 | security | `skills/security/` | `owasp-checklist.md`, `stride-threat-model-template.md`, `vulnerability-report-template.md`, `dependency-audit-template.md` | security-analyst, config-auditor |
@@ -134,6 +136,7 @@
 | naming | `instructions/naming.instructions.md` | Naming conventions across repos, code, and infrastructure |
 | nextjs-react19 | `instructions/nextjs-react19.instructions.md` | Next.js and React 19 Server Components, App Router, and modern patterns |
 | npm-workspaces | `instructions/npm-workspaces.instructions.md` | npm workspaces and monorepo management best practices |
+| observability | `instructions/observability.instructions.md` | OpenTelemetry SDK setup, structured logging, tracing, metrics naming, correlation ID propagation, and dashboard-as-code |
 | output-style | `instructions/output-style.instructions.md` | Concise agent responses while preserving clarity and full-fidelity code |
 | plan-first | `instructions/plan-first.instructions.md` | Explore-plan-implement-verify workflow for multi-step tasks |
 | process | `instructions/process.instructions.md` | Delivery lifecycle, sprint, triage, and release process |

@@ -22,6 +22,7 @@ This catalog helps teams discover what exists in Base Coat and when to use it.
 | `instructions/mcp.instructions.md`           | MCP server/tool governance and safe integration rules | mcp, tools, server, governance, allowlist                          |
 | `instructions/model-routing.instructions.md` | cost-aware model selection and fleet dispatch | model, routing, cost, fleet, dispatch, tier |
 | `instructions/naming.instructions.md`        | consistent naming across code and infrastructure      | naming, convention, style, files, resources                        |
+| `instructions/observability.instructions.md` | OTEL SDK setup, structured logging, tracing, metrics, correlation IDs, dashboards | observability, opentelemetry, otel, logging, tracing, metrics, dashboard |
 | `instructions/nextjs-react19.instructions.md` | Next.js and React 19 patterns and conventions | nextjs, react, react19, ssr, server-components |
 | `instructions/npm-workspaces.instructions.md` | npm workspaces and monorepo conventions | npm, workspaces, monorepo, packages |
 | `instructions/output-style.instructions.md`  | agent output formatting and style guidance | output, style, formatting, markdown |
@@ -68,6 +69,7 @@ This catalog helps teams discover what exists in Base Coat and when to use it.
 | `skills/identity-migration/SKILL.md`    | identity and authentication migration patterns | identity, migration, auth, entra, modernization |
 | `skills/manual-test-strategy/SKILL.md`  | define manual scope, produce charters, checklists, and handoff artifacts | manual testing, exploratory, charter, regression, defect, automation handoff |
 | `skills/mcp-development/SKILL.md`       | MCP server, tool definition, and transport templates | mcp, server, tool, transport, integration |
+| `skills/observability/SKILL.md`         | OTEL instrumentation, structured logging, distributed tracing, metrics naming, dashboards, and correlation ID propagation | observability, opentelemetry, otel, logging, tracing, metrics, dashboard, correlation-id |
 | `skills/performance-profiling/SKILL.md` | isolate and measure slow code paths                     | profiling, performance, latency, hot path    |
 | `skills/refactoring/SKILL.md`           | restructure code without changing behavior              | refactor, cleanup, simplify, extract, rename |
 | `skills/security/SKILL.md`              | OWASP checklist, STRIDE threat model, and vulnerability templates | security, owasp, stride, threat-model, vulnerability |
@@ -122,6 +124,7 @@ This catalog helps teams discover what exists in Base Coat and when to use it.
 | `agents/middleware-dev.agent.md`        | design integration layers, message contracts, and resilience patterns   | agent, middleware, integration, message, event-driven, circuit breaker, retry |
 | `agents/mlops.agent.md`             | model lifecycle, experiment tracking, deployment automation, and drift monitoring | agent, mlops, model, experiment, deployment, drift |
 | `agents/new-customization.agent.md` | choose and create the right customization type | agent, customization, instruction, prompt |
+| `agents/observability-engineer.agent.md` | OpenTelemetry instrumentation, structured logging, distributed tracing, metrics naming, correlation IDs, and dashboards | agent, observability, opentelemetry, otel, tracing, logging, metrics, dashboard |
 | `agents/performance-analyst.agent.md` | profiling, load testing, and performance optimization | agent, performance, profiling, load-test, optimization |
 | `agents/policy-as-code-compliance.agent.md` | validate policy-as-code rules, automated compliance checks, exceptions, and audit-ready evidence | agent, compliance, policy-as-code, governance, audit, exceptions |
 | `agents/product-manager.agent.md`   | requirements, user stories, acceptance criteria, roadmaps | agent, product, requirements, stories, roadmap |
