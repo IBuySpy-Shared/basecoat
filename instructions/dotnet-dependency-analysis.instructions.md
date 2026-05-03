@@ -21,4 +21,3 @@ Analyze direct and transitive dependencies for compatibility with the target .NE
 - Dependency compatibility matrix
 - Ordered remediation backlog with risk and owner fields
 - Explicit blockers requiring architectural decisions
-

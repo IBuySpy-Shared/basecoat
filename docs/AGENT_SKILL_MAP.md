@@ -1,6 +1,6 @@
 # Base Coat Agent & Skill Index
 
-Complete reference guide for all 52 GitHub Copilot agents and 36 customization skills in the Base Coat framework.
+Complete reference guide for all 56 GitHub Copilot agents and 45 customization skills in the Base Coat framework.
 
 ## Quick Navigation
 
@@ -116,13 +116,6 @@ Complete reference guide for all 52 GitHub Copilot agents and 36 customization s
 | fabric-notebooks | Analytics notebooks | Medallion architecture, builtin modules, CI/CD |
 | basecoat | Framework routing | Agent discovery, delegation patterns |
 
-### .NET Modernization (2 skills)
-
-| Skill | Focus | Primary Use Case |
-|-------|-------|-----------------|
-| dotnet-modernization | Platform modernization | Upgrade planning, compatibility review, phased migration execution |
-| entity-framework-migration | Data modernization | EF6 to EF Core migration strategy and validation |
-
 ### Quality & Testing (4 skills)
 
 | Skill | Focus | Primary Use Case |
@@ -179,13 +172,6 @@ Complete reference guide for all 52 GitHub Copilot agents and 36 customization s
 - ha-resilience
 - otel-instrumentation
 
-### Dotnet-Modernization-Advisor Agent
-**Compatible Skills:**
-- dotnet-modernization (primary)
-- entity-framework-migration
-- dependency-lifecycle
-- contract-testing
-
 ---
 
 ## Getting Started
@@ -237,8 +223,8 @@ compatibility: ["agent:backend-dev", "agent:data-tier"]
 
 ## Statistics
 
-- **Total Agents:** 52
-- **Total Skills:** 36
+- **Total Agents:** 56
+- **Total Skills:** 45
 - **Total Disciplines:** 6 (Development, Architecture, DevOps, Quality, Data/AI, Process/Meta)
 - **Total Domains:** 8+ (security, infrastructure, identity, data, observability, quality, development, framework)
 
@@ -256,6 +242,6 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md) for detailed guidelines.
 
 ---
 
-**Last Updated:** 2026-05-03  
+**Last Updated:** 2026-05-02  
 **Spec Version:** Agent Skills v1.0  
 **Maintainer:** Base Coat Team

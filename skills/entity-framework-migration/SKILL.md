@@ -14,7 +14,7 @@ category: data
 tags: [dotnet, entity-framework, ef-core, migration]
 ---
 
-# Entity Framework Migration
+## Entity Framework Migration
 
 Use this skill when modernizing data layers from Entity Framework 6 or older patterns to EF Core.
 
@@ -36,4 +36,3 @@ Use this skill when modernizing data layers from Entity Framework 6 or older pat
 - EF migration approach and risk summary
 - Mapping and query refactor checklist
 - Validation strategy for correctness and performance
-

@@ -22,4 +22,3 @@ Produce a phased, low-risk upgrade plan from current .NET targets to a supported
 - A concise phased plan with dependencies and blockers
 - Risk register with mitigation owner and validation method
 - Clear go/no-go gates between phases
-

@@ -14,7 +14,7 @@ category: modernization
 tags: [dotnet, modernization, migration, upgrade]
 ---
 
-# .NET Modernization
+## .NET Modernization
 
 Use this skill when evaluating, planning, or executing migration from legacy .NET Framework or older .NET targets to modern .NET.
 
@@ -42,4 +42,3 @@ Use this skill when evaluating, planning, or executing migration from legacy .NE
 ## References
 
 - ./references/breaking-changes.md
-

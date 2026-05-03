@@ -21,4 +21,3 @@ Define and enforce a test strategy that protects behavior, performance, and oper
 - Phase-by-phase test matrix
 - Entry/exit criteria for each modernization wave
 - Post-deployment validation checks and rollback triggers
-

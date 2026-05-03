@@ -1,6 +1,6 @@
 {
     "name": "base-coat",
-    "version": "2.8.0",
-    "releaseDate": "2026-05-03",
-    "notes": "v2.8.0: .NET modernization foundation with advisor agent, migration skills, guidance instructions, and decision docs."
+    "version": "2.7.0",
+    "releaseDate": "2026-05-02",
+    "notes": "v2.7.0: Ecosystem completion - supply chain security, skill refactoring guidance, blocked issues documentation."
 }

@@ -29,4 +29,3 @@ This reference helps teams capture and manage known breaking changes while moder
 - Contract/integration tests pass against upgraded dependencies
 - Performance regressions are within accepted thresholds
 - Operational telemetry and alerts remain healthy post-upgrade
-
