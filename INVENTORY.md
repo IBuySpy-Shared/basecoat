@@ -13,6 +13,7 @@ This catalog helps teams discover what exists in Base Coat and when to use it.
 | `instructions/backend.instructions.md`       | API, services, data access, backend guardrails        | backend, api, refactor, service, reliability                       |
 | `instructions/bicep.instructions.md`         | Bicep authoring, parameters, and deployment hygiene   | bicep, bicepparam, module, symbolic name                           |
 | `instructions/config.instructions.md`        | config file safety and secrets prevention | config, secrets, safety, environment |
+| `instructions/data-science.instructions.md`   | data science, ML workflows, notebooks, medallion lakehouse | data-science, ml, notebook, pipeline, medallion, bronze, silver, gold |
 | `instructions/development.instructions.md`   | shared standards for backend-dev, frontend-dev, middleware-dev, data-tier agents | development, code style, error handling, security, logging, testing, collaboration |
 | `instructions/documentation.instructions.md` | docs updates and operational notes                    | docs, readme, changelog, migration, usage                          |
 | `instructions/drift-monitor.instructions.md` | detect and prevent configuration drift across environments | drift, monitor, config, environment, consistency |
