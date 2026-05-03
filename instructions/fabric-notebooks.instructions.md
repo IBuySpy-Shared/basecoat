@@ -1,215 +1,173 @@
 ---
-description: Deploy and manage Microsoft Fabric notebooks with CI/CD, lakehouse integration, governance, and production patterns.
-applyTo: "**/*.ipynb", "**/*notebook*"
+description: "Patterns for deploying notebooks to Fabric via CI/CD, lakehouse integration, and resource management."
+applyTo:
+  - fabric
+  - notebooks
+  - lakehouse
+  - medallion
 ---
 
-# Fabric Notebook Deployment
+# Microsoft Fabric Notebook Deployment
 
-Production-ready patterns for Microsoft Fabric notebooks (formerly Synapse).
+## Notebook Structure Patterns
 
-## Medallion Architecture for Notebooks
+### Medallion Layer Notebooks
 
-Structure notebooks into bronze (raw ingestion) → silver (transformation) → gold (analytics) layers:
+- Bronze → Silver: cleaning notebooks (`nb_clean_*.ipynb`)
+- Silver → Gold: feature engineering notebooks (`nb_features_*.ipynb`)
+- Gold → Models: training notebooks (`nb_model_*.ipynb`)
+- Exploration: EDA notebooks (`nb_eda_*.ipynb`)
 
-```python
-# bronze_ingest.ipynb
-from fabric import FabricNotebook
+### Naming Conventions
 
-# Raw data ingestion with lineage tracking
-notebook = FabricNotebook()
-lakehouse = notebook.get_lakehouse("my_workspace/my_lakehouse")
-
-# Raw table (immutable, source-aligned)
-raw_df = spark.read \
-  .option("multiline", "true") \
-  .json("/data/api-export-raw.json")
-
-raw_df.write \
-  .mode("overwrite") \
-  .saveAsTable("bronze.api_events", 
-    external=False,
-    path=f"{lakehouse.mount_point}/bronze/api_events")
-
-# Lineage: record source + timestamp
-spark.sql("""
-  INSERT INTO bronze.lineage_metadata
-  SELECT 'api_events', current_timestamp(), 'https://api.example.com/v1/events'
-""")
-```
+- Prefix with layer: `nb_clean_`, `nb_features_`, `nb_model_`, `nb_eda_`
+- Suffix with domain/entity: `nb_clean_grammys`, `nb_features_temporal`
 
 ## Lakehouse Integration
 
-Use Lakehouse shortcuts to organize data by domain.
+### Reading from Bronze (Files)
 
 ```python
-# silver_transform.ipynb
-# Access bronze tables via shortcut
-raw_events = spark.read.table("bronze.api_events")
-
-# Apply transformations
-silver_df = raw_events \
-  .filter(col("timestamp") > "2024-01-01") \
-  .select("event_id", "user_id", "event_type", "timestamp") \
-  .withColumn("event_date", to_date(col("timestamp")))
-
-# Write to silver with schema validation
-silver_df.write \
-  .mode("overwrite") \
-  .option("mergeSchema", "false") \
-  .saveAsTable("silver.events_cleaned")
+bronze_path = f"{notebookutils.lakehouse.getMountPoint('{lakehouse_name}')}/Files/bronze"
+df = pd.read_csv(f"{bronze_path}/raw_data.csv")
 ```
 
-## Testing in Notebooks
-
-Embed test assertions for data quality.
+### Writing to Silver/Gold (Delta Tables)
 
 ```python
-# Test helpers
-def assert_no_nulls(df, column):
-  null_count = df.filter(col(column).isNull()).count()
-  assert null_count == 0, f"Found {null_count} nulls in {column}"
-
-def assert_range(df, column, min_val, max_val):
-  out_of_range = df.filter((col(column) < min_val) | (col(column) > max_val)).count()
-  assert out_of_range == 0, f"Found {out_of_range} out-of-range values in {column}"
-
-# Apply tests
-assert_no_nulls(silver_df, "user_id")
-assert_range(silver_df, "event_id", 1, 9999999)
-assert silver_df.count() > 0, "No rows in silver table"
+spark_df = spark.createDataFrame(df)
+spark_df.write.format("delta").mode("overwrite").saveAsTable("silver_clean_data")
 ```
 
-## CI/CD Integration
-
-### Pipeline Orchestration (Data Factory / Synapse Pipeline)
-
-```json
-{
-  "name": "FabricNotebookPipeline",
-  "activities": [
-    {
-      "name": "RunBronzeNotebook",
-      "type": "SynapseNotebook",
-      "typeProperties": {
-        "notebook": {
-          "referenceName": "bronze_ingest",
-          "type": "NotebookReference"
-        },
-        "parameters": {
-          "timestamp": "@pipeline().TriggerTime",
-          "environment": "prod"
-        }
-      }
-    },
-    {
-      "name": "RunSilverNotebook",
-      "type": "SynapseNotebook",
-      "dependsOn": [{"activity": "RunBronzeNotebook", "dependencyConditions": ["Succeeded"]}],
-      "typeProperties": {
-        "notebook": {"referenceName": "silver_transform", "type": "NotebookReference"}
-      }
-    }
-  ]
-}
-```
-
-### Source Control (Git Integration)
-
-Store notebooks in Git with `nbstripout` to remove execution metadata:
-
-```bash
-# .gitattributes
-*.ipynb filter=jupyter_strip_notebook
-
-# .git/config
-[filter "jupyter_strip_notebook"]
-  clean = jupyter nbconvert --to notebook --stdout | jq '{cells, metadata}'
-  smudge = cat
-```
-
-## Governance & Monitoring
-
-### Role-Based Access
+### Reading from Silver/Gold (Delta Tables)
 
 ```python
-# Set Fabric item permissions via PySpark
-from fabric import FabricItem
-
-notebook = FabricItem("my_workspace/my_notebook")
-notebook.grant_permission(
-  principal="data-engineers@company.com",
-  role="Contributor"
-)
-notebook.grant_permission(
-  principal="analysts@company.com",
-  role="Viewer"
-)
+df = spark.read.table("silver_clean_data").toPandas()
 ```
 
-### Audit Logging
+### Standard Table Naming
 
-Log all transformations for compliance.
+- Silver: `silver_{entity}_clean`
+- Gold features: `gold_features_{domain}`
+- Gold final: `gold_train`, `gold_test`, `gold_feature_matrix`
+
+## Notebook Resource Management
+
+### Module Imports via builtin/
 
 ```python
-# Audit trail
-spark.sql("""
-  CREATE TABLE IF NOT EXISTS gold.audit_log AS
-  SELECT 
-    'silver_transform' as notebook_name,
-    current_timestamp() as execution_time,
-    current_user() as executed_by,
-    'COMPLETED' as status
-""")
+import sys
+sys.path.insert(0, f"{notebookutils.nbResPath}/builtin/src")
+
+from cleaning.grammys import standardize_grammys
+from features.temporal import build_temporal_features
 ```
 
-## Performance Tuning
+### Upload src/ to builtin/
 
-- **Shuffle partitions**: `spark.sql.shuffle.partitions = 200` (adjust per cluster)
-- **Caching**: Use `.cache()` for reused DataFrames, `.unpersist()` to free memory
-- **Partition pruning**: Add `year`, `month` columns for efficient filtering
-- **AQE (Adaptive Query Execution)**: Enabled by default in Fabric; monitors partitions dynamically
+### Option 1: Fabric Portal
 
-## Error Handling & Retries
+1. Open notebook → Explorer → Resources → builtin/
+2. Upload folder → select `src/`
 
-```python
-import time
-from functools import wraps
+### Option 2: VS Code Fabric Extension
 
-def retry_on_failure(max_attempts=3, backoff=2):
-  def decorator(func):
-    def wrapper(*args, **kwargs):
-      for attempt in range(max_attempts):
-        try:
-          return func(*args, **kwargs)
-        except Exception as e:
-          if attempt == max_attempts - 1:
-            raise
-          wait_time = backoff ** attempt
-          print(f"Attempt {attempt + 1} failed: {e}. Retrying in {wait_time}s...")
-          time.sleep(wait_time)
-    return wrapper
-  return decorator
+1. Navigate to artifact folder: `{WorkspaceId}/SynapseNotebook/{ArtifactId}/`
+2. Copy `src/` into `builtin/`
+3. Publish notebook
 
-@retry_on_failure(max_attempts=3)
-def load_external_data():
-  return spark.read.format("csv").load("https://api.example.com/data.csv")
+## Automated Deployment via CI/CD
+
+### GitHub Actions Workflow Pattern
+
+```yaml
+- name: Upload Notebooks to Fabric
+  env:
+    FABRIC_WORKSPACE_ID: ${{ vars.FABRIC_WORKSPACE_ID }}
+    FABRIC_ACCESS_TOKEN: ${{ steps.fabric-token.outputs.token }}
+  run: |
+    $notebookContent = Get-Content "notebooks/nb_clean_data.ipynb" -Raw
+    $body = @{
+      displayName = "nb_clean_data"
+      definition  = @{ parts = @(@{ path = "notebook-content.py"; payload = [Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes($notebookContent)) }) }
+    } | ConvertTo-Json -Depth 10
+    $headers = @{ "Authorization" = "Bearer $env:FABRIC_ACCESS_TOKEN"; "Content-Type" = "application/json" }
+    $uri = "https://api.fabric.microsoft.com/v1/workspaces/$env:FABRIC_WORKSPACE_ID/notebooks"
+    Invoke-RestMethod -Method Post -Uri $uri -Headers $headers -Body $body
 ```
 
-## MCP Fallback
+### Authentication Pattern
 
-If Fabric SDK unavailable, use REST API:
+```yaml
+- name: Azure Login (OIDC)
+  uses: azure/login@v2
+  with:
+    client-id: ${{ vars.AZURE_CLIENT_ID }}
+    tenant-id: ${{ vars.AZURE_TENANT_ID }}
+    subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
 
-```python
-import requests
-
-FABRIC_API = "https://api.fabric.microsoft.com/v1"
-ACCESS_TOKEN = "..."  # OAuth token
-
-# Get lakehouse metadata
-response = requests.get(
-  f"{FABRIC_API}/workspaces/{workspace_id}/lakehouses/{lakehouse_id}",
-  headers={"Authorization": f"Bearer {ACCESS_TOKEN}"}
-)
-lakehouse_data = response.json()
+- name: Get Fabric API Access Token
+  id: fabric-token
+  run: |
+    TOKEN=$(az account get-access-token \
+      --resource "https://api.fabric.microsoft.com" \
+      --query accessToken -o tsv)
+    echo "token=$TOKEN" >> "$GITHUB_OUTPUT"
 ```
 
+### Required GitHub Variables
+
+- `FABRIC_WORKSPACE_ID` (GUID from workspace URL or MCP tool)
+- `AZURE_CLIENT_ID` (service principal with OIDC)
+- `AZURE_TENANT_ID`
+- `AZURE_SUBSCRIPTION_ID`
+
+## MCP Tool Fallback
+
+When Fabric MCP publishing tools fail (`fabric_notebookCreateTool`, `fabric_notebookPublishTool`):
+
+1. Use the Fabric Items REST API directly
+2. Create a PowerShell script wrapper: `Upload-FabricNotebooksAPI.ps1`
+3. Implement in the CI/CD workflow (see pattern above)
+
+### Common MCP Tool Failures
+
+- "No activate workspace" → workspace not selected in VS Code Fabric extension
+- "Notebook not found" → notebook must exist remotely before publishing
+- Fallback: Use REST API automation
+
+## Execution Order Documentation
+
+Always document notebook execution order in README:
+
+| Order | Notebook | Layer | Writes |
+| --- | --- | --- | --- |
+| 1 | nb_eda_cross_domain | Exploration | — (read-only) |
+| 2 | nb_clean_grammys | Bronze→Silver | silver_grammys_clean |
+| 3 | nb_features_temporal | Silver→Gold | gold_features_temporal |
+
+## Idempotency Requirements
+
+- Safe to re-run without duplicates
+- Use `.mode("overwrite")` for Delta table writes
+- Clear cell outputs before committing
+- Test full pipeline end-to-end locally before deployment
+
+## Environment Configuration
+
+### Fabric Capacity SKUs
+
+- Dev: F2 (minimum for testing)
+- Prod: F4+ (based on workload needs)
+
+### Workspace Settings
+
+- Enable Git integration for source control
+- Attach default lakehouse to notebooks
+- Configure compute settings per notebook or via Environment artifact
+
+## Reference Implementations
+
+See real-world examples:
+
+- [AwardPredictor](https://github.com/IBuySpy-Dev/AwardPredictor) — 14 notebooks, medallion pipeline, CI/CD automation

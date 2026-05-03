@@ -127,6 +127,7 @@
 | documentation | `instructions/documentation.instructions.md` | Documentation and change-note expectations |
 | drift-monitor | `instructions/drift-monitor.instructions.md` | Infrastructure-as-Code drift detection and remediation strategies |
 | error-kb | `instructions/error-kb.instructions.md` | Building and consulting error knowledge bases for failure classification and proven fixes |
+| fabric-notebooks | `instructions/fabric-notebooks.instructions.md` | Microsoft Fabric notebook deployment via CI/CD, lakehouse integration, and resource management |
 | frontend | `instructions/frontend.instructions.md` | Frontend, UI, state management, and accessibility |
 | governance | `instructions/governance.instructions.md` | Repository-wide AI governance rules |
 | mcp | `instructions/mcp.instructions.md` | MCP server, tooling, and trust-boundary guidance |
