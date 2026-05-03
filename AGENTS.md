@@ -2,7 +2,7 @@
 
 This file lists all available agents in the Base Coat framework.
 
-> **51 agents** available
+> **53 agents** available
 
 | Agent | Description |
 |---|---|
@@ -12,6 +12,7 @@ This file lists all available agents in the Base Coat framework.
 | [app-inventory](agents/app-inventory.agent.md) | Scans legacy applications to discover dependencies, identify technology stacks, assess migration complexity, and generate architecture diagrams for portfolio analysis. |
 | [azure-landing-zone](agents/azure-landing-zone.agent.md) | Azure Landing Zone (ESLZ) agent for scaffolding enterprise-scale landing zones following Microsoft's Cloud Adoption Framework. Use when designing management group hierarchies, platform subscriptions, hub networking, policy baselines, or landing zone vending templates. |
 | [backend-dev](agents/backend-dev.agent.md) | Backend development agent for APIs, services, and business logic. Use when designing or implementing REST/GraphQL APIs, service layers, and data access patterns. |
+| [business-continuity](agents/business-continuity.agent.md) | Business Continuity and Disaster Recovery Planning agent for BIA, BCP/DRP master documents, RTO/RPO worksheets, DR test exercises, and catastrophic-scenario runbooks. Use when building or reviewing BCP/DRP plans aligned to ISO 22301 and NIST SP 800-34. |
 | [chaos-engineer](agents/chaos-engineer.agent.md) | Chaos engineering agent for fault injection, game days, resilience scoring, recovery validation, and SLO-aware resilience experiments. |
 | [code-review](agents/code-review.agent.md) | Use when a task needs a structured, multi-step code review workflow with findings prioritized by severity and file references. |
 | [config-auditor](agents/config-auditor.agent.md) | Use when you need to scan a repository for committed or unprotected configuration files that contain secrets, credentials, or sensitive environment-specific values. Produces a findings report with remediation steps. |
@@ -41,6 +42,7 @@ This file lists all available agents in the Base Coat framework.
 | [performance-analyst](agents/performance-analyst.agent.md) | Performance analysis agent for profiling, load testing, and optimization. Use when evaluating application performance, planning load tests, analyzing Core Web Vitals, or investigating query and caching performance. |
 | [policy-as-code-compliance](agents/policy-as-code-compliance.agent.md) | Policy-as-code compliance agent for validating code and configuration against organizational rules, managing exceptions, and producing audit-ready compliance reports. |
 | [product-manager](agents/product-manager.agent.md) | Use when gathering requirements, writing user stories, defining acceptance criteria, planning roadmaps, or prioritizing features using frameworks like RICE or MoSCoW. |
+| [production-readiness](agents/production-readiness.agent.md) | Production Readiness Review (PRR) agent for running launch-readiness gates, service maturity scorecards, and post-launch monitoring plans. Use when validating that a service meets the operational bar for production launch. |
 | [project-onboarding](agents/project-onboarding.agent.md) | Single-invocation new repo setup with Basecoat integration. Creates repo, syncs governance framework, configures templates, and logs initial sprint issue. |
 | [prompt-coach](agents/prompt-coach.agent.md) | Interactive prompt optimization coach. Use when reviewing prompts, scoring prompt quality, identifying anti-patterns, and guiding iterative refinement. |
 | [prompt-engineer](agents/prompt-engineer.agent.md) | Prompt optimization and system prompt engineering agent. Use when designing system prompts, optimizing token usage, crafting few-shot examples, or structuring chain-of-thought instructions. |
@@ -48,6 +50,7 @@ This file lists all available agents in the Base Coat framework.
 | [release-manager](agents/release-manager.agent.md) | Automated versioned release workflow. Reads merged PRs since the last release, bumps version.json, writes CHANGELOG entry, creates git tag, and publishes GitHub release. |
 | [retro-facilitator](agents/retro-facilitator.agent.md) | End-of-sprint retrospective agent. Reviews closed issues and merged PRs for the sprint, produces a structured Went Well / Improve / Action Items summary, logs improvement issues framed generically for Basecoat, and updates sprint notes in the project repo. |
 | [rollout-basecoat](agents/rollout-basecoat.agent.md) | Use when onboarding a repository to Base Coat in an enterprise setting. Focuses on pinned versions, safe rollout, installation method, and validation steps. |
+| [safety-analyst](agents/safety-analyst.agent.md) | Safety analysis agent for software FMEA, Fault Tree Analysis (FTA), safety requirement traceability, and defensive programming review. Use when performing safety-critical analysis for IEC 61508, DO-178C, ISO 26262, IEC 62304, or EU AI Act Article 9. |
 | [security-analyst](agents/security-analyst.agent.md) | Security analysis agent for vulnerability assessment, threat modeling, and secure coding review. Use when auditing code for security issues, performing threat analysis, or reviewing dependencies for known vulnerabilities. |
 | [self-healing-ci](agents/self-healing-ci.agent.md) | Automated CI failure analysis, log parsing, and pipeline remediation with retry strategies, flaky test detection, dependency resolution, and cache invalidation |
 | [solution-architect](agents/solution-architect.agent.md) | Solution architecture agent for system design, C4 diagrams, ADRs, technology selection, and cross-cutting concerns. Use when designing new systems, evaluating technology choices, or reviewing architecture for scalability and risk. |

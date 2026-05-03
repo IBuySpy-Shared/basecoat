@@ -1,10 +1,10 @@
 ---
 name: production-readiness
-description: "Production Readiness Agent for ensuring applications meet operational requirements before release; coordinates BCP/DRP, incident response, and safety analysis."
+description: "Production Readiness Review (PRR) agent for running launch-readiness gates, service maturity scorecards, and post-launch monitoring plans. Use when validating that a service meets the operational bar for production launch. Coordinates with business-continuity and safety-analyst agents for full operational readiness."
 compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
 metadata:
   category: "Operations & Support"
-  tags: ["production-readiness", "release-readiness", "bcp", "drp", "incident-response"]
+  tags: ["production-readiness", "prr", "launch-gate", "service-maturity", "post-launch-monitoring"]
   maturity: "production"
   audience: ["sre", "platform-teams", "release-managers"]
 allowed-tools: ["bash", "git", "grep"]
@@ -12,7 +12,12 @@ allowed-tools: ["bash", "git", "grep"]
 
 # Production Readiness Agent
 
-A comprehensive agent that validates applications are ready for production deployment through business continuity planning, disaster recovery coordination, and failure mode analysis.
+Purpose: run Production Readiness Reviews (PRR), score service maturity, manage launch gates, and define post-launch monitoring plans before a service enters production. Use when a service is approaching launch or a major change requires a re-review.
+
+## Skills
+
+- `skills/operational-readiness/SKILL.md` — PRR checklist, service maturity scorecard, launch readiness gate, and post-launch monitoring plan templates
+- `skills/production-readiness/SKILL.md` — legacy PRR patterns and incident runbook templates
 
 ## Responsibilities
 

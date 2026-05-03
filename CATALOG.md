@@ -36,13 +36,16 @@
 | strategy-to-automation | `agents/strategy-to-automation.agent.md` | Converts manual test paths into tiered automation candidates | manual-test-strategy | GPT-4o / Claude Sonnet |
 | | **🚀 DevOps** | | | |
 | agentops | `agents/agentops.agent.md` | Agent lifecycle, versioning, rollout health, rollback, and retirement | — | GPT-4o / Claude Sonnet |
+| business-continuity | `agents/business-continuity.agent.md` | Business Continuity and Disaster Recovery Planning for BIA, BCP/DRP master documents, RTO/RPO worksheets, DR test exercises, and catastrophic-scenario runbooks | business-continuity | Claude Sonnet |
 | containerization-planner | `agents/containerization-planner.agent.md` | Containerization readiness assessment, platform selection, Dockerfiles, multi-stage builds, and deployment manifests | — | GPT-4o / Claude Sonnet |
 | devops-engineer | `agents/devops-engineer.agent.md` | CI/CD, IaC, deployment, rollback, and observability | devops | GPT-4o / Claude Sonnet |
 | incident-responder | `agents/incident-responder.agent.md` | Structured incident response and recovery for classifying, mitigating, coordinating, and post-incident learning | — | GPT-4o / Claude Sonnet |
 | infrastructure-deploy | `agents/infrastructure-deploy.agent.md` | Orchestrates Azure infrastructure deployments using Bicep with parameter validation and rollback strategies | — | GPT-4o / Claude Sonnet |
+| production-readiness | `agents/production-readiness.agent.md` | Production Readiness Reviews (PRR), service maturity scoring, launch gates, and post-launch monitoring plans | operational-readiness, production-readiness | Claude Sonnet |
 | release-impact-advisor | `agents/release-impact-advisor.agent.md` | Release readiness assessment, blast radius analysis, rollback planning, and safe deployment strategies | — | GPT-4o / Claude Sonnet |
 | release-manager | `agents/release-manager.agent.md` | Versioned release workflow, changelog, tagging, and publishing | — | GPT-4o-mini / Claude Haiku |
 | rollout-basecoat | `agents/rollout-basecoat.agent.md` | Enterprise Base Coat onboarding and rollout | — | GPT-4o-mini / Claude Haiku |
+| safety-analyst | `agents/safety-analyst.agent.md` | Safety analysis for software FMEA, Fault Tree Analysis, safety requirement traceability, and defensive programming review for IEC 61508, DO-178C, ISO 26262, and EU AI Act Art. 9 | functional-safety | Claude Sonnet |
 | self-healing-ci | `agents/self-healing-ci.agent.md` | Automated CI failure analysis, log parsing, flaky test detection, and pipeline remediation | — | GPT-4o / Claude Sonnet |
 | sre-engineer | `agents/sre-engineer.agent.md` | Site reliability engineering for SLOs, error budgets, incident response, chaos engineering, and toil reduction | — | GPT-4o / Claude Sonnet |
 | | **📋 Process** | | | |
@@ -95,11 +98,14 @@
 | documentation | `skills/documentation/` | `readme-template.md`, `runbook-template.md`, `adr-template.md` | tech-writer |
 | environment-bootstrap | `skills/environment-bootstrap/` | *(workflow only)* | devops-engineer |
 | frontend-dev | `skills/frontend-dev/` | `component-spec-template.md`, `accessibility-checklist.md`, `state-management-template.md` | frontend-dev |
+| functional-safety | `skills/functional-safety/` | `software-fmea-template.md`, `fta-template.md`, `safety-requirements-traceability.md`, `defensive-programming-checklist.md` | safety-analyst |
 | handoff | `skills/handoff/` | *(workflow only)* | — |
 | human-in-the-loop | `skills/human-in-the-loop/` | *(workflow only)* | — |
 | identity-migration | `skills/identity-migration/` | *(workflow only)* | identity-architect |
 | manual-test-strategy | `skills/manual-test-strategy/` | `charter-template.md`, `checklist-template.md`, `defect-template.md`, `rubric-template.md` | manual-test-strategy, exploratory-charter, strategy-to-automation |
 | mcp-development | `skills/mcp-development/` | `mcp-server-template.md`, `tool-definition-template.md`, `transport-config-template.md` | mcp-developer |
+| operational-readiness | `skills/operational-readiness/` | `prr-checklist.md`, `service-maturity-scorecard.md`, `launch-readiness-gate.md`, `post-launch-monitoring-plan.md` | production-readiness |
+| business-continuity | `skills/business-continuity/` | `bia-template.md`, `bcp-drp-master.md`, `rto-rpo-worksheet.md`, `dr-test-exercise.md`, `dr-runbook.md` | business-continuity |
 | performance-profiling | `skills/performance-profiling/` | *(workflow only)* | performance-analyst |
 | refactoring | `skills/refactoring/` | *(workflow only)* | — |
 | security | `skills/security/` | `owasp-checklist.md`, `stride-threat-model-template.md`, `vulnerability-report-template.md`, `dependency-audit-template.md` | security-analyst, config-auditor |
