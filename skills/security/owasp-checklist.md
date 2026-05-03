@@ -20,6 +20,7 @@ Use this checklist to evaluate an application against the OWASP Top 10 (2021). M
 | 1.4 | Directory listing is disabled on web servers | ☐ Pass ☐ Fail ☐ N/A | |
 | 1.5 | Rate limiting is applied to sensitive endpoints | ☐ Pass ☐ Fail ☐ N/A | |
 | 1.6 | JWT tokens are validated for signature, expiry, and audience | ☐ Pass ☐ Fail ☐ N/A | |
+| 1.7 | **CWE-352**: State-changing requests (POST/PUT/DELETE/PATCH) include and validate CSRF tokens or use SameSite cookies | ☐ Pass ☐ Fail ☐ N/A | |
 
 ## A02:2021 — Cryptographic Failures
 
@@ -40,6 +41,8 @@ Use this checklist to evaluate an application against the OWASP Top 10 (2021). M
 | 3.3 | NoSQL queries are parameterized | ☐ Pass ☐ Fail ☐ N/A | |
 | 3.4 | LDAP queries are parameterized | ☐ Pass ☐ Fail ☐ N/A | |
 | 3.5 | Template engines use auto-escaping | ☐ Pass ☐ Fail ☐ N/A | |
+| 3.6 | **CWE-22**: File path construction rejects `..` traversal sequences and is restricted to an allowed base directory | ☐ Pass ☐ Fail ☐ N/A | |
+| 3.7 | **CWE-94**: `eval()`, `exec()`, and dynamic code execution are absent or restricted to trusted input only; SSTI payloads (`{{ 7*7 }}`, `<%= 7*7 %>`) are rejected | ☐ Pass ☐ Fail ☐ N/A | |
 
 ## A04:2021 — Insecure Design
 
@@ -95,6 +98,18 @@ Use this checklist to evaluate an application against the OWASP Top 10 (2021). M
 | 9.2 | Authorization failures are logged with context | ☐ Pass ☐ Fail ☐ N/A | |
 | 9.3 | Logs do not contain secrets, tokens, or PII | ☐ Pass ☐ Fail ☐ N/A | |
 | 9.4 | Alerting is configured for anomalous patterns | ☐ Pass ☐ Fail ☐ N/A | |
+| 9.5 | Input validation failures and injection attempts are logged | ☐ Pass ☐ Fail ☐ N/A | |
+| 9.6 | High-value business transactions (payments, privilege changes, data exports) produce an audit trail | ☐ Pass ☐ Fail ☐ N/A | |
+| 9.7 | Logs are forwarded to a tamper-resistant, centralized store (SIEM) | ☐ Pass ☐ Fail ☐ N/A | |
+| 9.8 | Log retention meets the applicable compliance requirement (e.g., 90 days minimum) | ☐ Pass ☐ Fail ☐ N/A | |
+
+## A09-CWE-362: Race Conditions and TOCTOU
+
+| # | Check | Status | Evidence |
+|---|---|---|---|
+| RC.1 | **CWE-362**: Shared resources (files, database rows, in-memory counters) accessed by concurrent requests are protected with appropriate locking or atomic operations | ☐ Pass ☐ Fail ☐ N/A | |
+| RC.2 | Check-then-act sequences (file existence check before write, balance check before debit) use database-level transactions or compare-and-swap to prevent TOCTOU races | ☐ Pass ☐ Fail ☐ N/A | |
+| RC.3 | Idempotency keys or deduplication guards prevent double-processing of financial or state-changing operations submitted concurrently | ☐ Pass ☐ Fail ☐ N/A | |
 
 ## A10:2021 — Server-Side Request Forgery (SSRF)
 
@@ -119,6 +134,7 @@ Use this checklist to evaluate an application against the OWASP Top 10 (2021). M
 | A07 — Auth Failures | | |
 | A08 — Data Integrity Failures | | |
 | A09 — Logging & Monitoring Failures | | |
+| A09-CWE-362 — Race Conditions / TOCTOU | | |
 | A10 — SSRF | | |
 
-**Total Findings:** ___ | **Issues Filed:** ___
+**Total Findings:** &nbsp; | **Issues Filed:** &nbsp;

@@ -2,13 +2,14 @@
 
 This file lists all available agents in the Base Coat framework.
 
-> **51 agents** available
+> **52 agents** available
 
 | Agent | Description |
 |---|---|
 | [agent-designer](agents/agent-designer.agent.md) | Agent that designs and authors Copilot agent definitions. Use when creating new agents, composing skills, writing agent instructions, or coordinating multi-agent workflows. |
 | [agentops](agents/agentops.agent.md) | AgentOps lifecycle manager for agent versioning, rollout, health monitoring, rollback, and operational governance. Use when deploying, canarying, or retiring agent versions. |
 | [api-designer](agents/api-designer.agent.md) | API designer agent for OpenAPI spec authoring, REST and GraphQL design, versioning strategy, breaking-change detection, and API governance. Use when designing, reviewing, or evolving API contracts. |
+| [api-security](agents/api-security.agent.md) | API Security agent for auditing REST and GraphQL APIs against OWASP API Security Top 10 (2023), detecting mass assignment, broken function-level authorization, business flow abuse, shadow APIs, and unsafe third-party consumption. |
 | [app-inventory](agents/app-inventory.agent.md) | Scans legacy applications to discover dependencies, identify technology stacks, assess migration complexity, and generate architecture diagrams for portfolio analysis. |
 | [azure-landing-zone](agents/azure-landing-zone.agent.md) | Azure Landing Zone (ESLZ) agent for scaffolding enterprise-scale landing zones following Microsoft's Cloud Adoption Framework. Use when designing management group hierarchies, platform subscriptions, hub networking, policy baselines, or landing zone vending templates. |
 | [backend-dev](agents/backend-dev.agent.md) | Backend development agent for APIs, services, and business logic. Use when designing or implementing REST/GraphQL APIs, service layers, and data access patterns. |

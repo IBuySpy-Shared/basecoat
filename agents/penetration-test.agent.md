@@ -38,6 +38,7 @@ Pre-Engagement Checklist:
 ```
 
 **Key Questions:**
+
 - Which systems are in-scope? (web apps, APIs, infrastructure, mobile)
 - What data classification must be protected? (PII, secrets, configs)
 - Are there regulatory constraints? (HIPAA, PCI-DSS, GDPR)
@@ -62,6 +63,7 @@ nuclei -target https://target.com -t api/
 ```
 
 **Documentation:**
+
 - Asset inventory (domains, IPs, services)
 - Technology stack detection (frameworks, databases, libraries)
 - API endpoint catalog (methods, authentication, data models)
@@ -72,6 +74,7 @@ nuclei -target https://target.com -t api/
 Execute test cases aligned with OWASP Testing Guide (v4.2).
 
 **OWASP Top 10 Areas:**
+
 - **Authentication:** Weak password policies, session fixation, credential exposure
 - **Authorization:** Broken access control, privilege escalation, attribute-based flaws
 - **Input Handling:** SQL injection, command injection, XSS, XXE, deserialization
@@ -80,6 +83,7 @@ Execute test cases aligned with OWASP Testing Guide (v4.2).
 - **Configuration:** Debug modes, default credentials, security headers, CORS misconfiguration
 
 **Test Execution Pattern:**
+
 ```python
 # Conceptual test runner
 for vulnerability_category in owasp_categories:
@@ -129,6 +133,7 @@ Finding Triage:
 Coordinate fix verification and residual risk assessment.
 
 **Workflow:**
+
 1. Developer receives finding with remediation guidance
 2. Fix is implemented and unit-tested
 3. Penetration tester validates fix with original test
@@ -136,6 +141,7 @@ Coordinate fix verification and residual risk assessment.
 5. If fixed: confirm in writing, close finding
 
 **Residual Risk Assessment:**
+
 - Can the vulnerability be exploited at scale? (worm potential)
 - Is there external visibility? (attacker research, public tools)
 - Are there compensating controls? (WAF rules, monitoring)
@@ -145,7 +151,8 @@ Coordinate fix verification and residual risk assessment.
 Deliver executive summary and detailed technical roadmap.
 
 **Report Structure:**
-```
+
+```text
 1. Executive Summary
    - Engagement dates, scope, methodology
    - High-level risk profile (X critical, Y high, Z medium findings)
@@ -204,11 +211,13 @@ wait
 
 ## Skills & Tools Required
 
-- **Penetration Testing:** skills/penetration-testing/
-  - OWASP Testing Guide execution patterns
+- **Penetration Testing:** `skills/security/`
+  - `pentest-scope-template.md` — pre-engagement scope, rules of engagement, and success criteria
+  - `pentest-findings-template.md` — structured per-finding cards, CVSS scoring, and coverage matrix
+  - `owasp-checklist.md` — OWASP Web Top 10 test coverage
+  - `owasp-api-security-checklist.md` — OWASP API Security Top 10 (2023) test coverage
   - Attack payloads (SQLi, XSS, command injection templates)
   - Exploitation frameworks (Metasploit modules, custom scripts)
-  - Reporting templates (finding card format, remediation snippets)
 
 - **Vulnerability Scanners:** Burp Suite, OWASP ZAP, Nuclei, Nessus patterns
 - **Protocol Analysis:** Wireshark, mitmproxy for API/HTTP inspection

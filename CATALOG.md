@@ -33,6 +33,8 @@
 | performance-analyst | `agents/performance-analyst.agent.md` | Profiling, load testing, and performance optimization | performance-profiling | GPT-4o / Claude Sonnet |
 | policy-as-code-compliance | `agents/policy-as-code-compliance.agent.md` | Policy-as-code compliance for validating code and config against organizational rules and producing audit-ready reports | azure-policy | GPT-4o / Claude Sonnet |
 | security-analyst | `agents/security-analyst.agent.md` | Vulnerability assessment, threat modeling, secure code review | security | GPT-4o / Claude Sonnet |
+| api-security | `agents/api-security.agent.md` | OWASP API Security Top 10 (2023) audits for REST and GraphQL APIs — mass assignment, broken function-level authorization, business flow abuse, shadow APIs, unsafe third-party consumption | api-security, security | GPT-4o / Claude Sonnet |
+| penetration-test | `agents/penetration-test.agent.md` | Penetration testing engagements from pre-engagement through post-assessment — scope definition, vulnerability discovery, CVSS rating, remediation coordination, and reporting | security, penetration-testing | GPT-4o / Claude Sonnet |
 | strategy-to-automation | `agents/strategy-to-automation.agent.md` | Converts manual test paths into tiered automation candidates | manual-test-strategy | GPT-4o / Claude Sonnet |
 | | **🚀 DevOps** | | | |
 | agentops | `agents/agentops.agent.md` | Agent lifecycle, versioning, rollout health, rollback, and retirement | — | GPT-4o / Claude Sonnet |
@@ -102,7 +104,7 @@
 | mcp-development | `skills/mcp-development/` | `mcp-server-template.md`, `tool-definition-template.md`, `transport-config-template.md` | mcp-developer |
 | performance-profiling | `skills/performance-profiling/` | *(workflow only)* | performance-analyst |
 | refactoring | `skills/refactoring/` | *(workflow only)* | — |
-| security | `skills/security/` | `owasp-checklist.md`, `stride-threat-model-template.md`, `vulnerability-report-template.md`, `dependency-audit-template.md` | security-analyst, config-auditor |
+| security | `skills/security/` | `owasp-checklist.md`, `owasp-api-security-checklist.md`, `stride-threat-model-template.md`, `vulnerability-report-template.md`, `dependency-audit-template.md`, `pentest-scope-template.md`, `pentest-findings-template.md` | security-analyst, api-security, penetration-test, config-auditor |
 | github-security-posture | `skills/github-security-posture/` | `posture-report-template.md` | github-security-posture |
 | service-bus-migration | `skills/service-bus-migration/` | *(workflow only)* | — |
 | sprint-management | `skills/sprint-management/` | `sprint-planning-template.md`, `backlog-grooming-template.md`, `retrospective-template.md` | sprint-planner, retro-facilitator, product-manager, issue-triage |
