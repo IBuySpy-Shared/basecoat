@@ -13,10 +13,12 @@ description: Tracking for known limitations and prerequisites for certain featur
 **Description:** GitHub API does not expose per-model premium billing breakdown. This data is only available through the GitHub web UI's billing dashboard.
 
 **Why It's Blocked:**
+
 - GitHub REST API v3 and GraphQL API do not include granular billing data per model
 - Enterprise billing aggregation only available via web UI
 
 **Workaround:**
+
 - Navigate to: GitHub Settings → Billing and plans → Usage metrics
 - Export billing data manually from web dashboard
 - Use Azure Cost Management for Azure OpenAI consumption instead
@@ -29,20 +31,33 @@ description: Tracking for known limitations and prerequisites for certain featur
 
 **Status:** BLOCKED (Enterprise Admin Gate)
 
-**Description:** Enterprise admin must enable "Copilot usage metrics" policy in GitHub Enterprise settings before any usage data collection.
+**Description:** Enterprise admin must enable "Copilot usage metrics" policy in GitHub Enterprise settings before the `/orgs/{org}/copilot/metrics` endpoint returns data (currently 404).
 
 **Why It's Blocked:**
+
 - Only enterprise admins have permission to enable this policy
 - Feature requires GitHub Enterprise Cloud subscription
 - Organization-level settings insufficient (enterprise scope required)
 
 **Prerequisite Actions:**
+
 1. Contact your GitHub Enterprise admin
-2. Navigate to GitHub Enterprise settings → "Code security and analysis"
-3. Enable "Copilot usage metrics collection"
-4. Wait 24-48 hours for data pipeline initialization
+2. Navigate to **Enterprise → Settings → Policies → Copilot → Usage metrics**
+3. Toggle **Usage metrics** to **Enabled**
+4. Wait 24–48 hours for data pipeline initialization
+
+**Affected Endpoints (return 404 until enabled):**
+
+- `GET /orgs/IBuySpy-Shared/copilot/metrics`
+- `GET /orgs/IBuySpy-Shared/copilot/metrics/reports/org-1-day`
+
+**Working Endpoints (no policy required):**
+
+- `GET /enterprises/ibuyspy/settings/billing/usage` — seat costs
+- `GET /orgs/IBuySpy-Shared/copilot/billing/seats` — seat assignments + last_activity
 
 **Then Available:**
+
 - Organization-level Copilot usage reports
 - Per-seat metrics (active users, chats, completions)
 - Model adoption trends
@@ -62,7 +77,8 @@ description: Tracking for known limitations and prerequisites for certain featur
 **Solution:** Modular pattern with `references/` subdirectory
 
 **Example:** `skills/security-operations/SKILL.md` split into:
-```
+
+```text
 skills/security-operations/
   ├─ SKILL.md (overview, 5KB)
   ├─ references/
@@ -73,11 +89,13 @@ skills/security-operations/
 ```
 
 **Why Needed:**
+
 - IDEs (VS Code, etc) show previews up to ~5KB
 - Documentation sites render better below 10KB per page
 - Cognitive load reduced with focused, single-topic files
 
 **Next Steps:**
+
 - Identify all skills >5KB
 - Apply modular refactoring pattern
 - Update main SKILL.md with navigation links
@@ -90,14 +108,16 @@ skills/security-operations/
 ### Copilot Usage Metrics
 
 **Requires:**
+
 - ✅ GitHub Enterprise Cloud subscription
-- ⏳ Enterprise admin enablement (external action)
-- ⏳ 24-48h activation period
-- ⏳ Permissions: `admin:enterprise` scope
+- ⏳ Enterprise admin enablement: Enterprise → Settings → Policies → Copilot → Usage metrics → Enable
+- ⏳ 24–48h activation period
+- ⏳ Token with `manage_billing:copilot` scope
 
 **Post-Enablement:**
+
 - Organization usage dashboard available
-- Per-seat active user tracking
+- Per-seat active user tracking (`/orgs/{org}/copilot/metrics`)
 - Model adoption metrics
 - Cost per seat reporting
 
@@ -116,6 +136,7 @@ skills/security-operations/
 ## Issue Resolution Path
 
 ### For Blocked Issues
+
 1. **Assess blocker type:** External (API), Enterprise prerequisite, or Design limitation
 2. **Document prerequisite:** Link to setup guides or admin actions
 3. **Provide workaround:** Offer alternative if available
@@ -123,6 +144,7 @@ skills/security-operations/
 5. **Re-evaluate quarterly:** Check if API limitations lifted or enterprise policies updated
 
 ### For Design Limitations
+
 1. **Prototype solution:** Create proof-of-concept (e.g., modular skill refactoring)
 2. **Test at scale:** Apply to 2-3 large skills before full rollout
 3. **Document pattern:** Add to `docs/` for future contributors

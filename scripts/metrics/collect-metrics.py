@@ -48,25 +48,58 @@ def github_api(url, token):
 
 
 def collect_copilot_metrics(org, token):
-    """Collect Copilot usage metrics for the organization."""
+    """Collect Copilot usage metrics for the organization.
+
+    Tries the newer /copilot/metrics endpoint first (requires enterprise
+    usage-metrics policy to be enabled). Falls back to the legacy
+    /copilot/usage endpoint when the new one returns 404.
+    """
     print(f"  Collecting Copilot metrics for {org}...")
-    data = github_api(
+
+    # Try new endpoint (requires: Enterprise → Settings → Policies →
+    # Copilot → Usage metrics → Enable)
+    metrics_data = github_api(
+        f"https://api.github.com/orgs/{org}/copilot/metrics",
+        token
+    )
+
+    if metrics_data is not None:
+        # New endpoint returns a list of daily metric objects
+        days = metrics_data if isinstance(metrics_data, list) else []
+        total_active = max(
+            (d.get("total_active_users", 0) for d in days), default=0
+        )
+        return {
+            "available": True,
+            "endpoint": "copilot/metrics",
+            "total_active_users": total_active,
+            "days": days[-28:] if len(days) > 28 else days,
+        }
+
+    # 404 — enterprise policy not yet enabled; fall back to legacy endpoint
+    print(
+        "  INFO: /copilot/metrics returned 404. "
+        "Enterprise admin must enable Copilot usage metrics policy "
+        "(Enterprise → Settings → Policies → Copilot → Usage metrics). "
+        "Falling back to legacy /copilot/usage endpoint."
+    )
+    legacy_data = github_api(
         f"https://api.github.com/orgs/{org}/copilot/usage",
         token
     )
-    if not data:
-        print("  WARNING: Could not fetch Copilot metrics (need org admin scope)")
+    if not legacy_data:
+        print(
+            "  WARNING: Could not fetch Copilot metrics from either endpoint. "
+            "Ensure the token has 'manage_billing:copilot' or 'read:org' scope."
+        )
         return {"available": False}
 
-    # Extract recent metrics
-    days = data.get("day_breakdown", data.get("breakdown", []))
-    if not days:
-        return {"available": True, "days": []}
-
+    days = legacy_data.get("day_breakdown", legacy_data.get("breakdown", []))
     return {
         "available": True,
-        "total_active_users": data.get("total_active_users", 0),
-        "days": days[-28:] if len(days) > 28 else days
+        "endpoint": "copilot/usage",
+        "total_active_users": legacy_data.get("total_active_users", 0),
+        "days": days[-28:] if len(days) > 28 else days,
     }
 
 
