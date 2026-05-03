@@ -92,4 +92,7 @@ Write-Host 'Running adoption scanner tests...'
 Write-Host 'Running workflow guardrails tests...'
 & pwsh -NoProfile -File (Join-Path $PSScriptRoot 'workflow-guardrails-tests.ps1')
 
+Write-Host 'Running data workload tests...'
+& pwsh -NoProfile -File (Join-Path $PSScriptRoot 'data-workload-tests.ps1')
+
 Write-Host 'All PowerShell tests passed'
