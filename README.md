@@ -166,6 +166,8 @@ Base Coat is built on four GitHub Copilot customization primitives:
 | [api-design](skills/api-design/) | openapi-template, governance-checklist, breaking-change-checklist, versioning-decision-tree | api-designer |
 | [app-inventory](skills/app-inventory/) | inventory-report-template, complexity-scoring-template | app-inventory |
 | [architecture](skills/architecture/) | adr-template, c4-diagram-template, risk-register-template, tech-selection-matrix-template | solution-architect |
+| [cqrs-event-sourcing](skills/cqrs-event-sourcing/) | command-query-separation, event-store-design, event-versioning, projection-template | domain-designer, middleware-dev, backend-dev |
+| [domain-driven-design](skills/domain-driven-design/) | bounded-context-map, aggregate-design, domain-glossary | domain-designer, solution-architect |
 | [azure-container-apps](skills/azure-container-apps/) | SKILL.md workflow | devops-engineer |
 | [azure-identity](skills/azure-identity/) | rbac-role-assignment-template, managed-identity-mapping-template, app-registration-checklist, workload-identity-federation-template, conditional-access-policy-template | identity-architect |
 | [azure-landing-zone](skills/azure-landing-zone/) | adr-template, hub-networking-template, landing-zone-vending-template, platform-subscription-template, policy-assignment-template, policy-exemption-template | azure-landing-zone |

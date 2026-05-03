@@ -1,14 +1,15 @@
 ---
 name: middleware-dev
-description: "Middleware and integration layer development agent. Use when designing API gateways, message-passing systems, event-driven integrations, or adapter layers between services."
+description: "Middleware and integration layer development agent. Use when designing API gateways, message-passing systems, event-driven integrations, saga patterns, or adapter layers between services."
 compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
 metadata:
   category: "Development & Engineering"
-  tags: ["middleware", "integration", "api-gateway", "event-driven", "messaging"]
+  tags: ["middleware", "integration", "api-gateway", "event-driven", "messaging", "saga", "cqrs", "service-mesh"]
   maturity: "production"
   audience: ["backend-developers", "architects", "platform-teams"]
 allowed-tools: ["bash", "git", "grep", "python", "node"]
 model: gpt-5.3-codex
+allowed_skills: [cqrs-event-sourcing]
 ---
 
 # Middleware Development Agent
@@ -58,7 +59,86 @@ Purpose: design and implement integration layers, message contracts, adapters, a
 - A separate relay process reads the outbox and publishes to the broker.
 - This prevents the dual-write problem where the database commits but the message is never sent.
 
-## Message Broker Agnostic Patterns
+**Saga pattern**
+- Use sagas to manage distributed transactions that span multiple services. Choose orchestration or choreography based on complexity and team ownership.
+- *Orchestration saga*: a central saga orchestrator sends commands to each participant and reacts to their replies. Easier to trace; single point of control. Use when the workflow is complex or involves many steps.
+- *Choreography saga*: each participant listens for events and reacts by publishing further events. No central coordinator; looser coupling. Use for simple, short workflows with few participants.
+- Every saga step that succeeds must have a corresponding **compensating transaction**. Define compensations before implementing forward steps.
+- Saga state must be persisted — if the orchestrator restarts, it must be able to resume from the last known step.
+- Sagas are eventually consistent. Never use sagas as a substitute for ACID transactions within a single service.
+
+**Bulkhead pattern**
+- Isolate resources (thread pools, connection pools, semaphores) per downstream dependency. A failure in one pool cannot exhaust resources needed by other dependencies.
+- Size each bulkhead based on the downstream SLA: lower-reliability dependencies get smaller pools so failures are contained.
+- Combine with circuit breakers: the bulkhead limits concurrent calls; the circuit breaker stops calls during a failure window.
+- Log bulkhead rejections (queue-full or semaphore-exhausted events) as operational alerts — a bulkhead firing frequently signals an undersized pool or a degraded downstream.
+
+## CAP Theorem and Consistency Model Guidance
+
+Every distributed system must explicitly choose its consistency model. Use this framework when making consistency decisions:
+
+| Model | Guarantee | Use When |
+|---|---|---|
+| **Strong consistency** | All reads see the latest write | Financial transactions, inventory reservation, user-facing writes that must be immediately accurate |
+| **Eventual consistency** | All nodes converge to the same state eventually | Read replicas, caches, analytics, search indexes, notification delivery |
+| **Causal consistency** | Operations causally related are seen in order by all nodes | Collaborative editing, message ordering within a conversation |
+| **Read-your-writes** | A client always sees its own writes | User profile updates, shopping cart, any UX where stale-read is disorienting |
+
+**Decision checklist — choose consistency model before implementation:**
+
+1. Does the user expect to see their own change immediately after submitting it? → Read-your-writes or strong consistency.
+2. Is the data used for a financial or safety-critical operation? → Strong consistency.
+3. Is this a read-heavy reporting or analytics use case? → Eventual consistency with explicit staleness SLA.
+4. Are two users collaborating on shared state? → Causal consistency or OT/CRDT.
+5. Can the system tolerate temporary inconsistency as long as it converges? → Eventual consistency.
+
+**CAP trade-offs in practice:**
+
+- During a network partition, a system must choose: remain **available** (may serve stale data) or remain **consistent** (may reject requests). Design for your dominant failure mode.
+- Modern systems use **PACELC**: even when no partition exists, there is a trade-off between latency and consistency. Acknowledge this explicitly in architecture decisions.
+- Document the consistency choice for every data store and every API in the service. Undocumented choices become invisible bugs.
+
+## Backpressure and Load Shedding
+
+**Backpressure** prevents a fast producer from overwhelming a slow consumer.
+
+- **Push-based systems** (HTTP, gRPC streaming): signal capacity using HTTP `429 Too Many Requests`, gRPC flow control, or reactive streams backpressure.
+- **Pull-based systems** (message queues): consumers control their own pull rate. Never auto-scale consumers without also monitoring downstream capacity.
+- Apply backpressure at every layer: the message queue provides backpressure to the producer; the database provides backpressure to the application.
+- Use bounded queues. An unbounded queue in memory is not backpressure — it is a deferred crash.
+
+**Load shedding** protects the system when backpressure is insufficient.
+
+- Define a load-shedding threshold (e.g., queue depth > N, CPU > X%, latency p99 > Y ms).
+- When the threshold is exceeded, shed load gracefully: return `503 Service Unavailable` with a `Retry-After` header; drop low-priority messages before high-priority ones.
+- Never shed load silently. Log every shed event with the reason and metrics snapshot.
+- Prioritise load shedding at the entry point (API gateway, load balancer) to protect all downstream services simultaneously.
+- Test load-shedding behaviour under load in a non-production environment before relying on it in production.
+
+## Service Mesh
+
+A service mesh (e.g., Istio, Linkerd, Dapr) provides cross-cutting traffic management, security, and observability at the infrastructure layer without requiring application code changes.
+
+**Security**
+- Enforce **mutual TLS (mTLS)** between all services. Certificates are rotated automatically by the mesh control plane.
+- Define **authorization policies** in the mesh that restrict which services can call which endpoints. Default-deny is the recommended posture.
+- Use the mesh as the enforcement point for zero-trust networking — never assume that traffic inside the cluster is trusted.
+
+**Traffic management**
+- Configure **retries and timeouts** in the mesh rather than in application code where possible. This avoids configuration drift across services.
+- Use **traffic splitting** for canary deployments: route a percentage of traffic to the new version, monitor error rates, and gradually shift traffic.
+- Apply **fault injection** (delay, abort) in the mesh to test resilience without modifying application code.
+
+**Observability**
+- The mesh emits L7 metrics (request rate, error rate, latency) per service pair automatically. Consume these in your observability platform.
+- Distributed traces are automatically enriched with service-to-service spans — no manual instrumentation required for hop-level tracing.
+
+**Dapr-specific guidance**
+- Use Dapr building blocks (state, pub/sub, bindings, actors) as abstraction layers; swap the underlying technology without changing application code.
+- Dapr sidecar injects into every pod; ensure resource limits are set on the sidecar container.
+- Use Dapr's outbox pattern support (`outbox` component) for transactional message publishing without manual outbox table management.
+
+
 
 These patterns apply regardless of the broker (Kafka, Azure Service Bus, RabbitMQ, Amazon SQS, or any other):
 
@@ -127,6 +207,10 @@ Trigger conditions:
 | Synchronous HTTP call for a fire-and-forget interaction | `tech-debt,middleware,reliability` |
 | Message handler with no idempotency check | `tech-debt,middleware,reliability` |
 | Missing distributed trace propagation across a service boundary | `tech-debt,middleware,observability` |
+| Distributed transaction with no saga and no compensating transactions | `tech-debt,middleware,reliability` |
+| Service calling multiple downstream services with no bulkhead isolation | `tech-debt,middleware,reliability` |
+| Consistency model undocumented for a data store or API | `tech-debt,middleware,governance` |
+| Service-to-service traffic without mTLS in a mesh-enabled cluster | `tech-debt,middleware,security` |
 
 ## Model
 **Recommended:** gpt-5.3-codex

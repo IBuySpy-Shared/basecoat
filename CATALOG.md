@@ -12,10 +12,11 @@
 | | **🔨 Development** | | | |
 | backend-dev | `agents/backend-dev.agent.md` | APIs, service layers, business logic, and data access | backend-dev | GPT-4o / Claude Sonnet |
 | frontend-dev | `agents/frontend-dev.agent.md` | UI components, responsive layouts, state, accessibility | frontend-dev | GPT-4o / Claude Sonnet |
-| middleware-dev | `agents/middleware-dev.agent.md` | API gateways, integration layers, event-driven architectures | — | GPT-4o / Claude Sonnet |
+| middleware-dev | `agents/middleware-dev.agent.md` | API gateways, integration layers, event-driven architectures, saga patterns, and service mesh | cqrs-event-sourcing | GPT-4o / Claude Sonnet |
 | data-tier | `agents/data-tier.agent.md` | Schema design, migrations, query optimization, data access | data-tier | GPT-4o / Claude Sonnet |
 | | **🏗️ Architecture** | | | |
 | solution-architect | `agents/solution-architect.agent.md` | System design, C4 diagrams, ADRs, and technology selection | architecture | GPT-4o / Claude Sonnet |
+| domain-designer | `agents/domain-designer.agent.md` | Bounded context mapping, aggregate design, event storming, and ubiquitous language | domain-driven-design, cqrs-event-sourcing | Claude Sonnet |
 | api-designer | `agents/api-designer.agent.md` | API design for OpenAPI, REST, GraphQL, and governance | api-design | GPT-4o / Claude Sonnet |
 | ux-designer | `agents/ux-designer.agent.md` | Journey mapping, wireframes, and accessibility audits | ux | GPT-4o / Claude Sonnet |
 | app-inventory | `agents/app-inventory.agent.md` | Scan legacy apps for project files, NuGet/npm dependencies, connection strings, framework versions, and migration complexity scores | app-inventory | GPT-4o / Claude Sonnet |
@@ -83,6 +84,8 @@
 | azure-waf-review | `skills/azure-waf-review/` | `waf-assessment-report-template.md`, `pillar-scoring-rubric.md`, `remediation-action-plan-template.md` | solution-architect, security-analyst, devops-engineer |
 | azure-policy | `skills/azure-policy/` | `policy-definition-template.md`, `initiative-definition-template.md`, `remediation-task-template.md`, `compliance-report-template.md` | policy-as-code-compliance |
 | architecture | `skills/architecture/` | `adr-template.md`, `c4-diagram-template.md`, `risk-register-template.md`, `tech-selection-matrix-template.md` | solution-architect |
+| cqrs-event-sourcing | `skills/cqrs-event-sourcing/` | `templates/command-query-separation.md`, `templates/event-store-design.md`, `templates/event-versioning.md`, `templates/projection-template.md` | domain-designer, middleware-dev, backend-dev |
+| domain-driven-design | `skills/domain-driven-design/` | `templates/bounded-context-map.md`, `templates/aggregate-design.md`, `templates/domain-glossary.md` | domain-designer, solution-architect |
 | azure-container-apps | `skills/azure-container-apps/` | *(workflow only)* | devops-engineer |
 | azure-networking | `skills/azure-networking/` | `hub-spoke-topology.md`, `cidr-allocation.md`, `private-endpoint-dns-zones.md`, `nsg-rule-matrix.md` | solution-architect, devops-engineer |
 | azure-identity | `skills/azure-identity/` | `rbac-role-assignment-template.md`, `managed-identity-mapping-template.md`, `app-registration-checklist.md`, `workload-identity-federation-template.md`, `conditional-access-policy-template.md` | identity-architect |

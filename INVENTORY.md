@@ -47,6 +47,8 @@ This catalog helps teams discover what exists in Base Coat and when to use it.
 | `skills/api-design/SKILL.md`            | OpenAPI spec, API governance, and versioning templates | api, openapi, governance, versioning |
 | `skills/app-inventory/SKILL.md`         | legacy app inventory reports and complexity scoring | inventory, legacy, scanning, complexity |
 | `skills/architecture/SKILL.md`          | ADR, C4 diagram, and tech selection templates | architecture, adr, c4, diagram, tech-selection |
+| `skills/cqrs-event-sourcing/SKILL.md`   | implement CQRS, event sourcing, event stores, projections, event versioning, and snapshot patterns | cqrs, event-sourcing, event-store, projections, commands, queries, event-versioning |
+| `skills/domain-driven-design/SKILL.md`  | decompose domains into bounded contexts, design aggregates, map context relationships, and build domain glossaries | ddd, domain-driven-design, bounded-context, aggregate, ubiquitous-language, event-storming, context-mapping |
 | `skills/azure-container-apps/SKILL.md`  | deploy, scale, and manage containers on Azure Container Apps with managed identity, health probes, and traffic splitting | azure, container apps, aca, ingress, scale, revision, health probes, managed identity |
 | `skills/azure-identity/SKILL.md`        | design RBAC hierarchies, managed identities, app registrations, conditional access, and workload identity federation | azure, identity, rbac, managed identity, entra, zero trust, oidc |
 | `skills/azure-landing-zone/SKILL.md`    | enterprise-scale landing zone scaffolding with Bicep templates | azure, landing-zone, eslz, caf, bicep |

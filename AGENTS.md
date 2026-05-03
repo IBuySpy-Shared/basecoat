@@ -2,7 +2,7 @@
 
 This file lists all available agents in the Base Coat framework.
 
-> **51 agents** available
+> **52 agents** available
 
 | Agent | Description |
 |---|---|
@@ -20,6 +20,7 @@ This file lists all available agents in the Base Coat framework.
 | [dataops](agents/dataops.agent.md) | DataOps agent for data quality, lineage, governance, orchestration, data contracts, and drift detection across analytical and ML data pipelines. Use when managing pipeline reliability and data change risk. |
 | [dependency-lifecycle](agents/dependency-lifecycle.agent.md) | Agent for managing dependency updates, tracking breaking changes, planning upgrade paths, monitoring vulnerabilities, analyzing semantic versioning, and generating migration guides. |
 | [devops-engineer](agents/devops-engineer.agent.md) | DevOps engineer agent for CI/CD pipelines, infrastructure as code, container strategy, environment promotion, rollback procedures, and observability. Use when designing or improving deployment workflows. |
+| [domain-designer](agents/domain-designer.agent.md) | Domain-Driven Design agent for bounded context mapping, aggregate design, ubiquitous language, and event storming facilitation. Use when decomposing a domain into services, designing aggregates and invariants, or establishing shared domain language with stakeholders. |
 | [exploratory-charter](agents/exploratory-charter.agent.md) | Use when you need time-boxed exploratory testing sessions. Generates mission-driven charters with scope, triage routing, and evidence capture. Automatically files GitHub Issues for automation candidates found during exploration. |
 | [feedback-loop](agents/feedback-loop.agent.md) | Continuous learning and optimization through user feedback collection, prompt effectiveness tracking, outcome measurement, A/B testing, regression detection, and instruction refinement |
 | [frontend-dev](agents/frontend-dev.agent.md) | Frontend development agent for UI components and applications. Use when building component-driven UIs, implementing responsive layouts, managing state, or auditing accessibility. |
