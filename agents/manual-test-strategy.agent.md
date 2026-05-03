@@ -75,6 +75,7 @@ If a sprint label is applicable, append `--label "<sprint-label>"`.
 - PR summary including assumptions, coverage boundaries, and next actions
 
 ## Model
+
 **Recommended:** claude-sonnet-4.6
 **Rationale:** Structured thinking for test strategy design, risk classification, and edge case identification
 **Minimum:** claude-haiku-4.5
