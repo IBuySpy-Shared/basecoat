@@ -87,6 +87,164 @@ Purpose: design and maintain CI/CD pipelines, infrastructure as code, container 
 - Include health check endpoints (`/healthz`, `/readyz`) in every deployable service.
 - Correlate logs and traces with a shared `correlationId` across services.
 
+## DORA Metrics (Deployment Performance)
+
+Track four key metrics to measure CI/CD and DevOps effectiveness:
+
+### 1. Deployment Frequency
+
+How often does the team deploy to production?
+
+```
+Measurement: Deployments per day/week
+Target by maturity:
+  - Early stage: 1-2 per week
+  - Growth: Daily
+  - Elite: Multiple per day
+
+Instrumentation:
+  - Count successful deployments from Git commits
+  - Exclude rollbacks (count as failed deploy)
+  - Use GitHub Actions workflow runs or deployment records
+```
+
+### 2. Lead Time for Changes
+
+How long from code commit to production deployment?
+
+```
+Measurement: Median time from commit to production
+Target by maturity:
+  - Early stage: 1-4 weeks
+  - Growth: 1-7 days
+  - Elite: < 1 day
+
+Instrumentation:
+  - Timestamp: git commit time
+  - Timestamp: deployment complete time
+  - Calculate median across all deployments in period
+```
+
+### 3. Change Failure Rate
+
+What percentage of deployments cause production issues?
+
+```
+Measurement: (Failed deployments / Total deployments) × 100%
+Target by maturity:
+  - Early stage: 31-45%
+  - Growth: 16-30%
+  - Elite: 0-15%
+
+Instrumentation:
+  - Failed deployment = rollback within 1 hour of deploy
+  - Or: incident filed within 1 hour of deploy
+  - Calculate: failed deployments / total deployments
+```
+
+### 4. Mean Time to Recovery (MTTR)
+
+How quickly can the team recover from a production incident?
+
+```
+Measurement: Median time from incident detection to resolved/rolled back
+Target by maturity:
+  - Early stage: 1-7 days
+  - Growth: 1-24 hours
+  - Elite: < 1 hour
+
+Instrumentation:
+  - Timestamp: Alert/incident created (incident_created_at)
+  - Timestamp: Resolved (incident_resolved_at)
+  - Calculate median across incidents in period
+```
+
+### DORA Dashboard Template (Grafana / Azure Monitor)
+
+```
+┌─────────────────────────────────────────────┐
+│ DORA Metrics — Last 30 Days                 │
+├─────────────────────────────────────────────┤
+│                                             │
+│ Deployment Frequency   │  2.1 per day       │
+│ Lead Time for Changes  │  18 hours median   │
+│ Change Failure Rate    │  8%                │
+│ Mean Time to Recovery  │  45 minutes        │
+│                                             │
+│ Maturity Assessment: ELITE ✓                │
+│ (All 4 metrics in elite range)              │
+│                                             │
+├─────────────────────────────────────────────┤
+│ Trends (7-day rolling average)              │
+│                                             │
+│ Deployment Frequency ▲ (trend: up)         │
+│ Lead Time for Changes ▼ (trend: down ✓)    │
+│ Change Failure Rate ▼ (trend: down ✓)      │
+│ MTTR ▼ (trend: down ✓)                     │
+│                                             │
+└─────────────────────────────────────────────┘
+```
+
+### Benchmark by Maturity Level
+
+| Metric | Early Stage | Growth | Elite |
+|--------|---|---|---|
+| Deployment Frequency | 1-2/week | Daily | Multiple/day |
+| Lead Time | 1-4 weeks | 1-7 days | < 1 day |
+| Change Failure Rate | 31-45% | 16-30% | 0-15% |
+| MTTR | 1-7 days | 1-24 hours | < 1 hour |
+
+### Setting Goals
+
+Example team goals for next quarter:
+
+```
+Current State:
+  Deployment Frequency: 0.5/day → Target: 2/day
+  Lead Time: 5 days → Target: 2 days
+  Change Failure Rate: 18% → Target: 10%
+  MTTR: 4 hours → Target: 1 hour
+
+Initiatives to improve:
+  1. Automate acceptance tests (reduce lead time)
+  2. Increase test coverage to 85% (reduce change failures)
+  3. Implement canary deployments (faster rollback → lower MTTR)
+  4. Add automatic deployment trigger on main branch (increase frequency)
+```
+
+### Instrumentation Examples
+
+**GitHub Actions**:
+```yaml
+- name: Record deployment metrics
+  run: |
+    # Deployment Frequency
+    gh api repos/${{ github.repository }}/actions/runs \
+      --query '.workflow_runs | map(select(.conclusion=="success")) | length' 
+    
+    # Lead time = current_time - commit_time
+    # MTTR = time since last incident
+```
+
+**Azure Pipelines**:
+```yaml
+- name: Publish DORA metrics
+  script: |
+    # Push metrics to Azure Monitor
+    az monitor metrics create \
+      --resource /subscriptions/.../devops_metrics \
+      --metric-name DeploymentFrequency \
+      --value 2.1
+```
+
+**Manual tracking** (spreadsheet):
+```csv
+Date,Deployment Count,Lead Time (hours),Failed Deployments,Incidents,MTTR (minutes)
+2026-05-01,2,18,0,0,0
+2026-05-02,1,22,1,1,120
+2026-05-03,3,15,0,0,0
+```
+
 ## Security in Pipelines
 
 - Run SAST (static analysis) and dependency vulnerability scanning in every pipeline run.
