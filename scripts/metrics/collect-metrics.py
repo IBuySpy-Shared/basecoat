@@ -68,8 +68,9 @@ def github_api(url, token):
                         f"  ⚠ Rate-limit headroom low: {remaining} requests remaining{reset_str}",
                         file=sys.stderr,
                     )
-                interval = BACKOFF_INITIAL_INTERVAL  # reset backoff on success
-                return json.loads(resp.read().decode())
+                data = json.loads(resp.read().decode())
+                interval = BACKOFF_INITIAL_INTERVAL  # reset backoff only after full success
+                return data
         except HTTPError as e:
             if e.code == 404:
                 return None
@@ -89,7 +90,7 @@ def github_api(url, token):
                 time.sleep(interval)
                 interval = min(interval * BACKOFF_MULTIPLIER, BACKOFF_MAX_INTERVAL)
                 continue
-            print(f"  WARNING: API error {e.code} for {url}", file=sys.stderr)
+            print(f"  WARNING: API error {e.code} {e.reason} for {url}", file=sys.stderr)
             return None
 
 
