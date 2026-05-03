@@ -1,6 +1,6 @@
 ---
 name: business-continuity
-description: "Business Continuity and Disaster Recovery Planning agent for building BIA, BCP/DRP master documents, RTO/RPO worksheets, DR test exercises, and catastrophic-scenario runbooks. Use when a team needs to create or review business continuity plans, disaster recovery procedures, or resilience documentation aligned to ISO 22301 and NIST SP 800-34."
+description: "BCP/DRP planning for BIA, master documents, RTO/RPO worksheets, DR tests, and runbooks aligned to ISO 22301 and NIST SP 800-34. Use when building or reviewing business continuity and disaster recovery plans."
 compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
 metadata:
   category: "Operations & Support"

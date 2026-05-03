@@ -1,6 +1,6 @@
 ---
 name: safety-analyst
-description: "Safety analysis agent for software FMEA, Fault Tree Analysis (FTA), safety requirement traceability, and defensive programming review. Use when performing safety-critical system analysis for medical devices, industrial control systems, automotive software, financial settlement systems, or EU AI Act Article 9 compliance."
+description: "FMEA, FTA, traceability, and defensive programming review for safety-critical systems (IEC 61508, DO-178C, ISO 26262, IEC 62304, EU AI Act Art. 9). Use when performing safety-critical system analysis for medical, industrial, automotive, financial, or AI domains."
 compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
 metadata:
   category: "Security & Compliance"

@@ -36,7 +36,7 @@
 | strategy-to-automation | `agents/strategy-to-automation.agent.md` | Converts manual test paths into tiered automation candidates | manual-test-strategy | GPT-4o / Claude Sonnet |
 | | **🚀 DevOps** | | | |
 | agentops | `agents/agentops.agent.md` | Agent lifecycle, versioning, rollout health, rollback, and retirement | — | GPT-4o / Claude Sonnet |
-| business-continuity | `agents/business-continuity.agent.md` | Business Continuity and Disaster Recovery Planning for BIA, BCP/DRP master documents, RTO/RPO worksheets, DR test exercises, and catastrophic-scenario runbooks | business-continuity | Claude Sonnet |
+| business-continuity | `agents/business-continuity.agent.md` | BCP/DRP planning for BIA, master documents, RTO/RPO worksheets, DR tests, and runbooks aligned to ISO 22301 and NIST SP 800-34 | business-continuity | Claude Sonnet |
 | containerization-planner | `agents/containerization-planner.agent.md` | Containerization readiness assessment, platform selection, Dockerfiles, multi-stage builds, and deployment manifests | — | GPT-4o / Claude Sonnet |
 | devops-engineer | `agents/devops-engineer.agent.md` | CI/CD, IaC, deployment, rollback, and observability | devops | GPT-4o / Claude Sonnet |
 | incident-responder | `agents/incident-responder.agent.md` | Structured incident response and recovery for classifying, mitigating, coordinating, and post-incident learning | — | GPT-4o / Claude Sonnet |
@@ -45,7 +45,7 @@
 | release-impact-advisor | `agents/release-impact-advisor.agent.md` | Release readiness assessment, blast radius analysis, rollback planning, and safe deployment strategies | — | GPT-4o / Claude Sonnet |
 | release-manager | `agents/release-manager.agent.md` | Versioned release workflow, changelog, tagging, and publishing | — | GPT-4o-mini / Claude Haiku |
 | rollout-basecoat | `agents/rollout-basecoat.agent.md` | Enterprise Base Coat onboarding and rollout | — | GPT-4o-mini / Claude Haiku |
-| safety-analyst | `agents/safety-analyst.agent.md` | Safety analysis for software FMEA, Fault Tree Analysis, safety requirement traceability, and defensive programming review for IEC 61508, DO-178C, ISO 26262, and EU AI Act Art. 9 | functional-safety | Claude Sonnet |
+| safety-analyst | `agents/safety-analyst.agent.md` | FMEA, FTA, traceability, and defensive programming review for safety-critical systems (IEC 61508, DO-178C, ISO 26262, EU AI Act Art. 9) | functional-safety | Claude Sonnet |
 | self-healing-ci | `agents/self-healing-ci.agent.md` | Automated CI failure analysis, log parsing, flaky test detection, and pipeline remediation | — | GPT-4o / Claude Sonnet |
 | sre-engineer | `agents/sre-engineer.agent.md` | Site reliability engineering for SLOs, error budgets, incident response, chaos engineering, and toil reduction | — | GPT-4o / Claude Sonnet |
 | | **📋 Process** | | | |

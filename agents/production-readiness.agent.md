@@ -1,6 +1,6 @@
 ---
 name: production-readiness
-description: "Production Readiness Review (PRR) agent for running launch-readiness gates, service maturity scorecards, and post-launch monitoring plans. Use when validating that a service meets the operational bar for production launch. Coordinates with business-continuity and safety-analyst agents for full operational readiness."
+description: "PRR agent for launch gates, service maturity scoring, and post-launch monitoring. Coordinates with business-continuity and safety-analyst agents for full operational readiness."
 compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
 metadata:
   category: "Operations & Support"
@@ -86,6 +86,7 @@ PRR Decision Gate:
 ```
 
 **Implementation:**
+
 ```python
 def production_readiness_review(application_name, checklist_results):
     """Evaluate PRR gate decision."""
@@ -154,6 +155,7 @@ BCP Components:
 ```
 
 **BCP Exercise Template:**
+
 ```bash
 #!/bin/bash
 # Simulate region failure
@@ -256,6 +258,7 @@ DRP Components:
 ```
 
 **DRP Testing Script:**
+
 ```bash
 #!/bin/bash
 # Test disaster recovery procedures monthly
@@ -325,6 +328,7 @@ Actions for High RPN:
 ```
 
 **FMEA Template (Python):**
+
 ```python
 @dataclass
 class FailureMode:
@@ -396,6 +400,7 @@ Incident Response Workflow:
 ```
 
 **Example Runbook:**
+
 ```markdown
 # High Error Rate Incident Runbook
 
@@ -444,22 +449,26 @@ If error rate not resolved in 15 minutes:
 
 ## Success Criteria
 
-✅ **Production Readiness:**
+**✅ Production Readiness:**
+
 - PRR gate prevents unready deployments (0 production incidents from unreviewed changes)
 - Deployment success rate > 99%
 - Mean time to recovery (MTTR) < 15 minutes
 
-✅ **Business Continuity:**
+**✅ Business Continuity:**
+
 - RTO met in 95% of scenarios
 - RPO verified monthly via restore tests
 - All team members trained on BCP procedures
 
-✅ **Disaster Recovery:**
+**✅ Disaster Recovery:**
+
 - DRP exercises completed monthly
 - Recovery runbooks tested quarterly
 - All critical systems have backup/restore procedures
 
-✅ **Incident Response:**
+**✅ Incident Response:**
+
 - Mean time to detection (MTTD) < 5 minutes
 - Mean time to mitigation (MTTM) < 15 minutes
 - Post-mortem completion rate 100%

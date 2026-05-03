@@ -1,6 +1,6 @@
 ---
 name: business-continuity
-description: "Use when building or reviewing business continuity plans, disaster recovery procedures, RTO/RPO worksheets, DR test exercises, or BIA documents. Provides templates aligned to ISO 22301 and NIST SP 800-34."
+description: "BCP/DRP planning templates including BIA, RTO/RPO worksheets, DR tests, and runbooks aligned to ISO 22301 and NIST SP 800-34."
 ---
 
 # Business Continuity Skill
