@@ -1,6 +1,13 @@
 ---
 name: your-skill-name
 description: "Use when [specific repeated task]. Include common trigger phrases and keywords people will actually type."
+license: MIT
+compatibility: "Works with VS Code Copilot, GitHub Copilot CLI, and Claude Code."
+metadata:
+  category: "<development|architecture|quality|devops|process|meta>"
+  keywords: "<keyword1>, <keyword2>, <keyword3>"
+  model-tier: "<standard|premium>"
+allowed-tools: "search/codebase"
 ---
 
 # Skill Title

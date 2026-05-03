@@ -19,7 +19,7 @@ Use this skill when the goal is to add a new `SKILL.md` to a shared customizatio
 1. Define the exact problem the skill should solve repeatedly.
 2. Confirm a skill is the right primitive instead of an instruction, prompt, or agent.
 3. Create a folder with a stable, discoverable name.
-4. Add frontmatter with `name` matching the folder and a description that includes trigger phrases.
+4. Add frontmatter with `name` matching the folder, a description that includes trigger phrases, and the four optional Agent Skills spec fields: `license`, `compatibility`, `metadata` (category, keywords, model-tier), and `allowed-tools`.
 5. Write a short workflow with guardrails, expected output, and non-goals.
 6. Add templates or examples if the workflow benefits from starter assets.
 7. Validate frontmatter and update any catalog or inventory.

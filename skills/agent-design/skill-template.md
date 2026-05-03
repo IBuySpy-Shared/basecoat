@@ -1,6 +1,13 @@
 ---
 name: "<skill-name>"
 description: "<One-line description with trigger phrases for discovery.>"
+license: MIT
+compatibility: "Works with VS Code Copilot, GitHub Copilot CLI, and Claude Code."
+metadata:
+  category: "<development|architecture|quality|devops|process|meta>"
+  keywords: "<keyword1>, <keyword2>, <keyword3>"
+  model-tier: "<standard|premium>"
+allowed-tools: "search/codebase"
 ---
 
 # <Skill Display Name>
