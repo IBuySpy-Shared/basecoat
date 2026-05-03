@@ -152,6 +152,7 @@ This catalog helps teams discover what exists in Base Coat and when to use it.
 | `docs/MULTI_AGENT_WORKFLOWS.md`           | structure parallel agent sprints to minimize merge conflicts; branch naming; merge order; fresh clone principle | multi-agent, parallel, sprint, merge, conflict, branch |
 | `docs/app-inventory.md`                   | conceptual guide for legacy app scanning: parameters, complexity scoring, output formats, and downstream integration | inventory, legacy, scanning, dependencies, complexity, migration |
 | `docs/treatment-matrix.md`                | decision framework mapping complexity scores and strategic value to Retire/Rehost/Replatform/Refactor/Rebuild/Replace treatment paths | treatment, migration, retire, rehost, replatform, refactor, rebuild, replace |
+| `docs/DOTNET_DECISION_TREE.md`            | decision tree for selecting a .NET modernization strategy: entry questions, decision nodes, go/no-go gates, and quick-reference summary | dotnet, .net, migration, modernization, web-forms, aspnet-core, strategy, decision-tree |
 
 ## Operational Assets
 
