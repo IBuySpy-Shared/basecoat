@@ -285,7 +285,10 @@ MAPPING = {
     },
 }
 
-KEYS_TO_STRIP = {"license", "compatibility", "metadata", "allowed-tools", "context", "tags", "title"}
+# Fields to remove before inserting canonical spec fields.
+# Includes spec fields being replaced (license/compatibility/metadata/allowed-tools),
+# legacy non-spec fields (context, tags, title) that are not part of the Agent Skills spec.
+LEGACY_LEGACY_KEYS_TO_STRIP = {"license", "compatibility", "metadata", "allowed-tools", "context", "tags", "title"}
 
 
 def build_new_frontmatter(existing_lines, skill_name, fields):
@@ -313,13 +316,13 @@ def build_new_frontmatter(existing_lines, skill_name, fields):
     # Build output lines: name, description, then new fields, skip old spec fields
     out = []
     for key, block_lines in parsed:
-        if key in KEYS_TO_STRIP:
+        if key in LEGACY_KEYS_TO_STRIP:
             continue
         out.extend(block_lines)
 
     # Now insert new fields after description
     insert_pos = None
-    for idx, (key, _) in enumerate([(k, v) for k, v in parsed if k not in KEYS_TO_STRIP]):
+    for idx, (key, _) in enumerate([(k, v) for k, v in parsed if k not in LEGACY_KEYS_TO_STRIP]):
         if key == "description":
             insert_pos = idx + 1
             break
@@ -341,14 +344,14 @@ def build_new_frontmatter(existing_lines, skill_name, fields):
     # Rebuild out list in correct order
     clean = []
     for key, block_lines in parsed:
-        if key in KEYS_TO_STRIP:
+        if key in LEGACY_KEYS_TO_STRIP:
             continue
         clean.extend(block_lines)
         if key == "description":
             clean.extend(new_field_lines)
 
     # If description not found, append at end
-    if insert_pos is None or not any(k == "description" for k, _ in parsed if k not in KEYS_TO_STRIP):
+    if insert_pos is None or not any(k == "description" for k, _ in parsed if k not in LEGACY_KEYS_TO_STRIP):
         clean.extend(new_field_lines)
 
     return clean
