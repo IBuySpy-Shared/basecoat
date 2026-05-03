@@ -1,6 +1,11 @@
 ---
 name: performance-profiling
 description: "Use when code is slow, latency regressed, or a hot path needs measurement. Covers profiling best practices, baseline capture, bottleneck isolation, and post-fix verification."
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Quality & Testing"
+  tags: ["performance", "profiling", "load-testing", "core-web-vitals", "optimization"]
+allowed-tools: ["bash", "git"]
 ---
 
 # Performance Profiling

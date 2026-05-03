@@ -1,6 +1,13 @@
 ---
 name: data-pipeline
 description: "Data pipeline agent for medallion lakehouse architecture, data quality, ML pipeline orchestration, and feature store integration. Use when building or reviewing bronze/silver/gold Delta Lake pipelines, data quality checks, feature engineering, or ML training workflows."
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Data & Analytics"
+  tags: ["data-pipeline", "medallion", "lakehouse", "data-quality", "ml", "delta-lake"]
+  maturity: "production"
+  audience: ["data-engineers", "ml-engineers", "platform-teams"]
+allowed-tools: ["bash", "git", "grep", "find", "python", "sql"]
 model: claude-sonnet-4.6
 tools: [read_file, write_file, list_dir, run_terminal_command, create_github_issue]
 ---

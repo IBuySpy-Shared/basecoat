@@ -1,6 +1,11 @@
 ---
 name: security
 description: "Use when performing security audits, threat modeling, vulnerability assessments, or dependency reviews. Provides OWASP checklists, STRIDE templates, vulnerability report structures, and dependency audit formats."
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Security & Compliance"
+  tags: ["security", "owasp", "stride", "threat-modeling", "vulnerabilities", "cve"]
+allowed-tools: ["bash", "git", "grep"]
 ---
 
 # Security Skill

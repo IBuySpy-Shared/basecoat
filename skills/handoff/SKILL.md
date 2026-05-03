@@ -1,6 +1,11 @@
 ---
 name: handoff
 description: "Use when ending a session, rotating context, or transferring work to another agent. Provides structured handoff templates that preserve both reasoning and mechanical state."
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Meta & Customization"
+  tags: ["handoff", "context", "session", "agent-coordination"]
+allowed-tools: ["bash", "git"]
 ---
 
 # Handoff Skill

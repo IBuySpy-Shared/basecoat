@@ -1,6 +1,11 @@
 ---
 name: manual-test-strategy
 description: "Use when defining where human judgment is still required, how exploratory work is captured, and which repeated checks should graduate into automation. Provides templates for decision rubrics, exploratory charters, regression checklists, and defect evidence."
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Quality & Testing"
+  tags: ["testing", "manual-testing", "exploratory", "regression", "automation"]
+allowed-tools: ["bash", "git"]
 ---
 
 # Manual Test Strategy

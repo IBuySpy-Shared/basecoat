@@ -1,6 +1,11 @@
 ---
 name: azure-landing-zone
 description: "Use when designing or scaffolding Azure enterprise-scale landing zones (ESLZ) following the Cloud Adoption Framework. Provides IaC templates for management groups, hub networking, policy assignments, and landing zone vending."
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Infrastructure & DevOps"
+  tags: ["azure", "landing-zone", "eslz", "bicep", "terraform", "caf"]
+allowed-tools: ["bash", "azure-cli", "terraform"]
 ---
 
 # Azure Landing Zone Skill

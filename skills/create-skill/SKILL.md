@@ -1,6 +1,11 @@
 ---
 name: create-skill
 description: "Use when creating a new reusable skill for instructions, workflows, or domain guidance. Covers folder layout, frontmatter, discovery language, templates, and validation steps."
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Meta & Customization"
+  tags: ["skills", "copilot", "customization", "authoring", "folder-layout"]
+allowed-tools: ["bash", "git"]
 ---
 
 # Create A Skill

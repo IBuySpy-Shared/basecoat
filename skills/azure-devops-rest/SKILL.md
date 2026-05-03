@@ -2,6 +2,11 @@
 name: azure-devops-rest
 description: "Azure DevOps REST API patterns — authentication, scopes, pagination, throttling, and endpoint taxonomy for work items, pipelines, repos, and artifacts."
 context: fork
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Infrastructure & DevOps"
+  tags: ["azure-devops", "rest-api", "pipelines", "work-items", "authentication"]
+allowed-tools: ["curl", "bash", "jq"]
 ---
 
 # Azure DevOps REST API Skill

@@ -1,6 +1,11 @@
 ---
 name: devops
 description: "Use when designing CI/CD pipelines, writing IaC templates, planning deployments, or setting up observability. Provides workflow templates, deployment checklists, rollback runbooks, and environment promotion guides."
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Infrastructure & DevOps"
+  tags: ["ci-cd", "github-actions", "iac", "deployment", "observability"]
+allowed-tools: ["bash", "git", "terraform", "kubectl"]
 ---
 
 # DevOps Skill

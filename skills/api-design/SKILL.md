@@ -1,6 +1,11 @@
 ---
 name: api-design
 description: "Use when designing, reviewing, or evolving API contracts. Provides OpenAPI templates, breaking-change checklists, versioning decision trees, and governance checklists."
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Development & Engineering"
+  tags: ["api", "openapi", "graphql", "rest", "versioning", "governance"]
+allowed-tools: ["curl", "jq", "bash", "git"]
 ---
 
 # API Design Skill

@@ -1,6 +1,11 @@
 ---
 name: azure-identity
 description: "Use when designing Azure identity architectures — RBAC role assignments, managed identities, Entra ID app registrations, conditional access policies, or workload identity federation for CI/CD. Covers zero trust patterns, PIM, and GitHub OIDC."
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Security & Compliance"
+  tags: ["azure", "identity", "rbac", "managed-identity", "entra-id", "oidc"]
+allowed-tools: ["bash", "azure-cli", "curl"]
 ---
 
 # Azure Identity & Entra ID Skill

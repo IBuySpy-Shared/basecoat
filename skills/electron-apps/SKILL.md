@@ -2,6 +2,11 @@
 name: electron-apps
 description: Build secure, production-ready Electron desktop applications with best practices for IPC, CSP, state management, testing, packaging, and auto-updates.
 applyTo: agent-electron-developer, agent-desktop-engineer
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Development & Engineering"
+  tags: ["electron", "desktop", "ipc", "packaging", "auto-updates", "security"]
+allowed-tools: ["bash", "npm", "git"]
 ---
 
 # Electron Application Development

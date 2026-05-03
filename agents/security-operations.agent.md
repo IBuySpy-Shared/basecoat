@@ -1,6 +1,11 @@
 ---
 name: security-operations
 description: Provide SOC (Security Operations Center) playbook guidance for threat detection, incident response, secrets rotation, audit logging, and operational security.
+metadata:
+  category: "Security & Compliance"
+  tags: ["soc", "incident-response", "threat-detection", "secrets-management", "audit-logging"]
+  maturity: "production"
+  audience: ["security-engineers", "soc-analysts", "incident-responders"]
 maturity: production
 category: security
 tags:

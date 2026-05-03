@@ -1,6 +1,11 @@
 ---
 name: agent-design
 description: "Use when designing Copilot agents, authoring agent definitions, creating skill folders, or scaffolding instruction files. Provides templates and conventions for the agent ecosystem."
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Meta & Customization"
+  tags: ["agents", "copilot", "customization", "workflow", "instruction-files"]
+allowed-tools: ["bash", "git", "grep"]
 ---
 
 # Agent Design Skill

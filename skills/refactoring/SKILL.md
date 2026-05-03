@@ -1,6 +1,11 @@
 ---
 name: refactoring
 description: "Use when simplifying structure without intentionally changing behavior. Covers common refactoring best practices for preserving behavior, reducing risk, and validating changes."
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Development & Engineering"
+  tags: ["refactoring", "code-quality", "patterns", "clean-code"]
+allowed-tools: ["bash", "git", "grep"]
 ---
 
 # Refactoring

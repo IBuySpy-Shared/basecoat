@@ -1,6 +1,11 @@
 ---
 name: code-review
 description: "Use when reviewing code, pull requests, or diffs. Covers best practices for risk-focused review, severity ordering, and identifying missing tests or regressions."
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Quality & Testing"
+  tags: ["code-review", "security", "testing", "regressions", "best-practices"]
+allowed-tools: ["bash", "git", "grep"]
 ---
 
 # Code Review
