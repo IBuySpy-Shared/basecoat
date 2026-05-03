@@ -13,10 +13,13 @@ This catalog helps teams discover what exists in Base Coat and when to use it.
 | `instructions/backend.instructions.md`       | API, services, data access, backend guardrails        | backend, api, refactor, service, reliability                       |
 | `instructions/bicep.instructions.md`         | Bicep authoring, parameters, and deployment hygiene   | bicep, bicepparam, module, symbolic name                           |
 | `instructions/config.instructions.md`        | config file safety and secrets prevention | config, secrets, safety, environment |
+| `instructions/data-science.instructions.md` | data science, ML, and notebook-driven projects — idempotency, reproducibility, medallion patterns | data-science, ml, notebook, pandas, scikit-learn, medallion |
+| `instructions/data-workload-testing.instructions.md` | medallion layer test conventions, data quality validation, and schema assertions | data, testing, medallion, bronze, silver, gold, quality |
 | `instructions/development.instructions.md`   | shared standards for backend-dev, frontend-dev, middleware-dev, data-tier agents | development, code style, error handling, security, logging, testing, collaboration |
 | `instructions/documentation.instructions.md` | docs updates and operational notes                    | docs, readme, changelog, migration, usage                          |
 | `instructions/drift-monitor.instructions.md` | detect and prevent configuration drift across environments | drift, monitor, config, environment, consistency |
 | `instructions/error-kb.instructions.md`      | error knowledge base and resolution pattern guidance | error, knowledge-base, resolution, troubleshooting |
+| `instructions/fabric-notebooks.instructions.md` | Microsoft Fabric notebook deployment, lakehouse integration, medallion CI/CD, and governance | fabric, notebook, lakehouse, medallion, spark, cicd |
 | `instructions/frontend.instructions.md`      | UI, accessibility, responsiveness, frontend changes   | frontend, ui, css, accessibility, react                            |
 | `instructions/governance.instructions.md`    | repository-wide AI governance rules | governance, rules, compliance, standards |
 | `instructions/mcp.instructions.md`           | MCP server/tool governance and safe integration rules | mcp, tools, server, governance, allowlist                          |
@@ -27,6 +30,7 @@ This catalog helps teams discover what exists in Base Coat and when to use it.
 | `instructions/output-style.instructions.md`  | agent output formatting and style guidance | output, style, formatting, markdown |
 | `instructions/plan-first.instructions.md`    | plan-first workflow for agents — think before coding | plan, workflow, think, design, before-coding |
 | `instructions/process.instructions.md`       | delivery lifecycle, sprint, triage, and release process | process, sprint, triage, release, delivery |
+| `instructions/python.instructions.md`        | Python coding standards — type hints, pathlib, venvs, linting, and packaging | python, type-hints, pathlib, ruff, mypy, packaging |
 | `instructions/quality.instructions.md`       | PR review, security, performance, and coverage gates | quality, review, security, performance, coverage |
 | `instructions/reliability.instructions.md`   | resilience, failure modes, observability              | reliability, retry, timeout, logging, resilience                   |
 | `instructions/security.instructions.md`      | secure coding, auth boundaries, secret handling       | security, auth, secrets, validation, unsafe                        |

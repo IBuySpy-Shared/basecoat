@@ -1,11 +1,6 @@
 ---
-title: Data Science / ML / Notebook Instruction
-type: instruction
-description: "Conventions for data science, ML, and notebook-driven projects."
-applyTo:
-  - data-science
-  - ml
-  - notebook
+description: "Use when working on data science, ML, or notebook-driven projects. Covers notebook idempotency, cell output hygiene, train/test split conventions, reproducibility, feature engineering, and medallion architecture patterns."
+applyTo: "**/*.{py,ipynb}"
 ---
 
 # Data Science / ML / Notebook Instruction

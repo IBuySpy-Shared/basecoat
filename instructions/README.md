@@ -13,6 +13,10 @@ Current starters:
 - `reliability.instructions.md`
 - `documentation.instructions.md`
 - `mcp.instructions.md`
+- `python.instructions.md`
+- `data-science.instructions.md`
+- `fabric-notebooks.instructions.md`
+- `data-workload-testing.instructions.md`
 
 Guidelines for adding more:
 

@@ -1,11 +1,6 @@
 ---
-title: Python Coding Standards
-type: instruction
-description: "Conventions for Python-centric projects, including data science and ML pipelines."
-applyTo:
-  - python
-  - data-science
-  - ml
+description: "Use when working on Python projects, including data science, ML pipelines, and scripts. Covers type hints, pathlib, virtual environments, dependency pinning, linting, and packaging."
+applyTo: "**/*.py"
 ---
 
 # Python Coding Standards
