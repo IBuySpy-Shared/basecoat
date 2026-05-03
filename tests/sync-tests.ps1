@@ -65,6 +65,10 @@ function Invoke-SyncToConsumer {
     Push-Location $ConsumerPath
     try {
         $branch = git -C $repoRoot rev-parse --abbrev-ref HEAD
+        if ($branch -eq 'HEAD') {
+            # Detached HEAD state (common in CI) — use the full commit SHA instead
+            $branch = git -C $repoRoot rev-parse HEAD
+        }
         $env:BASECOAT_REPO = "file://$repoRoot"
         $env:BASECOAT_REF = $branch
         & pwsh -NoProfile -File (Join-Path $repoRoot 'sync.ps1')

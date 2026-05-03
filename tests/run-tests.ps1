@@ -83,13 +83,30 @@ finally {
     }
 }
 
+$suiteFailures = @()
+$suitePassed = 0
+
 Write-Host 'Running sync process tests...'
 & pwsh -NoProfile -File (Join-Path $PSScriptRoot 'sync-tests.ps1')
+if ($LASTEXITCODE -ne 0) { $suiteFailures += 'sync-tests' } else { $suitePassed++ }
 
 Write-Host 'Running adoption scanner tests...'
 & pwsh -NoProfile -File (Join-Path $PSScriptRoot 'adoption-scanner-tests.ps1')
+if ($LASTEXITCODE -ne 0) { $suiteFailures += 'adoption-scanner-tests' } else { $suitePassed++ }
 
 Write-Host 'Running workflow guardrails tests...'
 & pwsh -NoProfile -File (Join-Path $PSScriptRoot 'workflow-guardrails-tests.ps1')
+if ($LASTEXITCODE -ne 0) { $suiteFailures += 'workflow-guardrails-tests' } else { $suitePassed++ }
 
-Write-Host 'All PowerShell tests passed'
+Write-Host "`n================================================" -ForegroundColor Cyan
+Write-Host 'Test Suite Summary' -ForegroundColor Cyan
+Write-Host "================================================" -ForegroundColor Cyan
+
+if ($suiteFailures.Count -gt 0) {
+    Write-Host "`nFAILED: $($suiteFailures.Count) suite(s) failed:" -ForegroundColor Red
+    $suiteFailures | ForEach-Object { Write-Host "  - $_" -ForegroundColor Red }
+    Write-Host "Passed: $suitePassed suite(s)" -ForegroundColor Yellow
+    exit 1
+}
+
+Write-Host "`nAll $suitePassed test suite(s) passed" -ForegroundColor Green
