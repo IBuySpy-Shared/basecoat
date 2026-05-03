@@ -9,8 +9,11 @@ permissions:
   contents: read
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  group: cloud-agent-execution
+  cancel-in-progress: false
+
+env:
+  MAX_CONCURRENT_AGENTS: 4
 
 jobs:
   approve:
