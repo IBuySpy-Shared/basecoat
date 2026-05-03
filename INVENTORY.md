@@ -61,6 +61,7 @@ This catalog helps teams discover what exists in Base Coat and when to use it.
 | `skills/data-tier/SKILL.md`             | design schemas, write migrations, review queries, build data dictionaries | data, schema, migration, query, indexing                            |
 | `skills/devops/SKILL.md`                | CI/CD pipeline, deployment, and rollback templates | devops, cicd, deployment, rollback, github-actions |
 | `skills/documentation/SKILL.md`         | README, runbook, and ADR templates | documentation, readme, runbook, adr |
+| `skills/dotnet-modernization/SKILL.md`  | .NET framework upgrade guidance with breaking changes catalog for .NET 6→8 and .NET 8→10 | dotnet, modernization, migration, breaking-changes, upgrade |
 | `skills/environment-bootstrap/SKILL.md` | environment setup and bootstrap configuration | environment, bootstrap, setup, configuration |
 | `skills/frontend-dev/SKILL.md`          | build accessible, responsive UI components and manage client state       | frontend, ui, component, accessibility, state management             |
 | `skills/handoff/SKILL.md`               | structured agent-to-agent handoff protocols | handoff, agent, protocol, transition |

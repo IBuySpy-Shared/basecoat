@@ -180,6 +180,7 @@ Base Coat is built on four GitHub Copilot customization primitives:
 | [data-tier](skills/data-tier/) | schema-design-template, migration-template, query-review-checklist, data-dictionary-template | data-tier |
 | [devops](skills/devops/) | deployment-checklist, environment-promotion-template, github-actions-template, rollback-runbook-template | devops-engineer |
 | [documentation](skills/documentation/) | readme-template, runbook-template, adr-template | tech-writer |
+| [dotnet-modernization](skills/dotnet-modernization/) | breaking-changes | legacy-modernization |
 | [environment-bootstrap](skills/environment-bootstrap/) | SKILL.md workflow | devops-engineer |
 | [frontend-dev](skills/frontend-dev/) | component-spec-template, accessibility-checklist, state-management-template | frontend-dev |
 | [handoff](skills/handoff/) | handoff-template | — |
