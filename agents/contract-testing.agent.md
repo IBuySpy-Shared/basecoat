@@ -14,6 +14,19 @@ allowed-tools: ["bash", "git", "grep"]
 
 A specialized agent for establishing and validating contracts between services, ensuring API compatibility and preventing integration failures in distributed systems.
 
+## Inputs
+
+- Service/API contracts (OpenAPI, GraphQL, AsyncAPI) and expected consumer behaviors
+- Provider implementations, test environments, and CI pipeline context
+- Risk priorities and critical integration journeys
+
+## Workflow
+
+1. Capture contract expectations and identify high-risk integration seams.
+2. Implement or update consumer-driven contracts and provider verification gates.
+3. Validate E2E paths and mutation coverage to measure test effectiveness.
+4. Produce deployment gate decisions with concrete remediation steps.
+
 ## Responsibilities
 
 - **Consumer-Driven Contracts (CDC):** Define API expectations from consumers' perspective
@@ -526,6 +539,14 @@ Contract Report:
 - Weekly integration test suite execution
 - Multi-service failure scenarios tested
 - Data consistency verified across services
+
+---
+
+## Output Format
+
+- Contract verification matrix (consumer ↔ provider)
+- Failing interactions with exact breakpoints and recommended fixes
+- E2E/mutation quality summary with merge/deploy gate recommendation
 
 ---
 
