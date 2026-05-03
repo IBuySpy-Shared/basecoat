@@ -1,6 +1,6 @@
 # Base Coat Agent & Skill Index
 
-Complete reference guide for all 56 GitHub Copilot agents and 45 customization skills in the Base Coat framework.
+Complete reference guide for all 54 GitHub Copilot agents and 47 customization skills in the Base Coat framework.
 
 ## Quick Navigation
 
@@ -13,7 +13,7 @@ Complete reference guide for all 56 GitHub Copilot agents and 45 customization s
 
 ## Agents by Discipline
 
-### Development (15 agents)
+### Development (9 agents)
 
 | Agent | Domain | Purpose |
 |-------|--------|---------|
@@ -25,8 +25,9 @@ Complete reference guide for all 56 GitHub Copilot agents and 45 customization s
 | containerization-planner | Infrastructure | Container strategy and Docker/Kubernetes |
 | dependency-lifecycle | Development | Dependency management and version upgrades |
 | code-review | Quality | Code review and quality assessment |
+| middleware-dev | Integration | API gateways, message-passing, event-driven integration |
 
-### Architecture (12 agents)
+### Architecture (8 agents)
 
 | Agent | Domain | Purpose |
 |-------|--------|---------|
@@ -36,6 +37,8 @@ Complete reference guide for all 56 GitHub Copilot agents and 45 customization s
 | azure-landing-zone | Cloud | Azure landing zone design |
 | containerization-planner | Infrastructure | Container orchestration architecture |
 | service-bus-architect | Cloud | Azure Service Bus topology design |
+| legacy-modernization | Modernization | ASP.NET Web Forms to Razor Pages migration using strangler fig |
+| database-migration | Modernization | Database schema evolution, zero-downtime upgrades, legacy DB modernization |
 
 ### DevOps & Infrastructure (14 agents)
 
@@ -90,7 +93,7 @@ Complete reference guide for all 56 GitHub Copilot agents and 45 customization s
 | production-readiness | Production operations | PRR gates, incident runbooks, DRP scripts |
 | contract-testing | E2E validation | Consumer-driven contracts, mutation testing |
 
-### Infrastructure & Cloud (12 skills)
+### Infrastructure & Cloud (14 skills)
 
 | Skill | Focus | Primary Use Case |
 |-------|-------|-----------------|
@@ -99,6 +102,7 @@ Complete reference guide for all 56 GitHub Copilot agents and 45 customization s
 | environment-bootstrap | Infrastructure automation | Terraform, Bicep, Azure automation, Fabric SP setup |
 | identity-migration | Identity management | ASP.NET Core Identity, Entra ID integration |
 | ha-resilience | Resilience patterns | Multi-region, fault tolerance, chaos testing |
+| azure-identity | Identity & Access | RBAC design, managed identity, Entra ID app registrations, zero trust |
 
 ### Data & Observability (8 skills)
 
@@ -108,13 +112,14 @@ Complete reference guide for all 56 GitHub Copilot agents and 45 customization s
 | domain-driven-design | Architecture patterns | DDD, CQRS, event sourcing, aggregates |
 | data-science | ML workflows | Notebooks, feature engineering, model training |
 
-### Development & Tools (10 skills)
+### Development & Tools (11 skills)
 
 | Skill | Focus | Primary Use Case |
 |-------|-------|-----------------|
 | electron-apps | Desktop applications | Secure IPC, CSP, state management, packaging |
 | fabric-notebooks | Analytics notebooks | Medallion architecture, builtin modules, CI/CD |
 | basecoat | Framework routing | Agent discovery, delegation patterns |
+| refactoring | Code quality | Structural improvements, behavior preservation, incremental changes |
 
 ### Quality & Testing (4 skills)
 
@@ -172,6 +177,22 @@ Complete reference guide for all 56 GitHub Copilot agents and 45 customization s
 - ha-resilience
 - otel-instrumentation
 
+### Legacy-Modernization Agent
+**Compatible Skills:**
+- refactoring (primary)
+- identity-migration
+- azure-identity
+- service-bus-migration
+- domain-driven-design
+- otel-instrumentation
+
+### Database-Migration Agent
+**Compatible Skills:**
+- domain-driven-design
+- environment-bootstrap
+- ha-resilience
+- otel-instrumentation
+
 ---
 
 ## Getting Started
@@ -223,8 +244,8 @@ compatibility: ["agent:backend-dev", "agent:data-tier"]
 
 ## Statistics
 
-- **Total Agents:** 56
-- **Total Skills:** 45
+- **Total Agents:** 54
+- **Total Skills:** 47
 - **Total Disciplines:** 6 (Development, Architecture, DevOps, Quality, Data/AI, Process/Meta)
 - **Total Domains:** 8+ (security, infrastructure, identity, data, observability, quality, development, framework)
 
@@ -242,6 +263,6 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md) for detailed guidelines.
 
 ---
 
-**Last Updated:** 2026-05-02  
+**Last Updated:** 2026-05-03  
 **Spec Version:** Agent Skills v1.0  
 **Maintainer:** Base Coat Team
