@@ -346,6 +346,97 @@ Both files follow Markdown table format with columns for name, file path, descri
 
 ---
 
+## GitHub API Rate Limit Handling
+
+During rapid CI iteration or sprint execution it is easy to exhaust GitHub's API quota.
+Follow the policies below to avoid cascading failures.
+
+### Background
+
+| Quota tier | Limit |
+|---|---|
+| Unauthenticated | 60 requests / hour |
+| Authenticated (`GITHUB_TOKEN`) | 5,000 requests / hour |
+| GitHub Actions runner token | 1,000 requests / hour per repo |
+
+When a limit is hit the API returns **HTTP 429** (or **403** for secondary limits).
+The response includes `x-ratelimit-remaining` and `x-ratelimit-reset` headers.
+**Always log these headers** when a rate-limit error is encountered so operators know when quota refills.
+
+### PR Check Polling
+
+Use a minimum polling interval of **60 seconds** when watching a PR check suite.
+For suites with 12+ checks (e.g., `sprint-1-dotnet` PRs), increase to **90–120 seconds**.
+
+```bash
+# Compliant: 60-second polling with gh CLI
+while true; do
+  gh pr checks <PR-NUMBER> --repo <owner>/<repo>
+  sleep 60
+done
+```
+
+Implement **exponential backoff** whenever a 429 / rate-limit response is received:
+
+| Parameter | Value |
+|---|---|
+| Initial interval | 30 s |
+| Backoff multiplier | 1.5× per retry |
+| Maximum interval | 5 min (300 s) |
+| Reset on success | ✅ Yes |
+
+### Issue and PR Creation Batching
+
+- Create at most **5 issues/PRs per 60 seconds** in automated scripts.
+- Wait **10 seconds** between each batch.
+
+```bash
+# Create in batches of 5, 10 s apart
+count=0
+for item in "${items[@]}"; do
+  gh issue create --title "$item" --body "..."
+  count=$((count + 1))
+  if (( count % 5 == 0 )); then sleep 10; fi
+done
+```
+
+### Workflow Dispatch
+
+- Space successive `workflow_dispatch` submissions by **at least 60 seconds**.
+- Never queue **more than 2 concurrent workflow runs per branch**.
+
+```bash
+gh workflow run ci.yml --ref my-branch
+sleep 60
+gh workflow run lint.yml --ref my-branch
+```
+
+### `gh` CLI Usage
+
+- Avoid `--retry-limit` for critical quota-sensitive operations; uncontrolled retries consume quota silently.
+- Check your remaining quota at any time:
+
+```bash
+gh api /rate_limit --jq '.resources.core'
+```
+
+- Refresh scopes when rate-limit headers are unexpected:
+
+```bash
+gh auth refresh --scopes repo,workflow
+```
+
+### Automated Script Guidelines
+
+Scripts that call the GitHub API (e.g., `scripts/metrics/collect-metrics.py`) must:
+
+1. Retry with exponential backoff on HTTP 429 / 403.
+2. Log `x-ratelimit-reset` when a rate-limit error is received.
+3. Log a warning when `x-ratelimit-remaining` drops below 100.
+4. Reset the backoff interval after a successful response.
+
+---
+
 ## Questions
 
 Open an issue with the `question` label. Do not DM maintainers for things that belong in the open.

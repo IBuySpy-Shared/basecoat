@@ -18,6 +18,7 @@ Environment variables (set by GitHub Actions from secrets):
 import json
 import os
 import sys
+import time
 from datetime import datetime, timedelta, timezone
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError
@@ -31,18 +32,58 @@ def get_env(name, required=True):
     return value
 
 
-def github_api(url, token):
-    """Make authenticated GitHub API request."""
+def github_api(url, token, _retry_state=None):
+    """Make authenticated GitHub API request with exponential backoff on rate limits.
+
+    Backoff policy (mirrors CONTRIBUTING.md §GitHub API Rate Limit Handling):
+    - Initial interval: 30 s
+    - Max interval:      5 min (300 s)
+    - Multiplier:        1.5x per retry
+    - Reset:             on success
+    """
+    # Default mutable retry state passed by reference across recursive calls
+    if _retry_state is None:
+        _retry_state = {"interval": 30, "attempts": 0}
+
     req = Request(url)
     req.add_header("Authorization", f"token {token}")
     req.add_header("Accept", "application/vnd.github+json")
     req.add_header("X-GitHub-Api-Version", "2022-11-28")
     try:
         with urlopen(req) as resp:
+            # Log remaining quota proactively so callers can monitor headroom
+            remaining = resp.headers.get("x-ratelimit-remaining")
+            if remaining is not None and int(remaining) < 100:
+                reset_ts = resp.headers.get("x-ratelimit-reset", "")
+                reset_str = ""
+                if reset_ts:
+                    reset_str = f", resets at {datetime.fromtimestamp(int(reset_ts), tz=timezone.utc).isoformat()}"
+                print(
+                    f"  ⚠ Rate-limit headroom low: {remaining} requests remaining{reset_str}",
+                    file=sys.stderr,
+                )
+            _retry_state["interval"] = 30  # reset backoff on success
             return json.loads(resp.read().decode())
     except HTTPError as e:
         if e.code == 404:
             return None
+        if e.code in (429, 403):
+            # Log rate-limit-reset header so operators know when quota refills
+            reset_ts = e.headers.get("x-ratelimit-reset", "")
+            reset_str = ""
+            if reset_ts:
+                reset_str = f" (resets at {datetime.fromtimestamp(int(reset_ts), tz=timezone.utc).isoformat()})"
+            remaining = e.headers.get("x-ratelimit-remaining", "unknown")
+            print(
+                f"  ⚠ Rate limit hit (HTTP {e.code}): {remaining} requests remaining{reset_str}",
+                file=sys.stderr,
+            )
+            wait = _retry_state["interval"]
+            _retry_state["attempts"] += 1
+            _retry_state["interval"] = min(wait * 1.5, 300)
+            print(f"  ↻ Backing off {wait:.0f}s before retry (attempt {_retry_state['attempts']})…", file=sys.stderr)
+            time.sleep(wait)
+            return github_api(url, token, _retry_state)
         print(f"  WARNING: API error {e.code} for {url}", file=sys.stderr)
         return None
 
