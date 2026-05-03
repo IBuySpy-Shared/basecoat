@@ -32,7 +32,7 @@ Prefer selectors in this order — most stable to least stable:
 2. ARIA role + accessible name: `getByRole('button', { name: 'Submit' })`
 3. Label text: `getByLabel('Email address')`
 4. Placeholder text: `getByPlaceholder('Enter email')`
-5. Text content (only for static, non-localised strings): `getByText('Confirm')`
+5. Text content (only for static, non-localized strings): `getByText('Confirm')`
 
 **Never use:** CSS class selectors, XPath, or DOM structure-dependent selectors.
 

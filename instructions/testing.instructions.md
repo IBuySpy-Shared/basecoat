@@ -115,7 +115,7 @@ These thresholds complement, not replace, the line-coverage gates in `instructio
 
 ### Reducing Noise
 
-- Exclude generated code, migration files, configuration, and serialisation boilerplate from mutation runs.
+- Exclude generated code, migration files, configuration, and serialization boilerplate from mutation runs.
 - Use equivalent mutant detection or survivor allowlists sparingly; document every exclusion with a reason.
 - Run mutation testing on a targeted module or file set during development; run full-suite scans in scheduled CI only (not every PR) to keep feedback loops fast.
 
