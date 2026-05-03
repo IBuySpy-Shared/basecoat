@@ -43,4 +43,3 @@ Is there sufficient automated coverage for critical paths?
 - Ordered wave plan with gates and rollback criteria
 - Dependency remediation backlog
 - Test matrix and acceptance criteria
-

@@ -38,4 +38,3 @@ This document defines the Base Coat approach for modernizing .NET workloads.
   - `instructions/dotnet-upgrade-planning.instructions.md`
   - `instructions/dotnet-dependency-analysis.instructions.md`
   - `instructions/dotnet-test-strategy.instructions.md`
-
