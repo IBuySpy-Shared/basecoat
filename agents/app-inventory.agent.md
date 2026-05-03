@@ -9,6 +9,17 @@ metadata:
   audience: ["architects", "devops-engineers", "platform-teams"]
 allowed-tools: ["bash", "git", "grep", "powershell"]
 model: claude-sonnet-4.6
+tools:
+  - grep
+  - glob
+  - view
+  - bash
+  - powershell
+handoffs:
+  - label: Start Migration
+    agent: legacy-modernization
+    prompt: Use the inventory and migration complexity assessment above to begin the modernization plan. Apply the strangler fig pattern to the components identified as high-complexity migration targets.
+    send: false
 ---
 
 # App Inventory Agent

@@ -9,6 +9,11 @@ metadata:
   audience: ["qa-engineers", "testers", "test-leads"]
 allowed-tools: ["bash", "git", "gh"]
 model: claude-sonnet-4.6
+handoffs:
+  - label: Generate Automation Candidates
+    agent: strategy-to-automation
+    prompt: Review the exploratory testing findings above and generate automation candidates. For each charter finding that is a good automation candidate, map it to a smoke test, regression tier, or agent spec, and file a GitHub Issue.
+    send: false
 ---
 
 # Exploratory Charter Agent
@@ -79,6 +84,7 @@ For each session, produce a charter following `skills/manual-test-strategy/chart
 After the session, produce a brief findings summary with filed GitHub Issues for automation candidates.
 
 ## Model
+
 **Recommended:** claude-sonnet-4.6
 **Rationale:** Structured thinking and edge case identification for exploratory testing sessions
 **Minimum:** claude-haiku-4.5

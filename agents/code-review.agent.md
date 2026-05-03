@@ -9,6 +9,11 @@ metadata:
   audience: ["developers", "reviewers", "tech-leads", "architects"]
 allowed-tools: ["bash", "git", "gh", "grep", "find"]
 model: claude-sonnet-4.6
+handoffs:
+  - label: Run Security Review
+    agent: security-analyst
+    prompt: Perform a security review of the code reviewed above. Focus on the critical and high findings flagged in the code review, and evaluate the new endpoints and data flows for OWASP Top 10 vulnerabilities.
+    send: false
 ---
 
 # Code Review Agent
@@ -36,6 +41,7 @@ Purpose: perform a structured repository or pull request review with emphasis on
 - Short summary
 
 ## Model
+
 **Recommended:** claude-sonnet-4.6
 **Rationale:** Nuanced code analysis requires good reasoning but not premium-tier complexity
 **Minimum:** claude-haiku-4.5

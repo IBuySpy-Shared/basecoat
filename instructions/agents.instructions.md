@@ -24,6 +24,11 @@ name: kebab-case-agent-name
 description: "One-sentence description of the agent's purpose. Start with the role noun and state when to invoke it."
 tools: [read_file, write_file, list_dir, run_terminal_command, create_github_issue]
 allowed_skills: [skill-name-a, skill-name-b]
+handoffs:
+  - label: Next Step
+    agent: next-agent-name
+    prompt: Continue from the output above. <specific instructions>
+    send: false
 ---
 ```
 
@@ -33,12 +38,14 @@ allowed_skills: [skill-name-a, skill-name-b]
 | `description` | Yes | One sentence. Begin with the role, end with trigger guidance ("Use when …"). |
 | `tools` | Yes | Array of tool identifiers the agent needs. Enforced at runtime — the agent cannot call any tool not in this list. Follow least-privilege — include only tools the agent actually uses. |
 | `allowed_skills` | No | Array of skill folder names the agent may invoke. When omitted, the agent inherits all available skills (legacy behavior). Use `allowed_skills: []` to block all skill invocations. When present, the runtime filters the `<available_skills>` list to this allow-list before injecting it into the agent context. |
+| `handoffs` | No | Array of VS Code transition buttons rendered after each response. Each entry requires `label`, `agent`, and `prompt`. Set `send: false` to let the user review before the next agent runs. See `docs/agent-handoffs.md`. |
 
 ### Runtime Enforcement Semantics
 
 - **`tools:` is a whitelist.** At runtime the agent session is restricted to exactly the tools declared. Any tool not listed is unavailable, regardless of what the parent session has enabled.
 - **`allowed_skills:` is a filter.** The platform injects only the skills named in this list into `<available_skills>`. An agent with `allowed_skills: []` receives an empty skill catalog and must stop immediately if its workflow depends on a skill.
 - **`## Model` is binding.** The model named in the agent's **Model** section is used as the actual model selection when the agent is invoked, not merely a suggestion. Specify the recommended model using the identifier exactly as it appears in the platform's model registry.
+- **`handoffs:` is declarative.** Handoff entries do not affect the agent's runtime behavior — they configure the VS Code UI to display transition buttons after the agent responds. The `agent` field must match the `name` field of an existing agent.
 
 ## Required Sections Checklist
 

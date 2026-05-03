@@ -9,6 +9,12 @@ metadata:
   audience: ["product-managers", "product-owners", "team-leads"]
 allowed-tools: ["bash", "git", "grep"]
 model: claude-sonnet-4.6
+tools: [run_terminal_command, read_file, write_file, list_dir]
+handoffs:
+  - label: Plan Sprint
+    agent: sprint-planner
+    prompt: Use the user stories and prioritization above as the sprint goal. Decompose them into GitHub issues with labels, wave dependency maps, agent assignments, and acceptance criteria.
+    send: false
 ---
 
 # Product Manager Agent

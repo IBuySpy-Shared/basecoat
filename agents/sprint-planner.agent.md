@@ -10,6 +10,15 @@ metadata:
 allowed-tools: ["bash", "git", "gh", "grep"]
 model: claude-sonnet-4.6
 allowed_skills: [basecoat]
+handoffs:
+  - label: Begin Backend Sprint Work
+    agent: backend-dev
+    prompt: Begin implementation for the backend issues from this sprint plan. Use the wave dependency map and acceptance criteria defined above as your guide.
+    send: false
+  - label: Begin Frontend Sprint Work
+    agent: frontend-dev
+    prompt: Begin implementation for the frontend issues from this sprint plan. Use the wave dependency map and acceptance criteria defined above as your guide.
+    send: false
 ---
 
 # Sprint Planner Agent
@@ -185,6 +194,7 @@ List any of the following detected during planning:
 - Do not estimate hours or story points unless the user explicitly requests it.
 
 ## Model
+
 **Recommended:** claude-sonnet-4.6
 **Rationale:** Goal decomposition, dependency mapping, and wave planning require good reasoning depth
 **Minimum:** claude-haiku-4.5
@@ -201,6 +211,6 @@ This agent operates under the basecoat governance framework.
 
 ## Allowed Skills
 
-*(none)*
+none
 
 This agent uses GitHub issue-creation tools only. Do not invoke design, code-generation, infrastructure, or any other skills — if `create_github_issue` or other primary tools are unavailable, stop and report the blocker immediately.

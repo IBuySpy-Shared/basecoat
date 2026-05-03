@@ -9,6 +9,12 @@ metadata:
   audience: ["api-designers", "backend-developers", "architects"]
 allowed-tools: ["bash", "git", "grep", "find"]
 model: gpt-5.3-codex
+tools: [read_file, write_file, list_dir, run_terminal_command, create_github_issue]
+handoffs:
+  - label: Implement API
+    agent: backend-dev
+    prompt: Implement the API contract designed above. Use the OpenAPI spec as the authoritative contract. Follow the endpoint definitions, request/response schemas, error codes, and versioning strategy documented in the design.
+    send: false
 ---
 
 # API Designer Agent

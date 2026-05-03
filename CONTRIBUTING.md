@@ -161,6 +161,7 @@ Every agent file (`agents/<name>.agent.md`) must begin with YAML frontmatter con
 | `description` | ✅ Yes | One-line summary of what the agent does and when to use it |
 | `tools` | ❌ Optional | List of tools the agent may invoke |
 | `model` | ❌ Optional | Model override (e.g., `gpt-4o`, `claude-sonnet-4`) |
+| `handoffs` | ❌ Optional | List of VS Code handoff transitions to other agents (see below) |
 
 **Example:**
 
@@ -169,10 +170,32 @@ Every agent file (`agents/<name>.agent.md`) must begin with YAML frontmatter con
 name: backend-dev
 description: "Backend development agent for APIs, services, and business logic."
 tools: [read_file, write_file, list_dir, run_terminal_command]
+handoffs:
+  - label: Run Code Review
+    agent: code-review
+    prompt: Review the implementation above for correctness, security, and test coverage.
+    send: false
 ---
 ```
 
 The `name` and `description` fields are validated by `scripts/validate-basecoat.ps1` and CI.
+
+#### Handoffs
+
+The `handoffs` field enables VS Code to render transition buttons after an agent response,
+letting users move to the next agent in a workflow with a pre-filled prompt. Each entry in
+the array has four fields:
+
+| Field | Required | Description |
+|---|---|---|
+| `label` | ✅ Yes | Text shown on the transition button in VS Code |
+| `agent` | ✅ Yes | `name` of the target agent (matches filename without `.agent.md`) |
+| `prompt` | ✅ Yes | Pre-filled context passed to the target agent |
+| `send` | ❌ Optional | `false` (default) lets the user review before sending; `true` auto-sends |
+
+Use `send: false` for all handoffs so users can review and adjust the pre-filled context.
+See `docs/agent-handoffs.md` for the full list of implemented handoff chains and guidelines
+for authoring effective prompts.
 
 ---
 
