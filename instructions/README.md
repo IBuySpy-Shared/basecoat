@@ -12,6 +12,7 @@ Current starters:
 - `security.instructions.md`
 - `reliability.instructions.md`
 - `documentation.instructions.md`
+- `dotnet-dependency-analysis.instructions.md`
 - `mcp.instructions.md`
 
 Guidelines for adding more:

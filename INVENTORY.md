@@ -15,6 +15,7 @@ This catalog helps teams discover what exists in Base Coat and when to use it.
 | `instructions/config.instructions.md`        | config file safety and secrets prevention | config, secrets, safety, environment |
 | `instructions/development.instructions.md`   | shared standards for backend-dev, frontend-dev, middleware-dev, data-tier agents | development, code style, error handling, security, logging, testing, collaboration |
 | `instructions/documentation.instructions.md` | docs updates and operational notes                    | docs, readme, changelog, migration, usage                          |
+| `instructions/dotnet-dependency-analysis.instructions.md` | NuGet workflow, transitive dependencies, security scanning, and .NET compatibility matrices | dotnet, nuget, dependencies, security, transitive, compatibility |
 | `instructions/drift-monitor.instructions.md` | detect and prevent configuration drift across environments | drift, monitor, config, environment, consistency |
 | `instructions/error-kb.instructions.md`      | error knowledge base and resolution pattern guidance | error, knowledge-base, resolution, troubleshooting |
 | `instructions/frontend.instructions.md`      | UI, accessibility, responsiveness, frontend changes   | frontend, ui, css, accessibility, react                            |
