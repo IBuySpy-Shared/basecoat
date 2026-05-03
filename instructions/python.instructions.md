@@ -1,11 +1,14 @@
 ---
 title: Python Coding Standards
 type: instruction
-description: "Conventions for Python-centric projects, including data science and ML pipelines."
+description: "Conventions for Python-centric projects, including data science and ML pipelines with pandas, scikit-learn, DuckDB, and Jupyter notebooks."
 applyTo:
   - python
   - data-science
   - ml
+  - pandas
+  - scikit-learn
+  - jupyter
 ---
 
 # Python Coding Standards

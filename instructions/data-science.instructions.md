@@ -1,11 +1,15 @@
 ---
 title: Data Science / ML / Notebook Instruction
 type: instruction
-description: "Conventions for data science, ML, and notebook-driven projects."
+description: "Conventions for data science, ML, and notebook-driven projects using Jupyter, pandas, scikit-learn, DuckDB, and the medallion lakehouse architecture."
 applyTo:
   - data-science
   - ml
   - notebook
+  - jupyter
+  - duckdb
+  - pandas
+  - scikit-learn
 ---
 
 # Data Science / ML / Notebook Instruction
@@ -315,6 +319,77 @@ When using Fabric Spark for large-scale data pipelines:
 - **Cell length:** Keep cells <50 lines for readability; split complex logic into functions in `src/`.
 - **Markdown documentation:** Use markdown cells to document each section's purpose and assumptions.
 - **Kernel restart:** Use Kernel → Restart & Run All before committing to ensure reproducibility.
+
+### DuckDB for Analytics and ETL
+
+DuckDB is an in-process SQL database ideal for analytical workloads and data pipelines, especially within notebooks and Python applications.
+
+- **Install:** `pip install duckdb`
+- **Use cases:** SQL queries on pandas DataFrames, Parquet files, or CSV without data movement; fast aggregations; analytics within notebooks
+- **Performance:** Vectorized execution; 10-100x faster than pandas for large datasets
+- **Integration:** Works seamlessly with pandas, Parquet, Polars, and Apache Arrow
+
+**Basic usage in notebooks:**
+
+```python
+import duckdb
+import pandas as pd
+
+# Query pandas DataFrame directly
+df = pd.read_csv("data.csv")
+result = duckdb.sql("SELECT * FROM df WHERE value > 100").pl()
+
+# Or query Parquet files
+result = duckdb.sql("SELECT COUNT(*) FROM read_parquet('data/silver/*.parquet')").df()
+
+# Export to pandas
+output_df = result.df()
+```
+
+**Medallion architecture with DuckDB:**
+
+```python
+import duckdb
+
+# Bronze → Silver transformation
+duckdb.sql("""
+    CREATE TABLE silver.users AS
+    SELECT
+        user_id,
+        CAST(created_at AS DATE) as created_date,
+        email
+    FROM read_parquet('data/bronze/users_raw_*.parquet')
+    WHERE email IS NOT NULL
+""")
+
+# Silver → Gold aggregation
+duckdb.sql("""
+    CREATE TABLE gold.daily_users AS
+    SELECT
+        created_date,
+        COUNT(DISTINCT user_id) as daily_signups
+    FROM silver.users
+    GROUP BY created_date
+""")
+
+# Export result
+result = duckdb.sql("SELECT * FROM gold.daily_users").df()
+result.to_parquet("data/gold/daily_users.parquet")
+```
+
+**Performance tips:**
+
+- Use `read_parquet()` instead of reading to pandas for large files
+- Use `SELECT ... LIMIT` to preview data quickly
+- Use window functions (`ROW_NUMBER()`, `LAG()`) for advanced analytics
+- Push aggregations to SQL; only bring small results to pandas
+- Use connection pooling for multi-notebook workflows
+
+**Integrating with Microsoft Fabric:**
+
+- Load Fabric lakehouse tables via Spark integration
+- Query Bronze/Silver/Gold layers without intermediate pandas copies
+- Use DuckDB for local development, Spark for production scale-out
 
 ## See Also
 
