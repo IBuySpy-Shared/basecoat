@@ -383,6 +383,105 @@ Both files follow Markdown table format with columns for name, file path, descri
 
 ---
 
+## Rate Limiting and API Best Practices
+
+GitHub API has a rate limit of 5,000 authenticated requests per hour (~83 requests per minute). During rapid sprint execution with automation, workflows, and batch operations, exhausting the quota is a common failure mode.
+
+### Backoff Policy
+
+**Exponential backoff is mandatory** for any polling or retry logic:
+
+```
+Initial delay: 30 seconds
+Max delay: 90 seconds
+Backoff multiplier: 1.5x
+```
+
+**Example:**
+- Attempt 1: Wait 30s
+- Attempt 2: Wait 45s
+- Attempt 3: Wait 67.5s (capped at 90s)
+
+**Reference implementation:** `scripts/rate-limit-backoff.ps1`
+
+### Batch Operations Guidance
+
+- **Max batch size:** 5 operations per 60 seconds
+- **Delay between batches:** 10 seconds minimum
+- **Example:** Running 50 workflow dispatches should take ≥ 10 minutes (5 dispatches × 60s + 9 × 10s delays)
+
+### Workflow Dispatch Spacing
+
+Avoid triggering multiple workflow runs in rapid succession:
+
+- **Minimum spacing:** 60+ seconds between dispatch calls for the same workflow
+- **Reason:** Each dispatch triggers GitHub actions, API logging, and repository polling, consuming quota and CI capacity
+- **Best practice:** Use `gh workflow run` with `--ref` to specify branch, but always pause ≥ 60s before the next call
+
+**Example:**
+```powershell
+# DON'T do this
+gh workflow run build.yml --ref main
+gh workflow run build.yml --ref main  # fired immediately — quota and CI waste
+
+# DO this instead
+gh workflow run build.yml --ref main
+Start-Sleep -Seconds 60
+gh workflow run build.yml --ref main
+```
+
+### `gh` CLI Best Practices
+
+1. **Disable automatic retry logic** to control backoff yourself:
+   ```powershell
+   gh config set http.retries 0
+   ```
+
+2. **Check rate limit before batch operations:**
+   ```powershell
+   gh api rate_limit --jq '.rate.remaining'
+   # If < 50: pause and wait; if < 100: warn
+   ```
+
+3. **Log rate limit headers** after each call:
+   ```powershell
+   # Extract from response metadata
+   gh api repos/owner/repo/issues --jq '.[] | "\(.number): \(.url)"' \
+     --header 'X-GitHub-Api-Version:2022-11-28'
+   ```
+
+### Rate Limit Header Logging
+
+Always inspect these headers after API calls, especially in automation:
+
+- **`X-RateLimit-Limit`** — Total requests allowed (5000 for authenticated)
+- **`X-RateLimit-Remaining`** — Requests left in current window
+- **`X-RateLimit-Reset`** — Unix timestamp when quota resets
+- **`X-RateLimit-Used`** — Requests consumed this window
+
+**Strategy:**
+1. Log these headers in CI/CD logs for debugging
+2. If `Remaining < 50`, pause and wait until `Reset` time
+3. If `Remaining < 200`, log a warning and increase delay between operations
+
+### Automation Safeguards
+
+**Sprint execution checklist:**
+- [ ] All polling loops implement exponential backoff (min 30s, max 90s)
+- [ ] Workflow dispatch calls have 60+ second spacing
+- [ ] Batch operations respect 5 per 60s limit
+- [ ] Rate limit check (`gh api rate_limit`) runs before major operations
+- [ ] CI logs capture rate limit headers (for post-mortem analysis)
+- [ ] Manual testing validates backoff with `--dry-run` flags where available
+
+### References
+
+- [GitHub API Rate Limiting](https://docs.github.com/en/rest/overview/resources-in-the-rest-api?apiVersion=2022-11-28#rate-limiting)
+- [gh CLI Rate Limit Docs](https://cli.github.com/manual/gh_api)
+- Related issues: #451 (concurrency control), #443 (observed exhaustion)
+
+---
+
 ## Questions
 
 Open an issue with the `question` label. Do not DM maintainers for things that belong in the open.
