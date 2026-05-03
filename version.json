@@ -1,6 +1,6 @@
 {
     "name": "base-coat",
-    "version": "2.7.0",
-    "releaseDate": "2026-05-02",
-    "notes": "v2.7.0: Ecosystem completion - supply chain security, skill refactoring guidance, blocked issues documentation."
+    "version": "2.9.0",
+    "releaseDate": "2026-05-04",
+    "notes": "v2.9.0: Sprint 6 enterprise infrastructure, tracking, and data science guidance."
 }
