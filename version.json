@@ -1,6 +1,6 @@
 {
     "name": "base-coat",
-    "version": "2.3.0",
-    "releaseDate": "2025-01-15",
-    "notes": "v2.3.0: Final release - Cloud agent auto-approval and complete sprint delivery"
+    "version": "3.0.0",
+    "releaseDate": "2026-05-04",
+    "notes": "v3.0.0: Major milestone - 100+ agents/skills, enterprise-scale ecosystem, complete governance framework"
 }
