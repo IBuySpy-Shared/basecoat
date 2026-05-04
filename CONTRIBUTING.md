@@ -301,6 +301,46 @@ This is intentional — catching a broken build post-merge is significantly more
 
 ---
 
+## Cloud Agent Workflow Auto-Approval
+
+When the cloud agent (`app/copilot-swe-agent`) opens a PR, it triggers the GitHub Actions workflows defined in this repository. To streamline execution and reduce manual intervention, the `auto-approve-cloud-agent-workflows.yml` workflow automatically approves pending workflows.
+
+### How It Works
+
+1. The cloud agent creates a PR with implementation changes
+2. GitHub Actions detects pending workflow runs that require approval
+3. The `auto-approve-cloud-agent-workflows.yml` workflow automatically approves them
+4. All CI checks proceed without manual maintainer intervention
+
+### Security & Permissions
+
+- **Trigger:** Only activates when `github.actor == 'app/copilot-swe-agent'`
+- **Permissions:** Uses `pull-requests: read` and `contents: read` only
+- **Approval scope:** Limited to workflow runs associated with the agent's PR
+- **Error handling:** Fails gracefully if insufficient permissions; logs warnings instead of blocking
+
+### Skipping Auto-Approval
+
+If you need to prevent auto-approval for a specific PR (e.g., for sensitive changes), you can:
+
+1. Manually cancel the pending workflows via GitHub UI
+2. Add a label to the PR (custom label-based skipping not yet implemented — file an issue if needed)
+3. Disable the workflow temporarily by removing or renaming `.github/workflows/auto-approve-cloud-agent-workflows.yml`
+
+### Troubleshooting
+
+**Issue:** Workflows still require manual approval
+
+- **Cause:** The workflow may not have permissions to approve, or the API call failed silently
+- **Fix:** Check the `auto-approve-cloud-agent-workflows` workflow run logs for error messages
+
+**Issue:** Unrelated workflows are being approved
+
+- **Cause:** The filter is too broad or includes unintended workflow types
+- **Fix:** Update the workflow filtering logic in `.github/workflows/auto-approve-cloud-agent-workflows.yml` and file an issue
+
+---
+
 ## Adoption Tooling
 
 Base Coat provides tools to track, measure, and monitor asset adoption across your GitHub organization.
@@ -391,13 +431,14 @@ GitHub API has a rate limit of 5,000 authenticated requests per hour (~83 reques
 
 **Exponential backoff is mandatory** for any polling or retry logic:
 
-```
+```text
 Initial delay: 30 seconds
 Max delay: 90 seconds
 Backoff multiplier: 1.5x
 ```
 
 **Example:**
+
 - Attempt 1: Wait 30s
 - Attempt 2: Wait 45s
 - Attempt 3: Wait 67.5s (capped at 90s)
@@ -419,6 +460,7 @@ Avoid triggering multiple workflow runs in rapid succession:
 - **Best practice:** Use `gh workflow run` with `--ref` to specify branch, but always pause ≥ 60s before the next call
 
 **Example:**
+
 ```powershell
 # DON'T do this
 gh workflow run build.yml --ref main
@@ -433,17 +475,20 @@ gh workflow run build.yml --ref main
 ### `gh` CLI Best Practices
 
 1. **Disable automatic retry logic** to control backoff yourself:
+
    ```powershell
    gh config set http.retries 0
    ```
 
 2. **Check rate limit before batch operations:**
+
    ```powershell
    gh api rate_limit --jq '.rate.remaining'
    # If < 50: pause and wait; if < 100: warn
    ```
 
 3. **Log rate limit headers** after each call:
+
    ```powershell
    # Extract from response metadata
    gh api repos/owner/repo/issues --jq '.[] | "\(.number): \(.url)"' \
@@ -460,6 +505,7 @@ Always inspect these headers after API calls, especially in automation:
 - **`X-RateLimit-Used`** — Requests consumed this window
 
 **Strategy:**
+
 1. Log these headers in CI/CD logs for debugging
 2. If `Remaining < 50`, pause and wait until `Reset` time
 3. If `Remaining < 200`, log a warning and increase delay between operations
@@ -467,6 +513,7 @@ Always inspect these headers after API calls, especially in automation:
 ### Automation Safeguards
 
 **Sprint execution checklist:**
+
 - [ ] All polling loops implement exponential backoff (min 30s, max 90s)
 - [ ] Workflow dispatch calls have 60+ second spacing
 - [ ] Batch operations respect 5 per 60s limit
