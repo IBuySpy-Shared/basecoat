@@ -1,6 +1,6 @@
 {
     "name": "base-coat",
-    "version": "2.9.0",
-    "releaseDate": "2026-05-04",
-    "notes": "v2.9.0: Sprint 6 enterprise infrastructure, tracking, and data science guidance."
+    "version": "2.3.0",
+    "releaseDate": "2025-01-15",
+    "notes": "v2.3.0: Final release - Cloud agent auto-approval and complete sprint delivery"
 }
