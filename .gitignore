@@ -63,6 +63,19 @@ aws-credentials.json
 .terraform/
 .terraformrc
 terraform.rc
+terraform.lock.hcl
+.terraform.lock.hcl
+crash.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Terraform logs
+*.log
+
+# Lambda function packages (may contain code)
+lambda_rotation.zip
 
 # Ansible
 *.vault
