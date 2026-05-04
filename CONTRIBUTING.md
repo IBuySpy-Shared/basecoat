@@ -330,10 +330,12 @@ If you need to prevent auto-approval for a specific PR (e.g., for sensitive chan
 ### Troubleshooting
 
 **Issue:** Workflows still require manual approval
+
 - **Cause:** The workflow may not have permissions to approve, or the API call failed silently
 - **Fix:** Check the `auto-approve-cloud-agent-workflows` workflow run logs for error messages
 
 **Issue:** Unrelated workflows are being approved
+
 - **Cause:** The filter is too broad or includes unintended workflow types
 - **Fix:** Update the workflow filtering logic in `.github/workflows/auto-approve-cloud-agent-workflows.yml` and file an issue
 
