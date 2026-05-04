@@ -475,17 +475,20 @@ gh workflow run build.yml --ref main
 ### `gh` CLI Best Practices
 
 1. **Disable automatic retry logic** to control backoff yourself:
+
    ```powershell
    gh config set http.retries 0
    ```
 
 2. **Check rate limit before batch operations:**
+
    ```powershell
    gh api rate_limit --jq '.rate.remaining'
    # If < 50: pause and wait; if < 100: warn
    ```
 
 3. **Log rate limit headers** after each call:
+
    ```powershell
    # Extract from response metadata
    gh api repos/owner/repo/issues --jq '.[] | "\(.number): \(.url)"' \
