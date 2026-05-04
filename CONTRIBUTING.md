@@ -431,13 +431,14 @@ GitHub API has a rate limit of 5,000 authenticated requests per hour (~83 reques
 
 **Exponential backoff is mandatory** for any polling or retry logic:
 
-```
+```text
 Initial delay: 30 seconds
 Max delay: 90 seconds
 Backoff multiplier: 1.5x
 ```
 
 **Example:**
+
 - Attempt 1: Wait 30s
 - Attempt 2: Wait 45s
 - Attempt 3: Wait 67.5s (capped at 90s)
@@ -459,6 +460,7 @@ Avoid triggering multiple workflow runs in rapid succession:
 - **Best practice:** Use `gh workflow run` with `--ref` to specify branch, but always pause ≥ 60s before the next call
 
 **Example:**
+
 ```powershell
 # DON'T do this
 gh workflow run build.yml --ref main
@@ -500,6 +502,7 @@ Always inspect these headers after API calls, especially in automation:
 - **`X-RateLimit-Used`** — Requests consumed this window
 
 **Strategy:**
+
 1. Log these headers in CI/CD logs for debugging
 2. If `Remaining < 50`, pause and wait until `Reset` time
 3. If `Remaining < 200`, log a warning and increase delay between operations
@@ -507,6 +510,7 @@ Always inspect these headers after API calls, especially in automation:
 ### Automation Safeguards
 
 **Sprint execution checklist:**
+
 - [ ] All polling loops implement exponential backoff (min 30s, max 90s)
 - [ ] Workflow dispatch calls have 60+ second spacing
 - [ ] Batch operations respect 5 per 60s limit
