@@ -1,0 +1,33 @@
+[
+  {
+    "collected_at": "2026-05-04T10:54:26.775694+00:00",
+    "organization": "IBuySpy-Shared",
+    "copilot": {
+      "available": false
+    },
+    "repos": {
+      "IBuySpy-Shared/basecoat": {
+        "pull_requests": {
+          "prs_merged_28d": 48,
+          "cycle_time_median_hours": 0.0,
+          "cycle_time_p95_hours": 0.1
+        },
+        "ci": {
+          "success_rate": 69.0,
+          "total_runs_sampled": 100
+        },
+        "issues": {
+          "issues_closed_28d": 50,
+          "resolution_time_median_hours": 5.9
+        },
+        "basecoat_coverage": {
+          "agents": 0,
+          "instructions": 0,
+          "skills": 0,
+          "prompts": 0,
+          "percentage": 0.0
+        }
+      }
+    }
+  }
+]
