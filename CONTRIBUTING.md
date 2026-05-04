@@ -301,6 +301,44 @@ This is intentional — catching a broken build post-merge is significantly more
 
 ---
 
+## Cloud Agent Workflow Auto-Approval
+
+When the cloud agent (`app/copilot-swe-agent`) opens a PR, it triggers the GitHub Actions workflows defined in this repository. To streamline execution and reduce manual intervention, the `auto-approve-cloud-agent-workflows.yml` workflow automatically approves pending workflows.
+
+### How It Works
+
+1. The cloud agent creates a PR with implementation changes
+2. GitHub Actions detects pending workflow runs that require approval
+3. The `auto-approve-cloud-agent-workflows.yml` workflow automatically approves them
+4. All CI checks proceed without manual maintainer intervention
+
+### Security & Permissions
+
+- **Trigger:** Only activates when `github.actor == 'app/copilot-swe-agent'`
+- **Permissions:** Uses `pull-requests: read` and `contents: read` only
+- **Approval scope:** Limited to workflow runs associated with the agent's PR
+- **Error handling:** Fails gracefully if insufficient permissions; logs warnings instead of blocking
+
+### Skipping Auto-Approval
+
+If you need to prevent auto-approval for a specific PR (e.g., for sensitive changes), you can:
+
+1. Manually cancel the pending workflows via GitHub UI
+2. Add a label to the PR (custom label-based skipping not yet implemented — file an issue if needed)
+3. Disable the workflow temporarily by removing or renaming `.github/workflows/auto-approve-cloud-agent-workflows.yml`
+
+### Troubleshooting
+
+**Issue:** Workflows still require manual approval
+- **Cause:** The workflow may not have permissions to approve, or the API call failed silently
+- **Fix:** Check the `auto-approve-cloud-agent-workflows` workflow run logs for error messages
+
+**Issue:** Unrelated workflows are being approved
+- **Cause:** The filter is too broad or includes unintended workflow types
+- **Fix:** Update the workflow filtering logic in `.github/workflows/auto-approve-cloud-agent-workflows.yml` and file an issue
+
+---
+
 ## Adoption Tooling
 
 Base Coat provides tools to track, measure, and monitor asset adoption across your GitHub organization.
