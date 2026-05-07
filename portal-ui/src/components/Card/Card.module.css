@@ -1,0 +1,126 @@
+.card {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-4);
+  transition: all var(--transition-normal);
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+
+  @media (max-width: 768px) {
+    padding: var(--spacing-3);
+  }
+}
+
+/* Elevation levels */
+.none {
+  box-shadow: none;
+}
+
+.subtle {
+  box-shadow: var(--shadow-subtle);
+}
+
+.medium {
+  box-shadow: var(--shadow-medium);
+}
+
+.large {
+  box-shadow: var(--shadow-large);
+}
+
+/* Interactive state */
+.interactive {
+  cursor: pointer;
+
+  &:hover {
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-medium);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &:active {
+      transform: none;
+    }
+  }
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: var(--spacing-3);
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: var(--spacing-3);
+
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+
+  @media (max-width: 768px) {
+    font-size: var(--font-size-base);
+    margin-bottom: var(--spacing-2);
+    padding-bottom: var(--spacing-2);
+  }
+}
+
+/* Body */
+.body {
+  color: var(--text-primary);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-normal);
+
+  & > * + * {
+    margin-top: var(--spacing-3);
+  }
+
+  @media (max-width: 768px) {
+    & > * + * {
+      margin-top: var(--spacing-2);
+    }
+  }
+}
+
+/* Footer */
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: var(--spacing-3);
+  border-top: 1px solid var(--border-color);
+  margin-top: var(--spacing-3);
+
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: var(--spacing-2);
+    padding-top: var(--spacing-2);
+    margin-top: var(--spacing-2);
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: more) {
+  .card {
+    border-width: 2px;
+  }
+
+  .header,
+  .footer {
+    border-width: 2px;
+  }
+}

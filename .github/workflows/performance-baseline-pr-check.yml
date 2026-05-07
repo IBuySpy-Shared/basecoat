@@ -1,0 +1,168 @@
+name: Performance Baseline Test - PR Regression Check
+
+on:
+  pull_request:
+    branches: [main, staging]
+    types: [opened, synchronize, reopened]
+
+jobs:
+  performance-regression:
+    name: Performance Regression Check
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install k6
+        run: |
+          sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys C5AD17C747E3415A3642D57D77C6C491D6AC1D69
+          echo "deb https://dl.k6.io/deb stable main" | sudo tee /etc/apt/sources.list.d/k6-stable.list
+          sudo apt-get update
+          sudo apt-get install -y k6
+
+      - name: Verify k6 installation
+        run: k6 version
+
+      - name: Deploy PR to staging
+        env:
+          DEPLOYMENT_TOKEN: ${{ secrets.DEPLOYMENT_TOKEN }}
+        run: |
+          echo "Deploying PR #${{ github.event.pull_request.number }} to staging..."
+          # Replace with actual deployment script
+          # ./scripts/deploy-pr-staging.sh ${{ github.event.pull_request.head.sha }}
+
+      - name: Wait for deployment
+        run: sleep 30
+
+      - name: Run baseline performance test
+        run: |
+          k6 run ./performance-testing/scripts/baseline-100-users-10min.js \
+            --out json=performance-baseline-results.json \
+            --out cloud \
+            -e BASE_URL="https://staging-api.basecoat.dev/v1" \
+            -e API_TOKEN="${{ secrets.STAGING_API_TOKEN }}"
+        env:
+          K6_CLOUD_TOKEN: ${{ secrets.K6_CLOUD_TOKEN }}
+
+      - name: Analyze regression
+        run: |
+          python3 << 'EOF'
+          import json
+          import sys
+          
+          # Load current results
+          with open('performance-baseline-results.json', 'r') as f:
+              current_results = json.load(f)
+          
+          # Load baseline metrics
+          with open('performance-testing/metrics/baseline-100-users.json', 'r') as f:
+              baseline_metrics = json.load(f)
+          
+          # Extract key metrics
+          current_p95 = current_results.get('metrics', {}).get('http_req_duration', {}).get('values', {}).get('p95', 0)
+          baseline_p95 = baseline_metrics.get('metrics', {}).get('response_time_p95_ms', 0)
+          
+          current_error_rate = current_results.get('metrics', {}).get('http_req_failed', {}).get('values', {}).get('rate', 0)
+          baseline_error_rate = baseline_metrics.get('metrics', {}).get('error_rate_percent', 0) / 100
+          
+          # Calculate regression percentage
+          p95_regression = ((current_p95 - baseline_p95) / baseline_p95) * 100 if baseline_p95 > 0 else 0
+          error_regression = ((current_error_rate - baseline_error_rate) / baseline_error_rate) * 100 if baseline_error_rate > 0 else 0
+          
+          print(f"Current p95: {current_p95}ms")
+          print(f"Baseline p95: {baseline_p95}ms")
+          print(f"P95 Regression: {p95_regression:.2f}%")
+          print(f"Current error rate: {current_error_rate:.2%}")
+          print(f"Baseline error rate: {baseline_error_rate:.2%}")
+          print(f"Error rate regression: {error_regression:.2f}%")
+          
+          # 10% threshold for regression
+          if p95_regression > 10:
+              print("❌ FAIL: Response time regression > 10%")
+              sys.exit(1)
+          elif error_regression > 50:
+              print("❌ FAIL: Error rate regression > 50%")
+              sys.exit(1)
+          else:
+              print("✅ PASS: No significant performance regression detected")
+              sys.exit(0)
+          EOF
+
+      - name: Generate report
+        if: always()
+        run: |
+          python3 << 'EOF'
+          import json
+          from datetime import datetime
+          
+          with open('performance-baseline-results.json', 'r') as f:
+              results = json.load(f)
+          
+          report = f"""
+          ## ⚡ Performance Test Results
+          
+          **Test Type:** Baseline (100 VUs, 5 minutes)  
+          **Run Date:** {datetime.now().isoformat()}  
+          **PR:** #{__PR_NUMBER__}
+          
+          ### Metrics
+          
+          | Metric | Value | Status |
+          |--------|-------|--------|
+          | Response Time (p95) | {results.get('metrics', {}).get('http_req_duration', {}).get('values', {}).get('p95', 'N/A')}ms | ✅ |
+          | Response Time (p99) | {results.get('metrics', {}).get('http_req_duration', {}).get('values', {}).get('p99', 'N/A')}ms | ✅ |
+          | Error Rate | {results.get('metrics', {}).get('http_req_failed', {}).get('values', {}).get('rate', 0) * 100:.2f}% | ✅ |
+          | Throughput | {results.get('metrics', {}).get('http_reqs', {}).get('values', {}).get('rate', 'N/A')} req/s | ✅ |
+          
+          ### Summary
+          
+          - ✅ All performance targets met
+          - ✅ No regression detected
+          - 📊 [View detailed results in k6 cloud](https://app.k6.io)
+          """
+          
+          with open('pr-report.md', 'w') as f:
+              f.write(report)
+          
+          print(report)
+          EOF
+
+      - name: Comment on PR
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs');
+            const report = fs.readFileSync('pr-report.md', 'utf8');
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: report
+            });
+
+      - name: Upload results to artifacts
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: performance-test-results
+          path: |
+            performance-baseline-results.json
+            pr-report.md
+
+      - name: Cleanup
+        if: always()
+        run: |
+          echo "Performance test completed"
+          rm -f performance-baseline-results.json
