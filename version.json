@@ -1,6 +1,6 @@
 {
   "name": "base-coat",
-  "version": "3.6.0",
+  "version": "3.7.0",
   "releaseDate": "2026-05-07",
-  "notes": "v3.6.0: Sprint 9 — Plugin wired end-to-end, Portal REST API + GitHub OAuth, React frontend with live data and auth, CLI binary, integration tests (104 plugin / 78 portal tests)."
+  "notes": "v3.7.0: Sprint 10 — Portal dashboard charts, repository detail page, Docker deployment stack, CLI plugin docs, 7 Dependabot security updates."
 }

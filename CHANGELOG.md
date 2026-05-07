@@ -4,6 +4,48 @@ All notable changes to this repository should be recorded in this file.
 
 ## Unreleased
 
+## 3.7.0 - 2026-05-07
+
+### Sprint 10 — Portal UX, Docker Deployment, and Plugin Docs
+
+#### Portal Frontend
+
+- **Dashboard charts** — recharts `ScanBarChart` (scans per repo) and `ScanStatusPie` (pass/fail distribution) with summary cards for total repos, total scans, pass rate (#548)
+- **Repository detail page** — `RepositoryDetail.tsx` with scan history table, status badges, and back navigation; 7 unit tests (#549)
+- **Repositories list** — `Repositories.tsx` list page with repo name, scan count, and last-scan status (#549)
+
+#### Docker Deployment
+
+- **Multi-stage Dockerfiles** — `portal/backend/Dockerfile` (node:20-alpine, `USER node`) and `portal/frontend/Dockerfile` (Vite build + nginx:alpine runtime) (#550)
+- **docker-compose.yml** — Full stack: `postgres:16` + `backend:3000` + `frontend:8080` with health checks and env-var injection (#550)
+- **nginx SPA routing** — `portal/frontend/nginx.conf` with `/api` proxy pass and `try_files` fallback for React Router (#550)
+- **`.env.example`** — Documented all required environment variables (#550)
+- **Portal quickstart** — `portal/README.md` with Docker Compose and manual dev-server setup instructions (#550)
+
+#### CLI Plugin Docs
+
+- **Plugin README** — End-user documentation for `@basecoat/copilot-cli-plugin`: install, config, API, and troubleshooting (#551)
+- **npm publish config** — Added `files`, `publishConfig`, `keywords`, `repository`, and `engines` to `plugins/copilot-cli-plugin/package.json` (#551)
+- **`.npmignore`** — Excludes test files, source maps, and dev configs from published package (#551)
+
+#### CI / Agent Quality
+
+- **Sync test robustness** — `Invoke-SyncToConsumer` now creates a temp named branch for `git clone` instead of using detached-HEAD ref; works in all CI states (PR merge commits, tag checkouts, shallow clones)
+- **Agent output sections** — Fixed `## Key Outputs` → `## Output` in `api-security`, `database-migration`, `e2e-test-strategy`, and `gitops-engineer` agents to satisfy word-boundary CI validation
+- **CRLF fix** — `skills/azure-container-apps/SKILL.md` converted to LF
+
+#### Security Updates (Dependabot)
+
+- Bump `vite` 5.4.21 → 8.0.11 in `/portal/frontend` (#532)
+- Bump `tar` and `sqlite3` in `/portal/backend` (#528)
+- Bump `@tootallnate/once` and `sqlite3` in `/portal/backend` (#527)
+- Bump `hono` 4.12.8 → 4.12.18 in `/mcp` (#518)
+- Bump `@hono/node-server` 1.19.11 → 1.19.14 in `/mcp` (#517)
+- Bump `ip-address` and `express-rate-limit` in `/mcp` (#516)
+- Bump `minimatch`, `@typescript-eslint/eslint-plugin`, `@typescript-eslint/parser` in `/portal-ui` (#514)
+
+
+
 ## 3.6.0 - 2026-05-07
 
 ### Sprint 9 — Plugin Wiring, Portal API, Auth, and Frontend Data
