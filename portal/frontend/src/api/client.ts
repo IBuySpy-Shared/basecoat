@@ -1,12 +1,30 @@
 import axios from 'axios';
+import { getToken, clearToken } from '../auth';
 
-const baseURL = import.meta.env.VITE_API_URL ?? 'http://localhost:3000';
-
-const client = axios.create({
-  baseURL,
+export const apiClient = axios.create({
+  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:3000',
   headers: {
     'Content-Type': 'application/json',
   },
 });
 
-export default client;
+apiClient.interceptors.request.use((config) => {
+  const token = getToken();
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
+
+apiClient.interceptors.response.use(
+  (r) => r,
+  (error) => {
+    if (error.response?.status === 401) {
+      clearToken();
+      window.location.href = '/login';
+    }
+    return Promise.reject(error);
+  },
+);
+
+export default apiClient;
