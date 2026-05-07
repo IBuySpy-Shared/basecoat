@@ -1,9 +1,10 @@
 import { Router, Request, Response } from 'express';
 import { Repository } from '../models';
+import { requireAuth } from '../middleware/requireAuth';
 
 const router = Router();
 
-router.get('/repositories', async (_req: Request, res: Response) => {
+router.get('/repositories', requireAuth, async (_req: Request, res: Response) => {
   try {
     const repos = await Repository.findAll();
     res.json({ data: repos });
@@ -12,7 +13,7 @@ router.get('/repositories', async (_req: Request, res: Response) => {
   }
 });
 
-router.post('/repositories', async (req: Request, res: Response) => {
+router.post('/repositories', requireAuth, async (req: Request, res: Response) => {
   const { owner, name, githubId, isPrivate } = req.body;
 
   if (!owner) {
@@ -39,7 +40,7 @@ router.post('/repositories', async (req: Request, res: Response) => {
   }
 });
 
-router.get('/repositories/:id', async (req: Request, res: Response) => {
+router.get('/repositories/:id', requireAuth, async (req: Request, res: Response) => {
   try {
     const repo = await Repository.findByPk(req.params.id);
     if (!repo) {

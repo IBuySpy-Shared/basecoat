@@ -1,4 +1,5 @@
 import request from 'supertest';
+import jwt from 'jsonwebtoken';
 import { createApp } from '../src/app';
 import { Repository, Scan } from '../src/models';
 
@@ -18,6 +19,9 @@ jest.mock('../src/models', () => ({
 }));
 
 const app = createApp();
+
+const validToken = jwt.sign({ id: 'user-1', username: 'testuser', role: 'viewer' }, 'dev-secret');
+const authHeader = `Bearer ${validToken}`;
 
 const mockRepo = {
   id: 'repo-uuid-1',
@@ -48,7 +52,9 @@ describe('POST /api/v1/repositories/:id/scans', () => {
     (Repository.findByPk as jest.Mock).mockResolvedValue(mockRepo);
     (Scan.create as jest.Mock).mockResolvedValue(mockScan);
 
-    const res = await request(app).post('/api/v1/repositories/repo-uuid-1/scans');
+    const res = await request(app)
+      .post('/api/v1/repositories/repo-uuid-1/scans')
+      .set('Authorization', authHeader);
 
     expect(res.status).toBe(201);
     expect(res.body.data.status).toBe('pending');
@@ -61,7 +67,9 @@ describe('POST /api/v1/repositories/:id/scans', () => {
   it('returns 404 when repository not found', async () => {
     (Repository.findByPk as jest.Mock).mockResolvedValue(null);
 
-    const res = await request(app).post('/api/v1/repositories/nonexistent/scans');
+    const res = await request(app)
+      .post('/api/v1/repositories/nonexistent/scans')
+      .set('Authorization', authHeader);
 
     expect(res.status).toBe(404);
     expect(res.body.error.code).toBe('NOT_FOUND');
@@ -71,7 +79,9 @@ describe('POST /api/v1/repositories/:id/scans', () => {
   it('returns 500 on database error', async () => {
     (Repository.findByPk as jest.Mock).mockRejectedValue(new Error('DB error'));
 
-    const res = await request(app).post('/api/v1/repositories/repo-uuid-1/scans');
+    const res = await request(app)
+      .post('/api/v1/repositories/repo-uuid-1/scans')
+      .set('Authorization', authHeader);
 
     expect(res.status).toBe(500);
     expect(res.body.error.code).toBe('INTERNAL_ERROR');
@@ -82,7 +92,9 @@ describe('GET /api/v1/repositories/:id/scans', () => {
   it('returns list of scans for a repository', async () => {
     (Scan.findAll as jest.Mock).mockResolvedValue([mockScan]);
 
-    const res = await request(app).get('/api/v1/repositories/repo-uuid-1/scans');
+    const res = await request(app)
+      .get('/api/v1/repositories/repo-uuid-1/scans')
+      .set('Authorization', authHeader);
 
     expect(res.status).toBe(200);
     expect(res.body.data).toHaveLength(1);
@@ -95,7 +107,9 @@ describe('GET /api/v1/repositories/:id/scans', () => {
   it('returns empty array when no scans', async () => {
     (Scan.findAll as jest.Mock).mockResolvedValue([]);
 
-    const res = await request(app).get('/api/v1/repositories/repo-uuid-1/scans');
+    const res = await request(app)
+      .get('/api/v1/repositories/repo-uuid-1/scans')
+      .set('Authorization', authHeader);
 
     expect(res.status).toBe(200);
     expect(res.body.data).toEqual([]);
@@ -104,7 +118,9 @@ describe('GET /api/v1/repositories/:id/scans', () => {
   it('returns 500 on database error', async () => {
     (Scan.findAll as jest.Mock).mockRejectedValue(new Error('DB error'));
 
-    const res = await request(app).get('/api/v1/repositories/repo-uuid-1/scans');
+    const res = await request(app)
+      .get('/api/v1/repositories/repo-uuid-1/scans')
+      .set('Authorization', authHeader);
 
     expect(res.status).toBe(500);
     expect(res.body.error.code).toBe('INTERNAL_ERROR');
@@ -116,7 +132,7 @@ describe('GET /api/v1/scans/:id', () => {
     const scanWithResults = { ...mockScan, results: [] };
     (Scan.findByPk as jest.Mock).mockResolvedValue(scanWithResults);
 
-    const res = await request(app).get('/api/v1/scans/scan-uuid-1');
+    const res = await request(app).get('/api/v1/scans/scan-uuid-1').set('Authorization', authHeader);
 
     expect(res.status).toBe(200);
     expect(res.body.data.id).toBe('scan-uuid-1');
@@ -126,7 +142,7 @@ describe('GET /api/v1/scans/:id', () => {
   it('returns 404 when scan not found', async () => {
     (Scan.findByPk as jest.Mock).mockResolvedValue(null);
 
-    const res = await request(app).get('/api/v1/scans/nonexistent');
+    const res = await request(app).get('/api/v1/scans/nonexistent').set('Authorization', authHeader);
 
     expect(res.status).toBe(404);
     expect(res.body.error.code).toBe('NOT_FOUND');
@@ -135,7 +151,7 @@ describe('GET /api/v1/scans/:id', () => {
   it('returns 500 on database error', async () => {
     (Scan.findByPk as jest.Mock).mockRejectedValue(new Error('DB error'));
 
-    const res = await request(app).get('/api/v1/scans/scan-uuid-1');
+    const res = await request(app).get('/api/v1/scans/scan-uuid-1').set('Authorization', authHeader);
 
     expect(res.status).toBe(500);
     expect(res.body.error.code).toBe('INTERNAL_ERROR');
