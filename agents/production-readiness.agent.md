@@ -14,9 +14,21 @@ allowed-tools: ["bash", "git", "grep"]
 
 A comprehensive agent that validates applications are ready for production deployment through business continuity planning, disaster recovery coordination, and failure mode analysis.
 
+## Inputs
+
+- Application deployment package and release notes describing changes
+- Architecture documentation (system diagram, data flows, dependencies)
+- PRR checklist status or known gaps from the development team
+- SLO/SLA targets and error budget status
+- Incident history and prior post-mortem action items
+
+## Workflow
+
+See the core workflows below for detailed step-by-step guidance.
+
 ## Responsibilities
 
-- **Production Readiness Review (PRR):** Gate-level assessment against deployment criteria
+- **Production Readiness Review (PRR):**Gate-level assessment against deployment criteria
 - **Business Continuity Planning (BCP):** Ensure service continuity during disruptions
 - **Disaster Recovery Planning (DRP):** Plan and test recovery procedures
 - **Failure Mode & Effects Analysis (FMEA):** Identify and mitigate risks
@@ -461,9 +473,15 @@ If error rate not resolved in 15 minutes:
 
 ---
 
-## References
+## Output
 
-- [NIST Incident Response Guide (SP 800-61)](https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-61r2.pdf)
+- **Production Readiness Review Report** — gate assessment result (pass/fail) with gaps, owners, and remediation deadlines
+- **Business Continuity Plan (BCP)** — service continuity procedures, communication plan, and recovery priorities
+- **Disaster Recovery Plan (DRP)** — documented and tested restore procedures with RTO/RPO verification results
+- **FMEA Summary** — identified failure modes, impact ratings, and mitigation recommendations
+- **Incident Response Runbooks** — step-by-step response playbooks for critical failure scenarios
+
+## References(https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-61r2.pdf)
 - [CIS Critical Security Controls](https://www.cisecurity.org/controls/cis-controls-list/)
 - [ISO 22301: Business Continuity Management](https://www.iso.org/standard/75106.html)
 - [OWASP Disaster Recovery Checklist](https://owasp.org/www-community/controls/Disaster_Recovery)

@@ -15,6 +15,14 @@ allowed-tools: ["bash", "git", "grep", "find"]
 
 # Observability Engineer Agent
 
+## Inputs
+
+- Service architecture description (languages, frameworks, dependencies, deployment platform)
+- Existing monitoring and logging setup (current tools, gaps, pain points)
+- SLO requirements and key business metrics to track
+- Observability backend or platform in use (Datadog, Grafana/Loki, Elastic, Azure Monitor)
+- Compliance or data-retention requirements affecting log and trace storage
+
 ## Overview
 
 The Observability Engineer agent operationalizes the **three pillars of observability** (logs, metrics, traces) using industry standards. While individual agents emit observability signals, this agent provides the integrated instrumentation strategy.
@@ -32,6 +40,15 @@ The Observability Engineer agent operationalizes the **three pillars of observab
 - Synthetic monitoring strategy (heartbeat tests, user journey scripts)
 - Log aggregation architecture (Loki, ELK, Datadog)
 - Correlation ID propagation patterns
+
+## Workflow
+
+1. **Assess current observability gaps** — review existing logs, metrics, and traces to identify missing coverage and noise.
+2. **Design instrumentation strategy** — select OpenTelemetry SDK per language/framework and plan span naming, baggage, and correlation ID propagation.
+3. **Define structured log schema** — establish required and context fields for all services using the schema template.
+4. **Define metrics taxonomy** — name and label application and infrastructure metrics consistently; plan histogram buckets for latency.
+5. **Design dashboards and alerts** — author dashboard-as-code templates and configure SLO-based alerting with appropriate thresholds.
+6. **Validate and iterate** — run synthetic tests, confirm traces propagate end-to-end, verify dashboards reflect real traffic.
 
 ## The Three Pillars
 
@@ -250,10 +267,19 @@ Custom Fields (domain-specific):
   external_api: External service name
 ```
 
+## Output
+
+- **Instrumentation Strategy Document** — OpenTelemetry SDK setup per language, span naming conventions, and correlation ID propagation plan
+- **Structured Log Schema** — required and optional fields, log levels, and example payloads per service type
+- **Metrics Taxonomy** — metric names, units, labels, and aggregation types aligned to SLOs
+- **Dashboard Templates** — dashboard-as-code (Grafana, Datadog, or Azure Monitor) for key business and technical indicators
+- **Alerting Rules** — SLO-based alert definitions with thresholds, severity, and escalation routing
+
 ## Metrics Taxonomy
 
 ```yaml
 Application Metrics:
+
   http.request.count:
     - unit: requests
     - labels: [method, path, status]

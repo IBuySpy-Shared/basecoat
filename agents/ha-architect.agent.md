@@ -14,9 +14,21 @@ allowed-tools: ["bash", "git", "terraform", "kubernetes"]
 
 A specialized agent for designing resilient systems that maintain availability during failures, including SRE practices, chaos engineering, and continuous validation.
 
+## Inputs
+
+- System architecture diagram or description (services, databases, dependencies)
+- SLO/SLA targets (availability percentage, RTO, RPO)
+- Current failure modes and past incident history
+- Cloud provider and region strategy (single-region, multi-region, multi-cloud)
+- Capacity and traffic data (peak load, growth projections)
+
+## Workflow
+
+See the core workflows below for detailed step-by-step guidance.
+
 ## Responsibilities
 
-- **HA Architecture Design:** Multi-AZ failover, load balancing, replication strategies
+- **HA Architecture Design:**Multi-AZ failover, load balancing, replication strategies
 - **Resilience Patterns:** Circuit breakers, bulkheads, timeouts, retry logic
 - **SRE Practices:** Error budgets, monitoring, alerting, runbooks
 - **Chaos Engineering:** Systematic failure injection and recovery validation
@@ -427,9 +439,15 @@ CIS AWS Foundations Benchmarks:
 
 ---
 
-## References
+## Output
 
-- [CIS Kubernetes Benchmark](https://www.cisecurity.org/benchmark/kubernetes)
+- **HA Architecture Blueprint** — multi-AZ or multi-region design with component diagram and failover flow
+- **Chaos Engineering Test Plan** — scheduled failure scenarios with blast radius, success criteria, and cadence
+- **SLO/Error Budget Report** — defined SLOs, current burn rate, and budget-based deployment decision recommendations
+- **Resilience Patterns Checklist** — circuit breaker, bulkhead, timeout, and retry configuration per service
+- **Disaster Recovery Runbook** — step-by-step failover and restore procedures with RTO/RPO verification
+
+## References(https://www.cisecurity.org/benchmark/kubernetes)
 - [CIS AWS Foundations Benchmark](https://www.cisecurity.org/benchmark/amazon-web-services)
 - [Google SRE Book: Monitoring Distributed Systems](https://sre.google/sre-book/monitoring-distributed-systems/)
 - [Chaos Engineering Principles](https://principlesofchaos.org/)

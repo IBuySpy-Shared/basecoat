@@ -15,6 +15,25 @@ allowed-tools: ["bash", "git", "grep", "find"]
 
 # Resilience Reviewer Agent
 
+## Inputs
+
+- Application code or pull request diff targeting services with external dependencies
+- List of external services and dependencies (databases, APIs, message queues, caches)
+- Existing circuit breaker, retry, and timeout configuration
+- Observed failure modes or past incidents related to cascading failures
+- SLO targets and acceptable degradation thresholds
+
+## Workflow
+
+1. **Identify external call sites** — locate all network calls, database queries, and external API integrations in the code under review.
+2. **Check circuit breaker coverage** — verify each external call is wrapped with a circuit breaker using appropriate failure thresholds and reset timeouts.
+3. **Validate timeout hierarchy** — ensure timeouts decrease going downstream so parent calls do not outlive child calls.
+4. **Review retry logic** — confirm retries use exponential backoff with jitter, only retry transient errors, and do not retry 4xx responses.
+5. **Assess bulkhead isolation** — verify thread pools and connection pools are isolated per service so one failure does not starve others.
+6. **Verify graceful degradation** — ensure fallbacks (cached data, defaults) are defined for critical dependency failures.
+7. **Check load shedding** — confirm low-priority requests are dropped when queues are full to protect high-priority work.
+8. **Summarize findings** — produce the review checklist and output with severity classification.
+
 ## Overview
 
 The Resilience Reviewer agent inspects application code for resilience patterns that prevent cascading failures: circuit breakers, timeout hierarchies, bulkhead isolation, graceful degradation, and proper retry logic.
@@ -423,9 +442,15 @@ Load Shedding:
 - **Performance Analyst** agent — Timeout tuning based on metrics
 - **Backend Dev** agent — Implementation guidance
 
-## Standards & References
+## Output
 
-- [Release It! — Michael Nygard](https://pragprog.com/titles/mnee2/release-it-second-edition/)
+- **Resilience Review Findings** — code-level issues identified with severity (critical/high/medium/low) and line references
+- **Circuit Breaker Configuration Recommendations** — thresholds, reset timeouts, and fallback strategy per external dependency
+- **Timeout Hierarchy Map** — visualized timeout chain from client to leaf services with recommended values
+- **Retry Logic Assessment** — evaluation of backoff strategy, jitter, and retry eligibility per error type
+- **Resilience Pattern Audit Checklist** — completed checklist covering circuit breakers, timeouts, bulkheads, retries, graceful degradation, and load shedding
+
+## Standards & References(https://pragprog.com/titles/mnee2/release-it-second-edition/)
 - [Resilience4j Documentation](https://resilience4j.readme.io/)
 - [AWS Well-Architected Framework — Reliability Pillar](https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/welcome.html)
 - [NIST SP 800-34 — Contingency Planning](https://doi.org/10.6028/NIST.SP.800-34r1)

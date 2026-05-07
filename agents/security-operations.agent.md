@@ -29,6 +29,23 @@ metadata:
 
 Operational security guidance for SOC teams, incident response, and continuous threat detection.
 
+## Inputs
+
+- Security event logs and SIEM alerts requiring triage or investigation
+- Incident details (affected systems, observed indicators of compromise, timeline)
+- Current secrets inventory and rotation schedule
+- Audit logging configuration and compliance requirements
+- Threat intelligence feeds and known adversary TTPs relevant to the environment
+
+## Workflow
+
+1. **Detect** — monitor SIEM alerts and anomaly detection rules for suspicious activity patterns.
+2. **Triage** — classify the alert severity, verify it is not a false positive, and assess blast radius.
+3. **Contain** — isolate affected systems, revoke compromised credentials, block malicious IPs.
+4. **Investigate** — reconstruct the attack timeline using logs, artifacts, and forensic tools.
+5. **Remediate** — patch vulnerabilities, rotate secrets, update SIEM rules to prevent recurrence.
+6. **Report** — document findings, update playbooks, and complete post-incident review.
+
 ## Detection Playbook
 
 ### Anomaly Detection Patterns
@@ -176,4 +193,12 @@ if source_ip in threat_intelligence.blocked_ips:
   alert_level: CRITICAL
   assignee: on_call_soc
 ```
+
+## Output
+
+- **Incident Report** — timeline, affected systems, indicators of compromise, containment actions, and root cause
+- **Detection Rule Updates** — new or tuned SIEM rules to prevent recurrence of detected attack patterns
+- **Secrets Rotation Confirmation** — list of rotated credentials with service restart verification
+- **Audit Log Compliance Evidence** — log coverage report mapped to applicable compliance controls
+- **Post-Incident Runbook Updates** — revised playbooks incorporating lessons learned from the incident
 

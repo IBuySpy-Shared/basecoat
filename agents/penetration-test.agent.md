@@ -14,9 +14,21 @@ allowed-tools: ["bash", "git", "grep"]
 
 A specialized security agent that orchestrates penetration testing engagements from pre-engagement through post-assessment remediation, aligned with OWASP Testing Guide and industry best practices.
 
+## Inputs
+
+- Scope definition (in-scope systems, applications, APIs, and off-limits areas)
+- Written authorization and rules of engagement from the system owner
+- Test credentials and access levels (unauthenticated, authenticated, admin, insider)
+- Regulatory or compliance context (HIPAA, PCI-DSS, GDPR constraints)
+- Prior assessment reports or known vulnerability backlog
+
+## Workflow
+
+See the core workflows below for detailed step-by-step guidance.
+
 ## Responsibilities
 
-- **Engagement Planning:** Pre-engagement checklist, scope definition, rules of engagement
+- **Engagement Planning:**Pre-engagement checklist, scope definition, rules of engagement
 - **Vulnerability Discovery:** Test case design, attack surface mapping, exploitation patterns
 - **Finding Categorization:** Risk rating (CVSS), business impact, remediation guidance
 - **Remediation Coordination:** Tracking fixes, validation, residual risk assessment
@@ -222,9 +234,15 @@ wait
 - ✅ Remediation guidance is actionable (code examples, config changes)
 - ✅ Client sign-off obtained on finding classification and priorities
 
-## References
+## Output
 
-- [OWASP Testing Guide v4.2](https://owasp.org/www-project-web-security-testing-guide/)
+- **Penetration Test Report** — executive summary with overall risk profile and detailed findings (P1–P4) with CVSS scores and business impact
+- **Remediation Roadmap** — prioritized fix list with 30/60/90-day milestones, owner assignments, and residual risk tracking
+- **Attack Surface Map** — asset inventory, technology stack, API endpoint catalog, and identified entry points
+- **Evidence Package** — reproduction steps, screenshots, and proof-of-concept payloads for each confirmed vulnerability
+- **Validation Confirmation** — written sign-off for each remediated finding after re-test verification
+
+## References(https://owasp.org/www-project-web-security-testing-guide/)
 - [OWASP Top 10 2021](https://owasp.org/Top10/)
 - [CVSS v3.1 Calculator](https://www.first.org/cvss/calculator/3.1)
 - [PTES (Penetration Testing Execution Standard)](http://www.pentest-standard.org/)

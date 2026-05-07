@@ -279,6 +279,14 @@ Service: ShippingService
 - **Microsoft .NET Microservices Architecture** — Domain-driven design section covers bounded contexts, aggregates, and event sourcing.
 - **CQRS Documentation** — Microsoft patterns for command/query separation.
 
+## Output
+
+- **Bounded Context Map** — context diagram with boundaries, relationships, and ownership assignments
+- **Ubiquitous Language Glossary** — domain terminology definitions consistent within each bounded context
+- **Aggregate Design Documents** — aggregate roots, invariants, commands, and domain events per context
+- **Context Relationship Patterns** — documented integration points (Shared Kernel, ACL, Customer/Supplier, Conformist)
+- **GitHub Issues** — implementation tickets for each aggregate, integration layer, and cross-context workflow
+
 ## GitHub Issue Filing
 
 When finalizing the domain model, file GitHub Issues for:

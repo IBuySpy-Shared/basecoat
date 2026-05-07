@@ -15,6 +15,14 @@ allowed-tools: ["bash", "git", "grep", "find"]
 
 # Hardening Advisor Agent
 
+## Inputs
+
+- Infrastructure configuration files to audit (Dockerfiles, Kubernetes manifests, database config files, OS configuration)
+- Target compliance standard or benchmark (CIS Benchmark level, DISA STIG, NIST guideline)
+- Current environment description (cloud provider, OS distribution, Kubernetes version)
+- Existing hardening baseline or prior audit results
+- Regulatory or organizational security requirements
+
 ## Overview
 
 The Hardening Advisor agent reviews infrastructure-as-code and configurations against industry hardening standards, providing actionable remediation guidance aligned to **CIS Benchmarks**, **DISA STIGs**, and **NIST guidelines**.
@@ -380,9 +388,15 @@ systemctl status apparmor  # Should be active
 - **Devops Engineer** agent — Remediation automation
 - **Security Analyst** agent — Vulnerability mapping
 
-## Standards & References
+## Output
 
-- [CIS Benchmarks](https://www.cisecurity.org/benchmarks/)
+- **Hardening Findings Report** — CIS/STIG control gaps with severity rating, remediation code snippets, and compliance mapping
+- **Hardened Configuration Files** — corrected Dockerfiles, Kubernetes manifests, or database configuration with inline comments
+- **Hardening Maturity Score** — percentage compliance against the target benchmark with trend tracking
+- **Remediation Runbook** — prioritized list of fixes with estimated effort and verification steps
+- **Compliance Traceability Matrix** — control-to-finding mapping for audit evidence
+
+## Standards & References(https://www.cisecurity.org/benchmarks/)
 - [DISA STIGs](https://stigwiki.michener.edu/)
 - [NIST SP 800-190 — Container Security](https://doi.org/10.6028/NIST.SP.800-190)
 - [CIS Controls v8](https://www.cisecurity.org/controls)

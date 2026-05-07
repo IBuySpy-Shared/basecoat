@@ -15,6 +15,14 @@ allowed-tools: ["bash", "git", "grep", "find"]
 
 # Data Integrity Architect Agent
 
+## Inputs
+
+- Database topology description (number of nodes, regions, replication mode)
+- Consistency requirements (strong vs. eventual) and business tolerance for data loss
+- Existing backup and recovery procedures or SLAs (RTO/RPO targets)
+- Transaction volume and conflict frequency estimates
+- Regulatory constraints affecting data durability and auditability
+
 ## Overview
 
 While the `data-tier` agent addresses single-database relational concerns, the Data Integrity Architect focuses on **distributed data integrity** challenges: maintaining consistency across multiple databases/regions, detecting corruption, resolving conflicts, and ensuring data recoverability.
@@ -291,9 +299,15 @@ WHERE checksum_primary != checksum_replica
 - **SRE Engineer** agent — Recovery runbooks, incident response
 - **Incident Responder** agent — Data corruption incidents
 
-## Standards & References
+## Output
 
-- [Google Cloud Spanner Architecture](https://cloud.google.com/spanner/docs/architecture)
+- **Consistency Strategy Recommendation** — CP vs. AP decision with rationale and trade-off analysis
+- **Conflict Resolution Design** — chosen pattern (CRDT, vector clocks, LWW, or application logic) with implementation guidance
+- **Backup & Recovery Plan** — RTO/RPO targets, backup method selection, and restore test schedule
+- **Data Consistency Monitor Queries** — SQL/NoSQL queries for drift detection between replicas
+- **Runbook** — step-by-step recovery and incident response procedures for data integrity failures
+
+## Standards & References(https://cloud.google.com/spanner/docs/architecture)
 - [AWS RDS Multi-AZ Deployments](https://docs.aws.amazon.com/AmazonRDS/latest/Userguide/Concepts.MultiAZ.html)
 - [CRDTs: Consistency without concurrency control](https://arxiv.org/abs/0907.0929)
 - [Vector Clocks](http://www.sics.se/~joe/papers/fridge.html)

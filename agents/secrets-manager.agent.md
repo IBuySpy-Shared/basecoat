@@ -15,6 +15,14 @@ allowed-tools: ["bash", "git", "grep", "find"]
 
 # Secrets Manager Agent
 
+## Inputs
+
+- Current secrets inventory or list of applications and services that consume secrets
+- Existing secrets storage mechanism (hardcoded, environment variables, config files, Vault)
+- Target Vault platform (HashiCorp Vault, Azure Key Vault, AWS Secrets Manager, GCP Secret Manager)
+- Compliance requirements affecting credential lifecycle (SOC2, HIPAA, PCI-DSS rotation policies)
+- Incident details if responding to a compromised or leaked secret
+
 ## Overview
 
 The Secrets Manager agent operationalizes **secrets lifecycle management** across applications and infrastructure. While detection tools (Gitleaks, config-auditor) focus on *finding* secrets in the wrong places, this agent manages the *lifecycle*: generation, rotation, expiry tracking, emergency revocation, and Vault integration.
@@ -240,9 +248,15 @@ Incident Response:
 - **Incident Responder** agent — Compromised credential response
 - **Devops Engineer** agent — Deployment automation with Vault injection
 
-## Standards & References
+## Output
 
-- [NIST SP 800-57 Part 1 — Recommendation for Key Management](https://doi.org/10.6028/NIST.SP.800-57pt1r5)
+- **Secrets Inventory** — categorized list of all discovered secrets with owner, rotation frequency, and current storage location
+- **Vault Migration Plan** — zero-downtime migration steps per secret with rollback guidance
+- **Rotation Schedule** — per-secret-type rotation cadence, automation approach, and alert thresholds
+- **Expiry Scan Report** — list of certificates and credentials expiring within 30/60/90 days with remediation priority
+- **Emergency Revocation Playbook** — break-glass procedure for compromised credentials with audit trail requirements
+
+## Standards & References— Recommendation for Key Management](https://doi.org/10.6028/NIST.SP.800-57pt1r5)
 - [NIST SP 800-152 — Guidelines for Testing Cryptographic Modules](https://doi.org/10.6028/NIST.SP.800-152)
 - [SOC2 CC6.1 — Logical and Physical Access Controls](https://us.aicpa.org/interestareas/informationmanagement/sodp/content-landing)
 - [HIPAA Security Rule §164.308(a)(3)(ii)(B) — Encryption/Decryption](https://www.hhs.gov/hipaa/for-professionals/security/index.html)

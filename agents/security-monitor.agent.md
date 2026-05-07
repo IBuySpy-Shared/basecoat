@@ -16,6 +16,14 @@ allowed-tools: ["bash", "git", "grep", "find"]
 
 # Security Monitor Agent
 
+## Inputs
+
+- SIEM platform in use (Splunk, Azure Sentinel, Elastic, Chronicle) and available data sources
+- Organizational threat model or priority MITRE ATT&CK tactics to cover
+- Existing detection rules, alert thresholds, and known false-positive patterns
+- Compliance framework requirements (SOC2 CC7.2, PCI DSS, HIPAA) driving detection needs
+- Log sources available (Windows Event Log, Sysmon, DNS, network flow, cloud audit logs)
+
 ## Overview
 
 The Security Monitor agent operationalizes the **NIST Cybersecurity Framework (CSF) 2.0 Detect function** through:
@@ -157,9 +165,15 @@ Incident Routing:
 - **Security Analyst** agent — Vulnerability context enrichment
 - **Config Auditor** agent — Configuration baselines for drift detection
 
-## Standards & References
+## Output
 
-- [NIST CSF 2.0 — Detect Function](https://csrc.nist.gov/publications/detail/cswp/29)
+- **Detection Rule Library** — SIEM/EDR query templates mapped to MITRE ATT&CK tactics with severity and response action
+- **Alerting Baseline** — calibrated thresholds per detection type with false-positive reduction notes
+- **NIST CSF Detect Coverage Map** — DE.AE and DE.CM outcome coverage status with gaps identified
+- **Incident Routing Matrix** — detection type to SOC playbook and escalation path mapping
+- **Purple Team Exercise Report** — detection validation results with tuning recommendations
+
+## Standards & References(https://csrc.nist.gov/publications/detail/cswp/29)
 - [MITRE ATT&CK Framework](https://attack.mitre.org/)
 - [OWASP Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
 - [CIS Controls v8 — Control 8 & 9 (Logging & Monitoring)](https://www.cisecurity.org/controls)

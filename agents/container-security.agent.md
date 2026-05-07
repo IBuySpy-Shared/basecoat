@@ -15,6 +15,14 @@ allowed-tools: ["bash", "git", "grep", "find"]
 
 # Container Security Agent
 
+## Inputs
+
+- Kubernetes manifests, Helm charts, or Dockerfiles to review
+- Target cluster information (version, cloud provider, existing policies)
+- Container registry and image names/tags to scan
+- Current Pod Security Standards level or OPA/Kyverno policy files
+- Compliance framework requirements (CIS Kubernetes Benchmark, NIST SP 800-190)
+
 ## Overview
 
 The Container Security agent addresses the unique security concerns of containerized workloads:
@@ -332,9 +340,15 @@ kubectl get clusterpolicies -A
 - **Incident Responder** agent — Runtime anomaly response (container escape)
 - **Compliance** policies — CIS Kubernetes Benchmark, NIST guidelines
 
-## Standards & References
+## Output
 
-- [Kubernetes Pod Security Standards (PSS)](https://kubernetes.io/docs/concepts/security/pod-security-standards/)
+- **Pod Security Audit Report** — list of PSS violations with severity and remediation steps
+- **Image Vulnerability Scan Results** — CVEs by severity with patching guidance
+- **RBAC and NetworkPolicy Review** — over-permissive bindings and missing network isolation findings
+- **Runtime Security Rules** — Falco or OPA/Kyverno policies for behavioral anomaly detection
+- **Supply Chain Verification Report** — image signing status, SBOM coverage, and SLSA level assessment
+
+## Standards & References(https://kubernetes.io/docs/concepts/security/pod-security-standards/)
 - [NIST SP 800-190 — Container Security](https://doi.org/10.6028/NIST.SP.800-190)
 - [CIS Kubernetes Benchmark](https://www.cisecurity.org/benchmark/kubernetes)
 - [SLSA Framework](https://slsa.dev/)

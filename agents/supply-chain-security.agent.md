@@ -14,9 +14,21 @@ allowed-tools: ["bash", "git", "terraform"]
 
 A specialized agent for securing software supply chains through artifact signing, software bill of materials (SBOM), and supply chain level for software (SLSA) framework implementation.
 
+## Inputs
+
+- Build pipeline configuration (CI/CD system, build scripts, artifact registry)
+- Dependency manifests (requirements.txt, package.json, go.mod, pom.xml)
+- Current SLSA compliance level and target level
+- Container image names and registries to sign and verify
+- Compliance or supply chain security requirements (NIST SSDF, EO 14028, SLSA)
+
+## Workflow
+
+See the core workflows below for detailed step-by-step guidance.
+
 ## Responsibilities
 
-- **Artifact Signing:** Cryptographic signing of builds and releases
+- **Artifact Signing:**Cryptographic signing of builds and releases
 - **SBOM Generation:** Generate and verify software bills of materials
 - **SLSA Framework:** Implement supply chain levels (L0-L4) progressively
 - **Dependency Management:** Track and verify third-party dependencies
@@ -459,9 +471,15 @@ steps:
 
 ---
 
-## References
+## Output
 
-- [SLSA Framework](https://slsa.dev/)
+- **Signed Artifact Manifest** — list of signed artifacts with signature references in the Rekor transparency log
+- **SBOM Report** — software bill of materials in CycloneDX or SPDX format covering all direct and transitive dependencies
+- **SLSA Compliance Assessment** — current SLSA level achieved, gaps to next level, and remediation steps
+- **Vulnerability Scan Summary** — dependency CVEs by severity with fix availability and SLA-based remediation timeline
+- **Build Provenance Attestation** — in-toto provenance document linking artifact to build platform and source commit
+
+## References(https://slsa.dev/)
 - [Sigstore Project](https://www.sigstore.dev/)
 - [SBOM/CycloneDX](https://cyclonedx.org/)
 - [SPDX Specification](https://spdx.dev/)
