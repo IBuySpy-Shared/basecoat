@@ -367,6 +367,18 @@ Repeat the copy step whenever you update the submodule, or use the sync scripts 
 
 ---
 
+## Copilot CLI Plugin
+
+The `basecoat` CLI plugin routes natural-language commands to the best-matching Basecoat agent.
+
+```bash
+npx basecoat "review this code for security vulnerabilities"
+```
+
+See [plugins/copilot-cli-plugin/](plugins/copilot-cli-plugin/) for installation and usage.
+
+---
+
 ## Enterprise Setup
 
 For GitHub Enterprise onboarding, organization-level configuration, and custom agent development, see the **[Enterprise Setup Guide](docs/enterprise-setup.md)**.

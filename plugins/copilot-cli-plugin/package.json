@@ -1,11 +1,29 @@
 {
   "name": "@basecoat/copilot-cli-plugin",
   "version": "0.1.0",
-  "description": "GitHub Copilot CLI plugin for /basecoat agent delegation",
+  "description": "GitHub Copilot CLI plugin for routing commands to Basecoat agents",
+  "keywords": ["github-copilot", "copilot-plugin", "basecoat", "ai-agents", "cli"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/IBuySpy-Shared/basecoat.git",
+    "directory": "plugins/copilot-cli-plugin"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "bin": {
     "basecoat": "./dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "schema",
+    "README.md"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   },
   "scripts": {
     "build": "tsc",

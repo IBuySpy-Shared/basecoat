@@ -1,46 +1,71 @@
-# @basecoat/copilot-cli-plugin
+# basecoat
 
-> Foundation for the `/basecoat` command in GitHub Copilot CLI — implements agent delegation from natural language input.
+> GitHub Copilot CLI plugin — routes natural-language commands to the right [Basecoat](https://github.com/IBuySpy-Shared/basecoat) agent.
 
-## Purpose
-
-This plugin provides the core scaffolding for routing `/basecoat <agent> <task>` CLI commands to the appropriate Base Coat agent. It is the foundation described in [GitHub issue #477](https://github.com/IBuySpy-Shared/basecoat/issues/477).
-
-## Quick Start
+## Installation
 
 ```bash
-npm install
-npm run build
-npm test
+npm install -g @basecoat/cli
+# or use without installing:
+npx basecoat <command>
 ```
 
-## Architecture
+## Usage
 
-The plugin is composed of four modules, each implemented in a separate issue:
+```bash
+# Route a command to the best-matching agent
+basecoat "review this pull request for security issues"
 
-| Module | Path | Issue | Responsibility |
-|---|---|---|---|
-| **Parser** | `src/parser/` | [#479](https://github.com/IBuySpy-Shared/basecoat/issues/479) | Parses raw CLI input into a `BasecoatCommand` |
-| **Registry** | `src/registry/` | [#482](https://github.com/IBuySpy-Shared/basecoat/issues/482) | Loads and caches the agent registry |
-| **Context** | `src/context/` | [#481](https://github.com/IBuySpy-Shared/basecoat/issues/481) | Builds invocation context (env, user, session) |
-| **Delegation** | `src/delegation/` | [#483](https://github.com/IBuySpy-Shared/basecoat/issues/483) | Delegates the command to the resolved agent |
+# List available agents
+basecoat --list-agents
 
-### Data flow
+# Show help
+basecoat --help
 
-```
-rawInput → Parser → BasecoatCommand
-                          ↓
-Registry ──────→ AgentEntry (resolved)
-                          ↓
-Context ────────→ InvocationContext
-                          ↓
-Delegation ─────→ DelegationResult
+# Show version
+basecoat --version
 ```
 
-## Related Issues
+## How It Works
 
-- [#477](https://github.com/IBuySpy-Shared/basecoat/issues/477) — Plugin scaffold (this PR)
-- [#479](https://github.com/IBuySpy-Shared/basecoat/issues/479) — Implement parser
-- [#481](https://github.com/IBuySpy-Shared/basecoat/issues/481) — Implement context builder
-- [#482](https://github.com/IBuySpy-Shared/basecoat/issues/482) — Implement agent registry
-- [#483](https://github.com/IBuySpy-Shared/basecoat/issues/483) — Implement delegation
+1. **Parse** — Natural language input is parsed to extract intent and context
+2. **Lookup** — The agent registry (73 agents) is searched for the best match
+3. **Delegate** — The matched agent receives the command and returns a result
+
+## Agent Registry
+
+The plugin ships with a registry of 73 Basecoat agents covering:
+
+- Code review, security analysis, architecture design
+- DevOps, CI/CD, infrastructure
+- Frontend, backend, data tier development
+- Documentation, testing, release management
+
+See [agents/](https://github.com/IBuySpy-Shared/basecoat/tree/main/agents) for the full list.
+
+## Configuration
+
+| Environment Variable | Description | Default |
+|---|---|---|
+| `BASECOAT_REGISTRY_PATH` | Path to custom agent registry JSON | Built-in registry |
+| `BASECOAT_TIMEOUT_MS` | Delegation timeout in milliseconds | `30000` |
+
+## API
+
+```typescript
+import { BasecoatPlugin } from 'basecoat';
+
+const plugin = new BasecoatPlugin();
+const result = await plugin.invoke('analyze performance of this query');
+
+if (result.success) {
+  console.log('Agent:', result.agentName);
+  console.log('Response:', result.response);
+} else {
+  console.error('Error:', result.error);
+}
+```
+
+## License
+
+MIT — see [LICENSE](../../LICENSE)
