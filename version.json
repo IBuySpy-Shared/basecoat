@@ -1,6 +1,6 @@
 {
   "name": "base-coat",
-  "version": "3.7.0",
+  "version": "3.8.0",
   "releaseDate": "2026-05-07",
-  "notes": "v3.7.0: Sprint 10 — Portal dashboard charts, repository detail page, Docker deployment stack, CLI plugin docs, 7 Dependabot security updates."
+  "notes": "v3.8.0: Sprint 11 — 5 GitHub Agentic Workflows (gh aw), portal scan trigger with polling, and COPILOT_GITHUB_TOKEN setup docs."
 }

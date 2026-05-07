@@ -4,6 +4,51 @@ All notable changes to this repository should be recorded in this file.
 
 ## Unreleased
 
+## 3.8.0 - 2026-05-07
+
+### Sprint 11 — GitHub Agentic Workflows + Portal Scan Trigger
+
+#### Agentic Workflows (`gh aw`)
+
+Five BaseCoat agents converted to GitHub Agentic Workflows that run automatically
+inside GitHub Actions. Each workflow is a `.md` source file compiled to a
+`.lock.yml` with the `gh aw` framework's defense-in-depth security model
+(read-only agent job → threat detection → safe-output execution).
+
+- **`issue-triage`** — fires on `issues: opened`; classifies issue type, applies
+  priority labels (`P0`–`P3`), and posts a triage summary comment (#562)
+- **`retro-facilitator`** — `schedule: weekly`; analyzes closed issues and merged
+  PRs for the past 7 days and creates a structured Went Well / Improve / Action
+  Items retrospective issue (#563)
+- **`self-healing-ci`** — fires on `workflow_run: failed`; fetches failed job logs
+  and posts a root-cause diagnosis with remediation steps (#564)
+- **`release-impact-advisor`** — fires on `pull_request: opened`; assesses blast
+  radius, rollback complexity, and risks for the PR diff (#566)
+- **`code-review-agent`** — fires on `pull_request: [opened, synchronize]`; reviews
+  the diff for bugs, security vulnerabilities, and logic errors with
+  high signal-to-noise ratio (#567)
+
+#### Portal — Scan Trigger
+
+- **Trigger Scan button** in `RepositoryDetail` — POST `/api/v1/repositories/:id/scans`,
+  disabled while running, error banner on failure (#565)
+- **`useScanPoller` hook** — polls `GET /api/v1/scans/:id` every 3s until
+  `completed` or `failed`; auto-refreshes scan history table (#565)
+- **Scan running badge** — visual indicator while polling is active (#565)
+- **Backend stub runner** — scan transitions `running → completed` via 5s timeout,
+  enabling end-to-end demo without a live scanner (#565)
+- **20 tests** — 6 `useScanPoller` unit tests + 14 `RepositoryDetail` tests (#565)
+
+#### Documentation
+
+- **`docs/agentic-workflows.md`** — `COPILOT_GITHUB_TOKEN` PAT setup guide,
+  workflow authoring instructions, security model overview, allowed-expressions
+  reference
+
+#### Security
+
+- Bump `path-to-regexp` 8.3.0 → 8.4.2 in `/mcp` (#559)
+
 ## 3.7.0 - 2026-05-07
 
 ### Sprint 10 — Portal UX, Docker Deployment, and Plugin Docs
