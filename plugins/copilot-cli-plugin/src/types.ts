@@ -21,10 +21,13 @@ export interface AgentRegistry {
 
 export interface InvocationContext {
   command: BasecoatCommand;
-  env: Record<string, string | undefined>;
-  user: string;
-  timestamp: Date;
-  sessionId: string;
+  environment: {
+    os: string;
+    shell: string;
+    cwd: string;
+    timestamp: string;
+  };
+  metadata: Record<string, unknown>;
 }
 
 export interface DelegationResult {
