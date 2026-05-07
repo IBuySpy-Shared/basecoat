@@ -5,6 +5,7 @@ import Header from './Header';
 const pageTitles: Record<string, string> = {
   '/': 'Dashboard',
   '/agents': 'Agents',
+  '/repositories': 'Repositories',
 };
 
 export default function Layout() {
