@@ -4,6 +4,33 @@ All notable changes to this repository should be recorded in this file.
 
 ## Unreleased
 
+## 3.3.0 - 2026-05-08
+
+### Deployable MCP Server
+
+- **`mcp/` server** — standalone Node.js MCP server exposing Base Coat assets as tools
+- **Docker + Azure Container Apps** deployment support with `Dockerfile` and deployment guide
+- **`docs/mcp-deployment.md`** — step-by-step deployment guide for Docker and ACA
+- **`examples/mcp/basecoat.mcp.json`** — reference MCP client configuration
+
+### Squad Workflow Automation
+
+- **`.github/agents/squad.agent.md`** — squad coordination agent for GitHub issue management
+- **4 GitHub Actions workflows**: `squad-heartbeat`, `squad-issue-assign`, `squad-triage`, `sync-squad-labels`
+- **`.copilot/mcp-config.json`** — MCP configuration for squad integration
+
+### Consumer Smoke Tests
+
+- **`tests/run-consumer-smoke.ps1`** — Windows smoke test script for release artifact validation
+- **`tests/run-consumer-smoke.sh`** — Unix smoke test script for CI/CD pipeline use
+
+### CI Hardening
+
+- **16 agent files** fixed with missing required `## Inputs`, `## Workflow`, `## Output` sections
+- **`actions/upload-artifact`** upgraded from deprecated v3 → v4 in performance baseline check
+- **`.markdownlintignore`** — excludes third-party agent files from markdown lint CI
+- **`version-consistency`** now reliably enforced across all PR branches
+
 ## 3.2.0 - 2026-05-07
 
 ### Wave 3 Portal Design Acceleration — Design Validation & Implementation Readiness

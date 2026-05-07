@@ -1,6 +1,6 @@
 {
   "name": "base-coat",
-  "version": "3.2.0",
-  "releaseDate": "2026-05-07",
-  "notes": "v3.2.0: Wave 3 Portal Design Acceleration — architecture review sign-off, API contract, security roadmap, portal-ui component library v0.1.0, performance testing framework"
+  "version": "3.3.0",
+  "releaseDate": "2026-05-08",
+  "notes": "v3.3.0: Deployable MCP server, squad workflow automation, consumer smoke tests, CI hardening (16 agent structure fixes, upload-artifact v4 upgrade)"
 }
