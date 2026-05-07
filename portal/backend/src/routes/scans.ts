@@ -1,9 +1,10 @@
 import { Router, Request, Response } from 'express';
 import { Repository, Scan, ScanResult } from '../models';
+import { requireAuth } from '../middleware/requireAuth';
 
 const router = Router();
 
-router.post('/repositories/:id/scans', async (req: Request, res: Response) => {
+router.post('/repositories/:id/scans', requireAuth, async (req: Request, res: Response) => {
   try {
     const repo = await Repository.findByPk(req.params.id);
     if (!repo) {
@@ -19,7 +20,7 @@ router.post('/repositories/:id/scans', async (req: Request, res: Response) => {
   }
 });
 
-router.get('/repositories/:id/scans', async (req: Request, res: Response) => {
+router.get('/repositories/:id/scans', requireAuth, async (req: Request, res: Response) => {
   try {
     const scans = await Scan.findAll({ where: { repositoryId: req.params.id } });
     return res.json({ data: scans });
@@ -28,7 +29,7 @@ router.get('/repositories/:id/scans', async (req: Request, res: Response) => {
   }
 });
 
-router.get('/scans/:id', async (req: Request, res: Response) => {
+router.get('/scans/:id', requireAuth, async (req: Request, res: Response) => {
   try {
     const scan = await Scan.findByPk(req.params.id, {
       include: [{ model: ScanResult, as: 'results' }],
