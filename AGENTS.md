@@ -2,7 +2,7 @@
 
 This file lists all available agents in the Base Coat framework.
 
-> **52 agents** available
+> **73 agents** available
 
 | Agent | Description |
 |---|---|

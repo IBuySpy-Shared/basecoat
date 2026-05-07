@@ -39,6 +39,29 @@ This catalog helps teams discover what exists in Base Coat and when to use it.
 | `instructions/tool-minimization.instructions.md` | reduce unnecessary tool calls for efficiency | tool, minimization, efficiency, calls, overhead |
 | `instructions/ux.instructions.md`            | UX, accessibility, and design-system guidance | ux, accessibility, design, wcag |
 | `instructions/verification.instructions.md`  | verification-driven development — test-first workflow | verification, tdd, test-first, validation |
+| `instructions/ai-verification.instructions.md` | risk-tiered verification protocol for AI-generated code | ai, verification, risk, trust, code-review |
+| `instructions/bootstrap-autodetect.instructions.md` | auto-detect values in bootstrap scripts without interactive prompts | bootstrap, autodetect, scripting, automation |
+| `instructions/bootstrap-github-secrets.instructions.md` | provision identity and GitHub Actions secrets in bootstrap scripts | bootstrap, secrets, github-actions, ci-cd |
+| `instructions/bootstrap-structure.instructions.md` | decomposition, idempotency, and cross-platform requirements for bootstrap scripts | bootstrap, structure, idempotency, cross-platform |
+| `instructions/ci-firewall.instructions.md`   | GitHub Actions workflows accessing firewalled Azure resources with single-job runner IP | ci, firewall, azure, github-actions |
+| `instructions/cpp.instructions.md`           | memory safety, concurrency, undefined behavior, and sanitizer validation for C++ | cpp, c++, memory-safety, concurrency, sanitizers |
+| `instructions/data-workload-testing.instructions.md` | medallion pattern testing and data quality validation for bronze/silver/gold layers | data, medallion, testing, bronze, silver, gold |
+| `instructions/dotnet-dependency-analysis.instructions.md` | .NET dependency compatibility and remediation analysis | dotnet, dependency, compatibility, analysis |
+| `instructions/dotnet-test-strategy.instructions.md` | .NET modernization test strategy and regression-gate guidance | dotnet, testing, modernization, regression |
+| `instructions/dotnet-upgrade-planning.instructions.md` | phased .NET upgrade planning checklist and execution guidance | dotnet, upgrade, planning, migration |
+| `instructions/electron.instructions.md`      | secure Electron desktop apps: IPC, CSP, code signing, auto-updates, credential storage | electron, desktop, security, csp, signing |
+| `instructions/enterprise-configuration.instructions.md` | GitHub Copilot enterprise policy configuration, seat management, security policies | enterprise, copilot, policy, configuration |
+| `instructions/fabric-notebooks.instructions.md` | Microsoft Fabric notebooks CI/CD, lakehouse integration, and production governance | fabric, notebooks, lakehouse, ci-cd |
+| `instructions/monolith.instructions.md`      | context scoping, dependency awareness, and safe decomposition for large monolith codebases | monolith, decomposition, context, dependencies |
+| `instructions/mutation-testing.instructions.md` | mutation testing standards for verifying test quality and mutation score interpretation | mutation, testing, quality, coverage |
+| `instructions/observability.instructions.md` | OpenTelemetry instrumentation, trace propagation, structured logging, metrics, and dashboards | observability, opentelemetry, tracing, metrics, logging |
+| `instructions/python.instructions.md`        | Python conventions for data science, ML pipelines, pandas, scikit-learn, DuckDB, Jupyter | python, data-science, ml, pandas, jupyter |
+| `instructions/rbac-authentication.instructions.md` | RBAC-only Azure authentication — no shared keys, SAS tokens, or connection strings | rbac, azure, authentication, security, managed-identity |
+| `instructions/rest-client-resilience.instructions.md` | timeouts, retries, 429 handling, circuit breakers, and structured failure logging for HTTP clients | rest, resilience, retry, circuit-breaker, http |
+| `instructions/runtime-debugging.instructions.md` | AI-assisted debugging using crash dumps, logs, memory state, and production telemetry | debugging, runtime, crash-dump, telemetry, logs |
+| `instructions/secrets-management.instructions.md` | never commit secrets, use Vault solutions, implement rotation, and audit access | secrets, vault, rotation, audit, security |
+| `instructions/security-monitoring.instructions.md` | SIEM integration, alert configuration, detection rules, and incident escalation | security, siem, monitoring, alerts, detection |
+| `instructions/terraform-init.instructions.md` | terraform init in bootstrap scripts and CI/CD pipelines without blocking automation | terraform, init, bootstrap, ci-cd |
 
 ## Skills
 
