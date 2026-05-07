@@ -304,6 +304,12 @@ kubectl delete application/my-app -n argocd
 kubectl apply -f my-app-backup.yaml
 ```
 
+## Output
+
+- **GitOps Repository Structure** — environment overlays, kustomize/Helm charts, and policy files
+- **Sync Pipeline** — Argo CD / Flux application manifests and sync hooks
+- **Drift Detection Report** — out-of-sync resources, remediation steps, and rollback runbook
+
 ## Best Practices
 
 | Practice | Benefit |

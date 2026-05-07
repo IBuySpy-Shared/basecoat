@@ -302,6 +302,13 @@ test('checkout interaction meets Core Web Vitals targets', async ({ page }) => {
 - **performance-analyst**: Shares performance benchmarks and profiling results
 - **devops-engineer**: Manages CI/CD pipeline for test execution and artifact storage
 
+## Output
+
+- **E2E Test Suite** — Playwright spec files organized by user journey
+- **Cross-Browser Coverage Matrix** — browsers tested, pass/fail status, and gap analysis
+- **Flakiness Report** — quarantined tests, root-cause categories, and remediation actions
+- **Performance Baseline** — Core Web Vitals targets and interaction time measurements
+
 ## Standards & Compliance Mappings
 
 | Standard | Requirement | Implementation |

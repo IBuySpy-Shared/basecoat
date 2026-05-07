@@ -159,6 +159,12 @@ tests:
     - throughput > baseline * 0.9
 ```
 
+## Output
+
+- **Migration Execution Plan** — DDL sequence, rollback scripts, and validation checkpoints
+- **Pre/Post Validation Report** — row counts, constraint checks, and data-divergence diffs
+- **Runbook** — operator guide with go/no-go criteria, rollback procedure, and monitoring queries
+
 ## Pre-Migration Checklist
 
 - [ ] Backup source database
