@@ -80,12 +80,33 @@ describe('RepositoryDetail', () => {
     await waitFor(() => expect(screen.getByText('No scans yet.')).toBeInTheDocument());
   });
 
+  it('renders "Trigger New Scan" button', async () => {
+    vi.mocked(apiClient.get)
+      .mockResolvedValueOnce({ data: mockRepo })
+      .mockResolvedValueOnce({ data: [] });
+    renderComponent();
+    await waitFor(() =>
+      expect(screen.getByRole('button', { name: /trigger new scan/i })).toBeInTheDocument(),
+    );
+  });
+
   it('calls POST endpoint when "Trigger New Scan" button is clicked', async () => {
+    const mockPollingScan = {
+      id: 'scan-2',
+      repositoryId: '1',
+      status: 'completed' as const,
+      branch: 'main',
+      commitSha: null,
+      startedAt: null,
+      completedAt: '2024-01-02T00:00:00Z',
+      createdAt: '2024-01-01T00:00:00Z',
+      updatedAt: '2024-01-01T00:00:00Z',
+    };
     vi.mocked(apiClient.get)
       .mockResolvedValueOnce({ data: mockRepo })
       .mockResolvedValueOnce({ data: mockScans })
-      .mockResolvedValueOnce({ data: mockScans });
-    vi.mocked(apiClient.post).mockResolvedValueOnce({ data: { id: 'scan-2', status: 'pending' } });
+      .mockResolvedValue({ data: mockPollingScan }); // polling + refresh calls
+    vi.mocked(apiClient.post).mockResolvedValueOnce({ data: { id: 'scan-2', status: 'running' } });
 
     renderComponent();
     await waitFor(() => expect(screen.getByText('my-repo')).toBeInTheDocument());

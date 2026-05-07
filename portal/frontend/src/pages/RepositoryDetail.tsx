@@ -1,6 +1,7 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { apiClient } from '../api/client';
+import { useScanPoller } from '../hooks/useScanPoller';
 import type { Repository, Scan, ScanStatus } from '../types';
 
 const statusBadgeClass: Record<ScanStatus, string> = {
@@ -17,6 +18,9 @@ export default function RepositoryDetail() {
   const [loading, setLoading] = useState(true);
   const [scanLoading, setScanLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [activeScanId, setActiveScanId] = useState<string | null>(null);
+
+  const { isPolling, error: pollingError } = useScanPoller(activeScanId);
 
   const fetchScans = useCallback(async () => {
     if (!id) return;
@@ -28,6 +32,16 @@ export default function RepositoryDetail() {
       : (res.data as { data: Scan[] }).data ?? [];
     setScans(data);
   }, [id]);
+
+  // Refresh the scan list when polling completes or fails
+  const prevIsPollingRef = useRef(false);
+  useEffect(() => {
+    if (prevIsPollingRef.current && !isPolling && activeScanId) {
+      fetchScans().catch((err: Error) => setError(err.message));
+      setActiveScanId(null);
+    }
+    prevIsPollingRef.current = isPolling;
+  }, [isPolling, activeScanId, fetchScans]);
 
   useEffect(() => {
     if (!id) return;
@@ -45,12 +59,16 @@ export default function RepositoryDetail() {
   const handleTriggerScan = useCallback(() => {
     if (!id) return;
     setScanLoading(true);
+    setError(null);
     apiClient
-      .post<Scan>(`/api/v1/repositories/${id}/scans`)
-      .then(() => fetchScans())
+      .post<{ data: Scan } | Scan>(`/api/v1/repositories/${id}/scans`)
+      .then((res) => {
+        const newScan = (res.data as { data: Scan }).data ?? (res.data as Scan);
+        setActiveScanId(newScan.id);
+      })
       .catch((err: Error) => setError(err.message))
       .finally(() => setScanLoading(false));
-  }, [id, fetchScans]);
+  }, [id]);
 
   return (
     <div className="space-y-6">
@@ -76,6 +94,12 @@ export default function RepositoryDetail() {
       {error && (
         <div className="rounded-md bg-red-50 px-4 py-3 text-sm text-red-700 border border-red-200">
           {error}
+        </div>
+      )}
+
+      {pollingError && (
+        <div className="rounded-md bg-red-50 px-4 py-3 text-sm text-red-700 border border-red-200">
+          Scan error: {pollingError}
         </div>
       )}
 
@@ -111,13 +135,20 @@ export default function RepositoryDetail() {
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 space-y-4">
             <div className="flex items-center justify-between">
               <h2 className="text-lg font-semibold text-gray-900">Scan History</h2>
-              <button
-                onClick={handleTriggerScan}
-                disabled={scanLoading}
-                className="inline-flex items-center px-4 py-2 rounded-md bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {scanLoading ? 'Triggering…' : 'Trigger New Scan'}
-              </button>
+              <div className="flex items-center gap-3">
+                {isPolling && (
+                  <span className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium bg-blue-100 text-blue-700">
+                    Scan running…
+                  </span>
+                )}
+                <button
+                  onClick={handleTriggerScan}
+                  disabled={scanLoading || isPolling}
+                  className="inline-flex items-center px-4 py-2 rounded-md bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {scanLoading ? 'Triggering…' : 'Trigger New Scan'}
+                </button>
+              </div>
             </div>
 
             {scans.length === 0 ? (

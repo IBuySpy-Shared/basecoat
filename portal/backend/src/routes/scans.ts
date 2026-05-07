@@ -12,8 +12,21 @@ router.post('/repositories/:id/scans', requireAuth, async (req: Request, res: Re
     }
     const scan = await Scan.create({
       repositoryId: req.params.id,
-      status: 'pending',
+      status: 'running',
     });
+
+    // Stub runner: complete the scan after 5 seconds
+    setTimeout(async () => {
+      try {
+        await scan.update({
+          status: 'completed',
+          completedAt: new Date(),
+        });
+      } catch {
+        // best-effort; ignore errors in stub runner
+      }
+    }, 5000);
+
     return res.status(201).json({ data: scan });
   } catch {
     return res.status(500).json({ error: { message: 'Internal server error', code: 'INTERNAL_ERROR' } });
