@@ -14,6 +14,13 @@ $files = Get-ChildItem instructions, prompts, agents, skills -Recurse -File | Wh
     $_.Name -eq 'SKILL.md' -or $_.Name -eq 'AGENT.md' -or $_.Name -like '*.instructions.md' -or $_.Name -like '*.prompt.md' -or $_.Name -like '*.agent.md'
 }
 
+# Also scan .agents/skills/ for cross-client Agent Skills interop (if present)
+if (Test-Path '.agents/skills') {
+    $files += Get-ChildItem '.agents/skills' -Recurse -File | Where-Object {
+        $_.Name -eq 'SKILL.md'
+    }
+}
+
 $errors = 0
 $warnings = 0
 

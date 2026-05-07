@@ -123,6 +123,7 @@
 | backend | `instructions/backend.instructions.md` | Backend APIs, services, workers, and data access |
 | bicep | `instructions/bicep.instructions.md` | Azure Bicep authoring and validation |
 | config | `instructions/config.instructions.md` | Config file safety and secrets prevention |
+| data-science | `instructions/data-science.instructions.md` | Data science, ML, notebook, and medallion lakehouse patterns |
 | development | `instructions/development.instructions.md` | Shared dev standards for all dev-core agents |
 | documentation | `instructions/documentation.instructions.md` | Documentation and change-note expectations |
 | drift-monitor | `instructions/drift-monitor.instructions.md` | Infrastructure-as-Code drift detection and remediation strategies |
