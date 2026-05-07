@@ -4,6 +4,23 @@ All notable changes to this repository should be recorded in this file.
 
 ## Unreleased
 
+## 3.4.0 - 2026-05-08
+
+### Repository Structure Cleanup
+
+- **`docs/portal/`** — 21 portal/IAM/accessibility/security docs moved out of repo root and `docs/` (#501)
+- **`docs/wireframes/`** — 6 Excalidraw wireframe files relocated from repo root (#501)
+- **`portal/prompts/`** — 5 portal-specific prompts moved out of `prompts/` sync path (#503)
+- **`docs/INDEX.md`** — New repo-wide documentation map covering all 60+ docs by topic (#502)
+- **`docs/PORTAL_INDEX.md`** — Former `docs/INDEX.md` (portal infrastructure index) preserved (#502)
+- **`scripts/generate-inventory.ps1`** — New script to validate asset counts against INVENTORY.md and README.md (#505)
+
+### INVENTORY.md Completion
+
+- Added 21 missing agent entries (73 total, up from 52)
+- Added 22 missing skill entries (55 total, up from 33)
+- All counts verified: 73 agents · 55 skills · 56 instructions · 8 prompts
+
 ## 3.3.0 - 2026-05-08
 
 ### Deployable MCP Server

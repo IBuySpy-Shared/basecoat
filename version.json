@@ -1,6 +1,6 @@
 {
   "name": "base-coat",
-  "version": "3.3.0",
+  "version": "3.4.0",
   "releaseDate": "2026-05-08",
-  "notes": "v3.3.0: Deployable MCP server, squad workflow automation, consumer smoke tests, CI hardening (16 agent structure fixes, upload-artifact v4 upgrade)"
+  "notes": "v3.4.0: Repository structure cleanup — portal assets organized, repo-wide doc index, generate-inventory script, INVENTORY.md fully complete (73 agents, 55 skills)"
 }
