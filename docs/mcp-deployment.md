@@ -30,7 +30,7 @@ The Base Coat MCP server exposes the packaged standards catalog through a read-o
 docker build -f mcp/Dockerfile -t basecoat-mcp .
 ```
 
-2. Run the container with stdio attached:
+1. Run the container with stdio attached:
 
 ```bash
 docker run --rm -i basecoat-mcp
