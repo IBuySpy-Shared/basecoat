@@ -1,6 +1,6 @@
 {
   "name": "base-coat",
-  "version": "3.1.0",
+  "version": "3.2.0",
   "releaseDate": "2026-05-07",
-  "notes": "v3.1.0: Monolith AI guidance (decomposition, C++, runtime debugging, AI verification), production sync workflow"
+  "notes": "v3.2.0: Wave 3 Portal Design Acceleration — architecture review sign-off, API contract, security roadmap, portal-ui component library v0.1.0, performance testing framework"
 }

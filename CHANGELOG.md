@@ -4,6 +4,37 @@ All notable changes to this repository should be recorded in this file.
 
 ## Unreleased
 
+## 3.2.0 - 2026-05-07
+
+### Wave 3 Portal Design Acceleration — Design Validation & Implementation Readiness
+
+This release delivers the complete Wave 3 Days 2-3 outputs: formal validation sign-offs,
+implementation scaffolding, and Go/No-Go approval for Sprint 7 (May 11 kickoff).
+
+#### Architecture & API Sign-Offs
+- **Architecture Review** — Formal APPROVED status with 11 documented risks and mitigations
+- **API Contract Sign-Off** — Binding contracts for 28+ endpoints (OAuth 2.0, RBAC matrix, rate limiting, multi-tenancy audit trail)
+
+#### Security
+- **Security Risk Mitigation Roadmap** — OWASP Top 10, STRIDE (20 threats), SOC 2, GDPR mapped to 4-week sprint delivery plan
+
+#### Implementation Scaffolding
+- **@basecoat/portal-ui v0.1.0** — React component library (5 production components, 96.99% test coverage, WCAG 2.1 AA)
+- **Performance Testing Framework** — 5 k6 load test scripts + Prometheus/Grafana monitoring + GitHub Actions CI/CD integration; baselines: <500ms p95 at 100 users
+- **Pydantic v2 Schemas** — Complete artifact schema definitions (Agent, Skill, Instruction, Prompt, CustomInstruction + CompatibilityEnum/MaturityEnum)
+
+#### Documentation
+- Wave 3 deliverables manifest and staging infrastructure deployment documentation
+- Staging cost estimate: $250-315/month (AWS multi-AZ)
+- Final deployment readiness report — **✅ GO for Sprint 7 May 11 kickoff**
+
+## 3.1.0 - 2026-05-07
+
+### Monolith AI Guidance & Production Sync
+
+- Instruction sets for monolith decomposition, C++, runtime debugging, and AI verification
+- Automated production sync workflow (publish-to-production CI/CD)
+
 ## 3.0.0 - 2026-05-04
 
 ### Major Release: Enterprise-Scale Ecosystem Complete
