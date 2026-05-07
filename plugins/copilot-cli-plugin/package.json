@@ -4,6 +4,9 @@
   "description": "GitHub Copilot CLI plugin for /basecoat agent delegation",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "bin": {
+    "basecoat": "./dist/cli.js"
+  },
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch",
