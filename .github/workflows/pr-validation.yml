@@ -42,7 +42,17 @@ jobs:
 
           printf '%s\n' "Markdown files to lint:" "${md_files[@]}"
           npm install --global markdownlint-cli@0.39.0
-          markdownlint "${md_files[@]}"
+
+          # Build ignore flags from .markdownlintignore (third-party / generated files)
+          ignore_args=()
+          if [[ -f .markdownlintignore ]]; then
+            while IFS= read -r pattern; do
+              [[ "$pattern" =~ ^#|^$ ]] && continue
+              ignore_args+=(--ignore "$pattern")
+            done < .markdownlintignore
+          fi
+
+          markdownlint "${ignore_args[@]}" "${md_files[@]}"
 
   gitleaks-scan:
     name: Gitleaks secret scan (warn only)
