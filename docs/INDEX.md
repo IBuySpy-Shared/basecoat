@@ -1,240 +1,115 @@
-# Basecoat Portal Infrastructure Documentation Index
+# Base Coat Documentation Index
 
-## Quick Navigation
+> A complete map of all documentation in this repository.
+> For asset inventory, see [INVENTORY.md](../INVENTORY.md).
 
-### 📋 Getting Started
+## Core Framework
 
-**New to this infrastructure?** Start here:
-1. [terraform/README.md](../terraform/README.md) - Overview & quick start
-2. [DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md) - Step-by-step deployment
-3. [BACKEND_SETUP.md](../terraform/environments/BACKEND_SETUP.md) - Configure state management
+- [README.md](../README.md) — Getting started, installation, and overview
+- [INVENTORY.md](../INVENTORY.md) — Full asset listing (agents, skills, instructions, prompts)
+- [CHANGELOG.md](../CHANGELOG.md) — Release history
+- [GOVERNANCE.md](GOVERNANCE.md) — Contribution policies and review standards
+- [RELEASE_PROCESS.md](RELEASE_PROCESS.md) — How releases are cut and published
+- [DISTRIBUTION.md](DISTRIBUTION.md) — Sync mechanism for consumer repos
+- [HOOKS.md](HOOKS.md) — Git hooks and pre-commit validation
 
-### 📚 Core Documentation
+## Agent & Skill Ecosystem
 
-**Architecture & Design**:
-- [PORTAL_INFRASTRUCTURE_as_CODE_v1.md](./PORTAL_INFRASTRUCTURE_as_CODE_v1.md) - Complete architecture (10+ pages)
-- [INFRASTRUCTURE_DELIVERY_SUMMARY.md](./INFRASTRUCTURE_DELIVERY_SUMMARY.md) - Project completion summary
+- [AGENT_SKILL_MAP.md](AGENT_SKILL_MAP.md) — Agent-to-skill dependency map
+- [AGENT_RUNTIME_ENFORCEMENT.md](AGENT_RUNTIME_ENFORCEMENT.md) — Runtime enforcement rules
+- [AGENT_TELEMETRY.md](AGENT_TELEMETRY.md) — Telemetry and adoption metrics
+- [AGENT_TESTING.md](AGENT_TESTING.md) — Agent testing strategy
+- [AGENT_TESTING_HARNESS.md](AGENT_TESTING_HARNESS.md) — Test harness implementation
+- [agent-handoffs.md](agent-handoffs.md) — Agent handoff protocols
+- [MULTI_AGENT_WORKFLOWS.md](MULTI_AGENT_WORKFLOWS.md) — Multi-agent orchestration patterns
+- [multi-agent-orchestration-patterns.md](multi-agent-orchestration-patterns.md) — LangGraph patterns
+- [PROMPT_REGISTRY.md](PROMPT_REGISTRY.md) — Prompt catalog and registry
+- [ASSET_REGISTRY.md](ASSET_REGISTRY.md) — Asset registry metadata
 
-**Operations**:
-- [OPERATIONAL_RUNBOOK.md](./OPERATIONAL_RUNBOOK.md) - Common procedures (scaling, troubleshooting, maintenance)
-- [DISASTER_RECOVERY.md](./DISASTER_RECOVERY.md) - Failover procedures & recovery strategies
+## Enterprise Guidance
 
-**Financial**:
-- [COST_OPTIMIZATION.md](./COST_OPTIMIZATION.md) - Cost analysis & optimization strategies
+- [ENTERPRISE_DOTNET_GUIDANCE.md](ENTERPRISE_DOTNET_GUIDANCE.md) — .NET modernization patterns
+- [ENTERPRISE_IDENTITY_ACCESS.md](ENTERPRISE_IDENTITY_ACCESS.md) — Identity & access patterns
+- [ENTERPRISE_KUBERNETES_PATTERNS.md](ENTERPRISE_KUBERNETES_PATTERNS.md) — AKS / K8s guidance
+- [ENTERPRISE_RUNNERS.md](ENTERPRISE_RUNNERS.md) — Self-hosted runner setup
+- [ENTERPRISE_SECURITY_HARDENING.md](ENTERPRISE_SECURITY_HARDENING.md) — Security hardening guide
+- [enterprise-rollout.md](enterprise-rollout.md) — Enterprise rollout playbook
+- [enterprise-setup.md](enterprise-setup.md) — Initial enterprise setup
+- [repo-template-standard.md](repo-template-standard.md) — Repo template standards
 
----
+## Architecture & AI Patterns
 
-## Documentation by Role
+- [AI_ARCHITECTURE_PATTERNS.md](AI_ARCHITECTURE_PATTERNS.md) — AI system design patterns
+- [RAG_PATTERNS.md](RAG_PATTERNS.md) — Retrieval-Augmented Generation patterns
+- [LOCAL_MODELS.md](LOCAL_MODELS.md) — Local LLM deployment
+- [LOCAL_EMBEDDINGS.md](LOCAL_EMBEDDINGS.md) — Local embeddings configuration
+- [OFFLINE_AGENT_STACK.md](OFFLINE_AGENT_STACK.md) — Offline / air-gapped agent stack
+- [MODEL_OPTIMIZATION.md](MODEL_OPTIMIZATION.md) — Model routing and optimization
+- [token-optimization.md](token-optimization.md) — Token usage optimization
+- [rate-limit-guidance.md](rate-limit-guidance.md) — Rate limit handling
+- [SQLITE_MEMORY.md](SQLITE_MEMORY.md) — SQLite cross-session memory layer
+- [pydantic-mcp-integration.md](pydantic-mcp-integration.md) — Pydantic + MCP integration
+- [pydantic-validation-strategy.md](pydantic-validation-strategy.md) — Validation strategy
+- [pydantic-typescript-client-generation.md](pydantic-typescript-client-generation.md) — Client generation
 
-### 👨‍💼 DevOps Engineer / Platform Engineer
+## MCP Server
 
-**Learn first**:
-1. terraform/README.md - Understand structure
-2. DEPLOYMENT_GUIDE.md - Deploy environments
-3. OPERATIONAL_RUNBOOK.md - Common operations
+- [mcp-deployment.md](mcp-deployment.md) — Deploying the Base Coat MCP server (Docker / ACA)
 
-**Reference**:
-- DISASTER_RECOVERY.md - Emergency procedures
-- BACKEND_SETUP.md - State management
-- terraform/modules/*/main.tf - Implementation details
+## Governance & Process
 
-**Key Procedures**:
-- Deploy dev/staging/prod environments
-- Scale application capacity
-- Database maintenance & backups
-- Monitor alarms & dashboards
-- Incident response & failover
+- [LABEL_TAXONOMY.md](LABEL_TAXONOMY.md) — GitHub label taxonomy
+- [SCOPED_INSTRUCTIONS.md](SCOPED_INSTRUCTIONS.md) — Scoped instruction authoring guide
+- [prd-and-spec-guidance.md](prd-and-spec-guidance.md) — PRD and spec gate guidance
+- [RELEASE_METRICS.md](RELEASE_METRICS.md) — Release metrics and KPIs
+- [TELEMETRY_ADOPTION.md](TELEMETRY_ADOPTION.md) — Adoption telemetry guide
+- [GOALS.md](GOALS.md) — Project goals and OKRs
+- [BLOCKED_ISSUES.md](BLOCKED_ISSUES.md) — Blocked issues tracking
 
-### 💻 Software Developer / Backend Engineer
+## Security & Operations
 
-**Learn first**:
-1. terraform/README.md - Architecture overview
-2. PORTAL_INFRASTRUCTURE_as_CODE_v1.md - Infrastructure components
-3. OPERATIONAL_RUNBOOK.md - Development procedures
+- [OPERATIONAL_RUNBOOK.md](OPERATIONAL_RUNBOOK.md) — Runbook for common operations
+- [DISASTER_RECOVERY.md](DISASTER_RECOVERY.md) — DR procedures
+- [COST_OPTIMIZATION.md](COST_OPTIMIZATION.md) — Cost analysis and optimization
+- [RBAC_ONLY_AUTHENTICATION_PATTERNS.md](RBAC_ONLY_AUTHENTICATION_PATTERNS.md) — RBAC auth patterns
+- [APPLICATION_GATEWAY_ROUTING_GUIDANCE.md](APPLICATION_GATEWAY_ROUTING_GUIDANCE.md) — App Gateway routing
 
-**Reference**:
-- terraform/modules/compute/ - Application servers
-- terraform/modules/database/ - Database configuration
-- terraform/modules/secrets/ - Credential management
+## .NET & Platform Guidance
 
-**Key Tasks**:
-- Connect to development database
-- Access application logs
-- Deploy code updates
-- Test infrastructure changes
+- [DOTNET_DECISION_TREE.md](DOTNET_DECISION_TREE.md) — .NET version decision tree
+- [DOTNET_MODERNIZATION.md](DOTNET_MODERNIZATION.md) — Modernization guide
+- [AZURE_SQL_MIGRATION_GUIDANCE.md](AZURE_SQL_MIGRATION_GUIDANCE.md) — Azure SQL migration
+- [WINDOWS_SERVER_AZURE_GUIDANCE.md](WINDOWS_SERVER_AZURE_GUIDANCE.md) — Windows Server on Azure
+- [app-inventory.md](app-inventory.md) — Application inventory template
+- [untools-integration.md](untools-integration.md) — UnTools integration guide
 
-### 📊 Engineering Manager / Tech Lead
+## Cleanup & Audit Reports
 
-**Learn first**:
-1. INFRASTRUCTURE_DELIVERY_SUMMARY.md - Project overview
-2. PORTAL_INFRASTRUCTURE_as_CODE_v1.md - Architecture
-3. COST_OPTIMIZATION.md - Financial impact
+- [CLEANUP_AUDIT_INDEX.md](CLEANUP_AUDIT_INDEX.md) — Audit index
+- [CLEANUP_AUDIT_SUMMARY.md](CLEANUP_AUDIT_SUMMARY.md) — Audit summary
+- [CLEANUP_REPORT.md](CLEANUP_REPORT.md) — Cleanup findings report
+- [INFRASTRUCTURE_DELIVERY_SUMMARY.md](INFRASTRUCTURE_DELIVERY_SUMMARY.md) — Infrastructure delivery summary
+- [treatment-matrix.md](treatment-matrix.md) — Issue treatment matrix
 
-**Reference**:
-- DISASTER_RECOVERY.md - Risk assessment
-- OPERATIONAL_RUNBOOK.md - Team procedures
-- terraform/environments/ - Environment configurations
+## Portal (Solution-Specific)
 
-**Key Concerns**:
-- HA/DR capabilities (RTO < 4h, RPO < 1h)
-- Cost projections ($8.1k/month, $61k/year optimized)
-- Security posture (encryption, VPC isolation, IAM)
-- Deployment automation (CI/CD ready)
+> These documents cover the Basecoat Portal project and are not part of the core framework sync.
 
-### 🔐 Security Officer / Compliance
+- [docs/portal/](portal/) — All portal design, API, IAM, accessibility, and security docs
+- [docs/PORTAL_INDEX.md](PORTAL_INDEX.md) — Portal infrastructure documentation index
+- [docs/wireframes/](wireframes/) — Excalidraw wireframe files
+- [portal/prompts/](../portal/prompts/) — Portal-specific prompt templates
 
-**Learn first**:
-1. PORTAL_INFRASTRUCTURE_as_CODE_v1.md - Security section
-2. terraform/modules/security/ - Security groups & IAM
-3. OPERATIONAL_RUNBOOK.md - Audit trail procedures
+## Wave 3 Delivery Summaries
 
-**Reference**:
-- terraform/modules/secrets/ - Key management
-- terraform/modules/monitoring/ - Logging & audit
-- DISASTER_RECOVERY.md - Data protection
+- [WAVE3_DAY1_SUMMARY.md](WAVE3_DAY1_SUMMARY.md) — Wave 3 Day 1 summary
+- [concurrency-phase2.md](concurrency-phase2.md) — Concurrency Phase 2 design
 
-**Key Focus**:
-- Encryption at rest (KMS) & in transit (TLS)
-- VPC isolation & security groups
-- IAM least-privilege policies
-- Audit logging & VPC Flow Logs
-- Secret rotation & key management
+## CLI Reference
 
----
+- [CLI_COMMAND_REFERENCE.md](CLI_COMMAND_REFERENCE.md) — `/basecoat` CLI command reference
 
-## File Structure Reference
+## Documentation Scaffolds
 
-```
-.
-├── docs/                                    # This directory
-│   ├── INFRASTRUCTURE_DELIVERY_SUMMARY.md  # Project completion
-│   ├── PORTAL_INFRASTRUCTURE_as_CODE_v1.md # Architecture (10+ pages)
-│   ├── DEPLOYMENT_GUIDE.md                 # Deployment procedures
-│   ├── DISASTER_RECOVERY.md                # Failover procedures
-│   ├── OPERATIONAL_RUNBOOK.md              # Common operations
-│   ├── COST_OPTIMIZATION.md                # Cost analysis
-│   └── INDEX.md                            # This file
-│
-├── terraform/                              # Terraform root
-│   ├── README.md                           # Quick start guide
-│   ├── versions.tf                         # Provider configuration
-│   ├── variables.tf                        # Input variables
-│   ├── main.tf                             # Module orchestration
-│   ├── outputs.tf                          # Output values
-│   ├── terraform.tfvars                    # Default values
-│   │
-│   ├── modules/                            # Reusable modules
-│   │   ├── networking/main.tf              # VPC, subnets, routing
-│   │   ├── database/main.tf                # PostgreSQL RDS
-│   │   ├── compute/main.tf                 # ALB, ASG, EC2
-│   │   ├── caching/main.tf                 # Redis ElastiCache
-│   │   ├── storage/main.tf                 # S3 buckets
-│   │   ├── secrets/main.tf                 # KMS, Secrets Manager
-│   │   ├── security/main.tf                # Security groups, IAM
-│   │   └── monitoring/main.tf              # CloudWatch, alarms
-│   │
-│   └── environments/                       # Environment configs
-│       ├── dev/terraform.tfvars            # Development (minimal)
-│       ├── staging/terraform.tfvars        # Staging (prod-like)
-│       ├── prod/terraform.tfvars           # Production (maximum)
-│       └── BACKEND_SETUP.md                # Backend configuration
-│
-└── .github/workflows/
-    └── terraform-deploy.yml                # CI/CD pipeline
-```
-
----
-
-## Key Metrics
-
-| Metric | Dev | Staging | Prod |
-|--------|-----|---------|------|
-| **Monthly Cost** | $400 | $1,200 | $6,500 |
-| **RTO** | N/A | 4 hours | 4 hours |
-| **RPO** | N/A | 1 hour | 1 hour |
-| **Database** | t3.micro | t3.small | r6i.xlarge |
-| **Compute** | 1-3 | 2-5 | 3-20 |
-| **Backup Days** | 7 | 14 | 30 |
-| **Multi-AZ** | No | Yes | Yes |
-| **Read Replicas** | No | No | Yes |
-
----
-
-## Common Procedures
-
-### Deploy Application Update
-See: [OPERATIONAL_RUNBOOK.md](./OPERATIONAL_RUNBOOK.md) → Application Deployment
-
-### Increase Capacity
-See: [OPERATIONAL_RUNBOOK.md](./OPERATIONAL_RUNBOOK.md) → Scaling Operations
-
-### Database Backup
-See: [OPERATIONAL_RUNBOOK.md](./OPERATIONAL_RUNBOOK.md) → Database Operations
-
-### Regional Failover
-See: [DISASTER_RECOVERY.md](./DISASTER_RECOVERY.md) → Scenario 4
-
-### Emergency Response
-See: [OPERATIONAL_RUNBOOK.md](./OPERATIONAL_RUNBOOK.md) → Emergency Procedures
-
----
-
-## Important Contacts
-
-**Infrastructure Issues**:
-- Email: infrastructure@example.com
-- Slack: #infrastructure
-- On-Call: PagerDuty (escalate for SEV-1/2)
-
-**Escalation**:
-- SEV-1 (Down): VP Engineering + On-Call Manager
-- SEV-2 (Degraded): Engineering Leads + On-Call
-- Critical: CEO + Legal + Customer Success
-
----
-
-## Maintenance Schedule
-
-| Task | Frequency | Owner | Reference |
-|------|-----------|-------|-----------|
-| DR Drill | Monthly | DevOps | DISASTER_RECOVERY.md |
-| Security Audit | Quarterly | Security | PORTAL_INFRASTRUCTURE_as_CODE_v1.md |
-| Cost Review | Semi-annual | Finance | COST_OPTIMIZATION.md |
-| Provider Updates | Annually | DevOps | terraform/README.md |
-| Certificate Renewal | 60 days before expiry | DevOps | OPERATIONAL_RUNBOOK.md |
-
----
-
-## FAQ
-
-**Q: How do I deploy to production?**
-A: See [DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md) or [terraform/README.md](../terraform/README.md)
-
-**Q: What's the monthly cost?**
-A: $8,100/month (~$61,200/year optimized). See [COST_OPTIMIZATION.md](./COST_OPTIMIZATION.md)
-
-**Q: What happens if a region fails?**
-A: Manual failover to us-west-2 in < 4 hours. See [DISASTER_RECOVERY.md](./DISASTER_RECOVERY.md)
-
-**Q: How do I scale up quickly?**
-A: Auto-scaling or manual capacity increase in < 10 minutes. See [OPERATIONAL_RUNBOOK.md](./OPERATIONAL_RUNBOOK.md)
-
-**Q: Is data encrypted?**
-A: Yes, at rest (KMS) and in transit (TLS 1.2+). See [PORTAL_INFRASTRUCTURE_as_CODE_v1.md](./PORTAL_INFRASTRUCTURE_as_CODE_v1.md)
-
-**Q: Where is state stored?**
-A: S3 + DynamoDB (production recommended). See [BACKEND_SETUP.md](../terraform/environments/BACKEND_SETUP.md)
-
----
-
-## Version History
-
-| Version | Date | Changes |
-|---------|------|---------|
-| 1.0 | May 2024 | Initial delivery - complete AWS infrastructure, multi-cloud structure |
-
----
-
-**Last Updated**: May 2024
-**Document**: INDEX.md
-**Status**: ✅ Complete
+- [documentation-heading-scaffolds.md](documentation-heading-scaffolds.md) — Heading template scaffolds
+- [CONFIG_PATTERN.md](CONFIG_PATTERN.md) — Configuration pattern reference

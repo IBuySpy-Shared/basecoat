@@ -109,6 +109,18 @@ This catalog helps teams discover what exists in Base Coat and when to use it.
 | `prompts/code-review.prompt.md` | initiate a focused code review workflow              | review, pull request, findings        |
 | `prompts/bugfix.prompt.md`      | investigate and fix a bug at the root cause          | bugfix, incident, regression, failure |
 
+### Portal Prompts
+
+> Portal-specific prompts live in `portal/prompts/` and are not synced to consumer repos.
+
+| File                                                           | Use For                                                       | Keywords                                       |
+| -------------------------------------------------------------- | ------------------------------------------------------------- | ---------------------------------------------- |
+| `portal/prompts/portal-audit-risk-analysis.prompt.md`         | analyze audit findings and surface risk themes                | audit, risk, compliance, portal                |
+| `portal/prompts/portal-compliance-mapping.prompt.md`          | map controls to compliance frameworks (SOC 2, GDPR, HIPAA)   | compliance, mapping, controls, portal          |
+| `portal/prompts/portal-plain-language.prompt.md`              | rewrite technical content in plain language                   | plain-language, accessibility, portal          |
+| `portal/prompts/portal-remediation-planning.prompt.md`        | create a prioritized remediation plan from audit results      | remediation, planning, priority, portal        |
+| `portal/prompts/portal-threat-analysis.prompt.md`             | perform threat analysis using STRIDE / OWASP                  | threat, analysis, stride, owasp, security      |
+
 ## Agents
 
 | File                                | Use For                                        | Keywords                                  |
