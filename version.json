@@ -1,6 +1,6 @@
 {
-    "name": "base-coat",
-    "version": "3.0.0",
-    "releaseDate": "2026-05-04",
-    "notes": "v3.0.0: Major milestone - 100+ agents/skills, enterprise-scale ecosystem, complete governance framework"
+  "name": "base-coat",
+  "version": "3.1.0",
+  "releaseDate": "2026-05-07",
+  "notes": "v3.1.0: Monolith AI guidance (decomposition, C++, runtime debugging, AI verification), production sync workflow"
 }
