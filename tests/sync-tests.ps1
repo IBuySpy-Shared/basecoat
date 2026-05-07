@@ -65,6 +65,8 @@ function Invoke-SyncToConsumer {
     Push-Location $ConsumerPath
     try {
         $branch = git -C $repoRoot rev-parse --abbrev-ref HEAD
+        # Detached HEAD (e.g. tag checkout in CI) — fall back to main
+        if ($branch -eq 'HEAD') { $branch = 'main' }
         $env:BASECOAT_REPO = "file://$repoRoot"
         $env:BASECOAT_REF = $branch
         & pwsh -NoProfile -File (Join-Path $repoRoot 'sync.ps1')
