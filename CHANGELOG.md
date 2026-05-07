@@ -4,6 +4,28 @@ All notable changes to this repository should be recorded in this file.
 
 ## Unreleased
 
+## 3.5.0 - 2026-05-09
+
+### Sprint 8 — Copilot CLI Plugin and Portal Scaffold
+
+#### Copilot CLI Plugin (`plugins/copilot-cli-plugin/`)
+
+- **Agent registry design** — JSON Schema Draft 7, 73-agent registry, TTL-cached loader, fuzzy search (#478, #482)
+- **Plugin scaffold** — `BasecoatPlugin` class, TypeScript interfaces, ESLint/Prettier/Jest setup (#477)
+- **Command parser** — `/basecoat <agent-id> <task> [--flags]` with validation, quoted strings, 40 tests (#479)
+- **Context builder** — OS/shell detection, ISO 8601 timestamp, `InvocationContext` assembly, 17 tests (#481)
+- **Delegation engine** — `Promise.race` timeout, exponential backoff retry, streaming chunks, 83 total tests (#483)
+
+#### Portal Backend (`portal/backend/`)
+
+- **Express scaffold** — TypeScript, Sequelize, Winston logger, request logger, error handler, `GET /health` (#485)
+- **Data models** — User, Repository, Scan, ScanResult, AuditLog with associations and 5 Sequelize migrations (#486)
+
+#### Portal Frontend (`portal/frontend/`)
+
+- **React scaffold** — React 18 + Vite 5 + TypeScript + Tailwind CSS + Zustand + React Router v6 (#487)
+- Dashboard with stat cards, searchable Agents page, sidebar navigation, Axios API client
+
 ## 3.4.0 - 2026-05-08
 
 ### Repository Structure Cleanup

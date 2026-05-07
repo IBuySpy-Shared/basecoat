@@ -1,6 +1,6 @@
 {
   "name": "base-coat",
-  "version": "3.4.0",
-  "releaseDate": "2026-05-08",
-  "notes": "v3.4.0: Repository structure cleanup — portal assets organized, repo-wide doc index, generate-inventory script, INVENTORY.md fully complete (73 agents, 55 skills)"
+  "version": "3.5.0",
+  "releaseDate": "2026-05-09",
+  "notes": "v3.5.0: Sprint 8 — Copilot CLI plugin and Portal scaffold. Plugin: agent registry, command parser, context builder, registry loader, delegation engine. Portal: Express backend, Sequelize models (5 entities), React 18/Vite/Tailwind frontend."
 }
