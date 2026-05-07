@@ -1,0 +1,10 @@
+# Source files (only dist/ is published)
+src/
+tests/
+tsconfig.json
+tsconfig.build.json
+jest.config.js
+*.test.ts
+*.spec.ts
+coverage/
+docs/
