@@ -12,6 +12,7 @@ export interface Repository {
   id: string;
   name: string;
   url: string;
+  description?: string;
   owner: string;
   defaultBranch: string;
   createdAt: string;

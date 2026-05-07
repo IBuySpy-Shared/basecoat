@@ -229,7 +229,7 @@ Identify and inventory undocumented or decommissioned APIs.
 5. Rate limiting on third-party calls (prevent account lockout)
 ```
 
-## Key Outputs
+## Output
 
 - **OWASP API Assessment Report** (finding categories, severity, remediation steps)
 - **API Threat Model** (attack surface, data flows, identified risks)

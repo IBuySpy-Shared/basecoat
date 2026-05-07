@@ -4,6 +4,7 @@ import { clearToken } from '../auth';
 const navItems = [
   { to: '/', label: 'Dashboard', end: true },
   { to: '/agents', label: 'Agents', end: false },
+  { to: '/repositories', label: 'Repositories', end: false },
 ];
 
 export default function Sidebar() {

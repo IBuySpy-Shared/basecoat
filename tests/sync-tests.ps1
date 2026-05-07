@@ -62,18 +62,21 @@ function Invoke-SyncToConsumer {
         [string]$ConsumerPath
     )
 
+    # Create a temporary named branch so git clone --branch works even in
+    # detached-HEAD CI environments (tag checkouts, PR merge commits).
+    $testBranch = "sync-test-" + [System.Guid]::NewGuid().ToString().Substring(0, 8)
+    git -C $repoRoot branch $testBranch HEAD 2>&1 | Out-Null
+
     Push-Location $ConsumerPath
     try {
-        $branch = git -C $repoRoot rev-parse --abbrev-ref HEAD
-        # Detached HEAD (e.g. tag checkout in CI) — fall back to main
-        if ($branch -eq 'HEAD') { $branch = 'main' }
         $env:BASECOAT_REPO = "file://$repoRoot"
-        $env:BASECOAT_REF = $branch
+        $env:BASECOAT_REF = $testBranch
         & pwsh -NoProfile -File (Join-Path $repoRoot 'sync.ps1')
     }
     finally {
         Remove-Item Env:\BASECOAT_REPO -ErrorAction SilentlyContinue
         Remove-Item Env:\BASECOAT_REF -ErrorAction SilentlyContinue
+        git -C $repoRoot branch -D $testBranch 2>&1 | Out-Null
         Pop-Location
     }
 }
