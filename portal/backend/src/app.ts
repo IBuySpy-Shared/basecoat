@@ -4,6 +4,8 @@ import cors from 'cors';
 import { requestLogger } from './middleware/requestLogger';
 import { errorHandler } from './middleware/errorHandler';
 import healthRouter from './routes/health';
+import repositoriesRouter from './routes/repositories';
+import scansRouter from './routes/scans';
 
 export function createApp(): Application {
   const app = express();
@@ -15,6 +17,8 @@ export function createApp(): Application {
   app.use(requestLogger);
 
   app.use('/health', healthRouter);
+  app.use('/api/v1', repositoriesRouter);
+  app.use('/api/v1', scansRouter);
 
   app.use((_req: Request, res: Response) => {
     res.status(404).json({ error: 'Not Found', status: 404 });
