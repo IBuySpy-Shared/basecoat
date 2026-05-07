@@ -1,0 +1,19 @@
+{
+    "name": "basecoat-mcp",
+    "version": "0.4.3",
+    "private": true,
+    "type": "module",
+    "description": "Deployable MCP server for browsing and retrieving Base Coat standards assets.",
+    "bin": {
+        "basecoat-mcp": "./index.js"
+    },
+    "scripts": {
+        "start": "node index.js",
+        "self-test": "node index.js --self-test",
+        "inventory": "node index.js --inventory"
+    },
+    "dependencies": {
+        "@modelcontextprotocol/sdk": "1.27.1",
+        "zod": "4.3.6"
+    }
+}
