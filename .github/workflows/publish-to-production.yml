@@ -1,0 +1,47 @@
+name: Publish to Production
+
+# Syncs tagged releases from internal (IBuySpy-Shared/basecoat) to production (ivegamsft/basecoat)
+on:
+  push:
+    tags:
+      - "v[0-9]+.[0-9]+.[0-9]+"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publish-production
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out repository at tag
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          fetch-depth: 0
+
+      - name: Push to production repository
+        env:
+          PRODUCTION_TOKEN: ${{ secrets.PRODUCTION_REPO_TOKEN }}
+        run: |
+          set -euo pipefail
+
+          if [[ -z "${PRODUCTION_TOKEN:-}" ]]; then
+            echo "::error::PRODUCTION_REPO_TOKEN secret not configured. Skipping production sync."
+            exit 1
+          fi
+
+          PRODUCTION_REMOTE="https://x-access-token:${PRODUCTION_TOKEN}@github.com/ivegamsft/basecoat.git"
+          TAG="${GITHUB_REF_NAME}"
+
+          # Push the main branch
+          git push "${PRODUCTION_REMOTE}" HEAD:refs/heads/main --force
+
+          # Push the tag
+          git push "${PRODUCTION_REMOTE}" "refs/tags/${TAG}"
+
+          echo "✅ Pushed ${TAG} to ivegamsft/basecoat"
