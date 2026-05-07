@@ -4,6 +4,31 @@ All notable changes to this repository should be recorded in this file.
 
 ## Unreleased
 
+## 3.6.0 - 2026-05-07
+
+### Sprint 9 — Plugin Wiring, Portal API, Auth, and Frontend Data
+
+#### Copilot CLI Plugin
+
+- **invoke() wired end-to-end** — `parseCommand → buildContext → findAgent → delegate`, never throws, returns structured `DelegationResult` (#533)
+- **CLI binary** — `src/cli.ts` + `bin/basecoat` npm binary with `--help`, `--version`, exit codes (#536)
+- **Integration tests** — 7 plugin e2e tests covering success, agent-not-found, parse errors, streaming, config override (#538)
+
+#### Portal Backend
+
+- **REST API** — 6 endpoints: `GET/POST /api/v1/repositories`, `GET /api/v1/repositories/:id`, `POST/GET /api/v1/repositories/:id/scans`, `GET /api/v1/scans/:id` with `{ data }` envelope (#534)
+- **GitHub OAuth + JWT** — passport-github2 strategy, `requireAuth` middleware, `/auth/github`, `/auth/github/callback`, `/auth/logout`, `GET /api/v1/me` (#535)
+- **Auth on API routes** — repositories and scans routes now require valid JWT (#538)
+- **Integration tests** — 12 portal API tests covering auth middleware and full CRUD flow (#538)
+
+#### Portal Frontend
+
+- **GitHub OAuth flow** — Login page, AuthCallback (`?token=` param), JWT in localStorage (#537)
+- **Protected routes** — `ProtectedRoute` wraps all authenticated pages, redirects to `/login` (#537)
+- **Live data** — Dashboard fetches real `/api/v1/repositories` with loading spinner and error banner (#537)
+- **Axios interceptor** — Bearer token on all requests, auto-logout on 401 (#537)
+- **Logout** — Sidebar logout clears JWT and redirects to `/login`; Header shows real username (#537)
+
 ## 3.5.0 - 2026-05-09
 
 ### Sprint 8 — Copilot CLI Plugin and Portal Scaffold

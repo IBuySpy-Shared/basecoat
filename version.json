@@ -1,6 +1,6 @@
 {
   "name": "base-coat",
-  "version": "3.5.0",
-  "releaseDate": "2026-05-09",
-  "notes": "v3.5.0: Sprint 8 — Copilot CLI plugin and Portal scaffold. Plugin: agent registry, command parser, context builder, registry loader, delegation engine. Portal: Express backend, Sequelize models (5 entities), React 18/Vite/Tailwind frontend."
+  "version": "3.6.0",
+  "releaseDate": "2026-05-07",
+  "notes": "v3.6.0: Sprint 9 — Plugin wired end-to-end, Portal REST API + GitHub OAuth, React frontend with live data and auth, CLI binary, integration tests (104 plugin / 78 portal tests)."
 }
