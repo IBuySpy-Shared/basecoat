@@ -31,8 +31,23 @@ jobs:
           set -euo pipefail
 
           if [[ -z "${PRODUCTION_TOKEN:-}" ]]; then
-            echo "::error::PRODUCTION_REPO_TOKEN secret not configured. Skipping production sync."
-            echo "::error::This must be a PAT from the ivegamsft account with 'contents:write' and 'administration:write' scopes."
+            echo "::error::PRODUCTION_REPO_TOKEN secret not configured."
+            echo "::error::Fix: create a fine-grained PAT signed in as ivegamsft with resource owner=ivegamsft, repo=ivegamsft/basecoat, permissions: Contents R/W + Administration R/W."
+            echo "::error::See issue #575 for step-by-step instructions."
+            exit 1
+          fi
+
+          # Verify the token can read the production repo before attempting push
+          HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
+            -H "Authorization: token ${PRODUCTION_TOKEN}" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/ivegamsft/basecoat")
+
+          if [[ "${HTTP_STATUS}" != "200" ]]; then
+            echo "::error::PRODUCTION_REPO_TOKEN cannot access ivegamsft/basecoat (HTTP ${HTTP_STATUS})."
+            echo "::error::The PAT must be created by the ivegamsft account (not IBuySpy-Shared)."
+            echo "::error::Resource owner: ivegamsft | Repo: ivegamsft/basecoat | Perms: Contents R/W + Administration R/W"
+            echo "::error::See issue #575 for step-by-step fix."
             exit 1
           fi
 
