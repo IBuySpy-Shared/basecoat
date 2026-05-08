@@ -32,6 +32,7 @@ jobs:
   sweep:
     name: Sweep enlisted repos for learnings
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     # No job-level GH_TOKEN — each step uses the correct token explicitly
 
     steps:

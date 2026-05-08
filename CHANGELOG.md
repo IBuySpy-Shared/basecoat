@@ -4,7 +4,42 @@ All notable changes to this repository should be recorded in this file.
 
 ## Unreleased
 
-## 3.11.0 - 2026-05-09
+## 3.12.0 - 2026-05-08
+
+### MCP Deployment Infra, Enterprise Memory Sweep, Portal Consolidation
+
+#### MCP Server Deployment (`mcp/basecoat-metrics/`, `infra/mcp/`, `.github/workflows/`)
+
+Full production deployment stack for the `basecoat-metrics` MCP server:
+
+- **`mcp/basecoat-metrics/Dockerfile`** — multi-stage `node:22-alpine` build, non-root `mcp` user, `HEALTHCHECK`, port 8080
+- **`mcp/basecoat-metrics/src/index.ts`** — added `StreamableHTTPServerTransport`; HTTP mode when `MCP_TRANSPORT=http` or `NODE_ENV=production`; stdio stays default for local dev
+- **`infra/mcp/main.bicep`** — Azure Container Apps + Log Analytics Workspace; scales to zero; HTTPS auto-TLS; liveness + readiness probes; HTTP scaling rule
+- **`infra/mcp/README.md`** — one-time setup, service principal creation, manual deploy steps, parameter table
+- **`.github/workflows/mcp-build.yml`** — PR gate: `npm ci` → `tsc` → Docker build smoke test → `az bicep build` lint; triggers on `mcp/**` and `infra/mcp/**`
+- **`.github/workflows/mcp-deploy.yml`** — on merge to `main`: build + push to GHCR → Bicep deploy → smoke-test `/health`; requires `AZURE_CREDENTIALS` and `MCP_RESOURCE_GROUP` secrets
+- **`.vscode/mcp.json`** — local stdio + remote HTTP entries for the deployed Azure Container Apps FQDN
+
+#### Enterprise Memory Sweep (`scripts/`, `docs/memory/`, `.github/workflows/`)
+
+Zero-maintenance enterprise repo enlistment and weekly memory extraction:
+
+- **`docs/memory/enlistment.md`** — repo opt-in via `basecoat-enabled` GitHub topic; optional `.basecoat.yml` per-repo config; `MEMORY_REPO_TOKEN` setup guide
+- **`scripts/sweep-enterprise-memory.ps1`** — discovers `basecoat-enabled` repos via GitHub API, extracts PR/issue/CHANGELOG signals, writes dated candidate files
+- **`.github/workflows/memory-sweep.yml`** — weekly sweep (Monday 06:00 UTC); writes to `{org}/basecoat-memory` (separate repo), opens PR there for human review; two-token pattern: `GITHUB_TOKEN` for reads, `MEMORY_REPO_TOKEN` for writes
+
+#### Portal Consolidation (`portal/`)
+
+- Moved `portal-ui/` → `portal/ui/` via `git mv` (full history preserved)
+- `portal/README.md` rewritten as monorepo index documenting `frontend/`, `backend/`, `ui/`, `prompts/`
+- `@basecoat/portal-ui` npm package name unchanged; only the path moved
+
+#### Test Coverage (`tests/`)
+
+- **`tests/mcp-tests.ps1`** — 8 check groups covering MCP file structure, IaC, workflows, `.vscode/mcp.json`, Dockerfile hardening, HTTP transport, Bicep outputs, secret references
+- **`tests/run-tests.ps1`** — MCP tests wired in after data-workload tests
+
+
 
 ### Docs Reorganization, Memory Design Docs, Architecture Diagrams
 
