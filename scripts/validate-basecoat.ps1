@@ -3,11 +3,17 @@ $ErrorActionPreference = 'Stop'
 $rootDir = if ($args.Count -gt 0) { $args[0] } else { (Get-Location).Path }
 Set-Location $rootDir
 
-$required = @('README.md', 'CHANGELOG.md', 'INVENTORY.md', 'version.json', 'sync.sh', 'sync.ps1', 'instructions', 'skills', 'prompts', 'agents')
+$required = @('README.md', 'CHANGELOG.md', 'version.json', 'sync.sh', 'sync.ps1', 'instructions', 'skills', 'prompts', 'agents')
 foreach ($item in $required) {
     if (-not (Test-Path $item)) {
         throw "Missing required path: $item"
     }
+}
+
+# INVENTORY.md may be at root or in docs/reference/ after reorganization
+$inventoryPath = if (Test-Path 'INVENTORY.md') { 'INVENTORY.md' } elseif (Test-Path 'docs/reference/INVENTORY.md') { 'docs/reference/INVENTORY.md' } else { $null }
+if (-not $inventoryPath) {
+    throw "Missing required path: INVENTORY.md (checked root and docs/reference/)"
 }
 
 $files = Get-ChildItem instructions, prompts, agents, skills -Recurse -File | Where-Object {

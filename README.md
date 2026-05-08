@@ -92,7 +92,7 @@ Base Coat uses a consistent label taxonomy for issue triage, discovery, and spri
 - Find high-priority bugs: `is:issue label:priority:high label:bug`
 - Find blocked issues: `is:issue label:blocked`
 
-**For complete label reference:** [`docs/LABEL_TAXONOMY.md`](docs/LABEL_TAXONOMY.md) · [`GOVERNANCE.md`](docs/GOVERNANCE.md#labels)
+**For complete label reference:** [`docs/reference/LABEL_TAXONOMY.md`](docs/reference/LABEL_TAXONOMY.md) · [`GOVERNANCE.md`](docs/reference/GOVERNANCE.md#labels)
 
 ---
 
@@ -266,18 +266,18 @@ Instructions are automatically loaded by GitHub Copilot to enforce standards acr
 
 ## Guardrails
 
-Guardrail policies in [`docs/guardrails/`](docs/guardrails/) enforce non-negotiable standards:
+Guardrail policies in [`docs/reference/guardrails/`](docs/reference/guardrails/) enforce non-negotiable standards:
 
 | Guardrail | Purpose |
 |---|---|
-| [caf-naming](docs/guardrails/caf-naming.md) | CAF naming conventions for Azure resources |
-| [container-image-tags](docs/guardrails/container-image-tags.md) | Container image tags must include Git SHA |
-| [db-deployment-concurrency](docs/guardrails/db-deployment-concurrency.md) | Database deployment concurrency rules |
-| [env-example](docs/guardrails/env-example.md) | `.env.example` required for every repo |
-| [oidc-federation](docs/guardrails/oidc-federation.md) | GitHub Actions to Azure OIDC federation |
-| [secrets-in-workflows](docs/guardrails/secrets-in-workflows.md) | No hardcoded secrets in workflow files |
+| [caf-naming](docs/reference/guardrails/caf-naming.md) | CAF naming conventions for Azure resources |
+| [container-image-tags](docs/reference/guardrails/container-image-tags.md) | Container image tags must include Git SHA |
+| [db-deployment-concurrency](docs/reference/guardrails/db-deployment-concurrency.md) | Database deployment concurrency rules |
+| [env-example](docs/reference/guardrails/env-example.md) | `.env.example` required for every repo |
+| [oidc-federation](docs/reference/guardrails/oidc-federation.md) | GitHub Actions to Azure OIDC federation |
+| [secrets-in-workflows](docs/reference/guardrails/secrets-in-workflows.md) | No hardcoded secrets in workflow files |
 
-Additional security docs: [`docs/security/BRANCH_PROTECTION.md`](docs/security/BRANCH_PROTECTION.md) · [`docs/security/SECRET_SCANNING.md`](docs/security/SECRET_SCANNING.md)
+Additional security docs: [`docs/operations/security/BRANCH_PROTECTION.md`](docs/operations/security/BRANCH_PROTECTION.md) · [`docs/operations/security/SECRET_SCANNING.md`](docs/operations/security/SECRET_SCANNING.md)
 
 ---
 
@@ -290,7 +290,7 @@ Base Coat operates under a lightweight enterprise governance framework:
 - **No secrets**: Never commit credentials, tokens, API keys, or sensitive data.
 - **Branch naming**: `feature/<issue-number>-<short-description>` or `fix/<issue-number>-<short-description>`
 
-Full reference: [`docs/GOVERNANCE.md`](docs/GOVERNANCE.md) · Contributing: [`CONTRIBUTING.md`](CONTRIBUTING.md)
+Full reference: [`docs/reference/GOVERNANCE.md`](docs/reference/GOVERNANCE.md) · Contributing: [`CONTRIBUTING.md`](CONTRIBUTING.md)
 
 ---
 
@@ -381,7 +381,7 @@ See [plugins/copilot-cli-plugin/](plugins/copilot-cli-plugin/) for installation 
 
 ## Enterprise Setup
 
-For GitHub Enterprise onboarding, organization-level configuration, and custom agent development, see the **[Enterprise Setup Guide](docs/enterprise-setup.md)**.
+For GitHub Enterprise onboarding, organization-level configuration, and custom agent development, see the **[Enterprise Setup Guide](docs/guides/enterprise-setup.md)**.
 
 ---
 
@@ -401,3 +401,4 @@ See [`CONTRIBUTING.md`](CONTRIBUTING.md) for guidelines on adding agents, skills
 ## License
 
 This project is for internal use. Contact your organization's open-source program office for licensing terms.
+
