@@ -29,6 +29,7 @@ jobs:
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           fetch-depth: 0
+          persist-credentials: false
 
       - name: Push to production repository
         env:
@@ -70,6 +71,9 @@ jobs:
             -H "Authorization: token ${PRODUCTION_TOKEN}" \
             -H "Accept: application/vnd.github+json" \
             "https://api.github.com/repos/ivegamsft/basecoat/branches/main/protection" || true
+
+          # Clear any persisted Actions bot credentials so PAT is used for push
+          git config --local --unset-all http.https://github.com/.extraheader || true
 
           # Push the main branch
           git push "${PRODUCTION_REMOTE}" HEAD:refs/heads/main --force
