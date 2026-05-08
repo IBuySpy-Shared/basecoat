@@ -5,6 +5,8 @@ applyTo: "**/*"
 
 # Memory Index — L2 Hot Cache
 
+> **For forks of BaseCoat:** This file ships with BaseCoat's own patterns as a reference implementation. Replace the Trigger Map and Pattern Bundle Catalog with your team's patterns. The Memory Hierarchy and Promotion Ladder sections are framework guidance — keep those. Your accumulated memories (SQLite store, session state) are yours alone and are git-ignored — they never travel upstream.
+
 This file is the L2 tier of the BaseCoat memory hierarchy. It loads automatically to prime fast recall before any task starts. It contains trigger-to-subject mappings and the highest-confidence patterns that recur across sprints.
 
 **Rule:** Do not inline full memories here. List the pattern in one line and the subject tag. Full retrieval goes to L3/L4.
@@ -15,9 +17,13 @@ This file is the L2 tier of the BaseCoat memory hierarchy. It loads automaticall
 |---|---|---|---|
 | L0 | Reflexes | Hard rules in frontmatter + always-on instructions | Zero — baked in |
 | L1 | Procedural | `applyTo: **/*` instruction files | Zero — always loaded |
-| L2 | Hot Index | This file — trigger → pattern/subject map | ~400 tokens at session start |
+| L2 | Team Hot Index | This file — trigger → pattern/subject map | ~400 tokens at session start |
+| L2s | Shared Hot Index | `{org}/basecoat-memory/hot-index.md` (if configured) | ~400 tokens at session start |
 | L3 | Episodic | `session_store_sql` — recent session history | 1 tool call, ~200–500 tokens |
+| L3s | Shared Deep | `memories/{domain}/*.md` from shared repo (cached) | On demand, per domain |
 | L4 | Semantic | `store_memory` recall + `docs/` reference | 1–2 tool calls, load on demand |
+
+**Shared memory** (`L2s`/`L3s`) requires `BASECOAT_SHARED_MEMORY_REPO` to be set and `pwsh scripts/sync-shared-memory.ps1` to have been run. Memories are cached locally with a 24-hour TTL and are git-ignored — they never travel with the repo. See `docs/shared-memory.md`.
 
 ### Promotion Ladder
 

@@ -4,6 +4,8 @@ Defines a persistent memory MCP server for Base Coat agents using SQLite so usef
 
 > **Tracking:** Issue [#144](https://github.com/IBuySpy-Shared/basecoat/issues/144)
 
+> **Ownership:** The SQLite memory store is org-private. It accumulates from your team's usage and reflects your codebase, conventions, and history. The `.db` file is git-ignored and never travels upstream. Each org that adopts BaseCoat builds their own memory store from scratch.
+
 ---
 
 ## 1. Overview

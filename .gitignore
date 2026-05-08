@@ -128,3 +128,30 @@ gitleaks-report.sarif
 # Dashboard local config cache (secrets stored via gh CLI)
 .dashboard-repos-cache.json
 
+# =============================================================================
+# Session state and accumulated memory — NEVER commit these
+# These are org-private: they accumulate from your team's usage of BaseCoat.
+# Each org that forks BaseCoat builds their own. They do not travel upstream.
+# =============================================================================
+
+# SQLite memory store (docs/SQLITE_MEMORY.md)
+*.db
+*.sqlite
+*.sqlite3
+memory.db
+memories.db
+
+# Copilot CLI session state (contains turn history, checkpoints, memories)
+.copilot/session-state/
+.copilot/sessions/
+
+# Memory export/import artifacts
+memories.json
+memory-export.json
+memory-snapshot.json
+.memory/
+
+# Any local agent state files
+agent-state.json
+session-state.json
+

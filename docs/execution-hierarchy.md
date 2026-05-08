@@ -4,6 +4,8 @@ Defines the layered execution stack for all BaseCoat agents. Every task traverse
 
 > Related: `instructions/token-economics.instructions.md`, `instructions/memory-index.instructions.md`, `instructions/governance.instructions.md`
 
+> **For forks:** The Pattern Bundle Catalog (Layer 3a) ships with BaseCoat's own patterns as a reference. Replace or extend it with your team's patterns. The stack architecture and confidence lifecycle are framework guidance — keep those. Pattern confidence scores reflect BaseCoat's own history; reset them to `0.80` (provisional) when adopting.
+
 ---
 
 ## The Stack
