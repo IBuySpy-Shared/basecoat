@@ -3,7 +3,10 @@
     "basecoat-metrics": {
       "type": "stdio",
       "command": "node",
-      "args": ["${workspaceFolder}/mcp/basecoat-metrics/dist/index.js"]
+      "args": ["${workspaceFolder}/mcp/basecoat-metrics/dist/index.js"],
+      "env": {
+        "REPO_DIR": "${workspaceFolder}"
+      }
     },
     "basecoat-metrics-remote": {
       "type": "http",

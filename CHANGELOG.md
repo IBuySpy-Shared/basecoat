@@ -4,6 +4,52 @@ All notable changes to this repository should be recorded in this file.
 
 ## Unreleased
 
+## 3.13.0 - 2026-05-08
+
+### TRM Intelligence + Skill Modularization + MCP Expansion
+
+#### TRM Reflexion Instruction (`instructions/trm-reflexion.instructions.md`)
+
+New instruction file implementing the TRM Phase 1 adoption path from the research doc:
+
+- **Two-pass intent classification** — Pass 1 on L2 trigger map; Pass 2 only in the 0.30–0.79 confidence band; converges immediately at ≥ 0.80 or ≤ 0.30
+- **Reflexion failure signal** — structured `REFLEXION` block injected into next pass on repeated misrouting; forces explicit failure reflection before reclassifying
+- **Self-consistency cap** — k=3 maximum passes; Pass 3 uses majority vote across all three passes
+- **Progress estimator** — exponential moving average `estimate(t) = estimate(t-1)×0.7 + observation(t)×0.3`; fires checkpoint when progress/turns_remaining < 0.6
+- **HRM tier integration** — TRM confidence score surfaces alongside fast/full routing decision
+- Updated `instructions/token-economics.instructions.md` and `instructions/memory-index.instructions.md` with cross-references to `trm-reflexion.instructions.md`
+
+#### Large Skill Modularization (`skills/`)
+
+Applied the `references/` pattern (proven in `service-bus-migration`) to the top 5 skills by size:
+
+| Skill | Before | After | Reference Files |
+|---|---|---|---|
+| `cqrs-event-sourcing` | 19.7 KB | 2.8 KB | command-side, event-sourcing, read-side, sagas-operations |
+| `e2e-testing` | 14.1 KB | 1.9 KB | playwright-patterns, cypress-patterns, ci-integration |
+| `penetration-testing` | 13.7 KB | 2.5 KB | test-cases, exploitation, reporting |
+| `gitops` | 9.5 KB | 2.0 KB | flux-argocd, multi-cluster-secrets |
+| `twelve-factor` | 9.5 KB | 2.4 KB | factors-1-6, factors-7-12 |
+
+Each SKILL.md is now a ≤5KB overview with a navigation table; all detail lives in `references/*.md` (≤5KB each).
+
+#### MCP Asset Search Tools (`mcp/basecoat-metrics/src/index.ts`)
+
+Three new tools added to the `basecoat-metrics` MCP server:
+
+- **`search-skills`** — fuzzy (case-insensitive substring) search across all skills by name or description; requires `REPO_DIR`
+- **`search-agents`** — same for agents
+- **`get-asset-details`** — returns full file content of any skill or agent by relative path; path traversal protection included
+- `REPO_DIR` env var documented in `mcp/basecoat-metrics/README.md`; pre-wired in `.vscode/mcp.json` via `${workspaceFolder}`
+- `tests/mcp-tests.ps1` updated to validate all three new tools and `REPO_DIR` support
+
+#### Dependency Update Advisor (`agents/`, `.github/workflows/`)
+
+New agentic workflow for automated Dependabot PR triage:
+
+- **`agents/dependency-update-advisor.agent.md`** — defines the full workflow: semver bump detection, breaking change lookup, impact surface analysis, CVE context, structured comment posting
+- **`.github/workflows/dependency-update-advisor.yml`** — GitHub Actions workflow triggered on `pull_request: opened` for Dependabot PRs; posts a `🔍 Dependency Update Risk Assessment` comment with risk level (LOW/MEDIUM/HIGH), breaking change detection from release notes, test focus suggestions, and CVE context
+
 ## 3.12.0 - 2026-05-08
 
 ### MCP Deployment Infra, Enterprise Memory Sweep, Portal Consolidation

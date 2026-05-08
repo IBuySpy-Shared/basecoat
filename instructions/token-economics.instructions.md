@@ -115,7 +115,8 @@ If TRM overhead (two-pass classification) would exceed 15% of the remaining cont
 budget, skip the second pass and accept the Pass 1 result directly.
 
 See `docs/research/TRM-HRM-investigation.md` for full TRM estimator rationale and
-threshold calibration values.
+threshold calibration values. For the complete Reflexion failure signal format and
+two-pass classification contract, see `instructions/trm-reflexion.instructions.md`.
 
 ## Review Lens
 
