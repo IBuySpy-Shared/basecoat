@@ -1,6 +1,6 @@
 {
   "name": "base-coat",
-  "version": "3.9.0",
-  "releaseDate": "2026-05-07",
-  "notes": "v3.9.0: Adaptive execution hierarchy — intent-driven fast path routing, pattern bundles, memory lookup tiers (L0-L4), turn budget rules, and failure/success learning protocols."
+  "version": "3.10.0",
+  "releaseDate": "2026-05-08",
+  "notes": "v3.10.0: Bootstrap, Agentic Workflows Tier 1-2, Azure instructions, and shared org memory repo."
 }

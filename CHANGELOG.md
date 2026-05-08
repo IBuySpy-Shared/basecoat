@@ -4,6 +4,40 @@ All notable changes to this repository should be recorded in this file.
 
 ## Unreleased
 
+## 3.10.0 - 2026-05-08
+
+### Bootstrap, Agentic Workflows Tier 1-2, Azure Instructions, Shared Org Memory
+
+#### Bootstrap (`scripts/bootstrap.ps1`)
+
+New idempotent 4-phase setup script for new BaseCoat adopters:
+
+- **Phase 1 — Repo setup**: fork/clone detection, `gh` CLI check, `gh aw` extension install prompt, GitHub Actions status verification
+- **Phase 2 — Memory layer**: `.gitignore` guard for SQLite/session-state files, `.memory/` directory init, optional shared org memory sync
+- **Phase 3 — Secrets checklist**: `COPILOT_GITHUB_TOKEN` presence check, `BASECOAT_SHARED_MEMORY_REPO` config, `version.json` readability
+- **Phase 4 — Validation**: runs `validate-basecoat.ps1` + `tests/run-tests.ps1`; actionable error list on failure
+- Flags: `-Silent` (CI use), `-SkipTests`, `-SharedMemoryRepo`
+
+#### Agentic Workflows — Tier 2 (`.github/workflows/`)
+
+New `security-analyst.md` + compiled `security-analyst.lock.yml`:
+
+- Triggers on `pull_request: [opened, synchronize]`
+- Performs OWASP Top 10 spot check scoped to PR diff, secret scan, dependency risk assessment
+- Posts a severity-ranked findings table only when issues are found — no noise on clean PRs
+- Completes the Tier 1+2 agentic workflow set: `issue-triage`, `retro-facilitator`, `self-healing-ci`, `code-review-agent`, `release-impact-advisor`, `security-analyst`
+
+#### Azure Instructions
+
+- **`instructions/azure-service-connector.instructions.md`**: managed identity authentication (system/user-assigned), Key Vault references for secrets, Bicep `Microsoft.ServiceLinker/linkers` patterns, standard environment variable names, connection validation
+- **`instructions/azure-app-configuration.instructions.md`**: key naming hierarchy (`{service}/{component}/{key}` + labels), feature flags with safe defaults, dynamic refresh with sentinel key, `disableLocalAuth`, purge protection, private endpoints, SDK usage pattern (.NET example)
+
+#### Shared Org Memory Repo
+
+- Created `IBuySpy-Shared/basecoat-memory` private repo — the shared L2s/L3s memory tier for the org
+- Seeded from `docs/templates/basecoat-memory/`: README, CONTRIBUTING, hot-index, validate-memory CI workflow
+- Sync via `scripts/sync-shared-memory.ps1 -SharedMemoryRepo IBuySpy-Shared/basecoat-memory`
+
 ## 3.9.0 - 2026-05-07
 
 ### Adaptive Execution Hierarchy + Memory Fast-Path Routing
