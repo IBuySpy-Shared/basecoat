@@ -2,10 +2,7 @@
 title: Enterprise Configuration and Policy Setup
 type: instruction
 description: "Enterprise-level GitHub Copilot policy configuration, including usage metrics enablement, seat management, and security policies."
-applyTo:
-  - enterprise
-  - github-organization
-  - governance
+applyTo: "**/*"
 distribute: false
 ---
 
