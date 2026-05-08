@@ -9,6 +9,7 @@ metadata:
   audience: ["developers", "maintainers", "platform-teams"]
 allowed-tools: ["bash", "git", "grep"]
 model: gpt-5.4-mini
+allowed_skills: []
 ---
 
 # Dependency Update Advisor Agent
@@ -76,3 +77,19 @@ Post a GitHub comment with the following structure:
 - Do not block the PR — post an advisory comment only. Merge decisions remain with maintainers.
 - If the changelog or release notes are unavailable, note "Breaking change data unavailable — review manually for major bumps."
 - Do not fetch arbitrary external URLs; use GitHub API to retrieve release data from the package's registered repository.
+
+## Model
+
+**Recommended:** claude-sonnet-4.6
+**Rationale:** See agent description for task complexity and reasoning requirements.
+**Minimum:** gpt-5.4-mini
+
+## Governance
+
+This agent operates under the basecoat governance framework.
+
+- **Issue-first**: Do not make code changes without a logged GitHub issue.
+- **PRs only**: Never commit directly to `main`. Open a PR, self-approve if needed.
+- **No secrets**: Never commit credentials, tokens, API keys, or sensitive data.
+- **Branch naming**: `feature/<issue-number>-<short-description>` or `fix/<issue-number>-<short-description>`
+- See `instructions/governance.instructions.md` for the full governance reference.

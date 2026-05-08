@@ -4,6 +4,52 @@ All notable changes to this repository should be recorded in this file.
 
 ## Unreleased
 
+## 3.16.0 - 2026-05-29
+
+### Agent Compliance + Instruction Trim
+
+#### Agent Compliance Sweep — All 74 Agents (#581)
+
+Added `allowed_skills` frontmatter, `## Model` body section, and `## Governance`
+to all agents that were missing them. Every agent now declares its default model,
+model rationale, and governance policy.
+
+- **Batch 1 (10 agents):** sprint-planner, release-manager, domain-designer,
+  infrastructure-deploy, self-healing-ci, strategy-to-automation,
+  legacy-modernization, dotnet-modernization-advisor, release-impact-advisor, feedback-loop
+- **Batch 2 (12 agents):** api-security, secrets-manager, hardening-advisor,
+  penetration-test, supply-chain-security, config-auditor, security-monitor,
+  security-operations, ha-architect, resilience-reviewer, observability-engineer,
+  production-readiness
+- **Batch 3 (52 agents):** all remaining agents
+
+Lightweight coordination agents (retro-facilitator, sprint-retrospective,
+memory-curator, merge-coordinator, rollout-basecoat, project-onboarding,
+new-customization, issue-triage) use `claude-haiku-4.5`.
+
+#### Instruction Modularization Batch 2 — 3 Instructions (#582)
+
+Applied references/ extraction pattern to three large instruction files:
+
+- **data-science.instructions.md** — condensed from 13.3 KB to 3.5 KB; detail in
+  `references/data-science/notebook-conventions.md`, `medallion-and-duckdb.md`,
+  `feature-engineering-and-training.md`
+- **data-workload-testing.instructions.md** — condensed from 11.6 KB to 2.3 KB; detail in
+  `references/data-workload-testing/data-quality-tests.md`, `layer-test-patterns.md`
+- **mutation-testing.instructions.md** — condensed from 11.5 KB to 2.4 KB; detail in
+  `references/mutation-testing/mutation-tools-and-ci.md`, `survival-patterns-and-fixes.md`
+
+#### PowerShell CI Test Job (#585)
+
+Added `test` job to `.github/workflows/ci.yml` running `pwsh tests/run-tests.ps1`
+on `ubuntu-latest` with artifact upload on failure.
+
+#### Test Fix
+
+Fixed `allowed_skills: []` empty-array validation bug in `tests/agent-integration-tests.ps1`
+(PowerShell `return @()` is coerced to `$null` at call site; wrapped with `@(...)` and
+added raw-line regex check).
+
 ## 3.15.0 - 2026-05-22
 
 ### Modularization Sweep + Repo Structure
