@@ -94,7 +94,8 @@ class PerformanceTestRunner:
         ]
 
         try:
-            print(f"\n▶️  Running: {' '.join(cmd)}\n")
+            safe_cmd = [arg if 'API_TOKEN' not in arg else f"API_TOKEN=[REDACTED]" for arg in cmd]
+            print(f"\n▶️  Running: {' '.join(safe_cmd)}\n")
             result = subprocess.run(cmd, check=True, capture_output=False)
 
             # Load and store results
