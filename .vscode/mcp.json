@@ -1,0 +1,13 @@
+{
+  "servers": {
+    "basecoat-metrics": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["${workspaceFolder}/mcp/basecoat-metrics/dist/index.js"]
+    },
+    "basecoat-metrics-remote": {
+      "type": "http",
+      "url": "https://<MCP_FQDN>"
+    }
+  }
+}

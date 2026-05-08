@@ -14,6 +14,8 @@
 
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
+import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
+import { createServer, type IncomingMessage, type ServerResponse } from "node:http";
 import { readFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import { join } from "node:path";
@@ -296,12 +298,46 @@ server.tool(
 );
 
 // ---------------------------------------------------------------------------
-// Start
+// Start — stdio (local dev) or HTTP (deployed)
 // ---------------------------------------------------------------------------
 
-async function main() {
+async function startHttp(): Promise<void> {
+  const port = parseInt(process.env.PORT ?? "8080", 10);
+
+  // Stateless transport — each request is independent (no session affinity needed)
+  const transport = new StreamableHTTPServerTransport({
+    sessionIdGenerator: undefined,
+  });
+
+  await server.connect(transport);
+
+  const httpServer = createServer(
+    async (req: IncomingMessage, res: ServerResponse) => {
+      if (req.url === "/health") {
+        res.writeHead(200, { "Content-Type": "text/plain" }).end("ok");
+        return;
+      }
+      // All MCP traffic routed through transport
+      await transport.handleRequest(req, res);
+    }
+  );
+
+  httpServer.listen(port, () => {
+    process.stderr.write(`basecoat-metrics-mcp listening on port ${port}\n`);
+  });
+}
+
+async function startStdio(): Promise<void> {
   const transport = new StdioServerTransport();
   await server.connect(transport);
+}
+
+async function main(): Promise<void> {
+  if (process.env.MCP_TRANSPORT === "http" || process.env.NODE_ENV === "production") {
+    await startHttp();
+  } else {
+    await startStdio();
+  }
 }
 
 main().catch((err) => {

@@ -41,8 +41,37 @@ Add to your `.vscode/mcp.json` (or user-level MCP config):
 
 | Variable | Default | Description |
 |---|---|---|
+| `MCP_TRANSPORT` | *(none)* | Set to `http` to enable HTTP/SSE transport on `PORT` |
+| `NODE_ENV` | *(none)* | Set to `production` to also enable HTTP transport |
+| `PORT` | `8080` | Port for HTTP transport |
 | `METRICS_BASE_URL` | GitHub Pages URL | Override the base URL for metrics JSON files |
 | `METRICS_DIR` | *(none)* | Path to a local directory containing `latest.json`, `history.json`, `alerts.json` |
 
 Set `METRICS_DIR` to `dashboard/metrics` when running locally against a freshly
 collected metrics run.
+
+## Deployment
+
+The server supports two transports selected by environment variable:
+
+- **`stdio`** (default) — local VS Code / Copilot CLI use
+- **`http`** — set `MCP_TRANSPORT=http` or `NODE_ENV=production`
+
+### Docker
+
+```bash
+cd mcp/basecoat-metrics
+docker build -t basecoat-metrics-mcp .
+docker run -p 8080:8080 basecoat-metrics-mcp
+# GET http://localhost:8080/health → ok
+```
+
+### Azure Container Apps (production)
+
+See [`infra/mcp/README.md`](../../infra/mcp/README.md) for full provisioning steps.
+
+CI/CD:
+- **`mcp-build.yml`** — builds and Docker smoke-tests on every PR touching `mcp/**`
+- **`mcp-deploy.yml`** — pushes to GHCR and deploys to Azure Container Apps on merge to `main`
+
+Required secrets: `AZURE_CREDENTIALS`, `MCP_RESOURCE_GROUP`

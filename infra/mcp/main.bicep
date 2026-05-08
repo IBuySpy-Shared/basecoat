@@ -1,0 +1,150 @@
+// ── BaseCoat Metrics MCP Server — Azure Container Apps ───────────────────────
+//
+// Provisions:
+//   - Log Analytics Workspace (Container Apps telemetry)
+//   - Container Apps Environment
+//   - Container App (pulling from GHCR)
+//
+// Deploy:
+//   az group create -n <rg> -l eastus
+//   az deployment group create -g <rg> -f infra/mcp/main.bicep \
+//     --parameters imageTag=latest metricsBaseUrl=https://ibuyspy-shared.github.io/basecoat/metrics
+
+@description('Azure region for all resources.')
+param location string = resourceGroup().location
+
+@description('Short environment label appended to resource names.')
+@allowed(['prod', 'staging', 'dev'])
+param environment string = 'prod'
+
+@description('Container image tag to deploy (e.g. latest or a SHA digest).')
+param imageTag string = 'latest'
+
+@description('GHCR image repository (org/repo).')
+param imageRepo string = 'ibuyspy-shared/basecoat-metrics-mcp'
+
+@description('Override the metrics base URL (GitHub Pages endpoint).')
+param metricsBaseUrl string = 'https://ibuyspy-shared.github.io/basecoat/metrics'
+
+@description('Container CPU cores.')
+param cpuCores string = '0.25'
+
+@description('Container memory in Gi.')
+param memoryGi string = '0.5'
+
+@description('Minimum replicas (0 = scale to zero).')
+param minReplicas int = 0
+
+@description('Maximum replicas.')
+param maxReplicas int = 3
+
+// ── Variables ─────────────────────────────────────────────────────────────────
+
+var prefix    = 'bcmcp'
+var envSuffix = environment == 'prod' ? '' : '-${environment}'
+var lawName   = '${prefix}-law${envSuffix}'
+var envName   = '${prefix}-env${envSuffix}'
+var appName   = '${prefix}-app${envSuffix}'
+var image     = 'ghcr.io/${imageRepo}:${imageTag}'
+
+// ── Log Analytics Workspace ───────────────────────────────────────────────────
+
+resource law 'Microsoft.OperationalInsights/workspaces@2023-09-01' = {
+  name: lawName
+  location: location
+  properties: {
+    sku: { name: 'PerGB2018' }
+    retentionInDays: 30
+    features: { enableLogAccessUsingOnlyResourcePermissions: true }
+  }
+}
+
+// ── Container Apps Environment ────────────────────────────────────────────────
+
+resource env 'Microsoft.App/managedEnvironments@2024-03-01' = {
+  name: envName
+  location: location
+  properties: {
+    appLogsConfiguration: {
+      destination: 'log-analytics'
+      logAnalyticsConfiguration: {
+        customerId: law.properties.customerId
+        sharedKey: law.listKeys().primarySharedKey
+      }
+    }
+  }
+}
+
+// ── Container App ─────────────────────────────────────────────────────────────
+
+resource app 'Microsoft.App/containerApps@2024-03-01' = {
+  name: appName
+  location: location
+  properties: {
+    managedEnvironmentId: env.id
+    configuration: {
+      ingress: {
+        external: true
+        targetPort: 8080
+        transport: 'http'
+        allowInsecure: false
+      }
+      // GHCR public image — no registry credentials needed for public repos.
+      // For private images add a registries block with a PAT secret.
+    }
+    template: {
+      containers: [
+        {
+          name: 'mcp'
+          image: image
+          resources: {
+            cpu: json(cpuCores)
+            memory: '${memoryGi}Gi'
+          }
+          env: [
+            { name: 'MCP_TRANSPORT',    value: 'http' }
+            { name: 'NODE_ENV',         value: 'production' }
+            { name: 'PORT',             value: '8080' }
+            { name: 'METRICS_BASE_URL', value: metricsBaseUrl }
+          ]
+          probes: [
+            {
+              type: 'Liveness'
+              httpGet: { path: '/health', port: 8080 }
+              initialDelaySeconds: 15
+              periodSeconds: 30
+              failureThreshold: 3
+            }
+            {
+              type: 'Readiness'
+              httpGet: { path: '/health', port: 8080 }
+              initialDelaySeconds: 5
+              periodSeconds: 10
+            }
+          ]
+        }
+      ]
+      scale: {
+        minReplicas: minReplicas
+        maxReplicas: maxReplicas
+        rules: [
+          {
+            name: 'http-scaling'
+            http: { metadata: { concurrentRequests: '10' } }
+          }
+        ]
+      }
+    }
+  }
+}
+
+// ── Outputs ───────────────────────────────────────────────────────────────────
+
+@description('Fully-qualified domain name of the deployed MCP server.')
+output fqdn string = app.properties.configuration.ingress.fqdn
+
+@description('Health check URL.')
+output healthUrl string = 'https://${app.properties.configuration.ingress.fqdn}/health'
+
+@description('MCP endpoint URL for .vscode/mcp.json.')
+output mcpUrl string = 'https://${app.properties.configuration.ingress.fqdn}'
