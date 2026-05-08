@@ -28,7 +28,7 @@ $zipPath = Join-Path $distDir "$archiveBase.zip"
 Compress-Archive -Path (Join-Path $distDir 'stage\base-coat\*') -DestinationPath $zipPath
 
 $tarPath = Join-Path $distDir "$archiveBase.tar.gz"
-tar.exe -czf $tarPath -C (Join-Path $distDir 'stage') 'base-coat'
+tar -czf $tarPath -C (Join-Path $distDir 'stage') 'base-coat'
 
 $zipChecksum = (Get-FileHash $zipPath -Algorithm SHA256).Hash.ToLowerInvariant()
 $tarChecksum = (Get-FileHash $tarPath -Algorithm SHA256).Hash.ToLowerInvariant()
