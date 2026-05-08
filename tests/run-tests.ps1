@@ -111,5 +111,12 @@ if ($LASTEXITCODE -ne 0) {
     exit 1
 }
 
+Write-Host 'Running MCP tests...'
+& pwsh -NoProfile -File (Join-Path $PSScriptRoot 'mcp-tests.ps1')
+if ($LASTEXITCODE -ne 0) {
+    Write-Host 'MCP tests failed' -ForegroundColor Red
+    exit 1
+}
+
 Write-Host 'All PowerShell tests passed'
 exit 0

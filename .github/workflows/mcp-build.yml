@@ -4,10 +4,12 @@ on:
   push:
     paths:
       - "mcp/basecoat-metrics/**"
+      - "infra/mcp/**"
       - ".github/workflows/mcp-build.yml"
   pull_request:
     paths:
       - "mcp/basecoat-metrics/**"
+      - "infra/mcp/**"
       - ".github/workflows/mcp-build.yml"
 
 permissions:
@@ -16,8 +18,9 @@ permissions:
 
 jobs:
   build:
-    name: Build and validate MCP server
+    name: Build, lint, and validate MCP server
     runs-on: ubuntu-latest
+    timeout-minutes: 15
 
     steps:
       - name: Check out repository
@@ -44,3 +47,6 @@ jobs:
           context: mcp/basecoat-metrics
           push: false
           tags: basecoat-metrics-mcp:pr-${{ github.event.number || 'local' }}
+
+      - name: Lint Bicep template
+        run: az bicep build --file infra/mcp/main.bicep --stdout > /dev/null
