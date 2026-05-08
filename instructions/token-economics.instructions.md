@@ -100,9 +100,22 @@ When a task completes within its turn budget and tests pass, evaluate whether th
 - **If yes:** call `store_memory` with the pattern, the context it applies to, and the test that validated it. This converts learning cost into reusable knowledge and lowers future turn budgets.
 - **If no:** skip. Reinforcing well-known patterns wastes memory slots and dilutes signal.
 
-### Progress Tracking
+### Progress Tracking (TRM Estimator)
 
-Track actual turns against the estimated budget as you work. If you reach 80% of your budget with less than 50% progress, pause and reassess before continuing — do not wait until fully stuck.
+Track progress using a rolling weighted estimate updated each turn:
+
+```text
+estimate(t) = estimate(t-1) × 0.7 + observation(t) × 0.3
+```
+
+Where `observation(t)` is the fraction of task checklist items completed this turn.
+The checkpoint fires when `estimate.progress / estimate.turns_remaining < 0.6`.
+
+If TRM overhead (two-pass classification) would exceed 15% of the remaining context
+budget, skip the second pass and accept the Pass 1 result directly.
+
+See `docs/research/TRM-HRM-investigation.md` for full TRM estimator rationale and
+threshold calibration values.
 
 ## Review Lens
 

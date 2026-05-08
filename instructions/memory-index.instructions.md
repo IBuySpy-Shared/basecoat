@@ -39,17 +39,27 @@ L2 entry not referenced in 60 days → demote to L4 or prune
 
 **Pinned patterns** (security, governance, hard constraints) are exempt from decay. Mark with `[pin]`.
 
-## Execution Path Routing
+## Intent Classification — TRM Two-Pass Routing
 
-Before loading any context, classify intent and route:
+Before routing, classify intent using at most two passes:
 
-```
-confidence ≥ 0.80 → FAST PATH: load pattern bundle, skip exploration
-confidence 0.50–0.79 → bundle as starting point + run Explore phase  
-confidence < 0.50 → FULL PATH: layered context load, estimate N turns
-```
+1. **Pass 1** — match against L2 trigger map; compute initial confidence
+2. **Evaluate** — if confidence ≥ 0.80 or ≤ 0.30, converge immediately (no Pass 2)
+3. **Pass 2** — for scores in the 0.30–0.79 band, retrieve a targeted L3 snippet (last
+   N=3 turns on the topic) and reclassify
 
-Guardrails (Layer 1) fire at fixed checkpoints regardless of path. See `docs/execution-hierarchy.md`.
+Bounds on Pass 2:
+
+- Maximum confidence boost from Pass 2: **+0.15**
+- If Pass 1 and Pass 2 disagree on intent category AND the confidence gap > 0.20,
+  apply a 0.10 confidence penalty and route to full path if penalized score < 0.50
+- Apply a **-0.10 confidence discount** to matches from L2s (shared org index) versus
+  L2 (repo-local index) — shared entries are not calibrated for this specific repo
+
+See `docs/research/TRM-HRM-investigation.md` — *TRM Intent Classifier Contract* for
+the full parameter set and failure-mode mitigations.
+
+
 
 ## Pattern Bundles — Fast Path Catalog
 
@@ -112,7 +122,37 @@ Guardrails (Layer 1) fire at fixed checkpoints regardless of path. See `docs/exe
 | Stuck after 5 turns | `store_memory` failure pattern, change approach, do not escalate model tier first | `failure-protocol` [pin] |
 | Task succeeds with novel solution | `store_memory` if non-obvious pattern + tests pass; skip for boilerplate | `success-protocol` |
 
-## Episodic Retrieval Shortcuts (L3)
+## HRM Tier Resolution Order
+
+Resolve memory tier by tier — do not skip layers or query deeper tiers before shallower
+ones. Each tier is an HRM layer with its own scope constraint:
+
+| Tier | Resolves | Escalates when |
+|------|---------|----------------|
+| L0/L1 | Always-on rules; glob-scoped instructions | Out-of-scope for the glob or hard rule |
+| L2 | Pattern bundle match, confidence ≥ 0.80 | Confidence < 0.80 after TRM Pass 2 |
+| L3 | Prior session coverage of the task | No matching session found |
+| L4 | Long-term fact or architecture guidance | No coverage → generate and store |
+
+**Do not query L4 before L3; do not query L3 before L2.** Skipping layers misses
+hot-cache hits and inflates token cost.
+
+When escalating from L2 to L3/L4, pass a structured `EscalationQuery`:
+
+```text
+intent: string          (matched bundle name or "novel")
+keywords: string[]      (key terms from the task)
+confidence: float       (score after TRM Pass 2)
+context_budget: int     (tokens remaining in session budget)
+```
+
+Log `ELEVATE_TO_L3` and `ELEVATE_TO_L4` escalation signals to `store_memory` as
+provisional facts when they represent novel patterns not already in the index.
+
+See `docs/research/TRM-HRM-investigation.md` — *HRM Execution Stack Contract* for
+full layer contracts and cross-layer dependency handling.
+
+
 
 Use these queries when you need prior session context:
 
