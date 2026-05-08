@@ -34,6 +34,7 @@ jobs:
       - name: Push to production repository
         env:
           PRODUCTION_TOKEN: ${{ secrets.PRODUCTION_REPO_TOKEN }}
+          TAG: ${{ inputs.tag || github.ref_name }}
         run: |
           set -euo pipefail
 
@@ -65,7 +66,7 @@ jobs:
           fi
 
           PRODUCTION_REMOTE="https://x-access-token:${PRODUCTION_TOKEN}@github.com/ivegamsft/basecoat.git"
-          TAG="${GITHUB_REF_NAME:-${{ inputs.tag }}}"
+          # TAG is set from GitHub expression in env: inputs.tag on dispatch, github.ref_name on tag push
 
           # Temporarily disable branch protection to allow push
           echo "Disabling branch protection..."
