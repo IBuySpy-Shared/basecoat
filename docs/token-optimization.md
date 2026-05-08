@@ -319,6 +319,134 @@ Savings:                                            78%
 
 ---
 
+## 9. Task Complexity, Turn Budgets, and Adaptive Learning
+
+Agent work has a cost that goes beyond tokens — it also consumes turns. Turns compound: each one adds history to the context window, narrows decision space, and raises the cost of a wrong approach. This section defines how to classify tasks, budget turns, and convert experience into reusable memory.
+
+### 9.1 Complexity Classification
+
+Classify each task before starting. State the class in your plan or at the top of your first response.
+
+| Class | Definition | Typical indicators | Soft turn budget |
+|---|---|---|---|
+| **Routine** | Pattern fully covered by existing instructions or memory | "We have an instruction for this", existing template matches | ≤ 3 turns |
+| **Familiar** | Similar to prior work but with new variables or constraints | "We've done something like this", partial memory match | ≤ 5 turns |
+| **Novel** | No prior coverage; encountering this pattern for the first time | No matching instruction, no memory hit, new tool/API/pattern | Estimate N turns upfront |
+
+For Novel tasks, state the estimated turn cost at task start:
+
+```
+Task: Integrate Azure Service Connector with App Configuration
+Class: Novel — no prior Service Connector instruction exists
+Estimated turns: 6 (learning cost: ~3 for discovery, ~3 for implementation + validation)
+```
+
+**Learning cost amortization:** A Novel task that succeeds becomes Familiar the next time. Familiar tasks that are done repeatedly become Routine. Memory is the mechanism — see §9.3.
+
+### 9.2 Failure Protocol — Stuck After 5 Turns
+
+If a task has consumed more than 5 turns **and** there has been no measurable forward progress, stop. Do not continue with more of the same approach.
+
+#### What counts as forward progress?
+
+| Signal | Counts? |
+|---|---|
+| A new test passes that did not pass before | ✅ Yes |
+| A new error class is resolved (not just a different message for the same root cause) | ✅ Yes |
+| A file reaches its intended target state | ✅ Yes |
+| A blocker is identified and removed | ✅ Yes |
+| The same error appears with different output | ❌ No |
+| More lines of code added without test validation | ❌ No |
+| Escalating to a higher-tier model without changing the approach | ❌ No |
+
+#### When stuck:
+
+1. **Log to memory.** Call `store_memory` with:
+   - Task description (what was being attempted)
+   - Approach tried (summarize the strategy, not the code)
+   - Failure mode (exact error, logical dead-end, or missing capability)
+   - Blocking signal (what specifically is preventing progress)
+
+2. **Reassess, don't escalate.** Change the approach before changing the model tier. Common pivots:
+   - Break the task into smaller independently-verifiable units
+   - Load docs or examples that were previously skipped to save tokens
+   - Invert the approach (bottom-up instead of top-down, or vice versa)
+   - Consult memory for similar prior failures
+
+3. **Escalate model tier only as a last resort**, and only when the problem genuinely requires deeper reasoning — not just more attempts.
+
+#### Early warning: the 80/50 rule
+
+At 80% of your turn budget, if you have less than 50% progress toward the goal, pause and reassess. Don't wait until fully stuck.
+
+```
+Turn budget: 5
+Current turn: 4 (80%)
+Progress: 1 test passing of 4 required (25%)
+→ Pause. Reassess before turn 5.
+```
+
+### 9.3 Success Protocol — Learning Reinforcement
+
+When a task completes within its turn budget **and** test validation passes, evaluate whether the solution involved a non-obvious pattern.
+
+**Reinforce when:**
+- The solution required a discovery that no existing instruction covers
+- The approach was non-obvious and could save future agents 2+ turns
+- A specific error was encountered and resolved in a reusable way
+
+**Skip when:**
+- The task followed an existing instruction exactly
+- The solution is boilerplate (adding a route, writing a standard test, etc.)
+- The memory fact would duplicate existing instruction content
+
+**What to store:**
+
+```
+Subject:    <topic area>
+Fact:       <pattern or rule, ≤200 chars>
+Citations:  <file:line or "User input: ..." or "Validated in task X">
+Reason:     <why this will help future tasks; what turns it saves>
+```
+
+**Good example:**
+```
+Subject:    gh-aw compilation
+Fact:       gh aw safe-outputs: add-labels and add-comment take no sub-properties.
+            allowed-labels belongs under create-issue, not add-labels.
+Citations:  .github/workflows/issue-triage.md — Sprint 11 compile iteration
+Reason:     This error burned 2 turns on Sprint 11. Any future agentic workflow
+            author will hit it immediately without this memory.
+```
+
+**Bad example (too generic — skip):**
+```
+Fact: Use TypeScript for new files.
+→ Already in instructions. Skip.
+```
+
+### 9.4 Turn Accounting Summary
+
+```
+Before task:
+  Classify: Routine / Familiar / Novel
+  If Novel: state estimated turn budget
+
+During task:
+  Track actual turns vs. budget
+  At 80% budget / <50% progress: reassess
+
+On failure (>5 turns, no progress):
+  store_memory(failure pattern)
+  change approach or escalate
+
+On success (within budget + tests pass):
+  if novel pattern: store_memory(solution pattern)
+  classification → drops one level (Novel→Familiar, Familiar→Routine)
+```
+
+---
+
 ## Related References
 
 - [`MODEL_OPTIMIZATION.md`](MODEL_OPTIMIZATION.md) — Model tier matrix and cost considerations

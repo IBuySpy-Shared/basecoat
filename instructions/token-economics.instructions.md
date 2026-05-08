@@ -59,6 +59,44 @@ When escalating, explicitly mention the tradeoff: higher cost is being accepted 
 - `docs/MODEL_OPTIMIZATION.md` — model tier matrix, overrides, and cost guidance
 - `docs/token-optimization.md` — context window strategy, compression, caching, and token budget patterns
 
+## Turn Budget and Learning Cost
+
+Classify each task before starting. State the classification at the top of your plan.
+
+| Class | Definition | Soft turn budget |
+|---|---|---|
+| **Routine** | Matches a known pattern already covered by instructions or memory | ≤ 3 turns |
+| **Familiar** | Partial match — similar to prior work but with new variables | ≤ 5 turns |
+| **Novel** | No prior coverage; first time encountering this pattern | Estimate N turns upfront as learning cost; state it explicitly |
+
+Novel tasks pay a learning cost. That cost is real and expected — do not treat a Novel task overrunning its estimate as failure. Once completed, it becomes Familiar for next time.
+
+### Failure Protocol — Stuck After 5 Turns
+
+If a task has consumed more than 5 turns **and** there has been no measurable forward progress, stop and reassess. Do not continue with "more of the same."
+
+Forward progress means at least one of:
+- A new test passes that did not pass before
+- A new error class is resolved (not just the same error with a different message)
+- A file reaches its intended target state
+- A blocker is identified and removed
+
+**When stuck:**
+1. Log the failure pattern to memory: task description, approach tried, failure mode, and blocking signal.
+2. Reassess: try a different approach, escalate the model tier, break the task into smaller units, or flag as blocked.
+3. Do not escalate model tier as the first response — change the approach first.
+
+### Success Protocol — Completed Within Budget + Test Validation
+
+When a task completes within its turn budget and tests pass, evaluate whether the solution involved a non-obvious pattern not already covered by existing instructions.
+
+- **If yes:** call `store_memory` with the pattern, the context it applies to, and the test that validated it. This converts learning cost into reusable knowledge and lowers future turn budgets.
+- **If no:** skip. Reinforcing well-known patterns wastes memory slots and dilutes signal.
+
+### Progress Tracking
+
+Track actual turns against the estimated budget as you work. If you reach 80% of your budget with less than 50% progress, pause and reassess before continuing — do not wait until fully stuck.
+
 ## Review Lens
 
 - Is the chosen model tier the lowest-cost tier that can do the work reliably?
@@ -66,3 +104,6 @@ When escalating, explicitly mention the tradeoff: higher cost is being accepted 
 - Were already-loaded files reused instead of re-read?
 - Were targeted sections used instead of whole-file reads where possible?
 - If premium-tier reasoning was used, was the cost-quality tradeoff stated explicitly?
+- Was the task classified (Routine/Familiar/Novel) before starting?
+- If stuck past 5 turns, was the failure logged and approach changed?
+- If completed within budget with test validation, was a novel pattern reinforced to memory?
