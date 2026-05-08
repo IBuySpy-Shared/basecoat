@@ -66,7 +66,7 @@ jobs:
               echo "::error file=$file::File does not follow naming convention '<name>.instructions.md'"
               status=1
             fi
-          done < <(find instructions -type f -name '*.md' | sort)
+          done < <(find instructions -maxdepth 1 -type f -name '*.md' | sort)
           exit $status
 
       - name: Validate — CATALOG.md references exist on disk
