@@ -39,7 +39,8 @@ jobs:
 
           if [[ -z "${PRODUCTION_TOKEN:-}" ]]; then
             echo "::error::PRODUCTION_REPO_TOKEN secret not configured."
-            echo "::error::Fix: create a fine-grained PAT signed in as ivegamsft with resource owner=ivegamsft, repo=ivegamsft/basecoat, permissions: Contents R/W + Administration R/W."
+            echo "::error::Fix: create a fine-grained PAT signed in as ivegamsft with resource owner=ivegamsft, repo=ivegamsft/basecoat."
+            echo "::error::Required permissions: Contents R/W + Administration R/W + Workflows R/W"
             echo "::error::See issue #575 for step-by-step instructions."
             exit 1
           fi
@@ -56,7 +57,8 @@ jobs:
             PUSH_VAL=$(echo "${REPO_JSON}" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('permissions',{}).get('push','?'))" 2>/dev/null || echo "?")
             echo "::error::PRODUCTION_REPO_TOKEN cannot push to ivegamsft/basecoat (permissions.push=${PUSH_VAL})."
             echo "::error::The PAT must be created by the ivegamsft account owner (not IBuySpy-Shared org)."
-            echo "::error::Steps: sign in as ivegamsft → Settings → Fine-grained tokens → resource owner=ivegamsft, repo=ivegamsft/basecoat, Contents R/W + Administration R/W"
+            echo "::error::Steps: sign in as ivegamsft → Settings → Fine-grained tokens → resource owner=ivegamsft, repo=ivegamsft/basecoat"
+            echo "::error::Permissions needed: Contents R/W + Administration R/W + Workflows R/W"
             echo "::error::Then: gh secret set PRODUCTION_REPO_TOKEN --repo IBuySpy-Shared/basecoat"
             echo "::error::See issue #575 for details."
             exit 1
