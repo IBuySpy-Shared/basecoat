@@ -43,17 +43,21 @@ jobs:
             exit 1
           fi
 
-          # Verify the token can read the production repo before attempting push
-          HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
+          # Verify the token can push to the production repo before attempting
+          REPO_JSON=$(curl -s \
             -H "Authorization: token ${PRODUCTION_TOKEN}" \
             -H "Accept: application/vnd.github+json" \
             "https://api.github.com/repos/ivegamsft/basecoat")
 
-          if [[ "${HTTP_STATUS}" != "200" ]]; then
-            echo "::error::PRODUCTION_REPO_TOKEN cannot access ivegamsft/basecoat (HTTP ${HTTP_STATUS})."
-            echo "::error::The PAT must be created by the ivegamsft account (not IBuySpy-Shared)."
-            echo "::error::Resource owner: ivegamsft | Repo: ivegamsft/basecoat | Perms: Contents R/W + Administration R/W"
-            echo "::error::See issue #575 for step-by-step fix."
+          HTTP_STATUS=$(echo "${REPO_JSON}" | python3 -c "import sys,json; d=json.load(sys.stdin); print('ok' if d.get('permissions',{}).get('push') else 'nopush')" 2>/dev/null || echo "error")
+
+          if [[ "${HTTP_STATUS}" != "ok" ]]; then
+            PUSH_VAL=$(echo "${REPO_JSON}" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('permissions',{}).get('push','?'))" 2>/dev/null || echo "?")
+            echo "::error::PRODUCTION_REPO_TOKEN cannot push to ivegamsft/basecoat (permissions.push=${PUSH_VAL})."
+            echo "::error::The PAT must be created by the ivegamsft account owner (not IBuySpy-Shared org)."
+            echo "::error::Steps: sign in as ivegamsft → Settings → Fine-grained tokens → resource owner=ivegamsft, repo=ivegamsft/basecoat, Contents R/W + Administration R/W"
+            echo "::error::Then: gh secret set PRODUCTION_REPO_TOKEN --repo IBuySpy-Shared/basecoat"
+            echo "::error::See issue #575 for details."
             exit 1
           fi
 
