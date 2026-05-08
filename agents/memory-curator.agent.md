@@ -70,22 +70,74 @@ Every stored memory should retain provenance such as user input, a repo document
 - Use `supports` when multiple memories reinforce the same convention or decision
 - Preserve relation history so retrieval can suppress stale guidance without losing lineage
 
+## Memory Lookup Hierarchy
+
+Memories are organized into five tiers by retrieval cost. Always resolve the cheapest tier first before querying deeper tiers.
+
+| Tier | Name | Mechanism | Lookup cost | Contents |
+|---|---|---|---|---|
+| L0 | Reflexes | Agent frontmatter + hard rules | Zero — always active | Hard constraints, governance rules |
+| L1 | Procedural | `applyTo: **/*` instruction files | Zero — always loaded | Frequent patterns, coding standards |
+| L2 | Hot Index | `instructions/memory-index.instructions.md` | ~400 tokens at session start | Trigger map, subject tags, top patterns |
+| L3 | Episodic | `session_store_sql` queries | 1 tool call, ~200–500 tokens | Recent session history, prior failures |
+| L4 | Semantic | `store_memory` recall + `docs/` | 1–2 tool calls, load on demand | Long-tail patterns, deep reference |
+
+### Resolution Order
+
+On `SessionStart`:
+1. L0/L1 load automatically — no action needed
+2. L2 loads automatically — scan the trigger map for the current task domain
+3. Query L3 only if L2 subjects suggest prior relevant sessions exist
+4. Query L4 only if the task is Novel or a specific subject is not covered by L2
+
+On `PostToolUse` (failure resolution):
+1. Check L2 for known failure patterns before attempting L3/L4
+2. If not found, query L3 for similar failures in recent sessions
+3. If still not found, load L4 docs for the relevant domain
+
+### Promotion Protocol (Myelination)
+
+Move memories up the tier ladder when access frequency justifies it:
+
+```
+L4 → L2: access_count ≥ 3 across sessions → add entry to memory-index.instructions.md
+L2 → L1: entry applied in 5+ sessions → extract to a dedicated instruction file rule
+L1 → L0: rule applied in >50% of sessions → bake into agent frontmatter
+```
+
+Move memories down (demotion / decay):
+```
+L1 rule not applied in 90 days → demote back to L2 or prune
+L2 entry not referenced in 60 days → demote to L4 or prune
+```
+
+**Pinned memories** (`pinned = 1`) are exempt from decay. Use for security, governance, and hard constraints.
+
+### Heat Tracking
+
+Update `heat` on every access based on `access_count`:
+- `cold`: 0–2 accesses — retrieve only on exact subject match
+- `warm`: 3–9 accesses — include in broad subject retrieval
+- `hot`: 10+ accesses — inject proactively at session start when domain matches
+
 ## Retrieval Strategy
 
 On `SessionStart` and before high-risk tool use, retrieve memories using deterministic filters first:
 
-1. Exact subject or project match
-2. Category filter
-3. Keyword match on content and source
-4. Ranking by `confidence × recency × access_count`
+1. Check L2 trigger map for current task domain
+2. Exact subject or project match on L3/L4
+3. Category filter
+4. Keyword match on content and source
+5. Ranking by `confidence × recency × access_count`
 
 Retrieval rules:
 
 - Prefer memories tied to the active repo, issue, branch, file, or subject
-- Inject only the minimum set needed to improve success probability
+- Inject only the minimum set needed to improve success probability — respect the token budget
 - Favor concise, atomic memories over long summaries
-- Update `last_accessed` and `access_count` when a memory is used successfully
+- Update `last_accessed`, `access_count`, and `heat` when a memory is used successfully
 - Suppress expired, zero-confidence, or contradicted memories unless audit review is requested
+- After successful retrieval of an L4 memory accessed 3+ times, flag it for L2 promotion
 
 ## Conflict Resolution and Decay
 

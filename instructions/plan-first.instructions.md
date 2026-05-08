@@ -22,12 +22,34 @@ Skip the formal plan for small, obvious work such as:
 - typo or wording corrections
 - safe one-step changes with a clear outcome
 
-## Four-Phase Workflow
+## Five-Phase Workflow
 
-1. **Explore** — Inspect the relevant code, constraints, and existing patterns before proposing changes.
-2. **Plan** — Write a short plan covering scope, approach, major risks, and verification criteria.
-3. **Implement** — Execute the plan in small, well-scoped steps instead of attempting the whole task at once.
-4. **Verify** — Run the relevant tests, validation, or manual checks and confirm the result matches the plan.
+### Phase 0 — Intent Classification (always first, zero extra context cost)
+
+Before loading any context, classify the task:
+
+1. Match the user message against the L2 trigger map in `instructions/memory-index.instructions.md`
+2. If a pattern bundle matches with confidence ≥ 0.80 → **Fast Path**: load the bundle's pre-scoped context, apply its turn budget, skip broad exploration
+3. If confidence 0.50–0.79 → load the bundle as a starting point but continue with full Explore phase
+4. If confidence < 0.50 or no match → **Full Path**: proceed through all phases below
+
+Fast-path tasks skip directly to Phase 2 (Plan) using the bundle's context. Guardrails still fire at their fixed checkpoints regardless of path.
+
+### Phase 1 — Explore (Full Path only)
+
+Inspect the relevant code, constraints, and existing patterns before proposing changes.
+
+### Phase 2 — Plan
+
+Write a short plan covering scope, approach, major risks, and verification criteria.
+
+### Phase 3 — Implement
+
+Execute the plan in small, well-scoped steps instead of attempting the whole task at once.
+
+### Phase 4 — Verify
+
+Run the relevant tests, validation, or manual checks and confirm the result matches the plan.
 
 ## Plan Expectations
 

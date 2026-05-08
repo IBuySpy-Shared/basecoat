@@ -48,26 +48,33 @@ The baseline schema stores individual memory records plus lightweight links betw
 ```sql
 CREATE TABLE memories (
     id TEXT PRIMARY KEY,
-    category TEXT NOT NULL,       -- 'fact', 'preference', 'decision', 'convention'
-    subject TEXT NOT NULL,        -- topic tag (e.g., 'testing', 'auth', 'deployment')
-    content TEXT NOT NULL,        -- the memory itself
-    source TEXT,                  -- where it came from (file path, user input, inference)
-    confidence REAL DEFAULT 1.0, -- 0.0-1.0, decays over time
+    category TEXT NOT NULL,           -- 'fact', 'preference', 'decision', 'convention'
+    subject TEXT NOT NULL,            -- topic tag (e.g., 'testing', 'auth', 'deployment')
+    content TEXT NOT NULL,            -- the memory itself
+    source TEXT,                      -- where it came from (file path, user input, inference)
+    confidence REAL DEFAULT 1.0,      -- 0.0-1.0, decays over time
     created_at TEXT NOT NULL,
     last_accessed TEXT,
     access_count INTEGER DEFAULT 0,
-    expires_at TEXT               -- optional TTL
+    expires_at TEXT,                  -- optional TTL
+    tier TEXT DEFAULT 'l4',           -- 'l0'|'l1'|'l2'|'l3'|'l4' — lookup hierarchy tier
+    heat TEXT DEFAULT 'cold',         -- 'cold'|'warm'|'hot' — derived from access_count
+    pinned INTEGER DEFAULT 0,         -- 1 = exempt from decay/demotion (security, governance)
+    promotion_count INTEGER DEFAULT 0,-- number of tier promotions
+    last_promoted_at TEXT             -- ISO 8601 timestamp of last tier promotion
 );
 
 CREATE TABLE memory_relations (
     from_id TEXT NOT NULL,
     to_id TEXT NOT NULL,
-    relation_type TEXT,           -- 'supports', 'contradicts', 'refines'
+    relation_type TEXT,               -- 'supports', 'contradicts', 'refines'
     PRIMARY KEY (from_id, to_id)
 );
 
 CREATE INDEX idx_memories_subject ON memories(subject);
 CREATE INDEX idx_memories_category ON memories(category);
+CREATE INDEX idx_memories_tier ON memories(tier);
+CREATE INDEX idx_memories_heat ON memories(heat);
 ```
 
 ### `memories`
@@ -86,6 +93,19 @@ Each row represents one reusable unit of context.
 | `last_accessed` | Most recent retrieval timestamp |
 | `access_count` | Recall frequency for ranking and pruning |
 | `expires_at` | Optional TTL for temporary context |
+| `tier` | Lookup hierarchy tier: `l0`–`l4`. Determines retrieval cost and loading strategy |
+| `heat` | Access frequency bucket: `cold` (0–2), `warm` (3–9), `hot` (10+) — updated on each access |
+| `pinned` | When `1`, exempt from decay and demotion; use for security and governance rules |
+| `promotion_count` | Number of tier promotions; high values indicate stable, high-value patterns |
+| `last_promoted_at` | Timestamp of last promotion; used to assess promotion velocity |
+
+### Heat Thresholds
+
+| `access_count` | `heat` |
+|---|---|
+| 0–2 | `cold` |
+| 3–9 | `warm` |
+| 10+ | `hot` |
 
 ### `memory_relations`
 

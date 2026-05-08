@@ -26,14 +26,21 @@ Use this instruction whenever choosing a model, deciding how much context to loa
 
 ## Context Loading Discipline
 
+**Classify intent before loading any context.** Intent classification is free — it uses only what is already in context (user message + L2 memory index). Context loading happens *after* classification, not before.
+
 Load context in this order:
 
-1. Governing instructions and the immediate task
-2. The exact files, symbols, or sections needed to act
-3. Supporting docs, adjacent files, or history only if the task still cannot be completed
-4. Broad repository context only as a last resort
+1. **Intent classification** — match against L2 trigger map; assign fast path or full path
+2. **Fast path (confidence ≥ 0.80)**: load the pattern bundle only — pre-scoped instructions + docs for this intent type. Skip broad exploration.
+3. **Full path (confidence < 0.80 or Novel)**: load in layered order:
+   - Governing instructions and the immediate task
+   - The exact files, symbols, or sections needed to act
+   - Supporting docs, adjacent files, or history only if the task still cannot be completed
+   - Broad repository context only as a last resort
 
 Prefer targeted searches, line ranges, summaries, diffs, and handoffs before loading full files or large document sets.
+
+See `docs/execution-hierarchy.md` for the full stack, pattern bundle catalog, and confidence lifecycle.
 
 ## Cost Escalation
 
