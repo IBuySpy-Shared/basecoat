@@ -20,12 +20,19 @@ on:
 permissions:
   contents: read
 
+# Token strategy (two tokens, different scopes):
+#   GITHUB_TOKEN        — reads this repo + searches/reads all enlisted org repos
+#   MEMORY_REPO_TOKEN   — fine-grained PAT scoped to {org}/basecoat-memory only
+#                         Required permissions on basecoat-memory:
+#                           Contents: Read and Write  (clone + push branch)
+#                           Pull requests: Read and Write  (gh pr create)
+#                           Metadata: Read (implicit)
+
 jobs:
   sweep:
     name: Sweep enlisted repos for learnings
     runs-on: ubuntu-latest
-    env:
-      GH_TOKEN: ${{ secrets.MEMORY_REPO_TOKEN || secrets.GITHUB_TOKEN }}
+    # No job-level GH_TOKEN — each step uses the correct token explicitly
 
     steps:
       - name: Check out basecoat (scripts only)
@@ -51,6 +58,7 @@ jobs:
       - name: Check for enlisted repos
         id: check
         env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}   # org-level search — use GITHUB_TOKEN
           ORG: ${{ steps.params.outputs.org }}
         run: |
           COUNT=$(gh api "search/repositories?q=topic:basecoat-enabled+org:${ORG}&per_page=1" \
@@ -74,7 +82,9 @@ jobs:
         if: steps.check.outputs.count != '0'
         shell: pwsh
         env:
-          GH_TOKEN: ${{ secrets.MEMORY_REPO_TOKEN || secrets.GITHUB_TOKEN }}
+          # GITHUB_TOKEN reads PRs/issues/CHANGELOGs from all enlisted repos.
+          # MEMORY_REPO_TOKEN is scoped only to basecoat-memory and would 403 here.
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           # Write candidates directly into the basecoat-memory checkout
           pwsh basecoat/scripts/sweep-enterprise-memory.ps1 `
