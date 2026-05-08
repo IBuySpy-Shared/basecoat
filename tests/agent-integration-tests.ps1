@@ -181,9 +181,12 @@ foreach ($file in $agentFiles) {
     if (-not (Test-YamlFieldPresent $frontmatter 'allowed_skills')) { continue }
 
     $allowedSkillsChecked++
-    $skills = Get-YamlArrayField $frontmatter 'allowed_skills'
+    # Use @(...) to preserve empty-array distinction (PowerShell collapses @() to $null on function return)
+    $rawSkillsLine = ($frontmatter -replace "`r","" -split "`n") |
+        Where-Object { $_ -match "^allowed_skills\s*:" } | Select-Object -First 1
+    $skills = @(Get-YamlArrayField $frontmatter 'allowed_skills')
 
-    if ($null -eq $skills) {
+    if ($skills.Count -eq 0 -and $rawSkillsLine -notmatch "^allowed_skills\s*:\s*(\[\]|\s*$)") {
         $failures += "$($file.Name): 'allowed_skills' field is present but is not a valid YAML array (expected inline array like [skill1, skill2] or [])"
         continue
     }
