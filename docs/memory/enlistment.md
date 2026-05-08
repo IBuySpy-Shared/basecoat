@@ -115,6 +115,22 @@ fix is non-obvious and reusable.
 
 ---
 
+## Required Secret
+
+The sweep workflow writes to `{org}/basecoat-memory` using a PAT stored as
+`MEMORY_REPO_TOKEN` in the basecoat repo secrets.
+
+Create a fine-grained PAT with:
+- **Resource owner:** your org
+- **Repository access:** `{org}/basecoat-memory` only
+- **Permissions:** Contents (R/W), Pull requests (R/W)
+
+```bash
+gh secret set MEMORY_REPO_TOKEN --repo IBuySpy-Shared/basecoat
+```
+
+---
+
 ## Sweep Schedule
 
 The sweep runs:
@@ -123,8 +139,11 @@ The sweep runs:
 - **On demand** — `workflow_dispatch` from the BaseCoat repo Actions tab
 
 After each sweep a PR is opened against `{org}/basecoat-memory` with candidate
-memory files. The memory-curator agent reviews each candidate and a memory steward
-approves the merge.
+files under `sweep-candidates/YYYY-MM-DD.md` in that repo. The memory-curator
+agent reviews each candidate and a memory steward approves the merge.
+
+> **Note:** No sweep data is written back to this (basecoat) repository.
+> All candidates land in `{org}/basecoat-memory` only.
 
 ---
 

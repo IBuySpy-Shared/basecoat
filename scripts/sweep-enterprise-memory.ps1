@@ -16,7 +16,8 @@
     How many days back to look for signals. Default: 30.
 
 .PARAMETER OutputDir
-    Where to write candidate files. Default: docs/memory/sweep-candidates.
+    Where to write candidate files. Default: sweep-candidates (relative to cwd).
+    In CI the workflow checks out {org}/basecoat-memory and passes that path.
 
 .PARAMETER DryRun
     Print candidates to console without writing files.
@@ -29,7 +30,7 @@
 param(
     [string]$Org       = ($env:GITHUB_REPOSITORY_OWNER ?? "IBuySpy-Shared"),
     [int]   $DaysBack  = 30,
-    [string]$OutputDir = "docs/memory/sweep-candidates",
+    [string]$OutputDir = "sweep-candidates",
     [switch]$DryRun
 )
 
