@@ -19,10 +19,10 @@ Use this instruction whenever choosing a model, deciding how much context to loa
 
 ## Model Tier Guidance
 
-- **Premium** — Use for high-stakes, irreversible, or trust-without-second-opinion decisions such as architecture direction, security analysis, compliance interpretation, and major cross-system tradeoffs.
-- **Reasoning** — Use for analysis, code review, research, test strategy, planning, and other work that needs structured judgment but not the highest-cost tier.
-- **Code** — Use for implementation, refactoring, debugging, migration, and code generation tasks where code quality matters more than broad strategic reasoning.
-- **Fast** — Use for routine automation, scanning, formatting, status checks, simple transformations, and other well-defined tasks with clear inputs and easy validation.
+- **Premium** (`claude-opus-4.7`, `claude-opus-4.7-high`, `claude-opus-4.6`) — Use for high-stakes, irreversible, or trust-without-second-opinion decisions such as architecture direction, security analysis, compliance interpretation, and major cross-system tradeoffs.
+- **Reasoning/Standard** (`claude-sonnet-4.6`, `claude-sonnet-4.5`, `gpt-5.4`, `gpt-5.2`) — Use for analysis, code review, research, test strategy, planning, and other work that needs structured judgment but not the highest-cost tier.
+- **Code** (`gpt-5.3-codex`, `gpt-5.2-codex`) — Use for implementation, refactoring, debugging, migration, and code generation tasks where code quality matters more than broad strategic reasoning.
+- **Fast** (`claude-haiku-4.5`, `gpt-5.4-mini`, `gpt-5-mini`, `gpt-4.1`) — Use for routine automation, scanning, formatting, status checks, simple transformations, and other well-defined tasks with clear inputs and easy validation.
 
 ## Context Loading Discipline
 
