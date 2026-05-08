@@ -1,5 +1,6 @@
 import express, { Express, Response } from 'express';
 import cors from 'cors';
+import rateLimit from 'express-rate-limit';
 import { AppDataSource } from '@config/database';
 import logger from '@config/logger';
 import { requestIdMiddleware, requestLoggingMiddleware, AuthRequest } from '@middleware/request.middleware';
@@ -25,6 +26,17 @@ export class App {
     // Request ID and logging
     this.app.use(requestIdMiddleware);
     this.app.use(requestLoggingMiddleware);
+
+    // Global rate limiting
+    this.app.use(
+      rateLimit({
+        windowMs: 15 * 60 * 1000,
+        max: 100,
+        standardHeaders: true,
+        legacyHeaders: false,
+        message: { error: 'Too many requests, please try again later.', code: 'RATE_LIMITED' },
+      }),
+    );
 
     // CORS
     const corsOrigins = (process.env.CORS_ORIGINS || 'http://localhost:3000').split(',');
