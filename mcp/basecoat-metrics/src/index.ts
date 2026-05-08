@@ -298,6 +298,260 @@ server.tool(
 );
 
 // ---------------------------------------------------------------------------
+// Asset discovery helpers (skills/, agents/)
+// ---------------------------------------------------------------------------
+
+const REPO_DIR = process.env.REPO_DIR ?? null;
+
+type AssetFrontmatter = {
+  name: string;
+  description: string;
+  type: "skill" | "agent";
+  path: string;
+};
+
+function parseFrontmatter(content: string): Record<string, string> {
+  const match = content.match(/^---\r?\n([\s\S]*?)\r?\n---/);
+  if (!match) return {};
+  const result: Record<string, string> = {};
+  for (const line of match[1].split(/\r?\n/)) {
+    const sep = line.indexOf(":");
+    if (sep === -1) continue;
+    const key = line.slice(0, sep).trim();
+    const value = line.slice(sep + 1).trim().replace(/^["']|["']$/g, "");
+    if (key && value) result[key] = value;
+  }
+  return result;
+}
+
+async function discoverAssets(): Promise<AssetFrontmatter[]> {
+  if (!REPO_DIR) return [];
+
+  const { readdir, readFile: rf } = await import("node:fs/promises");
+  const { existsSync: exists } = await import("node:fs");
+  const { join: j } = await import("node:path");
+
+  const assets: AssetFrontmatter[] = [];
+
+  // Skills
+  const skillsDir = j(REPO_DIR, "skills");
+  if (exists(skillsDir)) {
+    for (const entry of await readdir(skillsDir, { withFileTypes: true })) {
+      if (!entry.isDirectory()) continue;
+      const skillMd = j(skillsDir, entry.name, "SKILL.md");
+      if (!exists(skillMd)) continue;
+      try {
+        const content = await rf(skillMd, "utf-8");
+        const fm = parseFrontmatter(content);
+        assets.push({
+          name: fm["name"] ?? entry.name,
+          description: fm["description"] ?? "",
+          type: "skill",
+          path: `skills/${entry.name}/SKILL.md`,
+        });
+      } catch {
+        // skip unreadable files
+      }
+    }
+  }
+
+  // Agents
+  const agentsDir = j(REPO_DIR, "agents");
+  if (exists(agentsDir)) {
+    for (const entry of await readdir(agentsDir, { withFileTypes: true })) {
+      if (!entry.isFile() || !entry.name.endsWith(".agent.md")) continue;
+      const agentMd = j(agentsDir, entry.name);
+      try {
+        const content = await rf(agentMd, "utf-8");
+        const fm = parseFrontmatter(content);
+        const name = entry.name.replace(/\.agent\.md$/, "");
+        assets.push({
+          name: fm["name"] ?? name,
+          description: fm["description"] ?? "",
+          type: "agent",
+          path: `agents/${entry.name}`,
+        });
+      } catch {
+        // skip unreadable files
+      }
+    }
+  }
+
+  return assets;
+}
+
+// ── Tool: search-skills ─────────────────────────────────────────────────────
+
+server.tool(
+  "search-skills",
+  "Search Base Coat skills by name or description keyword. " +
+    "Returns matching skills with name, description, and relative path. " +
+    "Requires the server to be started with REPO_DIR set to the repository root.",
+  {
+    query: z
+      .string()
+      .describe("Keyword to search for in skill name or description (case-insensitive)."),
+    limit: z
+      .number()
+      .int()
+      .min(1)
+      .max(50)
+      .default(10)
+      .describe("Maximum number of results to return (default 10)."),
+  },
+  async ({ query, limit }) => {
+    if (!REPO_DIR) {
+      return {
+        content: [
+          {
+            type: "text" as const,
+            text: "REPO_DIR environment variable is not set. Set it to the repository root to enable asset search.",
+          },
+        ],
+      };
+    }
+
+    const assets = await discoverAssets();
+    const q = query.toLowerCase();
+    const skills = assets
+      .filter(
+        (a) =>
+          a.type === "skill" &&
+          (a.name.toLowerCase().includes(q) || a.description.toLowerCase().includes(q))
+      )
+      .slice(0, limit);
+
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(
+            { query, count: skills.length, skills: skills.map((s) => ({ name: s.name, description: s.description, path: s.path })) },
+            null,
+            2
+          ),
+        },
+      ],
+    };
+  }
+);
+
+// ── Tool: search-agents ─────────────────────────────────────────────────────
+
+server.tool(
+  "search-agents",
+  "Search Base Coat agents by name or description keyword. " +
+    "Returns matching agents with name, description, and relative path. " +
+    "Requires the server to be started with REPO_DIR set to the repository root.",
+  {
+    query: z
+      .string()
+      .describe("Keyword to search for in agent name or description (case-insensitive)."),
+    limit: z
+      .number()
+      .int()
+      .min(1)
+      .max(50)
+      .default(10)
+      .describe("Maximum number of results to return (default 10)."),
+  },
+  async ({ query, limit }) => {
+    if (!REPO_DIR) {
+      return {
+        content: [
+          {
+            type: "text" as const,
+            text: "REPO_DIR environment variable is not set. Set it to the repository root to enable asset search.",
+          },
+        ],
+      };
+    }
+
+    const assets = await discoverAssets();
+    const q = query.toLowerCase();
+    const agents = assets
+      .filter(
+        (a) =>
+          a.type === "agent" &&
+          (a.name.toLowerCase().includes(q) || a.description.toLowerCase().includes(q))
+      )
+      .slice(0, limit);
+
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(
+            { query, count: agents.length, agents: agents.map((a) => ({ name: a.name, description: a.description, path: a.path })) },
+            null,
+            2
+          ),
+        },
+      ],
+    };
+  }
+);
+
+// ── Tool: get-asset-details ─────────────────────────────────────────────────
+
+server.tool(
+  "get-asset-details",
+  "Return the full content of a Base Coat skill (SKILL.md) or agent (.agent.md) file. " +
+    "Use search-skills or search-agents first to discover the exact asset path. " +
+    "Requires the server to be started with REPO_DIR set to the repository root.",
+  {
+    path: z
+      .string()
+      .describe(
+        "Relative path to the asset file from the repo root " +
+          "(e.g. 'skills/cqrs-event-sourcing/SKILL.md' or 'agents/security-analyst.agent.md')."
+      ),
+  },
+  async ({ path: assetPath }) => {
+    if (!REPO_DIR) {
+      return {
+        content: [
+          {
+            type: "text" as const,
+            text: "REPO_DIR environment variable is not set. Set it to the repository root to enable asset details.",
+          },
+        ],
+      };
+    }
+
+    const { readFile: rf } = await import("node:fs/promises");
+    const { existsSync: exists } = await import("node:fs");
+    const { join: j, resolve: res, normalize: norm } = await import("node:path");
+
+    // Prevent path traversal
+    const safeBase = res(REPO_DIR);
+    const fullPath = res(j(REPO_DIR, norm(assetPath)));
+    if (!fullPath.startsWith(safeBase)) {
+      return {
+        content: [{ type: "text" as const, text: "Invalid path: traversal not allowed." }],
+      };
+    }
+
+    if (!exists(fullPath)) {
+      return {
+        content: [{ type: "text" as const, text: `Asset not found: ${assetPath}` }],
+      };
+    }
+
+    try {
+      const content = await rf(fullPath, "utf-8");
+      return {
+        content: [{ type: "text" as const, text: content }],
+      };
+    } catch (err) {
+      return {
+        content: [{ type: "text" as const, text: `Failed to read asset: ${String(err)}` }],
+      };
+    }
+  }
+);
+
+// ---------------------------------------------------------------------------
 // Start — stdio (local dev) or HTTP (deployed)
 // ---------------------------------------------------------------------------
 

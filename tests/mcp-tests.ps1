@@ -77,6 +77,18 @@ Assert-FileContains 'mcp/basecoat-metrics/src/index.ts' '/health' `
 Assert-FileContains 'mcp/basecoat-metrics/src/index.ts' 'MCP_TRANSPORT' `
     'src/index.ts is missing MCP_TRANSPORT env var switch'
 
+Write-Host 'MCP tests: validating asset search tools in src/index.ts...'
+Assert-FileContains 'mcp/basecoat-metrics/src/index.ts' 'search-skills' `
+    'src/index.ts is missing search-skills tool'
+Assert-FileContains 'mcp/basecoat-metrics/src/index.ts' 'search-agents' `
+    'src/index.ts is missing search-agents tool'
+Assert-FileContains 'mcp/basecoat-metrics/src/index.ts' 'get-asset-details' `
+    'src/index.ts is missing get-asset-details tool'
+Assert-FileContains 'mcp/basecoat-metrics/src/index.ts' 'REPO_DIR' `
+    'src/index.ts is missing REPO_DIR environment variable support'
+Assert-FileContains 'mcp/basecoat-metrics/src/index.ts' 'parseFrontmatter' `
+    'src/index.ts is missing parseFrontmatter helper function'
+
 Write-Host 'MCP tests: validating Dockerfile...'
 Assert-FileContains 'mcp/basecoat-metrics/Dockerfile' 'HEALTHCHECK' `
     'Dockerfile is missing HEALTHCHECK instruction'

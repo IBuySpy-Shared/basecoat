@@ -12,6 +12,11 @@ GitHub Pages endpoint or a local directory override.
 | `get-history` | Historical snapshots for the last N weeks |
 | `get-alerts` | Active degradation alerts (CI drops, cycle time spikes) |
 | `get-repo-metrics` | Detailed metrics + trend for a single repository |
+| `search-skills` | Fuzzy search Base Coat skills by name or description keyword |
+| `search-agents` | Fuzzy search Base Coat agents by name or description keyword |
+| `get-asset-details` | Return full content of a skill or agent file by relative path |
+
+> `search-skills`, `search-agents`, and `get-asset-details` require `REPO_DIR` to be set.
 
 ## Build
 
@@ -46,9 +51,13 @@ Add to your `.vscode/mcp.json` (or user-level MCP config):
 | `PORT` | `8080` | Port for HTTP transport |
 | `METRICS_BASE_URL` | GitHub Pages URL | Override the base URL for metrics JSON files |
 | `METRICS_DIR` | *(none)* | Path to a local directory containing `latest.json`, `history.json`, `alerts.json` |
+| `REPO_DIR` | *(none)* | Absolute path to the Base Coat repository root — enables `search-skills`, `search-agents`, and `get-asset-details` |
 
 Set `METRICS_DIR` to `dashboard/metrics` when running locally against a freshly
 collected metrics run.
+
+Set `REPO_DIR` to the repository root to enable asset discovery tools. For local use
+via VS Code, add it to your `.vscode/mcp.json` `env` block (see below).
 
 ## Deployment
 

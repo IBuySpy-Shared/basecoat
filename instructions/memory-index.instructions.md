@@ -57,7 +57,8 @@ Bounds on Pass 2:
   L2 (repo-local index) — shared entries are not calibrated for this specific repo
 
 See `docs/research/TRM-HRM-investigation.md` — *TRM Intent Classifier Contract* for
-the full parameter set and failure-mode mitigations.
+the full parameter set and failure-mode mitigations. For the Reflexion failure signal
+format and operational constraints, see `instructions/trm-reflexion.instructions.md`.
 
 
 

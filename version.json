@@ -1,6 +1,6 @@
 {
   "name": "base-coat",
-  "version": "3.12.0",
+  "version": "3.13.0",
   "releaseDate": "2026-05-08",
-  "notes": "v3.12.0: MCP deployment infra, enterprise memory sweep, portal consolidation, and test coverage."
+  "notes": "v3.13.0: TRM Reflexion instruction, top-5 skill modularization, MCP asset search tools, dependency-update-advisor workflow."
 }
