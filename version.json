@@ -1,6 +1,6 @@
 {
   "name": "base-coat",
-  "version": "3.14.0",
-  "releaseDate": "2026-05-09",
-  "notes": "v3.14.0: HRM Phase 2 formalization, skill modularization batch 2 (7 skills), memory intelligence (Bayesian confidence + heat scoring), dependency hygiene."
+  "version": "3.15.0",
+  "releaseDate": "2026-05-22",
+  "notes": "v3.15.0: Skill modularization batch 3 (6 skills), instruction modularization batch 1 (3 instructions), distribute:false separation policy (#578)."
 }

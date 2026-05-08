@@ -1,6 +1,7 @@
 ---
 description: "Use when selecting models, escalating reasoning cost, or loading context. Enforces cost-aware routing and token budget discipline for all agent work."
 applyTo: "**/*"
+distribute: false
 ---
 
 # Token Economics

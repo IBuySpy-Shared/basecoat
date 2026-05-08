@@ -4,6 +4,44 @@ All notable changes to this repository should be recorded in this file.
 
 ## Unreleased
 
+## 3.15.0 - 2026-05-22
+
+### Modularization Sweep + Repo Structure
+
+#### Skill Modularization Batch 3 (6 skills)
+
+Condensed 6 large SKILL.md files (all were 5.2–6.4 KB) to ≤5 KB overview files,
+extracting detailed content into `references/` subdirectories per skill.
+
+- **electron-apps** — `process-architecture.md`, `packaging-updates.md`, `testing-security.md`
+- **database-migration** — `zero-downtime-patterns.md`, `schema-versioning.md`, `operations-checklist.md`
+- **github-security-posture** — `org-checks.md`, `repo-checks.md`
+- **contract-testing** — `pact-patterns.md`, `e2e-orchestration.md`
+- **azure-waf-review** — `pillar-guide.md`, `workflow-guardrails.md`
+- **copilot-usage-analytics** — `api-landscape-detail.md`, `cost-estimation-guide.md`
+
+#### Instruction Modularization Batch 1 (3 instructions)
+
+Applied the same references/ pattern to the three largest instruction files:
+
+- **electron.instructions.md** — condensed from 15.2 KB to 4.2 KB; detail in `references/electron/ipc-security.md` and `csp-child-process.md`
+- **nextjs-react19.instructions.md** — condensed from 14.2 KB to 2.4 KB; detail in `references/nextjs/server-components.md` and `app-router.md`
+- **agents.instructions.md** — condensed from 14.1 KB to 6.5 KB; detail in `references/agents/skill-pairing.md` and `lifecycle.md`
+
+#### Issue #578 — Internal/Distributable Separation
+
+Added `distribute: false` frontmatter to repo-internal instruction files that should
+not be synced to downstream repositories:
+
+- `governance.instructions.md`
+- `enterprise-configuration.instructions.md`
+- `hrm-execution.instructions.md`
+- `token-economics.instructions.md`
+- `memory-index.instructions.md`
+
+Sync scripts already honour this flag (validated by test suite). Documented policy
+in `CONTRIBUTING.md` under "Asset Distribution". Closes #578.
+
 ## 3.14.0 - 2026-05-09
 
 ### HRM Formalization + Skill Batch 2 + Memory Intelligence

@@ -6,6 +6,7 @@ applyTo:
   - enterprise
   - github-organization
   - governance
+distribute: false
 ---
 
 # Enterprise Configuration and Policy Setup

@@ -529,6 +529,39 @@ Always inspect these headers after API calls, especially in automation:
 
 ---
 
+## Asset Distribution
+
+When an instruction or prompt file is maintained for BaseCoat's own internal use only
+(governance rules, framework-specific patterns, memory indexes), it should **not** be
+distributed to repos that adopt BaseCoat as a foundation.
+
+Mark such files with `distribute: false` in their YAML frontmatter:
+
+```yaml
+---
+description: "..."
+applyTo: "**/*"
+distribute: false
+---
+```
+
+Sync scripts (`sync.ps1`, `sync.sh`) skip any instruction file containing
+`distribute: false` when copying assets to downstream repositories.
+
+Files currently marked `distribute: false`:
+
+- `instructions/governance.instructions.md` — BaseCoat repo-governance rules
+- `instructions/enterprise-configuration.instructions.md` — enterprise setup guidance
+- `instructions/hrm-execution.instructions.md` — internal execution hierarchy
+- `instructions/token-economics.instructions.md` — cost-routing rules for this repo
+- `instructions/memory-index.instructions.md` — hot-cache memory index
+
+When adding a new instruction, ask: "Should downstream repos receive this?" If the
+answer is no (it references BaseCoat tooling, sprints, or internal conventions), add
+`distribute: false`.
+
+---
+
 ## Questions
 
 Open an issue with the `question` label. Do not DM maintainers for things that belong in the open.
