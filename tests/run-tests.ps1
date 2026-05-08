@@ -3,6 +3,21 @@ $ErrorActionPreference = 'Stop'
 $repoRoot = Resolve-Path (Join-Path $PSScriptRoot '..')
 Set-Location $repoRoot
 
+$testResultsDir = Join-Path $repoRoot 'test-results'
+
+function Write-FailureLog {
+    param([string]$TestName, [string]$Detail = '')
+    if (-not (Test-Path $testResultsDir)) {
+        New-Item -ItemType Directory -Path $testResultsDir -Force | Out-Null
+    }
+    $logPath = Join-Path $testResultsDir 'failure.log'
+    $timestamp = Get-Date -Format 'yyyy-MM-ddTHH:mm:ss'
+    $entry = "[$timestamp] FAILED: $TestName"
+    if ($Detail) { $entry += "`n  Detail: $Detail" }
+    Add-Content -Path $logPath -Value $entry
+    Write-Host "  [Screenshot capture: no browser test — see $logPath]" -ForegroundColor Yellow
+}
+
 function Assert-PathExists {
     param(
         [string]$Path,
@@ -87,6 +102,7 @@ Write-Host 'Running sync process tests...'
 & pwsh -NoProfile -File (Join-Path $PSScriptRoot 'sync-tests.ps1')
 if ($LASTEXITCODE -ne 0) {
     Write-Host 'Sync process tests failed' -ForegroundColor Red
+    Write-FailureLog 'sync-tests'
     exit 1
 }
 
@@ -94,6 +110,7 @@ Write-Host 'Running adoption scanner tests...'
 & pwsh -NoProfile -File (Join-Path $PSScriptRoot 'adoption-scanner-tests.ps1')
 if ($LASTEXITCODE -ne 0) {
     Write-Host 'Adoption scanner tests failed' -ForegroundColor Red
+    Write-FailureLog 'adoption-scanner-tests'
     exit 1
 }
 
@@ -101,6 +118,7 @@ Write-Host 'Running workflow guardrails tests...'
 & pwsh -NoProfile -File (Join-Path $PSScriptRoot 'workflow-guardrails-tests.ps1')
 if ($LASTEXITCODE -ne 0) {
     Write-Host 'Workflow guardrails tests failed' -ForegroundColor Red
+    Write-FailureLog 'workflow-guardrails-tests'
     exit 1
 }
 
@@ -108,6 +126,7 @@ Write-Host 'Running data workload tests...'
 & pwsh -NoProfile -File (Join-Path $PSScriptRoot 'data-workload-tests.ps1')
 if ($LASTEXITCODE -ne 0) {
     Write-Host 'Data workload tests failed' -ForegroundColor Red
+    Write-FailureLog 'data-workload-tests'
     exit 1
 }
 
@@ -115,6 +134,7 @@ Write-Host 'Running MCP tests...'
 & pwsh -NoProfile -File (Join-Path $PSScriptRoot 'mcp-tests.ps1')
 if ($LASTEXITCODE -ne 0) {
     Write-Host 'MCP tests failed' -ForegroundColor Red
+    Write-FailureLog 'mcp-tests'
     exit 1
 }
 
