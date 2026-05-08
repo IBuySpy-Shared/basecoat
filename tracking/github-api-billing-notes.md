@@ -6,13 +6,13 @@ GitHub Copilot offers per-model cost breakdown in the web-based billing dashboar
 
 ## Current Status
 
-**Last Updated:** 2026-05-03
+**Last Updated:** 2026-05-08
 
 | Data | API Available | Where |
 |------|---------------|-------|
 | Seat costs ($19/user/mo) | ✅ Yes | `GET /enterprises/{ent}/settings/billing/usage` |
 | Seat assignments + activity | ✅ Yes | `GET /orgs/{org}/copilot/billing/seats` |
-| Usage metrics (completions, suggestions) | ⚠️ Gated | Requires enterprise admin enable policy (`#282`) |
+| Usage metrics (completions, suggestions) | ✅ Available | New `/metrics/reports/` endpoints (old `/copilot/metrics` sunset Apr 2 2026) |
 | **Per-model request counts** | ❌ No API | Web UI only |
 | **Per-model costs (e.g., Claude Opus: $72.72)** | ❌ No API | Web UI only |
 | Premium request totals | ❌ No API | Web UI only |
@@ -45,21 +45,30 @@ curl -H "Authorization: token $GH_TOKEN" \
 # - pending_cancellation_date
 ```
 
-### Usage Metrics (REST API) — Policy-Gated
+### Usage Metrics (REST API) — Now Available
+
+> ⚠️ **API Migration:** The old `GET /orgs/{org}/copilot/metrics` endpoint was
+> deprecated 2026-01-29 and **sunset 2026-04-02**. It returns 404. Use the new
+> `/metrics/reports/` endpoints below.
 
 ```bash
+# 28-day rolling report (latest available)
 curl -H "Authorization: token $GH_TOKEN" \
-  "https://api.github.com/orgs/{org}/copilot/metrics"
+  -H "X-GitHub-Api-Version: 2022-11-28" \
+  "https://api.github.com/orgs/{org}/copilot/metrics/reports/organization-28-day/latest"
 
-# Response includes:
-# - copilot_suggestions (daily)
-# - copilot_acceptances (daily)
-# - copilot_completions (daily)
-# - copilot_active_users (daily)
-# Per language, editor, etc.
+# Response: { "download_links": ["<azure-blob-url>"], "report_start_day": "...", "report_end_day": "..." }
+# Download the NDJSON file from the link — each line is an independent JSON object.
+# Fields include: daily_active_users, daily_active_cli_users,
+# daily_active_copilot_cloud_agent_users, weekly_active_users, etc.
 
-# NOTE: Returns 404 if enterprise admin hasn't enabled the policy.
-# See #282 for enabling steps.
+# 1-day report (requires ?day=YYYY-MM-DD query param)
+curl -H "Authorization: token $GH_TOKEN" \
+  -H "X-GitHub-Api-Version: 2022-11-28" \
+  "https://api.github.com/orgs/{org}/copilot/metrics/reports/organization-1-day?day=2026-05-07"
+
+# Requires: admin:org or read:org scope (no manage_billing:copilot needed)
+# Requires: enterprise admin to have enabled Copilot usage metrics policy (#282 — now resolved)
 ```
 
 ## What Data IS NOT Available (Web UI Only)

@@ -53,7 +53,7 @@ Three data sources were investigated for programmatic Copilot CLI usage data:
 
 | Source | Endpoint | Status | Notes |
 |---|---|---|---|
-| GitHub REST — Copilot Usage | `GET /orgs/{org}/copilot/usage` | ⚠️ Partial | Returns IDE completion metrics only; CLI/agent token data not exposed |
+| GitHub REST — Copilot Metrics | `GET /orgs/{org}/copilot/metrics/reports/organization-28-day/latest` | ✅ Live | Returns NDJSON download link; DAU, CLI users, agent users. Old `/copilot/metrics` sunset 2026-04-02 |
 | GitHub REST — Copilot Billing | `GET /orgs/{org}/copilot/billing` | ⚠️ Partial | Returns seat counts only; no per-model or per-session cost data |
 | Power BI Copilot Usage dataset | Dataset `5c6c70ac-*` | ❌ Auth error | Requires separate AAD scope (`AADSTS9010010`); not available via standard MCP token |
 

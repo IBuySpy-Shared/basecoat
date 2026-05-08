@@ -27,27 +27,14 @@ description: Tracking for known limitations and prerequisites for certain featur
 
 ### #282: Copilot Usage Metrics Policy Configuration
 
-**Status:** BLOCKED (Enterprise Admin Gate)
+**Status:** RESOLVED (2026-05-08)
 
-**Description:** Enterprise admin must enable "Copilot usage metrics" policy in GitHub Enterprise settings before any usage data collection.
+**Description:** Enterprise admin has enabled the "Copilot usage metrics" policy. The new
+`/copilot/metrics/reports/` API endpoints are live and returning data.
 
-**Why It's Blocked:**
-- Only enterprise admins have permission to enable this policy
-- Feature requires GitHub Enterprise Cloud subscription
-- Organization-level settings insufficient (enterprise scope required)
-
-**Prerequisite Actions:**
-1. Contact your GitHub Enterprise admin
-2. Navigate to GitHub Enterprise settings → "Code security and analysis"
-3. Enable "Copilot usage metrics collection"
-4. Wait 24-48 hours for data pipeline initialization
-
-**Then Available:**
-- Organization-level Copilot usage reports
-- Per-seat metrics (active users, chats, completions)
-- Model adoption trends
-
-**Documentation:** See `docs/COPILOT_METRICS_SETUP.md` for post-enablement configuration.
+**Note:** The old `GET /orgs/{org}/copilot/metrics` endpoint was sunset 2026-04-02 and replaced
+by `/orgs/{org}/copilot/metrics/reports/organization-28-day/latest`. See
+`instructions/enterprise-configuration.instructions.md` for updated API reference.
 
 ---
 
