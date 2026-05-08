@@ -1,6 +1,6 @@
 {
   "name": "base-coat",
-  "version": "3.10.0",
-  "releaseDate": "2026-05-08",
-  "notes": "v3.10.0: Bootstrap, Agentic Workflows Tier 1-2, Azure instructions, and shared org memory repo."
+  "version": "3.11.0",
+  "releaseDate": "2026-05-09",
+  "notes": "v3.11.0: Docs reorganization, memory design docs, and 10 architecture diagrams."
 }

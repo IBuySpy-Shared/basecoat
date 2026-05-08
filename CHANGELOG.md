@@ -4,6 +4,54 @@ All notable changes to this repository should be recorded in this file.
 
 ## Unreleased
 
+## 3.11.0 - 2026-05-09
+
+### Docs Reorganization, Memory Design Docs, Architecture Diagrams
+
+#### Docs Reorganization (`docs/`)
+
+Complete restructuring of 155+ files into an 8-section taxonomy for navigability:
+
+- **`docs/architecture/`** — execution hierarchy, multi-agent orchestration, AI patterns
+- **`docs/guides/`** — enterprise setup, rollout, governance, hooks, rate-limit
+- **`docs/reference/`** — CLI, label taxonomy, asset registry, INVENTORY, prompt registry
+- **`docs/agents/`** — agent testing, skill map, telemetry, handoffs, runtime enforcement
+- **`docs/memory/`** — SQLite memory, shared memory, token optimization, local models
+- **`docs/operations/`** — release process, runbooks, cost optimization, DR, blocked issues
+- **`docs/integrations/`** — MCP, RAG, pydantic, Azure-specific, portal, app inventory
+- **`docs/archive/`** — wave summaries, staging reports, sprint deliverables
+- Updated `docs/INDEX.md` with full 8-section taxonomy and diagram links
+- Updated `README.md` all broken doc links to new paths
+- Updated `sync.ps1` to find `INVENTORY.md` at new `docs/reference/` location
+
+#### Memory Design Documentation (`docs/memory/`)
+
+Three new authoritative docs for the BaseCoat memory model:
+
+- **`MEMORY_DESIGN.md`** — full L0–L4 hierarchy, retrieval cost, promotion ladder, turn budget, failure protocols, SQLite schema, fork guidance
+- **`LEARNING_MODEL.md`** — Routine/Familiar/Novel knowledge taxonomy, TRM/HRM research context, adopter warm-up path, pattern bundle lifecycle, anti-patterns
+- **`SHARED_MEMORY_GUIDE.md`** — full setup walkthrough, writing good entries, contribution flow, sync script usage, maintenance cadence
+
+#### Architecture Diagrams (`docs/diagrams/`)
+
+10 new Excalidraw diagrams providing visual reference for architecture and process flows:
+
+**Architecture (5):**
+- `execution-hierarchy.excalidraw` — 5-layer execution stack from user intent to output
+- `multi-agent-orchestration.excalidraw` — LangGraph StateGraph fan-out/fan-in pattern
+- `asset-taxonomy.excalidraw` — four primitive asset types and their relationships
+- `memory-lookup-hierarchy.excalidraw` — L0–L4 memory layer lookup and retrieval cost
+- `two-tier-memory-model.excalidraw` — personal vs shared memory tiers
+
+**Process (5):**
+- `intent-routing.excalidraw` — fast-path vs deep-reasoning routing decision
+- `turn-budget-protocol.excalidraw` — token budget enforcement and graceful degradation
+- `memory-promotion-flow.excalidraw` — pattern promotion and demotion ladder
+- `agentic-workflow-lifecycle.excalidraw` — PR trigger → filter → agent → safe output
+- `bootstrap-flow.excalidraw` — 4-phase bootstrap script flow
+
+All diagrams indexed at `docs/diagrams/README.md`.
+
 ## 3.10.0 - 2026-05-08
 
 ### Bootstrap, Agentic Workflows Tier 1-2, Azure Instructions, Shared Org Memory

@@ -23,13 +23,19 @@ try {
     $fullTargetDir = Join-Path $repoRoot $targetDir
     New-Item -ItemType Directory -Force -Path $fullTargetDir | Out-Null
 
-    foreach ($item in @('README.md', 'CHANGELOG.md', 'INVENTORY.md', 'version.json', 'basecoat-metadata.json', 'instructions', 'skills', 'prompts', 'agents', 'docs')) {
+    foreach ($item in @('README.md', 'CHANGELOG.md', 'version.json', 'basecoat-metadata.json', 'instructions', 'skills', 'prompts', 'agents', 'docs')) {
         $destination = Join-Path $fullTargetDir $item
         if (Test-Path $destination) {
             Remove-Item -Path $destination -Recurse -Force
         }
 
         Copy-Item -Path (Join-Path $sourcePath $item) -Destination $destination -Recurse -Force
+    }
+
+    # INVENTORY.md moved to docs/reference/ in v3.11.0 — copy from new location to target root for backwards compat
+    $inventorySrc = Join-Path $sourcePath 'docs/reference/INVENTORY.md'
+    if (Test-Path $inventorySrc) {
+        Copy-Item -Path $inventorySrc -Destination (Join-Path $fullTargetDir 'INVENTORY.md') -Force
     }
 
     # Remove agent taxonomy subdirs from staging — they contain only index
