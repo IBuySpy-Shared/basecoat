@@ -28,10 +28,15 @@ git clone --depth 1 --branch "$SOURCE_REF" "$SOURCE_REPO" "$TMP_DIR/source" >/de
 
 mkdir -p "$REPO_ROOT/$TARGET_DIR"
 
-for item in README.md CHANGELOG.md INVENTORY.md version.json basecoat-metadata.json instructions skills prompts agents docs; do
+for item in README.md CHANGELOG.md version.json basecoat-metadata.json instructions skills prompts agents docs; do
   rm -rf "$REPO_ROOT/$TARGET_DIR/$item"
   cp -R "$TMP_DIR/source/$item" "$REPO_ROOT/$TARGET_DIR/$item"
 done
+
+# INVENTORY.md moved to docs/reference/ in v3.11.0 — copy from new location to target root for backwards compat
+if [[ -f "$TMP_DIR/source/docs/reference/INVENTORY.md" ]]; then
+  cp "$TMP_DIR/source/docs/reference/INVENTORY.md" "$REPO_ROOT/$TARGET_DIR/INVENTORY.md"
+fi
 
 # Remove agent taxonomy subdirs from staging — they contain only index
 # READMEs with relative links that break outside the source repo

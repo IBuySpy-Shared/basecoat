@@ -5,13 +5,19 @@ set -euo pipefail
 ROOT_DIR="${1:-$(pwd)}"
 cd "$ROOT_DIR"
 
-required=(README.md CHANGELOG.md INVENTORY.md version.json sync.sh sync.ps1 instructions skills prompts agents)
+required=(README.md CHANGELOG.md version.json sync.sh sync.ps1 instructions skills prompts agents)
 for item in "${required[@]}"; do
   if [[ ! -e "$item" ]]; then
     echo "Missing required path: $item" >&2
     exit 1
   fi
 done
+
+# INVENTORY.md moved to docs/reference/ in v3.11.0 — accept either location
+if [[ ! -e "INVENTORY.md" && ! -e "docs/reference/INVENTORY.md" ]]; then
+  echo "Missing required path: INVENTORY.md" >&2
+  exit 1
+fi
 
 while IFS= read -r file; do
   if [[ "$(sed -n '1p' "$file")" != "---" ]]; then
