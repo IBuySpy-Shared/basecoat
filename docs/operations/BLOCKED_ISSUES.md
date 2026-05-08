@@ -55,33 +55,15 @@ description: Tracking for known limitations and prerequisites for certain featur
 
 ### Skill Refactoring (>5KB Files) — Phase 2 #330
 
-**Status:** IN PROGRESS
+**Status:** COMPLETE (closed Sprint 15–16)
 
-**Challenge:** Large skills (15-20KB) are difficult to navigate in editor UIs.
+**Resolved:** All 12 skills that exceeded 5KB have been modularized using the `references/` pattern. Each `SKILL.md` is now a ≤5KB overview + nav table pointing to focused `references/*.md` files.
 
-**Solution:** Modular pattern with `references/` subdirectory
+**Skills modularized:**
+- Sprint 15 (batch 1): `cqrs-event-sourcing`, `e2e-testing`, `penetration-testing`, `microservices-migration`, `service-bus-migration`
+- Sprint 16 (batch 2): `identity-migration`, `basecoat`, `tech-debt`, `dev-containers`, `api-security`, `ha-resilience`, `azure-devops-rest`
 
-**Example:** `skills/security-operations/SKILL.md` split into:
-```
-skills/security-operations/
-  ├─ SKILL.md (overview, 5KB)
-  ├─ references/
-  │  ├─ threat-detection.md (5KB)
-  │  ├─ incident-response.md (4KB)
-  │  ├─ secrets-rotation.md (2KB)
-  │  └─ audit-logging.md (2KB)
-```
-
-**Why Needed:**
-- IDEs (VS Code, etc) show previews up to ~5KB
-- Documentation sites render better below 10KB per page
-- Cognitive load reduced with focused, single-topic files
-
-**Next Steps:**
-- Identify all skills >5KB
-- Apply modular refactoring pattern
-- Update main SKILL.md with navigation links
-- Update related agents' `allowed-tools` references
+**Remaining skills >5KB for Sprint 17 (batch 3):** `electron-apps` 6.4KB, `database-migration` 6.1KB, `github-security-posture` 6.1KB, `contract-testing` 5.6KB, `azure-waf-review` 5.3KB, `copilot-usage-analytics` 5.1KB
 
 ---
 
@@ -131,6 +113,6 @@ skills/security-operations/
 
 ---
 
-**Last Updated:** 2026-05-02  
+**Last Updated:** 2026-05-08  
 **Reviewed By:** Copilot  
-**Next Review:** 2026-06-02
+**Next Review:** 2026-06-08
