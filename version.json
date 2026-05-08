@@ -1,6 +1,6 @@
 {
   "name": "base-coat",
-  "version": "3.8.0",
+  "version": "3.9.0",
   "releaseDate": "2026-05-07",
-  "notes": "v3.8.0: Sprint 11 — 5 GitHub Agentic Workflows (gh aw), portal scan trigger with polling, and COPILOT_GITHUB_TOKEN setup docs."
+  "notes": "v3.9.0: Adaptive execution hierarchy — intent-driven fast path routing, pattern bundles, memory lookup tiers (L0-L4), turn budget rules, and failure/success learning protocols."
 }

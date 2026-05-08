@@ -4,6 +4,60 @@ All notable changes to this repository should be recorded in this file.
 
 ## Unreleased
 
+## 3.9.0 - 2026-05-07
+
+### Adaptive Execution Hierarchy + Memory Fast-Path Routing
+
+#### Execution Hierarchy (`docs/execution-hierarchy.md`)
+
+New reference document defining the 5-layer execution stack for all BaseCoat agents:
+
+- **Layer 0** — System instructions (host/provider, immutable)
+- **Layer 1** — BaseCoat guardrails as structural circuit breakers (governance, security, agent-behavior); fire at fixed checkpoints regardless of fast/full path — cannot be routed around
+- **Layer 2** — Intent classification using L2 memory index (zero extra context cost); routes to fast path or full path based on confidence score
+- **Layer 3a Fast Path** — Pattern bundle loaded for known intents (confidence ≥ 0.80); pre-scoped context + pre-validated turn budget
+- **Layer 3b Full Path** — Layered context load for novel/low-confidence tasks; L2 → L3 episodic → L4 semantic
+- **Layer 5** — Post-execution learning: reinforce successful novel patterns to memory; log failure patterns on stuck tasks
+
+Pattern bundle catalog: 9 known BaseCoat patterns with turn budgets and confidence lifecycle (degrades on overruns, retires below 0.50).
+
+#### Memory Lookup Hierarchy (`instructions/memory-index.instructions.md`)
+
+New L2 hot-cache instruction file — loads at session start to prime fast recall:
+
+- L0–L4 tier map with retrieval cost per tier
+- Promotion ladder: `store_memory` accessed 3× → L2 index; 5 sessions → L1 instruction rule; >50% sessions → L0 frontmatter
+- Pinned patterns exempt from decay (security, governance)
+- Trigger map organized by domain (CI, testing, portal, git, assets, turn budget)
+- Episodic retrieval SQL shortcuts for L3 queries
+
+#### Turn Budget and Learning Cost (`instructions/token-economics.instructions.md`)
+
+- Classify tasks as **Routine** (≤3 turns), **Familiar** (≤5 turns), or **Novel** (estimate N) before starting
+- **Failure protocol**: after 5 turns with no measurable forward progress → `store_memory` failure pattern, change approach before escalating model tier
+- **Success protocol**: novel solution + tests pass → `store_memory`; skip for boilerplate
+- **80/50 early-warning rule**: at 80% turn budget with <50% progress → pause and reassess
+- Intent-first context loading replaces static layered order
+
+#### Memory Schema Extensions (`docs/SQLITE_MEMORY.md`)
+
+- Added columns: `tier` (l0–l4), `heat` (cold/warm/hot), `pinned`, `promotion_count`, `last_promoted_at`
+- Heat thresholds: cold (0–2 accesses), warm (3–9), hot (10+)
+- Pinned flag exempts memories from decay and demotion
+
+#### Memory Curator Agent (`agents/memory-curator.agent.md`)
+
+- L0–L4 lookup hierarchy with retrieval cost per tier
+- Promotion protocol (myelination): access frequency drives tier promotion
+- Heat-based proactive injection: hot memories injected at session start when domain matches
+- Resolution order for SessionStart and PostToolUse failure paths
+
+#### Plan-First Workflow (`instructions/plan-first.instructions.md`)
+
+- Phase 0 (Intent Classification) added before Explore phase
+- Fast-path tasks skip directly to Plan using bundle context
+- Guardrails still fire at structural checkpoints on all paths
+
 ## 3.8.0 - 2026-05-07
 
 ### Sprint 11 — GitHub Agentic Workflows + Portal Scan Trigger
