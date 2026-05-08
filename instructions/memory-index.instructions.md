@@ -30,12 +30,17 @@ This file is the L2 tier of the BaseCoat memory hierarchy. It loads automaticall
 Patterns move up through use; stale patterns move down.
 
 ```
-L4 store_memory accessed 3+ times across sessions → promote to L2 index entry
-L2 entry applied 5+ times → extract to L1 instruction file rule
-L1 rule applied in >50% of sessions → consider L0 (agent frontmatter)
-L1 rule not applied in 90 days → demote back to L2 or prune
-L2 entry not referenced in 60 days → demote to L4 or prune
+heat(pattern, t) = 0.85 × heat(t-1) + 0.15 × relevance(t)
+  relevance ∈ { 1.0 = applied this turn, 0.5 = loaded but not applied, 0.0 = not loaded }
+
+L4 → L2:  heat ≥ 0.60 sustained across 3+ sessions  → add L2 index entry  [heat-score: <value>]
+L2 → L1:  heat ≥ 0.80 sustained across 5+ tasks     → extract to L1 instruction rule
+L1 → L0:  applied in > 50% of sessions              → consider L0 (agent frontmatter)
+L1 demotion: heat < 0.10 after 90 days              → demote to L2 or prune
+L2 demotion: heat < 0.20 after 60 days              → demote to L4 or prune
 ```
+
+Use `[heat-score: <value>]` as an inline comment on L2 index entries to enable decay tracking.
 
 **Pinned patterns** (security, governance, hard constraints) are exempt from decay. Mark with `[pin]`.
 
@@ -60,7 +65,29 @@ See `docs/research/TRM-HRM-investigation.md` — *TRM Intent Classifier Contract
 the full parameter set and failure-mode mitigations. For the Reflexion failure signal
 format and operational constraints, see `instructions/trm-reflexion.instructions.md`.
 
+For HRM layer escalation (L0→L4), the two-dimensional routing matrix, and the full
+guidance signal catalogue, see `instructions/hrm-execution.instructions.md`.
 
+## EscalationQuery Contract
+
+When TRM confidence falls below the fast-path threshold and the current HRM layer cannot
+resolve the intent, emit an `EscalationQuery` to the next layer:
+
+```text
+EscalationQuery {
+  intent:                   string       // classified intent label
+  keywords:                 string[]     // matched trigger keywords
+  confidence:               float        // current TRM confidence score [0.00, 1.00]
+  context_budget_remaining: int          // tokens remaining in session budget
+  originating_layer:        L0 | L1 | L2 | L3 | L4
+  reason:                   string       // why fast path was not taken
+}
+```
+
+The receiving layer responds with a `GuidanceSignal`
+(`STAY_FAST_PATH` | `EXPAND_CONTEXT` | `ELEVATE_TO_L3` | `ELEVATE_TO_L4` |
+`TURN_BUDGET_AT_RISK` | `ESCALATE_SCOPE` | `CONFIDENCE_DRIFT`).
+See `instructions/hrm-execution.instructions.md` for the full signal definitions.
 
 ## Pattern Bundles — Fast Path Catalog
 
@@ -75,6 +102,21 @@ format and operational constraints, see `instructions/trm-reflexion.instructions
 | `release` | release, version bump, tag, CHANGELOG | 4 | 0.87 |
 | `clean-branches` | clean branches, stale branches, delete merged | 2 | 0.95 |
 | `portal-feature` | portal, component, hook, frontend | 5 | 0.80 |
+
+### Pattern Bundle Confidence Updates
+
+Bundle confidence scores are updated using Bayesian incremental learning after each
+applied outcome (outcome = 1.0 for success, 0.0 for failure):
+
+```text
+confidence(t) = confidence(t-1) + η × (outcome(t) - confidence(t-1))
+  η = 0.05 (learning rate)
+  bounds: [0.50, 0.99]
+```
+
+**Quarterly drift review:** flag bundles where `|confidence(t) - authored_value| > 0.15`.
+Bundles that drift beyond 0.15 must be reviewed and either re-anchored or reclassified.
+Security and governance bundles (marked `[pin]`) are exempt from confidence decay.
 
 ### CI / GitHub Actions
 

@@ -4,6 +4,47 @@ All notable changes to this repository should be recorded in this file.
 
 ## Unreleased
 
+## 3.14.0 - 2026-05-09
+
+### HRM Formalization + Skill Batch 2 + Memory Intelligence
+
+#### HRM Phase 2 Formal Layer Contracts (`instructions/hrm-execution.instructions.md`)
+
+New instruction file formalizing the Human-Routing-Model Phase 2 adoption path from the TRM/HRM research doc:
+
+- **L0–L4 scope table** — formal input/output contracts and scope constraints per layer
+- **EscalationQuery type** — structured object (`intent`, `keywords`, `confidence`, `context_budget_remaining`, `originating_layer`, `reason`) passed between HRM layers
+- **Two-dimensional routing matrix** — confidence × context completeness: four routing quadrants from fast path to full HRM traversal
+- **Guidance signal catalogue** — 7 signals: `STAY_FAST_PATH`, `EXPAND_CONTEXT`, `ELEVATE_TO_L3`, `ELEVATE_TO_L4`, `TURN_BUDGET_AT_RISK`, `ESCALATE_SCOPE`, `CONFIDENCE_DRIFT`
+- **Agent decomposition scope table** — Sprint → Wave → Issue → Task → Sub-task with "can resolve" and "must escalate" columns
+- **Cross-layer dependency notation** — `[depends: subject@fact]` comment convention
+- Updated `instructions/memory-index.instructions.md` and `instructions/token-economics.instructions.md` with 2D routing matrix references and cross-links
+
+#### TRM Memory Intelligence (`instructions/memory-index.instructions.md`)
+
+- **Pattern bundle Bayesian confidence updates** — `confidence(t) = confidence(t-1) + 0.05 × (outcome(t) - confidence(t-1))`, bounded [0.50, 0.99]; quarterly drift review for bundles drifting > 0.15 from authored value
+- **Memory promotion heat scoring** — `heat(t) = 0.85 × heat(t-1) + 0.15 × relevance(t)` where relevance ∈ {1.0 applied, 0.5 loaded, 0.0 not loaded}; `[heat-score: <value>]` inline comment convention for L2 index entries; raw access-count thresholds replaced with heat thresholds
+
+#### Large Skill Modularization Batch 2 (`skills/`)
+
+Applied the `references/` pattern to the next 7 skills by size:
+
+| Skill | Before | After | Reference Files |
+|---|---|---|---|
+| `identity-migration` | 12.5 KB | ≤5 KB | migration-patterns, azure-integration, testing-checklist |
+| `basecoat` | 8.7 KB | ≤5 KB | authoring, governance |
+| `tech-debt` | 7.8 KB | ≤5 KB | assessment, remediation |
+| `dev-containers` | 7.8 KB | ≤5 KB | configuration, workflows |
+| `api-security` | 7.6 KB | ≤5 KB | threat-model, controls |
+| `ha-resilience` | 7.2 KB | ≤5 KB | patterns, testing |
+| `azure-devops-rest` | 7.0 KB | ≤5 KB | pipelines, extensions |
+
+Each `SKILL.md` is now a ≤5 KB overview + nav table; detailed content lives in `references/*.md`.
+
+#### Dependency Hygiene
+
+- Merged PR #577: esbuild, `@storybook/addon-essentials`, and `@storybook/react` bumps in `portal/ui`
+
 ## 3.13.0 - 2026-05-08
 
 ### TRM Intelligence + Skill Modularization + MCP Expansion

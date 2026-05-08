@@ -1,6 +1,6 @@
 {
   "name": "base-coat",
-  "version": "3.13.0",
-  "releaseDate": "2026-05-08",
-  "notes": "v3.13.0: TRM Reflexion instruction, top-5 skill modularization, MCP asset search tools, dependency-update-advisor workflow."
+  "version": "3.14.0",
+  "releaseDate": "2026-05-09",
+  "notes": "v3.14.0: HRM Phase 2 formalization, skill modularization batch 2 (7 skills), memory intelligence (Bayesian confidence + heat scoring), dependency hygiene."
 }

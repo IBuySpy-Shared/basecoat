@@ -30,17 +30,18 @@ Use this instruction whenever choosing a model, deciding how much context to loa
 
 Load context in this order:
 
-1. **Intent classification** — match against L2 trigger map; assign fast path or full path
-2. **Fast path (confidence ≥ 0.80)**: load the pattern bundle only — pre-scoped instructions + docs for this intent type. Skip broad exploration.
-3. **Full path (confidence < 0.80 or Novel)**: load in layered order:
+1. **Intent classification** — match against L2 trigger map; compute confidence and context completeness
+2. **Fast path (confidence ≥ 0.80 + context completeness ≥ 0.70)**: load the pattern bundle only — pre-scoped instructions + docs for this intent type. Skip broad exploration.
+3. **Fast path + targeted load (confidence ≥ 0.80 + context completeness < 0.70)**: load pattern bundle, then add one targeted L3 snippet to fill the context gap.
+4. **Bundle start + explore (confidence 0.50–0.79)**: start with the closest-match pattern bundle, then enter an explore phase to resolve ambiguity.
+5. **Full HRM traversal (confidence < 0.50 or Novel)**: load in layered order (L2→L3→L4):
    - Governing instructions and the immediate task
    - The exact files, symbols, or sections needed to act
    - Supporting docs, adjacent files, or history only if the task still cannot be completed
    - Broad repository context only as a last resort
 
-Prefer targeted searches, line ranges, summaries, diffs, and handoffs before loading full files or large document sets.
-
-See `docs/execution-hierarchy.md` for the full stack, pattern bundle catalog, and confidence lifecycle.
+This two-dimensional routing matrix (confidence × context completeness) is documented in full at
+`instructions/hrm-execution.instructions.md`. For EscalationQuery types and GuidanceSignals, see the same file.
 
 ## Cost Escalation
 
