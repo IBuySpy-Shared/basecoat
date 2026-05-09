@@ -2,7 +2,8 @@
 
 How a simple idea — *what if teams could share Copilot customizations the way they share
 linting configs?* — became an enterprise framework with 200+ assets, automated quality
-gates, a fleet execution model, and a live metrics dashboard.
+gates, a fleet execution model, and a live metrics dashboard. And why it's called what
+it's called.
 
 ---
 
@@ -13,9 +14,59 @@ instruction files, and a version file. The core insight was already present in v
 separate **instructions** (ambient rules) from **agents** (workflows) from **skills**
 (knowledge packs). That separation is still the foundation today.
 
-The name comes from the idea of applying a base coat before the custom work goes on top:
-a shared standard that every developer inherits, without anyone having to configure it
-manually.
+---
+
+## The Name
+
+A base coat of paint does something specific: it prepares a surface so that everything
+applied on top adheres properly, covers evenly, and lasts. Skip it and the topcoat looks
+fine at first — then starts to peel, leaves bare patches, and has to be stripped and
+redone. The problem wasn't the topcoat. The foundation was missing.
+
+That maps directly to what happens in a Copilot setup without shared standards.
+
+### Adherence
+
+Without a shared instruction layer, each team lays its own standards directly onto its
+agents — inline, duplicated, drifting apart. Security rules in one agent, naming
+conventions in another, nothing in a third. When a new policy lands, you update what you
+can find and hope you didn't miss one. Standards that live in 30 places don't stick
+the way standards that live in one place do.
+
+BaseCoat's instruction files are ambient — they apply to every agent, every session,
+every developer in every repo that has adopted the overlay. Change one file, the whole
+surface re-adheres uniformly. That's what adherence means here: standards that hold
+because they're part of the foundation, not painted on top.
+
+### The tacky window
+
+There's a moment in a new project — a new repo, a new team, a new onboarding — when
+patterns haven't formed yet. The surface is still open. That's when a base coat sets.
+Once habits are in place, conventions are established, and agents are already written,
+changing the foundation means scraping and repainting.
+
+BaseCoat is designed to be adopted in that window. The sync takes minutes. The overlay
+lands before the first agent is written. The standards arrive at the right moment —
+when the surface is still receptive — rather than as a retrofit six months later.
+
+### What happens without it
+
+No base coat means no consistent surface to build on:
+
+- **Duplication** — Security rules, naming conventions, and quality standards get copied
+  into every agent that needs them. When requirements change, you're editing 40 files.
+- **Gaps** — Something always gets missed. An agent that should enforce OIDC doesn't.
+  A workflow that should validate input doesn't. Bare patches in the surface.
+- **Drift** — Each team's standards diverge from every other team's. What looks like
+  "consistency" is just proximity — people on the same team happen to follow the same
+  rules because they talked to each other, not because the rules are enforced.
+- **Rework** — Eventually the gaps become visible: a security audit, a failed review,
+  an incident. Then it's strip-and-repaint time, which costs more than getting the
+  foundation right at the start.
+
+The instructions in BaseCoat are the base coat. The agents and skills are the topcoats —
+your team's specific workflows, custom to your stack and domain. The distinction matters:
+standards belong in the foundation; customization belongs on top.
 
 ---
 
