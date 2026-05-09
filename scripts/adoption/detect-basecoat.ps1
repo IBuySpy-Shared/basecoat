@@ -26,7 +26,8 @@ param(
     [string]$Org = "IBuySpy-Shared",
     [string]$BasecoatRepo = "basecoat",
     [ValidateSet("table", "json", "markdown")]
-    [string]$OutputFormat = "table"
+    [string]$OutputFormat = "table",
+    [switch]$AssetDetail   # Flip view: show per-asset adoption rate across repos
 )
 
 Set-StrictMode -Version Latest
@@ -242,3 +243,93 @@ switch ($OutputFormat) {
 }
 
 Write-Host "`n=== Scan Complete ===" -ForegroundColor Cyan
+
+# If -AssetDetail was requested, output a flipped view: per-asset adoption across repos
+if ($AssetDetail) {
+    Write-Host "`n=== Per-Asset Adoption Detail ===" -ForegroundColor Cyan
+    Write-Host "Shows how many consumer repos have each BaseCoat asset (current/stale/missing)`n"
+
+    # Build per-asset stats
+    $assetStats = @{}
+    foreach ($key in $sourceAssets.Keys) {
+        $assetStats[$key] = @{
+            asset    = $key
+            type     = $sourceAssets[$key].type
+            current  = 0
+            stale    = 0
+            missing  = 0
+            repos    = @()
+        }
+    }
+
+    $totalReposScanned = $adoptionReport.Count
+
+    foreach ($r in $adoptionReport) {
+        $seen = @{}
+        foreach ($a in $r.assets) {
+            $seen[$a.asset] = $a.status
+            if ($assetStats.ContainsKey($a.asset)) {
+                $assetStats[$a.asset][$a.status]++
+                $assetStats[$a.asset].repos += "$($r.repo):$($a.status)"
+            }
+        }
+        # Count missing for assets not seen in this repo
+        foreach ($key in $sourceAssets.Keys) {
+            if (-not $seen.ContainsKey($key)) {
+                $assetStats[$key].missing++
+            }
+        }
+    }
+
+    # Sort by adoption rate descending
+    $sorted = $assetStats.Values | Sort-Object {
+        if ($totalReposScanned -gt 0) { ($_.current + $_.stale) / $totalReposScanned } else { 0 }
+    } -Descending
+
+    switch ($OutputFormat) {
+        "json" {
+            @{
+                scan_date        = (Get-Date -Format "o")
+                org              = $Org
+                total_repos      = $totalReposScanned
+                assets           = ($sorted | ForEach-Object {
+                    @{
+                        asset       = $_.asset
+                        type        = $_.type
+                        current     = $_.current
+                        stale       = $_.stale
+                        missing     = $_.missing
+                        adoptionPct = if ($totalReposScanned -gt 0) {
+                            [math]::Round(($_.current + $_.stale) / $totalReposScanned * 100, 1)
+                        } else { 0 }
+                        repos       = $_.repos
+                    }
+                })
+            } | ConvertTo-Json -Depth 5
+        }
+        "markdown" {
+            Write-Host "## Per-Asset Adoption — $Org"
+            Write-Host ""
+            Write-Host "| Asset | Type | Current | Stale | Missing | Adoption% |"
+            Write-Host "|-------|------|---------|-------|---------|-----------|"
+            foreach ($a in $sorted) {
+                $pct = if ($totalReposScanned -gt 0) {
+                    [math]::Round(($a.current + $a.stale) / $totalReposScanned * 100, 1)
+                } else { 0 }
+                $flag = if ($a.stale -gt 0) { " ⚠️" } else { "" }
+                Write-Host "| $($a.asset) | $($a.type) | $($a.current) | $($a.stale)$flag | $($a.missing) | $pct% |"
+            }
+        }
+        default {
+            foreach ($a in $sorted) {
+                $pct = if ($totalReposScanned -gt 0) {
+                    [math]::Round(($a.current + $a.stale) / $totalReposScanned * 100, 1)
+                } else { 0 }
+                $adopted = $a.current + $a.stale
+                $color = if ($pct -ge 50) { "Green" } elseif ($pct -ge 20) { "Yellow" } else { "DarkGray" }
+                Write-Host ("  {0,-60} [{1}] {2}/{3} repos ({4}%)" -f $a.asset, $a.type, $adopted, $totalReposScanned, $pct) -ForegroundColor $color
+            }
+        }
+    }
+}
+

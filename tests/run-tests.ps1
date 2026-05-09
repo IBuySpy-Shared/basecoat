@@ -138,5 +138,13 @@ if ($LASTEXITCODE -ne 0) {
     exit 1
 }
 
+Write-Host 'Running asset quality gate tests...'
+& pwsh -NoProfile -File (Join-Path $PSScriptRoot 'quality-gate-tests.ps1')
+if ($LASTEXITCODE -ne 0) {
+    Write-Host 'Asset quality gate tests failed' -ForegroundColor Red
+    Write-FailureLog 'quality-gate-tests'
+    exit 1
+}
+
 Write-Host 'All PowerShell tests passed'
 exit 0

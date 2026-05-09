@@ -1,6 +1,6 @@
 {
   "name": "base-coat",
-  "version": "3.23.0",
+  "version": "3.24.0",
   "releaseDate": "2026-05-09",
   "notes": "v3.23.0: Multi-agent strategy matrix, Business Model Canvas, creator-verifier agent pair (guidance-author + guidance-reviewer), Creator-Verifier Loop and Pub-Sub Broadcast patterns, basecoat-memory validate.yml improvements, sprint-20-22 memory contributions."
 }
