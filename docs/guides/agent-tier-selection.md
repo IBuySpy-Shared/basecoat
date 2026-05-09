@@ -1,4 +1,4 @@
-# Agent-Tier Selection Guide
+﻿# Agent-Tier Selection Guide
 
 Choosing the right agent tier for each task reduces cost, protects sensitive data,
 and prevents session instability. This guide explains the four tiers available in
@@ -20,7 +20,7 @@ Explicit tier selection removes these failure modes before a task starts.
 ### Cloud Agent (Copilot Coding Agent)
 
 Triggered by posting `/approve` on a GitHub issue. Runs asynchronously in a cloud
-workspace with full repository access. Always produces a pull request — a human
+workspace with full repository access. Always produces a pull request ΓÇö a human
 must merge it.
 
 | Attribute | Detail |
@@ -39,9 +39,9 @@ agent is stateless and receives all needed context in its dispatch prompt.
 | Attribute | Detail |
 |---|---|
 | Invocation | `task(agent_type: "...", model: "...", prompt: "...")` |
-| Scope | Session-parallel; up to 5 concurrent agents |
+| Scope | Session-parallel; 2–3 concurrent general-purpose agents (enterprise quota limit) |
 | Strengths | Independent subtask fan-out, sprint execution, phase-gated workflows |
-| Limitations | Hard cap of 5 concurrent (enterprise 429 risk above this); no inter-agent coordination |
+| Limitations | Hard ceiling of ``max_fleet_agents`` (default: 4); no inter-agent coordination |
 | Required for | Sprint phases where subtasks are independent and bounded |
 
 ### CLI Main Conversation
@@ -89,6 +89,68 @@ flowchart TD
     LO -->|No| FL
 ```
 
+## Fleet Parallelism
+
+Each background general-purpose agent consumes model API capacity for its entire lifetime.
+Running too many simultaneously saturates the enterprise quota and triggers HTTP 429
+`user_global_rate_limited` errors across the whole session.
+
+### Why Wave Batching
+
+Seven agents running for 10–15 minutes each is equivalent to 70–105 agent-minutes of
+sustained model capacity drawn in parallel. Enterprise quotas are measured per-user across
+all concurrent sessions, so the combined draw causes the rate limiter to reject new requests
+mid-session. Wave batching caps the simultaneous draw to a predictable, safe level.
+
+### Wave Dispatch Pattern
+
+Dispatch work in waves of 2–4 agents. Wait for the entire wave to complete before
+launching the next:
+
+| Wave | Agents dispatched | Gate before next wave |
+|------|------------------|-----------------------|
+| 1 | Tasks 1–4 | Wait for all 4 to finish |
+| 2 | Tasks 5–8 | Wait for all 4 to finish |
+| 3 | Tasks 9–12 | Wait for all 4 to finish |
+
+**Example — 12-task sprint broken into 3 waves:**
+
+```text
+Wave 1: implement auth module, add unit tests, update README, lint-fix CI config
+Wave 2: implement API routes, add integration tests, update OpenAPI spec, bump version
+Wave 3: write migration script, update docs, close tracking issues, open final PR
+```
+
+Use the Haiku / fast model for short-lived tasks (file edits, lint fixes, PR merges) to
+reduce token burn and quota pressure within each wave.
+
+### Long-Running Agent Rules
+
+Agents expected to run longer than 5 minutes (deploys, workflow triggers, large builds)
+should be dispatched **alone or in pairs**, never bundled into a wave with other agents.
+
+### 429 Recovery Pattern
+
+If a `user_global_rate_limited` (HTTP 429) error is returned:
+
+1. **Wait 60 seconds** — do not retry immediately.
+2. **Retry only the failed agent(s)** — do not re-dispatch the entire wave.
+3. **Reduce wave size** for subsequent waves if 429 errors recur.
+
+Re-dispatching all agents simultaneously after a rate limit makes the problem worse.
+
+### Configuration
+
+The `max_fleet_agents` key in `.github/base-coat/agent-routing.json` sets the per-session
+fleet ceiling (default: 4). Adjust downward if your enterprise plan has a stricter quota:
+
+```json
+"configurable": {
+  "default_fleet_concurrency": 3,
+  "max_fleet_agents": 4
+}
+```
+
 ## Configurable Defaults Schema
 
 Teams can provide a `.github/base-coat/agent-routing.json` file to override soft
@@ -121,16 +183,16 @@ defaults. The schema has three sections:
 
 **Section rules:**
 
-- `enforced` — never override these via config. Violations are a compliance issue.
-- `configurable` — adjust to match your team's runner capacity and cost budget.
-- `guidelines` — soft defaults; individual tasks may deviate with justification.
+- `enforced` ΓÇö never override these via config. Violations are a compliance issue.
+- `configurable` ΓÇö adjust to match your team's runner capacity and cost budget.
+- `guidelines` ΓÇö soft defaults; individual tasks may deviate with justification.
 
 ## Routing Decision Matrix (Quick Reference)
 
 | Signal | Default Tier |
 |--------|-------------|
 | Security audit / compliance scan | Cloud Agent |
-| Parallel independent subtasks (≤5) | CLI Fleet |
+| Parallel independent subtasks (Γëñ5) | CLI Fleet |
 | Interactive design debate / planning | CLI Main |
 | Long async task, no session dependency | Cloud Agent |
 | High-frequency, low-stakes edits | Local LLM |
@@ -142,7 +204,7 @@ defaults. The schema has three sections:
 
 | Anti-Pattern | Risk | Fix |
 |---|---|---|
-| 7+ concurrent fleet agents | Enterprise 429 rate limit | Cap at 5; queue the rest |
+| 4+ concurrent fleet agents | Enterprise 429 rate limit | Cap at 2–3; use wave batching |
 | PII or proprietary code sent to cloud agents | Data-egress violation | Route to Local LLM |
 | CLI Main for tasks lasting > 15 minutes | Session timeout, lost progress | Delegate to Cloud Agent or Fleet |
 | Cloud Agent for interactive back-and-forth | Agent is async; cannot respond | Use CLI Main |
@@ -150,7 +212,7 @@ defaults. The schema has three sections:
 
 ## Related Guidance
 
-- [Agent Routing Instructions](../../instructions/agent-routing.instructions.md) — machine-readable routing rules for Copilot
-- [Model Routing](../../instructions/model-routing.instructions.md) — which LLM tier (Opus / Sonnet / Haiku) within a tier
-- [Runner Routing](../reference/guardrails/runner-routing.md) — which CI runner for GitHub Actions jobs
-- [Context Routing](../../instructions/references/token-economics/context-routing.md) — which context tiers to load
+- [Agent Routing Instructions](../../instructions/agent-routing.instructions.md) ΓÇö machine-readable routing rules for Copilot
+- [Model Routing](../../instructions/model-routing.instructions.md) ΓÇö which LLM tier (Opus / Sonnet / Haiku) within a tier
+- [Runner Routing](../reference/guardrails/runner-routing.md) ΓÇö which CI runner for GitHub Actions jobs
+- [Context Routing](../../instructions/references/token-economics/context-routing.md) ΓÇö which context tiers to load

@@ -1,13 +1,14 @@
-{
+﻿{
   "enforced": {
     "pii_or_secrets": "local-llm",
     "irreversible_operations": "cloud-agent",
     "regulated_environment": "local-llm"
   },
   "configurable": {
-    "default_fleet_concurrency": 5,
+    "default_fleet_concurrency": 3,
     "cli_main_timeout_minutes": 15,
-    "prefer_local_for_low_stakes": true
+    "prefer_local_for_low_stakes": true,
+    "max_fleet_agents": 4
   },
   "guidelines": {
     "security_audit": "cloud-agent",
