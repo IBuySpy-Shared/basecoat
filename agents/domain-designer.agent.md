@@ -7,6 +7,9 @@ metadata:
   tags: ["domain-driven-design", "bounded-contexts", "aggregates", "ubiquitous-language", "microservices", "domain-events"]
   maturity: "production"
   audience: ["architects", "domain-experts", "backend-developers", "platform-teams"]
+  model_tier: "reasoning"
+  task_phase: "plan"
+  interaction_type: "collaborative"
 allowed-tools: ["bash", "git", "grep", "find"]
 model: claude-sonnet-4.6
 allowed_skills: []

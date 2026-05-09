@@ -7,6 +7,9 @@ metadata:
   tags: ["legacy-code", "modernization", "migration", "asp.net", "dotnet", "refactoring"]
   maturity: "production"
   audience: ["developers", "architects", "tech-leads", "teams"]
+  model_tier: "reasoning"
+  task_phase: "build"
+  interaction_type: "collaborative"
 allowed-tools: ["bash", "git", "grep", "glob", "powershell", "dotnet"]
 model: claude-sonnet-4.6
 allowed_skills: []

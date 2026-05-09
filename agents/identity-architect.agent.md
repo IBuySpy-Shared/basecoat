@@ -7,6 +7,9 @@ metadata:
   tags: ["identity", "iam", "azure-rbac", "entra-id", "zero-trust", "conditional-access"]
   maturity: "production"
   audience: ["identity-architects", "security-engineers", "platform-teams"]
+  model_tier: "reasoning"
+  task_phase: "plan"
+  interaction_type: "collaborative"
 allowed-tools: ["bash", "git", "azure-cli", "terraform", "powershell"]
 model: gpt-5.3-codex
 allowed_skills: []

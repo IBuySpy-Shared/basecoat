@@ -7,6 +7,9 @@ metadata:
   tags: ["infrastructure", "azure", "bicep", "deployment", "iac"]
   maturity: "production"
   audience: ["infrastructure-engineers", "devops-engineers", "platform-teams"]
+  model_tier: "balanced"
+  task_phase: "deploy"
+  interaction_type: "autonomous"
 allowed-tools: ["bash", "git", "grep", "powershell", "terraform", "azure-cli"]
 model: claude-sonnet-4.6
 allowed_skills: []

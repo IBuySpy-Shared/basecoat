@@ -7,6 +7,9 @@ metadata:
   tags: ["high-availability", "resilience", "disaster-recovery", "chaos-engineering", "sre"]
   maturity: "production"
   audience: ["architects", "sre", "platform-teams"]
+  model_tier: "reasoning"
+  task_phase: "plan"
+  interaction_type: "collaborative"
 allowed-tools: ["bash", "git", "terraform", "kubernetes"]
 model: claude-sonnet-4.6
 allowed_skills: []

@@ -7,6 +7,9 @@ metadata:
   tags: ["test-automation", "testing-strategy", "qa", "regression-testing"]
   maturity: "production"
   audience: ["qa-engineers", "testers", "automation-engineers"]
+  model_tier: "reasoning"
+  task_phase: "plan"
+  interaction_type: "collaborative"
 allowed-tools: ["bash", "git", "gh"]
 model: claude-sonnet-4.6
 allowed_skills: []

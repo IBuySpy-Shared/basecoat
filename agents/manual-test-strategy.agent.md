@@ -7,6 +7,9 @@ metadata:
   tags: ["test-strategy", "manual-testing", "qa", "testing"]
   maturity: "production"
   audience: ["qa-engineers", "testers", "test-leads"]
+  model_tier: "balanced"
+  task_phase: "test"
+  interaction_type: "collaborative"
 allowed-tools: ["bash", "git", "gh"]
 model: claude-sonnet-4.6
 handoffs:

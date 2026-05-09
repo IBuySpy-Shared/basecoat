@@ -7,6 +7,9 @@ metadata:
   tags: ["data-tier", "schema-design", "migrations", "query-optimization", "database"]
   maturity: "production"
   audience: ["backend-developers", "data-engineers", "architects"]
+  model_tier: "balanced"
+  task_phase: "build"
+  interaction_type: "collaborative"
 allowed-tools: ["bash", "git", "grep", "sql"]
 model: gpt-5.3-codex
 allowed_skills: []

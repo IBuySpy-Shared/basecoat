@@ -7,6 +7,9 @@ metadata:
   tags: ["product-management", "requirements", "roadmap", "user-stories", "prioritization"]
   maturity: "production"
   audience: ["product-managers", "product-owners", "team-leads"]
+  model_tier: "reasoning"
+  task_phase: "plan"
+  interaction_type: "collaborative"
 allowed-tools: ["bash", "git", "grep"]
 model: claude-sonnet-4.6
 tools: [run_terminal_command, read_file, write_file, list_dir]

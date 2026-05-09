@@ -7,6 +7,9 @@ metadata:
   tags: ["issue-triage", "github", "prioritization", "classification"]
   maturity: "production"
   audience: ["product-managers", "team-leads", "project-managers"]
+  model_tier: "fast"
+  task_phase: "plan"
+  interaction_type: "autonomous"
 allowed-tools: ["bash", "git", "gh"]
 model: claude-sonnet-4.6
 allowed_skills: []

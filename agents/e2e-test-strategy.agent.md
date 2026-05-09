@@ -7,6 +7,9 @@ metadata:
   tags: ["e2e-testing", "playwright", "cypress", "test-automation", "qa"]
   maturity: "production"
   audience: ["qa-engineers", "developers", "test-automation-engineers"]
+  model_tier: "balanced"
+  task_phase: "test"
+  interaction_type: "collaborative"
 allowed-tools: ["bash", "git", "python", "docker"]
 model: claude-sonnet-4.6
 allowed_skills: []

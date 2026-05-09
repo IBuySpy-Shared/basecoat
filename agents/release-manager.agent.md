@@ -7,6 +7,9 @@ metadata:
   tags: ["release-management", "versioning", "changelog", "semver", "git-tagging"]
   maturity: "production"
   audience: ["devops-engineers", "release-managers", "platform-teams"]
+  model_tier: "balanced"
+  task_phase: "deploy"
+  interaction_type: "collaborative"
 allowed-tools: ["bash", "git", "gh", "grep"]
 model: claude-sonnet-4.6
 allowed_skills: []

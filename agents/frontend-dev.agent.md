@@ -7,6 +7,9 @@ metadata:
   tags: ["frontend", "ui", "react", "vue", "accessibility", "performance"]
   maturity: "production"
   audience: ["frontend-developers", "ux-engineers", "ui-architects"]
+  model_tier: "balanced"
+  task_phase: "build"
+  interaction_type: "collaborative"
 allowed-tools: ["bash", "git", "grep", "find", "node", "npm"]
 model: gpt-5.3-codex
 allowed_skills: []

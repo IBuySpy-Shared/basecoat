@@ -7,6 +7,9 @@ metadata:
   tags: ["dataops", "data-quality", "lineage", "governance", "data-contracts"]
   maturity: "production"
   audience: ["dataops-engineers", "data-engineers", "platform-teams"]
+  model_tier: "balanced"
+  task_phase: "deploy"
+  interaction_type: "collaborative"
 allowed-tools: ["bash", "git", "grep", "python", "sql", "terraform"]
 model: gpt-5.3-codex
 allowed_skills: []

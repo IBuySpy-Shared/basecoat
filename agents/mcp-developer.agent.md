@@ -7,6 +7,9 @@ metadata:
   tags: ["mcp", "model-context-protocol", "tools", "integration", "ai-systems"]
   maturity: "production"
   audience: ["ai-engineers", "developers", "platform-teams"]
+  model_tier: "balanced"
+  task_phase: "build"
+  interaction_type: "collaborative"
 allowed-tools: ["bash", "git", "grep", "python", "node"]
 model: claude-sonnet-4
 allowed_skills: []

@@ -7,6 +7,9 @@ metadata:
   tags: ["retrospective", "sprint-review", "metrics", "analysis"]
   maturity: "production"
   audience: ["scrum-masters", "team-leads", "agile-coaches"]
+  model_tier: "balanced"
+  task_phase: "plan"
+  interaction_type: "collaborative"
 allowed-tools: ["bash", "git"]
 model: claude-sonnet-4.6
 allowed_skills: []

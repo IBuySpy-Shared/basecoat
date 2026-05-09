@@ -7,6 +7,9 @@ metadata:
   tags: ["ci-cd", "automation", "pipeline", "remediation", "failure-analysis"]
   maturity: "production"
   audience: ["devops-engineers", "platform-teams", "developers"]
+  model_tier: "fast"
+  task_phase: "deploy"
+  interaction_type: "reactive"
 allowed-tools: ["bash", "git", "grep", "terraform"]
 model: claude-sonnet-4.6
 allowed_skills: []

@@ -7,6 +7,9 @@ metadata:
   tags: ["config-audit", "secrets-scanning", "security", "compliance"]
   maturity: "production"
   audience: ["security-engineers", "devops-engineers", "platform-teams"]
+  model_tier: "fast"
+  task_phase: "operate"
+  interaction_type: "reactive"
 allowed-tools: ["bash", "git", "grep"]
 model: claude-haiku-4.5
 allowed_skills: []

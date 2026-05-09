@@ -7,6 +7,9 @@ metadata:
   tags: ["chaos-engineering", "resilience", "reliability", "slo", "testing"]
   maturity: "production"
   audience: ["sre", "platform-teams", "reliability-engineers"]
+  model_tier: "balanced"
+  task_phase: "test"
+  interaction_type: "autonomous"
 allowed-tools: ["bash", "git", "terraform", "kubernetes"]
 model: gpt-5.3-codex
 allowed_skills: []

@@ -7,6 +7,9 @@ metadata:
   tags: ["code-review", "quality-assurance", "testing", "security", "performance"]
   maturity: "production"
   audience: ["developers", "reviewers", "tech-leads", "architects"]
+  model_tier: "balanced"
+  task_phase: "test"
+  interaction_type: "collaborative"
 allowed-tools: ["bash", "git", "gh", "grep", "find"]
 model: claude-sonnet-4.6
 handoffs:

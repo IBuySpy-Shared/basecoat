@@ -7,6 +7,9 @@ metadata:
   tags: ["llmops", "mlops", "prompts", "inference", "model-serving", "observability"]
   maturity: "production"
   audience: ["mlops-engineers", "llm-platform-teams", "data-scientists", "architects"]
+  model_tier: "balanced"
+  task_phase: "deploy"
+  interaction_type: "collaborative"
 allowed-tools: ["bash", "git", "terraform", "python", "azure-cli", "kubernetes"]
 model: claude-sonnet-4.6
 allowed_skills: []

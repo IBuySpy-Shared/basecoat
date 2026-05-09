@@ -7,6 +7,9 @@ metadata:
   tags: ["prompt-coaching", "prompt-optimization", "llm", "ai-development"]
   maturity: "production"
   audience: ["prompt-engineers", "ai-engineers", "developers"]
+  model_tier: "balanced"
+  task_phase: "build"
+  interaction_type: "collaborative"
 allowed-tools: ["bash", "git", "grep"]
 model: gpt-5.3-codex
 allowed_skills: []

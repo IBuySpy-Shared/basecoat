@@ -10,6 +10,9 @@ metadata:
   tags: ["uncategorized"]
   maturity: "beta"
   audience: ["developers"]
+  model_tier: "balanced"
+  task_phase: "build"
+  interaction_type: "collaborative"
 allowed-tools: ["bash", "git", "grep", "find"]
 allowed_skills: []
 ---

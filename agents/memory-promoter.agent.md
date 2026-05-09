@@ -7,7 +7,12 @@ metadata:
   tags: ["memory", "pattern-detection", "learning", "contributions"]
   maturity: "production"
   audience: ["developers", "architects", "platform-teams"]
+  model_tier: "fast"
+  task_phase: "operate"
+  interaction_type: "autonomous"
+model: claude-haiku-4.5
 allowed-tools: ["bash", "git"]
+allowed_skills: []
 ---
 
 # Memory Promoter Agent

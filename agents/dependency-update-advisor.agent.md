@@ -7,6 +7,9 @@ metadata:
   tags: ["dependabot", "dependency-updates", "security", "risk-assessment"]
   maturity: "production"
   audience: ["developers", "maintainers", "platform-teams"]
+  model_tier: "balanced"
+  task_phase: "operate"
+  interaction_type: "collaborative"
 allowed-tools: ["bash", "git", "grep"]
 model: gpt-5.4-mini
 allowed_skills: []

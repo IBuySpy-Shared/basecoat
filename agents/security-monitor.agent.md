@@ -11,6 +11,9 @@ metadata:
   tags: ["uncategorized"]
   maturity: "beta"
   audience: ["developers"]
+  model_tier: "balanced"
+  task_phase: "operate"
+  interaction_type: "reactive"
 allowed-tools: ["bash", "git", "grep", "find"]
 model: claude-sonnet-4.6
 allowed_skills: []

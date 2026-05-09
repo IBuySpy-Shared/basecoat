@@ -7,6 +7,9 @@ metadata:
   tags: ["api-design", "openapi", "graphql", "rest", "api-governance"]
   maturity: "production"
   audience: ["api-designers", "backend-developers", "architects"]
+  model_tier: "reasoning"
+  task_phase: "plan"
+  interaction_type: "collaborative"
 allowed-tools: ["bash", "git", "grep", "find"]
 model: gpt-5.3-codex
 tools: [read_file, write_file, list_dir, run_terminal_command, create_github_issue]

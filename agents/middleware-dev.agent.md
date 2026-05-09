@@ -7,6 +7,9 @@ metadata:
   tags: ["middleware", "integration", "api-gateway", "event-driven", "messaging"]
   maturity: "production"
   audience: ["backend-developers", "architects", "platform-teams"]
+  model_tier: "balanced"
+  task_phase: "build"
+  interaction_type: "collaborative"
 allowed-tools: ["bash", "git", "grep", "python", "node"]
 model: gpt-5.3-codex
 allowed_skills: []

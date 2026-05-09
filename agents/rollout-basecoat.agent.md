@@ -7,6 +7,9 @@ metadata:
   tags: ["basecoat", "rollout", "onboarding", "enterprise", "deployment"]
   maturity: "production"
   audience: ["platform-teams", "devops-engineers", "architects"]
+  model_tier: "balanced"
+  task_phase: "deploy"
+  interaction_type: "autonomous"
 allowed-tools: ["bash", "git", "gh"]
 model: claude-haiku-4.5
 allowed_skills: []

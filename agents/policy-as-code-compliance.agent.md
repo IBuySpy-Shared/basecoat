@@ -7,6 +7,9 @@ metadata:
   tags: ["policy-as-code", "compliance", "governance", "audit", "opa", "rego"]
   maturity: "production"
   audience: ["security-engineers", "compliance-engineers", "platform-teams"]
+  model_tier: "reasoning"
+  task_phase: "deploy"
+  interaction_type: "collaborative"
 allowed-tools: ["bash", "git", "grep", "terraform"]
 model: claude-sonnet-4.6
 allowed_skills: []

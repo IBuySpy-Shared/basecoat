@@ -7,6 +7,9 @@ metadata:
   tags: ["agentops", "lifecycle-management", "deployment", "monitoring"]
   maturity: "production"
   audience: ["platform-teams", "devops-engineers", "ai-engineers"]
+  model_tier: "balanced"
+  task_phase: "operate"
+  interaction_type: "collaborative"
 allowed-tools: ["bash", "git", "gh"]
 model: claude-sonnet-4.6
 allowed_skills: []

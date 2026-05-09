@@ -7,6 +7,9 @@ metadata:
   tags: ["architecture", "design", "c4-diagrams", "adr", "technology-selection", "system-design"]
   maturity: "production"
   audience: ["architects", "tech-leads", "platform-teams"]
+  model_tier: "reasoning"
+  task_phase: "plan"
+  interaction_type: "collaborative"
 allowed-tools: ["bash", "git", "grep", "find", "terraform", "azure-cli"]
 model: claude-sonnet-4-5
 tools: [read_file, write_file, list_dir, run_terminal_command, create_github_issue]

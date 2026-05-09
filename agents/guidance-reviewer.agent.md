@@ -7,6 +7,9 @@ metadata:
   tags: ["review", "validation", "quality-assurance", "guidance", "creator-verifier"]
   maturity: "experimental"
   audience: ["platform-teams", "architects", "tech-leads"]
+  model_tier: "balanced"
+  task_phase: "test"
+  interaction_type: "collaborative"
 allowed-tools: ["bash", "git", "grep", "find"]
 model: claude-sonnet-4.6
 handoffs:

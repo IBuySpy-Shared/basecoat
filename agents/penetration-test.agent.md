@@ -7,6 +7,9 @@ metadata:
   tags: ["penetration-testing", "security-assessment", "vulnerability-discovery", "owasp"]
   maturity: "production"
   audience: ["security-engineers", "penetration-testers", "architects"]
+  model_tier: "reasoning"
+  task_phase: "test"
+  interaction_type: "autonomous"
 allowed-tools: ["bash", "git", "grep"]
 model: claude-sonnet-4.6
 allowed_skills: []

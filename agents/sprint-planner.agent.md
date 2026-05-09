@@ -7,6 +7,9 @@ metadata:
   tags: ["sprint-planning", "agile", "issue-decomposition", "dependency-mapping", "roadmapping"]
   maturity: "production"
   audience: ["scrum-masters", "product-managers", "team-leads"]
+  model_tier: "balanced"
+  task_phase: "plan"
+  interaction_type: "collaborative"
 allowed-tools: ["bash", "git", "gh", "grep"]
 model: claude-sonnet-4.6
 allowed_skills: [basecoat]

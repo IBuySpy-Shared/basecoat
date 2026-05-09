@@ -7,6 +7,9 @@ metadata:
   tags: ["prompt-engineering", "llm", "system-prompts", "optimization", "token-efficiency"]
   maturity: "production"
   audience: ["ai-engineers", "prompt-engineers", "llm-practitioners"]
+  model_tier: "balanced"
+  task_phase: "build"
+  interaction_type: "collaborative"
 allowed-tools: ["bash", "git", "grep", "python"]
 model: gpt-5.3-codex
 allowed_skills: []

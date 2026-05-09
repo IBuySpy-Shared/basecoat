@@ -7,6 +7,9 @@ metadata:
   tags: ["feedback", "optimization", "learning", "a-b-testing", "metrics"]
   maturity: "production"
   audience: ["ai-engineers", "platform-teams", "agents"]
+  model_tier: "fast"
+  task_phase: "operate"
+  interaction_type: "reactive"
 allowed-tools: ["bash", "git", "gh"]
 model: claude-sonnet-4.6
 allowed_skills: []
