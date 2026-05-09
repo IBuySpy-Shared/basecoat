@@ -1,6 +1,6 @@
 {
   "name": "base-coat",
-  "version": "3.19.0",
+  "version": "3.20.0",
   "releaseDate": "2026-05-09",
-  "notes": "v3.19.0: Memory lifecycle completion — audit-memories.ps1 (validate/audit/update/purge), quarterly memory-audit.yml workflow, loopback hot-index promotion signals, sprint-20-memories.json contribution payload."
+  "notes": "v3.20.0: Consumer contribution kit — submit-learning.ps1 active push, .basecoat.yml.example config template, CONTRIBUTING.md guide, structured sweep candidate format with YAML promotion blocks."
 }

@@ -4,6 +4,39 @@ All notable changes to this repository should be recorded in this file.
 
 ## Unreleased
 
+## 3.20.0 - 2026-05-09
+
+### Consumer Contribution Kit (#620, #621)
+
+Closes the gap where consumer repos (those with `basecoat-enabled` topic) had no
+documented, deliberate path to submit learnings back to basecoat memory.
+
+#### scripts/submit-learning.ps1 — Active Push
+
+New script for consumer repos. Validates the candidate against the four-point scope
+policy (generic, durable, actionable, repo-scoped), writes a structured
+YAML+Markdown file to `basecoat-memory/sweep-candidates/`, and optionally opens a
+steward review PR with `-OpenPR`. Requires `MEMORY_REPO_TOKEN` env var.
+
+#### .basecoat.yml.example — Sweep Config Template
+
+Documented YAML config template for `basecoat-enabled` repos. Covers:
+`learning_labels`, `days_back`, `team`, `contact`, `domain`, `auto_pr`.
+Copy to `.basecoat.yml` at the repo root to customize sweep behavior.
+
+#### docs/memory/CONTRIBUTING.md — Consumer Guide
+
+End-to-end guide for repo owners: enlistment, passive label-based signals,
+`.basecoat.yml` configuration, active push via `submit-learning.ps1`, scope
+policy, and the steward feedback loop.
+
+#### Improved Sweep Candidate Format
+
+`sweep-enterprise-memory.ps1` now emits a structured YAML promotion block per
+candidate with auto-guessed domain, subject key, Evidence URL, Does NOT apply to
+section, and a four-point scope checklist. Stewards can copy-paste directly to
+`memories/{domain}/{subject}.md` — no longer authoring from scratch.
+
 ## 3.19.0 - 2026-05-09
 
 ### Memory Lifecycle Completion
