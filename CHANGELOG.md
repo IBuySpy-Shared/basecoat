@@ -4,6 +4,53 @@ All notable changes to this repository should be recorded in this file.
 
 ## Unreleased
 
+## 3.23.0 - 2026-05-09
+
+### Multi-Agent Guidance Management (#614-617)
+
+Implements multi-agent strategy research and two new creator-verifier agents.
+
+#### docs/research/multi-agent-strategy-matrix.md
+
+Maps 8 BaseCoat operational tasks to best-fit agent patterns using the
+Eisenhower x Cynefin framework and Decision Book models. Includes a pattern
+selection decision tree.
+
+#### docs/research/multi-agent-bmc.md
+
+Business Model Canvas for the BaseCoat multi-agent system. Covers value
+propositions, customer segments, channels, revenue streams (measured in
+adoption and knowledge quality), key activities, and cost structure.
+
+#### agents/guidance-author.agent.md
+
+Creator agent that drafts new BaseCoat guidance assets (instructions, skills,
+agents, prompts) from a plain-language description. Handoffs to
+guidance-reviewer for validation.
+
+#### agents/guidance-reviewer.agent.md
+
+Verifier agent that validates guidance drafts against lint rules, frontmatter
+schema, required sections, and BaseCoat conventions. Returns structured
+PASS/FAIL verdict with line-level findings. Handoffs back to guidance-author
+on FAIL for correction.
+
+#### docs/architecture/multi-agent-orchestration-patterns.md
+
+Added two new patterns: Creator-Verifier Loop (with LangGraph StateGraph
+implementation and conditional retry edges) and Pub-Sub Broadcast for memory
+promotion events (event schema, publisher/subscriber templates,
+repository_dispatch wiring).
+
+### Ops
+
+- **basecoat-memory validate.yml** (#619): improved PR validation — now checks
+  all required fields (subject, fact, citations, confidence), detects duplicate
+  subjects within a PR, and validates fact length (max 300 chars)
+- **Sprint 20-22 memories contributed** (#618): 7 memories submitted to
+  basecoat-memory via the callable workflow (ci, git, authoring, process, memory
+  domains)
+
 ## 3.22.0 - 2026-05-09
 
 ### Enterprise Onboarding (#623)
