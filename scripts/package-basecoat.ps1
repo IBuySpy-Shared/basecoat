@@ -18,6 +18,7 @@ if (Test-Path $distDir) {
 
 New-Item -ItemType Directory -Force -Path $stageDir | Out-Null
 
+# mkdocs.yml is excluded — it's a docs-site build config, not consumer guidance
 foreach ($item in @('README.md', 'CHANGELOG.md', 'INVENTORY.md', 'version.json', 'sync.sh', 'sync.ps1', 'instructions', 'skills', 'prompts', 'agents', 'scripts', '.githooks', 'docs', 'examples', '.github')) {
     if (Test-Path $item) {
         Copy-Item -Path $item -Destination (Join-Path $stageDir $item) -Recurse -Force
