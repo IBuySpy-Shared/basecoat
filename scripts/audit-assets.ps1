@@ -526,7 +526,7 @@ switch ($Format) {
 }
 
 # Exit 1 if any red assets found (useful in CI gate mode)
-if ($env:CI -eq "true" -and $redCount -gt 0) {
+if ($env:CI -eq "true" -and $redCount -gt 0 -and $Format -ne "json") {
     Write-Warning "$redCount asset(s) scored below 6.0 — see above for details."
     # Do NOT exit 1 here; quality-gate-tests.ps1 enforces the threshold.
 }
