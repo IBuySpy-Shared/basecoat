@@ -65,27 +65,47 @@ jobs:
               labels: ['approved', 'copilot-agent']
             });
 
-            // Assign to copilot (the coding agent picks up assigned issues)
+            // Assign to Copilot coding agent (requires Copilot coding agent enabled for repo)
+            let assigned = false;
             try {
               await github.rest.issues.addAssignees({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 issue_number: issue.number,
-                assignees: ['copilot-swe-agent']
+                assignees: ['Copilot']
               });
+              // Verify assignment actually stuck
+              const { data: updated } = await github.rest.issues.get({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number
+              });
+              assigned = updated.assignees.some(a => a.login.toLowerCase() === 'copilot');
             } catch (e) {
-              core.warning(`Could not assign to copilot: ${e.message}`);
+              core.warning(`Could not assign to Copilot: ${e.message}`);
             }
 
-            // Acknowledge
+            // Acknowledge with honest status
+            const body = assigned
+              ? [
+                  '✅ **Approved** — Issue assigned to the Copilot coding agent.',
+                  '',
+                  'Copilot will analyze this issue and open a draft PR with the implementation.',
+                  'Review the PR when ready and merge after CI passes.',
+                ].join('\n')
+              : [
+                  '✅ **Approved** — Labels `approved` + `copilot-agent` applied.',
+                  '',
+                  '⚠️ **Agent assignment failed.** The Copilot coding agent could not be automatically',
+                  'assigned (it may not be enabled for this repository).',
+                  '',
+                  'To trigger the agent manually, assign this issue to **@Copilot** in the sidebar,',
+                  'or implement the changes manually following the triage plan above.',
+                ].join('\n');
+
             await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: issue.number,
-              body: [
-                '✅ **Approved** — Issue assigned to Copilot coding agent.',
-                '',
-                'Copilot will analyze this issue and create a draft PR with the implementation.',
-                'Review the PR when ready and merge if it passes CI.',
-              ].join('\n')
+              body
             });
