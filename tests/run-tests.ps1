@@ -146,5 +146,9 @@ if ($LASTEXITCODE -ne 0) {
     exit 1
 }
 
+Write-Host 'Running coherence check (non-blocking)...'
+& pwsh -NoProfile -File (Join-Path $PSScriptRoot '..' 'scripts' 'check-coherence.ps1')
+# Non-blocking: coherence issues are warnings, not failures
+
 Write-Host 'All PowerShell tests passed'
 exit 0

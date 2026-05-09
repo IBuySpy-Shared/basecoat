@@ -2,5 +2,5 @@
   "name": "base-coat",
   "version": "3.24.0",
   "releaseDate": "2026-05-09",
-  "notes": "v3.23.0: Multi-agent strategy matrix, Business Model Canvas, creator-verifier agent pair (guidance-author + guidance-reviewer), Creator-Verifier Loop and Pub-Sub Broadcast patterns, basecoat-memory validate.yml improvements, sprint-20-22 memory contributions."
+  "notes": "v3.24.0: Asset quality audit system — scoring rubric for all 192 assets (agents/skills/instructions), CI-blocking quality gate, weekly health report workflow, per-asset adoption detail in detect-basecoat.ps1."
 }
