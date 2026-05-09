@@ -60,7 +60,7 @@ nav:
   - Home: index.md
   - Getting Started:
     - Quickstart: getting-started.md
-    - Enterprise Setup: reference/enterprise-setup.md
+    - Enterprise Setup: guides/enterprise-setup.md
     - Consumer Sync Guide: guides/consumer-sync.md
   - Asset Reference:
     - Overview: reference/QUICK_REFERENCE.md

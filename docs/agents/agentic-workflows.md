@@ -31,11 +31,11 @@ the Copilot agent:
 
 | Workflow | Trigger | What It Does |
 |---|---|---|
-| [`issue-triage.md`](../.github/workflows/issue-triage.md) | Issue opened | Classifies issue, applies priority labels, posts triage summary |
-| [`retro-facilitator.md`](../.github/workflows/retro-facilitator.md) | Weekly schedule | Analyzes past week's activity, creates sprint retrospective issue |
-| [`self-healing-ci.md`](../.github/workflows/self-healing-ci.md) | Workflow run failed | Fetches failed job logs, posts root-cause diagnosis |
-| [`release-impact-advisor.md`](../.github/workflows/release-impact-advisor.md) | PR opened | Assesses blast radius, rollback complexity, and risks |
-| [`code-review-agent.md`](../.github/workflows/code-review-agent.md) | PR opened / synchronized | Reviews diff for bugs, security issues, and logic errors |
+| [`issue-triage.md`](https://github.com/IBuySpy-Shared/basecoat/blob/main/.github/workflows/issue-triage.yml) | Issue opened | Classifies issue, applies priority labels, posts triage summary |
+| [`retro-facilitator.md`](https://github.com/IBuySpy-Shared/basecoat/blob/main/.github/workflows/retro-facilitator.lock.yml) | Weekly schedule | Analyzes past week's activity, creates sprint retrospective issue |
+| [`self-healing-ci.md`](https://github.com/IBuySpy-Shared/basecoat/blob/main/.github/workflows/self-healing-ci.lock.yml) | Workflow run failed | Fetches failed job logs, posts root-cause diagnosis |
+| [`release-impact-advisor.md`](https://github.com/IBuySpy-Shared/basecoat/blob/main/.github/workflows/release-impact-advisor.lock.yml) | PR opened | Assesses blast radius, rollback complexity, and risks |
+| [`code-review-agent.md`](https://github.com/IBuySpy-Shared/basecoat/blob/main/.github/workflows/code-review-agent.lock.yml) | PR opened / synchronized | Reviews diff for bugs, security issues, and logic errors |
 
 ## Workflow Authoring
 

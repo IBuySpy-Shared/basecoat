@@ -382,6 +382,6 @@ A robust implementation should follow these defaults:
 ## Related References
 
 - [`docs/HOOKS.md`](HOOKS.md) — lifecycle patterns for agent execution
-- [`docs/MULTI_AGENT_WORKFLOWS.md`](MULTI_AGENT_WORKFLOWS.md) — agent orchestration and coordination patterns
-- [`docs/MODEL_OPTIMIZATION.md`](MODEL_OPTIMIZATION.md) — model selection and compatibility considerations
+- [`docs/../architecture/multi-agent-orchestration-patterns.md`](../architecture/multi-agent-orchestration-patterns.md) — agent orchestration and coordination patterns
+- [`docs/../guides/MODEL_OPTIMIZATION.md`](../guides/MODEL_OPTIMIZATION.md) — model selection and compatibility considerations
 - Issue [#116](https://github.com/IBuySpy-Shared/basecoat/issues/116) — tracking issue for prompt registry specification

@@ -565,7 +565,7 @@ When adding hook support to a Base Coat-aligned runtime:
 
 ## Related References
 
-- [`docs/token-optimization.md`](token-optimization.md) — Token budget, compaction, and context handoff patterns
-- [`docs/MULTI_AGENT_WORKFLOWS.md`](MULTI_AGENT_WORKFLOWS.md) — Session handoff and coordination patterns across agents
+- [`docs/token-optimization.md`](../guides/token-optimization.md) — Token budget, compaction, and context handoff patterns
+- [`docs/../architecture/multi-agent-orchestration-patterns.md`](../architecture/multi-agent-orchestration-patterns.md) — Session handoff and coordination patterns across agents
 - [`instructions/governance.instructions.md`](/instructions/governance.instructions.md) — Always-on governance and safety constraints
 - Issue [#145](https://github.com/IBuySpy-Shared/basecoat/issues/145) — Tracking issue for lifecycle hook specification

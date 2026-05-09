@@ -125,7 +125,7 @@ Implement lightweight feedback collection within repositories:
   - `BASECOAT_FEEDBACK_CHANNEL=#basecoat-feedback` for Slack integration
 
 - **SQLite-based local session logging:**
-  - Reference: `docs/SQLITE_MEMORY.md` for session database schema
+  - Reference: `../memory/SQLITE_MEMORY.md` for session database schema
   - Aggregate logs weekly via GitHub Action
   - Upload to shared analysis repository
 
@@ -597,6 +597,6 @@ jobs:
 
 - [GitHub Copilot Metrics API](https://docs.github.com/en/rest/copilot/copilot-metrics)
 - [GitHub Actions Workflow Syntax](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions)
-- [SQLite Memory Implementation](docs/SQLITE_MEMORY.md)
-- [BaseCoat Architecture](../README.md)
-- [Feedback Loop Agent Guide](FEEDBACK_LOOP_AGENT.md)
+- [SQLite Memory Implementation](../memory/SQLITE_MEMORY.md)
+- [BaseCoat Architecture](https://github.com/IBuySpy-Shared/basecoat/blob/main/README.md)
+- [Feedback Loop Agent Guide](https://github.com/IBuySpy-Shared/basecoat/blob/main/agents/feedback-loop.agent.md)

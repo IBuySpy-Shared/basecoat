@@ -126,7 +126,7 @@ for event sourcing with CQRS pattern
 - `@code-review` — Code quality, performance, security review
 
 ### Other
-- See [AGENTS.md](../AGENTS.md) for complete list of 73 agents
+- See [AGENTS.md](../agents/AGENTS.md) for complete list of 73 agents
 
 ---
 
@@ -218,7 +218,7 @@ task = "design the factory architecture and document"
 
 If you encounter issues with agents or workarounds:
 
-1. **Check** [AGENTS.md](../AGENTS.md) for agent availability
+1. **Check** [AGENTS.md](../agents/AGENTS.md) for agent availability
 2. **Try** different agent names (exact match required)
 3. **Report** via GitHub Issues with:
    - Command attempted

@@ -83,10 +83,10 @@ Apply these settings to your Base Coat fork:
    - Require pull request reviews (1+ approvals)
    - Require status checks to pass (CI validation)
    - Restrict who can push to `main`
-   - See [`docs/security/BRANCH_PROTECTION.md`](security/BRANCH_PROTECTION.md)
+   - See [`docs/../operations/security/BRANCH_PROTECTION.md`](../operations/security/BRANCH_PROTECTION.md)
 
 2. **Secret scanning**: Enable GitHub secret scanning and push protection.
-   See [`docs/security/SECRET_SCANNING.md`](security/SECRET_SCANNING.md)
+   See [`docs/../operations/security/SECRET_SCANNING.md`](../operations/security/SECRET_SCANNING.md)
 
 3. **Copilot policy**: Enable Copilot for the organization and allow custom instructions from repositories.
 
@@ -134,7 +134,7 @@ Base Coat includes validation workflows. Ensure these run on your fork:
    ---
    ```
 
-4. Reference existing skills and instructions as needed. See [`CATALOG.md`](../CATALOG.md) for the full registry.
+4. Reference existing skills and instructions as needed. See [`CATALOG.md`](https://github.com/IBuySpy-Shared/basecoat/blob/main/CATALOG.md) for the full registry.
 
 ### Creating a New Skill
 
@@ -154,10 +154,10 @@ All customizations follow the same governance model:
 
 - **Issue-first**: Log a GitHub issue before creating or modifying any asset.
 - **PR review**: All changes go through pull requests. Self-approval is permitted for low-risk changes.
-- **Naming conventions**: Follow the patterns in [`instructions/naming.instructions.md`](../instructions/naming.instructions.md).
+- **Naming conventions**: Follow the patterns in [`instructions/naming.instructions.md`](https://github.com/IBuySpy-Shared/basecoat/blob/main/instructions/naming.instructions.md).
 - **Quality gates**: CI validates structure and naming on every PR.
 
-See [`docs/GOVERNANCE.md`](GOVERNANCE.md) and [`CONTRIBUTING.md`](../CONTRIBUTING.md) for full details.
+See [`docs/GOVERNANCE.md`](../reference/GOVERNANCE.md) and [`CONTRIBUTING.md`](https://github.com/IBuySpy-Shared/basecoat/blob/main/CONTRIBUTING.md) for full details.
 
 ---
 
@@ -174,13 +174,13 @@ See [`docs/GOVERNANCE.md`](GOVERNANCE.md) and [`CONTRIBUTING.md`](../CONTRIBUTIN
   ```
 
 - CI also runs commit message scanning via `validate-basecoat.yml`.
-- See guardrail: [`docs/guardrails/secrets-in-workflows.md`](guardrails/secrets-in-workflows.md)
+- See guardrail: [`docs/../reference/guardrails/secrets-in-workflows.md`](../reference/guardrails/secrets-in-workflows.md)
 
 ### Agent Trust Boundaries
 
 - Agents and skills execute in the context of the developer's Copilot session. They do not have independent access to systems.
-- MCP integrations must follow the trust-boundary rules in [`instructions/mcp.instructions.md`](../instructions/mcp.instructions.md).
-- Review [`docs/guardrails/oidc-federation.md`](guardrails/oidc-federation.md) before configuring any GitHub Actions to Azure authentication.
+- MCP integrations must follow the trust-boundary rules in [`instructions/mcp.instructions.md`](https://github.com/IBuySpy-Shared/basecoat/blob/main/instructions/mcp.instructions.md).
+- Review [`docs/../reference/guardrails/oidc-federation.md`](../reference/guardrails/oidc-federation.md) before configuring any GitHub Actions to Azure authentication.
 
 ### Supply Chain Security
 
@@ -232,7 +232,7 @@ curl -fsSL https://raw.githubusercontent.com/YOUR-ORG/basecoat/v1.1.0/sync.sh | 
 5. Create a GitHub Release with packaged artifacts using `scripts/package-basecoat.ps1` or `.sh`.
 6. Publish checksums alongside the release assets.
 
-See [`docs/RELEASE_PROCESS.md`](RELEASE_PROCESS.md) for the full release workflow.
+See [`docs/RELEASE_PROCESS.md`](../operations/RELEASE_PROCESS.md) for the full release workflow.
 
 ### Rollout Strategy
 
@@ -285,7 +285,7 @@ See [`docs/enterprise-rollout.md`](enterprise-rollout.md) for detailed rollout g
 
 - Run `CATALOG.md` validation to check all cross-references.
 - Ensure the skill directory exists and contains a `SKILL.md` file.
-- Check [`CATALOG.md`](../CATALOG.md) for the authoritative list of available assets.
+- Check [`CATALOG.md`](https://github.com/IBuySpy-Shared/basecoat/blob/main/CATALOG.md) for the authoritative list of available assets.
 
 ### Release artifacts fail checksum verification
 
