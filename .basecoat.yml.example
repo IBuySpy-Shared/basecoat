@@ -1,0 +1,36 @@
+# .basecoat.yml — Basecoat memory sweep configuration
+#
+# Place this file at the root of any repo with the `basecoat-enabled` GitHub topic.
+# The weekly enterprise memory sweep reads it to discover learnings from your repo.
+#
+# All keys are optional. Remove keys you don't need — sensible defaults apply.
+#
+# Docs: https://github.com/IBuySpy-Shared/basecoat/blob/main/docs/memory/CONTRIBUTING.md
+
+# ── Signal labels ──────────────────────────────────────────────────────────────
+# Issues and PRs with ANY of these labels are swept as learning candidates.
+# Default: [learning, retrospective, decision]
+learning_labels:
+  - learning
+  - retrospective
+  - decision
+  # - adr          # Architecture Decision Record
+  # - postmortem   # Incident postmortem
+
+# ── Sweep window ───────────────────────────────────────────────────────────────
+# How many days back the sweep looks for signals.
+# Useful if your team does quarterly retrospectives — set to 90.
+# Default: 30
+days_back: 30
+
+# ── Team metadata (optional, included in candidate files) ─────────────────────
+# Helps stewards understand context when reviewing candidates.
+team: ""         # e.g., "Platform Engineering"
+contact: ""      # GitHub username or team handle, e.g., "@my-team"
+domain: ""       # Primary domain hint: ci | git | authoring | process | security |
+                 #   portal | testing | governance | memory | infra
+
+# ── Active push (optional) ────────────────────────────────────────────────────
+# Set to true to enable submit-learning.ps1 output to be auto-opened as a PR.
+# Default: false (candidates land in sweep-candidates/ on the next weekly run instead)
+auto_pr: false
