@@ -4,6 +4,21 @@ All notable changes to this repository should be recorded in this file.
 
 ## Unreleased
 
+## 3.24.0 - 2026-05-09
+
+### Added
+
+- `scripts/audit-assets.ps1` — quality scoring rubric for all agents, skills, and instructions (max 10 pts each); outputs table, markdown, or JSON; grades library A–F
+- `tests/quality-gate-tests.ps1` — CI-blocking gate: fails if avg score < 5.0, red pct > 50%, any zero-score asset, or any category avg < 4.0
+- `.github/workflows/asset-health.yml` — weekly asset health report posted to job summary; opens GitHub issue if grade is F
+- `-AssetDetail` flag on `scripts/adoption/detect-basecoat.ps1` — per-asset adoption rate view across consumer repos (current/stale/missing per asset)
+- Quality gate wired into `tests/run-tests.ps1` (runs after MCP tests)
+- Issue #625: investigate CLI and VS Code extension for agent runtime telemetry signals
+
+### Changed
+
+- `scripts/audit-assets.ps1` progress messages suppressed from stdout when `-Format json` to allow clean JSON piping
+
 ## 3.23.0 - 2026-05-09
 
 ### Multi-Agent Guidance Management (#614-617)
