@@ -42,7 +42,7 @@ Write-Host ""
 # Collect scores from audit-assets.ps1
 # ---------------------------------------------------------------------------
 $jsonOutput = pwsh scripts/audit-assets.ps1 -Format json 2>$null
-$data = $jsonOutput | ConvertFrom-Json
+$data = ($jsonOutput -join "`n") | ConvertFrom-Json
 
 $totalAssets = $data.totalAssets
 $avgScore    = $data.avgScore

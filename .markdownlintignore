@@ -4,3 +4,8 @@
 
 # YAML config templates — not markdown files; # chars are YAML comments, not headings
 .basecoat.yml.example
+
+# CHANGELOG uses Keep-a-Changelog format which legitimately has duplicate section
+# names (### Added, ### Changed, ### Fixed per release) and visual blank-line
+# grouping between major release blocks — exempt from MD012/MD022/MD024/MD032.
+CHANGELOG.md

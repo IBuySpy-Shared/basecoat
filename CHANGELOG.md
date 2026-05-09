@@ -4,7 +4,7 @@ All notable changes to this repository should be recorded in this file.
 
 ## Unreleased
 
-## [3.24.0] - 2026-05-09
+## 3.24.0 - 2026-05-09
 
 ### Added
 
