@@ -4,6 +4,43 @@ All notable changes to this repository should be recorded in this file.
 
 ## Unreleased
 
+## 3.21.0 - 2026-05-09
+
+### Lower Contribution Barriers (#622)
+
+Consumer repos can now contribute learnings via five distinct paths with
+progressively lower tooling requirements:
+
+| Path | Requirements |
+|---|---|
+| Label issue/PR | `basecoat-enabled` topic (already exists) |
+| GitHub issue form | GitHub account only — zero local tools |
+| Reusable workflow | One workflow file + repo secret |
+| `submit-learning.sh` | `bash`, `curl`, `jq`, PAT |
+| `submit-learning.ps1` | PowerShell, `gh` CLI, PAT |
+
+#### scripts/submit-learning.sh
+
+Bash equivalent of `submit-learning.ps1`. Uses the GitHub REST API directly —
+no `git clone`, no `gh` CLI, no PowerShell. Works on any Linux/macOS environment
+with `bash`, `curl`, and `jq`.
+
+#### .github/ISSUE_TEMPLATE/memory-contribution.yml
+
+Structured issue form with scope-check boxes as required fields. Zero setup —
+any GitHub user can open an issue on the basecoat repo and the bot handles the rest.
+
+#### .github/workflows/memory-contribution-issue.yml
+
+Bot workflow triggered when an issue receives the `memory-contribution` label.
+Parses the structured form fields, validates scope and format, pushes a candidate
+to `basecoat-memory/sweep-candidates/`, and comments back with confirmation.
+
+#### .github/workflows/submit-learning-callable.yml
+
+`workflow_call` + `workflow_dispatch` reusable workflow. Consumer repos call it
+from their own CI pipelines — no local tools required, runs fully in GitHub Actions.
+
 ## 3.20.0 - 2026-05-09
 
 ### Consumer Contribution Kit (#620, #621)

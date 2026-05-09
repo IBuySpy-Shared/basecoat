@@ -1,6 +1,6 @@
 {
   "name": "base-coat",
-  "version": "3.20.0",
+  "version": "3.21.0",
   "releaseDate": "2026-05-09",
-  "notes": "v3.20.0: Consumer contribution kit — submit-learning.ps1 active push, .basecoat.yml.example config template, CONTRIBUTING.md guide, structured sweep candidate format with YAML promotion blocks."
+  "notes": "v3.21.0: Lower contribution barriers — bash script (curl/jq/no PowerShell), GitHub issue form (zero setup), reusable workflow_call, five-path CONTRIBUTING.md."
 }
