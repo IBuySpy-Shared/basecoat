@@ -75,4 +75,3 @@ See [dashboards-and-compliance.md](references/observability/dashboards-and-compl
 
 - `security-monitoring.instructions.md` — Security event log schema and SIEM integration.
 - `development.instructions.md` — Application development standards including error handling.
-

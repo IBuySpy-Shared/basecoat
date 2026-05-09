@@ -21,7 +21,7 @@
 
 ### Sprint Goal Template
 
-```
+```text
 In this sprint, we will [deliver X] so that [users/stakeholders can Y].
 We will know we succeeded when [acceptance criteria Z].
 ```
@@ -51,7 +51,7 @@ We will know we succeeded when [acceptance criteria Z].
 
 ## Backlog Refinement (60 min)
 
-### Agenda
+### Refinement Agenda
 
 1. **Stale issue review** (15 min) — close or re-prioritize issues inactive > 14 days.
 2. **New issue walkthrough** (30 min) — clarify, label, estimate, split if needed.

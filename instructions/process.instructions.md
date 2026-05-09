@@ -20,7 +20,7 @@ coordination, and cross-team collaboration.
 
 ## Issue Lifecycle
 
-```
+```text
 Triage → Backlog → Sprint → In Progress → In Review → Done
 ```
 
@@ -74,4 +74,3 @@ See [release-and-coordination.md](references/process/release-and-coordination.md
 
 - `governance.instructions.md` — Contribution policies and review standards.
 - `quality.instructions.md` — Coverage thresholds and quality gates.
-
