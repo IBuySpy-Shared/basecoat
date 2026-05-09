@@ -51,6 +51,7 @@ Max confidence boost from Pass 2: **+0.15**. For EscalationQuery contract and Gu
 | `release` | release, version bump, tag, CHANGELOG | 4 | 0.87 |
 | `clean-branches` | clean branches, stale branches, delete merged | 2 | 0.95 |
 | `portal-feature` | portal, component, hook, frontend | 5 | 0.80 |
+| `contribute-memory` | contribute memory, export memory, push to memory repo, sprint end | 2 | 0.90 |
 
 Confidence is updated using Bayesian incremental learning after each outcome. Security/governance bundles marked `[pin]` are exempt from decay. See [`references/memory-index/memory-algorithms.md`](references/memory-index/memory-algorithms.md) for the update formula.
 
@@ -112,6 +113,19 @@ Resolve memory tier by tier — do not skip layers or query deeper tiers before 
 | L3 | Prior session coverage of the task | No matching session found |
 | L4 | Long-term fact or architecture guidance | No coverage → generate and store |
 
+## Memory Scope Checklist
+
+Before calling `store_memory`, validate all four:
+
+1. **Repo-scoped** — Applies to this repo's conventions, not a customer/sub-project
+2. **Generic** — Useful to any BaseCoat team, not one company's specific setup
+3. **Durable** — Will still be true in 3+ sprints
+4. **Actionable** — Changes what an agent does next
+
+If any answer is "no", skip `store_memory`. Document in `docs/` or keep as session note.
+
+For sharing across sessions/users: see `docs/memory/PROCESS.md` — contribute to `basecoat-memory`.
+
 ## References
 
 | Topic | File |
@@ -120,3 +134,4 @@ Resolve memory tier by tier — do not skip layers or query deeper tiers before 
 | Full HRM layer definitions, GuidanceSignal types | `instructions/hrm-execution.instructions.md` |
 | Reflexion failure signal format, two-pass classification | `instructions/trm-reflexion.instructions.md` |
 | TRM estimator rationale and threshold calibration | `docs/research/TRM-HRM-investigation.md` |
+| End-to-end memory contribution pipeline, scope policy, steward guide | [`docs/memory/PROCESS.md`](../docs/memory/PROCESS.md) |
