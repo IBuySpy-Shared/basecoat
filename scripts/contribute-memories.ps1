@@ -314,4 +314,25 @@ Write-Ok "Contribution complete!"
 Write-Host "  Pushed:  $pushed memories"
 Write-Host "  Skipped: $skipped (already exist)"
 Write-Host "  PR:      $prUrl"
-Write-Host ""
+
+# ── Loopback: flag high-confidence memories for hot-index promotion ────────────
+$hotCandidates = @($memories | Where-Object {
+    $conf = if ($_.confidence) { [double]$_.confidence } else { 0 }
+    $conf -ge 0.90
+})
+
+if ($hotCandidates.Count -gt 0) {
+    Write-Host ""
+    Write-Warn "Hot-index promotion candidates ($($hotCandidates.Count) memories with confidence >= 0.90):"
+    foreach ($hc in $hotCandidates) {
+        $conf = [math]::Round([double]$hc.confidence, 2)
+        Write-Host "  → $($hc.subject) (confidence: $conf)"
+        Write-Host "    Fact: $($hc.fact.Substring(0, [Math]::Min(100, $hc.fact.Length)))..."
+    }
+    Write-Host ""
+    Write-Host "  These should be added to basecoat-memory/hot-index.md after PR merges." -ForegroundColor Yellow
+    Write-Host "  Run after merge: pwsh scripts/audit-memories.ps1 -Validate to confirm, then"
+    Write-Host "  manually add trigger entries to hot-index.md for each candidate above."
+    Write-Host ""
+}
+
