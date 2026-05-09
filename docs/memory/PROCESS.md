@@ -5,7 +5,7 @@ shared `{org}/basecoat-memory` repository and becomes available to all future se
 
 ## Memory Tier Overview
 
-```
+```text
 L0/L1 — Always-on rules (instruction files, frontmatter)      ← baked in, no lookup
 L2    — Team hot index (memory-index.instructions.md)         ← loaded at session start
 L2s   — Shared hot index (basecoat-memory/hot-index.md)      ← pulled via sync script
@@ -20,7 +20,7 @@ team member benefits.
 
 ## End-to-End Flow
 
-```
+```text
 Session produces memory
   └─ store_memory() → session_store_sql (personal cloud store)
 
