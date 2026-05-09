@@ -88,6 +88,69 @@ resource linker 'Microsoft.ServiceLinker/linkers@2022-11-01-preview' = {
 }
 ```
 
+## Azure SQL + Managed Identity Prerequisites
+
+Before debugging ServiceLinker failures for Azure SQL + managed identity connections,
+verify the following prerequisites are in place. Skipping step 2 causes **Error 18456
+(Login failed)** even when ServiceLinker reports "Succeeded" and the contained database
+user was created correctly. This is a silent CI killer.
+
+### 1. Enable system-assigned managed identity on the SQL server
+
+```bicep
+resource sqlServer 'Microsoft.Sql/servers@2022-11-01-preview' = {
+  name: sqlServerName
+  location: location
+  identity: {
+    type: 'SystemAssigned'
+  }
+  properties: {
+    // ...
+  }
+}
+```
+
+### 2. Add the SQL server MI to the Directory Readers role
+
+> **This cannot be done in Bicep or ARM.** It requires the Microsoft Graph API and
+> must be run once by someone with the `RoleManagement.ReadWrite.Directory` permission.
+
+Without this role, SQL Server cannot look up the connecting managed identity in
+Microsoft Entra ID during token validation, resulting in Error 18456.
+
+Step 1 — Get the Directory Readers role ID:
+
+```bash
+az rest --method GET \
+  --url "https://graph.microsoft.com/v1.0/directoryRoles?\$filter=displayName eq 'Directory Readers'" \
+  --query "value[0].id" -o tsv
+```
+
+Step 2 — Add the SQL server MI as a member (replace both placeholders):
+
+```bash
+az rest --method POST \
+  --url "https://graph.microsoft.com/v1.0/directoryRoles/{roleId}/members/\$ref" \
+  --body "{\"@odata.id\": \"https://graph.microsoft.com/v1.0/directoryObjects/{sqlServerMiObjectId}\"}"
+```
+
+The SQL server MI object ID is available in the Azure portal under the SQL server's
+**Identity** blade, or via:
+
+```bash
+az sql server show --name <sqlServerName> --resource-group <rg> \
+  --query identity.principalId -o tsv
+```
+
+### Prerequisites checklist
+
+Before raising a ServiceLinker issue or redeploying, confirm:
+
+- [ ] SQL server has `identity.type = 'SystemAssigned'` in Bicep
+- [ ] SQL server MI is a member of the **Directory Readers** directory role (Graph API, one-time)
+- [ ] ServiceLinker `authType` is `systemAssignedIdentity` or `userAssignedIdentity`
+- [ ] `az webapp connection validate` (or equivalent) passes after deployment
+
 ## Review Lens
 
 - Is the authentication type managed identity where supported?
