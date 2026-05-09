@@ -4,7 +4,53 @@ All notable changes to this repository should be recorded in this file.
 
 ## Unreleased
 
-## 3.16.0 - 2026-05-29
+## 3.17.0 - 2026-05-09
+
+### Instruction Trim Completion + Workflow Reliability
+
+#### Fix Copilot Agent Assignment in issue-approve.yml (#596)
+
+Corrected the assignee username from `copilot-swe-agent` to `Copilot` (the correct
+GitHub Copilot coding agent username). Added post-assignment verification that re-fetches
+the issue and checks the `assignees` list. Posts an honest success or failure comment
+with manual instructions when assignment does not stick.
+
+#### GitHub Secrets Operations Runbook (#583)
+
+Created `docs/operations/GITHUB_SECRETS.md` documenting all 4 required repository
+secrets (`COPILOT_GITHUB_TOKEN`, `GH_AW_GITHUB_TOKEN`, `GH_AW_GITHUB_MCP_SERVER_TOKEN`,
+`STAGING_API_TOKEN`) with setup steps, required scopes, rotation schedules, and
+troubleshooting guidance.
+
+#### Instruction Modularization Batch 3 — 4 Instructions (#584)
+
+Applied references/ extraction pattern to four large instruction files:
+
+- **process.instructions.md** — condensed from 10.3 KB; references in
+  `references/process/sprint-ceremonies.md`, `issue-and-pr-workflow.md`, `release-and-coordination.md`
+- **secrets-management.instructions.md** — condensed from 9.9 KB; references in
+  `references/secrets-management/classification-and-storage.md`, `rotation-and-scanning.md`, `emergency-and-compliance.md`
+- **security-monitoring.instructions.md** — condensed from 8.8 KB; references in
+  `references/security-monitoring/siem-and-alerts.md`, `detection-rules.md`, `incident-escalation.md`
+- **observability.instructions.md** — condensed from 8.6 KB; references in
+  `references/observability/tracing-and-logging.md`, `metrics-and-sampling.md`, `dashboards-and-compliance.md`
+
+#### Instruction Modularization Batch 4 — 5 Instructions (#595)
+
+Applied references/ extraction pattern to five large instruction files:
+
+- **governance.instructions.md** — condensed from 10.9 KB; references in
+  `references/governance/workflow-rules.md`, `agent-self-governance.md`, `guardrails-reference.md`
+- **token-economics.instructions.md** — condensed from 8.0 KB; references in
+  `references/token-economics/context-routing.md`, `turn-budget.md`
+- **quality.instructions.md** — condensed from 7.8 KB; references in
+  `references/quality/pr-review-checklist.md`, `agent-handoffs.md`
+- **enterprise-configuration.instructions.md** — condensed from 10.8 KB; references in
+  `references/enterprise-configuration/seat-management.md`, `metrics-api.md`, `security-and-checklist.md`
+- **memory-index.instructions.md** — condensed from 11.2 KB; references in
+  `references/memory-index/memory-algorithms.md`
+
+
 
 ### Agent Compliance + Instruction Trim
 

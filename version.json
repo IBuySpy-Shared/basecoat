@@ -1,6 +1,6 @@
 {
   "name": "base-coat",
-  "version": "3.16.0",
-  "releaseDate": "2026-05-29",
-  "notes": "v3.16.0: Agent compliance sweep (all 74 agents), instruction modularization batch 2 (3 instructions), PowerShell CI test job (#581, #582, #585)."
+  "version": "3.17.0",
+  "releaseDate": "2026-05-09",
+  "notes": "v3.17.0: Instruction modularization batches 3 and 4 (9 instruction files condensed, 23 reference files created), fix Copilot agent assignment in issue-approve.yml, GitHub secrets runbook."
 }
