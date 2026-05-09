@@ -4,6 +4,27 @@ All notable changes to this repository should be recorded in this file.
 
 ## Unreleased
 
+## 3.25.0 - 2026-05-09
+
+### Added
+
+- `docs/architecture/decisions/adr-001-naming-convention.md` — ADR clarifying `basecoat` vs `base-coat` naming split (#638)
+- `.github/workflows/check-basecoat-version-callable.yml` — callable version drift detection workflow for consumer repos (#648)
+- `.github/workflow-templates/check-basecoat-version.yml` — starter template for consumer repos
+- `instructions/workflow-integrity.instructions.md` — GitHub Actions security guardrails: injection, credentials, pinned actions (#642)
+- `instructions/workflow-file-integrity.instructions.md` — workflow YAML corruption prevention (#643)
+- `skills/azure-linux-app-service/SKILL.md` — Python/Ruby/Node.js PaaS on App Service Linux (#644)
+- `skills/cross-stack-modernization/SKILL.md` — language-agnostic modernization patterns: strangler fig, ACL, risk scoring (#645)
+- `agents/memory-promoter.agent.md` — promotes session patterns to memory contribution payloads (#627)
+- `scripts/detect-repeat-fixes.ps1` — scans session-state for recurring high-frequency fix patterns (#630)
+
+### Changed
+
+- `skills/database-migration/SKILL.md` — extended with Entra-only SQL auth: SID-based CREATE USER, managed identity (#647)
+- `agents/legacy-modernization.agent.md` — added Python, Ruby, Java, Node.js migration patterns (#639)
+- `agents/self-healing-ci.agent.md` — added Azure App Service PaaS startup failure patterns (#640)
+- `.github/workflows/submit-learning-callable.yml` — added batch `memories` JSON array input (#631)
+
 ## 3.24.0 - 2026-05-09
 
 ### Added

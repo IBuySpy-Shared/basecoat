@@ -1,6 +1,6 @@
 {
   "name": "base-coat",
-  "version": "3.24.0",
+  "version": "3.25.0",
   "releaseDate": "2026-05-09",
-  "notes": "v3.24.0: Asset quality audit system — scoring rubric for all 192 assets (agents/skills/instructions), CI-blocking quality gate, weekly health report workflow, per-asset adoption detail in detect-basecoat.ps1."
+  "notes": "Consumer reliability and asset coverage: naming ADR, version drift detection, security guardrails, new skills (azure-linux-app-service, cross-stack-modernization, Entra SQL auth), expanded agents (legacy-modernization, self-healing-ci), memory system (memory-promoter, repeat-fix detector, batch submit)"
 }
