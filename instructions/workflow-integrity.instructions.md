@@ -3,11 +3,11 @@ description: Prevent common GitHub Actions workflow security vulnerabilities inc
 applyTo: .github/workflows/**
 ---
 
-## Workflow Integrity Rules
+# Workflow Integrity Rules
 
 These rules guard against vulnerabilities in GitHub Actions workflow files.
 
-### No base64-encoded scripts
+## No base64-encoded scripts
 
 Never embed base64-encoded scripts in workflow YAML. Encoded payloads bypass code review and static analysis.
 
@@ -23,7 +23,7 @@ Never embed base64-encoded scripts in workflow YAML. Encoded payloads bypass cod
 - run: bash scripts/my-script.sh
 ```
 
-### No inline credentials
+## No inline credentials
 
 Never hardcode secrets, tokens, or credentials in workflow YAML — even as defaults or examples.
 
@@ -41,7 +41,7 @@ env:
   API_KEY: ${{ secrets.API_KEY }}
 ```
 
-### Pin third-party actions to full commit SHA
+## Pin third-party actions to full commit SHA
 
 Third-party actions (not `actions/*`) must be pinned to a full SHA, not a mutable tag.
 
@@ -57,11 +57,11 @@ uses: some-org/some-action@v2
 uses: some-org/some-action@a1b2c3d4e5f6...  # v2.1.0
 ```
 
-### No `pull_request_target` with untrusted code
+## No `pull_request_target` with untrusted code
 
 Do not check out PR code and run it in a `pull_request_target` context without explicit trust checks. This allows arbitrary code execution from forks.
 
-### Minimal permissions
+## Minimal permissions
 
 Always declare the minimum required `permissions` at the job level. Default to `contents: read`. Add only what the job needs (e.g., `issues: write`, `pull-requests: write`).
 
@@ -71,7 +71,7 @@ permissions:
   issues: write
 ```
 
-### No `${{ github.event.*.body }}` in run steps
+## No `${{ github.event.*.body }}` in run steps
 
 User-controlled inputs like issue body, PR title, and commit messages must never be interpolated directly into `run:` steps. Use environment variables instead.
 

@@ -3,11 +3,11 @@ description: Guard against silent GitHub Actions workflow file corruption and en
 applyTo: .github/workflows/**
 ---
 
-## Workflow File Integrity Rules
+# Workflow File Integrity Rules
 
 These rules prevent silent corruption when workflow files are created or modified programmatically.
 
-### Never write workflow YAML with PowerShell Set-Content
+## Never write workflow YAML with PowerShell Set-Content
 
 PowerShell `Set-Content` and `Out-File` use CRLF line endings by default on Windows, which can cause YAML parsing failures or invisible diffs. Always use Python with binary mode or the file creation tools.
 
@@ -24,7 +24,7 @@ with open('.github/workflows/ci.yml', 'wb') as f:
     f.write(content.encode('utf-8'))
 ```
 
-### Validate YAML syntax before committing
+## Validate YAML syntax before committing
 
 After generating or modifying a workflow file, validate it parses correctly.
 
@@ -32,7 +32,7 @@ After generating or modifying a workflow file, validate it parses correctly.
 python -c "import yaml, sys; yaml.safe_load(open(sys.argv[1]))" .github/workflows/ci.yml
 ```
 
-### Do not modify workflow files via GitHub API without verification
+## Do not modify workflow files via GitHub API without verification
 
 The GitHub API `contents` endpoint silently truncates files over certain sizes and may corrupt multi-document YAML. Always verify file integrity after API writes:
 
@@ -40,7 +40,7 @@ The GitHub API `contents` endpoint silently truncates files over certain sizes a
 2. Decode base64 content
 3. Compare SHA against local copy
 
-### Use checksums for critical workflow files
+## Use checksums for critical workflow files
 
 For workflows with security implications (deploy, release, secret access), maintain a checksum registry and verify on each CI run.
 
@@ -49,6 +49,6 @@ sha256sum .github/workflows/deploy.yml >> .github/workflow-checksums.sha256
 sha256sum --check .github/workflow-checksums.sha256
 ```
 
-### Avoid `eval` and dynamic `run:` construction
+## Avoid `eval` and dynamic `run:` construction
 
 Never construct `run:` script content dynamically from untrusted inputs. If dynamic behavior is needed, use a pre-written script file with explicit input parameters.
