@@ -149,8 +149,91 @@ Choose the tier based on the cognitive demand of the agent's primary task:
 
 ---
 
+## Lessons from Production
+
+These examples come from BaseCoat's own sprint history. Each led to a concrete
+change in the tier matrix or override rules above.
+
+### Sprint 2: The Haiku Default Failure
+
+**What happened:** All agents in Sprint 2 defaulted to `claude-haiku-4.5`. The
+architect agent was tasked with designing a multi-region failover strategy. The
+output was structurally correct but shallow — it described patterns without
+evaluating tradeoffs, skipped durability edge cases, and required two rounds of
+manual rework before the design was usable.
+
+**Root cause:** Haiku lacks the chain-of-thought depth for multi-step reasoning
+under uncertainty. Architect tasks are not "follow a template" tasks — they
+require weighing contradictory constraints.
+
+**What changed:** The tier matrix now assigns `architect` to Premium unconditionally,
+with an explicit override note: "never downgrade below Reasoning even under budget
+pressure."
+
+**Signal to watch for:** If an agent produces output that is structurally correct but
+feels thin — correct vocabulary, missing substance — it is likely under-tiered.
+
+---
+
+### Sprint 19: Haiku for Scanning, Not for Judgment
+
+**What happened:** A `config-auditor` agent using `claude-sonnet-4.6` was processing
+100+ config files per sprint. The cost was material. Switching to `claude-haiku-4.5`
+produced identical results for the scan phase (does this value match this pattern?)
+but failed on the judgment phase (is this config safe given the deployment context?).
+
+**Resolution:** Split the agent into two steps — Haiku for the scan loop, Sonnet for
+the final risk assessment. Cost dropped ~75% with no quality regression on the
+judgment output.
+
+**Pattern:** Scanning is a Fast-tier task. Judgment on scan results is a Reasoning-tier
+task. If your agent does both in one pass, split it.
+
+---
+
+### Sprint 24: Fleet Rate Limit Discovery
+
+**What happened:** A sprint launch dispatched 5 concurrent background agents. After
+~90 seconds, three returned 429 errors and stopped mid-task. Retrying immediately
+produced the same result. The sprint had to be restarted with a manual wave pattern.
+
+**What we learned:**
+- Enterprise Copilot API limits concurrent sessions, not just requests-per-minute
+- 3 concurrent agents = safe ceiling
+- 4 = risky depending on org activity at the time
+- 5+ = near-certain 429 within 60–90 seconds
+- Recovery: wait 90 seconds, then restart with reduced concurrency
+
+**What changed:** Added a 15-second inter-agent stagger to all sprint kickoff scripts.
+Wave size capped at 3 in `sprint-kickoff-safe.ps1`. The rate-limit guidance doc was
+updated to cover AI/Copilot fleet limits (previously only covered GitHub REST API).
+
+**Model connection:** Running 5 agents on Premium models worsens this. Premium models
+use more server-side resources. If you must run 5+ agents, use Fast/Code tier where
+possible to reduce per-agent resource consumption.
+
+---
+
+### Ongoing: Explore Agents Are Correctly Tiered at Fast/Haiku
+
+**Observation:** The BaseCoat audit agents (`audit-asset-counts`, `audit-ci-governance`,
+`audit-philosophy-adr`, `audit-scripts-memory`) each ran for 150–200 seconds using the
+Haiku-class explore agent. All four produced accurate, well-structured reports.
+
+**Why this works:** Explore agents read files, grep patterns, and report findings. This
+is scanning and synthesis from structured data — a Fast-tier task. They do not need
+multi-step reasoning or judgment. Sonnet would have cost ~10× more per agent for no
+improvement in output quality.
+
+**Rule confirmed:** Match tier to the cognitive demand of the task, not the perceived
+importance of the output. An audit report can be important without requiring Premium
+reasoning to produce.
+
+---
+
 ## Related References
 
 - `instructions/governance.instructions.md` — Section 10 covers model awareness policy
+- `instructions/token-economics.instructions.md` — Turn budget classification and fast-path routing
 - Individual agent files in `agents/` — each contains a `## Model` section
-- Issue [#50](https://github.com/ivegamsft/basecoat/issues/50) — tracking issue for this guide
+- [`token-optimization.md`](token-optimization.md) — Context window management and budget allocation

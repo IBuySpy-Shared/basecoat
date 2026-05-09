@@ -106,12 +106,15 @@ When a team forks Base Coat, the learning model starts cold. Warm-up sequence:
 After a session that produces reusable insights:
 
 ```powershell
-# Export current hot-index entries to shared repo
-.\scripts\sync-shared-memory.ps1 -Export -Domain azure
+# Export a specific memory entry to the shared repo
+.\scripts\sync-shared-memory.ps1 -Export -Subject "azure:app-config-hierarchy"
 
 # Review what would be exported (dry run)
-.\scripts\sync-shared-memory.ps1 -Export -Domain azure -WhatIf
+.\scripts\sync-shared-memory.ps1 -Export -Subject "azure:app-config-hierarchy" -WhatIf
 ```
+
+> **Note:** In `-Export` mode, `-Subject` is required (format: `domain:key`).
+> `-Domain` only filters results in pull/sync mode — it has no effect on exports.
 
 Exported memories are reviewed via PR in `IBuySpy-Shared/basecoat-memory`
 before merging. This prevents low-quality or sensitive facts from entering
