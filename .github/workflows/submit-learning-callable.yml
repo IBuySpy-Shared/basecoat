@@ -1,0 +1,138 @@
+name: Submit Learning (Callable)
+
+# Reusable workflow — consumer repos call this to submit a learning without
+# running any scripts locally.
+#
+# Usage from a consumer repo workflow:
+#
+#   jobs:
+#     submit:
+#       uses: IBuySpy-Shared/basecoat/.github/workflows/submit-learning-callable.yml@main
+#       with:
+#         subject:  "ci:agent-pr-approval"
+#         fact:     "Copilot agent PRs need a maintainer empty-commit to trigger CI."
+#         evidence: "https://github.com/myorg/myrepo/pull/42"
+#         domain:   "ci"
+#         source:   "myorg/myrepo"
+#       secrets:
+#         memory_repo_token: ${{ secrets.MEMORY_REPO_TOKEN }}
+#
+# Or trigger manually via workflow_dispatch on this repo:
+#   gh workflow run submit-learning-callable.yml \
+#     -f subject="ci:agent-pr-approval" \
+#     -f fact="..." \
+#     -f evidence="https://..." \
+#     -f domain="ci" \
+#     -f source="myorg/myrepo"
+
+on:
+  workflow_call:
+    inputs:
+      subject:
+        description: "domain:key namespace (e.g., ci:agent-pr-approval)"
+        required: true
+        type: string
+      fact:
+        description: "One-sentence pattern, ≤ 300 chars, no project-specific names"
+        required: true
+        type: string
+      evidence:
+        description: "URL to PR, issue, or CHANGELOG evidencing this pattern"
+        required: true
+        type: string
+      domain:
+        description: "Domain: ci | git | authoring | process | security | portal | testing | governance | memory | infra"
+        required: true
+        type: string
+      source:
+        description: "org/repo of the contributing repository"
+        required: true
+        type: string
+      team:
+        description: "Team name for steward context (optional)"
+        required: false
+        type: string
+        default: ""
+      open_pr:
+        description: "Open a PR in basecoat-memory immediately (default: true)"
+        required: false
+        type: boolean
+        default: true
+    secrets:
+      memory_repo_token:
+        description: >
+          Fine-grained PAT with Contents (R/W) and Pull Requests (R/W) on
+          {org}/basecoat-memory. Store as MEMORY_REPO_TOKEN in the calling repo.
+        required: true
+
+  workflow_dispatch:
+    inputs:
+      subject:
+        description: "domain:key (e.g., ci:agent-pr-approval)"
+        required: true
+        type: string
+      fact:
+        description: "One-sentence pattern (≤ 300 chars, no project-specific names)"
+        required: true
+        type: string
+      evidence:
+        description: "Evidence URL"
+        required: true
+        type: string
+      domain:
+        description: "Domain (ci|git|authoring|process|security|portal|testing|governance|memory|infra)"
+        required: true
+        type: choice
+        options: [ci, git, authoring, process, security, portal, testing, governance, memory, infra]
+      source:
+        description: "Source repo (org/repo)"
+        required: true
+        type: string
+      team:
+        description: "Team name (optional)"
+        required: false
+        type: string
+        default: ""
+      open_pr:
+        description: "Open a PR in basecoat-memory immediately"
+        required: false
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+jobs:
+  submit:
+    name: Submit learning to basecoat-memory
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out basecoat scripts
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+        with:
+          fetch-depth: 1
+
+      - name: Submit learning
+        env:
+          MEMORY_REPO_TOKEN: ${{ secrets.memory_repo_token || secrets.MEMORY_REPO_TOKEN }}
+        run: |
+          OPEN_PR_FLAG=""
+          if [[ "${{ inputs.open_pr }}" == "true" ]]; then
+            OPEN_PR_FLAG="--open-pr"
+          fi
+
+          TEAM_FLAG=""
+          if [[ -n "${{ inputs.team }}" ]]; then
+            TEAM_FLAG="--team '${{ inputs.team }}'"
+          fi
+
+          bash scripts/submit-learning.sh \
+            --subject  "${{ inputs.subject }}" \
+            --fact     "${{ inputs.fact }}" \
+            --evidence "${{ inputs.evidence }}" \
+            --domain   "${{ inputs.domain }}" \
+            --source   "${{ inputs.source }}" \
+            $TEAM_FLAG \
+            $OPEN_PR_FLAG

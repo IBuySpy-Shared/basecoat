@@ -1,0 +1,108 @@
+name: "💡 Submit a Memory Contribution"
+description: >
+  Share a reusable pattern or learning from your repo for the basecoat steward
+  team to consider promoting to shared memory. No PowerShell or local tools needed.
+title: "memory(contrib): <subject>"
+labels:
+  - "memory-contribution"
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## How this works
+
+        1. Fill in this form — keep answers generic (no internal system names, product names, or org-specific details)
+        2. Submit the issue — the steward bot will validate and write a candidate to `basecoat-memory`
+        3. A steward reviews and promotes it to shared memory if it passes the scope policy
+        4. Once merged, the pattern flows back to all `basecoat-enabled` repos via the weekly hot-index sync
+
+        **Scope policy — all four must be yes:**
+        - Generic (no product names / internal tooling)
+        - Applicable broadly (not just your specific project)
+        - Durable (held true for ≥ 3 sprints or ≥ 2 incidents)
+        - Actionable (another team would change behavior based on this)
+
+  - type: input
+    id: subject
+    attributes:
+      label: Subject (domain:key)
+      description: >
+        Namespace for this learning. Format: `domain:key` using lowercase letters,
+        digits, and hyphens. Valid domains: `ci`, `git`, `authoring`, `process`,
+        `security`, `portal`, `testing`, `governance`, `memory`, `infra`.
+      placeholder: "ci:agent-pr-approval"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: domain
+    attributes:
+      label: Domain
+      description: Must match the domain prefix in Subject above.
+      options:
+        - ci
+        - git
+        - authoring
+        - process
+        - security
+        - portal
+        - testing
+        - governance
+        - memory
+        - infra
+    validations:
+      required: true
+
+  - type: textarea
+    id: fact
+    attributes:
+      label: Pattern / Fact
+      description: >
+        One clear sentence describing the reusable pattern (≤ 300 characters).
+        Must be generic — no product names, internal system names, or
+        org-specific tooling.
+      placeholder: "Copilot agent PRs have action_required CI status until a maintainer pushes an empty commit to retrigger checks."
+    validations:
+      required: true
+
+  - type: input
+    id: evidence
+    attributes:
+      label: Evidence URL
+      description: Link to the PR, issue, CHANGELOG, or discussion that evidences this pattern.
+      placeholder: "https://github.com/myorg/myrepo/pull/42"
+    validations:
+      required: true
+
+  - type: input
+    id: source
+    attributes:
+      label: Source repo (org/repo)
+      description: The repository where this pattern was observed.
+      placeholder: "myorg/myrepo"
+    validations:
+      required: true
+
+  - type: input
+    id: team
+    attributes:
+      label: Team (optional)
+      description: Your team name, for steward context.
+      placeholder: "Platform Engineering"
+
+  - type: checkboxes
+    id: scope_check
+    attributes:
+      label: Scope check
+      description: Confirm all four before submitting.
+      options:
+        - label: Applies broadly (not just my specific internal project)
+          required: true
+        - label: Free of product names, internal system names, org-specific tooling
+          required: true
+        - label: Has held true across ≥ 3 sprints or ≥ 2 similar incidents
+          required: true
+        - label: Another team would change their behavior based on this
+          required: true
