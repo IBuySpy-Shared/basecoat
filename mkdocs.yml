@@ -1,9 +1,14 @@
 site_name: BaseCoat
 site_description: Enterprise shared library of GitHub Copilot customization assets — agents, skills, instructions, and prompts.
+# URLs below are substituted by .github/workflows/docs.yml for consumer forks.
 site_url: https://ibuyspy-shared.github.io/basecoat/
 repo_url: https://github.com/IBuySpy-Shared/basecoat
 repo_name: IBuySpy-Shared/basecoat
 edit_uri: edit/main/docs/
+
+# Exclude legacy archive files — links are historical and not maintained
+exclude_docs: |
+  archive/**
 
 theme:
   name: material
