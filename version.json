@@ -1,6 +1,6 @@
 {
   "name": "base-coat",
-  "version": "3.21.0",
+  "version": "3.22.0",
   "releaseDate": "2026-05-09",
-  "notes": "v3.21.0: Lower contribution barriers — bash script (curl/jq/no PowerShell), GitHub issue form (zero setup), reusable workflow_call, five-path CONTRIBUTING.md."
+  "notes": "v3.22.0: Enterprise onboarding — org-level secret path (zero per-repo config for internal teams), onboard-basecoat.sh one-command enlistment, org starter workflow, auto-enlist bulk workflow, SETUP-INTERNAL.md and SETUP-EXTERNAL.md guides."
 }

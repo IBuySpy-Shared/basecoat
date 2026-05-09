@@ -4,6 +4,41 @@ All notable changes to this repository should be recorded in this file.
 
 ## Unreleased
 
+## 3.22.0 - 2026-05-09
+
+### Enterprise Onboarding (#623)
+
+Reduces internal friction to near-zero. After a one-time admin step, any
+IBuySpy-Shared repo can contribute learnings with a single command.
+
+#### docs/memory/SETUP-INTERNAL.md
+
+Internal org guide. Admin sets `MEMORY_REPO_TOKEN` as an org-level Actions
+secret once; every repo in the org inherits it automatically with no per-repo
+configuration.
+
+#### docs/memory/SETUP-EXTERNAL.md
+
+External org step-by-step guide covering PAT creation, org-level vs per-repo
+secret options, onboarding script usage, callable workflow copy-paste, token
+rotation, and a troubleshooting table.
+
+#### scripts/onboard-basecoat.sh
+
+One-command enlistment. Adds the `basecoat-enabled` topic and creates the
+three learning labels. Infers repo from git remote if `--repo` is omitted.
+Idempotent - safe to re-run.
+
+#### .github/workflow-templates/submit-learning.yml
+
+Org starter workflow. Appears in the **Actions - New workflow** UI for all
+`IBuySpy-Shared` repos automatically. No file copy needed - fill form, run.
+
+#### .github/workflows/auto-enlist.yml
+
+Admin bulk-enlistment workflow. Accepts a comma-separated repo list or sweeps
+the entire org. Defaults to `dry_run: true` for safety.
+
 ## 3.21.0 - 2026-05-09
 
 ### Lower Contribution Barriers (#622)
