@@ -40,3 +40,18 @@ Use `docs/prd-and-spec-guidance.md` when defining scope, requirements, and imple
 - PRD: business goal, user needs, success metrics, constraints, non-goals
 - Technical spec: architecture, data flow, interfaces, rollout, risk, validation plan
 - Keep PRD and spec linked so delivery remains aligned with original intent
+
+## File Placement
+
+Follow the canonical placement rules in `docs/guides/file-placement.md`. Key rules:
+
+- **Repo root**: only standard project files (README, CHANGELOG, LICENSE, sync scripts, config dotfiles). No specs, no summaries, no API files.
+- **docs/guides/**: how-to guides and tutorials
+- **docs/reference/**: stable reference material; API specs go in `docs/reference/api/`
+- **docs/operations/**: runbooks, release docs, ops tracking
+- **docs/archive/**: retired content and sprint artifacts — do not add new content without tagging it for archival
+- **agents/**: flat `.agent.md` files only — no subdirectories, no meta-docs
+- **instructions/**: flat `.instructions.md` files; reference shards in `instructions/references/<topic>/`
+- **prompts/**: flat `.prompt.md` files
+- **Never** place source code (`.py`, `.ts`, `.sql`) inside `docs/`
+- **Never** commit AI-generated summary `.txt` files — see `.gitignore` patterns

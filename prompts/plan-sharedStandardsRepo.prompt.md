@@ -1,3 +1,7 @@
+---
+description: "Use when planning a shared standards repository with auto-sync capabilities for GitHub Copilot customizations across teams."
+---
+
 # Base Coat — Shared Standards Repository with Auto-Sync
 
 ## Plan Overview
