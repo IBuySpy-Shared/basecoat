@@ -58,7 +58,7 @@ or the target platform is fundamentally different.
 Route new functionality to the replacement system while the legacy system handles
 everything else. Incrementally move routes or capabilities until the legacy is empty.
 
-```
+```text
 ┌─────────────┐        ┌───────────────────┐
 │   Clients   │──────▶ │   Routing layer   │
 └─────────────┘        │  (proxy / facade) │
@@ -80,7 +80,7 @@ Steps:
 Wrap the legacy API in an adapter that translates its model into your domain model.
 New code only calls the ACL; it never depends directly on legacy internals.
 
-```
+```text
 New service ──▶ ACL (adapter) ──▶ Legacy API
                   │
                   └── translates: legacy DTO ↔ domain model
@@ -115,7 +115,7 @@ Choose **UI-first** when the legacy backend is stable and the UX is the blocker.
 
 Score each service before sequencing:
 
-```
+```text
 Risk = Complexity × Coupling × (1 / Test Coverage)
 ```
 
@@ -153,7 +153,7 @@ migrated to call it through an API.
 
 ### Risk scoring a service portfolio
 
-```
+```text
 Service A: Complexity=1, Coupling=1, Coverage=80% → Risk = 1×1×(1/0.8) = 1.25  ✅ migrate first
 Service B: Complexity=2, Coupling=2, Coverage=40% → Risk = 2×2×(1/0.4) = 10    ⚠ mid-queue
 Service C: Complexity=3, Coupling=3, Coverage=10% → Risk = 3×3×(1/0.1) = 90    🔴 migrate last

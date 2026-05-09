@@ -61,7 +61,7 @@ principal display name) exactly.
 
 No password. Set `Authentication=Active Directory Managed Identity` and omit `Password`:
 
-```
+```text
 Server=<server>.database.windows.net;Database=<db>;
 Authentication=Active Directory Managed Identity;
 User Id=<client-id-of-user-assigned-identity>;
@@ -69,7 +69,7 @@ User Id=<client-id-of-user-assigned-identity>;
 
 For system-assigned managed identity, omit `User Id`:
 
-```
+```text
 Server=<server>.database.windows.net;Database=<db>;
 Authentication=Active Directory Managed Identity;
 ```
