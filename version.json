@@ -1,6 +1,6 @@
 {
   "name": "base-coat",
-  "version": "3.18.0",
+  "version": "3.19.0",
   "releaseDate": "2026-05-09",
-  "notes": "v3.18.0: Memory contribution pipeline — contribute-memories.ps1, sync-shared-memory.ps1 -ExportFile, memory-contribute.yml workflow, docs/memory/PROCESS.md, memory scope policy."
+  "notes": "v3.19.0: Memory lifecycle completion — audit-memories.ps1 (validate/audit/update/purge), quarterly memory-audit.yml workflow, loopback hot-index promotion signals, sprint-20-memories.json contribution payload."
 }

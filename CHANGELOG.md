@@ -4,6 +4,44 @@ All notable changes to this repository should be recorded in this file.
 
 ## Unreleased
 
+## 3.19.0 - 2026-05-09
+
+### Memory Lifecycle Completion
+
+#### Memory Audit Script — scripts/audit-memories.ps1 (#607, #609, #610)
+
+New script with four modes covering the full memory governance lifecycle:
+
+- **`-Validate`** — checks all `basecoat-memory` memory files for frontmatter
+  completeness, fact ≤ 300 chars, `domain:key` subject format, and scope policy
+  markers (rejects project-specific technology names). CI-safe, exits 1 on violations.
+- **`-Audit`** — scans for stale memories (configurable day threshold, default 180)
+  and low-confidence (< 0.50) memories. With `-OpenPR`, moves stale memories to
+  `deprecated/{domain}/` via a PR in `basecoat-memory`.
+- **`-Update`** — appends new evidence to an existing memory, bumps `last_validated`,
+  opens a PR.
+- **`-Purge`** — moves a memory to `deprecated/{domain}/` with a deprecation note,
+  opens a PR.
+
+#### Memory Audit Workflow — .github/workflows/memory-audit.yml (#609)
+
+Quarterly schedule (1 Jan/Apr/Jul/Oct) + `workflow_dispatch`. Runs `-Validate` on
+every scheduled run and `-Audit` on demand. `-OpenPR` input triggers automated
+deprecation PR creation for stale memories.
+
+#### Loopback: High-Confidence Hot-Index Promotion (#608)
+
+`contribute-memories.ps1` now detects memories with `confidence >= 0.90` after pushing
+and emits a clear list of hot-index promotion candidates, closing the feedback loop
+from session memory → shared memory → L2 hot cache.
+
+#### Sprint-20 Memory Payload — docs/memory/sprint-20-memories.json (#611)
+
+Eight valid basecoat-scoped patterns from sprints 15–20, structured for immediate
+contribution via `contribute-memories.ps1`. Covers: CI quirks, git hygiene, agent/skill
+authoring conventions, sprint workflow, task classification, memory scope policy, and
+markdown lint patterns.
+
 ## 3.18.0 - 2026-05-09
 
 ### Memory Contribution Pipeline
