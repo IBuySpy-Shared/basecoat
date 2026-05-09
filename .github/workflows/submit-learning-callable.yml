@@ -58,6 +58,11 @@ on:
         required: false
         type: boolean
         default: true
+      memories:
+        description: "JSON array of memory objects for batch submission. Each object must have: subject, fact, evidence, domain, source. Optional: team, open_pr. When set, the singular inputs (subject/fact/evidence/domain/source) are ignored."
+        required: false
+        type: string
+        default: ""
     secrets:
       memory_repo_token:
         description: >
@@ -98,6 +103,11 @@ on:
         required: false
         type: boolean
         default: true
+      memories:
+        description: "JSON array of memory objects for batch submission (each: subject, fact, evidence, domain, source; optional: team, open_pr). When set, singular inputs are ignored."
+        required: false
+        type: string
+        default: ""
 
 permissions:
   contents: read
@@ -114,7 +124,39 @@ jobs:
         with:
           fetch-depth: 1
 
+      - name: Submit batch memories
+        if: inputs.memories != ''
+        env:
+          MEMORY_REPO_TOKEN: ${{ secrets.memory_repo_token || secrets.MEMORY_REPO_TOKEN }}
+          MEMORIES_JSON: ${{ inputs.memories }}
+        run: |
+          echo "$MEMORIES_JSON" | jq -c '.[]' | while IFS= read -r item; do
+            subj=$(echo "$item" | jq -r '.subject')
+            fact=$(echo "$item" | jq -r '.fact')
+            evid=$(echo "$item" | jq -r '.evidence')
+            dom=$(echo "$item"  | jq -r '.domain')
+            src=$(echo "$item"  | jq -r '.source')
+            team=$(echo "$item" | jq -r '.team // ""')
+            opr=$(echo "$item"  | jq -r '.open_pr // "true"')
+
+            OPEN_PR_FLAG=""
+            if [[ "$opr" == "true" ]]; then OPEN_PR_FLAG="--open-pr"; fi
+
+            TEAM_FLAG=""
+            if [[ -n "$team" ]]; then TEAM_FLAG="--team '$team'"; fi
+
+            bash scripts/submit-learning.sh \
+              --subject  "$subj" \
+              --fact     "$fact" \
+              --evidence "$evid" \
+              --domain   "$dom" \
+              --source   "$src" \
+              $TEAM_FLAG \
+              $OPEN_PR_FLAG
+          done
+
       - name: Submit learning
+        if: inputs.memories == ''
         env:
           MEMORY_REPO_TOKEN: ${{ secrets.memory_repo_token || secrets.MEMORY_REPO_TOKEN }}
         run: |
