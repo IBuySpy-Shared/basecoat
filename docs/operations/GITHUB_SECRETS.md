@@ -59,6 +59,7 @@ only `repo:read` scope. Name the token `basecoat-gh-aw`.
 agent to call GitHub APIs from within the agent container.
 
 **How to create:** A fine-grained PAT scoped to this repository with:
+
 - **Repository permissions:** Issues (read/write), Pull requests (read/write),
   Contents (read)
 - Name it `basecoat-mcp-server`
