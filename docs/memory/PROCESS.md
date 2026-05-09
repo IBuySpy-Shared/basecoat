@@ -217,4 +217,3 @@ pwsh scripts/audit-memories.ps1 -Update -Subject "ci:copilot-agent-pr" -Evidence
 # Deprecate a memory (move to deprecated/)
 pwsh scripts/audit-memories.ps1 -Purge -Subject "portal:scan-backend" -Reason "Portal removed in v4.0"
 ```
-
