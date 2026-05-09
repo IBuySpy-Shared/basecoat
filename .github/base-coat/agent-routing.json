@@ -1,0 +1,22 @@
+{
+  "enforced": {
+    "pii_or_secrets": "local-llm",
+    "irreversible_operations": "cloud-agent",
+    "regulated_environment": "local-llm"
+  },
+  "configurable": {
+    "default_fleet_concurrency": 5,
+    "cli_main_timeout_minutes": 15,
+    "prefer_local_for_low_stakes": true
+  },
+  "guidelines": {
+    "security_audit": "cloud-agent",
+    "parallel_subtasks": "cli-fleet",
+    "interactive_planning": "cli-main",
+    "long_async_task": "cloud-agent",
+    "high_frequency_edits": "local-llm",
+    "sprint_execution": "cli-fleet",
+    "pr_review": "cloud-agent",
+    "iterative_debugging": "cli-main"
+  }
+}
