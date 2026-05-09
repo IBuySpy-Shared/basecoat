@@ -1,6 +1,12 @@
 ---
 name: docs-site
 description: Scaffold a MkDocs Material documentation site for any GitHub repository — generates mkdocs.yml, landing page, getting-started guide, CI deploy workflow, and optional Mermaid architecture diagrams.
+metadata:
+  category: documentation
+  keywords: "mkdocs, material, github-pages, documentation, mermaid, diagrams"
+  maturity: production
+  audience: [developer, devops-engineer, open-source-maintainer]
+allowed-tools: [bash, git, powershell]
 ---
 
 # Docs Site
