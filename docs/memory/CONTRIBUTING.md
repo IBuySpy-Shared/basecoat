@@ -3,15 +3,27 @@
 This guide explains how repos that use basecoat guidance can contribute
 learnings back for the steward team to review and promote into shared memory.
 
+## First-Time Setup
+
+> **IBuySpy-Shared org members (internal):** See `docs/memory/SETUP-INTERNAL.md`.
+> After a one-time admin secret, onboarding a repo takes a single command.
+>
+> **External orgs:** See `docs/memory/SETUP-EXTERNAL.md`.
+> You need a fine-grained PAT stored as a secret, then one onboarding command.
+
+Once set up, the paths below all work with zero additional configuration
+for internal org members.
+
 ## Choosing a Path
 
-| Path | Setup required | Good for |
-|---|---|---|
-| **Label an issue or PR** | Add `basecoat-enabled` topic once | Ongoing passive collection |
-| **Submit via GitHub issue** | GitHub account only | One-off submissions, no CLI needed |
-| **Call the reusable workflow** | Copy one workflow file + add a secret | CI-triggered submissions, any language |
-| **Run `submit-learning.sh`** | `bash`, `curl`, `jq` + PAT | Linux/macOS teams, shell scripting |
-| **Run `submit-learning.ps1`** | PowerShell + `gh` CLI + PAT | Windows teams, PowerShell pipelines |
+| Path | Internal setup | External setup | Good for |
+|---|---|---|---|
+| **Label an issue or PR** | Enlist repo once | Enlist repo once | Ongoing passive collection |
+| **Starter workflow** | None — appears in Actions UI automatically | Copy one file | CI-triggered, GUI form |
+| **Submit via GitHub issue** | GitHub account only | GitHub account only | One-off, no CLI |
+| **Reusable workflow call** | None — org secret inherited | Copy one file + secret | Any OS, any language |
+| **`submit-learning.sh`** | Org secret auto-injected in CI | PAT env var | Linux/macOS/WSL |
+| **`submit-learning.ps1`** | Org secret auto-injected in CI | PAT env var | Windows/pwsh |
 
 ## How It Works
 
