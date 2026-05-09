@@ -149,3 +149,72 @@ The memory steward (a human maintainer or designated agent run) is responsible f
 |---|---|---|
 | `memory-sweep.yml` | Weekly Monday 06:00 UTC | Sweep enlisted repos for candidates |
 | `memory-contribute.yml` | `workflow_dispatch` | Agent-triggered batch memory push |
+| `memory-audit.yml` | Quarterly + `workflow_dispatch` | Validate all memories, evict stale ones |
+
+## Memory Lifecycle
+
+```text
+store_memory()                    ← produce (session)
+    ↓
+contribute-memories.ps1           ← export (sprint end)
+    ↓
+basecoat-memory PR review         ← validate (steward)
+    ↓
+memories/{domain}/{subject}.md    ← promote (merge)
+    ↓
+hot-index.md (if conf ≥ 0.90)    ← loopback (steward)
+    ↓
+sync-shared-memory.ps1 -Force     ← distribute (all sessions)
+    ↓
+audit-memories.ps1 -Audit         ← evict (quarterly)
+    ↓
+deprecated/{domain}/{subject}.md  ← archive (steward PR)
+```
+
+## Validation Gate (add to basecoat-memory)
+
+Add a `validate.yml` workflow to your `basecoat-memory` repo that runs on every PR:
+
+```yaml
+name: Validate Memories
+on:
+  pull_request:
+    paths: ["memories/**"]
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: your-org/basecoat
+          path: basecoat
+      - uses: actions/checkout@v4
+        with:
+          path: basecoat-memory
+      - name: Validate
+        shell: pwsh
+        env:
+          BASECOAT_SHARED_MEMORY_REPO: ${{ github.repository }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: pwsh basecoat/scripts/audit-memories.ps1 -Validate
+```
+
+## Audit Script Reference
+
+```powershell
+# Validate all memory files (CI safe, no writes)
+pwsh scripts/audit-memories.ps1 -Validate
+
+# Report stale memories
+pwsh scripts/audit-memories.ps1 -Audit
+
+# Report and open deprecation PR for stale memories
+pwsh scripts/audit-memories.ps1 -Audit -OpenPR
+
+# Update a memory with new evidence
+pwsh scripts/audit-memories.ps1 -Update -Subject "ci:copilot-agent-pr" -Evidence "Confirmed in PR #620"
+
+# Deprecate a memory (move to deprecated/)
+pwsh scripts/audit-memories.ps1 -Purge -Subject "portal:scan-backend" -Reason "Portal removed in v4.0"
+```
+
