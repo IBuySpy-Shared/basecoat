@@ -3,24 +3,29 @@
 This guide explains how repos that use basecoat guidance can contribute
 learnings back for the steward team to review and promote into shared memory.
 
-## Quick Start
+## Choosing a Path
 
-1. Add the `basecoat-enabled` topic to your repo
-2. Label any issue or PR `learning`, `retrospective`, or `decision`
-3. The weekly sweep picks it up automatically
-
-For deliberate, structured submissions skip to [Active Push](#active-push).
+| Path | Setup required | Good for |
+|---|---|---|
+| **Label an issue or PR** | Add `basecoat-enabled` topic once | Ongoing passive collection |
+| **Submit via GitHub issue** | GitHub account only | One-off submissions, no CLI needed |
+| **Call the reusable workflow** | Copy one workflow file + add a secret | CI-triggered submissions, any language |
+| **Run `submit-learning.sh`** | `bash`, `curl`, `jq` + PAT | Linux/macOS teams, shell scripting |
+| **Run `submit-learning.ps1`** | PowerShell + `gh` CLI + PAT | Windows teams, PowerShell pipelines |
 
 ## How It Works
 
 ```text
 Consumer repo (basecoat-enabled)
   │
-  ├─ labels issue/PR: "learning"        ← passive signal
-  ├─ runs submit-learning.ps1           ← active push
+  ├─ labels issue/PR: "learning"           ← passive, weekly pickup
+  ├─ opens basecoat issue (memory-contribution template) ← zero-setup
+  ├─ calls submit-learning-callable.yml    ← CI-native, any OS
+  ├─ runs submit-learning.sh               ← bash/curl/jq
+  ├─ runs submit-learning.ps1              ← PowerShell
   │
   ▼
-basecoat-memory/sweep-candidates/YYYY-MM-DD.md   ← PR opened for review
+basecoat-memory/sweep-candidates/          ← PR opened for steward review
   │
   ▼
 Memory steward reviews → promotes to memories/{domain}/{subject}.md
@@ -29,33 +34,129 @@ Memory steward reviews → promotes to memories/{domain}/{subject}.md
 Weekly sync distributes to all basecoat-enabled repos (hot-index.md)
 ```
 
-## Enlisting Your Repo
+## Path 1 — Label-Based Sweep (passive, zero setup after enlistment)
 
-Add the GitHub topic to your repo:
+Add the `basecoat-enabled` GitHub topic to your repo:
 
 ```sh
 gh api repos/{org}/{repo}/topics --method PUT --field names[]=basecoat-enabled
 ```
 
-The sweep runs every Monday at 06:00 UTC. Your repo is included automatically
-on the next run.
+Then label any merged PR or closed issue with `learning`, `retrospective`,
+or `decision`. The weekly sweep picks it up automatically every Monday.
 
-## Passive Signals (Label-Based)
-
-Any merged PR or closed issue with a learning label is swept as a candidate.
-
-Default labels: `learning`, `retrospective`, `decision`
-
-Create the label in your repo once:
+Create the labels once:
 
 ```sh
-gh label create learning   --color 0075ca --description "Candidate for basecoat memory"
+gh label create learning      --color 0075ca --description "Candidate for basecoat memory"
 gh label create retrospective --color e4e669 --description "Sprint retrospective finding"
-gh label create decision   --color d93f0b --description "Architecture or process decision"
+gh label create decision      --color d93f0b --description "Architecture or process decision"
 ```
 
-Then apply the label when closing issues or merging PRs that contain reusable
-patterns or decisions.
+## Path 2 — GitHub Issue (zero local setup)
+
+Open an issue on the basecoat repo using the **Memory Contribution** template.
+No CLI, no PAT, no PowerShell required — just a GitHub account.
+
+1. Go to: <https://github.com/IBuySpy-Shared/basecoat/issues/new/choose>
+2. Select **💡 Submit a Memory Contribution**
+3. Fill in the structured form
+4. Submit — the bot validates and queues the candidate automatically
+
+The scope-check boxes in the form are enforced before submission.
+
+## Path 3 — Reusable Workflow (CI-native, any OS)
+
+No local tools needed. Add one workflow file to your repo and the submission
+runs in GitHub Actions.
+
+**Prerequisites:**
+
+- Store `MEMORY_REPO_TOKEN` as a repo secret (fine-grained PAT with
+  Contents R/W + Pull Requests R/W on `{org}/basecoat-memory`)
+
+**Workflow to add** (copy to `.github/workflows/submit-learning.yml`):
+
+```yaml
+name: Submit learning to basecoat
+on:
+  workflow_dispatch:
+    inputs:
+      subject:  { required: true,  type: string }
+      fact:     { required: true,  type: string }
+      evidence: { required: true,  type: string }
+      domain:   { required: true,  type: string }
+      source:   { required: false, type: string, default: "" }
+
+jobs:
+  submit:
+    uses: IBuySpy-Shared/basecoat/.github/workflows/submit-learning-callable.yml@main
+    with:
+      subject:  ${{ inputs.subject }}
+      fact:     ${{ inputs.fact }}
+      evidence: ${{ inputs.evidence }}
+      domain:   ${{ inputs.domain }}
+      source:   ${{ inputs.source || github.repository }}
+    secrets:
+      memory_repo_token: ${{ secrets.MEMORY_REPO_TOKEN }}
+```
+
+Then trigger it:
+
+```sh
+gh workflow run submit-learning.yml \
+  -f subject="ci:agent-pr-approval" \
+  -f fact="Copilot agent PRs need a maintainer empty-commit to trigger CI." \
+  -f evidence="https://github.com/myorg/myrepo/pull/42" \
+  -f domain="ci"
+```
+
+## Path 4 — Bash Script (Linux / macOS)
+
+**Prerequisites:** `bash`, `curl`, `jq`, and `MEMORY_REPO_TOKEN` env var.
+
+```sh
+export MEMORY_REPO_TOKEN=ghp_...
+
+curl -fsSL https://raw.githubusercontent.com/IBuySpy-Shared/basecoat/main/scripts/submit-learning.sh \
+  -o submit-learning.sh
+
+bash submit-learning.sh \
+  --subject  "ci:agent-pr-approval" \
+  --fact     "Copilot agent PRs need a maintainer empty-commit to trigger CI." \
+  --evidence "https://github.com/myorg/myrepo/pull/42" \
+  --domain   "ci" \
+  --source   "myorg/myrepo" \
+  --open-pr
+```
+
+## Path 5 — PowerShell Script (Windows / cross-platform pwsh)
+
+**Prerequisites:** PowerShell (`pwsh`), `gh` CLI, and `MEMORY_REPO_TOKEN` env var.
+
+```powershell
+$env:MEMORY_REPO_TOKEN = "ghp_..."
+
+pwsh scripts/submit-learning.ps1 `
+  -Subject  "ci:agent-pr-approval" `
+  -Fact     "Copilot agent PRs need a maintainer empty-commit to trigger CI." `
+  -Evidence "https://github.com/myorg/myrepo/pull/42" `
+  -Domain   "ci" `
+  -Source   "myorg/myrepo" `
+  -OpenPR
+```
+
+## Getting MEMORY_REPO_TOKEN
+
+All active push paths (Paths 3–5) require a fine-grained PAT:
+
+1. Go to <https://github.com/settings/personal-access-tokens/new>
+2. Set **Resource owner** to your org
+3. Set **Repository access** → Only select repositories → `{org}/basecoat-memory`
+4. Under **Permissions**, grant:
+   - **Contents**: Read and Write
+   - **Pull requests**: Read and Write
+5. Generate and store as `MEMORY_REPO_TOKEN` in your repo secrets
 
 ## Configuring the Sweep
 
@@ -77,70 +178,18 @@ Key settings:
 | `contact` | *(empty)* | GitHub handle for follow-up |
 | `domain` | *(empty)* | Hint for which memory domain to target |
 
-## Active Push
-
-Use `submit-learning.ps1` to submit a structured learning immediately,
-without waiting for the next weekly sweep.
-
-### Prerequisites
-
-- `gh` CLI authenticated with access to write to `basecoat-memory`
-- `MEMORY_REPO_TOKEN` environment variable set to a fine-grained PAT with
-  Contents (R/W) and Pull Requests (R/W) on `{org}/basecoat-memory`
-
-### Usage
-
-```powershell
-# Download the script
-curl -fsSL https://raw.githubusercontent.com/IBuySpy-Shared/basecoat/main/scripts/submit-learning.ps1 \
-  -o scripts/submit-learning.ps1
-
-# Submit a learning
-pwsh scripts/submit-learning.ps1 `
-  -Subject   "ci:copilot-agent-prs-need-approval" `
-  -Fact      "Copilot agent PRs have action_required CI until a maintainer pushes an empty commit." `
-  -Evidence  "https://github.com/myorg/myrepo/pull/42" `
-  -Domain    "ci" `
-  -Source    "myorg/myrepo"
-```
-
-### Parameters
-
-| Parameter | Required | Description |
-|---|---|---|
-| `-Subject` | Yes | `domain:key` namespace (e.g., `ci:agent-pr-approval`) |
-| `-Fact` | Yes | One-sentence pattern (≤ 300 chars) |
-| `-Evidence` | Yes | URL to the PR, issue, or CHANGELOG that evidences this |
-| `-Domain` | Yes | One of: `ci`, `git`, `authoring`, `process`, `security`, `portal`, `testing`, `governance`, `memory`, `infra` |
-| `-Source` | Yes | `org/repo` of the contributing repo |
-| `-Team` | No | Team name for context |
-| `-Contact` | No | GitHub handle for follow-up |
-| `-DryRun` | No | Print candidate without writing |
-| `-OpenPR` | No | Open a PR in `basecoat-memory` immediately |
-
 ## What Makes a Good Learning
 
 The steward team evaluates candidates against a four-point scope policy:
 
 | Criterion | Question |
 |---|---|
-| **Repo-scoped** | Does it apply to this type of repo broadly, not just your internal project? |
-| **Generic** | Free of product names, internal system names, or org-specific tooling? |
+| **Generic** | Free of product names, internal system names, org-specific tooling? |
+| **Broadly applicable** | Would another team using Basecoat find this useful? |
 | **Durable** | Has it held true across ≥ 3 sprints or ≥ 2 similar incidents? |
 | **Actionable** | Would another team change their behavior based on this? |
 
 All four must be **yes** for a candidate to be promoted to shared memory.
-
-### Examples
-
-**Good candidate:**
-
-> "Squash-merged PRs don't appear in `git branch --merged`; use
-> `gh pr list --state all --head <branch>` to verify merge status."
-
-**Rejected (too project-specific):**
-
-> "Our internal deploy script requires DEPLOY_KEY to be set in GitHub secrets."
 
 ## Feedback Loop
 
@@ -148,13 +197,11 @@ Once a candidate is promoted to `basecoat-memory`, it flows back to all
 `basecoat-enabled` repos via the weekly hot-index sync. Your team benefits
 directly from other teams' learnings.
 
-Promotion status is visible in the `basecoat-memory` repo PRs. The steward
-team may comment on your submitted PR for clarification before promoting.
-
 ## References
 
-- `scripts/submit-learning.ps1` — active push script
+- `scripts/submit-learning.sh` — bash active push (curl/jq, no PowerShell)
+- `scripts/submit-learning.ps1` — PowerShell active push
+- `.github/workflows/submit-learning-callable.yml` — reusable/callable workflow
+- `.github/ISSUE_TEMPLATE/memory-contribution.yml` — zero-setup issue form
 - `.basecoat.yml.example` — sweep configuration template
 - `docs/memory/PROCESS.md` — full memory lifecycle overview
-- `scripts/sweep-enterprise-memory.ps1` — passive sweep implementation
-- `.github/workflows/memory-sweep.yml` — weekly sweep workflow
