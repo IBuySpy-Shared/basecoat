@@ -1,63 +1,43 @@
-# Base Coat Documentation Index
+# BaseCoat
 
-> A complete map of all documentation in this repository, organized by topic area.
-> For asset inventory, see [reference/INVENTORY.md](reference/INVENTORY.md).
+**Enterprise-grade GitHub Copilot customization framework.**
 
-## Core
+BaseCoat gives your organization a curated, version-controlled library of agents, skills, instructions, and prompts — synced into every team repo with a single command. Instead of every team writing Copilot customizations from scratch, you get production-ready assets that enforce consistent standards across your entire GitHub Enterprise org.
 
 - [README.md](https://github.com/IBuySpy-Shared/basecoat/blob/main/README.md) — Getting started, installation, and overview
 - [CHANGELOG.md](https://github.com/IBuySpy-Shared/basecoat/blob/main/CHANGELOG.md) — Release history
 - [CONTRIBUTING.md](https://github.com/IBuySpy-Shared/basecoat/blob/main/CONTRIBUTING.md) — Contribution guide
 - [PHILOSOPHY.md](PHILOSOPHY.md) — Design philosophy and principles
 
-## Agents (`docs/agents/`)
+---
 
-- [agents/AGENTS.md](agents/AGENTS.md) — Agent catalog and index
-- [agents/AGENT_SKILL_MAP.md](agents/AGENT_SKILL_MAP.md) — Agent-to-skill dependency map
-- [agents/AGENT_RUNTIME_ENFORCEMENT.md](agents/AGENT_RUNTIME_ENFORCEMENT.md) — Runtime enforcement rules
-- [agents/AGENT_TELEMETRY.md](agents/AGENT_TELEMETRY.md) — Telemetry and adoption metrics
-- [agents/AGENT_TESTING.md](agents/AGENT_TESTING.md) — Agent testing strategy
-- [agents/AGENT_TESTING_HARNESS.md](agents/AGENT_TESTING_HARNESS.md) — Test harness implementation
-- [agents/agent-handoffs.md](agents/agent-handoffs.md) — Agent handoff protocols
-- [agents/agentic-workflows.md](agents/agentic-workflows.md) — Agentic workflow reference
-- [agents/MULTI_AGENT_WORKFLOWS.md](agents/MULTI_AGENT_WORKFLOWS.md) — Multi-agent orchestration patterns
-- [agents/app-inventory.md](agents/app-inventory.md) — Application inventory agent guide
+## What's in the box
 
-## Architecture (`docs/architecture/`)
+| Asset type | Count | What it does |
+|---|---|---|
+| **Agents** | 79 | End-to-end task executors — sprint planners, code reviewers, security analysts, and more |
+| **Skills** | 57 | Reusable domain capabilities invoked by agents |
+| **Instructions** | 64 | Copilot behavior rules scoped by file path pattern |
+| **Prompts** | 3 | Structured templates for repeatable tasks |
 
-- [architecture/AI_ARCHITECTURE_PATTERNS.md](architecture/AI_ARCHITECTURE_PATTERNS.md) — AI system design patterns
-- [architecture/RAG_PATTERNS.md](architecture/RAG_PATTERNS.md) — Retrieval-Augmented Generation patterns
-- [architecture/LOCAL_MODELS.md](architecture/LOCAL_MODELS.md) — Local LLM deployment
-- [architecture/LOCAL_EMBEDDINGS.md](architecture/LOCAL_EMBEDDINGS.md) — Local embeddings configuration
-- [architecture/OFFLINE_AGENT_STACK.md](architecture/OFFLINE_AGENT_STACK.md) — Offline / air-gapped agent stack
-- [architecture/multi-agent-orchestration-patterns.md](architecture/multi-agent-orchestration-patterns.md) — LangGraph patterns
-- [architecture/concurrency-phase2.md](architecture/concurrency-phase2.md) — Concurrency Phase 2 design
-- [architecture/execution-hierarchy.md](architecture/execution-hierarchy.md) — 5-layer execution stack
+---
 
-## Memory (`docs/memory/`)
+## How it works
 
-- [memory/shared-memory.md](memory/shared-memory.md) — Two-tier shared memory architecture
-- [memory/SQLITE_MEMORY.md](memory/SQLITE_MEMORY.md) — SQLite cross-session memory layer
+```mermaid
+flowchart LR
+    BC[BaseCoat\nSource Repo] -->|sync.ps1 / sync.sh| CR[Your Team Repo\n.github/base-coat/]
+    CR -->|auto-discovered| CP[GitHub Copilot]
+    CP -->|guided by| DEV[Your Developers]
+```
 
-## Guides (`docs/guides/`)
+1. **Sync** — run one script to pull the latest BaseCoat release into `.github/base-coat/`
+2. **Use** — Copilot auto-discovers agents, instructions, and prompts from `.github/`
+3. **Contribute** — open a PR to share patterns back with every team in the org
 
-- [guides/enterprise-setup.md](guides/enterprise-setup.md) — Initial enterprise setup
-- [guides/enterprise-rollout.md](guides/enterprise-rollout.md) — Enterprise rollout playbook
-- [guides/repo-template-standard.md](guides/repo-template-standard.md) — Repo template standards
-- [guides/ENTERPRISE_DOTNET_GUIDANCE.md](guides/ENTERPRISE_DOTNET_GUIDANCE.md) — .NET modernization patterns
-- [guides/DOTNET_DECISION_TREE.md](guides/DOTNET_DECISION_TREE.md) — .NET version decision tree
-- [guides/DOTNET_MODERNIZATION.md](guides/DOTNET_MODERNIZATION.md) — Modernization guide
-- [guides/WINDOWS_SERVER_AZURE_GUIDANCE.md](guides/WINDOWS_SERVER_AZURE_GUIDANCE.md) — Windows Server on Azure
-- [guides/MODEL_OPTIMIZATION.md](guides/MODEL_OPTIMIZATION.md) — Model routing and optimization
-- [guides/token-optimization.md](guides/token-optimization.md) — Token usage optimization
-- [guides/rate-limit-guidance.md](guides/rate-limit-guidance.md) — Rate limit handling
-- [guides/prd-and-spec-guidance.md](guides/prd-and-spec-guidance.md) — PRD and spec gate guidance
-- [guides/CONFIG_PATTERN.md](guides/CONFIG_PATTERN.md) — Configuration pattern reference
-- [guides/pydantic-validation-strategy.md](guides/pydantic-validation-strategy.md) — Pydantic validation strategy
-- [guides/CODE_EXAMPLES.md](guides/CODE_EXAMPLES.md) — Code examples reference
-- [guides/DEPLOYMENT_CHECKLIST.md](guides/DEPLOYMENT_CHECKLIST.md) — Deployment checklist
+---
 
-## Integrations (`docs/integrations/`)
+## Explore the docs
 
 - [integrations/mcp-deployment.md](integrations/mcp-deployment.md) — Deploying the Base Coat MCP server
 - [integrations/pydantic-mcp-integration.md](integrations/pydantic-mcp-integration.md) — Pydantic + MCP integration

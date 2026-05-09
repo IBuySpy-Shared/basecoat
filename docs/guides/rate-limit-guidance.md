@@ -278,6 +278,103 @@ function Validate-RepositoriesSafely {
 - [ ] If ≥ 200 workflows run in sprint, consider using GitHub Apps (separate quota)
 - [ ] Dry-run test with `--dry-run` flag where available before production run
 
+---
+
+## AI Agent / Copilot Fleet Rate Limits
+
+> **This is a separate constraint from the GitHub REST API limit above.**
+> Enterprise Copilot has concurrent model session limits enforced at the org level.
+> Exceeding them returns HTTP 429 from the AI model endpoint — not from the GitHub API.
+
+### How it differs from the GitHub API limit
+
+| Dimension | GitHub REST API | Copilot / AI Model |
+|---|---|---|
+| Unit | Requests per hour per token | Concurrent sessions per org |
+| Limit | 5,000 req/hr | ~3–4 simultaneous long-running sessions |
+| Reset | Hourly (rolling) | Immediate once sessions complete |
+| Error | `API rate limit exceeded` | HTTP 429 on model inference |
+| Scope | Your PAT / GitHub App | Your enterprise Copilot seat allocation |
+
+### Fleet Concurrency Rules
+
+These are **enforced limits**, not suggestions:
+
+| Scenario | Max concurrent agents | Notes |
+|---|---|---|
+| Background fleet agents (general-purpose) | **3** safe, **4** risky, **5+** will 429 | Each agent holds a model session for its full duration |
+| Short tasks (< 2 min) | Up to 5 | Session released quickly |
+| Long tasks (> 10 min) | Max 3 | Hold sessions for extended periods |
+| Mixed (short + long) | 3 long + 1–2 short | Budget carefully |
+
+### Wave Pattern for Fleet Sprints
+
+Dispatch agents in waves — never all at once:
+
+```
+Wave 1: dispatch 3–4 agents → wait for ALL to complete
+Wave 2: dispatch next 3–4 → wait for ALL to complete
+Wave 3: etc.
+```
+
+**Minimum inter-agent delay:** Wait at least **15 seconds** between dispatching
+individual agents within a wave. This staggers session establishment and reduces
+burst pressure on the model endpoint.
+
+```powershell
+# Good: staggered dispatch within a wave
+foreach ($task in $wave) {
+    Start-Agent $task
+    Start-Sleep -Seconds 15  # stagger session starts
+}
+# Then wait for all to complete before Wave 2
+```
+
+### Recovery from a 429
+
+When an agent gets a 429 from the AI model endpoint:
+
+1. **Stop dispatching** — do not retry immediately
+2. **Wait 60–90 seconds** — allow in-flight sessions to complete
+3. **Check active agents** — use `list_agents` to see how many are still running
+4. **Resume with 1 fewer agent** — if 4 caused a 429, next wave uses 3
+
+```powershell
+# Check remaining rate limit before dispatching next wave
+$remaining = gh api rate_limit --jq '.rate.remaining'
+if ($remaining -lt 100) {
+    Write-Warning "GitHub API quota low ($remaining). Pausing 60s."
+    Start-Sleep -Seconds 60
+}
+# Also manually verify no long-running agents are still active before Wave N+1
+```
+
+### Configuration
+
+The default fleet concurrency is set in `.github/base-coat/agent-routing.json`
+(distributed to consumer repos via sync):
+
+```json
+{
+  "configurable": {
+    "max_fleet_agents": 4,
+    "default_fleet_concurrency": 3
+  }
+}
+```
+
+Override `default_fleet_concurrency` to `2` for repos with heavy background CI
+load (code review agents, security scans) running concurrently with fleet sprints.
+
+### Checklist for Fleet Sprints
+
+- [ ] Plan wave sizes ≤ 3 for long-running tasks, ≤ 4 for short tasks
+- [ ] Add 15s delay between agent dispatches within a wave
+- [ ] Wait for all wave N agents to complete before starting wave N+1
+- [ ] If a 429 occurs: stop, wait 90s, reduce next wave size by 1
+- [ ] Check `list_agents` before any dispatch — don't add to an already-busy pool
+- [ ] For sprints > 10 agents total, log a plan with wave breakdown before starting
+
 ### Related Issues
 
 - **#451** — Concurrency control: Coordinating parallel batch operations without quota collision
