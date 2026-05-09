@@ -45,19 +45,50 @@ After merge — all agents pull on next session
   └─ Cached in .memory/shared/ (git-ignored)
 ```
 
-## Automated Discovery (Weekly Sweep)
+## Consumer Repo Contributions
 
-In addition to manual contributions, `.github/workflows/memory-sweep.yml` runs every
-Monday and sweeps all repos with the `basecoat-enabled` GitHub topic. It looks for:
+Any repo can feed learnings back into basecoat memory via two paths:
+
+### Passive (Label-Based Sweep)
+
+`.github/workflows/memory-sweep.yml` runs every Monday and sweeps all repos
+with the `basecoat-enabled` GitHub topic. It extracts:
 
 - Merged PRs labelled `learning`, `retrospective`, or `decision`
 - Closed issues with the same labels
-- CHANGELOG entries
+- CHANGELOG entries within the configured window
 
-Raw candidates are written to `basecoat-memory/sweep-candidates/YYYY-MM-DD.md` as a PR
-for review. The memory steward promotes worthwhile candidates to `memories/{domain}/`.
+Raw candidates (with a structured promotion block per entry) are written to
+`basecoat-memory/sweep-candidates/YYYY-MM-DD.md` as a PR for steward review.
 
-To enlist a repo: `gh api repos/{org}/{repo}/topics --method PUT --field names[]=basecoat-enabled`
+**Enlist a repo:**
+
+```sh
+gh api repos/{org}/{repo}/topics --method PUT --field names[]=basecoat-enabled
+```
+
+**Configure sweep behavior** via `.basecoat.yml` at the repo root
+(copy `.basecoat.yml.example` from this repo as a starting point).
+
+### Active Push (submit-learning.ps1)
+
+Consumer repos can submit a structured learning immediately without waiting for
+the weekly sweep:
+
+```powershell
+pwsh scripts/submit-learning.ps1 `
+    -Subject  "ci:agent-pr-approval" `
+    -Fact     "Copilot agent PRs have action_required CI until a maintainer pushes an empty commit." `
+    -Evidence "https://github.com/myorg/myrepo/pull/42" `
+    -Domain   "ci" `
+    -Source   "myorg/myrepo" `
+    -OpenPR
+```
+
+The script validates scope, writes a structured candidate to
+`basecoat-memory/sweep-candidates/`, and optionally opens a review PR.
+
+See `docs/memory/CONTRIBUTING.md` for the full consumer guide.
 
 ## Memory File Format
 
@@ -141,7 +172,8 @@ The memory steward (a human maintainer or designated agent run) is responsible f
 | `scripts/sync-shared-memory.ps1 -Export -Subject domain:key` | Generate contribution template |
 | `scripts/sync-shared-memory.ps1 -ExportFile f.md -Subject domain:key` | Push single memory as PR |
 | `scripts/contribute-memories.ps1 -InputFile m.json -Sprint sprint-N` | Batch contribute memories |
-| `scripts/sweep-enterprise-memory.ps1` | Scan enlisted repos for candidates |
+| `scripts/sweep-enterprise-memory.ps1` | Scan enlisted repos for candidates (with structured promotion blocks) |
+| `scripts/submit-learning.ps1 -Subject … -Fact … -Evidence …` | Active push from a consumer repo |
 
 ## Workflow Reference
 
