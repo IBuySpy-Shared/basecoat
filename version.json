@@ -1,6 +1,6 @@
 {
   "name": "base-coat",
-  "version": "3.17.0",
+  "version": "3.18.0",
   "releaseDate": "2026-05-09",
-  "notes": "v3.17.0: Instruction modularization batches 3 and 4 (9 instruction files condensed, 23 reference files created), fix Copilot agent assignment in issue-approve.yml, GitHub secrets runbook."
+  "notes": "v3.18.0: Memory contribution pipeline — contribute-memories.ps1, sync-shared-memory.ps1 -ExportFile, memory-contribute.yml workflow, docs/memory/PROCESS.md, memory scope policy."
 }

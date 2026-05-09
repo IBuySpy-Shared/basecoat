@@ -4,6 +4,42 @@ All notable changes to this repository should be recorded in this file.
 
 ## Unreleased
 
+## 3.18.0 - 2026-05-09
+
+### Memory Contribution Pipeline
+
+#### Memory Contribution Script — scripts/contribute-memories.ps1 (#602)
+
+New batch export script that reads a JSON array of session memory facts and creates
+structured `memories/{domain}/{subject}.md` files in `{org}/basecoat-memory` via the
+GitHub API, opening a single PR for steward review. Supports `-DryRun` and `-Force` flags.
+
+#### sync-shared-memory.ps1: add -ExportFile mode (#601)
+
+Added `-ExportFile` parameter. After using `-Export` to generate a template and editing
+it, agents can use `-ExportFile /tmp/edit.md -Subject domain:key` to push the file to
+`basecoat-memory` on a new branch and open a PR — completing the single-memory contribution
+loop without manual `git` operations.
+
+#### Memory Contribute Workflow — .github/workflows/memory-contribute.yml (#603)
+
+New `workflow_dispatch` workflow for agent-triggered batch memory contribution. Accepts
+a base64-encoded JSON payload of memory facts, calls `contribute-memories.ps1`, and
+emits a job summary. Triggered at sprint end by the coding agent or manually by a steward.
+
+#### Memory Contribution Process Documentation — docs/memory/PROCESS.md (#604)
+
+New document covering the end-to-end pipeline: produce (store_memory) → export
+(contribute-memories.ps1 / -ExportFile) → review (PR in basecoat-memory) → promote
+(steward merges) → pull (sync-shared-memory.ps1). Includes memory domains taxonomy,
+Memory Scope Policy, steward responsibilities, and a scripts/workflows reference.
+
+#### Memory Scope Checklist in memory-index.instructions.md (#605)
+
+Added a four-point checklist (repo-scoped, generic, durable, actionable) agents must
+validate before calling `store_memory`. Added `contribute-memory` pattern bundle and
+reference link to PROCESS.md. Closes the stale-memory scope-creep issue.
+
 ## 3.17.0 - 2026-05-09
 
 ### Instruction Trim Completion + Workflow Reliability
