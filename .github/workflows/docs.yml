@@ -16,6 +16,7 @@ on:
 
 permissions:
   contents: write
+  pages: write
 
 jobs:
   validate:
@@ -54,6 +55,27 @@ jobs:
           pip install \
             mkdocs-material \
             mkdocs-awesome-pages-plugin
+
+      - name: Configure site URLs for this repository
+        run: |
+          OWNER="${{ github.repository_owner }}"
+          REPO="${{ github.event.repository.name }}"
+          SITE_URL="https://${OWNER}.github.io/${REPO}/"
+          REPO_URL="https://github.com/${{ github.repository }}"
+          # Substitute any source-repo URLs with this fork's URLs
+          sed -i "s|https://ibuyspy-shared.github.io/basecoat/|${SITE_URL}|gI" mkdocs.yml
+          sed -i "s|https://github.com/IBuySpy-Shared/basecoat|${REPO_URL}|gI" mkdocs.yml
+          sed -i "s|IBuySpy-Shared/basecoat|${{ github.repository }}|g" mkdocs.yml
+
+      - name: Enable GitHub Pages (first run)
+        run: |
+          gh api --method POST "repos/${{ github.repository }}/pages" \
+            --field 'source[branch]=gh-pages' \
+            --field 'source[path]=/' 2>/dev/null || true
+          gh api --method PATCH "repos/${{ github.repository }}" \
+            --field "homepage=https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/" 2>/dev/null || true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Deploy to GitHub Pages
         run: mkdocs gh-deploy --force --no-history
