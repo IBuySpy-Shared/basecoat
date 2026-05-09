@@ -55,4 +55,3 @@ See [incident-escalation.md](references/security-monitoring/incident-escalation.
 
 - `secrets-management.instructions.md` — Secrets revocation and break-glass procedures.
 - `observability.instructions.md` — Structured logging schema and log aggregation.
-

@@ -70,4 +70,3 @@ See [emergency-and-compliance.md](references/secrets-management/emergency-and-co
 
 - `security-monitoring.instructions.md` — SIEM integration and alert rules.
 - `governance.instructions.md` — Contribution policies and security review gates.
-

@@ -65,7 +65,7 @@ We will know we succeeded when [acceptance criteria Z].
 
 ## Sprint Review (60 min)
 
-### Agenda
+### Review Agenda
 
 1. **Demo** (40 min) — team demos each completed item against acceptance criteria.
 2. **Stakeholder feedback** (15 min) — open discussion; capture feedback as new issues.
