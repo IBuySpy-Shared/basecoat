@@ -89,6 +89,24 @@ jobs:
               labels: ['asset-health', 'automated-report'],
             });
 
+      - name: Generate dependency graph
+        shell: pwsh
+        run: |
+          $graph = pwsh scripts/graph-dependencies.ps1 -ShowOrphans
+          $graph | Out-File -FilePath /tmp/dep-graph.md -Encoding utf8
+
+          # Append to job summary
+          $separator = "`n`n---`n`n## Dependency Graph`n`n"
+          Add-Content -Path $env:GITHUB_STEP_SUMMARY -Value ($separator + $graph)
+
+          # Surface orphan count as annotation
+          if ($graph -match 'Orphaned nodes \((\d+)') {
+            $count = $Matches[1]
+            if ([int]$count -gt 0) {
+              Write-Host "::warning::$count orphaned asset nodes detected. Run 'pwsh scripts/graph-dependencies.ps1 -ShowOrphans' to review."
+            }
+          }
+
       - name: Fail workflow if grade is F
         if: steps.audit.outputs.grade == 'F'
         run: |
