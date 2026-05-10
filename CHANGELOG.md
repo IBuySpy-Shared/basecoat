@@ -16,7 +16,7 @@ All notable changes to this repository should be recorded in this file.
 - `skills/azure-linux-app-service/SKILL.md` — Python/Ruby/Node.js PaaS on App Service Linux (#644)
 - `skills/cross-stack-modernization/SKILL.md` — language-agnostic modernization patterns: strangler fig, ACL, risk scoring (#645)
 - `agents/memory-promoter.agent.md` — promotes session patterns to memory contribution payloads (#627)
-- `scripts/detect-repeat-fixes.ps1` — scans session-state for recurring high-frequency fix patterns (#630)
+- `scripts/detect-repeat-fixes.ps1` — checks session-state against a hardcoded list of known recurring fix patterns and flags those that exceed the frequency threshold (#630)
 
 ### Changed
 

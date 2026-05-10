@@ -1,5 +1,15 @@
 # Base Coat — Asset Catalog
 
+> **⚠️ Staleness notice:** This file is manually maintained and may lag behind the actual
+> repository contents. For the authoritative, machine-generated agent list run:
+>
+> ```bash
+> pwsh scripts/update-metadata.ps1
+> ```
+>
+> The generated output in `basecoat-metadata.json` is the canonical source used by the
+> router skill. Browse `agents/*.agent.md` directly for the current full list.
+
 > Machine-readable registry of all agents, skills, and instruction files.
 > Generated from the `main` branch. Keep this file in sync when adding or removing assets.
 

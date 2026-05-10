@@ -71,9 +71,13 @@ sequenceDiagram
 
     Dev->>CR: git clone / open repo
     CR->>BC: sync.ps1 / sync.sh (initial or update)
-    BC-->>CR: .github/base-coat/ (agents, skills, instructions)
-    CR-->>CP: Assets available in .github/base-coat/
-    CP-->>Dev: Copilot uses BaseCoat agents & instructions
+    BC-->>CR: .github/base-coat/ (raw synced assets — staging area)
+    Note over CR: sync script distributes assets to Copilot-readable locations
+    CR-->>CR: .github/agents/ (agent files)
+    CR-->>CR: .github/instructions/ (instruction files)
+    CR-->>CR: .github/prompts/ (prompt templates)
+    CR-->>CR: .github/skills/ (skill manifests)
+    CP-->>Dev: Copilot reads agents, instructions, prompts & skills
 
     loop Weekly drift check
         CR->>BC: check-basecoat-version-callable.yml

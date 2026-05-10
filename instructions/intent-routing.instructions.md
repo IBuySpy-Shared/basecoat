@@ -40,13 +40,13 @@ The same prefix has different timing implications depending on its syntactic con
 When a prefix appears as the first word of a standalone message, treat it as
 immediate work:
 
-```
+```text
 bug: the sync script exits with code 1 on Windows when BASECOAT_REPO is unset
 ```
 
 → Investigate and fix now.
 
-```
+```text
 audit: run a say-vs-do check against the CI workflows
 ```
 
@@ -60,7 +60,7 @@ When prefixes appear as items in a bulleted list within a message, they are
 **triage items**, not immediate work orders. Log them (as issues, todos, or
 plan notes) and confirm receipt. Do not implement.
 
-```
+```text
 - bug: metrics dashboard is broken on mobile
 - feature: add a prompt for getting started
 - audit: run impeccable against the GH Pages output
@@ -81,7 +81,7 @@ implementation request. A bulleted `feature:` means *"add this to the backlog."*
 A message can contain both a preamble action and a bulleted list. The preamble
 may be immediate; the list items are still triage:
 
-```
+```text
 run an audit against the CI workflows — log issues
 
 - feature: add retry logic to sync.sh

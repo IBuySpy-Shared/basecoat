@@ -105,8 +105,8 @@ From v1.0.0, every PR runs `validate-basecoat.ps1`:
 - `## Process` and output section for every skill
 - Average asset score ≥ 5.0/10; no asset scoring 0
 
-These gates caught real regressions. In the period between v0.7.0 and v1.0.0, 23 assets
-failed the quality gate before they shipped — and were improved before merge.
+These gates caught real regressions. During the v0.7.0–v1.0.0 development period,
+multiple assets failed the quality gate before they shipped — and were improved before merge.
 
 ---
 
@@ -130,9 +130,11 @@ Every sprint included a retro pass — issues opened for any guidance that produ
 unexpected output, any instruction that conflicted with another, or any agent that
 stalled on a real task.
 
-The `detect-repeat-fixes.ps1` script identifies patterns where the same type of fix
-is applied more than twice. When that happens, it's evidence that a rule is missing or
-unclear — and a new instruction or agent update follows.
+The `detect-repeat-fixes.ps1` script checks session-state files against a predefined
+list of known fix patterns and flags any that appear more than twice. When that happens,
+it's evidence that a rule is missing or unclear — and a new instruction or agent update
+follows. The set of patterns matched is hardcoded in the script; the script does not
+discover or learn new patterns automatically.
 
 ### Real session data
 

@@ -12,6 +12,9 @@ Use this instruction for any bootstrap script that creates values consumed by Gi
 - Bootstrap scripts **must** use `gh secret set` and `gh variable set` to push configuration to GitHub immediately after creation.
 - Non-secret identifiers go to **variables**: subscription ID, tenant ID, client ID, resource names, regions.
 - Sensitive credentials go to **secrets**: client secrets (if OIDC is not possible), SAS tokens, connection strings.
+- **Bootstrap is reserved for chicken-egg setup** (first-run identity/bootstrap dependencies). It is not the long-term mechanism for routine value propagation.
+- If IaC or a workflow **generates** a value needed by downstream workflows, it must push that value to GitHub Secrets/Variables immediately in the same automation path.
+- Generated values needed by "next workflow" steps are first-class outputs: publish them as soon as they exist (secret/variable classification still applies).
 - Provide a `-SkipGitHubVars` flag for air-gapped or testing scenarios.
 - When skipping, print the equivalent `gh` commands so users can run them manually.
 
@@ -65,5 +68,7 @@ gh secret set AZURE_SUBSCRIPTION_ID --body $subscriptionId -R $Repository
 
 - Does the bootstrap script push all required values to GitHub after provisioning?
 - Are non-secret values stored as variables, not secrets?
+- Are generated values from IaC/workflows published to GitHub immediately when downstream workflows depend on them?
+- Is bootstrap usage limited to chicken-egg initialization rather than ongoing operational sync?
 - Is there a `-SkipGitHubVars` escape hatch?
 - Does the skip path print the manual commands?

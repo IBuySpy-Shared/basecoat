@@ -57,6 +57,7 @@ Use this instruction for any change that adds, modifies, or relies on MCP server
 - Scope credentials to least privilege and store secrets in secure configuration, not source control.
 - Prefer short-lived credentials and managed identity where supported by the host platform.
 - Require explicit user confirmation before any MCP tool can create, delete, deploy, or mutate external systems.
+- For GitHub mutating actions (`issue`, `pr`, `comment`, labels, project updates), enforce repository-target preflight checks against an internal allowlist and block unknown/external repos by default.
 - Validate all MCP tool inputs and sanitize model-generated arguments before execution.
 - Enforce authentication on every transport endpoint in production — even on internal networks.
 - Use OAuth 2.1 or API key authentication at the transport layer. Prefer short-lived tokens.
