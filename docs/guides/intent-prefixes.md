@@ -18,6 +18,7 @@ Every message prefix tells the AI three things at once: **what kind of work**,
 | `chore:` | Maintenance, cleanup, non-functional | **Soon** | `@devops-engineer`, `@release-manager` |
 | `security:` | Security concern or vulnerability | **Now, high priority** | `@security-analyst`, `@guardrail` |
 | `perf:` | Performance degradation | **Now, measure first** | `@performance-analyst` |
+| `outage:` | Service outage, broken or dead system, site down | **Now, high priority** | `@rca` |
 | `docs:` | Documentation only | **Soon** | `@tech-writer` |
 | `test:` | Test coverage gap or test failure | **Now** | `@manual-test-strategy` |
 | `refactor:` | Structural improvement, no behavior change | **Later, batch** | `@code-review` |
@@ -111,6 +112,27 @@ Working in a long session with many items in flight, prefixes let you:
   here?" without triggering changes
 - **Control sprint scope** — a bulleted list of `feature:` items at the end of
   a message becomes the next sprint's backlog, not this session's work
+
+---
+
+## Outage routing
+
+When a user says a service is broken, dead, down, or not responding, normalize
+that request to `outage:` and route it to the RCA agent.
+
+| Alias | Normalized intent |
+|---|---|
+| `broken` | `outage:` |
+| `broke` | `outage:` |
+| `dead` | `outage:` |
+| `site down` | `outage:` |
+| `down` | `outage:` |
+| `not responding` | `outage:` |
+| `incident` | `outage:` |
+| `it's broken` | `outage:` |
+| `nothing works` | `outage:` |
+
+Use `@rca` for the deep-dive investigation after the active incident is stable.
 
 ---
 

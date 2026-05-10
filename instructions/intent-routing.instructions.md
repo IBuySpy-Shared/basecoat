@@ -23,6 +23,7 @@ both the type of work and **when** to do it.
 | `chore:` | Maintenance, cleanup, non-functional work | **Soon** — defer if sprint is full | `@devops-engineer`, `@release-manager` |
 | `security:` | Security concern or vulnerability | **Now, high priority** — escalate | `@security-analyst`, `@guardrail` |
 | `perf:` | Performance degradation or concern | **Now** — measure before changing | `@performance-analyst` |
+| `outage:` | Service outage, broken or dead system, site down | **Now, high priority** — route to RCA | `@rca` |
 | `docs:` | Documentation only | **Soon** — low urgency unless broken | `@tech-writer` |
 | `test:` | Test coverage gap or test failure | **Now** — coverage gaps block releases | `@manual-test-strategy`, `@strategy-to-automation` |
 | `refactor:` | Structural improvement, no behavior change | **Later** — batch with related work | `@code-review`, `@performance-analyst` |
@@ -132,6 +133,27 @@ When a bulleted `feature:` item is logged, the appropriate output is:
 
 The appropriate agent is `@sprint-planner` for prioritization or
 `@solution-architect` for design — not an implementation agent.
+
+---
+
+## Outage Routing
+
+When a user describes a system being broken, dead, down, or not responding,
+normalize the request to `outage:` and route it to the RCA agent.
+
+| Alias | Normalized intent |
+|---|---|
+| `broken` | `outage:` |
+| `broke` | `outage:` |
+| `dead` | `outage:` |
+| `site down` | `outage:` |
+| `down` | `outage:` |
+| `not responding` | `outage:` |
+| `incident` | `outage:` |
+| `it's broken` | `outage:` |
+| `nothing works` | `outage:` |
+
+Use `@rca` for deep-dive analysis once the active incident is stabilized.
 
 ---
 
