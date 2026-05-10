@@ -89,6 +89,10 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
+      - name: Lowercase owner
+        id: owner
+        run: echo "lc=${GITHUB_REPOSITORY_OWNER,,}" >> "$GITHUB_OUTPUT"
+
       - name: Deploy / update Bicep infrastructure
         uses: azure/arm-deploy@a1361c2c2cd398621955b16ca32e01c65ea340f5 # v2
         id: infra
@@ -97,8 +101,8 @@ jobs:
           template: infra/mcp/main.bicep
           parameters: >
             imageTag=${{ needs.build-push.outputs.image_tag }}
-            imageRepo=${{ github.repository_owner }}/basecoat-metrics-mcp
-            metricsBaseUrl=https://${{ github.repository_owner }}.github.io/basecoat/metrics
+            imageRepo=${{ steps.owner.outputs.lc }}/basecoat-metrics-mcp
+            metricsBaseUrl=https://${{ steps.owner.outputs.lc }}.github.io/basecoat/metrics
             environment=${{ inputs.environment || 'prod' }}
           deploymentName: mcp-${{ github.run_number }}
 
