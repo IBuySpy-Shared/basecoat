@@ -9,13 +9,13 @@ tools: ["githubRepo", "codebase", "web", "changes"]
 **How to invoke:**
 
 ```
-integrate and audit basecoat from https://github.com/YOUR-ORG/YOUR-REPO
+integrate and audit BaseCoat from https://github.com/YOUR-ORG/YOUR-REPO
 ```
 
 Or, if you are already inside the target repo:
 
 ```
-integrate and audit basecoat
+integrate and audit BaseCoat
 ```
 
 ---

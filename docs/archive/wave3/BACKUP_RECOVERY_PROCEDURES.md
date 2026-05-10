@@ -1,5 +1,5 @@
 # Backup & Recovery Procedures
-## Basecoat Portal Database v1.0
+## BaseCoat Portal Database v1.0
 
 ### Executive Summary
 

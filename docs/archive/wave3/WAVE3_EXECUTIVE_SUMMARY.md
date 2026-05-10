@@ -1,5 +1,5 @@
 # Wave 3 Day 3 Database Validation - Executive Summary
-## Basecoat Portal PostgreSQL v1.0 Staging Deployment
+## BaseCoat Portal PostgreSQL v1.0 Staging Deployment
 
 ---
 
@@ -448,7 +448,7 @@ Complete backup/recovery framework with 8 sections:
 
 ## Certification Sign-Off
 
-**Database:** Basecoat Portal PostgreSQL
+**Database:** BaseCoat Portal PostgreSQL
 **Version:** v1.0
 **Target Environment:** AWS RDS Staging
 **Certification Date:** 2025-01-15
