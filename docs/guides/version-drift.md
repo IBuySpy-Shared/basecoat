@@ -1,6 +1,8 @@
 # Version Drift Detection
 
 BaseCoat provides a callable workflow that consumer repos can schedule to detect when their synced assets are out of date.
+Release-version drift remains the default signal, with optional asset-level drift available via
+`asset-manifest.json` and the adoption scanner.
 
 ## How it works
 
@@ -12,7 +14,7 @@ sequenceDiagram
     CR->>GH: Scheduled trigger (weekly)
     GH->>CR: Read .github/base-coat/version.json
     GH->>BC: Fetch latest release tag
-    GH->>GH: Compute version drift
+    GH->>GH: Compute release version drift
     alt drift >= threshold
         GH->>CR: Open/update upgrade issue
     else up to date
@@ -55,3 +57,14 @@ When drift is detected, an issue is opened in the consumer repo titled:
 > `chore: BaseCoat upgrade available (v3.23.0 → v3.25.0)`
 
 The issue includes the current version, latest version, and upgrade instructions. If the issue already exists, a comment is added instead (idempotent).
+
+## Asset-level drift (optional)
+
+To evaluate per-asset version/SHA drift across consumer repos:
+
+```powershell
+pwsh scripts/adoption/detect-basecoat.ps1 -Org IBuySpy-Shared -OutputFormat markdown -AssetDetail
+```
+
+When a source asset has frontmatter `version`, the scanner compares source vs consumer version.
+When version metadata is unavailable, it falls back to SHA drift comparison.

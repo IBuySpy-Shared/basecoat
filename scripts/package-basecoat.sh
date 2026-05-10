@@ -18,7 +18,7 @@ ARCHIVE_BASE="base-coat-$VERSION"
 rm -rf "$DIST_DIR"
 mkdir -p "$STAGE_DIR"
 
-for item in README.md CHANGELOG.md INVENTORY.md version.json sync.sh sync.ps1 instructions skills prompts agents scripts .githooks docs examples .github; do
+for item in README.md CHANGELOG.md INVENTORY.md version.json asset-manifest.json sync.sh sync.ps1 instructions skills prompts agents scripts .githooks docs examples .github; do
   if [[ -e "$item" ]]; then
     cp -R "$item" "$STAGE_DIR/$item"
   fi

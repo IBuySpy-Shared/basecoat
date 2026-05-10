@@ -5,7 +5,7 @@ set -euo pipefail
 ROOT_DIR="${1:-$(pwd)}"
 cd "$ROOT_DIR"
 
-required=(README.md CHANGELOG.md version.json sync.sh sync.ps1 instructions skills prompts agents)
+required=(README.md CHANGELOG.md version.json asset-manifest.json sync.sh sync.ps1 instructions skills prompts agents)
 for item in "${required[@]}"; do
   if [[ ! -e "$item" ]]; then
     echo "Missing required path: $item" >&2
@@ -35,5 +35,30 @@ while IFS= read -r file; do
     exit 1
   fi
 done < <(find instructions prompts agents skills -type f \( -name '*.instructions.md' -o -name '*.prompt.md' -o -name '*.agent.md' -o -name 'SKILL.md' \) | sort)
+
+# Optional per-asset version must be SemVer when present
+while IFS= read -r file; do
+  version_line="$(sed -n '1,40p' "$file" | grep -E '^version:\s*' | head -n 1 || true)"
+  if [[ -n "$version_line" ]]; then
+    version_value="$(echo "$version_line" | sed -E 's/^version:\s*//; s/^["'"'"']?//; s/["'"'"']?$//')"
+    if [[ ! "$version_value" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+      echo "Invalid version '$version_value' in $file (expected SemVer X.Y.Z)" >&2
+      exit 1
+    fi
+  fi
+done < <(find instructions prompts agents skills -type f \( -name '*.instructions.md' -o -name '*.prompt.md' -o -name '*.agent.md' -o -name 'SKILL.md' \) | sort)
+
+# Validate asset-manifest basic shape
+python3 - <<'PY'
+import json,sys
+try:
+    data=json.load(open("asset-manifest.json","r",encoding="utf-8"))
+    for key in ("schemaVersion","libraryVersion","assets"):
+        if key not in data:
+            raise ValueError(f"missing key: {key}")
+except Exception as e:
+    print(f"asset-manifest.json invalid: {e}", file=sys.stderr)
+    sys.exit(1)
+PY
 
 echo "Base Coat validation passed"

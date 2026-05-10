@@ -78,6 +78,7 @@ nav:
     - Overview: reference/QUICK_REFERENCE.md
     - Inventory: reference/INVENTORY.md
     - Agents: reference/ASSET_REGISTRY.md
+    - Asset Versioning: reference/asset-versioning.md
     - Governance: reference/GOVERNANCE.md
   - How-To Guides:
     - Intent Prefixes: guides/intent-prefixes.md

@@ -11,6 +11,7 @@ The sync script copies all distributable assets to `.github/base-coat/` in your 
 - `instructions/` — all instruction files
 - `prompts/` — prompt templates
 - `version.json` — version metadata
+- `asset-manifest.json` — per-asset version/SHA manifest used for drift analysis
 
 Files that are **not** synced: test scripts, CI workflows, internal tooling, `docs/`.
 
