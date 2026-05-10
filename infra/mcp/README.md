@@ -34,40 +34,29 @@ Scales to zero between requests. Costs ~$0 at idle.
 
 ## One-Time Setup
 
-### 1. Create a resource group
+Run the bootstrap script. It creates the Azure resource group, provisions a
+service principal, and pushes both secrets to GitHub — all idempotent:
 
-```bash
-az group create --name rg-basecoat-mcp --location eastus
+```powershell
+pwsh scripts/bootstrap-mcp.ps1
 ```
 
-### 2. Create a service principal for CI
+Preview without making changes:
 
-```bash
-az ad sp create-for-rbac \
-  --name "basecoat-mcp-deploy" \
-  --role "Contributor" \
-  --scopes "/subscriptions/<SUB_ID>/resourceGroups/rg-basecoat-mcp" \
-  --sdk-auth
+```powershell
+pwsh scripts/bootstrap-mcp.ps1 -DryRun
 ```
 
-Copy the JSON output. Add it as a GitHub secret:
+Bootstrap and immediately trigger the first deploy:
 
-```bash
-gh secret set AZURE_CREDENTIALS \
-  --repo IBuySpy-Shared/basecoat \
-  --body '<paste JSON here>'
-
-gh secret set MCP_RESOURCE_GROUP \
-  --repo IBuySpy-Shared/basecoat \
-  --body 'rg-basecoat-mcp'
+```powershell
+pwsh scripts/bootstrap-mcp.ps1 -TriggerDeploy
 ```
 
-### 3. First deploy
+Override defaults:
 
-Trigger manually or push a change to `mcp/basecoat-metrics/`:
-
-```bash
-gh workflow run mcp-deploy.yml --repo IBuySpy-Shared/basecoat
+```powershell
+pwsh scripts/bootstrap-mcp.ps1 -ResourceGroup rg-mcp-staging -Location westus2
 ```
 
 The workflow outputs the FQDN. Update `.vscode/mcp.json` with it:
