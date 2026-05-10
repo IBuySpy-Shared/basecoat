@@ -44,6 +44,7 @@ patterns, and document which GitHub Copilot usage APIs exist.
 | `templates/session-cost-estimate-template.md` | Per-session cost breakdown by dispatch, model, and estimated token usage |
 | `templates/model-routing-recommendation-template.md` | Structured recommendations for right-sizing model selection per task type |
 | `templates/api-landscape.md` | Reference map of GitHub Copilot usage APIs — what exists, what is missing, and current workarounds |
+| `templates/usage-report.md` | Automated-style usage report with Handlebars placeholders for tooling integration |
 
 ## Key Patterns
 

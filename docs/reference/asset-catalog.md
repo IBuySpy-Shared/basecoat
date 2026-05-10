@@ -227,7 +227,6 @@ Skills are reusable domain capabilities stored as `skills/<name>/SKILL.md`.
 | Skill | Description |
 |---|---|
 | `architecture` | Architectural decision recording and system design |
-| `copilot-cli-usage-analytics` | Copilot CLI usage analytics collection and reporting |
 | `copilot-usage-analytics` | GitHub Copilot usage metrics and adoption reporting |
 | `documentation` | Technical documentation authoring and review |
 | `ux` | User experience design and accessibility patterns |
