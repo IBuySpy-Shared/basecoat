@@ -73,6 +73,16 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
+      - name: Ensure package is public
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Container Apps pulls without auth — package must be public
+          gh api \
+            --method PATCH \
+            /orgs/${{ github.repository_owner }}/packages/container/basecoat-metrics-mcp \
+            -f visibility=public 2>/dev/null || echo "Note: Could not set visibility (may need admin:org scope or manual setting)"
+
   deploy:
     name: Deploy to Azure Container Apps
     runs-on: ubuntu-latest

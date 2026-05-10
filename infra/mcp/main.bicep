@@ -91,8 +91,8 @@ resource app 'Microsoft.App/containerApps@2024-03-01' = {
         transport: 'http'
         allowInsecure: false
       }
-      // GHCR public image — no registry credentials needed for public repos.
-      // For private images add a registries block with a PAT secret.
+      // GHCR public image — no registry credentials needed.
+      // Package visibility must be set to public in GitHub org settings.
     }
     template: {
       containers: [
