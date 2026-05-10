@@ -1,12 +1,19 @@
 ---
 description: "Enterprise-level GitHub Copilot policy configuration, including usage metrics enablement, seat management, and security policies."
-applyTo: "**/*"
+applyTo: "references/enterprise-configuration/**/*.md,instructions/enterprise-configuration.instructions.md,.github/workflows/*.{yml,yaml}"
 distribute: false
 ---
 
 # Enterprise Configuration and Policy Setup
 
 Best practices for configuring GitHub Copilot at the enterprise level: policies, seat management, usage metrics, and security controls.
+
+## Guidelines
+
+- Record the owning admin role, approval path, and rollback option for each policy change.
+- Prefer documented API-backed workflows for metrics and seat management over manual screenshots or one-off notes.
+- Review inactive seats, org access, and security policy drift on a recurring schedule.
+- Keep rollout checklists explicit about prerequisites, validation, and communication steps.
 
 ## Prerequisites
 
@@ -31,6 +38,25 @@ Enable via: Enterprise → Settings → Policies → Copilot → Usage metrics �
 > Use the reports API: `GET /orgs/{org}/copilot/metrics/reports/organization-28-day/latest`
 
 See [`references/enterprise-configuration/metrics-api.md`](references/enterprise-configuration/metrics-api.md) for full API reference and troubleshooting.
+
+## Examples
+
+### Example metrics API call
+
+```bash
+gh api \
+  -H "Accept: application/vnd.github+json" \
+  /orgs/contoso/copilot/metrics/reports/organization-28-day/latest
+```
+
+### Example rollout checklist entry
+
+```text
+Policy: Enable usage metrics
+Owner: Enterprise admin
+Validation: Reports API returns current 28-day snapshot
+Rollback: Disable usage metrics policy and notify org admins
+```
 
 ## Security Policies (Summary)
 

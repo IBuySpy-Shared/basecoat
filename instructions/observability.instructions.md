@@ -2,7 +2,7 @@
 description: >
   OpenTelemetry instrumentation standards — trace context propagation,
   structured logging schema, metrics naming, and dashboard patterns.
-applyTo: agents/observability-engineer.agent.md, agents/devops-engineer.agent.md, agents/sre-engineer.agent.md
+applyTo: "**/*.{cs,ts,tsx,js,jsx,py,go,java,json,yml,yaml}"
 ---
 
 # Observability Standards
@@ -10,6 +10,13 @@ applyTo: agents/observability-engineer.agent.md, agents/devops-engineer.agent.md
 ## When Instrumenting Applications
 
 Every application must emit **logs, metrics, and traces** following these standards.
+
+## Rules
+
+- Instrument logs, metrics, and traces together so incidents can be correlated without guesswork.
+- Propagate W3C trace context across every inbound and outbound boundary.
+- Keep logs structured, redact secrets, and include correlation identifiers on every request path.
+- Define production sampling and dashboard expectations before rollout, not after the first incident.
 
 ## Trace Context Propagation
 
@@ -34,6 +41,33 @@ All logs must be structured JSON — never free text. Required fields per log li
 - `http.method`, `http.path`, `http.status_code`, `http.duration_ms`
 
 **DO NOT** log passwords, tokens, credit cards, SSNs, or raw request/response bodies.
+
+## Examples
+
+### Example structured log event
+
+```json
+{
+  "timestamp": "2026-05-10T18:24:00Z",
+  "level": "error",
+  "message": "Downstream payment request failed",
+  "trace_id": "4bf92f3577b34da6a3ce929d0e0e4736",
+  "span_id": "00f067aa0ba902b7",
+  "context": {
+    "service": "checkout-api",
+    "environment": "prod",
+    "version": "1.12.0"
+  }
+}
+```
+
+### Example metric names
+
+```text
+http.request.count
+database.query.duration
+cache.hit.count
+```
 
 ## Metrics Naming
 
