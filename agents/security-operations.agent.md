@@ -1,5 +1,4 @@
 ---
-
 name: security-operations
 description: Provide SOC (Security Operations Center) playbook guidance for threat detection, incident response, secrets rotation, audit logging, and operational security.
 maturity: production
