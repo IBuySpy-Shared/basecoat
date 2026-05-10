@@ -107,6 +107,23 @@ jobs:
             }
           }
 
+      - name: Detect unused assets (non-blocking)
+        shell: pwsh
+        run: |
+          $report = pwsh scripts/find-unused-assets.ps1 -Format markdown -ThresholdDays 90 2>&1
+
+          # Append to job summary
+          $separator = "`n`n---`n`n## Unused Assets`n`n"
+          Add-Content -Path $env:GITHUB_STEP_SUMMARY -Value ($separator + $report)
+
+          # Warn (non-blocking) if stale unused assets exist
+          if ($report -match '(\d+) exceed the 90-day stale threshold') {
+            $count = $Matches[1]
+            if ([int]$count -gt 0) {
+              Write-Host "::warning::$count assets unreferenced for >90 days. Run 'pwsh scripts/find-unused-assets.ps1' to review."
+            }
+          }
+
       - name: Fail workflow if grade is F
         if: steps.audit.outputs.grade == 'F'
         run: |
