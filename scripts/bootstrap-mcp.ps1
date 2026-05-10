@@ -3,10 +3,11 @@
     Bootstrap Azure resources and GitHub secrets for MCP server deployment.
 
 .DESCRIPTION
-    Idempotent three-phase setup for the BaseCoat Metrics MCP server:
+    Idempotent four-phase setup for the BaseCoat Metrics MCP server:
       Phase 1 — Prerequisites   (az CLI, gh CLI, Azure login, repo access)
       Phase 2 — Azure resources (resource group, service principal)
       Phase 3 — GitHub secrets  (AZURE_CREDENTIALS, MCP_RESOURCE_GROUP)
+      Phase 4 — GHCR visibility (adds packages scope, sets package public)
 
     After completion, trigger the deploy with:
       gh workflow run mcp-deploy.yml --repo <owner>/<repo>
@@ -210,10 +211,67 @@ if ($DryRun) {
     Write-Ok "Secret MCP_RESOURCE_GROUP set on $Repo"
 }
 
-# ── Phase 4: Optional Deploy Trigger ─────────────────────────────────────────
+# ── Phase 4: GHCR Package Visibility ─────────────────────────────────────────
+
+Write-Header "Phase 4 — GHCR Package Visibility"
+
+# Container Apps pulls without auth, so the GHCR package must be public.
+# This requires write:packages scope on the gh CLI token.
+$packageName = 'basecoat-metrics-mcp'
+
+# Check if gh CLI has packages scope
+$scopes = gh auth status 2>&1 | Select-String 'Token scopes'
+$hasPackagesScope = $scopes -match 'write:packages|admin:packages'
+
+if (-not $hasPackagesScope) {
+    Write-Warn "gh CLI lacks write:packages scope — needed to make GHCR package public"
+    if ($DryRun) {
+        Write-Info "Would run: gh auth refresh --scopes read:packages,write:packages"
+    } else {
+        Write-Host "  Adding packages scope (opens browser for one-time approval)..." -ForegroundColor Yellow
+        gh auth refresh --scopes read:packages,write:packages
+        if ($LASTEXITCODE -ne 0) {
+            Write-Fail "Failed to add packages scope. Run manually:"
+            Write-Info "  gh auth refresh --scopes read:packages,write:packages"
+            Write-Warn "Then re-run this script to complete package visibility setup"
+        } else {
+            Write-Ok "Packages scope added"
+            $hasPackagesScope = $true
+        }
+    }
+} else {
+    Write-Skip "gh CLI already has packages scope"
+}
+
+if ($hasPackagesScope -and -not $DryRun) {
+    # Check if the package exists (may not exist until first image push)
+    $org = ($Repo -split '/')[0]
+    $packageInfo = gh api "/orgs/$org/packages/container/$packageName" 2>$null | ConvertFrom-Json
+    if ($packageInfo.name) {
+        if ($packageInfo.visibility -eq 'public') {
+            Write-Skip "Package '$packageName' is already public"
+        } else {
+            Write-Host "  Setting package '$packageName' to public..." -ForegroundColor Yellow
+            gh api --method PATCH "/orgs/$org/packages/container/$packageName" -f visibility=public 2>$null
+            if ($LASTEXITCODE -eq 0) {
+                Write-Ok "Package '$packageName' set to public"
+            } else {
+                Write-Fail "Could not set package visibility. You may need org admin permissions."
+                Write-Info "Manual fix: GitHub → Org → Packages → $packageName → Settings → Visibility → Public"
+            }
+        }
+    } else {
+        Write-Warn "Package '$packageName' does not exist yet"
+        Write-Info "It will be created on the first deploy. Re-run this script after the first deploy to set visibility."
+    }
+} elseif ($DryRun) {
+    Write-Info "Would check and set package '$packageName' visibility to public"
+}
+
+# ── Phase 5: Optional Deploy Trigger ─────────────────────────────────────────
 
 if ($TriggerDeploy) {
-    Write-Header "Phase 4 — Trigger Deploy"
+    Write-Header "Phase 5 — Trigger Deploy"
 
     if ($DryRun) {
         Write-Info "Would trigger mcp-deploy.yml on $Repo"
