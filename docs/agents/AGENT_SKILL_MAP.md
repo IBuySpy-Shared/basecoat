@@ -238,7 +238,7 @@ To update this index:
 3. Update `metadata` in agent/skill frontmatter
 4. Run `pwsh scripts/validate-basecoat.ps1` to verify
 
-See [CONTRIBUTING.md](./CONTRIBUTING.md) for detailed guidelines.
+See [CONTRIBUTING.md](https://github.com/IBuySpy-Shared/basecoat/blob/main/CONTRIBUTING.md) for detailed guidelines.
 
 ---
 

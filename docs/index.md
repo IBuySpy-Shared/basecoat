@@ -5,9 +5,9 @@
 
 ## Core
 
-- [../README.md](../README.md) — Getting started, installation, and overview
-- [../CHANGELOG.md](../CHANGELOG.md) — Release history
-- [../CONTRIBUTING.md](../CONTRIBUTING.md) — Contribution guide
+- [README.md](https://github.com/IBuySpy-Shared/basecoat/blob/main/README.md) — Getting started, installation, and overview
+- [CHANGELOG.md](https://github.com/IBuySpy-Shared/basecoat/blob/main/CHANGELOG.md) — Release history
+- [CONTRIBUTING.md](https://github.com/IBuySpy-Shared/basecoat/blob/main/CONTRIBUTING.md) — Contribution guide
 - [PHILOSOPHY.md](PHILOSOPHY.md) — Design philosophy and principles
 
 ## Agents (`docs/agents/`)
@@ -106,9 +106,9 @@
 
 - [templates/](templates/) — Reusable file and directory templates (shared memory, repo scaffold, etc.)
 
-## Archive (`docs/archive/`)
+## Archive
 
 > Historical Wave 3 staging deliverables, portal design docs, wireframes, and cleanup reports.
 > These are preserved for reference but are not part of the active framework.
 
-- [archive/](archive/) — All archived Wave 3, portal, design, and audit documents
+- [View archive on GitHub](https://github.com/IBuySpy-Shared/basecoat/tree/main/docs/archive) — All archived Wave 3, portal, design, and audit documents

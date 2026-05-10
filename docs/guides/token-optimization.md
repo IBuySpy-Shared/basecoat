@@ -1,6 +1,6 @@
 # Token Optimization & Context Handling
 
-Strategies for managing token budgets, compressing context, and handing off state between agents in a multi-agent system. Companion to [`MODEL_OPTIMIZATION.md`](MODEL_OPTIMIZATION.md) (model selection) and [`MULTI_AGENT_WORKFLOWS.md`](MULTI_AGENT_WORKFLOWS.md) (branch coordination).
+Strategies for managing token budgets, compressing context, and handing off state between agents in a multi-agent system. Companion to [`MODEL_OPTIMIZATION.md`](MODEL_OPTIMIZATION.md) (model selection) and [`../architecture/multi-agent-orchestration-patterns.md`](../architecture/multi-agent-orchestration-patterns.md) (branch coordination).
 
 > **Tracking:** Issue [#42](https://github.com/IBuySpy-Shared/basecoat/issues/42)
 
@@ -450,7 +450,7 @@ On success (within budget + tests pass):
 ## Related References
 
 - [`MODEL_OPTIMIZATION.md`](MODEL_OPTIMIZATION.md) — Model tier matrix and cost considerations
-- [`MULTI_AGENT_WORKFLOWS.md`](MULTI_AGENT_WORKFLOWS.md) — Branch coordination for parallel agents
+- [`../architecture/multi-agent-orchestration-patterns.md`](../architecture/multi-agent-orchestration-patterns.md) — Branch coordination for parallel agents
 - [`instructions/governance.instructions.md`](/instructions/governance.instructions.md) — Section 10: Token and Model Awareness
 - Issue [#42](https://github.com/IBuySpy-Shared/basecoat/issues/42) — Tracking issue for token optimization
 - Issue [#44](https://github.com/IBuySpy-Shared/basecoat/issues/44) — Token budget and cost attribution
