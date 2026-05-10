@@ -4,6 +4,22 @@ All notable changes to this repository should be recorded in this file.
 
 ## Unreleased
 
+## Sprint 5 - 2026-05-10
+
+### Added
+
+- definition-of-done agent — validates engineering excellence standards across pull requests and deliverables
+
+### Changed
+
+- Merged 24 PRs (#733-#758) — comprehensive library expansion and documentation improvements
+- Cleaned up 31 local branches — repository maintenance
+
+### Fixed
+
+- Triaged and closed 32 dAIsy Chain backlog issues — improved issue tracking hygiene
+- Deploy Docs broken links — corrected documentation references and URLs
+
 ## 3.25.0 - 2026-05-09
 
 ### Added

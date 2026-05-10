@@ -1,6 +1,6 @@
 {
   "$schema": "basecoat-metadata-schema",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "generated": "2026-05-10",
   "categories": {
     "Development": {
@@ -1433,6 +1433,51 @@
       "aliases": [],
       "pairedSkill": "",
       "file": "agents/supply-chain-security.agent.md",
+      "model": "claude-sonnet-4.6",
+      "argumentHint": ""
+    },
+    {
+      "name": "definition-of-done",
+      "description": "Validate that a feature, PR, or release meets the Definition of Done before closing. Enforces testing evidence, config verification, response validation, and acceptance criteria.",
+      "category": "Meta",
+      "keywords": [
+        "definition-of-done",
+        "quality-gate",
+        "testing",
+        "acceptance-criteria",
+        "dod"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/definition-of-done.agent.md",
+      "model": "claude-sonnet-4.6",
+      "argumentHint": ""
+    },
+    {
+      "name": "orchestrator",
+      "description": "Multi-agent orchestrator that decomposes complex requests, routes subtasks to specialist agents, dispatches parallel work, tracks progress, resolves conflicts, and aggregates results into one coherent response. Use when a task spans multiple domains or needs coordinated specialist execution.",
+      "category": "Meta",
+      "keywords": [],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/orchestrator.agent.md",
+      "model": "claude-sonnet-4.6",
+      "argumentHint": ""
+    },
+    {
+      "name": "rca",
+      "description": "Root Cause Analysis agent for deep-dive incident investigations, hypothesis testing, and prevention follow-up.",
+      "category": "Meta",
+      "keywords": [
+        "incident-response",
+        "rca",
+        "root-cause-analysis",
+        "postmortem",
+        "troubleshooting"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/rca.agent.md",
       "model": "claude-sonnet-4.6",
       "argumentHint": ""
     }
