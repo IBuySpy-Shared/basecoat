@@ -144,7 +144,7 @@ try {
 
     $targetDir = Join-Path $consumer '.github/base-coat'
 
-    foreach ($item in @('README.md', 'CHANGELOG.md', 'version.json', 'basecoat-metadata.json')) {
+    foreach ($item in @('README.md', 'CHANGELOG.md', 'version.json', 'asset-manifest.json', 'basecoat-metadata.json')) {
         $testCount++
         Assert-SyncPathExists -Path (Join-Path $targetDir $item) `
             -Message "Sync test failed: $item not found in target directory"

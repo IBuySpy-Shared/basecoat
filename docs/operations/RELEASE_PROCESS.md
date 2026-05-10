@@ -76,6 +76,24 @@ Update the `version`, `releaseDate`, and optionally the `notes` field:
 }
 ```
 
+### 2a. Optional per-asset version bumps
+
+If you changed versioned assets and want independent asset SemVer bumps:
+
+```powershell
+# Preview version bumps
+pwsh scripts/bump-asset-versions.ps1 -BaseRef origin/main
+
+# Apply bumps
+pwsh scripts/bump-asset-versions.ps1 -BaseRef origin/main -Apply
+```
+
+Then regenerate the asset manifest:
+
+```powershell
+pwsh scripts/generate-asset-manifest.ps1
+```
+
 ### 3. Update `CHANGELOG.md`
 
 Add a new section immediately after the preamble, above existing entries. Follow this format:

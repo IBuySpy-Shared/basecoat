@@ -11,6 +11,7 @@ The sync script copies all distributable assets to `.github/base-coat/` in your 
 - `instructions/` — all instruction files
 - `prompts/` — prompt templates
 - `version.json` — version metadata
+- `asset-manifest.json` — per-asset version/SHA manifest used for drift analysis
 
 In addition, Copilot-discoverable directories (`instructions/`, `prompts/`, `skills/`) are
 mirrored to `.github/` and skills are also mirrored to `.agents/skills/` for cross-client
@@ -105,6 +106,21 @@ cat .github/base-coat/version.json
 
 Add the callable drift-detection workflow to get automatic issue notifications when a new BaseCoat version is available. See [Getting Started](../getting-started.md#keep-it-up-to-date).
 
+## Copilot Space context
+
+When a consumer repository needs BaseCoat guidance at inference time, reference the shared
+Copilot Space with this exact tuple:
+
+- **Owner**: `IBuySpy-Shared`
+- **Name**: `base-coat`
+
+Example reference:
+
+```text
+Copilot Space owner: IBuySpy-Shared
+Copilot Space name: base-coat
+```
+
 ## Naming convention
 
 BaseCoat uses two names intentionally:
@@ -115,3 +131,43 @@ BaseCoat uses two names intentionally:
 | `base-coat` | Distributed artifact, sync target (`.github/base-coat/`), `version.json`, release archives |
 
 See [ADR-001](../architecture/decisions/adr-001-naming-convention.md) for full details.
+
+
+## Rolling back to a prior version
+
+If a BaseCoat release introduces a breaking change, you can revert to any prior tagged release
+using the `rollback.ps1` / `rollback.sh` scripts included in the repo root.
+
+=== "PowerShell"
+
+    `powershell
+    # Roll back to a specific tag (run from your consumer repo root)
+    $env:BASECOAT_REPO = 'https://github.com/IBuySpy-Shared/basecoat.git'
+    pwsh rollback.ps1 -Tag v3.25.0
+
+    # See available tags and current version
+    pwsh rollback.ps1
+    `
+
+=== "Bash"
+
+    `ash
+    # Roll back to a specific tag (run from your consumer repo root)
+    BASECOAT_REPO=https://github.com/IBuySpy-Shared/basecoat.git bash rollback.sh v3.25.0
+
+    # See available tags and current version
+    BASECOAT_REPO=https://github.com/IBuySpy-Shared/basecoat.git bash rollback.sh
+    `
+
+After rollback, review and commit:
+
+`ash
+git add .github/base-coat/
+git commit -m "chore: roll back BaseCoat to v3.25.0"
+`
+
+The rollback script reads your current version from `version.json`, clones the requested
+tag, replaces `.github/base-coat/`, and reports a diff summary.
+
+To stay pinned and suppress automated upgrades, set `BASECOAT_REF=v3.25.0` in your
+sync workflow until you are ready to re-adopt the latest release.
