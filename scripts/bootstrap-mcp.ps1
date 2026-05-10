@@ -246,8 +246,12 @@ if (-not $hasPackagesScope) {
 if ($hasPackagesScope -and -not $DryRun) {
     # Check if the package exists (may not exist until first image push)
     $org = ($Repo -split '/')[0]
-    $packageInfo = gh api "/orgs/$org/packages/container/$packageName" 2>$null | ConvertFrom-Json
-    if ($packageInfo.name) {
+    $rawJson = gh api "/orgs/$org/packages/container/$packageName" 2>$null
+    $packageInfo = $null
+    if ($LASTEXITCODE -eq 0 -and $rawJson) {
+        $packageInfo = $rawJson | ConvertFrom-Json -ErrorAction SilentlyContinue
+    }
+    if ($packageInfo -and $packageInfo.PSObject.Properties['name']) {
         if ($packageInfo.visibility -eq 'public') {
             Write-Skip "Package '$packageName' is already public"
         } else {
