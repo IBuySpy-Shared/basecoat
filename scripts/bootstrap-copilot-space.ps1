@@ -344,10 +344,8 @@ catch {
     $message = $_.Exception.Message
     if ($message -match 'HTTP 404|Not found') {
         Show-ManualFallback -OrgName $Org -Name $SpaceName -SourceRepoSlug $SourceRepo
-        if ($DryRun) {
-            Write-Info 'Dry run complete.'
-            exit 0
-        }
+        Write-Info 'Manual fallback complete.'
+        exit 0
     }
 
     Write-Host ''
