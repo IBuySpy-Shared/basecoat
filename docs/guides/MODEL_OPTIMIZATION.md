@@ -2,6 +2,9 @@
 
 Choosing the right LLM for each agent role is a cost-performance tradeoff. Default-to-cheapest wastes time on retries and low-quality output; default-to-premium wastes money on tasks that don't need it. This guide provides a principled tier matrix so every agent runs on the model that matches its cognitive demand.
 
+> **GHCP-specific:** This guidance was developed and tested against GitHub Copilot (GHCP).
+> If you are using Azure OpenAI, Anthropic API, AWS Bedrock, or another provider,
+> model names, tier pricing, and rate limits will differ. See [Adapting for Other Providers](#adapting-for-other-providers).
 > **Discovery context:** During the app-migration-with-ai Sprint 2, all agents defaulted to Haiku. Architect and security tasks underperformed significantly, requiring manual rework. This guide codifies the lessons learned.
 
 ---
@@ -231,9 +234,28 @@ reasoning to produce.
 
 ---
 
+## Adapting for Other Providers
+
+The tier matrix above uses GitHub Copilot (GHCP) model names. If your agents target
+a different provider, map the tiers as follows:
+
+| Provider | Model tier equivalent | Rate limit difference | Billing unit |
+|---|---|---|---|
+| Azure OpenAI | GPT-4o ~= Standard, GPT-4o-mini ~= Fast | TPM/RPM per deployment | Per token |
+| Anthropic API | Opus ~= Premium, Sonnet ~= Standard, Haiku ~= Fast | Per-minute limits | Per token |
+| AWS Bedrock | On-demand vs. provisioned | Regional quotas | Per token |
+| OpenAI API | GPT-4o ~= Standard, GPT-4o-mini ~= Fast | Tier-based RPM/TPM | Per token |
+
+Substitute provider-specific model names in agent `## Model` sections and CI/CD
+environment variables. Cost considerations and override logic remain the same.
+For UBB billing and monitoring guidance, see [ubb-token-guidance.md](ubb-token-guidance.md).
+
+---
+
 ## Related References
 
 - `instructions/governance.instructions.md` — Section 10 covers model awareness policy
 - `instructions/token-economics.instructions.md` — Turn budget classification and fast-path routing
 - Individual agent files in `agents/` — each contains a `## Model` section
 - [`token-optimization.md`](token-optimization.md) — Context window management and budget allocation
+- [`ubb-token-guidance.md`](ubb-token-guidance.md) -- UBB billing model, cost estimation, alert thresholds

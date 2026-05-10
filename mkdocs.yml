@@ -89,6 +89,7 @@ nav:
     - Version Drift Detection: guides/version-drift.md
     - Model Optimization: guides/MODEL_OPTIMIZATION.md
     - Token Optimization: guides/token-optimization.md
+    - UBB Token Guidance: guides/ubb-token-guidance.md
   - Memory System:
     - Overview: memory/index.md
     - Learning Model: memory/LEARNING_MODEL.md
