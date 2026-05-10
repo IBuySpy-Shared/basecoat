@@ -97,6 +97,8 @@ jobs:
           template: infra/mcp/main.bicep
           parameters: >
             imageTag=${{ needs.build-push.outputs.image_tag }}
+            imageRepo=${{ github.repository_owner }}/basecoat-metrics-mcp
+            metricsBaseUrl=https://${{ github.repository_owner }}.github.io/basecoat/metrics
             environment=${{ inputs.environment || 'prod' }}
           deploymentName: mcp-${{ github.run_number }}
 
