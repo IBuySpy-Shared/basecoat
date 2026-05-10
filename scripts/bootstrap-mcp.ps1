@@ -7,7 +7,7 @@
       Phase 1 — Prerequisites   (az CLI, gh CLI, Azure login, repo access)
       Phase 2 — Azure resources (resource group, service principal)
       Phase 3 — GitHub secrets  (AZURE_CREDENTIALS, MCP_RESOURCE_GROUP)
-      Phase 4 — GHCR visibility (adds packages scope, sets package public)
+      Phase 4 — GHCR check      (verifies package exists)
 
     After completion, trigger the deploy with:
       gh workflow run mcp-deploy.yml --repo <owner>/<repo>
@@ -213,77 +213,29 @@ if ($DryRun) {
 
 # ── Phase 4: GHCR Package Visibility ─────────────────────────────────────────
 
-Write-Header "Phase 4 — GHCR Package Visibility"
+Write-Header "Phase 4 — GHCR Package Check"
 
-# Container Apps pulls without auth, so the GHCR package must be public.
-# This requires write:packages scope on the gh CLI token.
+# The deploy workflow passes GITHUB_TOKEN as registry credentials to Bicep,
+# so the package does NOT need to be public. This phase just verifies the
+# package exists (it won't until after the first image push).
 $packageName = 'basecoat-metrics-mcp'
+$org = ($Repo -split '/')[0]
 
-# Check if gh CLI has packages scope
-$scopes = gh auth status 2>&1 | Select-String 'Token scopes'
-$hasPackagesScope = $scopes -match 'write:packages|admin:packages'
-
-if (-not $hasPackagesScope) {
-    Write-Warn "gh CLI lacks write:packages scope — needed to make GHCR package public"
-    if ($DryRun) {
-        Write-Info "Would run: gh auth refresh --scopes read:packages,write:packages"
-    } else {
-        Write-Host "  Adding packages scope (opens browser for one-time approval)..." -ForegroundColor Yellow
-        gh auth refresh --scopes read:packages,write:packages
-        if ($LASTEXITCODE -ne 0) {
-            Write-Fail "Failed to add packages scope. Run manually:"
-            Write-Info "  gh auth refresh --scopes read:packages,write:packages"
-            Write-Warn "Then re-run this script to complete package visibility setup"
-        } else {
-            Write-Ok "Packages scope added"
-            $hasPackagesScope = $true
-        }
-    }
+if ($DryRun) {
+    Write-Info "Would check if package '$packageName' exists"
 } else {
-    Write-Skip "gh CLI already has packages scope"
-}
-
-if ($hasPackagesScope -and -not $DryRun) {
-    # Check if the package exists (may not exist until first image push)
-    $org = ($Repo -split '/')[0]
     $rawJson = gh api "/orgs/$org/packages/container/$packageName" 2>$null
     $packageInfo = $null
     if ($LASTEXITCODE -eq 0 -and $rawJson) {
         $packageInfo = $rawJson | ConvertFrom-Json -ErrorAction SilentlyContinue
     }
     if ($packageInfo -and $packageInfo.PSObject.Properties['name']) {
-        if ($packageInfo.visibility -eq 'public') {
-            Write-Skip "Package '$packageName' is already public"
-        } else {
-            # GitHub does not expose a REST API to change org package visibility.
-            # Open the settings page in the browser for the user.
-            $settingsUrl = "https://github.com/orgs/$org/packages/container/package/$packageName/settings"
-            Write-Warn "Package '$packageName' is private — Container Apps requires public packages"
-            Write-Info "GitHub has no API for changing package visibility. Opening settings page..."
-            Start-Process $settingsUrl
-            Write-Info "In the browser: Danger Zone → Change visibility → Public"
-            Write-Host ""
-            $null = Read-Host "  Press Enter after setting the package to public"
-
-            # Verify
-            $verifyJson = gh api "/orgs/$org/packages/container/$packageName" 2>$null
-            $verifyInfo = $null
-            if ($LASTEXITCODE -eq 0 -and $verifyJson) {
-                $verifyInfo = $verifyJson | ConvertFrom-Json -ErrorAction SilentlyContinue
-            }
-            if ($verifyInfo -and $verifyInfo.PSObject.Properties['visibility'] -and $verifyInfo.visibility -eq 'public') {
-                Write-Ok "Package '$packageName' is now public"
-            } else {
-                Write-Fail "Package is still private. Deploy will fail until visibility is changed."
-                Write-Info "URL: $settingsUrl"
-            }
-        }
+        Write-Ok "Package '$packageName' exists (visibility: $($packageInfo.visibility))"
+        Write-Info "Deploy workflow uses authenticated GHCR pulls — public visibility not required"
     } else {
         Write-Warn "Package '$packageName' does not exist yet"
-        Write-Info "It will be created on the first deploy. Re-run this script after the first deploy to set visibility."
+        Write-Info "It will be created on the first deploy workflow run"
     }
-} elseif ($DryRun) {
-    Write-Info "Would check and set package '$packageName' visibility to public"
 }
 
 # ── Phase 5: Optional Deploy Trigger ─────────────────────────────────────────

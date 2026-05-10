@@ -104,6 +104,8 @@ jobs:
             imageRepo=${{ steps.owner.outputs.lc }}/basecoat-metrics-mcp
             metricsBaseUrl=https://${{ steps.owner.outputs.lc }}.github.io/basecoat/metrics
             environment=${{ inputs.environment || 'prod' }}
+            registryUsername=${{ github.actor }}
+            registryPassword=${{ secrets.GITHUB_TOKEN }}
           deploymentName: mcp-${{ github.run_number }}
 
       - name: Smoke test — health endpoint
