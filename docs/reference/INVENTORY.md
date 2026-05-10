@@ -1,5 +1,11 @@
 # Inventory
 
+> **⚠️ Staleness notice:** This file is manually maintained and may not reflect recently
+> added agents, skills, or instruction files. For a current machine-generated listing:
+>
+> - Agents: run `pwsh scripts/update-metadata.ps1` and see `basecoat-metadata.json`
+> - Instructions and skills: browse the `instructions/` and `skills/` directories directly
+
 This catalog helps teams discover what exists in Base Coat and when to use it.
 
 ## Instructions

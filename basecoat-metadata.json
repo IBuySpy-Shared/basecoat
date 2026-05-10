@@ -1,7 +1,7 @@
 {
   "$schema": "basecoat-metadata-schema",
-  "version": "2.0.0",
-  "generated": "2026-04-28",
+  "version": "2.1.0",
+  "generated": "2026-05-10",
   "categories": {
     "Development": {
       "label": "Development",
@@ -628,6 +628,813 @@
       "file": "agents/merge-coordinator.agent.md",
       "model": "GPT-4o-mini / Claude Haiku",
       "argumentHint": "/basecoat merge coordinate merging 3 feature branches into main"
+    },
+    {
+      "name": "agentops",
+      "description": "AgentOps lifecycle manager for agent versioning, rollout, health monitoring, rollback, and operational governance. Use when deploying, canarying, or retiring agent versions.",
+      "category": "Meta",
+      "keywords": [
+        "agentops",
+        "lifecycle-management",
+        "deployment",
+        "monitoring"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/agentops.agent.md",
+      "model": "claude-sonnet-4.6",
+      "argumentHint": ""
+    },
+    {
+      "name": "api-security",
+      "description": "API Security Agent for comprehensive API threat modeling, OWASP API Security Top 10 assessment, and secure API design. Covers authentication, authorization, rate limiting, and API-specific vulnerabilities.",
+      "category": "Quality",
+      "keywords": [
+        "api-security",
+        "owasp-api",
+        "threat-modeling",
+        "authorization"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/api-security.agent.md",
+      "model": "claude-sonnet-4.6",
+      "argumentHint": ""
+    },
+    {
+      "name": "app-inventory",
+      "description": "Scans legacy applications to discover dependencies, identify technology stacks, assess migration complexity, and generate architecture diagrams for portfolio analysis.",
+      "category": "Meta",
+      "keywords": [
+        "app-discovery",
+        "inventory",
+        "legacy-systems",
+        "technology-stack",
+        "assessment"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/app-inventory.agent.md",
+      "model": "claude-sonnet-4.6",
+      "argumentHint": ""
+    },
+    {
+      "name": "azure-landing-zone",
+      "description": "Azure Landing Zone (ESLZ) agent for scaffolding enterprise-scale landing zones following Microsoft's Cloud Adoption Framework. Use when designing management group hierarchies, platform subscriptions, hub networking, policy baselines, or landing zone vending templates.",
+      "category": "Meta",
+      "keywords": [
+        "azure-landing-zone",
+        "caf",
+        "cloud-adoption-framework",
+        "azure",
+        "enterprise-scale"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/azure-landing-zone.agent.md",
+      "model": "claude-sonnet-4.6",
+      "argumentHint": ""
+    },
+    {
+      "name": "chaos-engineer",
+      "description": "Chaos engineering agent for fault injection, game days, resilience scoring, recovery validation, and SLO-aware resilience experiments.",
+      "category": "Meta",
+      "keywords": [
+        "chaos-engineering",
+        "resilience",
+        "reliability",
+        "slo",
+        "testing"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/chaos-engineer.agent.md",
+      "model": "gpt-5.3-codex",
+      "argumentHint": ""
+    },
+    {
+      "name": "ci-failure-escalation",
+      "description": "Detects N consecutive CI failures on the same workflow job, opens a blocking issue, and gates further deploys to that environment — the andon cord / halt-the-line pattern for CI/CD pipelines.",
+      "category": "Meta",
+      "keywords": [
+        "ci-cd",
+        "automation",
+        "pipeline",
+        "escalation",
+        "deployment-gate"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/ci-failure-escalation.agent.md",
+      "model": "claude-sonnet-4.6",
+      "argumentHint": ""
+    },
+    {
+      "name": "container-security",
+      "description": ">",
+      "category": "Meta",
+      "keywords": "uncategorized",
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/container-security.agent.md",
+      "model": "claude-sonnet-4.6",
+      "argumentHint": ""
+    },
+    {
+      "name": "containerization-planner",
+      "description": "Helps assess containerization readiness, choose deployment platforms (Docker/AKS/ACA), and generate container configurations including Dockerfiles, multi-stage builds, health probes, resource limits, and deployment manifests.",
+      "category": "Meta",
+      "keywords": [
+        "containerization",
+        "docker",
+        "kubernetes",
+        "container-apps",
+        "deployment"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/containerization-planner.agent.md",
+      "model": "claude-sonnet-4.6",
+      "argumentHint": ""
+    },
+    {
+      "name": "contract-testing",
+      "description": "Contract Testing Agent for consumer-driven contracts, E2E testing strategy, and mutation testing for distributed systems.",
+      "category": "Meta",
+      "keywords": [
+        "contract-testing",
+        "cdc",
+        "integration-testing",
+        "testing",
+        "e2e-testing"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/contract-testing.agent.md",
+      "model": "claude-sonnet-4.6",
+      "argumentHint": ""
+    },
+    {
+      "name": "data-architect",
+      "description": "Design scalable data architectures, medallion layers, data governance, and analytics workflows. Use when planning data warehouses, data lakes, ETL/ELT pipelines, or data mesh frameworks.",
+      "category": "Meta",
+      "keywords": [
+        "data-architecture",
+        "medallion",
+        "data-governance",
+        "etl",
+        "analytics",
+        "dbt"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/data-architect.agent.md",
+      "model": "claude-sonnet-4.6",
+      "argumentHint": ""
+    },
+    {
+      "name": "data-integrity",
+      "description": ">",
+      "category": "Meta",
+      "keywords": "uncategorized",
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/data-integrity.agent.md",
+      "model": "claude-sonnet-4.6",
+      "argumentHint": ""
+    },
+    {
+      "name": "data-pipeline",
+      "description": "Data pipeline agent for medallion lakehouse architecture, data quality, ML pipeline orchestration, and feature store integration. Use when building or reviewing bronze/silver/gold Delta Lake pipelines, data quality checks, feature engineering, or ML training workflows.",
+      "category": "Meta",
+      "keywords": "uncategorized",
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/data-pipeline.agent.md",
+      "model": "claude-sonnet-4.6",
+      "argumentHint": ""
+    },
+    {
+      "name": "database-migration",
+      "description": "Plan and execute database migrations: schema evolution, data replication, zero-downtime upgrades, and legacy system modernization. Use for migration strategies, risk assessment, and runbook creation.",
+      "category": "Meta",
+      "keywords": [
+        "database-migration",
+        "schema-evolution",
+        "data-replication",
+        "modernization",
+        "sql"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/database-migration.agent.md",
+      "model": "claude-sonnet-4.6",
+      "argumentHint": ""
+    },
+    {
+      "name": "dataops",
+      "description": "DataOps agent for data quality, lineage, governance, orchestration, data contracts, and drift detection across analytical and ML data pipelines. Use when managing pipeline reliability and data change risk.",
+      "category": "Meta",
+      "keywords": [
+        "dataops",
+        "data-quality",
+        "lineage",
+        "governance",
+        "data-contracts"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/dataops.agent.md",
+      "model": "gpt-5.3-codex",
+      "argumentHint": ""
+    },
+    {
+      "name": "dependency-lifecycle",
+      "description": "Agent for managing dependency updates, tracking breaking changes, planning upgrade paths, monitoring vulnerabilities, analyzing semantic versioning, and generating migration guides.",
+      "category": "Meta",
+      "keywords": [
+        "dependency-management",
+        "version-upgrades",
+        "vulnerability-tracking",
+        "breaking-changes"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/dependency-lifecycle.agent.md",
+      "model": "claude-sonnet-4.6",
+      "argumentHint": ""
+    },
+    {
+      "name": "dependency-update-advisor",
+      "description": "Reviews Dependabot pull requests and posts a structured risk assessment comment: semver bump type, breaking change likelihood, suggested test focus areas, and known CVE context.",
+      "category": "Meta",
+      "keywords": [
+        "dependabot",
+        "dependency-updates",
+        "security",
+        "risk-assessment"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/dependency-update-advisor.agent.md",
+      "model": "gpt-5.4-mini",
+      "argumentHint": ""
+    },
+    {
+      "name": "domain-designer",
+      "description": "Domain-Driven Design agent for bounded context modeling, aggregate design, ubiquitous language definition, and DDD patterns. Use when designing domain models, refactoring monoliths into domain-aligned services, or establishing domain-driven architecture.",
+      "category": "Meta",
+      "keywords": [
+        "domain-driven-design",
+        "bounded-contexts",
+        "aggregates",
+        "ubiquitous-language",
+        "microservices",
+        "domain-events"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/domain-designer.agent.md",
+      "model": "claude-sonnet-4.6",
+      "argumentHint": ""
+    },
+    {
+      "name": "dotnet-modernization-advisor",
+      "description": "Advisor for .NET modernization assessment, upgrade planning, and execution guidance. Use when migrating legacy .NET Framework/older .NET solutions to modern .NET versions.",
+      "category": "Meta",
+      "keywords": [
+        "dotnet",
+        "modernization",
+        "migration",
+        "upgrade",
+        "legacy"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/dotnet-modernization-advisor.agent.md",
+      "model": "claude-sonnet-4.6",
+      "argumentHint": ""
+    },
+    {
+      "name": "e2e-test-strategy",
+      "description": "E2E Test Strategy Agent for end-to-end testing orchestration, critical path identification, flakiness prevention, and cross-browser coverage. Covers Playwright, Cypress, Selenium patterns and integration with CI/CD pipelines.",
+      "category": "Meta",
+      "keywords": [
+        "e2e-testing",
+        "playwright",
+        "cypress",
+        "test-automation",
+        "qa"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/e2e-test-strategy.agent.md",
+      "model": "claude-sonnet-4.6",
+      "argumentHint": ""
+    },
+    {
+      "name": "feedback-loop",
+      "description": "Continuous learning and optimization through user feedback collection, prompt effectiveness tracking, outcome measurement, A/B testing, regression detection, and instruction refinement.",
+      "category": "Meta",
+      "keywords": [
+        "feedback",
+        "optimization",
+        "learning",
+        "a-b-testing",
+        "metrics"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/feedback-loop.agent.md",
+      "model": "claude-sonnet-4.6",
+      "argumentHint": ""
+    },
+    {
+      "name": "finops-advisor",
+      "description": "FinOps advisor for cloud cost governance, cost optimization, chargeback/showback models, and 12-Factor App best practices for cost efficiency",
+      "category": "Meta",
+      "keywords": [
+        "finops",
+        "cost-optimization",
+        "cloud-cost",
+        "governance",
+        "chargeback",
+        "showback"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/finops-advisor.agent.md",
+      "model": "claude-sonnet-4.6",
+      "argumentHint": ""
+    },
+    {
+      "name": "github-security-posture",
+      "description": "GitHub security posture auditor for org and repository policy checks. Use when auditing GitHub organization code security configurations, repository rulesets, secret scanning alerts, Dependabot configuration, or branch protection rules.",
+      "category": "Meta",
+      "keywords": "uncategorized",
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/github-security-posture.agent.md",
+      "model": "claude-sonnet-4.5",
+      "argumentHint": ""
+    },
+    {
+      "name": "gitops-engineer",
+      "description": "Design GitOps workflows for Infrastructure-as-Code, declarative configuration, automated deployment, and continuous reconciliation. Use when implementing Argo CD, Flux, or GitOps best practices.",
+      "category": "Meta",
+      "keywords": [
+        "gitops",
+        "argo-cd",
+        "flux",
+        "infrastructure-as-code",
+        "kubernetes",
+        "ci-cd"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/gitops-engineer.agent.md",
+      "model": "claude-sonnet-4.6",
+      "argumentHint": ""
+    },
+    {
+      "name": "guardrail",
+      "description": "Guardrail validation agent for checking outputs against safety, quality, compliance, and formatting rules before delivery.",
+      "category": "Quality",
+      "keywords": [
+        "guardrails",
+        "validation",
+        "safety",
+        "compliance"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/guardrail.agent.md",
+      "model": "claude-sonnet-4.6",
+      "argumentHint": ""
+    },
+    {
+      "name": "guidance-author",
+      "description": "Use when drafting new BaseCoat guidance assets (instruction files, skill SKILL.md, agent files, prompt templates) from a description or requirement. Produces a structured draft ready for guidance-reviewer validation.",
+      "category": "Meta",
+      "keywords": [
+        "authoring",
+        "guidance",
+        "instructions",
+        "skills",
+        "agents",
+        "creator-verifier"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/guidance-author.agent.md",
+      "model": "claude-sonnet-4.6",
+      "argumentHint": ""
+    },
+    {
+      "name": "guidance-reviewer",
+      "description": "Use when validating a BaseCoat guidance draft (instruction, skill, agent, prompt) before committing. Checks lint rules, required sections, frontmatter schema, and BaseCoat conventions. Returns a structured pass/fail verdict with actionable fixes.",
+      "category": "Meta",
+      "keywords": [
+        "review",
+        "validation",
+        "quality-assurance",
+        "guidance",
+        "creator-verifier"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/guidance-reviewer.agent.md",
+      "model": "claude-sonnet-4.6",
+      "argumentHint": ""
+    },
+    {
+      "name": "ha-architect",
+      "description": "Design high-availability, resilience, and chaos testing strategies for distributed systems.",
+      "category": "Meta",
+      "keywords": [
+        "high-availability",
+        "resilience",
+        "disaster-recovery",
+        "chaos-engineering",
+        "sre"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/ha-architect.agent.md",
+      "model": "claude-sonnet-4.6",
+      "argumentHint": ""
+    },
+    {
+      "name": "hardening-advisor",
+      "description": ">",
+      "category": "Meta",
+      "keywords": "uncategorized",
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/hardening-advisor.agent.md",
+      "model": "claude-sonnet-4.6",
+      "argumentHint": ""
+    },
+    {
+      "name": "identity-architect",
+      "description": "Identity architecture agent for Azure RBAC design, managed identity configuration, Entra ID app registrations, conditional access policies, and workload identity federation. Use when designing identity and access management for Azure workloads or enforcing zero trust principles.",
+      "category": "Quality",
+      "keywords": [
+        "identity",
+        "iam",
+        "azure-rbac",
+        "entra-id",
+        "zero-trust",
+        "conditional-access"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/identity-architect.agent.md",
+      "model": "gpt-5.3-codex",
+      "argumentHint": ""
+    },
+    {
+      "name": "incident-responder",
+      "description": "Structured incident response and recovery agent for classifying incidents, guiding mitigation, coordinating communications, verifying recovery, and facilitating post-incident learning.",
+      "category": "Meta",
+      "keywords": [
+        "incident-response",
+        "sre",
+        "on-call",
+        "troubleshooting",
+        "post-mortem"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/incident-responder.agent.md",
+      "model": "claude-sonnet-4.6",
+      "argumentHint": ""
+    },
+    {
+      "name": "infrastructure-deploy",
+      "description": "Orchestrates Azure infrastructure deployments using Bicep, handles resource group management, parameter validation, and rollback strategies.",
+      "category": "Meta",
+      "keywords": [
+        "infrastructure",
+        "azure",
+        "bicep",
+        "deployment",
+        "iac"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/infrastructure-deploy.agent.md",
+      "model": "claude-sonnet-4.6",
+      "argumentHint": ""
+    },
+    {
+      "name": "instruction-auditor",
+      "description": "Detects missing instruction coverage for a repo — identifies tech stacks and workflow patterns present in the codebase that have no corresponding Basecoat instruction file in the overlay.",
+      "category": "Meta",
+      "keywords": [
+        "instructions",
+        "coverage",
+        "audit",
+        "tech-stack",
+        "overlay"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/instruction-auditor.agent.md",
+      "model": "claude-sonnet-4.6",
+      "argumentHint": ""
+    },
+    {
+      "name": "legacy-modernization",
+      "description": "Guides teams through Web Forms to Razor Pages migration using the strangler fig pattern for incremental modernization of legacy ASP.NET applications.",
+      "category": "Meta",
+      "keywords": [
+        "legacy-code",
+        "modernization",
+        "migration",
+        "asp.net",
+        "dotnet",
+        "refactoring"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/legacy-modernization.agent.md",
+      "model": "claude-sonnet-4.6",
+      "argumentHint": ""
+    },
+    {
+      "name": "llmops",
+      "description": "LLMOps agent for prompt deployment pipelines, model gateway configuration, inference monitoring, version rollback, endpoint health checks, and cost optimization. Use when operating production LLM inference systems.",
+      "category": "Meta",
+      "keywords": [
+        "llmops",
+        "mlops",
+        "prompts",
+        "inference",
+        "model-serving",
+        "observability"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/llmops.agent.md",
+      "model": "claude-sonnet-4.6",
+      "argumentHint": ""
+    },
+    {
+      "name": "memory-curator",
+      "description": "Use when extracting, deduplicating, validating, and retrieving cross-session knowledge with the SQLite memory layer, including conflict resolution, decay, and context injection.",
+      "category": "Meta",
+      "keywords": [
+        "memory",
+        "knowledge-management",
+        "cross-session",
+        "learning"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/memory-curator.agent.md",
+      "model": "claude-sonnet-4.6",
+      "argumentHint": ""
+    },
+    {
+      "name": "memory-promoter",
+      "description": "Analyzes session transcripts and sprint summaries to identify high-value patterns for promotion to long-term BaseCoat memory contributions.",
+      "category": "Meta",
+      "keywords": [
+        "memory",
+        "pattern-detection",
+        "learning",
+        "contributions"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/memory-promoter.agent.md",
+      "model": "claude-haiku-4.5",
+      "argumentHint": ""
+    },
+    {
+      "name": "mlops",
+      "description": "MLOps agent for model lifecycle, experiment tracking, model registry, deployment automation, drift monitoring, and reproducibility. Use when operationalizing ML systems.",
+      "category": "Meta",
+      "keywords": [
+        "mlops",
+        "ml-engineering",
+        "model-registry",
+        "experiment-tracking",
+        "ml-deployment"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/mlops.agent.md",
+      "model": "gpt-5.3-codex",
+      "argumentHint": ""
+    },
+    {
+      "name": "observability-engineer",
+      "description": ">",
+      "category": "Meta",
+      "keywords": "uncategorized",
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/observability-engineer.agent.md",
+      "model": "claude-sonnet-4.6",
+      "argumentHint": ""
+    },
+    {
+      "name": "penetration-test",
+      "description": "Penetration Test Agent for security assessments, vulnerability discovery, and remediation workflows. Use when planning security testing engagements aligned with OWASP Testing Guide.",
+      "category": "Quality",
+      "keywords": [
+        "penetration-testing",
+        "security-assessment",
+        "vulnerability-discovery",
+        "owasp"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/penetration-test.agent.md",
+      "model": "claude-sonnet-4.6",
+      "argumentHint": ""
+    },
+    {
+      "name": "policy-as-code-compliance",
+      "description": "Policy-as-code compliance agent for validating code and configuration against organizational rules, managing exceptions, and producing audit-ready compliance reports.",
+      "category": "Quality",
+      "keywords": [
+        "policy-as-code",
+        "compliance",
+        "governance",
+        "audit",
+        "opa",
+        "rego"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/policy-as-code-compliance.agent.md",
+      "model": "claude-sonnet-4.6",
+      "argumentHint": ""
+    },
+    {
+      "name": "production-readiness",
+      "description": "Production Readiness Agent for ensuring applications meet operational requirements before release; coordinates BCP/DRP, incident response, and safety analysis.",
+      "category": "Meta",
+      "keywords": [
+        "production-readiness",
+        "release-readiness",
+        "bcp",
+        "drp",
+        "incident-response"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/production-readiness.agent.md",
+      "model": "claude-sonnet-4.6",
+      "argumentHint": ""
+    },
+    {
+      "name": "prompt-coach",
+      "description": "Interactive prompt optimization coach. Use when reviewing prompts, scoring prompt quality, identifying anti-patterns, and guiding iterative refinement.",
+      "category": "Meta",
+      "keywords": [
+        "prompt-coaching",
+        "prompt-optimization",
+        "llm",
+        "ai-development"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/prompt-coach.agent.md",
+      "model": "gpt-5.3-codex",
+      "argumentHint": ""
+    },
+    {
+      "name": "release-impact-advisor",
+      "description": "Comprehensive agent for assessing release readiness, analyzing change impacts, estimating blast radius, planning rollbacks, and guiding safe deployment strategies with feature flags, canary deployments, and changelog generation.",
+      "category": "Meta",
+      "keywords": [
+        "release-management",
+        "impact-analysis",
+        "deployment-strategy",
+        "rollback",
+        "canary"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/release-impact-advisor.agent.md",
+      "model": "claude-sonnet-4.6",
+      "argumentHint": ""
+    },
+    {
+      "name": "resilience-reviewer",
+      "description": ">",
+      "category": "Meta",
+      "keywords": "uncategorized",
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/resilience-reviewer.agent.md",
+      "model": "claude-sonnet-4.6",
+      "argumentHint": ""
+    },
+    {
+      "name": "secrets-manager",
+      "description": ">",
+      "category": "Meta",
+      "keywords": "uncategorized",
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/secrets-manager.agent.md",
+      "model": "claude-sonnet-4.6",
+      "argumentHint": ""
+    },
+    {
+      "name": "security-monitor",
+      "description": ">",
+      "category": "Meta",
+      "keywords": "uncategorized",
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/security-monitor.agent.md",
+      "model": "claude-sonnet-4.6",
+      "argumentHint": ""
+    },
+    {
+      "name": "security-operations",
+      "description": "Provide SOC (Security Operations Center) playbook guidance for threat detection, incident response, secrets rotation, audit logging, and operational security.",
+      "category": "Meta",
+      "keywords": "uncategorized",
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/security-operations.agent.md",
+      "model": "claude-sonnet-4.6",
+      "argumentHint": ""
+    },
+    {
+      "name": "self-healing-ci",
+      "description": "Automated CI failure analysis, log parsing, and pipeline remediation with retry strategies, flaky test detection, dependency resolution, and cache invalidation.",
+      "category": "Meta",
+      "keywords": [
+        "ci-cd",
+        "automation",
+        "pipeline",
+        "remediation",
+        "failure-analysis"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/self-healing-ci.agent.md",
+      "model": "claude-sonnet-4.6",
+      "argumentHint": ""
+    },
+    {
+      "name": "sprint-retrospective",
+      "description": "Reconstructs repository history for sprint retrospectives, generating structured markdown with metrics, timelines, and actionable development tips.",
+      "category": "Meta",
+      "keywords": [
+        "retrospective",
+        "sprint-review",
+        "metrics",
+        "analysis"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/sprint-retrospective.agent.md",
+      "model": "claude-sonnet-4.6",
+      "argumentHint": ""
+    },
+    {
+      "name": "sre-engineer",
+      "description": "Site reliability engineering agent for SLOs, error budgets, incident response, chaos engineering, and toil reduction. Use when improving service reliability and resilience.",
+      "category": "Meta",
+      "keywords": [
+        "sre",
+        "reliability",
+        "slo",
+        "error-budget",
+        "incident-response",
+        "chaos-engineering"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/sre-engineer.agent.md",
+      "model": "gpt-5.3-codex",
+      "argumentHint": ""
+    },
+    {
+      "name": "supply-chain-security",
+      "description": "Secure software supply chain with artifact signing, SBOM generation, and provenance tracking.",
+      "category": "Quality",
+      "keywords": [
+        "supply-chain",
+        "sbom",
+        "slsa",
+        "signing",
+        "provenance"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/supply-chain-security.agent.md",
+      "model": "claude-sonnet-4.6",
+      "argumentHint": ""
     }
   ]
 }
