@@ -19,24 +19,34 @@ Files that are **not** synced: test scripts, CI workflows, internal tooling, `do
 === "PowerShell"
 
     ```powershell
-    # Sync latest release
-    pwsh scripts/sync.ps1
+    # Sync latest release (from main)
+    $env:BASECOAT_REPO = 'https://github.com/IBuySpy-Shared/basecoat.git'
+    .\sync.ps1
 
-    # Sync specific version
-    pwsh scripts/sync.ps1 -Tag v3.25.0
+    # Sync a specific version tag
+    $env:BASECOAT_REPO = 'https://github.com/IBuySpy-Shared/basecoat.git'
+    $env:BASECOAT_REF  = 'v3.25.0'
+    .\sync.ps1
 
-    # Sync to custom target
-    pwsh scripts/sync.ps1 -TargetDir .github/my-basecoat
+    # Sync to a custom target directory
+    $env:BASECOAT_REPO       = 'https://github.com/IBuySpy-Shared/basecoat.git'
+    $env:BASECOAT_TARGET_DIR = '.github/my-basecoat'
+    .\sync.ps1
     ```
 
 === "Shell"
 
     ```bash
-    # Sync latest release
-    bash scripts/sync.sh
+    # Sync latest release (from main)
+    BASECOAT_REPO=https://github.com/IBuySpy-Shared/basecoat.git ./sync.sh
 
-    # Sync specific version
-    bash scripts/sync.sh --tag v3.25.0
+    # Sync a specific version tag
+    BASECOAT_REPO=https://github.com/IBuySpy-Shared/basecoat.git \
+    BASECOAT_REF=v3.25.0 ./sync.sh
+
+    # Sync to a custom target directory
+    BASECOAT_REPO=https://github.com/IBuySpy-Shared/basecoat.git \
+    BASECOAT_TARGET_DIR=.github/my-basecoat ./sync.sh
     ```
 
 ## Checking your version

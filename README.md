@@ -1,8 +1,8 @@
-# Base Coat
+# BaseCoat
 
 **Enterprise-grade shared repository for GitHub Copilot customizations.**
 
-Base Coat provides a curated library of agents, skills, instructions, and prompts that teams adopt across repositories through a single sync command. Instead of every team writing Copilot customizations from scratch, Base Coat gives you production-ready assets that enforce consistent standards, accelerate development workflows, and scale across an entire GitHub Enterprise organization.
+BaseCoat provides a curated library of agents, skills, instructions, and prompts that teams adopt across repositories through a single sync command. Instead of every team writing Copilot customizations from scratch, BaseCoat gives you production-ready assets that enforce consistent standards, accelerate development workflows, and scale across an entire GitHub Enterprise organization.
 
 **73 agents** · **55 skills** · **56 instruction files** · **8 prompt starters**
 
@@ -45,7 +45,7 @@ $env:BASECOAT_REF  = 'v1.0.0'
 irm https://raw.githubusercontent.com/IBuySpy-Shared/basecoat/$env:BASECOAT_REF/sync.ps1 | iex
 ```
 
-The sync script clones Base Coat, copies the standard assets into `.github/base-coat/`, then copies agents, instructions, and prompts to `.github/agents/`, `.github/instructions/`, and `.github/prompts/` so that GitHub Copilot auto-discovers them. The whole process takes under a minute.
+The sync script clones BaseCoat, copies the standard assets into `.github/base-coat/`, then copies agents, instructions, and prompts to `.github/agents/`, `.github/instructions/`, and `.github/prompts/` so that GitHub Copilot auto-discovers them. The whole process takes under a minute.
 
 ### Environment Variables
 
@@ -71,7 +71,7 @@ Always use `sync.ps1` or `sync.sh`. Manual copying leads to stale assets, missin
 
 ## 🏷️ Issue Labels
 
-Base Coat uses a consistent label taxonomy for issue triage, discovery, and sprint management.
+BaseCoat uses a consistent label taxonomy for issue triage, discovery, and sprint management.
 
 ### Label Categories
 
@@ -98,11 +98,11 @@ Base Coat uses a consistent label taxonomy for issue triage, discovery, and spri
 
 ## Architecture Overview
 
-Base Coat is built on four GitHub Copilot customization primitives:
+BaseCoat is built on four GitHub Copilot customization primitives:
 
 ```text
 ┌─────────────────────────────────────────────────────┐
-│                    Base Coat                         │
+│                    BaseCoat                         │
 ├──────────┬──────────┬───────────────┬───────────────┤
 │  Agents  │  Skills  │ Instructions  │   Prompts     │
 │ (73)     │ (55)     │ (56)          │   (8)         │
@@ -160,17 +160,17 @@ Base Coat is built on four GitHub Copilot customization primitives:
 | [merge-coordinator](agents/merge-coordinator.agent.md) | Parallel branch merge coordination |
 | [middleware-dev](agents/middleware-dev.agent.md) | API gateways, integration layers, event-driven architectures |
 | [mlops](agents/mlops.agent.md) | Model lifecycle, experiment tracking, deployment automation, and drift monitoring |
-| [new-customization](agents/new-customization.agent.md) | Creates or updates Base Coat customization assets |
+| [new-customization](agents/new-customization.agent.md) | Creates or updates BaseCoat customization assets |
 | [performance-analyst](agents/performance-analyst.agent.md) | Profiling, load testing, and performance optimization |
 | [policy-as-code-compliance](agents/policy-as-code-compliance.agent.md) | Policy-as-code validation, exception management, and audit-ready compliance reports |
 | [product-manager](agents/product-manager.agent.md) | Requirements, user stories, acceptance criteria, roadmaps |
-| [project-onboarding](agents/project-onboarding.agent.md) | Base Coat repository onboarding and setup |
+| [project-onboarding](agents/project-onboarding.agent.md) | BaseCoat repository onboarding and setup |
 | [prompt-coach](agents/prompt-coach.agent.md) | Interactive prompt review, scoring, and refinement coaching |
 | [prompt-engineer](agents/prompt-engineer.agent.md) | Prompt and system-prompt optimization |
 | [release-impact-advisor](agents/release-impact-advisor.agent.md) | Release readiness assessment, blast radius analysis, and rollback planning |
 | [release-manager](agents/release-manager.agent.md) | Versioned release workflow, changelog, tagging, and publishing |
 | [retro-facilitator](agents/retro-facilitator.agent.md) | Sprint retrospective summary and improvement issue creation |
-| [rollout-basecoat](agents/rollout-basecoat.agent.md) | Enterprise Base Coat onboarding and rollout |
+| [rollout-basecoat](agents/rollout-basecoat.agent.md) | Enterprise BaseCoat onboarding and rollout |
 | [security-analyst](agents/security-analyst.agent.md) | Vulnerability assessment, threat modeling, secure code review |
 | [self-healing-ci](agents/self-healing-ci.agent.md) | CI failure analysis, log parsing, flaky test detection, and pipeline remediation |
 | [solution-architect](agents/solution-architect.agent.md) | System design, C4 diagrams, ADRs, and technology selection |
@@ -283,7 +283,7 @@ Additional security docs: [`docs/operations/security/BRANCH_PROTECTION.md`](docs
 
 ## Governance
 
-Base Coat operates under a lightweight enterprise governance framework:
+BaseCoat operates under a lightweight enterprise governance framework:
 
 - **Issue-first**: All changes must be backed by a logged GitHub issue.
 - **PRs only**: Never commit directly to `main`. Open a pull request; self-approval is permitted.
