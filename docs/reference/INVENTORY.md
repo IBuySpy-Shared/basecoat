@@ -257,6 +257,7 @@ This catalog helps teams discover what exists in Base Coat and when to use it.
 | `.github/workflows/prd-spec-gate.yml`                                      | enforce PRD/spec references on risky or large pull requests | workflow, prd, spec, governance        |
 | `.github/workflows/asset-health.yml`                                       | weekly Monday 08:00 UTC health report; posts to GitHub Step Summary; opens issue if any asset grades F | workflow, health, weekly, grade, issue |
 | `.github/workflows/package-basecoat.yml`                                   | package and publish release artifacts                       | workflow, release, package, artifact   |
+| `.github/workflows/stale-asset-alerts.yml`                                 | alert consumer repos when their synced BaseCoat assets go stale after a new release; opens issues in stale consumer repos on tag push | workflow, alerts, consumer, stale, drift, release |
 | `.github/PULL_REQUEST_TEMPLATE.md`                                         | pull request template with PRD/spec reference fields        | pull request, template, prd, spec      |
 | `examples/workflows/bootstrap-from-release.yml`                            | install a pinned Base Coat release into a new repo          | workflow, bootstrap, pinned release    |
 | `examples/workflows/validate-basecoat-consumer.yml`                        | validate a consumer repo keeps Base Coat present            | workflow, consumer, drift, validation  |
