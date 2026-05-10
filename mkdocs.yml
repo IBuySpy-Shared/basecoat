@@ -73,6 +73,7 @@ nav:
   - Getting Started:
     - Quickstart: getting-started.md
     - Enterprise Setup: guides/enterprise-setup.md
+    - External Setup: guides/external-setup.md
     - Consumer Sync Guide: guides/consumer-sync.md
   - Asset Reference:
     - Overview: reference/QUICK_REFERENCE.md
