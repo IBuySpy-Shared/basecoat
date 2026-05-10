@@ -80,8 +80,20 @@ nav:
     - Agents: reference/ASSET_REGISTRY.md
     - Governance: reference/GOVERNANCE.md
   - How-To Guides:
+    - Intent Prefixes: guides/intent-prefixes.md
+    - Get Started (integrate prompt): guides/integrate-prompt.md
+    - Make It Your Own: guides/customization.md
+    - Agent Examples: guides/agent-examples.md
     - Contributing: guides/contributing.md
     - Version Drift Detection: guides/version-drift.md
+    - Model Optimization: guides/MODEL_OPTIMIZATION.md
+    - Token Optimization: guides/token-optimization.md
+  - Memory System:
+    - Overview: memory/index.md
+    - Learning Model: memory/LEARNING_MODEL.md
+    - Triage Guide: memory/triage.md
+    - Contributing Learnings: memory/CONTRIBUTING.md
+    - Process: memory/PROCESS.md
   - Architecture:
     - Overview: architecture/overview.md
     - Diagrams: diagrams/README.md

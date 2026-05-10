@@ -64,6 +64,8 @@ See `docs/MODEL_OPTIMIZATION.md` for the full tier matrix. See `docs/token-optim
 | Env vars undocumented | Add to `.env.example` |
 | DB migration workflow | `cancel-in-progress: false` |
 | Stop deployment mid-flight | Pre-flight check required |
+| Message has `bug:` / `feature:` prefix | See intent-routing instructions |
+| Bulleted `- feature:` item | Log to backlog; do not implement |
 
 ## References
 
@@ -72,3 +74,4 @@ See `docs/MODEL_OPTIMIZATION.md` for the full tier matrix. See `docs/token-optim
 | PR workflow, branch naming, commit format, file placement, PR template | [`references/governance/workflow-rules.md`](references/governance/workflow-rules.md) |
 | When to stop vs proceed, agent accountability rules | [`references/governance/agent-self-governance.md`](references/governance/agent-self-governance.md) |
 | OIDC, CAF naming, container tags, env-example, DB concurrency, deployment cancellation | [`references/governance/guardrails-reference.md`](references/governance/guardrails-reference.md) |
+| Intent prefix routing, timing semantics, prefix-to-agent map | [`instructions/intent-routing.instructions.md`](../instructions/intent-routing.instructions.md) |

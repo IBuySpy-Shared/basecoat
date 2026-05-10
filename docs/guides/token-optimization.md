@@ -447,6 +447,92 @@ On success (within budget + tests pass):
 
 ---
 
+## 10. From the Field: BaseCoat Sprint Experience
+
+These examples come from BaseCoat's own development sprints. They illustrate how
+the strategies in §1–9 play out in practice.
+
+### Context Loading: The Cost of Speculative Reads
+
+**What happened:** In early sprints, the explore skill pattern was: read the entire
+`agents/` directory to understand the repo state. At 77 agents (~400 tokens each),
+this consumed ~30K tokens before any task work started.
+
+**What changed:** The hot-index pattern. The L2 memory index (`memory-index.instructions.md`)
+loads a curated summary (~1,500 tokens) of all key facts about the repo. This
+replaces the full directory scan for 80% of tasks. The other 20% (Novel tasks
+that need specific agent details) load only the targeted agent files.
+
+**Measured impact:** Task startup dropped from ~30K tokens (full scan) to
+~3K tokens (hot index + targeted load). On a sprint with 30 agent invocations,
+this saves ~810K tokens.
+
+---
+
+### Turn Budget: The 5-Turn Recovery Pattern
+
+**What happened:** During Sprint 19, an agent was tasked with wiring
+`check-coherence.ps1` into CI. It consumed 7 turns and produced no working
+configuration. The agent kept modifying the workflow YAML — changing indentation,
+restructuring steps — but the root problem was that the script exits 0 by default
+and CI never knew it had run with violations.
+
+**The 80/50 signal was ignored:** At turn 4 (80% of a ≤5 budget), the agent had
+1 of 3 required checks passing (33% progress). The correct move was to pause
+and reassess.
+
+**Resolution in turn 8:** Changed approach — instead of fixing the workflow, added
+`-Strict` to the script call in `run-tests.ps1`. The same tests that had been
+passing now surfaced the violations. Three lines of change instead of 50.
+
+**Pattern confirmed:** At 80% of turn budget with <50% progress, the approach is
+wrong. More turns with the same approach do not fix this.
+
+---
+
+### Instruction Sizing: When Instructions Become Context Debt
+
+**Observation across Sprint 23–24:** The governance instruction file
+(`instructions/governance.instructions.md`) grew to 8KB+ (estimated ~2,500 tokens).
+Because it has `applyTo: "**/*"`, it loads on every agent invocation. Across a
+30-invocation sprint, the governance instruction alone accounts for ~75K tokens.
+
+**What this means:** Every 1KB added to a global instruction file costs ~750K
+tokens per year at BaseCoat's sprint velocity (~300 invocations/month).
+Global instruction files have a much higher amortized cost than targeted ones.
+
+**Rule reinforced:** Global instructions (`applyTo: "**/*"`) should contain only
+invariant rules. Domain-specific guidance belongs in scoped instruction files
+(`applyTo: "agents/**"`, `applyTo: "*.yml"`).
+
+---
+
+### Compression: Haiku for Summarization, Sonnet for Analysis
+
+**Pattern from audit sprint:** Four audit background agents each read 50–80 files
+and returned structured reports (150–200s wall time). All four used the Haiku-class
+explore model. All four produced accurate results. Total token cost: approximately
+the same as one Sonnet invocation with the same context.
+
+**The lesson:** "Reading and organizing" is a Fast-tier task even when the output
+matters. "Analyzing and deciding based on what you read" is a Reasoning-tier task.
+The audit agents did the former; the session's main agent did the latter using the
+audit reports as compressed input (~15K tokens total from four Haiku agents, vs.
+~80K tokens if the Sonnet session had read all the files directly).
+
+**Template for expensive research:**
+
+```
+Fast agent (Haiku): read files, grep patterns, count things, organize findings
+  → output: structured report (~2K tokens)
+
+Reasoning agent (Sonnet): receive structured reports, analyze, decide, act
+  → input: N × 2K tokens from fast agents
+  → avoids: N × 30K tokens of direct file reading
+```
+
+---
+
 ## Related References
 
 - [`MODEL_OPTIMIZATION.md`](MODEL_OPTIMIZATION.md) — Model tier matrix and cost considerations
