@@ -58,25 +58,27 @@ name: "Self-Healing CI — Automated Failure Diagnosis"
       run_id:
         description: Workflow run ID to analyze (optional)
         required: false
-  workflow_run:
-    # zizmor: ignore[dangerous-triggers] - workflow_run trigger is secured with role and fork validation
-    types:
-    - completed
-    workflows:
-    - CI
-    - PR Validation
-    - Validate BaseCoat
-    - Validate Repo Template Sample
-    - Package Base Coat
-    - Deploy Docs
-    - MCP Build
-    - MCP Deploy
-    - Release
-    - Publish to Production
-    - Terraform Deploy
-    - Post-Deploy Smoke Test
-    - Version Consistency Check
-    - Consumer Sync Validation
+  # workflow_run trigger disabled — requires COPILOT_GITHUB_TOKEN org secret
+  # which is not configured. Fires on every CI run and creates spam failures.
+  # Re-enable once the secret is provisioned in org settings.
+  # workflow_run:
+  #   types:
+  #   - completed
+  #   workflows:
+  #   - CI
+  #   - PR Validation
+  #   - Validate BaseCoat
+  #   - Validate Repo Template Sample
+  #   - Package Base Coat
+  #   - Deploy Docs
+  #   - MCP Build
+  #   - MCP Deploy
+  #   - Release
+  #   - Publish to Production
+  #   - Terraform Deploy
+  #   - Post-Deploy Smoke Test
+  #   - Version Consistency Check
+  #   - Consumer Sync Validation
 
 permissions: {}
 
