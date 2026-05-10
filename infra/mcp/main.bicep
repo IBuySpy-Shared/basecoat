@@ -8,7 +8,9 @@
 // Deploy:
 //   az group create -n <rg> -l eastus
 //   az deployment group create -g <rg> -f infra/mcp/main.bicep \
-//     --parameters imageTag=latest metricsBaseUrl=https://ibuyspy-shared.github.io/basecoat/metrics
+//     --parameters imageTag=latest \
+//       imageRepo=YOUR_ORG/basecoat-metrics-mcp \
+//       metricsBaseUrl=https://YOUR_ORG.github.io/basecoat/metrics
 
 @description('Azure region for all resources.')
 param location string = resourceGroup().location
@@ -20,11 +22,11 @@ param environment string = 'prod'
 @description('Container image tag to deploy (e.g. latest or a SHA digest).')
 param imageTag string = 'latest'
 
-@description('GHCR image repository (org/repo).')
-param imageRepo string = 'ibuyspy-shared/basecoat-metrics-mcp'
+@description('GHCR image repository (org/repo). Replace YOUR_ORG with your GitHub org before deploying.')
+param imageRepo string = 'YOUR_ORG/basecoat-metrics-mcp'
 
-@description('Override the metrics base URL (GitHub Pages endpoint).')
-param metricsBaseUrl string = 'https://ibuyspy-shared.github.io/basecoat/metrics'
+@description('GitHub Pages metrics endpoint. Replace YOUR_ORG with your GitHub org before deploying.')
+param metricsBaseUrl string = 'https://YOUR_ORG.github.io/basecoat/metrics'
 
 @description('Container CPU cores.')
 param cpuCores string = '0.25'
