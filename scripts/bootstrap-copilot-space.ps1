@@ -22,11 +22,23 @@
 .PARAMETER SourceRef
     Branch or tag to read source files from. Defaults to main.
 
+.PARAMETER SpaceNumber
+    If the Space was created manually via the UI, pass the space number
+    (from the URL) to skip API-based creation and proceed to resource setup.
+
 .PARAMETER DryRun
     Show the actions without mutating GitHub.
 
+.NOTES
+    The Copilot Spaces REST API may return 404 from gh CLI tokens even with
+    write:org scope. If that happens, create the Space via the UI at
+    https://github.com/copilot/spaces and pass -SpaceNumber to this script.
+
 .EXAMPLE
     pwsh scripts/bootstrap-copilot-space.ps1
+
+.EXAMPLE
+    pwsh scripts/bootstrap-copilot-space.ps1 -SpaceNumber 2
 
 .EXAMPLE
     pwsh scripts/bootstrap-copilot-space.ps1 -Org "IBuySpy-Shared" -DryRun
@@ -39,6 +51,7 @@ param(
     [string]$Description = 'BaseCoat guidance, reference docs, and bootstrap context.',
     [string]$SourceRepo = 'IBuySpy-Shared/basecoat',
     [string]$SourceRef = 'main',
+    [int]$SpaceNumber = 0,
     [switch]$DryRun
 )
 
@@ -268,13 +281,19 @@ try {
     Write-Info "Space: $SpaceName"
     Write-Info "Source repo: $SourceRepo @ $SourceRef"
 
-    $space = Get-SpaceByName -OrgName $Org -Name $SpaceName
-    if ($space) {
-        Write-Ok "Space already exists (#$($space.number))"
+    $space = $null
+    if ($SpaceNumber -gt 0) {
+        Write-Ok "Using provided space number: #$SpaceNumber"
+        $space = [pscustomobject]@{ number = $SpaceNumber; name = $SpaceName }
     } else {
-        $space = New-Space -OrgName $Org -Name $SpaceName -DescriptionText $Description
-        if ($space.number) {
-            Write-Ok "Created space #$($space.number)"
+        $space = Get-SpaceByName -OrgName $Org -Name $SpaceName
+        if ($space) {
+            Write-Ok "Space already exists (#$($space.number))"
+        } else {
+            $space = New-Space -OrgName $Org -Name $SpaceName -DescriptionText $Description
+            if ($space.number) {
+                Write-Ok "Created space #$($space.number)"
+            }
         }
     }
 
