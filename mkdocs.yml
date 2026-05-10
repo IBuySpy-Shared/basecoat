@@ -57,8 +57,7 @@ markdown_extensions:
   - pymdownx.highlight:
       anchor_linenums: true
   - pymdownx.inlinehilite
-  - pymdownx.snippets:
-      base_path: ['.']
+  - pymdownx.snippets
   - pymdownx.tabbed:
       alternate_style: true
   - admonition
@@ -74,25 +73,22 @@ nav:
   - Getting Started:
     - Quickstart: getting-started.md
     - Enterprise Setup: guides/enterprise-setup.md
-    - External Setup: guides/external-setup.md
     - Consumer Sync Guide: guides/consumer-sync.md
   - Asset Reference:
     - Overview: reference/QUICK_REFERENCE.md
     - Inventory: reference/INVENTORY.md
     - Agents: reference/ASSET_REGISTRY.md
-    - Asset Versioning: reference/asset-versioning.md
     - Governance: reference/GOVERNANCE.md
   - How-To Guides:
     - Intent Prefixes: guides/intent-prefixes.md
     - Get Started (integrate prompt): guides/integrate-prompt.md
     - Make It Your Own: guides/customization.md
     - Agent Examples: guides/agent-examples.md
-    - A/B Experimentation: guides/ab-experimentation.md
     - Contributing: guides/contributing.md
     - Version Drift Detection: guides/version-drift.md
-    - Stale Asset Alerts: guides/stale-asset-alerts.md
     - Model Optimization: guides/MODEL_OPTIMIZATION.md
     - Token Optimization: guides/token-optimization.md
+    - BaseCoat Config (.basecoat.yml): guides/basecoat-yml.md
     - UBB Token Guidance: guides/ubb-token-guidance.md
   - Memory System:
     - Overview: memory/index.md
@@ -105,7 +101,6 @@ nav:
     - Diagrams: diagrams/README.md
     - ADR-001 Naming Convention: architecture/decisions/adr-001-naming-convention.md
     - Multi-Agent Patterns: architecture/multi-agent-orchestration-patterns.md
-    - Agent Planning Patterns: design/agent-planning-patterns.md
   - About:
     - Philosophy: PHILOSOPHY.md
     - The Story: story.md
