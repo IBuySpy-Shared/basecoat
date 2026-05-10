@@ -99,6 +99,7 @@ nav:
     - Diagrams: diagrams/README.md
     - ADR-001 Naming Convention: architecture/decisions/adr-001-naming-convention.md
     - Multi-Agent Patterns: architecture/multi-agent-orchestration-patterns.md
+    - Agent Planning Patterns: design/agent-planning-patterns.md
   - About:
     - Philosophy: PHILOSOPHY.md
     - The Story: story.md
