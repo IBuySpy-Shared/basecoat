@@ -155,3 +155,11 @@ memory-snapshot.json
 agent-state.json
 session-state.json
 
+# AI-generated completion artifacts (never commit these)
+*_COMPLETION_SUMMARY.txt
+*_COMPLETION_SUMMARY.md
+WAVE*_DAY*_*.txt
+WAVE*_DAY*_*.md
+*_STATUS.txt
+*_EXECUTIVE_SUMMARY.txt
+
