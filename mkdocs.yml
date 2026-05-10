@@ -86,6 +86,7 @@ nav:
     - Agent Examples: guides/agent-examples.md
     - Contributing: guides/contributing.md
     - Version Drift Detection: guides/version-drift.md
+    - Stale Asset Alerts: guides/stale-asset-alerts.md
     - Model Optimization: guides/MODEL_OPTIMIZATION.md
     - Token Optimization: guides/token-optimization.md
   - Memory System:
