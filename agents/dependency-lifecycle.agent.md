@@ -7,6 +7,9 @@ metadata:
   tags: ["dependency-management", "version-upgrades", "vulnerability-tracking", "breaking-changes"]
   maturity: "production"
   audience: ["developers", "platform-teams", "tech-leads"]
+  model_tier: "fast"
+  task_phase: "operate"
+  interaction_type: "autonomous"
 allowed-tools: ["bash", "git", "grep"]
 model: claude-sonnet-4.6
 allowed_skills: []

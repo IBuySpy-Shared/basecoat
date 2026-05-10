@@ -7,6 +7,9 @@ metadata:
   tags: ["production-readiness", "release-readiness", "bcp", "drp", "incident-response"]
   maturity: "production"
   audience: ["sre", "platform-teams", "release-managers"]
+  model_tier: "balanced"
+  task_phase: "deploy"
+  interaction_type: "collaborative"
 allowed-tools: ["bash", "git", "grep"]
 model: claude-sonnet-4.6
 allowed_skills: []

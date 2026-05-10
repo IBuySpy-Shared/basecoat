@@ -7,6 +7,9 @@ metadata:
   tags: ["app-discovery", "inventory", "legacy-systems", "technology-stack", "assessment"]
   maturity: "production"
   audience: ["architects", "devops-engineers", "platform-teams"]
+  model_tier: "balanced"
+  task_phase: "plan"
+  interaction_type: "autonomous"
 allowed-tools: ["bash", "git", "grep", "powershell"]
 model: claude-sonnet-4.6
 tools:

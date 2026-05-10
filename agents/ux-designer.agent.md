@@ -7,6 +7,9 @@ metadata:
   tags: ["ux-design", "user-experience", "accessibility", "wireframes", "ui-design"]
   maturity: "production"
   audience: ["ux-designers", "ui-designers", "product-teams"]
+  model_tier: "balanced"
+  task_phase: "plan"
+  interaction_type: "collaborative"
 allowed-tools: ["bash", "git", "grep"]
 model: claude-sonnet-4-5
 allowed_skills: []

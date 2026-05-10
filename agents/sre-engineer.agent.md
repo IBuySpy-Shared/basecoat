@@ -7,6 +7,9 @@ metadata:
   tags: ["sre", "reliability", "slo", "error-budget", "incident-response", "chaos-engineering"]
   maturity: "production"
   audience: ["sre", "platform-teams", "devops-engineers"]
+  model_tier: "balanced"
+  task_phase: "operate"
+  interaction_type: "reactive"
 allowed-tools: ["bash", "git", "terraform", "kubernetes", "python", "azure-cli"]
 model: gpt-5.3-codex
 allowed_skills: []

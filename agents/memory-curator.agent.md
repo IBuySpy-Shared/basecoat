@@ -7,6 +7,9 @@ metadata:
   tags: ["memory", "knowledge-management", "cross-session", "learning"]
   maturity: "production"
   audience: ["developers", "architects", "platform-teams"]
+  model_tier: "fast"
+  task_phase: "operate"
+  interaction_type: "autonomous"
 allowed-tools: ["bash", "git"]
 model: claude-sonnet-4.6
 allowed_skills: []

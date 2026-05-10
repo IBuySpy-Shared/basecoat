@@ -7,6 +7,9 @@ metadata:
   tags: ["performance-analysis", "profiling", "load-testing", "optimization", "core-web-vitals"]
   maturity: "production"
   audience: ["performance-engineers", "developers", "platform-teams"]
+  model_tier: "balanced"
+  task_phase: "test"
+  interaction_type: "collaborative"
 allowed-tools: ["bash", "git", "grep", "python"]
 model: gpt-5.3-codex
 allowed_skills: []

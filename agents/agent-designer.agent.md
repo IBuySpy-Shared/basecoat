@@ -7,6 +7,9 @@ metadata:
   tags: ["agent-design", "copilot", "agent-authoring", "skill-composition"]
   maturity: "production"
   audience: ["ai-engineers", "developers", "architects"]
+  model_tier: "balanced"
+  task_phase: "build"
+  interaction_type: "collaborative"
 allowed-tools: ["bash", "git", "grep", "find"]
 model: gpt-5.3-codex
 allowed_skills: []

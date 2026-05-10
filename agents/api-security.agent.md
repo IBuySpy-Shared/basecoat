@@ -7,6 +7,9 @@ metadata:
   tags: ["api-security", "owasp-api", "threat-modeling", "authorization"]
   maturity: "production"
   audience: ["security-engineers", "api-designers", "architects"]
+  model_tier: "reasoning"
+  task_phase: "test"
+  interaction_type: "collaborative"
 allowed-tools: ["bash", "git", "grep"]
 model: claude-sonnet-4.6
 allowed_skills: []

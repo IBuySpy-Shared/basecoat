@@ -7,6 +7,9 @@ metadata:
   tags: ["guardrails", "validation", "safety", "compliance"]
   maturity: "production"
   audience: ["platform-teams", "agents", "developers"]
+  model_tier: "fast"
+  task_phase: "test"
+  interaction_type: "reactive"
 allowed-tools: ["bash", "git"]
 model: claude-sonnet-4.6
 allowed_skills: []

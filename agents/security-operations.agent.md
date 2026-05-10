@@ -23,6 +23,9 @@ metadata:
   tags: ["uncategorized"]
   maturity: "beta"
   audience: ["developers"]
+  model_tier: "balanced"
+  task_phase: "operate"
+  interaction_type: "collaborative"
 model: claude-sonnet-4.6
 allowed_skills: []
 ---

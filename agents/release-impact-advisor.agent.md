@@ -7,6 +7,9 @@ metadata:
   tags: ["release-management", "impact-analysis", "deployment-strategy", "rollback", "canary"]
   maturity: "production"
   audience: ["release-managers", "devops-engineers", "platform-teams"]
+  model_tier: "balanced"
+  task_phase: "deploy"
+  interaction_type: "collaborative"
 allowed-tools: ["bash", "git", "grep", "powershell"]
 model: claude-sonnet-4.6
 allowed_skills: []

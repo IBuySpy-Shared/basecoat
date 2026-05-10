@@ -7,6 +7,9 @@ metadata:
   tags: ["mlops", "ml-engineering", "model-registry", "experiment-tracking", "ml-deployment"]
   maturity: "production"
   audience: ["mlops-engineers", "data-scientists", "ml-platform-teams"]
+  model_tier: "balanced"
+  task_phase: "deploy"
+  interaction_type: "collaborative"
 allowed-tools: ["bash", "git", "python", "terraform", "kubernetes", "azure-cli"]
 model: gpt-5.3-codex
 allowed_skills: []

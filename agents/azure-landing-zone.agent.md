@@ -7,6 +7,9 @@ metadata:
   tags: ["azure-landing-zone", "caf", "cloud-adoption-framework", "azure", "enterprise-scale"]
   maturity: "production"
   audience: ["architects", "platform-teams", "devops-engineers"]
+  model_tier: "reasoning"
+  task_phase: "deploy"
+  interaction_type: "collaborative"
 allowed-tools: ["bash", "git", "terraform", "azure-cli", "powershell"]
 model: claude-sonnet-4.6
 allowed_skills: []

@@ -7,6 +7,9 @@ metadata:
   tags: ["project-setup", "onboarding", "basecoat", "governance"]
   maturity: "production"
   audience: ["platform-teams", "devops-engineers", "team-leads"]
+  model_tier: "balanced"
+  task_phase: "plan"
+  interaction_type: "autonomous"
 allowed-tools: ["bash", "git", "gh"]
 model: claude-sonnet-4.6
 allowed_skills: []

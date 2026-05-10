@@ -7,6 +7,9 @@ metadata:
   tags: ["security-analysis", "vulnerability-assessment", "threat-modeling", "owasp"]
   maturity: "production"
   audience: ["security-engineers", "developers", "architects"]
+  model_tier: "reasoning"
+  task_phase: "test"
+  interaction_type: "collaborative"
 allowed-tools: ["bash", "git", "grep", "find"]
 model: gpt-5.3-codex
 allowed_skills: []

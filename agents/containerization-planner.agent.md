@@ -7,6 +7,9 @@ metadata:
   tags: ["containerization", "docker", "kubernetes", "container-apps", "deployment"]
   maturity: "production"
   audience: ["devops-engineers", "platform-teams", "architects"]
+  model_tier: "reasoning"
+  task_phase: "plan"
+  interaction_type: "collaborative"
 allowed-tools: ["bash", "git", "terraform", "kubernetes", "docker", "azure-cli"]
 model: claude-sonnet-4.6
 allowed_skills: []

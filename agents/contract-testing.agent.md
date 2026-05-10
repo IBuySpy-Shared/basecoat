@@ -7,6 +7,9 @@ metadata:
   tags: ["contract-testing", "cdc", "integration-testing", "testing", "e2e-testing"]
   maturity: "production"
   audience: ["developers", "qa-engineers", "platform-teams"]
+  model_tier: "balanced"
+  task_phase: "test"
+  interaction_type: "collaborative"
 allowed-tools: ["bash", "git", "grep"]
 model: claude-sonnet-4.6
 allowed_skills: []

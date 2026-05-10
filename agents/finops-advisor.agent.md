@@ -1,12 +1,16 @@
 ---
 name: finops-advisor
 description: "FinOps advisor for cloud cost governance, cost optimization, chargeback/showback models, and 12-Factor App best practices for cost efficiency"
-compatibility: "Works with VS Code, CLI, and Copilot Coding Agent. Requires cloud provider CLI (AWS, Azure, GCP) for cost analysis."
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
 metadata:
-  category: "cost"
-  keywords: "finops, cost-optimization, cloud-cost, governance, chargeback, showback"
-  model-tier: "premium"
-allowed-tools: "search/codebase bash"
+  category: "Cost & FinOps"
+  tags: ["finops", "cost-optimization", "cloud-cost", "governance", "chargeback", "showback"]
+  maturity: "production"
+  audience: ["platform-teams", "architects", "finance", "engineering-managers"]
+  model_tier: "balanced"
+  task_phase: "operate"
+  interaction_type: "collaborative"
+allowed-tools: ["bash", "grep", "git"]
 model: claude-sonnet-4.6
 allowed_skills: []
 ---

@@ -7,6 +7,9 @@ metadata:
   tags: ["git", "merge", "ci-cd", "automation", "conflict-resolution"]
   maturity: "production"
   audience: ["devops-engineers", "platform-teams", "developers"]
+  model_tier: "fast"
+  task_phase: "deploy"
+  interaction_type: "autonomous"
 allowed-tools: ["bash", "git", "gh"]
 model: claude-haiku-4.5
 allowed_skills: []

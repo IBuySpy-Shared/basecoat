@@ -10,6 +10,9 @@ metadata:
   tags: ["uncategorized"]
   maturity: "beta"
   audience: ["developers"]
+  model_tier: "reasoning"
+  task_phase: "test"
+  interaction_type: "collaborative"
 allowed-tools: ["bash", "git", "grep", "find"]
 model: claude-sonnet-4.6
 allowed_skills: []

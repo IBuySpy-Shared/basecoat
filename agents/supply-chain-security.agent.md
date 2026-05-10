@@ -7,6 +7,9 @@ metadata:
   tags: ["supply-chain", "sbom", "slsa", "signing", "provenance"]
   maturity: "production"
   audience: ["security-engineers", "devops-engineers", "platform-teams"]
+  model_tier: "reasoning"
+  task_phase: "test"
+  interaction_type: "collaborative"
 allowed-tools: ["bash", "git", "terraform"]
 model: claude-sonnet-4.6
 allowed_skills: []

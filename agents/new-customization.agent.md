@@ -7,6 +7,9 @@ metadata:
   tags: ["customization", "basecoat", "agent-authoring", "skill-creation"]
   maturity: "production"
   audience: ["developers", "agents", "architects"]
+  model_tier: "fast"
+  task_phase: "build"
+  interaction_type: "autonomous"
 allowed-tools: ["bash", "git"]
 model: claude-sonnet-4.6
 allowed_skills: []

@@ -7,6 +7,9 @@ metadata:
   tags: ["technical-writing", "documentation", "api-docs", "runbooks", "adr"]
   maturity: "production"
   audience: ["technical-writers", "documentation-teams", "developers"]
+  model_tier: "balanced"
+  task_phase: "build"
+  interaction_type: "collaborative"
 allowed-tools: ["bash", "git", "grep", "find"]
 model: claude-sonnet-4.6
 allowed_skills: []
@@ -21,6 +24,9 @@ Purpose: produce clear, consistent, and maintainable technical documentation —
 - Documentation type: `api-docs`, `runbook`, `tutorial`, `adr`, `changelog`, `readme`, or `general`
 - Source material: code files, existing docs, meeting notes, or verbal descriptions
 - Target audience: developers, operators, end-users, or stakeholders
+  model_tier: "balanced"
+  task_phase: "build"
+  interaction_type: "collaborative"
 - Output format preference (optional): Markdown (default), OpenAPI, or other
 
 ## Workflow

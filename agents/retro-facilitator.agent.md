@@ -7,6 +7,9 @@ metadata:
   tags: ["retrospective", "sprint-review", "agile", "continuous-improvement"]
   maturity: "production"
   audience: ["scrum-masters", "team-leads", "agile-coaches"]
+  model_tier: "balanced"
+  task_phase: "plan"
+  interaction_type: "collaborative"
 allowed-tools: ["bash", "git", "gh"]
 model: claude-sonnet-4.6
 tools: [run_terminal_command, read_file, write_file, create_github_issue]

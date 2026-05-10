@@ -7,6 +7,9 @@ metadata:
   tags: ["devops", "ci-cd", "infrastructure", "containers", "kubernetes", "terraform"]
   maturity: "production"
   audience: ["devops-engineers", "platform-teams", "sre", "architects"]
+  model_tier: "balanced"
+  task_phase: "deploy"
+  interaction_type: "collaborative"
 allowed-tools: ["bash", "git", "terraform", "kubernetes", "docker", "azure-cli"]
 model: gpt-5.3-codex
 allowed_skills: []

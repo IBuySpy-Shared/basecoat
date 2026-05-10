@@ -7,6 +7,9 @@ metadata:
   tags: ["database-migration", "schema-evolution", "data-replication", "modernization", "sql"]
   maturity: "production"
   audience: ["dba", "platform-teams", "architects"]
+  model_tier: "balanced"
+  task_phase: "deploy"
+  interaction_type: "collaborative"
 allowed-tools: ["bash", "sql", "terraform", "git", "azure-cli", "postgresql-cli"]
 model: claude-sonnet-4.6
 allowed_skills: []
