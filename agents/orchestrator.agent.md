@@ -2,6 +2,7 @@
 name: orchestrator
 description: "Multi-agent orchestrator that decomposes complex requests, routes subtasks to specialist agents, dispatches parallel work, tracks progress, resolves conflicts, and aggregates results into one coherent response. Use when a task spans multiple domains or needs coordinated specialist execution."
 tools: [read_file, write_file, list_dir, run_terminal_command, create_github_issue]
+model: claude-sonnet-4.6
 ---
 
 # Orchestrator Agent

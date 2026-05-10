@@ -1,22 +1,24 @@
 ---
 on:
-  workflow_run:
-    workflows:
-      - CI
-      - PR Validation
-      - Validate BaseCoat
-      - Validate Repo Template Sample
-      - Package Base Coat
-      - Deploy Docs
-      - MCP Build
-      - MCP Deploy
-      - Release
-      - Publish to Production
-      - Terraform Deploy
-      - Post-Deploy Smoke Test
-      - Version Consistency Check
-      - Consumer Sync Validation
-    types: [completed]
+  # workflow_run trigger disabled — requires COPILOT_GITHUB_TOKEN org secret.
+  # Re-enable once the secret is provisioned.
+  # workflow_run:
+  #   workflows:
+  #     - CI
+  #     - PR Validation
+  #     - Validate BaseCoat
+  #     - Validate Repo Template Sample
+  #     - Package Base Coat
+  #     - Deploy Docs
+  #     - MCP Build
+  #     - MCP Deploy
+  #     - Release
+  #     - Publish to Production
+  #     - Terraform Deploy
+  #     - Post-Deploy Smoke Test
+  #     - Version Consistency Check
+  #     - Consumer Sync Validation
+  #   types: [completed]
   workflow_dispatch:
     inputs:
       run_id:
