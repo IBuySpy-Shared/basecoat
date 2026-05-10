@@ -4,6 +4,9 @@ Strategies for managing token budgets, compressing context, and handing off stat
 
 > **Tracking:** Issue [#42](https://github.com/IBuySpy-Shared/basecoat/issues/42)
 
+> **GHCP-specific:** This guidance was developed and tested against GitHub Copilot (GHCP).
+> If you are using Azure OpenAI, Anthropic API, AWS Bedrock, or another provider,
+> model names, tier pricing, and rate limits will differ. See [Adapting for Other Providers](#adapting-for-other-providers).
 ---
 
 ## 1. Context Window Management Strategies
@@ -533,6 +536,24 @@ Reasoning agent (Sonnet): receive structured reports, analyze, decide, act
 
 ---
 
+## Adapting for Other Providers
+
+This guide focuses on GitHub Copilot (GHCP). If your team routes agents to a
+different provider, model names, tier pricing, and rate limits will differ:
+
+| Provider | Model tier equivalent | Rate limit difference | Billing unit |
+|---|---|---|---|
+| Azure OpenAI | GPT-4o ~= Standard, GPT-4o-mini ~= Fast | TPM/RPM per deployment | Per token |
+| Anthropic API | Opus ~= Premium, Sonnet ~= Standard, Haiku ~= Fast | Per-minute limits | Per token |
+| AWS Bedrock | On-demand vs. provisioned | Regional quotas | Per token |
+| OpenAI API | GPT-4o ~= Standard, GPT-4o-mini ~= Fast | Tier-based RPM/TPM | Per token |
+
+Adjust rate-limit constants and budget thresholds to match the provider's documented
+limits. For UBB cost estimation and monitoring guidance, see
+[ubb-token-guidance.md](ubb-token-guidance.md).
+
+---
+
 ## Related References
 
 - [`MODEL_OPTIMIZATION.md`](MODEL_OPTIMIZATION.md) — Model tier matrix and cost considerations
@@ -540,3 +561,4 @@ Reasoning agent (Sonnet): receive structured reports, analyze, decide, act
 - [`instructions/governance.instructions.md`](/instructions/governance.instructions.md) — Section 10: Token and Model Awareness
 - Issue [#42](https://github.com/IBuySpy-Shared/basecoat/issues/42) — Tracking issue for token optimization
 - Issue [#44](https://github.com/IBuySpy-Shared/basecoat/issues/44) — Token budget and cost attribution
+- [`ubb-token-guidance.md`](ubb-token-guidance.md) -- UBB billing model, cost estimation, monitoring
