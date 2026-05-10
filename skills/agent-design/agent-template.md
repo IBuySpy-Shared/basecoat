@@ -14,6 +14,23 @@ Purpose: <one-sentence statement of what this agent does and why it exists.>
 - <Input 2>
 - <Input 3>
 
+## Goal State
+
+- **Goal description:** <the terminal outcome this agent is trying to achieve>
+- **Done when:**
+  - <verifiable condition 1>
+  - <verifiable condition 2>
+
+## Preconditions
+
+- <condition that must be true before execution starts>
+- <dependency or setup guard>
+
+## Success Criteria
+
+- [ ] <testable criterion with a concrete verification signal>
+- [ ] <testable criterion with a concrete verification signal>
+
 ## Workflow
 
 1. **<Step name>** — <what the agent does in this step. Keep to 1–3 sentences.>
