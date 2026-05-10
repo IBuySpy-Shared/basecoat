@@ -11,9 +11,6 @@ on:
         description: Number of minor versions behind before alerting
         type: number
         default: 1
-    secrets:
-      GITHUB_TOKEN:
-        required: false
 
 jobs:
   check-version:
@@ -79,6 +76,7 @@ jobs:
         run: |
           CONSUMER="${{ steps.compare.outputs.consumer_version }}"
           LATEST="${{ steps.compare.outputs.latest_version }}"
+          DRIFT="${{ steps.compare.outputs.drift }}"
           TITLE="chore: BaseCoat upgrade available (v${CONSUMER} → v${LATEST})"
 
           # Check for existing open issue (idempotent)
