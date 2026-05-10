@@ -1,11 +1,18 @@
 ---
 description: "Use when changing code paths where uptime, retries, background work, or dependency failures matter. Covers common reliability and operability best practices."
-applyTo: "**/*"
+applyTo: "**/*.{cs,ts,tsx,js,jsx,py,go,java,rb,ps1,json,yml,yaml}"
 ---
 
 # Reliability Standards
 
 Use this instruction when a change depends on external systems, asynchronous work, or long-running processes.
+
+## Rules
+
+- Bound remote calls with timeouts, cancellation, and explicit failure handling.
+- Retry only transient failures, with capped attempts and backoff.
+- Make background work idempotent or persist enough state to resume safely after crashes.
+- Emit logs and metrics that let responders reconstruct partial failure paths.
 
 ## Expectations
 
@@ -15,6 +22,28 @@ Use this instruction when a change depends on external systems, asynchronous wor
 - Emit enough logs or telemetry to reconstruct what happened during failures.
 - Avoid partial writes or split-brain behavior when multiple systems must stay consistent.
 - Prefer health checks and graceful shutdown behavior for services that stay running.
+
+## Examples
+
+### Example bounded outbound call
+
+```ts
+const controller = new AbortController();
+const timeout = setTimeout(() => controller.abort(), 3000);
+
+try {
+  return await fetch(url, { signal: controller.signal });
+} finally {
+  clearTimeout(timeout);
+}
+```
+
+### Example idempotent background processing
+
+```text
+Before writing results, check whether jobId=1234 was already completed.
+If it was, return success without applying the write a second time.
+```
 
 ## Review Lens
 
