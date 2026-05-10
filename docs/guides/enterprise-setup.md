@@ -93,6 +93,16 @@ Apply these settings to your Base Coat fork:
 4. **Template repositories**: Configure Base Coat as a template source for new repositories.
    See [`docs/repo-template-standard.md`](repo-template-standard.md)
 
+### Copilot Space reference for consumer repos
+
+Consumer repositories should reference the shared BaseCoat Copilot Space using:
+
+- **Owner**: `IBuySpy-Shared`
+- **Space name**: `base-coat`
+
+Use this exact owner/name pair when invoking Copilot Space context retrieval from consumers.
+Do not point consumers at repo-local or personal spaces for BaseCoat canonical guidance.
+
 ### CI/CD Pipeline
 
 Base Coat includes validation workflows. Ensure these run on your fork:

@@ -105,6 +105,21 @@ cat .github/base-coat/version.json
 
 Add the callable drift-detection workflow to get automatic issue notifications when a new BaseCoat version is available. See [Getting Started](../getting-started.md#keep-it-up-to-date).
 
+## Copilot Space context
+
+When a consumer repository needs BaseCoat guidance at inference time, reference the shared
+Copilot Space with this exact tuple:
+
+- **Owner**: `IBuySpy-Shared`
+- **Name**: `base-coat`
+
+Example reference:
+
+```text
+Copilot Space owner: IBuySpy-Shared
+Copilot Space name: base-coat
+```
+
 ## Naming convention
 
 BaseCoat uses two names intentionally:
