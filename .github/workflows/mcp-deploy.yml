@@ -85,12 +85,12 @@ jobs:
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
 
       - name: Azure login
-        uses: azure/login@a457da9ea143d694b1b9c7c869a6e8c55037e55e # v2
+        uses: azure/login@1384c340ab2dda50fed2bee3041d1d87018aa5e8 # v2
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       - name: Deploy / update Bicep infrastructure
-        uses: azure/arm-deploy@a1361c2781c6ca3b0b47f1b89db29e1b73c0194d # v2
+        uses: azure/arm-deploy@a1361c2c2cd398621955b16ca32e01c65ea340f5 # v2
         id: infra
         with:
           resourceGroupName: ${{ secrets.MCP_RESOURCE_GROUP }}
