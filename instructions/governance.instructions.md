@@ -15,6 +15,7 @@ These are not suggestions. Every AI agent operating in `ivegamsft/basecoat` must
 
 - **Issue-first:** No implementation without an issue number. No issue = hard stop. Create one first.
 - **No secrets:** Never write API keys, tokens, passwords, PII, or connection strings to any file, commit, or comment. If a task requires a secret, stop and ask the operator.
+- **Internal-only GitHub writes:** Never create/update issues, PRs, or comments in non-allowlisted repositories. Use deny-by-default with an explicit internal allowlist.
 - **Workflow secrets:** GitHub Actions must use `${{ secrets.SECRET_NAME }}` — no literals. See [`docs/guardrails/secrets-in-workflows.md`](/docs/guardrails/secrets-in-workflows.md).
 - **PR-only:** Never push directly to `main`. Always open a PR and wait for CI to pass.
 - **OIDC for Azure:** Use `azure/login@v2` with federated credentials. No stored client secrets in GitHub Secrets. See [`docs/guardrails/oidc-federation.md`](docs/guardrails/oidc-federation.md).
@@ -55,6 +56,7 @@ See `docs/MODEL_OPTIMIZATION.md` for the full tier matrix. See `docs/token-optim
 |---|---|
 | No issue | Create one, then proceed |
 | Secret needed | Stop, ask operator |
+| GitHub write target | Validate `owner/repo` against internal allowlist before write |
 | Direct main push | Never — use PR |
 | Scope expanded | Stop, ask if new issue needed |
 | CI failing | Fix before merge |
