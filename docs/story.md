@@ -130,9 +130,11 @@ Every sprint included a retro pass — issues opened for any guidance that produ
 unexpected output, any instruction that conflicted with another, or any agent that
 stalled on a real task.
 
-The `detect-repeat-fixes.ps1` script identifies patterns where the same type of fix
-is applied more than twice. When that happens, it's evidence that a rule is missing or
-unclear — and a new instruction or agent update follows.
+The `detect-repeat-fixes.ps1` script checks session-state files against a predefined
+list of known fix patterns and flags any that appear more than twice. When that happens,
+it's evidence that a rule is missing or unclear — and a new instruction or agent update
+follows. The set of patterns matched is hardcoded in the script; the script does not
+discover or learn new patterns automatically.
 
 ### Real session data
 
