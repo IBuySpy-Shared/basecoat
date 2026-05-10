@@ -16,9 +16,13 @@ This template is used by the Copilot CLI Usage Analytics skill to generate per-s
 
 ## Model Usage Breakdown
 
-| Model Name         | Dispatches | Estimated Tokens | Estimated Cost |
+| Model Name | Dispatches | Estimated Tokens | Estimated Cost |
 |--------------------|------------|-----------------|---------------|
-{{#each model_usage}}| {{model}} | {{dispatches}} | {{tokens}} | ${{cost}} |{{/each}}
+<!-- markdownlint-disable MD055 MD056 -->
+{{#each model_usage}}
+| {{model}} | {{dispatches}} | {{tokens}} | ${{cost}} |
+{{/each}}
+<!-- markdownlint-enable MD055 MD056 -->
 
 ## Recommendations
 
