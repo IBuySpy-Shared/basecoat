@@ -12,16 +12,18 @@ exclude_docs: |
 
 theme:
   name: material
+  logo: material/layers
+  favicon: material/layers
   palette:
     - scheme: default
-      primary: indigo
-      accent: indigo
+      primary: deep purple
+      accent: deep purple
       toggle:
         icon: material/brightness-7
         name: Switch to dark mode
     - scheme: slate
-      primary: indigo
-      accent: indigo
+      primary: deep purple
+      accent: deep purple
       toggle:
         icon: material/brightness-4
         name: Switch to light mode
@@ -40,6 +42,11 @@ theme:
 plugins:
   - search
   - awesome-pages
+
+exclude_docs: archive/**
+
+extra_css:
+  - stylesheets/extra.css
 
 markdown_extensions:
   - pymdownx.superfences:
@@ -74,15 +81,19 @@ nav:
     - Governance: reference/GOVERNANCE.md
   - How-To Guides:
     - Contributing: guides/contributing.md
-    - Sync Your Repo: guides/consumer-sync.md
     - Version Drift Detection: guides/version-drift.md
   - Architecture:
     - Overview: architecture/overview.md
-    - Naming Convention (ADR-001): architecture/decisions/adr-001-naming-convention.md
+    - Diagrams: diagrams/README.md
+    - ADR-001 Naming Convention: architecture/decisions/adr-001-naming-convention.md
     - Multi-Agent Patterns: architecture/multi-agent-orchestration-patterns.md
-  - Metrics Dashboard:
-    - Adoption Metrics: https://ibuyspy-shared.github.io/basecoat/dashboard/metrics/
-  - Changelog: changelog.md
+  - About:
+    - Philosophy: PHILOSOPHY.md
+    - The Story: story.md
+    - Metrics: metrics.md
+    - Changelog: changelog.md
+
+copyright: 'Copyright &copy; IBuySpy-Shared contributors. Licensed under MIT.'
 
 extra:
   social:

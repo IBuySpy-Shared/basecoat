@@ -1,12 +1,14 @@
-# Philosophy: Why Three Primitives?
+# Philosophy: Why Four Primitives?
 
-Base Coat uses three complementary primitives — **agents**, **skills**, and **instructions** — because each solves a different problem:
+BaseCoat uses four complementary primitives — **agents**, **skills**, **instructions**,
+and **prompts** — because each solves a different problem:
 
-| Primitive       | What it is                      | When it activates              | Analogy                  |
-|-----------------|---------------------------------|--------------------------------|--------------------------|
-| **Agent**       | A persona with a workflow       | When explicitly invoked        | A specialist on your team |
-| **Skill**       | A knowledge pack with templates | When attached to a conversation | A reference manual       |
-| **Instruction** | A set of rules and standards    | Always active (ambient)        | Company policy           |
+| Primitive | What it is | When it activates | Analogy |
+|---|---|---|---|
+| **Agent** | A persona with a workflow | When explicitly invoked | A specialist on your team |
+| **Skill** | A knowledge pack with templates | When attached to a conversation | A reference manual |
+| **Instruction** | A set of rules and standards | Always active (ambient) | Company policy |
+| **Prompt** | A structured invocation template | When the user calls it by name | A meeting agenda |
 
 ---
 
@@ -107,13 +109,51 @@ sees its first token.
 
 ---
 
+## What About Prompts?
+
+Prompts are lightweight — they don't carry a workflow or enforce ambient rules. They're
+**structured invocation templates**: named shortcuts users call by name to kick off a
+repeatable task with the right context already loaded.
+
+```text
+/sprint-plan          ← prompt template, no agent persona
+/basecoat             ← router skill, delegates to an agent
+@backend-dev          ← agent, runs a full workflow
+```
+
+Prompts are the entry point when the task is simple enough that it doesn't need an
+agent's full workflow, but structured enough that you don't want users to rephrase it
+from scratch every time.
+
+---
+
 ## Summary
 
-| Question                          | Answer              |
-|-----------------------------------|---------------------|
-| Who does the work?                | **Agent**           |
-| What knowledge do they use?       | **Skill**           |
-| What rules must everyone follow?  | **Instruction**     |
-| How does the user access it all?  | **`/basecoat` router** |
+| Question | Answer |
+|---|---|
+| Who does the work? | **Agent** |
+| What knowledge do they use? | **Skill** |
+| What rules must everyone follow? | **Instruction** |
+| How does the user kick it off? | **Prompt** |
+| How does the user access it all? | **`/basecoat` router** |
 
-Three primitives. One router. Zero ambiguity about where to put things.
+Four primitives. One router. Zero ambiguity about where to put things.
+
+---
+
+## Vocabulary
+
+BaseCoat's name is grounded in a straightforward idea: every workspace needs a solid
+foundation before custom work is layered on top — a base coat. The product itself avoids
+paint-shop language; these are the terms we use:
+
+| Term | Meaning |
+|---|---|
+| **BaseCoat** | The product. The shared Copilot configuration distributed to consumer repos. |
+| **Asset** | Any individual file: an agent, skill, instruction, or prompt. |
+| **Overlay** | The `.github/base-coat/` directory and Copilot-discoverable paths that `sync` creates. |
+| **Adopt** | Integrate BaseCoat into a repo for the first time (run `bootstrap-basecoat.ps1`). |
+| **Sync** | Pull the latest BaseCoat assets into an already-adopted repo (run `sync.ps1`). |
+| **Consumer** | A repository that has adopted the overlay. |
+| **Contributor** | Someone who adds or improves assets in the BaseCoat source repo. |
+| **Drift** | When a consumer's installed version lags behind the current BaseCoat release. |
