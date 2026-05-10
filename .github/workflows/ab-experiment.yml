@@ -1,0 +1,42 @@
+name: A/B Experiment
+
+on:
+  workflow_dispatch:
+    inputs:
+      experiment:
+        description: Experiment folder name under experiments/
+        required: false
+        default: code-review-improvement
+  schedule:
+    - cron: '0 8 * * 1'
+
+permissions:
+  contents: read
+
+jobs:
+  run-experiment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run experiment
+        shell: pwsh
+        run: |
+          $experiment = "${{ github.event.inputs.experiment }}"
+          if ([string]::IsNullOrWhiteSpace($experiment)) { $experiment = "code-review-improvement" }
+          pwsh scripts/run-experiment.ps1 -Experiment $experiment -OutputDir test-results
+
+      - name: Upload report artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ab-experiment-report
+          path: test-results/*-ab-report.*
+
+      - name: Add markdown report to job summary
+        shell: pwsh
+        run: |
+          $report = Get-ChildItem test-results\*-ab-report.md | Select-Object -First 1
+          if ($null -ne $report) {
+            Get-Content $report.FullName -Raw | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append -Encoding utf8
+          }

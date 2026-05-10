@@ -84,6 +84,7 @@ nav:
     - Get Started (integrate prompt): guides/integrate-prompt.md
     - Make It Your Own: guides/customization.md
     - Agent Examples: guides/agent-examples.md
+    - A/B Experimentation: guides/ab-experimentation.md
     - Contributing: guides/contributing.md
     - Version Drift Detection: guides/version-drift.md
     - Model Optimization: guides/MODEL_OPTIMIZATION.md

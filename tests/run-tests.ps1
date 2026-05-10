@@ -114,6 +114,14 @@ if ($LASTEXITCODE -ne 0) {
     exit 1
 }
 
+Write-Host 'Running A/B experiment harness tests...'
+& pwsh -NoProfile -File (Join-Path $PSScriptRoot 'ab-experiment-tests.ps1')
+if ($LASTEXITCODE -ne 0) {
+    Write-Host 'A/B experiment harness tests failed' -ForegroundColor Red
+    Write-FailureLog 'ab-experiment-tests'
+    exit 1
+}
+
 Write-Host 'Running workflow guardrails tests...'
 & pwsh -NoProfile -File (Join-Path $PSScriptRoot 'workflow-guardrails-tests.ps1')
 if ($LASTEXITCODE -ne 0) {
