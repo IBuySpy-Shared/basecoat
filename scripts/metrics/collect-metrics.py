@@ -47,26 +47,75 @@ def github_api(url, token):
         return None
 
 
+def fetch_text(url):
+    """Fetch raw text from a signed URL (no GitHub auth header required)."""
+    req = Request(url)
+    req.add_header("Accept", "application/json, text/plain, application/x-ndjson")
+    try:
+        with urlopen(req) as resp:
+            return resp.read().decode()
+    except HTTPError as e:
+        print(f"  WARNING: Could not download report ({e.code}) from {url}", file=sys.stderr)
+        return ""
+
+
+def to_int(value):
+    """Best-effort numeric conversion for report fields."""
+    if value is None:
+        return 0
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        return 0
+
+
 def collect_copilot_metrics(org, token):
     """Collect Copilot usage metrics for the organization."""
     print(f"  Collecting Copilot metrics for {org}...")
-    data = github_api(
-        f"https://api.github.com/orgs/{org}/copilot/usage",
-        token
+    report = github_api(
+        f"https://api.github.com/orgs/{org}/copilot/metrics/reports/organization-28-day/latest",
+        token,
     )
-    if not data:
+    if not report:
         print("  WARNING: Could not fetch Copilot metrics (need org admin scope)")
         return {"available": False}
 
-    # Extract recent metrics
-    days = data.get("day_breakdown", data.get("breakdown", []))
-    if not days:
+    links = report.get("download_links", [])
+    if not links:
+        print("  WARNING: Copilot metrics report has no download links")
+        return {"available": False}
+
+    raw = fetch_text(links[0])
+    rows = []
+    for line in raw.splitlines():
+        line = line.strip()
+        if not line:
+            continue
+        try:
+            rows.append(json.loads(line))
+        except json.JSONDecodeError:
+            continue
+
+    if not rows:
         return {"available": True, "days": []}
+
+    total_active = sum(
+        to_int(day.get("total_active_users") or day.get("daily_active_users"))
+        for day in rows
+    )
+    total_cli = sum(to_int(day.get("daily_active_cli_users")) for day in rows)
+    total_cloud_agent = sum(
+        to_int(day.get("daily_active_copilot_cloud_agent_users")) for day in rows
+    )
 
     return {
         "available": True,
-        "total_active_users": data.get("total_active_users", 0),
-        "days": days[-28:] if len(days) > 28 else days
+        "report_start_day": report.get("report_start_day"),
+        "report_end_day": report.get("report_end_day"),
+        "total_active_users": total_active,
+        "daily_active_cli_users_sum": total_cli,
+        "daily_active_cloud_agent_users_sum": total_cloud_agent,
+        "days": rows[-28:] if len(rows) > 28 else rows,
     }
 
 
@@ -187,17 +236,17 @@ def detect_degradation(current, history):
 
     prev = history[-1]
 
-    # Check Copilot acceptance rate drop
+    # Check Copilot active user decline
     if current["copilot"]["available"] and prev.get("copilot", {}).get("available"):
-        curr_rate = current["copilot"].get("acceptance_rate", 0)
-        prev_rate = prev["copilot"].get("acceptance_rate", 0)
-        if prev_rate > 0 and curr_rate < prev_rate * 0.9:
+        curr_users = current["copilot"].get("total_active_users", 0)
+        prev_users = prev["copilot"].get("total_active_users", 0)
+        if prev_users > 0 and curr_users < prev_users * 0.9:
             alerts.append({
-                "type": "copilot_acceptance_drop",
+                "type": "copilot_active_users_drop",
                 "severity": "warning",
-                "message": f"Copilot acceptance rate dropped from {prev_rate:.1f}% to {curr_rate:.1f}%",
-                "previous": prev_rate,
-                "current": curr_rate
+                "message": f"Copilot active users dropped from {prev_users} to {curr_users}",
+                "previous": prev_users,
+                "current": curr_users,
             })
 
     # Check per-repo CI success rate drop
