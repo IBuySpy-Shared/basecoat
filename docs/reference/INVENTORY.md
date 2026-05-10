@@ -83,7 +83,6 @@ This catalog helps teams discover what exists in Base Coat and when to use it.
 | `skills/basecoat/SKILL.md`              | /basecoat router — discovery and delegation entry point | basecoat, router, discovery, delegation |
 | `skills/code-review/SKILL.md`           | review changes for risk, regressions, and missing tests | review, bug risk, regression, findings       |
 | `skills/contract-testing/SKILL.md`      | Consumer-driven contracts, Pact, E2E testing, and mutation testing patterns | skill, contract-testing, pact, cdc |
-| `skills/copilot-cli-usage-analytics/SKILL.md` | Copilot CLI usage analytics: session cost, model dispatch, and cost breakdown | skill, copilot, analytics, cost |
 | `skills/copilot-usage-analytics/SKILL.md` | Per-session Copilot CLI cost estimation and model-routing efficiency analysis | skill, copilot, usage, analytics |
 | `skills/cqrs-event-sourcing/SKILL.md`   | CQRS and Event Sourcing for scalable, auditable distributed systems patterns | skill, cqrs, event-sourcing, distributed |
 | `skills/create-instruction/SKILL.md`    | create a new instruction file for a domain              | create instruction, applyTo, frontmatter     |

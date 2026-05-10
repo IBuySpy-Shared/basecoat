@@ -18,6 +18,7 @@ Every message prefix tells the AI three things at once: **what kind of work**,
 | `chore:` | Maintenance, cleanup, non-functional | **Soon** | `@devops-engineer`, `@release-manager` |
 | `security:` | Security concern or vulnerability | **Now, high priority** | `@security-analyst`, `@guardrail` |
 | `perf:` | Performance degradation | **Now, measure first** | `@performance-analyst` |
+| `outage:` | Service outage, broken or dead system, site down | **Now, high priority** | `@rca` |
 | `docs:` | Documentation only | **Soon** | `@tech-writer` |
 | `test:` | Test coverage gap or test failure | **Now** | `@manual-test-strategy` |
 | `refactor:` | Structural improvement, no behavior change | **Later, batch** | `@code-review` |
@@ -31,7 +32,7 @@ The same prefix means different things depending on how it appears in the messag
 
 ### Standalone → act now
 
-```
+```text
 bug: the sync script exits with code 1 on Windows when BASECOAT_REPO is unset
 ```
 
@@ -40,7 +41,7 @@ The AI investigates and fixes it in this session.
 
 ### Bulleted list → triage and log, not implement
 
-```
+```text
 - bug: metrics dashboard is broken on mobile
 - feature: add a getting-started prompt
 - chore: clean up stale branches
@@ -55,7 +56,7 @@ It does **not** start implementing.
 
 ### Mixed message → preamble is immediate, list is triage
 
-```
+```text
 run an audit against the CI workflows and log issues
 
 - feature: add retry logic to sync.sh
@@ -86,13 +87,13 @@ These words in a message override the default timing of any prefix:
 
 `audit:` never makes changes unless the user adds "and fix" or "resolve."
 
-```
+```text
 audit: run a say-vs-do check on the CI workflows
 ```
 
 → Returns findings. Logs issues if asked. Waits.
 
-```
+```text
 audit: run impeccable against GH Pages, log issues, and resolve
 ```
 
@@ -114,6 +115,27 @@ Working in a long session with many items in flight, prefixes let you:
 
 ---
 
+## Outage routing
+
+When a user says a service is broken, dead, down, or not responding, normalize
+that request to `outage:` and route it to the RCA agent.
+
+| Alias | Normalized intent |
+|---|---|
+| `broken` | `outage:` |
+| `broke` | `outage:` |
+| `dead` | `outage:` |
+| `site down` | `outage:` |
+| `down` | `outage:` |
+| `not responding` | `outage:` |
+| `incident` | `outage:` |
+| `it's broken` | `outage:` |
+| `nothing works` | `outage:` |
+
+Use `@rca` for the deep-dive investigation after the active incident is stable.
+
+---
+
 ## The instruction file
 
 This convention is codified in
@@ -129,7 +151,7 @@ convention in your own team immediately — no configuration required.
 
 ### Good: bug in a standalone message
 
-```
+```text
 bug: the lint workflow silently passes on instructions with trailing spaces
 ```
 
@@ -137,7 +159,7 @@ AI fixes it now.
 
 ### Good: features in a bulleted list
 
-```
+```text
 - feature: add retry logic to sync.sh
 - feature: add a prompt for onboarding new repos
 - feature: support BASECOAT_EXCLUDE env var
@@ -147,7 +169,7 @@ AI logs three backlog items and reports what was filed.
 
 ### Common mistake: bulleted feature treated as immediate
 
-```
+```text
 - feature: add a getting-started prompt
 ```
 
@@ -156,7 +178,7 @@ AI logs three backlog items and reports what was filed.
 
 ### Combine audit and fix explicitly
 
-```
+```text
 audit: check all agent files for missing Workflow sections, log issues, fix them
 ```
 

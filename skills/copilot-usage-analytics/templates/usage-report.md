@@ -5,6 +5,7 @@ This template is used by the Copilot CLI Usage Analytics skill to generate per-s
 ---
 
 ## Session Summary
+
 - **Session ID:** {{session_id}}
 - **Start Time:** {{start_time}}
 - **End Time:** {{end_time}}
@@ -14,15 +15,16 @@ This template is used by the Copilot CLI Usage Analytics skill to generate per-s
 - **Estimated Cost:** ${{cost_estimate}}
 
 ## Model Usage Breakdown
+
 | Model Name         | Dispatches | Estimated Tokens | Estimated Cost |
 |--------------------|------------|-----------------|---------------|
-{{#each model_usage}}
-| {{model}} | {{dispatches}} | {{tokens}} | ${{cost}} |
-{{/each}}
+{{#each model_usage}}| {{model}} | {{dispatches}} | {{tokens}} | ${{cost}} |{{/each}}
 
 ## Recommendations
+
 - {{recommendations}}
 
 ## Notes
+
 - Cost and token estimates are based on session-local tracking. For authoritative data, use GitHub Copilot Metrics API when available.
 - APIs checked: REST (no per-session), Billing (no usage), Power BI (auth error)

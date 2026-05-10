@@ -97,10 +97,4 @@ grep -E "autonomous.*deploy|deploy.*autonomous" agents/TAXONOMY.md
 grep -E "reasoning.*plan" agents/TAXONOMY.md
 ```
 
-Or reference by directory:
-
-```text
-agents/models/reasoning/   → agents needing opus-class models
-agents/tasks/deploy/       → agents for CI/CD and release
-agents/types/reactive/     → event-driven agents
-```
+Or filter the Registry table below by any column.

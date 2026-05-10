@@ -23,6 +23,7 @@ both the type of work and **when** to do it.
 | `chore:` | Maintenance, cleanup, non-functional work | **Soon** — defer if sprint is full | `@devops-engineer`, `@release-manager` |
 | `security:` | Security concern or vulnerability | **Now, high priority** — escalate | `@security-analyst`, `@guardrail` |
 | `perf:` | Performance degradation or concern | **Now** — measure before changing | `@performance-analyst` |
+| `outage:` | Service outage, broken or dead system, site down | **Now, high priority** — route to RCA | `@rca` |
 | `docs:` | Documentation only | **Soon** — low urgency unless broken | `@tech-writer` |
 | `test:` | Test coverage gap or test failure | **Now** — coverage gaps block releases | `@manual-test-strategy`, `@strategy-to-automation` |
 | `refactor:` | Structural improvement, no behavior change | **Later** — batch with related work | `@code-review`, `@performance-analyst` |
@@ -39,13 +40,13 @@ The same prefix has different timing implications depending on its syntactic con
 When a prefix appears as the first word of a standalone message, treat it as
 immediate work:
 
-```
+```text
 bug: the sync script exits with code 1 on Windows when BASECOAT_REPO is unset
 ```
 
 → Investigate and fix now.
 
-```
+```text
 audit: run a say-vs-do check against the CI workflows
 ```
 
@@ -59,7 +60,7 @@ When prefixes appear as items in a bulleted list within a message, they are
 **triage items**, not immediate work orders. Log them (as issues, todos, or
 plan notes) and confirm receipt. Do not implement.
 
-```
+```text
 - bug: metrics dashboard is broken on mobile
 - feature: add a prompt for getting started
 - audit: run impeccable against the GH Pages output
@@ -80,7 +81,7 @@ implementation request. A bulleted `feature:` means *"add this to the backlog."*
 A message can contain both a preamble action and a bulleted list. The preamble
 may be immediate; the list items are still triage:
 
-```
+```text
 run an audit against the CI workflows — log issues
 
 - feature: add retry logic to sync.sh
@@ -132,6 +133,27 @@ When a bulleted `feature:` item is logged, the appropriate output is:
 
 The appropriate agent is `@sprint-planner` for prioritization or
 `@solution-architect` for design — not an implementation agent.
+
+---
+
+## Outage Routing
+
+When a user describes a system being broken, dead, down, or not responding,
+normalize the request to `outage:` and route it to the RCA agent.
+
+| Alias | Normalized intent |
+|---|---|
+| `broken` | `outage:` |
+| `broke` | `outage:` |
+| `dead` | `outage:` |
+| `site down` | `outage:` |
+| `down` | `outage:` |
+| `not responding` | `outage:` |
+| `incident` | `outage:` |
+| `it's broken` | `outage:` |
+| `nothing works` | `outage:` |
+
+Use `@rca` for deep-dive analysis once the active incident is stabilized.
 
 ---
 
