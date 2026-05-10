@@ -365,6 +365,6 @@ Target branch <target-branch> updated with N of M branches merged.
 
 ## Governance
 
-This agent operates under the basecoat governance framework.
+This agent operates under the BaseCoat governance framework.
 - Issue-first, PRs only, No secrets, Branch naming conventions
 - See `instructions/governance.instructions.md` for the full reference

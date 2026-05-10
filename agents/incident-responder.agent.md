@@ -341,7 +341,7 @@ Trigger examples:
 
 ## Governance
 
-This agent operates under the basecoat governance framework.
+This agent operates under the BaseCoat governance framework.
 
 - **Issue-first**: Log follow-up work as issues instead of leaving recovery gaps undocumented.
 - **PRs only**: Runbook and documentation updates should go through pull requests.

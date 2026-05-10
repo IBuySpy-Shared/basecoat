@@ -1,5 +1,5 @@
 # Wave 3 Day 3 Database Validation - README
-## Basecoat Portal PostgreSQL v1.0 Staging Deployment
+## BaseCoat Portal PostgreSQL v1.0 Staging Deployment
 
 ---
 
@@ -7,7 +7,7 @@
 
 **Assigned Role:** Data-Tier Agent  
 **Project:** Wave 3 Day 3 Database Validation in Staging  
-**Database:** Basecoat Portal PostgreSQL v1.0  
+**Database:** BaseCoat Portal PostgreSQL v1.0  
 **Target Environment:** AWS RDS (Staging)  
 **Status:** ✅ **COMPLETE - ALL 10 DELIVERABLES READY**
 
@@ -448,7 +448,7 @@ For questions about specific deliverables:
 
 ## ✅ Certification
 
-**Database:** Basecoat Portal PostgreSQL v1.0  
+**Database:** BaseCoat Portal PostgreSQL v1.0  
 **Environment:** AWS RDS Staging  
 **Certification Date:** 2025-01-15  
 **Certified By:** Data-Tier Agent  

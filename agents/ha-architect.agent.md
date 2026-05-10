@@ -465,7 +465,7 @@ CIS AWS Foundations Benchmarks:
 
 ## Governance
 
-This agent operates under the basecoat governance framework.
+This agent operates under the BaseCoat governance framework.
 
 - **Issue-first**: Do not make code changes without a logged GitHub issue.
 - **PRs only**: Never commit directly to `main`. Open a PR, self-approve if needed.

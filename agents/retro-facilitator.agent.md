@@ -336,7 +336,7 @@ still find this issue useful? If yes, the framing is generic enough.
 
 ## Governance
 
-This agent operates under the basecoat governance framework.
+This agent operates under the BaseCoat governance framework.
 
 - **Issue-first**: Every action item must be backed by a filed issue.
 - **PRs only**: Retro doc changes go through a PR — no direct `main` commits.

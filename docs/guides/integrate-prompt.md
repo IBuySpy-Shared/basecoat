@@ -4,7 +4,7 @@ The `integrate` prompt is your zero-to-working starting point for any repository
 Open your editor or the Copilot CLI and say:
 
 ```
-integrate and audit basecoat from https://github.com/YOUR-ORG/YOUR-REPO
+integrate and audit BaseCoat from https://github.com/YOUR-ORG/YOUR-REPO
 ```
 
 That single sentence triggers a guided two-phase workflow:
@@ -49,7 +49,7 @@ The prompt works in any Copilot-enabled surface:
 ### GitHub Copilot CLI
 
 ```bash
-gh copilot suggest "integrate and audit basecoat from https://github.com/YOUR-ORG/YOUR-REPO"
+gh copilot suggest "integrate and audit BaseCoat from https://github.com/YOUR-ORG/YOUR-REPO"
 ```
 
 ### VS Code Copilot Chat
@@ -57,7 +57,7 @@ gh copilot suggest "integrate and audit basecoat from https://github.com/YOUR-OR
 Open the chat panel and type:
 
 ```
-@workspace /integrate integrate and audit basecoat from https://github.com/YOUR-ORG/YOUR-REPO
+@workspace /integrate integrate and audit BaseCoat from https://github.com/YOUR-ORG/YOUR-REPO
 ```
 
 Or, if the prompt file is synced to your repo, select it from the prompt picker (`/`) and pass the URL.
@@ -67,7 +67,7 @@ Or, if the prompt file is synced to your repo, select it from the prompt picker 
 If you are already working inside the target repository, you can omit the URL:
 
 ```
-integrate and audit basecoat
+integrate and audit BaseCoat
 ```
 
 The prompt will use the `codebase` tool to inspect the current repo.

@@ -179,7 +179,7 @@ EOF
 
 ## Governance
 
-This agent operates under the basecoat governance framework.
+This agent operates under the BaseCoat governance framework.
 - Issue-first, PRs only, No secrets, Branch naming conventions
 - See `instructions/governance.instructions.md` for the full reference
 - See `docs/CONFIG_PATTERN.md` for the local config pattern this agent enforces

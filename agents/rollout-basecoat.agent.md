@@ -78,4 +78,4 @@ gh issue create \
 
 ## Governance
 
-This agent follows the basecoat governance framework. See `instructions/governance.instructions.md`.
+This agent follows the BaseCoat governance framework. See `instructions/governance.instructions.md`.
