@@ -146,6 +146,14 @@ if ($LASTEXITCODE -ne 0) {
     exit 1
 }
 
+Write-Host 'Running behavioral evaluation smoke tests...'
+& pwsh -NoProfile -File (Join-Path $PSScriptRoot 'behavioral-eval-tests.ps1')
+if ($LASTEXITCODE -ne 0) {
+    Write-Host 'Behavioral evaluation smoke tests failed' -ForegroundColor Red
+    Write-FailureLog 'behavioral-eval-tests'
+    exit 1
+}
+
 Write-Host 'Running coherence check (non-blocking)...'
 & pwsh -NoProfile -File (Join-Path $PSScriptRoot '..' 'scripts' 'check-coherence.ps1')
 # Non-blocking: coherence issues are warnings, not failures
