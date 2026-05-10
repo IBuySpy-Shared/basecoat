@@ -255,13 +255,27 @@ if ($hasPackagesScope -and -not $DryRun) {
         if ($packageInfo.visibility -eq 'public') {
             Write-Skip "Package '$packageName' is already public"
         } else {
-            Write-Host "  Setting package '$packageName' to public..." -ForegroundColor Yellow
-            gh api --method PATCH "/orgs/$org/packages/container/$packageName" -f visibility=public 2>$null
-            if ($LASTEXITCODE -eq 0) {
-                Write-Ok "Package '$packageName' set to public"
+            # GitHub does not expose a REST API to change org package visibility.
+            # Open the settings page in the browser for the user.
+            $settingsUrl = "https://github.com/orgs/$org/packages/container/package/$packageName/settings"
+            Write-Warn "Package '$packageName' is private — Container Apps requires public packages"
+            Write-Info "GitHub has no API for changing package visibility. Opening settings page..."
+            Start-Process $settingsUrl
+            Write-Info "In the browser: Danger Zone → Change visibility → Public"
+            Write-Host ""
+            $null = Read-Host "  Press Enter after setting the package to public"
+
+            # Verify
+            $verifyJson = gh api "/orgs/$org/packages/container/$packageName" 2>$null
+            $verifyInfo = $null
+            if ($LASTEXITCODE -eq 0 -and $verifyJson) {
+                $verifyInfo = $verifyJson | ConvertFrom-Json -ErrorAction SilentlyContinue
+            }
+            if ($verifyInfo -and $verifyInfo.PSObject.Properties['visibility'] -and $verifyInfo.visibility -eq 'public') {
+                Write-Ok "Package '$packageName' is now public"
             } else {
-                Write-Fail "Could not set package visibility. You may need org admin permissions."
-                Write-Info "Manual fix: GitHub → Org → Packages → $packageName → Settings → Visibility → Public"
+                Write-Fail "Package is still private. Deploy will fail until visibility is changed."
+                Write-Info "URL: $settingsUrl"
             }
         }
     } else {
