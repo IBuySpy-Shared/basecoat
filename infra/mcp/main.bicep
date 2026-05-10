@@ -28,6 +28,13 @@ param imageRepo string = 'YOUR_ORG/basecoat-metrics-mcp'
 @description('GitHub Pages metrics endpoint. Replace YOUR_ORG with your GitHub org before deploying.')
 param metricsBaseUrl string = 'https://YOUR_ORG.github.io/basecoat/metrics'
 
+@description('GHCR username for authenticated pulls (github actor or org name).')
+param registryUsername string = ''
+
+@secure()
+@description('GHCR token/PAT for authenticated pulls. If empty, anonymous pull is used (package must be public).')
+param registryPassword string = ''
+
 @description('Container CPU cores.')
 param cpuCores string = '0.25'
 
@@ -91,8 +98,18 @@ resource app 'Microsoft.App/containerApps@2024-03-01' = {
         transport: 'http'
         allowInsecure: false
       }
-      // GHCR package must be public — set via bootstrap-mcp.ps1 Phase 4.
-      // No registry credentials needed for public packages.
+      // Registry auth: if credentials are provided, use authenticated GHCR pulls.
+      // Otherwise the package must be public for anonymous pulls.
+      secrets: registryPassword != '' ? [
+        { name: 'ghcr-password', value: registryPassword }
+      ] : []
+      registries: registryPassword != '' ? [
+        {
+          server: 'ghcr.io'
+          username: registryUsername
+          passwordSecretRef: 'ghcr-password'
+        }
+      ] : []
     }
     template: {
       containers: [
