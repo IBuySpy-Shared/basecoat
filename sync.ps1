@@ -23,7 +23,7 @@ try {
     $fullTargetDir = Join-Path $repoRoot $targetDir
     New-Item -ItemType Directory -Force -Path $fullTargetDir | Out-Null
 
-    foreach ($item in @('README.md', 'CHANGELOG.md', 'version.json', 'basecoat-metadata.json', 'instructions', 'skills', 'prompts', 'agents', 'docs')) {
+    foreach ($item in @('README.md', 'CHANGELOG.md', 'version.json', 'asset-manifest.json', 'basecoat-metadata.json', 'instructions', 'skills', 'prompts', 'agents', 'docs')) {
         $destination = Join-Path $fullTargetDir $item
         if (Test-Path $destination) {
             Remove-Item -Path $destination -Recurse -Force

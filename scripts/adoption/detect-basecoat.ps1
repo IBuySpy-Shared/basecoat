@@ -42,10 +42,36 @@ function Invoke-GhApi {
     return $result | ConvertFrom-Json
 }
 
+function Get-ContentMeta {
+    param(
+        [string]$Owner,
+        [string]$Repo,
+        [string]$Path
+    )
+    return Invoke-GhApi "/repos/$Owner/$Repo/contents/$Path"
+}
+
 function Get-FileSha {
     param([string]$Owner, [string]$Repo, [string]$Path)
-    $data = Invoke-GhApi "/repos/$Owner/$Repo/contents/$Path"
-    if ($data) { return $data.sha }
+    $data = Get-ContentMeta -Owner $Owner -Repo $Repo -Path $Path
+    if ($data -and $data.sha) { return $data.sha }
+    return $null
+}
+
+function Get-FrontmatterVersionFromContent {
+    param($ContentMeta)
+    if (-not $ContentMeta -or -not $ContentMeta.content) { return $null }
+    try {
+        $decoded = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String(($ContentMeta.content -replace "`n", "")))
+        if ($decoded -match '^---\r?\n([\s\S]+?)\r?\n---') {
+            $fm = $matches[1]
+            if ($fm -match '(?m)^version:\s*["'']?([0-9]+\.[0-9]+\.[0-9]+)["'']?\s*$') {
+                return $matches[1]
+            }
+        }
+    } catch {
+        return $null
+    }
     return $null
 }
 
@@ -66,57 +92,82 @@ if (-not $targetRepos -or $targetRepos.Count -eq 0) {
 
 Write-Host "Found $($targetRepos.Count) target repo(s)`n"
 
-# 2. Get basecoat source asset manifest (agents, instructions, prompts)
+# 2. Get basecoat source asset manifest
 Write-Host "Building basecoat source manifest..." -ForegroundColor Yellow
 $sourceAssets = @{}
+$manifestMeta = Get-ContentMeta -Owner $Org -Repo $BasecoatRepo -Path 'asset-manifest.json'
+if ($manifestMeta -and $manifestMeta.content) {
+    try {
+        $manifestJson = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String(($manifestMeta.content -replace "`n", "")))
+        $manifest = $manifestJson | ConvertFrom-Json
+        foreach ($asset in $manifest.assets) {
+            $syncPath = switch ($asset.type) {
+                'agent' { ".github/agents/$([System.IO.Path]::GetFileName($asset.path))" }
+                'instruction' { ".github/instructions/$([System.IO.Path]::GetFileName($asset.path))" }
+                'prompt' { ".github/prompts/$([System.IO.Path]::GetFileName($asset.path))" }
+                'skill' { ".github/skills/$((($asset.path -split '/')[1]))/SKILL.md" }
+                default { $null }
+            }
+            if (-not $syncPath) { continue }
+            $sourceAssets[$asset.path] = @{
+                sha      = $asset.sha
+                type     = $asset.type
+                syncPath = $syncPath
+                version  = $asset.effectiveVersion
+            }
+        }
+    } catch {
+        Write-Host "  WARNING: Unable to parse asset-manifest.json, falling back to SHA-only discovery." -ForegroundColor Yellow
+    }
+}
 
-# Agents
-$agentFiles = gh api "/repos/$Org/$BasecoatRepo/contents/agents" 2>&1 | ConvertFrom-Json
-if ($agentFiles) {
-    foreach ($f in $agentFiles | Where-Object { $_.name -match '\.agent\.md$' }) {
-        $sourceAssets["agents/$($f.name)"] = @{
-            sha      = $f.sha
-            type     = "agent"
-            syncPath = ".github/agents/$($f.name)"
+if ($sourceAssets.Count -eq 0) {
+    # Fallback discovery for repos without asset-manifest.json
+    $agentFiles = gh api "/repos/$Org/$BasecoatRepo/contents/agents" 2>&1 | ConvertFrom-Json
+    if ($agentFiles) {
+        foreach ($f in $agentFiles | Where-Object { $_.name -match '\.agent\.md$' }) {
+            $sourceAssets["agents/$($f.name)"] = @{
+                sha      = $f.sha
+                type     = "agent"
+                syncPath = ".github/agents/$($f.name)"
+                version  = $null
+            }
+        }
+    }
+    $instrFiles = gh api "/repos/$Org/$BasecoatRepo/contents/instructions" 2>&1 | ConvertFrom-Json
+    if ($instrFiles) {
+        foreach ($f in $instrFiles | Where-Object { $_.name -match '\.instructions\.md$' }) {
+            $sourceAssets["instructions/$($f.name)"] = @{
+                sha      = $f.sha
+                type     = "instruction"
+                syncPath = ".github/instructions/$($f.name)"
+                version  = $null
+            }
+        }
+    }
+    $promptFiles = gh api "/repos/$Org/$BasecoatRepo/contents/prompts" 2>&1 | ConvertFrom-Json
+    if ($promptFiles) {
+        foreach ($f in $promptFiles | Where-Object { $_.name -match '\.prompt\.md$' }) {
+            $sourceAssets["prompts/$($f.name)"] = @{
+                sha      = $f.sha
+                type     = "prompt"
+                syncPath = ".github/prompts/$($f.name)"
+                version  = $null
+            }
         }
     }
 }
 
-# Instructions
-$instrFiles = gh api "/repos/$Org/$BasecoatRepo/contents/instructions" 2>&1 | ConvertFrom-Json
-if ($instrFiles) {
-    foreach ($f in $instrFiles | Where-Object { $_.name -match '\.instructions\.md$' }) {
-        $sourceAssets["instructions/$($f.name)"] = @{
-            sha      = $f.sha
-            type     = "instruction"
-            syncPath = ".github/instructions/$($f.name)"
-        }
-    }
-}
-
-# Prompts
-$promptFiles = gh api "/repos/$Org/$BasecoatRepo/contents/prompts" 2>&1 | ConvertFrom-Json
-if ($promptFiles) {
-    foreach ($f in $promptFiles | Where-Object { $_.name -match '\.prompt\.md$' }) {
-        $sourceAssets["prompts/$($f.name)"] = @{
-            sha      = $f.sha
-            type     = "prompt"
-            syncPath = ".github/prompts/$($f.name)"
-        }
-    }
-}
-
-Write-Host "Source manifest: $($sourceAssets.Count) assets (agents, instructions, prompts)`n"
+Write-Host "Source manifest: $($sourceAssets.Count) assets`n"
 
 # 3. Scan each repo for synced assets (optimized: list .github dirs first, then SHA-check matches)
 Write-Host "Scanning target repos for basecoat assets..." -ForegroundColor Yellow
 $adoptionReport = @()
 
-# Build lookup of basecoat filenames → source info
-$filenameLookup = @{}
+# Build lookup of sync path -> source asset info
+$syncPathLookup = @{}
 foreach ($asset in $sourceAssets.GetEnumerator()) {
-    $filename = Split-Path $asset.Value.syncPath -Leaf
-    $filenameLookup[$filename] = $asset
+    $syncPathLookup[$asset.Value.syncPath] = $asset
 }
 
 foreach ($repo in $targetRepos) {
@@ -125,30 +176,55 @@ foreach ($repo in $targetRepos) {
     $currentCount = 0
     $staleCount = 0
 
-    # List .github/agents, .github/instructions, .github/prompts in one pass
-    $syncDirs = @(".github/agents", ".github/instructions", ".github/prompts")
+    # List .github/agents, .github/instructions, .github/prompts, .github/skills in one pass
+    $syncDirs = @(".github/agents", ".github/instructions", ".github/prompts", ".github/skills")
     $foundFiles = @()
 
     foreach ($dir in $syncDirs) {
         $listing = Invoke-GhApi "/repos/$Org/$repoName/contents/$dir"
         if ($listing) {
             foreach ($f in $listing) {
-                $foundFiles += @{ name = $f.name; sha = $f.sha; path = "$dir/$($f.name)" }
+                # For skills, list one level deeper (SKILL.md)
+                if ($f.type -eq 'dir' -and $dir -eq '.github/skills') {
+                    $skillFile = Invoke-GhApi "/repos/$Org/$repoName/contents/$dir/$($f.name)/SKILL.md"
+                    if ($skillFile) {
+                        $foundFiles += @{ name = 'SKILL.md'; sha = $skillFile.sha; path = "$dir/$($f.name)/SKILL.md" }
+                    }
+                    continue
+                }
+                if ($f.type -eq 'file') {
+                    $foundFiles += @{ name = $f.name; sha = $f.sha; path = "$dir/$($f.name)" }
+                }
             }
         }
     }
 
     # Match found files against basecoat source manifest
     foreach ($f in $foundFiles) {
-        $match = $filenameLookup[$f.name]
+        $match = $syncPathLookup[$f.path]
         if ($match) {
-            if ($f.sha -eq $match.Value.sha) {
+            $comparison = "sha"
+            $sourceVersion = $match.Value.version
+            $consumerVersion = $null
+            if ($sourceVersion) {
+                $meta = Get-ContentMeta -Owner $Org -Repo $repoName -Path $f.path
+                $consumerVersion = Get-FrontmatterVersionFromContent -ContentMeta $meta
+            }
+            $isCurrent = $false
+            if ($sourceVersion -and $consumerVersion) {
+                $comparison = "version"
+                $isCurrent = ($consumerVersion -eq $sourceVersion)
+            } else {
+                $isCurrent = ($f.sha -eq $match.Value.sha)
+            }
+
+            if ($isCurrent) {
                 $currentCount++
-                $repoAssets += @{ asset = $match.Key; status = "current"; type = $match.Value.type }
+                $repoAssets += @{ asset = $match.Key; status = "current"; type = $match.Value.type; comparison = $comparison; sourceVersion = $sourceVersion; consumerVersion = $consumerVersion }
             }
             else {
                 $staleCount++
-                $repoAssets += @{ asset = $match.Key; status = "stale"; type = $match.Value.type }
+                $repoAssets += @{ asset = $match.Key; status = "stale"; type = $match.Value.type; comparison = $comparison; sourceVersion = $sourceVersion; consumerVersion = $consumerVersion }
             }
         }
     }

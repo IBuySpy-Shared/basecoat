@@ -11,6 +11,7 @@ The sync script copies all distributable assets to `.github/base-coat/` in your 
 - `instructions/` — all instruction files
 - `prompts/` — prompt templates
 - `version.json` — version metadata
+- `asset-manifest.json` — per-asset version/SHA manifest used for drift analysis
 
 In addition, Copilot-discoverable directories (`instructions/`, `prompts/`, `skills/`) are
 mirrored to `.github/` and skills are also mirrored to `.agents/skills/` for cross-client

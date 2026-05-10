@@ -3,7 +3,7 @@ $ErrorActionPreference = 'Stop'
 $rootDir = if ($args.Count -gt 0) { $args[0] } else { (Get-Location).Path }
 Set-Location $rootDir
 
-$required = @('README.md', 'CHANGELOG.md', 'version.json', 'sync.sh', 'sync.ps1', 'instructions', 'skills', 'prompts', 'agents')
+$required = @('README.md', 'CHANGELOG.md', 'version.json', 'asset-manifest.json', 'sync.sh', 'sync.ps1', 'instructions', 'skills', 'prompts', 'agents')
 foreach ($item in $required) {
     if (-not (Test-Path $item)) {
         throw "Missing required path: $item"
@@ -42,6 +42,16 @@ foreach ($file in $files) {
     if (-not ($lines | Select-String -Pattern '^description:' -Quiet)) {
         Write-Host "ERROR: $($file.Name) missing 'description' in frontmatter" -ForegroundColor Red
         $errors++
+    }
+
+    # Optional per-asset version must be SemVer if present
+    $versionLine = $lines | Select-String -Pattern '^version:\s*' | Select-Object -First 1
+    if ($versionLine) {
+        $ver = ($versionLine -replace '^version:\s*', '').Trim().Trim('"').Trim("'")
+        if ($ver -notmatch '^[0-9]+\.[0-9]+\.[0-9]+$') {
+            Write-Host "ERROR: $($file.Name) has invalid version '$ver' (expected SemVer X.Y.Z)" -ForegroundColor Red
+            $errors++
+        }
     }
 
     # Agents and Skills require name
@@ -102,6 +112,17 @@ foreach ($file in $files) {
 
 if ($errors -gt 0) {
     throw "Validation failed with $errors error(s)"
+}
+
+# Validate asset-manifest basic shape
+try {
+    $manifest = Get-Content 'asset-manifest.json' -Raw | ConvertFrom-Json
+    if (-not $manifest.schemaVersion -or -not $manifest.libraryVersion -or -not $manifest.assets) {
+        throw 'missing required keys'
+    }
+}
+catch {
+    throw "Validation failed: asset-manifest.json is invalid ($($_.Exception.Message))"
 }
 
 if ($warnings -gt 0) {

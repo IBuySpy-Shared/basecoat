@@ -28,7 +28,7 @@ git clone --depth 1 --branch "$SOURCE_REF" "$SOURCE_REPO" "$TMP_DIR/source" >/de
 
 mkdir -p "$REPO_ROOT/$TARGET_DIR"
 
-for item in README.md CHANGELOG.md version.json basecoat-metadata.json instructions skills prompts agents docs; do
+for item in README.md CHANGELOG.md version.json asset-manifest.json basecoat-metadata.json instructions skills prompts agents docs; do
   rm -rf "$REPO_ROOT/$TARGET_DIR/$item"
   cp -R "$TMP_DIR/source/$item" "$REPO_ROOT/$TARGET_DIR/$item"
 done
