@@ -1,21 +1,21 @@
-# BaseCoat Config (.basecoat.yml)
+# BaseCoat Config (`.basecoat.yml`)
 
-Place a .basecoat.yml file at the root of your consumer repo to control how
+Place a `.basecoat.yml` file at the root of your consumer repo to control how
 BaseCoat assets are synced and how the enterprise memory sweep collects learnings
 from your repo.
 
 The file combines two concerns in one place:
 
-- **Sync configuration** --- which upstream source to pull from, which assets to
+- **Sync configuration** — which upstream source to pull from, which assets to
   include, and which paths to skip.
-- **Memory sweep configuration** --- which issue/PR labels mark learnings, how far
+- **Memory sweep configuration** — which issue/PR labels mark learnings, how far
   back to look, and team metadata for candidate review.
 
 Both sections are optional. Omit any key to accept the default.
 
 ## Sync configuration
 
-### source
+### `source`
 
 | | |
 |---|---|
@@ -30,7 +30,7 @@ your organisation maintains a private fork.
 source: https://github.com/YOUR-ORG/basecoat.git
 ```
 
-### ef
+### `ref`
 
 | | |
 |---|---|
@@ -46,7 +46,7 @@ leave as `main` to always pull the latest.
 ref: v3.25.0
 ```
 
-### gents
+### `agents`
 
 | | |
 |---|---|
@@ -65,7 +65,7 @@ agents:
   - security-review
 ```
 
-### skills
+### `skills`
 
 | | |
 |---|---|
@@ -83,7 +83,7 @@ skills:
   - database-migration
 ```
 
-### instructions
+### `instructions`
 
 | | |
 |---|---|
@@ -102,7 +102,7 @@ instructions:
   - token-economics
 ```
 
-### scoped_instructions
+### `scoped_instructions`
 
 | | |
 |---|---|
@@ -118,7 +118,7 @@ pattern-specific instructions.
 scoped_instructions: []
 ```
 
-### sync.exclude
+### `sync.exclude`
 
 | | |
 |---|---|
@@ -142,7 +142,7 @@ The enterprise memory sweep (`scripts/sweep-enterprise-memory.ps1`) runs weekly
 against all repos in your GitHub org that carry the `basecoat-enabled` topic.
 For each repo it reads `.basecoat.yml` to fine-tune sweep behaviour.
 
-### learning_labels
+### `learning_labels`
 
 | | |
 |---|---|
@@ -163,7 +163,7 @@ learning_labels:
   - postmortem
 ```
 
-### days_back
+### `days_back`
 
 | | |
 |---|---|
@@ -179,7 +179,7 @@ already seen.
 days_back: 30
 ```
 
-### 	eam
+### `team`
 
 | | |
 |---|---|
@@ -194,7 +194,7 @@ context during triage.
 team: "Platform Engineering"
 ```
 
-### contact
+### `contact`
 
 | | |
 |---|---|
@@ -209,7 +209,7 @@ handle when a candidate needs clarification.
 contact: "@platform-eng"
 ```
 
-### domain
+### `domain`
 
 | | |
 |---|---|
@@ -225,7 +225,7 @@ during steward review.
 domain: infra
 ```
 
-### uto_pr
+### `auto_pr`
 
 | | |
 |---|---|
@@ -261,11 +261,11 @@ weekly schedule and on `workflow_dispatch`. The sweep script is
 
 For each repo the sweep collects three signal types:
 
-- **Labelled issues** --- issues carrying any label in `learning_labels` closed
+- **Labelled issues** — issues carrying any label in `learning_labels` closed
   within `days_back` days.
-- **Labelled pull requests** --- PRs carrying any label in `learning_labels` merged
+- **Labelled pull requests** — PRs carrying any label in `learning_labels` merged
   within `days_back` days.
-- **CHANGELOG entries** --- recent entries from `CHANGELOG.md` or `CHANGELOG`.
+- **CHANGELOG entries** — recent entries from `CHANGELOG.md` or `CHANGELOG`.
 
 ### Output
 
@@ -278,7 +278,7 @@ When `auto_pr: true`, the script immediately opens a pull request proposing the
 candidates for inclusion. Otherwise candidates wait for the weekly steward triage
 cycle described in [Memory Triage](../memory/triage.md).
 
-### How .basecoat.yml influences the sweep
+### How `.basecoat.yml` influences the sweep
 
 | Key | Effect |
 |---|---|
@@ -289,7 +289,7 @@ cycle described in [Memory Triage](../memory/triage.md).
 
 ## Complete examples
 
-### Quickstart --- minimal config, sync everything from main
+### Quickstart — minimal config, sync everything from main
 
 Suitable for individuals and small teams trying BaseCoat for the first time. No
 include lists means all agents, skills, and instructions are synced.
@@ -300,7 +300,7 @@ source: https://github.com/IBuySpy-Shared/basecoat.git
 ref: main
 ```
 
-### Pinned production --- locked to a release tag with explicit asset lists
+### Pinned production — locked to a release tag with explicit asset lists
 
 Suitable for teams that need stability. Pin to a release tag so the next upstream
 release does not change agent behaviour unexpectedly.
@@ -308,7 +308,7 @@ release does not change agent behaviour unexpectedly.
 ```yaml
 # .basecoat.yml
 source: https://github.com/IBuySpy-Shared/basecoat.git
-ref: v3.25.0   # pinned --- update deliberately after reviewing the changelog
+ref: v3.25.0   # pinned — update deliberately after reviewing the changelog
 
 agents:
   - solution-architect
@@ -339,7 +339,7 @@ contact: "@platform-eng"
 domain: infra
 ```
 
-### Enterprise fork --- private fork, exclude archive
+### Enterprise fork — private fork, exclude archive
 
 Suitable for enterprises that maintain a private fork with organisation-specific
 agents and instructions. Point `source` at the fork; consumers get the
@@ -355,7 +355,7 @@ sync:
     - archive/              # skip archived assets
     - agents/experimental/  # not ready for consumers
 
-# Memory sweep --- quarterly retrospective cadence
+# Memory sweep — quarterly retrospective cadence
 learning_labels:
   - learning
   - adr
@@ -367,7 +367,7 @@ domain: governance
 auto_pr: false
 ```
 
-### Selective sync --- only security and governance assets
+### Selective sync — only security and governance assets
 
 Suitable for teams that want a minimal footprint. Only the listed agents,
 skills, and instructions are synced; everything else is excluded.
@@ -392,7 +392,7 @@ sync:
   exclude:
     - archive/
 
-# Memory sweep --- security domain focus
+# Memory sweep — security domain focus
 learning_labels:
   - security
   - decision
@@ -404,7 +404,7 @@ domain: security
 
 ## See also
 
-- [Consumer Sync Guide](consumer-sync.md) --- sync commands and automation setup
-- [Make It Your Own](customization.md) --- customization levels from zero-config to full fork
-- [Memory Triage](../memory/triage.md) --- how stewards review sweep candidates
-- [Memory Enlistment](../memory/enlistment.md) --- opt a repo into the memory sweep
+- [Consumer Sync Guide](consumer-sync.md) — sync commands and automation setup
+- [Make It Your Own](customization.md) — customization levels from zero-config to full fork
+- [Memory Triage](../memory/triage.md) — how stewards review sweep candidates
+- [Memory Enlistment](../memory/enlistment.md) — opt a repo into the memory sweep
