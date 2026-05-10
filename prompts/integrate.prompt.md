@@ -8,13 +8,13 @@ tools: ["githubRepo", "codebase", "web", "changes"]
 
 **How to invoke:**
 
-```
+```text
 integrate and audit BaseCoat from https://github.com/YOUR-ORG/YOUR-REPO
 ```
 
 Or, if you are already inside the target repo:
 
-```
+```text
 integrate and audit BaseCoat
 ```
 
@@ -131,7 +131,7 @@ Run a baseline audit. Do not assume the sync ran perfectly or that the repo star
 
 #### Audit dimensions
 
-**A. Instruction coverage**
+#### A. Instruction coverage
 
 | Check | Good | Needs work |
 |---|---|---|
@@ -140,7 +140,7 @@ Run a baseline audit. Do not assume the sync ran perfectly or that the repo star
 | No duplicate guidance between global and scoped files | ✅ | ❌ Same rule appears in multiple instruction files |
 | Governance instructions present | ✅ | ❌ Missing |
 
-**B. Agent relevance**
+#### B. Agent relevance
 
 | Check | Good | Needs work |
 |---|---|---|
@@ -148,14 +148,14 @@ Run a baseline audit. Do not assume the sync ran perfectly or that the repo star
 | Agents have all three required sections: Inputs, Workflow, Output | ✅ | ❌ Missing section |
 | Agents reference skills via `allowed_skills` where appropriate | ✅ | ❌ Skills exist but agents don't reference them |
 
-**C. Skill coverage**
+#### C. Skill coverage
 
 | Check | Good | Needs work |
 |---|---|---|
 | At least one skill per major domain in use | ✅ | ❌ Skills directory is empty |
 | Skills have `name` and `description` frontmatter | ✅ | ❌ Missing frontmatter |
 
-**D. CI integration**
+#### D. CI integration
 
 | Check | Good | Needs work |
 |---|---|---|
@@ -163,7 +163,7 @@ Run a baseline audit. Do not assume the sync ran perfectly or that the repo star
 | No BaseCoat workflow files reference undefined secrets | ✅ | ❌ Missing secret triggers silent failure |
 | `run-tests.ps1` / equivalent invoked in CI | ✅ | ❌ No automated validation |
 
-**E. Naming and taxonomy**
+#### E. Naming and taxonomy
 
 | Check | Good | Needs work |
 |---|---|---|
@@ -179,7 +179,7 @@ Produce a structured report with three sections:
 
 #### 1. Integration summary
 
-```
+```text
 Repo: [URL]
 Tech stack: [detected]
 Sync method: [chosen]
