@@ -1,7 +1,13 @@
+[CmdletBinding()]
+param(
+    [string]$RootDir = (Get-Location).Path,
+    [switch]$Strict
+)
+
+Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
-$rootDir = if ($args.Count -gt 0) { $args[0] } else { (Get-Location).Path }
-Set-Location $rootDir
+Set-Location $RootDir
 
 $required = @('README.md', 'CHANGELOG.md', 'version.json', 'asset-manifest.json', 'sync.sh', 'sync.ps1', 'instructions', 'skills', 'prompts', 'agents')
 foreach ($item in $required) {
@@ -29,6 +35,47 @@ if (Test-Path '.agents/skills') {
 
 $errors = 0
 $warnings = 0
+$metadataStale = $false
+
+function Test-AgentMetadataFreshness {
+    $agentFiles = @(Get-ChildItem 'agents' -Filter '*.agent.md' -File | Sort-Object Name)
+    $agentNames = @($agentFiles | ForEach-Object { $_.BaseName -replace '\.agent$', '' })
+    $metadataPath = Join-Path (Get-Location) 'basecoat-metadata.json'
+
+    if (-not (Test-Path $metadataPath)) {
+        Write-Host "ERROR: Missing required file: basecoat-metadata.json" -ForegroundColor Red
+        $script:errors++
+        return
+    }
+
+    try {
+        $metadata = Get-Content $metadataPath -Raw | ConvertFrom-Json
+    }
+    catch {
+        Write-Host "ERROR: basecoat-metadata.json is invalid ($($_.Exception.Message))" -ForegroundColor Red
+        $script:errors++
+        return
+    }
+
+    $metadataAgentNames = @($metadata.agents | ForEach-Object { $_.name } | Where-Object { $_ })
+    $missingAgents = @($agentNames | Where-Object { $_ -notin $metadataAgentNames })
+    $extraAgents = @($metadataAgentNames | Where-Object { $_ -notin $agentNames })
+
+    if ($missingAgents.Count -gt 0 -or $extraAgents.Count -gt 0 -or $agentNames.Count -ne $metadataAgentNames.Count) {
+        Write-Host "WARNING: basecoat-metadata.json is stale: found $($agentNames.Count) agent file(s) but $($metadataAgentNames.Count) metadata entry(ies). Run 'pwsh scripts/update-metadata.ps1'." -ForegroundColor Yellow
+
+        if ($missingAgents.Count -gt 0) {
+            Write-Host "WARNING: Missing metadata entries for agents: $($missingAgents -join ', ')" -ForegroundColor Yellow
+        }
+
+        if ($extraAgents.Count -gt 0) {
+            Write-Host "INFO: Metadata entries without matching agent files: $($extraAgents -join ', ')" -ForegroundColor DarkYellow
+        }
+
+        $script:warnings++
+        $script:metadataStale = $true
+    }
+}
 
 foreach ($file in $files) {
     $lines = Get-Content $file.FullName -TotalCount 50
@@ -125,8 +172,19 @@ catch {
     throw "Validation failed: asset-manifest.json is invalid ($($_.Exception.Message))"
 }
 
+Test-AgentMetadataFreshness
+
+if ($errors -gt 0) {
+    throw "Validation failed with $errors error(s)"
+}
+
 if ($warnings -gt 0) {
     Write-Host "Base Coat validation passed with $warnings warning(s)" -ForegroundColor Yellow
 } else {
     Write-Host 'Base Coat validation passed' -ForegroundColor Green
+}
+
+if ($Strict -and $metadataStale) {
+    Write-Host 'Registry metadata freshness check failed in strict mode.' -ForegroundColor Red
+    exit 1
 }
