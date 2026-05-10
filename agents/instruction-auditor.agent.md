@@ -1,6 +1,6 @@
 ---
 name: instruction-auditor
-description: Detects missing instruction coverage for a repo — identifies tech stacks and workflow patterns present in the codebase that have no corresponding Basecoat instruction file in the overlay.
+description: Detects missing instruction coverage for a repo — identifies tech stacks and workflow patterns present in the codebase that have no corresponding BaseCoat instruction file in the overlay.
 compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
 metadata:
   category: "Governance & Compliance"
@@ -15,7 +15,7 @@ allowed_skills: []
 # Instruction Auditor Agent
 
 This agent scans a repository to detect tech stacks and workflow patterns that lack
-corresponding Basecoat instruction files in the overlay. It produces a coverage report
+corresponding BaseCoat instruction files in the overlay. It produces a coverage report
 and recommends sync commands for any gaps.
 
 ## Inputs
@@ -168,7 +168,7 @@ broad pattern recognition across potentially large directory trees.
 
 ## Governance
 
-This agent operates under the basecoat governance framework.
+This agent operates under the BaseCoat governance framework.
 
 - **Issue-first**: Do not make code changes without a logged GitHub issue.
 - **PRs only**: Never commit directly to `main`. Open a PR, self-approve if needed.

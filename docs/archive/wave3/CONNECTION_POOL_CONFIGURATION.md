@@ -1,5 +1,5 @@
 # Connection Pool Configuration & Testing Guide
-## Basecoat Portal Database v1.0
+## BaseCoat Portal Database v1.0
 
 ### Executive Summary
 

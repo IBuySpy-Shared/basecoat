@@ -1,6 +1,6 @@
 # Branch Protection — Recommended Ruleset
 
-> **Part of:** basecoat Enterprise Governance Framework · Issue #43 · Sprint 5 / v1.0.0
+> **Part of:** BaseCoat Enterprise Governance Framework · Issue #43 · Sprint 5 / v1.0.0
 
 ---
 

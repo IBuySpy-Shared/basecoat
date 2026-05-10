@@ -1,12 +1,12 @@
 # Wave 3 Day 3 Database Validation - Deployment Procedures
-## Basecoat Portal PostgreSQL v1.0 Staging Deployment
+## BaseCoat Portal PostgreSQL v1.0 Staging Deployment
 
 ---
 
 ## Deployment Summary
 
 **Project:** Wave 3 Day 3 Database Validation in Staging
-**Database:** Basecoat Portal PostgreSQL v1.0
+**Database:** BaseCoat Portal PostgreSQL v1.0
 **Target:** AWS RDS Staging Environment
 **Status:** 🟢 READY FOR DEPLOYMENT
 

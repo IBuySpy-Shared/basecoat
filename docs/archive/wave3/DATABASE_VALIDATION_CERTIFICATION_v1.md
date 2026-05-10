@@ -684,7 +684,7 @@ wal_keep_size = 1GB
 
 ### Final Certification
 
-**Database:** Basecoat Portal
+**Database:** BaseCoat Portal
 **Version:** 1.0
 **Target Environment:** Staging RDS (PostgreSQL 14+)
 **Certification Date:** 2026-05-05
