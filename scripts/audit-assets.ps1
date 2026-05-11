@@ -416,26 +416,26 @@ $results = switch ($SortBy) {
 # Summary statistics
 # ---------------------------------------------------------------------------
 
-$allScores   = $results | Select-Object -ExpandProperty Score
-$totalAssets = $results.Count
+$allScores   = @($results | Select-Object -ExpandProperty Score)
+$totalAssets = $allScores.Count
 $avgScore    = if ($totalAssets -gt 0) { [math]::Round(($allScores | Measure-Object -Average).Average, 1) } else { 0 }
-$redCount    = ($results | Where-Object { $_.Score -lt 6.0 }).Count
-$yellowCount = ($results | Where-Object { $_.Score -ge 6.0 -and $_.Score -lt 8.0 }).Count
-$greenCount  = ($results | Where-Object { $_.Score -ge 8.0 }).Count
+$redCount    = @($results | Where-Object { $_.Score -lt 6.0 }).Count
+$yellowCount = @($results | Where-Object { $_.Score -ge 6.0 -and $_.Score -lt 8.0 }).Count
+$greenCount  = @($results | Where-Object { $_.Score -ge 8.0 }).Count
 $overallGrade = Get-GradeFromScore $avgScore
 
 # Per-category stats (use all results, not filtered)
 $allResults = @()
 if ($Category -in @("agents", "all")) {
-    $agentScores = ($results | Where-Object { $_.Category -eq "agent" } | Select-Object -ExpandProperty Score)
+    $agentScores = @($results | Where-Object { $_.Category -eq "agent" } | Select-Object -ExpandProperty Score)
     $agentAvg = if ($agentScores.Count -gt 0) { [math]::Round(($agentScores | Measure-Object -Average).Average, 1) } else { 0 }
 }
 if ($Category -in @("skills", "all")) {
-    $skillScores = ($results | Where-Object { $_.Category -eq "skill" } | Select-Object -ExpandProperty Score)
+    $skillScores = @($results | Where-Object { $_.Category -eq "skill" } | Select-Object -ExpandProperty Score)
     $skillAvg = if ($skillScores.Count -gt 0) { [math]::Round(($skillScores | Measure-Object -Average).Average, 1) } else { 0 }
 }
 if ($Category -in @("instructions", "all")) {
-    $instrScores = ($results | Where-Object { $_.Category -eq "instruction" } | Select-Object -ExpandProperty Score)
+    $instrScores = @($results | Where-Object { $_.Category -eq "instruction" } | Select-Object -ExpandProperty Score)
     $instrAvg = if ($instrScores.Count -gt 0) { [math]::Round(($instrScores | Measure-Object -Average).Average, 1) } else { 0 }
 }
 

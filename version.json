@@ -1,6 +1,6 @@
 {
   "name": "base-coat",
-  "version": "3.25.0",
-  "releaseDate": "2026-05-09",
-  "notes": "Consumer reliability and asset coverage: naming ADR, version drift detection, security guardrails, new skills (azure-linux-app-service, cross-stack-modernization, Entra SQL auth), expanded agents (legacy-modernization, self-healing-ci), memory system (memory-promoter, repeat-fix detector, batch submit)"
+  "version": "3.26.0",
+  "releaseDate": "2026-05-11",
+  "notes": "Quality uplift sprint: raised 8 red-scored assets to green, refreshed registry metadata to 82 agents, fixed all validation warnings, added missing frontmatter fields"
 }
