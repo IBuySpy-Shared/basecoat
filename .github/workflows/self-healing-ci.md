@@ -1,29 +1,29 @@
 ---
 on:
-  # workflow_run trigger disabled — requires COPILOT_GITHUB_TOKEN org secret.
-  # Re-enable once the secret is provisioned.
-  # workflow_run:
-  #   workflows:
-  #     - CI
-  #     - PR Validation
-  #     - Validate BaseCoat
-  #     - Validate Repo Template Sample
-  #     - Package Base Coat
-  #     - Deploy Docs
-  #     - MCP Build
-  #     - MCP Deploy
-  #     - Release
-  #     - Publish to Production
-  #     - Terraform Deploy
-  #     - Post-Deploy Smoke Test
-  #     - Version Consistency Check
-  #     - Consumer Sync Validation
-  #   types: [completed]
+  workflow_run:
+    workflows:
+      - CI
+      - PR Validation
+      - Validate BaseCoat
+      - Validate Repo Template Sample
+      - Package Base Coat
+      - Deploy Docs
+      - MCP Build
+      - MCP Deploy
+      - Release
+      - Publish to Production
+      - Terraform Deploy
+      - Post-Deploy Smoke Test
+      - Version Consistency Check
+      - Consumer Sync Validation
+    branches: [main]
+    types: [completed]
   workflow_dispatch:
     inputs:
       run_id:
         description: "Workflow run ID to analyze (optional)"
         required: false
+        type: string
 permissions:
   contents: read
   actions: read
@@ -31,11 +31,16 @@ permissions:
   pull-requests: read
 safe-outputs:
   add-comment:
+    hide-older-comments: true
   create-issue:
     max: 1
+    close-older-issues: true
+concurrency:
+  group: "gh-aw-${{ github.workflow }}-${{ github.event.workflow_run.id || inputs.run_id || github.run_id }}"
+  cancel-in-progress: true
 engine: copilot
 timeout-minutes: 20
-run-name: "Self-Healing CI — run ${{ github.event.workflow_run.id }}"
+run-name: "Self-Healing CI — run ${{ github.event.workflow_run.id || inputs.run_id || github.run_id }}"
 ---
 
 # Self-Healing CI — Automated Failure Diagnosis
@@ -49,8 +54,10 @@ diagnosis and remediation guidance.
 - **Commit SHA**: `${{ github.event.workflow_run.head_sha }}`
 - **Conclusion**: `${{ github.event.workflow_run.conclusion }}`
 - **Repository**: `${{ github.repository }}`
+- **Auto mode guard**: automatic `workflow_run` handling is gated by repo variable `SELF_HEALING_CI_AUTO=true` (disabled by default when unset).
 
 Fetch full workflow run details using:
+
 ```bash
 gh run view ${{ github.event.workflow_run.id }} --repo ${{ github.repository }} --json name,headBranch,conclusion,status,jobs
 ```

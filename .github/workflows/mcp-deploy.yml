@@ -8,6 +8,13 @@ on:
       - "mcp/basecoat-metrics/**"
       - "infra/mcp/**"
       - ".github/workflows/mcp-deploy.yml"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "mcp/basecoat-metrics/**"
+      - "infra/mcp/**"
+      - ".github/workflows/mcp-deploy.yml"
   workflow_dispatch:
     inputs:
       image_tag:
@@ -29,12 +36,14 @@ permissions:
 env:
   REGISTRY:   ghcr.io
   IMAGE_NAME: ${{ github.repository_owner }}/basecoat-metrics-mcp
+  TARGET_ENV: ${{ github.event_name == 'pull_request' && 'staging' || inputs.environment || 'prod' }}
 
 jobs:
   build-push:
     name: Build and push image to GHCR
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    if: ${{ github.event_name != 'pull_request' || !github.event.pull_request.head.repo.fork }}
     outputs:
       image_tag: ${{ steps.meta.outputs.version }}
       image_ref: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.meta.outputs.version }}
@@ -78,7 +87,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     needs: build-push
-    environment: ${{ inputs.environment || 'prod' }}
+    if: ${{ github.event_name != 'pull_request' || !github.event.pull_request.head.repo.fork }}
+    environment: ${{ env.TARGET_ENV }}
 
     steps:
       - name: Check out repository
@@ -93,6 +103,28 @@ jobs:
         id: owner
         run: echo "lc=${GITHUB_REPOSITORY_OWNER,,}" >> "$GITHUB_OUTPUT"
 
+      - name: Verify GHCR image pull auth
+        run: |
+          echo "${{ secrets.GITHUB_TOKEN }}" | docker login "${{ env.REGISTRY }}" -u "${{ github.actor }}" --password-stdin
+          docker pull "${{ needs.build-push.outputs.image_ref }}"
+
+      - name: Staging what-if validation
+        if: ${{ env.TARGET_ENV == 'staging' }}
+        run: |
+          az deployment group what-if \
+            --resource-group "${{ secrets.MCP_RESOURCE_GROUP }}" \
+            --template-file infra/mcp/main.bicep \
+            --name "mcp-staging-whatif-${{ github.run_id }}-${{ github.run_attempt }}" \
+            --parameters \
+              imageTag="${{ needs.build-push.outputs.image_tag }}" \
+              imageRepo="${{ steps.owner.outputs.lc }}/basecoat-metrics-mcp" \
+              metricsBaseUrl="https://${{ steps.owner.outputs.lc }}.github.io/basecoat/metrics" \
+              environment="${{ env.TARGET_ENV }}" \
+              registryUsername="${{ github.actor }}" \
+              registryPassword="${{ secrets.GITHUB_TOKEN }}" \
+            --result-format ResourceIdOnly \
+            --no-pretty-print
+
       - name: Deploy / update Bicep infrastructure
         uses: azure/arm-deploy@a1361c2c2cd398621955b16ca32e01c65ea340f5 # v2
         id: infra
@@ -103,10 +135,41 @@ jobs:
             imageTag=${{ needs.build-push.outputs.image_tag }}
             imageRepo=${{ steps.owner.outputs.lc }}/basecoat-metrics-mcp
             metricsBaseUrl=https://${{ steps.owner.outputs.lc }}.github.io/basecoat/metrics
-            environment=${{ inputs.environment || 'prod' }}
+            environment=${{ env.TARGET_ENV }}
             registryUsername=${{ github.actor }}
             registryPassword=${{ secrets.GITHUB_TOKEN }}
           deploymentName: mcp-${{ github.run_number }}
+
+      - name: Verify Container App readiness
+        run: |
+          if [[ "${{ env.TARGET_ENV }}" == "prod" ]]; then
+            APP_NAME="bcmcp-app"
+          else
+            APP_NAME="bcmcp-app-${{ env.TARGET_ENV }}"
+          fi
+
+          RUNNING_STATUS=$(az containerapp show \
+            --resource-group "${{ secrets.MCP_RESOURCE_GROUP }}" \
+            --name "${APP_NAME}" \
+            --query "properties.runningStatus" -o tsv)
+          LATEST_READY_REVISION=$(az containerapp show \
+            --resource-group "${{ secrets.MCP_RESOURCE_GROUP }}" \
+            --name "${APP_NAME}" \
+            --query "properties.latestReadyRevisionName" -o tsv)
+
+          echo "Container App: ${APP_NAME}"
+          echo "Running status: ${RUNNING_STATUS}"
+          echo "Latest ready revision: ${LATEST_READY_REVISION}"
+
+          if [[ "${RUNNING_STATUS}" != "Running" ]]; then
+            echo "::error::Container App is not running (status: ${RUNNING_STATUS})"
+            exit 1
+          fi
+
+          if [[ -z "${LATEST_READY_REVISION}" || "${LATEST_READY_REVISION}" == "null" ]]; then
+            echo "::error::No ready revision detected for ${APP_NAME}"
+            exit 1
+          fi
 
       - name: Smoke test — health endpoint
         run: |
@@ -134,5 +197,6 @@ jobs:
           echo "| | |" >> "$GITHUB_STEP_SUMMARY"
           echo "|---|---|" >> "$GITHUB_STEP_SUMMARY"
           echo "| **Image** | \`${{ needs.build-push.outputs.image_ref }}\` |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| **Environment** | \`${{ env.TARGET_ENV }}\` |" >> "$GITHUB_STEP_SUMMARY"
           echo "| **Health** | \`https://${{ steps.infra.outputs.fqdn }}/health\` |" >> "$GITHUB_STEP_SUMMARY"
           echo "| **MCP endpoint** | \`https://${{ steps.infra.outputs.fqdn }}\` |" >> "$GITHUB_STEP_SUMMARY"

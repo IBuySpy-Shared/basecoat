@@ -17,7 +17,7 @@ Phase 1 focuses on signals that are available today without private or speculati
 | Active Copilot users (rollup over report window) | `GET /orgs/{org}/copilot/metrics/reports/organization-28-day/latest` |
 | Daily active CLI users (sum over report window) | NDJSON report rows (`daily_active_cli_users`) |
 | Daily active cloud-agent users (sum over report window) | NDJSON report rows (`daily_active_copilot_cloud_agent_users`) |
-| PR cycle time, CI success rate, issue resolution | Existing repo metrics collectors in `scripts/metrics/collect-metrics.py` |
+| PR cycle time, CI pass rate (last 20 and 100 measurable runs), issue resolution | Existing repo metrics collectors in `scripts/metrics/collect-metrics.py` |
 
 ## Not available (public API)
 
@@ -43,6 +43,7 @@ Telemetry collection in this phase is metadata only:
 
 - `scripts/metrics/collect-metrics.py` now uses the reports endpoint and parses NDJSON rows.
 - Dashboard summaries continue to consume `latest.json` with backward-compatible `total_active_users`.
+- CI metrics expose backward-compatible `success_rate` and explicit `pass_rate` / `ci_pass_rate_last_20_runs` fields for retrospective use.
 
 ## Follow-up split candidates
 

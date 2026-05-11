@@ -18,19 +18,22 @@ Navigate to: **Settings → Secrets and variables → Actions → New repository
 **Purpose:** Authenticates the GitHub Agentic Workflow (gh-aw) agent containers.
 Without this secret the agentic lock-file workflows will fail to start.
 
-**How to create:**
+**How to create (recommended):**
 
-1. Go to <https://github.com/settings/tokens> (your personal account)
-2. Click **Generate new token (classic)**
-3. Name it `basecoat-copilot-agent`
-4. Set expiration to **90 days** (rotate on expiry)
-5. Select scopes:
-   - `repo` (full control of private repositories)
-   - `workflow`
-   - `read:org`
-6. Click **Generate token** and copy the value immediately
-7. In the repository: **Settings → Secrets and variables → Actions**
-8. Click **New repository secret**, name it `COPILOT_GITHUB_TOKEN`, paste value
+1. Go to <https://github.com/settings/personal-access-tokens/new>
+2. Create a **fine-grained PAT**
+3. Set **Resource owner** to your user account
+4. Under **Account permissions**, set **Copilot Requests** → `Read`
+5. Set expiration to **90 days** (rotate on expiry)
+6. Generate token and copy it immediately
+7. Run bootstrap script:
+
+```powershell
+pwsh scripts/bootstrap-copilot-github-token.ps1 -Repo IBuySpy-Shared/basecoat
+```
+
+If you prefer manual UI setup, add the value as repository secret
+`COPILOT_GITHUB_TOKEN`.
 
 **Rotation schedule:** Rotate every 90 days. Set a calendar reminder.
 When rotating, generate a new token *before* the old one expires, update
@@ -46,8 +49,9 @@ the secret, then revoke the old token.
 during agent execution (separate from `COPILOT_GITHUB_TOKEN` for least-privilege
 isolation).
 
-**How to create:** Same steps as `COPILOT_GITHUB_TOKEN` above, but select
-only `repo:read` scope. Name the token `basecoat-gh-aw`.
+**How to create:** Use a **separate token** from `COPILOT_GITHUB_TOKEN`
+(recommended). Name it `basecoat-gh-aw` and grant only the minimum
+repository read permissions required.
 
 ---
 

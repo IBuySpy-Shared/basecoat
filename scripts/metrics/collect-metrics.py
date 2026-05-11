@@ -155,22 +155,52 @@ def collect_pr_metrics(repo, token):
 
 
 def collect_ci_metrics(repo, token):
-    """Collect CI success rate for a repo."""
+    """Collect CI pass-rate metrics for a repo."""
     print(f"  Collecting CI metrics for {repo}...")
     runs = github_api(
         f"https://api.github.com/repos/{repo}/actions/runs?per_page=100&status=completed",
         token
     )
     if not runs or "workflow_runs" not in runs:
-        return {"success_rate": 0, "total_runs": 0}
+        return {
+            "success_rate": 0,
+            "pass_rate": 0,
+            "ci_pass_rate_last_20_runs": 0,
+            "ci_pass_rate_last_100_runs": 0,
+            "total_runs_sampled": 0,
+            "runs_sampled_last_20": 0,
+            "successful_runs_last_20": 0,
+        }
 
     workflow_runs = runs["workflow_runs"][:100]
-    success = sum(1 for r in workflow_runs if r["conclusion"] == "success")
-    total = len(workflow_runs)
+
+    # Prefer canonical CI workflows for signal quality.
+    canonical_ci_names = {"ci", "pr validation", "validate basecoat", "validate base coat"}
+    ci_runs = [r for r in workflow_runs if (r.get("name") or "").strip().lower() in canonical_ci_names]
+    sampled_runs = ci_runs if ci_runs else workflow_runs
+
+    # Exclude non-signal conclusions from denominator.
+    measurable_runs = [
+        r for r in sampled_runs
+        if r.get("conclusion") in {"success", "failure", "timed_out", "startup_failure"}
+    ]
+    measurable_20 = measurable_runs[:20]
+    success_total = sum(1 for r in measurable_runs if r.get("conclusion") == "success")
+    success_20 = sum(1 for r in measurable_20 if r.get("conclusion") == "success")
+    total = len(measurable_runs)
+    total_20 = len(measurable_20)
+
+    pass_rate_100 = round(success_total / total * 100, 1) if total > 0 else 0
+    pass_rate_20 = round(success_20 / total_20 * 100, 1) if total_20 > 0 else 0
 
     return {
-        "success_rate": round(success / total * 100, 1) if total > 0 else 0,
-        "total_runs_sampled": total
+        "success_rate": pass_rate_100,  # Backward-compatible field.
+        "pass_rate": pass_rate_100,
+        "ci_pass_rate_last_20_runs": pass_rate_20,
+        "ci_pass_rate_last_100_runs": pass_rate_100,
+        "total_runs_sampled": total,
+        "runs_sampled_last_20": total_20,
+        "successful_runs_last_20": success_20,
     }
 
 
@@ -252,8 +282,8 @@ def detect_degradation(current, history):
     # Check per-repo CI success rate drop
     for repo, data in current.get("repos", {}).items():
         prev_repo = prev.get("repos", {}).get(repo, {})
-        curr_ci = data.get("ci", {}).get("success_rate", 100)
-        prev_ci = prev_repo.get("ci", {}).get("success_rate", 100)
+        curr_ci = data.get("ci", {}).get("pass_rate", data.get("ci", {}).get("success_rate", 100))
+        prev_ci = prev_repo.get("ci", {}).get("pass_rate", prev_repo.get("ci", {}).get("success_rate", 100))
         if prev_ci > 0 and curr_ci < prev_ci - 15:
             alerts.append({
                 "type": "ci_success_drop",
@@ -357,14 +387,21 @@ def main():
         else:
             f.write("- Copilot metrics not available (check token permissions)\n\n")
         f.write(f"## Repository Metrics\n\n")
-        f.write("| Repo | PRs Merged | Cycle Time | CI Success | Coverage |\n")
-        f.write("|------|-----------|------------|------------|----------|\n")
+        f.write("| Repo | PRs Merged | Cycle Time | CI Success (100 runs) | CI Pass Rate (20 runs) | Coverage |\n")
+        f.write("|------|-----------|------------|-----------------------|------------------------|----------|\n")
         for repo, data in metrics["repos"].items():
             short = repo.split("/")[-1]
             pr = data["pull_requests"]
             ci = data["ci"]
             cov = data["basecoat_coverage"]
-            f.write(f"| {short} | {pr['prs_merged_28d']} | {pr['cycle_time_median_hours']}h | {ci['success_rate']}% | {cov['percentage']}% |\n")
+            ci_success = ci.get("success_rate", 0)
+            ci_pass_20 = ci.get("ci_pass_rate_last_20_runs", ci_success)
+            sampled_20 = ci.get("runs_sampled_last_20", 0)
+            success_20 = ci.get("successful_runs_last_20", 0)
+            f.write(
+                f"| {short} | {pr['prs_merged_28d']} | {pr['cycle_time_median_hours']}h | "
+                f"{ci_success}% | {ci_pass_20}% ({success_20}/{sampled_20}) | {cov['percentage']}% |\n"
+            )
         f.write("\n")
     print(f"✓ Summary written to {summary_path}")
 

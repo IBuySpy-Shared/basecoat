@@ -8,6 +8,7 @@ import subprocess
 import json
 import sys
 import time
+import os
 from datetime import datetime
 from pathlib import Path
 
@@ -48,10 +49,10 @@ class PerformanceTestRunner:
         },
     ]
 
-    def __init__(self, base_url: str, api_token: str, skip_tests: list = None):
+    def __init__(self, base_url: str, auth_token: str, skip_tests: list = None):
         """Initialize test runner"""
         self.base_url = base_url
-        self.api_token = api_token
+        self.auth_token = auth_token
         self.skip_tests = skip_tests or []
         self.results = {}
         self.start_time = datetime.now()
@@ -90,13 +91,13 @@ class PerformanceTestRunner:
             '--out', f"json=results-{test['name']}.json",
             '--out', 'cloud',
             '-e', f"BASE_URL={self.base_url}",
-            '-e', f"API_TOKEN={self.api_token}",
         ]
 
         try:
-            safe_cmd = [arg if 'API_TOKEN' not in arg else f"API_TOKEN=[REDACTED]" for arg in cmd]
-            print(f"\n▶️  Running: {' '.join(safe_cmd)}\n")
-            result = subprocess.run(cmd, check=True, capture_output=False)
+            print(f"\n▶️  Running: {' '.join(cmd)}\n")
+            env = os.environ.copy()
+            env['API_TOKEN'] = self.auth_token
+            result = subprocess.run(cmd, check=True, capture_output=False, env=env)
 
             # Load and store results
             results_file = f"results-{test['name']}.json"
@@ -197,13 +198,14 @@ def main():
 
     args = parser.parse_args()
 
-    # Use environment variable if token not provided
-    api_token = args.api_token or os.environ.get('API_TOKEN', 'test-token-123')
+    # Use environment variable if token not provided; never default to a placeholder secret.
+    auth_token = args.api_token or os.environ.get('API_TOKEN')
+    if not auth_token:
+        parser.error('API token is required via --api-token or API_TOKEN environment variable')
 
-    runner = PerformanceTestRunner(args.base_url, api_token, args.skip)
+    runner = PerformanceTestRunner(args.base_url, auth_token, args.skip)
     runner.run_all_tests()
 
 
 if __name__ == '__main__':
-    import os
     main()
