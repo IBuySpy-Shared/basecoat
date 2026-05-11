@@ -57,6 +57,7 @@ diagnosis and remediation guidance.
 - **Auto mode guard**: automatic `workflow_run` handling is gated by repo variable `SELF_HEALING_CI_AUTO=true` (disabled by default when unset).
 
 Fetch full workflow run details using:
+
 ```bash
 gh run view ${{ github.event.workflow_run.id }} --repo ${{ github.repository }} --json name,headBranch,conclusion,status,jobs
 ```

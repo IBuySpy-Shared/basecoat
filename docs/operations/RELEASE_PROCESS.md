@@ -17,7 +17,7 @@ basecoat follows [Semantic Versioning 2.0.0](https://semver.org/) and [Keep a Ch
 
 ## Version Bump Rules
 
-```
+```text
 MAJOR.MINOR.PATCH
 ```
 
