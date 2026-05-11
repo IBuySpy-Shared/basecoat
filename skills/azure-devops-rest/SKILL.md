@@ -1,6 +1,6 @@
 ---
 name: azure-devops-rest
-description: "Azure DevOps REST API patterns — authentication, scopes, pagination, throttling, and endpoint taxonomy for work items, pipelines, repos, and artifacts."
+description: "Use when building Azure DevOps REST integrations for work items, pipelines, repos, artifacts, auth, pagination, throttling, and API versioning."
 context: fork
 compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
 metadata:
@@ -13,8 +13,30 @@ allowed-tools: ["bash", "git", "grep", "find"]
 
 # Azure DevOps REST API Skill
 
-Patterns for building integrations, scripts, and agents that interact with Azure DevOps
-Services or Server via the REST API.
+Use this skill when you need proven patterns for scripts, automations, or agents that call Azure DevOps Services or Azure DevOps Server through the REST API. It helps with authentication choices, endpoint discovery, scope selection, pagination, throttling, and safe request construction for work items, pipelines, repos, artifacts, and extensions.
+
+## When to Use
+
+- Query or update work items with WIQL or JSON Patch
+- Trigger pipelines or inspect runs from automation
+- Read repos, pull requests, refs, commits, or artifacts
+- Design reliable pagination and retry handling
+- Choose the right auth flow for local scripts, agents, or pipelines
+
+## Inputs and Outputs
+
+Typical input includes the organization URL, project name, API version, auth method, endpoint path, request body, and any continuation token. The output usually returns JSON payloads, status codes, response headers, and resource identifiers. This skill also produces guidance on required scopes, safe headers, retry behavior, and common failure modes so the caller can turn raw API output into dependable automation.
+
+## Example Requests
+
+```bash
+curl -sS \
+  -u ":$AZDO_PAT" \
+  -H "Content-Type: application/json" \
+  "https://dev.azure.com/<org>/<project>/_apis/wit/workitems?ids=101,102&api-version=7.1"
+```
+
+Use `application/json-patch+json` for PATCH operations, and always include `api-version=7.1`. For pipeline runs, send the correct branch or template parameters and check the returned run identifier so downstream steps can poll for completion.
 
 ## Reference Files
 

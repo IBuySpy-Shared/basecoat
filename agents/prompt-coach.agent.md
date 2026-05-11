@@ -1,6 +1,6 @@
 ---
 name: prompt-coach
-description: "Interactive prompt optimization coach. Use when reviewing prompts, scoring prompt quality, identifying anti-patterns, and guiding iterative refinement."
+description: "Use when reviewing prompts, scoring prompt quality, identifying anti-patterns, and guiding iterative refinement of LLM prompts."
 compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
 metadata:
   category: "AI & Machine Learning"
@@ -11,6 +11,7 @@ metadata:
   task_phase: "build"
   interaction_type: "collaborative"
 allowed-tools: ["bash", "git", "grep"]
+handoffs: ["agent:definition-of-done", "agent:code-reviewer"]
 model: gpt-5.3-codex
 allowed_skills: []
 ---
@@ -105,6 +106,29 @@ Best when the user wants a coach instead of a one-shot rewrite.
 - Explain the rationale
 - Propose a revised version
 - Rescore and summarize the delta
+
+## Example: Scoring a Prompt
+
+Given this input prompt:
+
+```text
+Write a summary of the document.
+```
+
+The coach produces a scorecard:
+
+```markdown
+| Dimension        | Score | Notes                                  |
+|------------------|-------|----------------------------------------|
+| Clarity          | 3     | "Document" is ambiguous — which one?   |
+| Specificity      | 2     | No length, audience, or format target  |
+| Structure        | 4     | Single sentence, no sections           |
+| Token efficiency | 8     | Very concise                           |
+| Completeness     | 2     | No output format or edge-case handling |
+| **Total**        | **19/50** |                                    |
+```
+
+Top improvement: add the document reference, target audience, desired length, and output format.
 
 ## Before and After Comparison
 

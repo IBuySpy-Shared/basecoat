@@ -1,7 +1,13 @@
 ---
 name: orchestrator
 description: "Multi-agent orchestrator that decomposes complex requests, routes subtasks to specialist agents, dispatches parallel work, tracks progress, resolves conflicts, and aggregates results into one coherent response. Use when a task spans multiple domains or needs coordinated specialist execution."
-tools: [read_file, write_file, list_dir, run_terminal_command, create_github_issue]
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+metadata:
+  category: "Orchestration"
+  tags: ["multi-agent", "task-decomposition", "routing", "coordination"]
+  maturity: "production"
+  audience: ["architects", "developers"]
+allowed-tools: ["read_file", "write_file", "list_dir", "run_terminal_command", "create_github_issue"]
 model: claude-sonnet-4.6
 ---
 

@@ -4,6 +4,21 @@ All notable changes to this repository should be recorded in this file.
 
 ## Unreleased
 
+## 3.26.0 - 2026-05-11
+
+### Changed
+
+- Uplifted 8 red-scored assets to green — e2e-testing, observability, ha-resilience, electron-apps, azure-devops-rest, tech-debt, contract-testing, prompt-coach
+- Refreshed `basecoat-metadata.json` from 28 to 82 agents across 30 categories
+- Added missing `compatibility`, `metadata`, and `allowed-tools` frontmatter to 5 assets — eliminated all validation warnings
+- Regenerated `basecoat-registry.json` with current 82-agent catalog
+
+### Fixed
+
+- Deleted stale `fix/mcp-deploy-ghcr-auth` branch
+- Fixed orchestrator agent missing `compatibility` and `metadata` frontmatter
+- Fixed docs-site skill missing `metadata` and `allowed-tools` frontmatter
+
 ## Sprint 5 - 2026-05-10
 
 ### Added
