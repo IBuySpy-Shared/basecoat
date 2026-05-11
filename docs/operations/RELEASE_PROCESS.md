@@ -166,8 +166,10 @@ git push origin vX.Y.Z
 Pushing a `v*.*.*` tag triggers the `release.yml` and `package-basecoat.yml` workflows automatically. These workflows:
 
 1. Build a source archive (`basecoat-vX.Y.Z.zip`)
-2. Extract the changelog section for this version
+2. Extract release notes from `CHANGELOG.md` (prefers `## X.Y.Z`, then falls back to `## Unreleased`)
 3. Create a GitHub release with the archive and notes
+
+If neither changelog section is available, the workflow auto-generates release notes from commit history as a final fallback.
 
 If you need to create the release manually (e.g., workflows are disabled):
 

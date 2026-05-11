@@ -36,6 +36,13 @@ flowchart LR
 Metrics snapshots are stored in the `gh-pages` branch under `dashboard/metrics/`.
 Each weekly run appends a JSON record. The dashboard retains 52 weeks of history.
 
+Weekly output also includes CI reliability signals per repository in both
+`latest.json` and `SUMMARY.md`:
+
+- `success_rate` (backward-compatible, based on last 100 measurable runs)
+- `pass_rate` (alias of `success_rate`)
+- `ci_pass_rate_last_20_runs` (retrospective-focused pass rate window)
+
 ## Enabling adoption reporting in your repo
 
 Add the following workflow call to your consumer repository to participate in
