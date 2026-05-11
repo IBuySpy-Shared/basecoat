@@ -1,6 +1,7 @@
 ---
 name: azure-linux-app-service
 description: Deploy and operate Python, Ruby, and Node.js applications on Azure App Service Linux using PaaS patterns, slot swaps, and log streaming.
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
 metadata:
   category: infrastructure
   keywords: "azure, app-service, linux, python, ruby, nodejs, paas, deployment"

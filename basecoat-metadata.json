@@ -1,638 +1,322 @@
 {
   "$schema": "basecoat-metadata-schema",
-  "version": "2.2.0",
-  "generated": "2026-05-10",
+  "version": "3.26.0",
+  "generated": "2026-05-11",
   "categories": {
-    "Development": {
-      "label": "Development",
-      "description": "Core development agents for building software",
-      "icon": "🔨",
+    "AI & Development": {
+      "label": "AI & Development",
+      "description": "AI & Development agents",
+      "icon": "📦",
       "agents": [
-        "backend-dev",
-        "frontend-dev",
-        "middleware-dev",
-        "data-tier"
+        "agent-designer",
+        "new-customization"
       ]
     },
-    "Architecture": {
-      "label": "Architecture",
-      "description": "Architecture and design agents for system planning",
-      "icon": "🏗️",
+    "AI & Learning": {
+      "label": "AI & Learning",
+      "description": "AI & Learning agents",
+      "icon": "📦",
       "agents": [
-        "solution-architect",
-        "api-designer",
+        "feedback-loop"
+      ]
+    },
+    "AI & Machine Learning": {
+      "label": "AI & Machine Learning",
+      "description": "AI & Machine Learning agents",
+      "icon": "🤖",
+      "agents": [
+        "llmops",
+        "mcp-developer",
+        "mlops",
+        "prompt-coach",
+        "prompt-engineer"
+      ]
+    },
+    "AI & Operations": {
+      "label": "AI & Operations",
+      "description": "AI & Operations agents",
+      "icon": "📦",
+      "agents": [
+        "agentops"
+      ]
+    },
+    "API & Integration": {
+      "label": "API & Integration",
+      "description": "API & Integration agents",
+      "icon": "📦",
+      "agents": [
+        "api-designer"
+      ]
+    },
+    "Architecture & Design": {
+      "label": "Architecture & Design",
+      "description": "Architecture & Design agents",
+      "icon": "📦",
+      "agents": [
+        "domain-designer",
+        "ha-architect",
+        "solution-architect"
+      ]
+    },
+    "CI/CD & Automation": {
+      "label": "CI/CD & Automation",
+      "description": "CI/CD & Automation agents",
+      "icon": "📦",
+      "agents": [
+        "ci-failure-escalation",
+        "merge-coordinator",
+        "self-healing-ci"
+      ]
+    },
+    "Cost & FinOps": {
+      "label": "Cost & FinOps",
+      "description": "Cost & FinOps agents",
+      "icon": "📦",
+      "agents": [
+        "finops-advisor"
+      ]
+    },
+    "Data & Analytics": {
+      "label": "Data & Analytics",
+      "description": "Data & Analytics agents",
+      "icon": "📦",
+      "agents": [
+        "data-architect",
+        "data-tier",
+        "database-migration",
+        "dataops"
+      ]
+    },
+    "Design & UX": {
+      "label": "Design & UX",
+      "description": "Design & UX agents",
+      "icon": "📦",
+      "agents": [
         "ux-designer"
       ]
     },
-    "Quality": {
-      "label": "Quality",
-      "description": "Quality assurance, testing, and code review agents",
-      "icon": "🔍",
+    "Developer Experience": {
+      "label": "Developer Experience",
+      "description": "Developer Experience agents",
+      "icon": "📦",
       "agents": [
-        "code-review",
-        "security-analyst",
-        "performance-analyst",
-        "config-auditor",
-        "manual-test-strategy",
-        "exploratory-charter",
-        "strategy-to-automation"
+        "dependency-update-advisor"
       ]
     },
-    "DevOps": {
-      "label": "DevOps",
-      "description": "DevOps, CI/CD, and release management agents",
-      "icon": "🚀",
+    "Development & Engineering": {
+      "label": "Development & Engineering",
+      "description": "Development & Engineering agents",
+      "icon": "📦",
       "agents": [
+        "backend-dev",
+        "dependency-lifecycle",
+        "frontend-dev",
+        "middleware-dev"
+      ]
+    },
+    "Development & Review": {
+      "label": "Development & Review",
+      "description": "Development & Review agents",
+      "icon": "📦",
+      "agents": [
+        "code-review",
+        "definition-of-done"
+      ]
+    },
+    "Documentation & Knowledge": {
+      "label": "Documentation & Knowledge",
+      "description": "Documentation & Knowledge agents",
+      "icon": "📦",
+      "agents": [
+        "tech-writer"
+      ]
+    },
+    "Governance & Compliance": {
+      "label": "Governance & Compliance",
+      "description": "Governance & Compliance agents",
+      "icon": "📦",
+      "agents": [
+        "instruction-auditor"
+      ]
+    },
+    "Infrastructure & DevOps": {
+      "label": "Infrastructure & DevOps",
+      "description": "Infrastructure & DevOps agents",
+      "icon": "📦",
+      "agents": [
+        "gitops-engineer"
+      ]
+    },
+    "Infrastructure & Operations": {
+      "label": "Infrastructure & Operations",
+      "description": "Infrastructure & Operations agents",
+      "icon": "📦",
+      "agents": [
+        "azure-landing-zone",
+        "containerization-planner",
         "devops-engineer",
-        "release-manager",
+        "infrastructure-deploy"
+      ]
+    },
+    "Knowledge & Learning": {
+      "label": "Knowledge & Learning",
+      "description": "Knowledge & Learning agents",
+      "icon": "📦",
+      "agents": [
+        "guidance-author",
+        "guidance-reviewer",
+        "memory-curator",
+        "memory-promoter"
+      ]
+    },
+    "Modernization & Migration": {
+      "label": "Modernization & Migration",
+      "description": "Modernization & Migration agents",
+      "icon": "📦",
+      "agents": [
+        "app-inventory",
+        "dotnet-modernization-advisor",
+        "legacy-modernization"
+      ]
+    },
+    "Onboarding & Deployment": {
+      "label": "Onboarding & Deployment",
+      "description": "Onboarding & Deployment agents",
+      "icon": "📦",
+      "agents": [
+        "project-onboarding",
         "rollout-basecoat"
       ]
     },
-    "Process": {
-      "label": "Process",
-      "description": "Project management and process facilitation agents",
-      "icon": "📋",
+    "Operations & Support": {
+      "label": "Operations & Support",
+      "description": "Operations & Support agents",
+      "icon": "📦",
       "agents": [
-        "sprint-planner",
-        "product-manager",
-        "issue-triage",
-        "retro-facilitator",
-        "project-onboarding"
+        "chaos-engineer",
+        "incident-responder",
+        "production-readiness",
+        "rca",
+        "sre-engineer"
       ]
     },
-    "Meta": {
-      "label": "Meta",
-      "description": "Agents for creating and managing other agents and customizations",
-      "icon": "🧰",
+    "Orchestration": {
+      "label": "Orchestration",
+      "description": "Orchestration agents",
+      "icon": "🎯",
       "agents": [
-        "agent-designer",
-        "prompt-engineer",
-        "mcp-developer",
-        "tech-writer",
-        "new-customization",
-        "merge-coordinator"
+        "orchestrator"
+      ]
+    },
+    "Performance & Optimization": {
+      "label": "Performance & Optimization",
+      "description": "Performance & Optimization agents",
+      "icon": "📦",
+      "agents": [
+        "performance-analyst"
+      ]
+    },
+    "Product & Strategy": {
+      "label": "Product & Strategy",
+      "description": "Product & Strategy agents",
+      "icon": "📦",
+      "agents": [
+        "product-manager"
+      ]
+    },
+    "Project Management & Planning": {
+      "label": "Project Management & Planning",
+      "description": "Project Management & Planning agents",
+      "icon": "📦",
+      "agents": [
+        "issue-triage",
+        "retro-facilitator",
+        "sprint-planner",
+        "sprint-retrospective"
+      ]
+    },
+    "Release & Deployment": {
+      "label": "Release & Deployment",
+      "description": "Release & Deployment agents",
+      "icon": "📦",
+      "agents": [
+        "release-impact-advisor",
+        "release-manager"
+      ]
+    },
+    "Security & Compliance": {
+      "label": "Security & Compliance",
+      "description": "Security & Compliance agents",
+      "icon": "📦",
+      "agents": [
+        "api-security",
+        "config-auditor",
+        "guardrail",
+        "identity-architect",
+        "penetration-test",
+        "policy-as-code-compliance",
+        "security-analyst",
+        "supply-chain-security"
+      ]
+    },
+    "Testing & Quality": {
+      "label": "Testing & Quality",
+      "description": "Testing & Quality agents",
+      "icon": "📦",
+      "agents": [
+        "contract-testing",
+        "e2e-test-strategy",
+        "exploratory-charter",
+        "manual-test-strategy",
+        "strategy-to-automation"
+      ]
+    },
+    "Uncategorized": {
+      "label": "Uncategorized",
+      "description": "Uncategorized agents",
+      "icon": "📦",
+      "agents": [
+        "container-security",
+        "data-integrity",
+        "data-pipeline",
+        "github-security-posture",
+        "hardening-advisor",
+        "observability-engineer",
+        "resilience-reviewer",
+        "secrets-manager",
+        "security-monitor"
+      ]
+    },
+    "security": {
+      "label": "security",
+      "description": "security agents",
+      "icon": "📦",
+      "agents": [
+        "security-operations"
       ]
     }
   },
   "agents": [
     {
-      "name": "backend-dev",
-      "description": "Backend development agent for APIs, services, and business logic. Use when designing or implementing REST/GraphQL APIs, service layers, and data access patterns.",
-      "category": "Development",
-      "keywords": [
-        "backend",
-        "api",
-        "server",
-        "rest",
-        "graphql",
-        "service"
-      ],
-      "aliases": [
-        "api",
-        "server",
-        "backend"
-      ],
-      "pairedSkill": "backend-dev",
-      "file": "agents/backend-dev.agent.md",
-      "model": "GPT-4o / Claude Sonnet",
-      "argumentHint": "/basecoat backend build a REST API for orders"
-    },
-    {
-      "name": "frontend-dev",
-      "description": "Frontend development agent for UI components and applications. Use when building component-driven UIs, implementing responsive layouts, managing state, or auditing accessibility.",
-      "category": "Development",
-      "keywords": [
-        "frontend",
-        "ui",
-        "web",
-        "react",
-        "component",
-        "css"
-      ],
-      "aliases": [
-        "ui",
-        "web",
-        "frontend"
-      ],
-      "pairedSkill": "frontend-dev",
-      "file": "agents/frontend-dev.agent.md",
-      "model": "GPT-4o / Claude Sonnet",
-      "argumentHint": "/basecoat frontend create a responsive dashboard component"
-    },
-    {
-      "name": "middleware-dev",
-      "description": "Middleware and integration layer development agent. Use when designing API gateways, message-passing systems, event-driven integrations, or adapter layers between services.",
-      "category": "Development",
-      "keywords": [
-        "middleware",
-        "integration",
-        "gateway",
-        "event",
-        "messaging"
-      ],
-      "aliases": [
-        "integration",
-        "gateway"
-      ],
-      "pairedSkill": null,
-      "file": "agents/middleware-dev.agent.md",
-      "model": "GPT-4o / Claude Sonnet",
-      "argumentHint": "/basecoat middleware design an event-driven integration layer"
-    },
-    {
-      "name": "data-tier",
-      "description": "Data tier agent for schema design, migrations, query optimization, and data access patterns. Use when designing schemas, writing migrations, reviewing queries, or establishing repository patterns.",
-      "category": "Development",
-      "keywords": [
-        "data",
-        "database",
-        "db",
-        "schema",
-        "migration",
-        "sql",
-        "query"
-      ],
-      "aliases": [
-        "database",
-        "db",
-        "data"
-      ],
-      "pairedSkill": "data-tier",
-      "file": "agents/data-tier.agent.md",
-      "model": "GPT-4o / Claude Sonnet",
-      "argumentHint": "/basecoat data design a normalized schema for user accounts"
-    },
-    {
-      "name": "solution-architect",
-      "description": "Solution architecture agent for system design, C4 diagrams, ADRs, technology selection, and cross-cutting concerns. Use when designing new systems, evaluating technology choices, or reviewing architecture for scalability and risk.",
-      "category": "Architecture",
-      "keywords": [
-        "architect",
-        "design",
-        "system",
-        "c4",
-        "adr",
-        "technology"
-      ],
-      "aliases": [
-        "architect",
-        "design"
-      ],
-      "pairedSkill": "architecture",
-      "file": "agents/solution-architect.agent.md",
-      "model": "GPT-4o / Claude Sonnet",
-      "argumentHint": "/basecoat architect create a C4 diagram for the payments system"
-    },
-    {
-      "name": "api-designer",
-      "description": "API designer agent for OpenAPI spec authoring, REST and GraphQL design, versioning strategy, breaking-change detection, and API governance. Use when designing, reviewing, or evolving API contracts.",
-      "category": "Architecture",
-      "keywords": [
-        "api-design",
-        "openapi",
-        "swagger",
-        "rest-design",
-        "graphql-design"
-      ],
-      "aliases": [
-        "openapi",
-        "swagger",
-        "api-design"
-      ],
-      "pairedSkill": "api-design",
-      "file": "agents/api-designer.agent.md",
-      "model": "GPT-4o / Claude Sonnet",
-      "argumentHint": "/basecoat api-design draft an OpenAPI spec for the billing service"
-    },
-    {
-      "name": "ux-designer",
-      "description": "UX design agent for user journey mapping, wireframe specs, component design, and accessibility audits. Use when designing user experiences, evaluating usability, or auditing interfaces for WCAG compliance.",
-      "category": "Architecture",
-      "keywords": [
-        "ux",
-        "accessibility",
-        "a11y",
-        "wireframe",
-        "journey",
-        "usability"
-      ],
-      "aliases": [
-        "ux",
-        "accessibility"
-      ],
-      "pairedSkill": "ux",
-      "file": "agents/ux-designer.agent.md",
-      "model": "GPT-4o / Claude Sonnet",
-      "argumentHint": "/basecoat ux map the user journey for checkout flow"
-    },
-    {
-      "name": "code-review",
-      "description": "Use when a task needs a structured, multi-step code review workflow with findings prioritized by severity and file references.",
-      "category": "Quality",
-      "keywords": [
-        "review",
-        "cr",
-        "pull-request",
-        "pr"
-      ],
-      "aliases": [
-        "review",
-        "cr"
-      ],
-      "pairedSkill": "code-review",
-      "file": "agents/code-review.agent.md",
-      "model": "GPT-4o / Claude Sonnet",
-      "argumentHint": "/basecoat review check auth module for vulnerabilities"
-    },
-    {
-      "name": "security-analyst",
-      "description": "Security analysis agent for vulnerability assessment, threat modeling, and secure coding review. Use when auditing code for security issues, performing threat analysis, or reviewing dependencies for known vulnerabilities.",
-      "category": "Quality",
-      "keywords": [
-        "security",
-        "vulnerability",
-        "threat",
-        "owasp",
-        "pentest"
-      ],
-      "aliases": [
-        "security",
-        "audit",
-        "threat"
-      ],
-      "pairedSkill": "security",
-      "file": "agents/security-analyst.agent.md",
-      "model": "GPT-4o / Claude Sonnet",
-      "argumentHint": "/basecoat security run threat model for auth service"
-    },
-    {
-      "name": "performance-analyst",
-      "description": "Performance analysis agent for profiling, load testing, and optimization. Use when evaluating application performance, planning load tests, analyzing Core Web Vitals, or investigating query and caching performance.",
-      "category": "Quality",
-      "keywords": [
-        "performance",
-        "perf",
-        "load-test",
-        "profiling",
-        "optimization"
-      ],
-      "aliases": [
-        "perf",
-        "optimize"
-      ],
-      "pairedSkill": "performance-profiling",
-      "file": "agents/performance-analyst.agent.md",
-      "model": "GPT-4o / Claude Sonnet",
-      "argumentHint": "/basecoat perf profile the search endpoint under load"
-    },
-    {
-      "name": "config-auditor",
-      "description": "Use when you need to scan a repository for committed or unprotected configuration files that contain secrets, credentials, or sensitive environment-specific values. Produces a findings report with remediation steps.",
-      "category": "Quality",
-      "keywords": [
-        "config",
-        "secrets",
-        "audit",
-        "leak",
-        "credentials"
-      ],
-      "aliases": [
-        "config-audit"
-      ],
-      "pairedSkill": "security",
-      "file": "agents/config-auditor.agent.md",
-      "model": "GPT-4o / Claude Sonnet",
-      "argumentHint": "/basecoat config-audit scan repo for leaked secrets"
-    },
-    {
-      "name": "manual-test-strategy",
-      "description": "Use when you need a structured manual testing strategy for a feature or risk inventory. Produces a decision rubric, exploratory charter, regression checklist, defect template, and automation backlog. Automatically files GitHub Issues for automation candidates.",
-      "category": "Quality",
-      "keywords": [
-        "manual-test",
-        "test-strategy",
-        "rubric",
-        "checklist"
-      ],
-      "aliases": [
-        "manual-test"
-      ],
-      "pairedSkill": "manual-test-strategy",
-      "file": "agents/manual-test-strategy.agent.md",
-      "model": "GPT-4o / Claude Sonnet",
-      "argumentHint": "/basecoat manual-test create test strategy for payments feature"
-    },
-    {
-      "name": "exploratory-charter",
-      "description": "Use when you need time-boxed exploratory testing sessions. Generates mission-driven charters with scope, triage routing, and evidence capture. Automatically files GitHub Issues for automation candidates found during exploration.",
-      "category": "Quality",
-      "keywords": [
-        "exploratory",
-        "charter",
-        "session-based",
-        "testing"
-      ],
-      "aliases": [
-        "exploratory"
-      ],
-      "pairedSkill": "manual-test-strategy",
-      "file": "agents/exploratory-charter.agent.md",
-      "model": "GPT-4o / Claude Sonnet",
-      "argumentHint": "/basecoat exploratory generate a charter for login edge cases"
-    },
-    {
-      "name": "strategy-to-automation",
-      "description": "Use when converting manual test paths into automation candidates. Maps paths to smoke tests, regression tiers, or agent specs. ALWAYS files a GitHub Issue for every automation candidate identified.",
-      "category": "Quality",
-      "keywords": [
-        "test-automation",
-        "automate-tests",
-        "tiered-automation"
-      ],
-      "aliases": [
-        "automate-tests"
-      ],
-      "pairedSkill": "manual-test-strategy",
-      "file": "agents/strategy-to-automation.agent.md",
-      "model": "GPT-4o / Claude Sonnet",
-      "argumentHint": "/basecoat automate-tests convert checkout test paths to automation"
-    },
-    {
-      "name": "devops-engineer",
-      "description": "DevOps engineer agent for CI/CD pipelines, infrastructure as code, container strategy, environment promotion, rollback procedures, and observability. Use when designing or improving deployment workflows.",
-      "category": "DevOps",
-      "keywords": [
-        "devops",
-        "cicd",
-        "pipeline",
-        "deploy",
-        "infrastructure",
-        "iac"
-      ],
-      "aliases": [
-        "devops",
-        "cicd",
-        "deploy"
-      ],
-      "pairedSkill": "devops",
-      "file": "agents/devops-engineer.agent.md",
-      "model": "GPT-4o / Claude Sonnet",
-      "argumentHint": "/basecoat devops set up GitHub Actions CI pipeline"
-    },
-    {
-      "name": "release-manager",
-      "description": "Automated versioned release workflow. Reads merged PRs since the last release, bumps version.json, writes CHANGELOG entry, creates git tag, and publishes GitHub release.",
-      "category": "DevOps",
-      "keywords": [
-        "release",
-        "version",
-        "changelog",
-        "tag",
-        "publish"
-      ],
-      "aliases": [
-        "release",
-        "version"
-      ],
-      "pairedSkill": null,
-      "file": "agents/release-manager.agent.md",
-      "model": "GPT-4o-mini / Claude Haiku",
-      "argumentHint": "/basecoat release cut a new release from main"
-    },
-    {
-      "name": "rollout-basecoat",
-      "description": "Use when onboarding a repository to Base Coat in an enterprise setting. Focuses on pinned versions, safe rollout, installation method, and validation steps.",
-      "category": "DevOps",
-      "keywords": [
-        "rollout",
-        "onboard-enterprise",
-        "adoption",
-        "pilot"
-      ],
-      "aliases": [
-        "rollout",
-        "adopt"
-      ],
-      "pairedSkill": null,
-      "file": "agents/rollout-basecoat.agent.md",
-      "model": "GPT-4o-mini / Claude Haiku",
-      "argumentHint": "/basecoat rollout onboard the platform repo to Base Coat"
-    },
-    {
-      "name": "sprint-planner",
-      "description": "Goal-to-issues decomposition and wave dependency mapping. Accepts a sprint goal, produces GitHub issues with labels, wave dependency maps, agent assignments, and acceptance criteria.",
-      "category": "Process",
-      "keywords": [
-        "sprint",
-        "plan",
-        "wave",
-        "breakdown",
-        "capacity"
-      ],
-      "aliases": [
-        "sprint",
-        "plan"
-      ],
-      "pairedSkill": "sprint-management",
-      "file": "agents/sprint-planner.agent.md",
-      "model": "GPT-4o / Claude Sonnet",
-      "argumentHint": "/basecoat sprint plan sprint 5 from open issues"
-    },
-    {
-      "name": "product-manager",
-      "description": "Use when gathering requirements, writing user stories, defining acceptance criteria, planning roadmaps, or prioritizing features using frameworks like RICE or MoSCoW.",
-      "category": "Process",
-      "keywords": [
-        "product",
-        "requirements",
-        "stories",
-        "acceptance",
-        "roadmap"
-      ],
-      "aliases": [
-        "pm",
-        "requirements",
-        "stories"
-      ],
-      "pairedSkill": "sprint-management",
-      "file": "agents/product-manager.agent.md",
-      "model": "GPT-4o / Claude Sonnet",
-      "argumentHint": "/basecoat pm write user stories for the notifications feature"
-    },
-    {
-      "name": "issue-triage",
-      "description": "Use when triaging GitHub issues — classifying type, assigning priority (P0-P3), applying labels, detecting duplicates, tracking SLAs, and recommending sprint placement.",
-      "category": "Process",
-      "keywords": [
-        "triage",
-        "classify",
-        "label",
-        "prioritize",
-        "issues"
-      ],
-      "aliases": [
-        "triage",
-        "issues"
-      ],
-      "pairedSkill": "sprint-management",
-      "file": "agents/issue-triage.agent.md",
-      "model": "GPT-4o-mini / Claude Haiku",
-      "argumentHint": "/basecoat triage classify and label the last 20 open issues"
-    },
-    {
-      "name": "retro-facilitator",
-      "description": "End-of-sprint retrospective agent. Reviews closed issues and merged PRs for the sprint, produces a structured Went Well / Improve / Action Items summary, logs improvement issues framed generically for Basecoat, and updates sprint notes in the project repo.",
-      "category": "Process",
-      "keywords": [
-        "retro",
-        "retrospective",
-        "improvement",
-        "reflection"
-      ],
-      "aliases": [
-        "retro"
-      ],
-      "pairedSkill": "sprint-management",
-      "file": "agents/retro-facilitator.agent.md",
-      "model": "GPT-4o / Claude Sonnet",
-      "argumentHint": "/basecoat retro run retrospective for sprint 4"
-    },
-    {
-      "name": "project-onboarding",
-      "description": "Single-invocation new repo setup with Basecoat integration. Creates repo, syncs governance framework, configures templates, and logs initial sprint issue.",
-      "category": "Process",
-      "keywords": [
-        "onboarding",
-        "setup",
-        "getting-started",
-        "install"
-      ],
-      "aliases": [
-        "onboard",
-        "setup"
-      ],
-      "pairedSkill": null,
-      "file": "agents/project-onboarding.agent.md",
-      "model": "GPT-4o-mini / Claude Haiku",
-      "argumentHint": "/basecoat onboard set up a new repo with Base Coat defaults"
-    },
-    {
       "name": "agent-designer",
       "description": "Agent that designs and authors Copilot agent definitions. Use when creating new agents, composing skills, writing agent instructions, or coordinating multi-agent workflows.",
-      "category": "Meta",
+      "category": "AI & Development",
       "keywords": [
-        "agent",
-        "create-agent",
-        "agent-template"
+        "agent-design",
+        "copilot",
+        "agent-authoring",
+        "skill-composition"
       ],
-      "aliases": [
-        "agent",
-        "create-agent"
-      ],
-      "pairedSkill": "agent-design",
+      "aliases": [],
+      "pairedSkill": "",
       "file": "agents/agent-designer.agent.md",
-      "model": "GPT-4o / Claude Sonnet",
-      "argumentHint": "/basecoat agent create a new agent for database migrations"
-    },
-    {
-      "name": "prompt-engineer",
-      "description": "Prompt optimization and system prompt engineering agent. Use when designing system prompts, optimizing token usage, crafting few-shot examples, or structuring chain-of-thought instructions.",
-      "category": "Meta",
-      "keywords": [
-        "prompt",
-        "system-prompt",
-        "optimize-prompt"
-      ],
-      "aliases": [
-        "prompt",
-        "system-prompt"
-      ],
-      "pairedSkill": null,
-      "file": "agents/prompt-engineer.agent.md",
-      "model": "GPT-4o / Claude Sonnet",
-      "argumentHint": "/basecoat prompt optimize the system prompt for code review"
-    },
-    {
-      "name": "mcp-developer",
-      "description": "MCP server development agent for building Model Context Protocol servers, tools, and integrations. Use when designing, implementing, or reviewing MCP servers, tool definitions, transport configurations, and client integrations.",
-      "category": "Meta",
-      "keywords": [
-        "mcp",
-        "tools",
-        "tool-server",
-        "transport"
-      ],
-      "aliases": [
-        "mcp",
-        "tools"
-      ],
-      "pairedSkill": "mcp-development",
-      "file": "agents/mcp-developer.agent.md",
-      "model": "GPT-4o / Claude Sonnet",
-      "argumentHint": "/basecoat mcp build an MCP server for the inventory API"
-    },
-    {
-      "name": "tech-writer",
-      "description": "Use when creating or improving technical documentation, API docs, runbooks, tutorials, ADRs, changelogs, or implementing docs-as-code workflows.",
-      "category": "Meta",
-      "keywords": [
-        "docs",
-        "document",
-        "runbook",
-        "tutorial",
-        "changelog"
-      ],
-      "aliases": [
-        "docs",
-        "document",
-        "runbook"
-      ],
-      "pairedSkill": "documentation",
-      "file": "agents/tech-writer.agent.md",
-      "model": "GPT-4o / Claude Sonnet",
-      "argumentHint": "/basecoat docs write a runbook for the deployment pipeline"
-    },
-    {
-      "name": "new-customization",
-      "description": "Use when creating or updating a customization asset such as an instruction, skill, prompt, or agent. Chooses the right primitive, authors the file, and validates frontmatter and placement.",
-      "category": "Meta",
-      "keywords": [
-        "customization",
-        "create-skill",
-        "create-instruction"
-      ],
-      "aliases": [
-        "customize",
-        "new-asset"
-      ],
-      "pairedSkill": "create-skill",
-      "file": "agents/new-customization.agent.md",
-      "model": "GPT-4o / Claude Sonnet",
-      "argumentHint": "/basecoat customize create a new skill for API testing"
-    },
-    {
-      "name": "merge-coordinator",
-      "description": "Parallel branch merge coordinator. Use when multiple feature branches need to be merged into a target branch without interactive git editors hanging automated pipelines. Handles conflict detection, safe resolution, and ordered PR merging.",
-      "category": "Meta",
-      "keywords": [
-        "merge",
-        "branch",
-        "conflict",
-        "parallel-merge"
-      ],
-      "aliases": [
-        "merge",
-        "conflict"
-      ],
-      "pairedSkill": null,
-      "file": "agents/merge-coordinator.agent.md",
-      "model": "GPT-4o-mini / Claude Haiku",
-      "argumentHint": "/basecoat merge coordinate merging 3 feature branches into main"
+      "model": "gpt-5.3-codex",
+      "argumentHint": ""
     },
     {
       "name": "agentops",
       "description": "AgentOps lifecycle manager for agent versioning, rollout, health monitoring, rollback, and operational governance. Use when deploying, canarying, or retiring agent versions.",
-      "category": "Meta",
+      "category": "AI & Operations",
       "keywords": [
         "agentops",
         "lifecycle-management",
@@ -646,9 +330,26 @@
       "argumentHint": ""
     },
     {
+      "name": "api-designer",
+      "description": "API designer agent for OpenAPI spec authoring, REST and GraphQL design, versioning strategy, breaking-change detection, and API governance. Use when designing, reviewing, or evolving API contracts.",
+      "category": "API & Integration",
+      "keywords": [
+        "api-design",
+        "openapi",
+        "graphql",
+        "rest",
+        "api-governance"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/api-designer.agent.md",
+      "model": "gpt-5.3-codex",
+      "argumentHint": ""
+    },
+    {
       "name": "api-security",
       "description": "API Security Agent for comprehensive API threat modeling, OWASP API Security Top 10 assessment, and secure API design. Covers authentication, authorization, rate limiting, and API-specific vulnerabilities.",
-      "category": "Quality",
+      "category": "Security & Compliance",
       "keywords": [
         "api-security",
         "owasp-api",
@@ -664,7 +365,7 @@
     {
       "name": "app-inventory",
       "description": "Scans legacy applications to discover dependencies, identify technology stacks, assess migration complexity, and generate architecture diagrams for portfolio analysis.",
-      "category": "Meta",
+      "category": "Modernization & Migration",
       "keywords": [
         "app-discovery",
         "inventory",
@@ -681,7 +382,7 @@
     {
       "name": "azure-landing-zone",
       "description": "Azure Landing Zone (ESLZ) agent for scaffolding enterprise-scale landing zones following Microsoft's Cloud Adoption Framework. Use when designing management group hierarchies, platform subscriptions, hub networking, policy baselines, or landing zone vending templates.",
-      "category": "Meta",
+      "category": "Infrastructure & Operations",
       "keywords": [
         "azure-landing-zone",
         "caf",
@@ -696,9 +397,27 @@
       "argumentHint": ""
     },
     {
+      "name": "backend-dev",
+      "description": "Backend development agent for APIs, services, and business logic. Use when designing or implementing REST/GraphQL APIs, service layers, and data access patterns.",
+      "category": "Development & Engineering",
+      "keywords": [
+        "backend",
+        "api",
+        "services",
+        "database",
+        "performance",
+        "security"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/backend-dev.agent.md",
+      "model": "gpt-5.3-codex",
+      "argumentHint": ""
+    },
+    {
       "name": "chaos-engineer",
       "description": "Chaos engineering agent for fault injection, game days, resilience scoring, recovery validation, and SLO-aware resilience experiments.",
-      "category": "Meta",
+      "category": "Operations & Support",
       "keywords": [
         "chaos-engineering",
         "resilience",
@@ -715,7 +434,7 @@
     {
       "name": "ci-failure-escalation",
       "description": "Detects N consecutive CI failures on the same workflow job, opens a blocking issue, and gates further deploys to that environment — the andon cord / halt-the-line pattern for CI/CD pipelines.",
-      "category": "Meta",
+      "category": "CI/CD & Automation",
       "keywords": [
         "ci-cd",
         "automation",
@@ -730,10 +449,45 @@
       "argumentHint": ""
     },
     {
+      "name": "code-review",
+      "description": "Use when a task needs a structured, multi-step code review workflow with findings prioritized by severity and file references.",
+      "category": "Development & Review",
+      "keywords": [
+        "code-review",
+        "quality-assurance",
+        "testing",
+        "security",
+        "performance"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/code-review.agent.md",
+      "model": "claude-sonnet-4.6",
+      "argumentHint": ""
+    },
+    {
+      "name": "config-auditor",
+      "description": "Use when you need to scan a repository for committed or unprotected configuration files that contain secrets, credentials, or sensitive environment-specific values. Produces a findings report with remediation steps.",
+      "category": "Security & Compliance",
+      "keywords": [
+        "config-audit",
+        "secrets-scanning",
+        "security",
+        "compliance"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/config-auditor.agent.md",
+      "model": "claude-haiku-4.5",
+      "argumentHint": ""
+    },
+    {
       "name": "container-security",
       "description": ">",
-      "category": "Meta",
-      "keywords": "uncategorized",
+      "category": "Uncategorized",
+      "keywords": [
+        "uncategorized"
+      ],
       "aliases": [],
       "pairedSkill": "",
       "file": "agents/container-security.agent.md",
@@ -743,7 +497,7 @@
     {
       "name": "containerization-planner",
       "description": "Helps assess containerization readiness, choose deployment platforms (Docker/AKS/ACA), and generate container configurations including Dockerfiles, multi-stage builds, health probes, resource limits, and deployment manifests.",
-      "category": "Meta",
+      "category": "Infrastructure & Operations",
       "keywords": [
         "containerization",
         "docker",
@@ -760,7 +514,7 @@
     {
       "name": "contract-testing",
       "description": "Contract Testing Agent for consumer-driven contracts, E2E testing strategy, and mutation testing for distributed systems.",
-      "category": "Meta",
+      "category": "Testing & Quality",
       "keywords": [
         "contract-testing",
         "cdc",
@@ -777,7 +531,7 @@
     {
       "name": "data-architect",
       "description": "Design scalable data architectures, medallion layers, data governance, and analytics workflows. Use when planning data warehouses, data lakes, ETL/ELT pipelines, or data mesh frameworks.",
-      "category": "Meta",
+      "category": "Data & Analytics",
       "keywords": [
         "data-architecture",
         "medallion",
@@ -795,8 +549,10 @@
     {
       "name": "data-integrity",
       "description": ">",
-      "category": "Meta",
-      "keywords": "uncategorized",
+      "category": "Uncategorized",
+      "keywords": [
+        "uncategorized"
+      ],
       "aliases": [],
       "pairedSkill": "",
       "file": "agents/data-integrity.agent.md",
@@ -806,8 +562,10 @@
     {
       "name": "data-pipeline",
       "description": "Data pipeline agent for medallion lakehouse architecture, data quality, ML pipeline orchestration, and feature store integration. Use when building or reviewing bronze/silver/gold Delta Lake pipelines, data quality checks, feature engineering, or ML training workflows.",
-      "category": "Meta",
-      "keywords": "uncategorized",
+      "category": "Uncategorized",
+      "keywords": [
+        "uncategorized"
+      ],
       "aliases": [],
       "pairedSkill": "",
       "file": "agents/data-pipeline.agent.md",
@@ -815,9 +573,26 @@
       "argumentHint": ""
     },
     {
+      "name": "data-tier",
+      "description": "Data tier agent for schema design, migrations, query optimization, and data access patterns. Use when designing schemas, writing migrations, reviewing queries, or establishing repository patterns.",
+      "category": "Data & Analytics",
+      "keywords": [
+        "data-tier",
+        "schema-design",
+        "migrations",
+        "query-optimization",
+        "database"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/data-tier.agent.md",
+      "model": "gpt-5.3-codex",
+      "argumentHint": ""
+    },
+    {
       "name": "database-migration",
       "description": "Plan and execute database migrations: schema evolution, data replication, zero-downtime upgrades, and legacy system modernization. Use for migration strategies, risk assessment, and runbook creation.",
-      "category": "Meta",
+      "category": "Data & Analytics",
       "keywords": [
         "database-migration",
         "schema-evolution",
@@ -834,7 +609,7 @@
     {
       "name": "dataops",
       "description": "DataOps agent for data quality, lineage, governance, orchestration, data contracts, and drift detection across analytical and ML data pipelines. Use when managing pipeline reliability and data change risk.",
-      "category": "Meta",
+      "category": "Data & Analytics",
       "keywords": [
         "dataops",
         "data-quality",
@@ -849,9 +624,26 @@
       "argumentHint": ""
     },
     {
+      "name": "definition-of-done",
+      "description": "Validate that a feature, PR, or release meets the Definition of Done before closing. Enforces testing evidence, config verification, response validation, and acceptance criteria.",
+      "category": "Development & Review",
+      "keywords": [
+        "definition-of-done",
+        "quality-gate",
+        "testing",
+        "acceptance-criteria",
+        "dod"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/definition-of-done.agent.md",
+      "model": "claude-sonnet-4.6",
+      "argumentHint": ""
+    },
+    {
       "name": "dependency-lifecycle",
       "description": "Agent for managing dependency updates, tracking breaking changes, planning upgrade paths, monitoring vulnerabilities, analyzing semantic versioning, and generating migration guides.",
-      "category": "Meta",
+      "category": "Development & Engineering",
       "keywords": [
         "dependency-management",
         "version-upgrades",
@@ -867,7 +659,7 @@
     {
       "name": "dependency-update-advisor",
       "description": "Reviews Dependabot pull requests and posts a structured risk assessment comment: semver bump type, breaking change likelihood, suggested test focus areas, and known CVE context.",
-      "category": "Meta",
+      "category": "Developer Experience",
       "keywords": [
         "dependabot",
         "dependency-updates",
@@ -881,9 +673,27 @@
       "argumentHint": ""
     },
     {
+      "name": "devops-engineer",
+      "description": "DevOps engineer agent for CI/CD pipelines, infrastructure as code, container strategy, environment promotion, rollback procedures, and observability. Use when designing or improving deployment workflows.",
+      "category": "Infrastructure & Operations",
+      "keywords": [
+        "devops",
+        "ci-cd",
+        "infrastructure",
+        "containers",
+        "kubernetes",
+        "terraform"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/devops-engineer.agent.md",
+      "model": "gpt-5.3-codex",
+      "argumentHint": ""
+    },
+    {
       "name": "domain-designer",
       "description": "Domain-Driven Design agent for bounded context modeling, aggregate design, ubiquitous language definition, and DDD patterns. Use when designing domain models, refactoring monoliths into domain-aligned services, or establishing domain-driven architecture.",
-      "category": "Meta",
+      "category": "Architecture & Design",
       "keywords": [
         "domain-driven-design",
         "bounded-contexts",
@@ -901,7 +711,7 @@
     {
       "name": "dotnet-modernization-advisor",
       "description": "Advisor for .NET modernization assessment, upgrade planning, and execution guidance. Use when migrating legacy .NET Framework/older .NET solutions to modern .NET versions.",
-      "category": "Meta",
+      "category": "Modernization & Migration",
       "keywords": [
         "dotnet",
         "modernization",
@@ -918,7 +728,7 @@
     {
       "name": "e2e-test-strategy",
       "description": "E2E Test Strategy Agent for end-to-end testing orchestration, critical path identification, flakiness prevention, and cross-browser coverage. Covers Playwright, Cypress, Selenium patterns and integration with CI/CD pipelines.",
-      "category": "Meta",
+      "category": "Testing & Quality",
       "keywords": [
         "e2e-testing",
         "playwright",
@@ -933,9 +743,25 @@
       "argumentHint": ""
     },
     {
+      "name": "exploratory-charter",
+      "description": "Use when you need time-boxed exploratory testing sessions. Generates mission-driven charters with scope, triage routing, and evidence capture. Automatically files GitHub Issues for automation candidates found during exploration.",
+      "category": "Testing & Quality",
+      "keywords": [
+        "exploratory-testing",
+        "testing",
+        "qa",
+        "charter"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/exploratory-charter.agent.md",
+      "model": "claude-sonnet-4.6",
+      "argumentHint": ""
+    },
+    {
       "name": "feedback-loop",
       "description": "Continuous learning and optimization through user feedback collection, prompt effectiveness tracking, outcome measurement, A/B testing, regression detection, and instruction refinement.",
-      "category": "Meta",
+      "category": "AI & Learning",
       "keywords": [
         "feedback",
         "optimization",
@@ -952,7 +778,7 @@
     {
       "name": "finops-advisor",
       "description": "FinOps advisor for cloud cost governance, cost optimization, chargeback/showback models, and 12-Factor App best practices for cost efficiency",
-      "category": "Meta",
+      "category": "Cost & FinOps",
       "keywords": [
         "finops",
         "cost-optimization",
@@ -968,10 +794,30 @@
       "argumentHint": ""
     },
     {
+      "name": "frontend-dev",
+      "description": "Frontend development agent for UI components and applications. Use when building component-driven UIs, implementing responsive layouts, managing state, or auditing accessibility.",
+      "category": "Development & Engineering",
+      "keywords": [
+        "frontend",
+        "ui",
+        "react",
+        "vue",
+        "accessibility",
+        "performance"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/frontend-dev.agent.md",
+      "model": "gpt-5.3-codex",
+      "argumentHint": ""
+    },
+    {
       "name": "github-security-posture",
       "description": "GitHub security posture auditor for org and repository policy checks. Use when auditing GitHub organization code security configurations, repository rulesets, secret scanning alerts, Dependabot configuration, or branch protection rules.",
-      "category": "Meta",
-      "keywords": "uncategorized",
+      "category": "Uncategorized",
+      "keywords": [
+        "uncategorized"
+      ],
       "aliases": [],
       "pairedSkill": "",
       "file": "agents/github-security-posture.agent.md",
@@ -981,7 +827,7 @@
     {
       "name": "gitops-engineer",
       "description": "Design GitOps workflows for Infrastructure-as-Code, declarative configuration, automated deployment, and continuous reconciliation. Use when implementing Argo CD, Flux, or GitOps best practices.",
-      "category": "Meta",
+      "category": "Infrastructure & DevOps",
       "keywords": [
         "gitops",
         "argo-cd",
@@ -999,7 +845,7 @@
     {
       "name": "guardrail",
       "description": "Guardrail validation agent for checking outputs against safety, quality, compliance, and formatting rules before delivery.",
-      "category": "Quality",
+      "category": "Security & Compliance",
       "keywords": [
         "guardrails",
         "validation",
@@ -1015,7 +861,7 @@
     {
       "name": "guidance-author",
       "description": "Use when drafting new BaseCoat guidance assets (instruction files, skill SKILL.md, agent files, prompt templates) from a description or requirement. Produces a structured draft ready for guidance-reviewer validation.",
-      "category": "Meta",
+      "category": "Knowledge & Learning",
       "keywords": [
         "authoring",
         "guidance",
@@ -1033,7 +879,7 @@
     {
       "name": "guidance-reviewer",
       "description": "Use when validating a BaseCoat guidance draft (instruction, skill, agent, prompt) before committing. Checks lint rules, required sections, frontmatter schema, and BaseCoat conventions. Returns a structured pass/fail verdict with actionable fixes.",
-      "category": "Meta",
+      "category": "Knowledge & Learning",
       "keywords": [
         "review",
         "validation",
@@ -1050,7 +896,7 @@
     {
       "name": "ha-architect",
       "description": "Design high-availability, resilience, and chaos testing strategies for distributed systems.",
-      "category": "Meta",
+      "category": "Architecture & Design",
       "keywords": [
         "high-availability",
         "resilience",
@@ -1067,8 +913,10 @@
     {
       "name": "hardening-advisor",
       "description": ">",
-      "category": "Meta",
-      "keywords": "uncategorized",
+      "category": "Uncategorized",
+      "keywords": [
+        "uncategorized"
+      ],
       "aliases": [],
       "pairedSkill": "",
       "file": "agents/hardening-advisor.agent.md",
@@ -1078,7 +926,7 @@
     {
       "name": "identity-architect",
       "description": "Identity architecture agent for Azure RBAC design, managed identity configuration, Entra ID app registrations, conditional access policies, and workload identity federation. Use when designing identity and access management for Azure workloads or enforcing zero trust principles.",
-      "category": "Quality",
+      "category": "Security & Compliance",
       "keywords": [
         "identity",
         "iam",
@@ -1096,7 +944,7 @@
     {
       "name": "incident-responder",
       "description": "Structured incident response and recovery agent for classifying incidents, guiding mitigation, coordinating communications, verifying recovery, and facilitating post-incident learning.",
-      "category": "Meta",
+      "category": "Operations & Support",
       "keywords": [
         "incident-response",
         "sre",
@@ -1113,7 +961,7 @@
     {
       "name": "infrastructure-deploy",
       "description": "Orchestrates Azure infrastructure deployments using Bicep, handles resource group management, parameter validation, and rollback strategies.",
-      "category": "Meta",
+      "category": "Infrastructure & Operations",
       "keywords": [
         "infrastructure",
         "azure",
@@ -1129,8 +977,8 @@
     },
     {
       "name": "instruction-auditor",
-      "description": "Detects missing instruction coverage for a repo — identifies tech stacks and workflow patterns present in the codebase that have no corresponding Basecoat instruction file in the overlay.",
-      "category": "Meta",
+      "description": "Detects missing instruction coverage for a repo — identifies tech stacks and workflow patterns present in the codebase that have no corresponding BaseCoat instruction file in the overlay.",
+      "category": "Governance & Compliance",
       "keywords": [
         "instructions",
         "coverage",
@@ -1145,9 +993,25 @@
       "argumentHint": ""
     },
     {
+      "name": "issue-triage",
+      "description": "Use when triaging GitHub issues — classifying type, assigning priority (P0-P3), applying labels, detecting duplicates, tracking SLAs, and recommending sprint placement.",
+      "category": "Project Management & Planning",
+      "keywords": [
+        "issue-triage",
+        "github",
+        "prioritization",
+        "classification"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/issue-triage.agent.md",
+      "model": "claude-sonnet-4.6",
+      "argumentHint": ""
+    },
+    {
       "name": "legacy-modernization",
       "description": "Guides teams through Web Forms to Razor Pages migration using the strangler fig pattern for incremental modernization of legacy ASP.NET applications.",
-      "category": "Meta",
+      "category": "Modernization & Migration",
       "keywords": [
         "legacy-code",
         "modernization",
@@ -1165,7 +1029,7 @@
     {
       "name": "llmops",
       "description": "LLMOps agent for prompt deployment pipelines, model gateway configuration, inference monitoring, version rollback, endpoint health checks, and cost optimization. Use when operating production LLM inference systems.",
-      "category": "Meta",
+      "category": "AI & Machine Learning",
       "keywords": [
         "llmops",
         "mlops",
@@ -1181,9 +1045,42 @@
       "argumentHint": ""
     },
     {
+      "name": "manual-test-strategy",
+      "description": "Use when you need a structured manual testing strategy for a feature or risk inventory. Produces a decision rubric, exploratory charter, regression checklist, defect template, and automation backlog. Automatically files GitHub Issues for automation candidates.",
+      "category": "Testing & Quality",
+      "keywords": [
+        "test-strategy",
+        "manual-testing",
+        "qa",
+        "testing"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/manual-test-strategy.agent.md",
+      "model": "claude-sonnet-4.6",
+      "argumentHint": ""
+    },
+    {
+      "name": "mcp-developer",
+      "description": "MCP server development agent for building Model Context Protocol servers, tools, and integrations. Use when designing, implementing, or reviewing MCP servers, tool definitions, transport configurations, and client integrations.",
+      "category": "AI & Machine Learning",
+      "keywords": [
+        "mcp",
+        "model-context-protocol",
+        "tools",
+        "integration",
+        "ai-systems"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/mcp-developer.agent.md",
+      "model": "claude-sonnet-4",
+      "argumentHint": ""
+    },
+    {
       "name": "memory-curator",
       "description": "Use when extracting, deduplicating, validating, and retrieving cross-session knowledge with the SQLite memory layer, including conflict resolution, decay, and context injection.",
-      "category": "Meta",
+      "category": "Knowledge & Learning",
       "keywords": [
         "memory",
         "knowledge-management",
@@ -1199,7 +1096,7 @@
     {
       "name": "memory-promoter",
       "description": "Analyzes session transcripts and sprint summaries to identify high-value patterns for promotion to long-term BaseCoat memory contributions.",
-      "category": "Meta",
+      "category": "Knowledge & Learning",
       "keywords": [
         "memory",
         "pattern-detection",
@@ -1213,9 +1110,43 @@
       "argumentHint": ""
     },
     {
+      "name": "merge-coordinator",
+      "description": "Parallel branch merge coordinator. Use when multiple feature branches need to be merged into a target branch without interactive git editors hanging automated pipelines. Handles conflict detection, safe resolution, and ordered PR merging.",
+      "category": "CI/CD & Automation",
+      "keywords": [
+        "git",
+        "merge",
+        "ci-cd",
+        "automation",
+        "conflict-resolution"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/merge-coordinator.agent.md",
+      "model": "claude-haiku-4.5",
+      "argumentHint": ""
+    },
+    {
+      "name": "middleware-dev",
+      "description": "Middleware and integration layer development agent. Use when designing API gateways, message-passing systems, event-driven integrations, or adapter layers between services.",
+      "category": "Development & Engineering",
+      "keywords": [
+        "middleware",
+        "integration",
+        "api-gateway",
+        "event-driven",
+        "messaging"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/middleware-dev.agent.md",
+      "model": "gpt-5.3-codex",
+      "argumentHint": ""
+    },
+    {
       "name": "mlops",
       "description": "MLOps agent for model lifecycle, experiment tracking, model registry, deployment automation, drift monitoring, and reproducibility. Use when operationalizing ML systems.",
-      "category": "Meta",
+      "category": "AI & Machine Learning",
       "keywords": [
         "mlops",
         "ml-engineering",
@@ -1230,10 +1161,28 @@
       "argumentHint": ""
     },
     {
+      "name": "new-customization",
+      "description": "Use when creating or updating a customization asset such as an instruction, skill, prompt, or agent. Chooses the right primitive, authors the file, and validates frontmatter and placement.",
+      "category": "AI & Development",
+      "keywords": [
+        "customization",
+        "basecoat",
+        "agent-authoring",
+        "skill-creation"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/new-customization.agent.md",
+      "model": "claude-sonnet-4.6",
+      "argumentHint": ""
+    },
+    {
       "name": "observability-engineer",
       "description": ">",
-      "category": "Meta",
-      "keywords": "uncategorized",
+      "category": "Uncategorized",
+      "keywords": [
+        "uncategorized"
+      ],
       "aliases": [],
       "pairedSkill": "",
       "file": "agents/observability-engineer.agent.md",
@@ -1241,9 +1190,25 @@
       "argumentHint": ""
     },
     {
+      "name": "orchestrator",
+      "description": "Multi-agent orchestrator that decomposes complex requests, routes subtasks to specialist agents, dispatches parallel work, tracks progress, resolves conflicts, and aggregates results into one coherent response. Use when a task spans multiple domains or needs coordinated specialist execution.",
+      "category": "Orchestration",
+      "keywords": [
+        "multi-agent",
+        "task-decomposition",
+        "routing",
+        "coordination"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/orchestrator.agent.md",
+      "model": "claude-sonnet-4.6",
+      "argumentHint": ""
+    },
+    {
       "name": "penetration-test",
       "description": "Penetration Test Agent for security assessments, vulnerability discovery, and remediation workflows. Use when planning security testing engagements aligned with OWASP Testing Guide.",
-      "category": "Quality",
+      "category": "Security & Compliance",
       "keywords": [
         "penetration-testing",
         "security-assessment",
@@ -1257,9 +1222,26 @@
       "argumentHint": ""
     },
     {
+      "name": "performance-analyst",
+      "description": "Performance analysis agent for profiling, load testing, and optimization. Use when evaluating application performance, planning load tests, analyzing Core Web Vitals, or investigating query and caching performance.",
+      "category": "Performance & Optimization",
+      "keywords": [
+        "performance-analysis",
+        "profiling",
+        "load-testing",
+        "optimization",
+        "core-web-vitals"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/performance-analyst.agent.md",
+      "model": "gpt-5.3-codex",
+      "argumentHint": ""
+    },
+    {
       "name": "policy-as-code-compliance",
       "description": "Policy-as-code compliance agent for validating code and configuration against organizational rules, managing exceptions, and producing audit-ready compliance reports.",
-      "category": "Quality",
+      "category": "Security & Compliance",
       "keywords": [
         "policy-as-code",
         "compliance",
@@ -1275,9 +1257,26 @@
       "argumentHint": ""
     },
     {
+      "name": "product-manager",
+      "description": "Use when gathering requirements, writing user stories, defining acceptance criteria, planning roadmaps, or prioritizing features using frameworks like RICE or MoSCoW.",
+      "category": "Product & Strategy",
+      "keywords": [
+        "product-management",
+        "requirements",
+        "roadmap",
+        "user-stories",
+        "prioritization"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/product-manager.agent.md",
+      "model": "claude-sonnet-4.6",
+      "argumentHint": ""
+    },
+    {
       "name": "production-readiness",
       "description": "Production Readiness Agent for ensuring applications meet operational requirements before release; coordinates BCP/DRP, incident response, and safety analysis.",
-      "category": "Meta",
+      "category": "Operations & Support",
       "keywords": [
         "production-readiness",
         "release-readiness",
@@ -1292,9 +1291,25 @@
       "argumentHint": ""
     },
     {
+      "name": "project-onboarding",
+      "description": "Single-invocation new repo setup with Basecoat integration. Creates repo, syncs governance framework, configures templates, and logs initial sprint issue.",
+      "category": "Onboarding & Deployment",
+      "keywords": [
+        "project-setup",
+        "onboarding",
+        "basecoat",
+        "governance"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/project-onboarding.agent.md",
+      "model": "claude-sonnet-4.6",
+      "argumentHint": ""
+    },
+    {
       "name": "prompt-coach",
-      "description": "Interactive prompt optimization coach. Use when reviewing prompts, scoring prompt quality, identifying anti-patterns, and guiding iterative refinement.",
-      "category": "Meta",
+      "description": "Use when reviewing prompts, scoring prompt quality, identifying anti-patterns, and guiding iterative refinement of LLM prompts.",
+      "category": "AI & Machine Learning",
       "keywords": [
         "prompt-coaching",
         "prompt-optimization",
@@ -1308,9 +1323,43 @@
       "argumentHint": ""
     },
     {
+      "name": "prompt-engineer",
+      "description": "Prompt optimization and system prompt engineering agent. Use when designing system prompts, optimizing token usage, crafting few-shot examples, or structuring chain-of-thought instructions.",
+      "category": "AI & Machine Learning",
+      "keywords": [
+        "prompt-engineering",
+        "llm",
+        "system-prompts",
+        "optimization",
+        "token-efficiency"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/prompt-engineer.agent.md",
+      "model": "gpt-5.3-codex",
+      "argumentHint": ""
+    },
+    {
+      "name": "rca",
+      "description": "Root Cause Analysis agent for deep-dive incident investigations, hypothesis testing, and prevention follow-up.",
+      "category": "Operations & Support",
+      "keywords": [
+        "incident-response",
+        "rca",
+        "root-cause-analysis",
+        "postmortem",
+        "troubleshooting"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/rca.agent.md",
+      "model": "claude-sonnet-4.6",
+      "argumentHint": ""
+    },
+    {
       "name": "release-impact-advisor",
       "description": "Comprehensive agent for assessing release readiness, analyzing change impacts, estimating blast radius, planning rollbacks, and guiding safe deployment strategies with feature flags, canary deployments, and changelog generation.",
-      "category": "Meta",
+      "category": "Release & Deployment",
       "keywords": [
         "release-management",
         "impact-analysis",
@@ -1325,10 +1374,29 @@
       "argumentHint": ""
     },
     {
+      "name": "release-manager",
+      "description": "Automated versioned release workflow. Reads merged PRs since the last release, bumps version.json, writes CHANGELOG entry, creates git tag, and publishes GitHub release.",
+      "category": "Release & Deployment",
+      "keywords": [
+        "release-management",
+        "versioning",
+        "changelog",
+        "semver",
+        "git-tagging"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/release-manager.agent.md",
+      "model": "claude-sonnet-4.6",
+      "argumentHint": ""
+    },
+    {
       "name": "resilience-reviewer",
       "description": ">",
-      "category": "Meta",
-      "keywords": "uncategorized",
+      "category": "Uncategorized",
+      "keywords": [
+        "uncategorized"
+      ],
       "aliases": [],
       "pairedSkill": "",
       "file": "agents/resilience-reviewer.agent.md",
@@ -1336,10 +1404,45 @@
       "argumentHint": ""
     },
     {
+      "name": "retro-facilitator",
+      "description": "End-of-sprint retrospective agent. Reviews closed issues and merged PRs for the sprint, produces a structured Went Well / Improve / Action Items summary, logs improvement issues framed generically for Basecoat, and updates sprint notes in the project repo.",
+      "category": "Project Management & Planning",
+      "keywords": [
+        "retrospective",
+        "sprint-review",
+        "agile",
+        "continuous-improvement"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/retro-facilitator.agent.md",
+      "model": "claude-sonnet-4.6",
+      "argumentHint": ""
+    },
+    {
+      "name": "rollout-basecoat",
+      "description": "Use when onboarding a repository to Base Coat in an enterprise setting. Focuses on pinned versions, safe rollout, installation method, and validation steps.",
+      "category": "Onboarding & Deployment",
+      "keywords": [
+        "basecoat",
+        "rollout",
+        "onboarding",
+        "enterprise",
+        "deployment"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/rollout-basecoat.agent.md",
+      "model": "claude-haiku-4.5",
+      "argumentHint": ""
+    },
+    {
       "name": "secrets-manager",
       "description": ">",
-      "category": "Meta",
-      "keywords": "uncategorized",
+      "category": "Uncategorized",
+      "keywords": [
+        "uncategorized"
+      ],
       "aliases": [],
       "pairedSkill": "",
       "file": "agents/secrets-manager.agent.md",
@@ -1347,10 +1450,28 @@
       "argumentHint": ""
     },
     {
+      "name": "security-analyst",
+      "description": "Security analysis agent for vulnerability assessment, threat modeling, and secure coding review. Use when auditing code for security issues, performing threat analysis, or reviewing dependencies for known vulnerabilities.",
+      "category": "Security & Compliance",
+      "keywords": [
+        "security-analysis",
+        "vulnerability-assessment",
+        "threat-modeling",
+        "owasp"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/security-analyst.agent.md",
+      "model": "gpt-5.3-codex",
+      "argumentHint": ""
+    },
+    {
       "name": "security-monitor",
       "description": ">",
-      "category": "Meta",
-      "keywords": "uncategorized",
+      "category": "Uncategorized",
+      "keywords": [
+        "uncategorized"
+      ],
       "aliases": [],
       "pairedSkill": "",
       "file": "agents/security-monitor.agent.md",
@@ -1360,8 +1481,10 @@
     {
       "name": "security-operations",
       "description": "Provide SOC (Security Operations Center) playbook guidance for threat detection, incident response, secrets rotation, audit logging, and operational security.",
-      "category": "Meta",
-      "keywords": "uncategorized",
+      "category": "security",
+      "keywords": [
+        "uncategorized"
+      ],
       "aliases": [],
       "pairedSkill": "",
       "file": "agents/security-operations.agent.md",
@@ -1371,7 +1494,7 @@
     {
       "name": "self-healing-ci",
       "description": "Automated CI failure analysis, log parsing, and pipeline remediation with retry strategies, flaky test detection, dependency resolution, and cache invalidation.",
-      "category": "Meta",
+      "category": "CI/CD & Automation",
       "keywords": [
         "ci-cd",
         "automation",
@@ -1386,9 +1509,44 @@
       "argumentHint": ""
     },
     {
+      "name": "solution-architect",
+      "description": "Solution architecture agent for system design, C4 diagrams, ADRs, technology selection, and cross-cutting concerns. Use when designing new systems, evaluating technology choices, or reviewing architecture for scalability and risk.",
+      "category": "Architecture & Design",
+      "keywords": [
+        "architecture",
+        "design",
+        "c4-diagrams",
+        "adr",
+        "technology-selection",
+        "system-design"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/solution-architect.agent.md",
+      "model": "claude-sonnet-4-5",
+      "argumentHint": ""
+    },
+    {
+      "name": "sprint-planner",
+      "description": "Goal-to-issues decomposition and wave dependency mapping. Accepts a sprint goal, produces GitHub issues with labels, wave dependency maps, agent assignments, and acceptance criteria.",
+      "category": "Project Management & Planning",
+      "keywords": [
+        "sprint-planning",
+        "agile",
+        "issue-decomposition",
+        "dependency-mapping",
+        "roadmapping"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/sprint-planner.agent.md",
+      "model": "claude-sonnet-4.6",
+      "argumentHint": ""
+    },
+    {
       "name": "sprint-retrospective",
       "description": "Reconstructs repository history for sprint retrospectives, generating structured markdown with metrics, timelines, and actionable development tips.",
-      "category": "Meta",
+      "category": "Project Management & Planning",
       "keywords": [
         "retrospective",
         "sprint-review",
@@ -1404,7 +1562,7 @@
     {
       "name": "sre-engineer",
       "description": "Site reliability engineering agent for SLOs, error budgets, incident response, chaos engineering, and toil reduction. Use when improving service reliability and resilience.",
-      "category": "Meta",
+      "category": "Operations & Support",
       "keywords": [
         "sre",
         "reliability",
@@ -1420,9 +1578,25 @@
       "argumentHint": ""
     },
     {
+      "name": "strategy-to-automation",
+      "description": "Use when converting manual test paths into automation candidates. Maps paths to smoke tests, regression tiers, or agent specs. ALWAYS files a GitHub Issue for every automation candidate identified.",
+      "category": "Testing & Quality",
+      "keywords": [
+        "test-automation",
+        "testing-strategy",
+        "qa",
+        "regression-testing"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/strategy-to-automation.agent.md",
+      "model": "claude-sonnet-4.6",
+      "argumentHint": ""
+    },
+    {
       "name": "supply-chain-security",
       "description": "Secure software supply chain with artifact signing, SBOM generation, and provenance tracking.",
-      "category": "Quality",
+      "category": "Security & Compliance",
       "keywords": [
         "supply-chain",
         "sbom",
@@ -1437,48 +1611,37 @@
       "argumentHint": ""
     },
     {
-      "name": "definition-of-done",
-      "description": "Validate that a feature, PR, or release meets the Definition of Done before closing. Enforces testing evidence, config verification, response validation, and acceptance criteria.",
-      "category": "Meta",
+      "name": "tech-writer",
+      "description": "Use when creating or improving technical documentation, API docs, runbooks, tutorials, ADRs, changelogs, or implementing docs-as-code workflows.",
+      "category": "Documentation & Knowledge",
       "keywords": [
-        "definition-of-done",
-        "quality-gate",
-        "testing",
-        "acceptance-criteria",
-        "dod"
+        "technical-writing",
+        "documentation",
+        "api-docs",
+        "runbooks",
+        "adr"
       ],
       "aliases": [],
       "pairedSkill": "",
-      "file": "agents/definition-of-done.agent.md",
+      "file": "agents/tech-writer.agent.md",
       "model": "claude-sonnet-4.6",
       "argumentHint": ""
     },
     {
-      "name": "orchestrator",
-      "description": "Multi-agent orchestrator that decomposes complex requests, routes subtasks to specialist agents, dispatches parallel work, tracks progress, resolves conflicts, and aggregates results into one coherent response. Use when a task spans multiple domains or needs coordinated specialist execution.",
-      "category": "Meta",
-      "keywords": [],
-      "aliases": [],
-      "pairedSkill": "",
-      "file": "agents/orchestrator.agent.md",
-      "model": "claude-sonnet-4.6",
-      "argumentHint": ""
-    },
-    {
-      "name": "rca",
-      "description": "Root Cause Analysis agent for deep-dive incident investigations, hypothesis testing, and prevention follow-up.",
-      "category": "Meta",
+      "name": "ux-designer",
+      "description": "UX design agent for user journey mapping, wireframe specs, component design, and accessibility audits. Use when designing user experiences, evaluating usability, or auditing interfaces for WCAG compliance.",
+      "category": "Design & UX",
       "keywords": [
-        "incident-response",
-        "rca",
-        "root-cause-analysis",
-        "postmortem",
-        "troubleshooting"
+        "ux-design",
+        "user-experience",
+        "accessibility",
+        "wireframes",
+        "ui-design"
       ],
       "aliases": [],
       "pairedSkill": "",
-      "file": "agents/rca.agent.md",
-      "model": "claude-sonnet-4.6",
+      "file": "agents/ux-designer.agent.md",
+      "model": "claude-sonnet-4-5",
       "argumentHint": ""
     }
   ]

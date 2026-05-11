@@ -1,6 +1,7 @@
 ---
 name: container-migration
 description: Scaffold containerization of a legacy app for Azure Container Apps or Kubernetes — generates Dockerfile, health probe endpoint, managed identity config, ACR push/pull workflow, and ACA Bicep module.
+compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
 metadata:
   category: infrastructure
   keywords: "docker, containers, azure-container-apps, aks, kubernetes, acr, dockerfile, health-check, bicep"
