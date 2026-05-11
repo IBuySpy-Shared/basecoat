@@ -10,7 +10,7 @@ metadata:
 allowed-tools: [python, docker, bash, java, javascript]
 ---
 
-# Contract Testing Skill
+## Contract Testing Skill
 
 Use this skill when setting up consumer-driven contract tests, configuring Pact broker
 workflows, implementing provider verification, or orchestrating integration test suites

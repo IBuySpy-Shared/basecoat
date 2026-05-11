@@ -4,7 +4,7 @@ All notable changes to this repository should be recorded in this file.
 
 ## Unreleased
 
-## Sprint 6 — 2026-05-11
+## 3.26.0 - 2026-05-11
 
 ### Changed
 

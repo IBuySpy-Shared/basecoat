@@ -10,7 +10,7 @@ metadata:
 allowed-tools: [bash, node, python, docker]
 ---
 
-# E2E Testing Skill
+## E2E Testing Skill
 
 Use this skill to design reliable, maintainable end-to-end coverage for critical user journeys. It helps teams choose the right framework, define resilient selectors and waits, and connect browser tests to CI pipelines without creating brittle suites. The primary input is the application workflow you need to validate, along with environment details, browser targets, authentication constraints, and any mock or fixture requirements. The output should be a clear testing approach, representative test cases, and practical guidance that reduces flakes while preserving real product confidence. This skill also produces framework-specific examples that can be adapted quickly by engineering and QA teams.
 
