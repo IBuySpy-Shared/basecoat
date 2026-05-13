@@ -2,7 +2,11 @@
 name: azure-devops-rest
 description: "Use when building Azure DevOps REST integrations for work items, pipelines, repos, artifacts, auth, pagination, throttling, and API versioning."
 context: fork
-compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+compatibility:
+  editors:
+    - vscode
+  platforms:
+    - github
 metadata:
   category: "Developer Tools"
   tags: ["azure-devops", "rest-api", "pipelines", "work-items", "automation"]

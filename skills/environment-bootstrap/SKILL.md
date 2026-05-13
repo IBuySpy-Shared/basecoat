@@ -2,7 +2,11 @@
 name: environment-bootstrap
 description: Automated setup for OIDC federation, state storage, Key Vault, and environment promotion in Azure CI/CD pipelines. Now includes Fabric workspace service principal access automation.
 context: fork
-compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+compatibility:
+  editors:
+    - vscode
+  platforms:
+    - github
 metadata:
   category: "Infrastructure & DevOps"
   tags: ["azure", "oidc", "terraform", "bicep", "keyvault", "fabric", "aks"]
@@ -26,7 +30,8 @@ The Environment Bootstrap Skill provides a complete setup for establishing secur
 
 ## OIDC Federation Setup for CI/CD
 
-See \eferences/oidc-federation.md\ for complete OIDC federation setup instructions including:
+See \
+eferences/oidc-federation.md\ for complete OIDC federation setup instructions including:
 - Creating Entra ID applications
 - Configuring federated credentials
 - Assigning RBAC roles
@@ -36,7 +41,8 @@ See \eferences/oidc-federation.md\ for complete OIDC federation setup instructi
 
 ## Terraform and Bicep State Storage Configuration
 
-See \eferences/terraform-bicep-state-storage.md\ for state storage setup including:
+See \
+eferences/terraform-bicep-state-storage.md\ for state storage setup including:
 - Storage account creation and configuration
 - Blob container and backend setup
 - Bicep templates for state management
@@ -44,21 +50,24 @@ See \eferences/terraform-bicep-state-storage.md\ for state storage setup includ
 
 ## Azure Key Vault Provisioning
 
-See \eferences/azure-keyvault-provisioning.md\ for Key Vault setup including:
+See \
+eferences/azure-keyvault-provisioning.md\ for Key Vault setup including:
 - Key Vault creation and RBAC configuration
 - Secret management for CI/CD
 - Bicep templates for infrastructure-as-code
 
 ## GitHub Actions Secrets Configuration
 
-See \eferences/github-actions-secrets.md\ for GitHub Actions integration including:
+See \
+eferences/github-actions-secrets.md\ for GitHub Actions integration including:
 - Workflow configuration with Azure credentials
 - Retrieving secrets from Key Vault
 - Setting GitHub repository secrets
 
 ## Environment Promotion
 
-See \eferences/environment-promotion.md\ for multi-environment promotion including:
+See \
+eferences/environment-promotion.md\ for multi-environment promotion including:
 - Dev→Staging→Prod promotion strategies
 - Approval gates and manual controls
 - GitHub Environments configuration
@@ -66,7 +75,8 @@ See \eferences/environment-promotion.md\ for multi-environment promotion includ
 
 ## Workload Identity Federation
 
-See \eferences/workload-identity-federation.md\ for pod-level authentication including:
+See \
+eferences/workload-identity-federation.md\ for pod-level authentication including:
 - AKS prerequisites and setup
 - Federated credentials for Kubernetes pods
 - Service account configuration
@@ -74,7 +84,8 @@ See \eferences/workload-identity-federation.md\ for pod-level authentication in
 
 ## Troubleshooting
 
-See \eferences/troubleshooting.md\ for common issues and solutions including:
+See \
+eferences/troubleshooting.md\ for common issues and solutions including:
 - OIDC token exchange failures
 - State storage access issues
 - Key Vault access denied errors
@@ -82,7 +93,8 @@ See \eferences/troubleshooting.md\ for common issues and solutions including:
 
 ## Microsoft Fabric Workspace Service Principal Access
 
-See \eferences/fabric-workspace-access.md\ for Fabric workspace automation including:
+See \
+eferences/fabric-workspace-access.md\ for Fabric workspace automation including:
 - Creating service principals for Fabric access
 - Assigning workspace roles via REST API
 - Storing credentials in Key Vault

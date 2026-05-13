@@ -2,7 +2,11 @@
 name: security-operations
 title: Security Operations & Threat Detection
 description: Threat detection patterns, SIEM rules, secrets management, audit logging, and incident response automation
-compatibility: ["agent:security-operations"]
+compatibility:
+  editors:
+    - vscode
+  platforms:
+    - github
 metadata:
   domain: security
   maturity: production
@@ -16,7 +20,8 @@ Use this skill when implementing threat detection, secrets management, audit log
 
 ## Threat Detection Patterns
 
-See \eferences/threat-detection-patterns.md\ for threat detection guidance including:
+See \
+eferences/threat-detection-patterns.md\ for threat detection guidance including:
 - Authentication attack detection (Azure AD anomalies, Kubernetes API attacks)
 - Data access anomalies (database queries, Azure Blob Storage)
 - Privilege escalation detection (RBAC role changes)
@@ -24,7 +29,8 @@ See \eferences/threat-detection-patterns.md\ for threat detection guidance incl
 
 ## Secrets Management
 
-See \eferences/secrets-management.md\ for secrets management including:
+See \
+eferences/secrets-management.md\ for secrets management including:
 - Automated credential rotation (Kubernetes, Python scripts)
 - Secret access auditing with HashiCorp Vault
 - Rotation policies and schedules
@@ -32,7 +38,8 @@ See \eferences/secrets-management.md\ for secrets management including:
 
 ## Audit Logging
 
-See \eferences/audit-logging.md\ for centralized audit logging including:
+See \
+eferences/audit-logging.md\ for centralized audit logging including:
 - ELK Stack configuration (Filebeat, Elasticsearch, Logstash)
 - Log parsing and enrichment
 - Immutable audit trails with Azure Blob Storage
@@ -40,7 +47,8 @@ See \eferences/audit-logging.md\ for centralized audit logging including:
 
 ## Incident Response Automation
 
-See \eferences/incident-response-automation.md\ for incident response automation including:
+See \
+eferences/incident-response-automation.md\ for incident response automation including:
 - Alert triage and prioritization
 - False positive detection
 - Threat intelligence correlation
@@ -49,14 +57,16 @@ See \eferences/incident-response-automation.md\ for incident response automatio
 
 ## Monitoring & Metrics
 
-See \eferences/monitoring-metrics.md\ for security metrics and monitoring including:
+See \
+eferences/monitoring-metrics.md\ for security metrics and monitoring including:
 - Key security metrics to track
 - Alert configuration patterns
 - Dashboarding strategies
 
 ## Security Operations Playbooks
 
-See \eferences/security-operations-playbooks.md\ for incident response runbooks and playbooks including:
+See \
+eferences/security-operations-playbooks.md\ for incident response runbooks and playbooks including:
 - Common incident types and responses
 - Escalation procedures
 - Post-incident analysis templates

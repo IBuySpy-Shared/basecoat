@@ -2,7 +2,11 @@
 
 name: azure-policy
 description: "Use when authoring custom Azure Policy definitions, bundling initiatives, designing DeployIfNotExists remediation tasks, generating KQL compliance dashboard queries, or mapping policies to regulatory frameworks (CIS, NIST 800-53, ISO 27001). Covers policy-as-code authoring, parameter design, initiative composition, and compliance reporting."
-compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+compatibility:
+  editors:
+    - vscode
+  platforms:
+    - github
 metadata:
   category: "Uncategorized"
   tags: ["uncategorized"]

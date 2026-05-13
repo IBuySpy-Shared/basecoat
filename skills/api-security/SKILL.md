@@ -2,7 +2,11 @@
 name: api-security
 title: OWASP API Security Top 10 Patterns
 description: API authentication, authorization, input validation, rate limiting, and protection patterns
-compatibility: ["agent:api-security"]
+compatibility:
+  editors:
+    - vscode
+  platforms:
+    - github
 metadata:
   domain: security
   maturity: production

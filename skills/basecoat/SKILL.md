@@ -1,8 +1,11 @@
 ---
 name: basecoat
-title: BaseCoat Router & Agent Discovery
 description: Single entry point for 73+ agents across 6 disciplines — discover or delegate across Development, Architecture, Quality, DevOps, Process, and Meta
-compatibility: ["agent:*"]
+compatibility:
+  editors:
+    - vscode
+  platforms:
+    - github
 metadata:
   domain: framework
   maturity: production

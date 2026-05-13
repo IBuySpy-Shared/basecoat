@@ -2,7 +2,11 @@
 
 name: sprint-retrospective
 description: "Templates, metrics patterns, and tips taxonomy for generating sprint retrospective documents."
-compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+compatibility:
+  editors:
+    - vscode
+  platforms:
+    - github
 metadata:
   category: "Uncategorized"
   tags: ["uncategorized"]

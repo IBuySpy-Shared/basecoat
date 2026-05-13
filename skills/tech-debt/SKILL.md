@@ -1,7 +1,11 @@
 ---
 name: tech-debt
 description: "Use when inventorying, scoring, budgeting, or reducing technical debt with RICE prioritization, debt registers, amortization tracking, and governance rules."
-compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+compatibility:
+  editors:
+    - vscode
+  platforms:
+    - github
 metadata:
   category: "Engineering"
   tags: ["technical-debt", "prioritization", "rice", "budgeting", "tracking", "amortization"]

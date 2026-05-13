@@ -1,7 +1,11 @@
 ---
 name: twelve-factor
 description: "12-Factor App methodology: codebase, dependencies, configuration, backing services, build/run/release, processes, port binding, concurrency, disposability, dev/prod parity, logs, and admin tasks"
-compatibility: "Works with VS Code, CLI, and Copilot Coding Agent. Language-agnostic."
+compatibility:
+  editors:
+    - vscode
+  platforms:
+    - github
 metadata:
   category: "architecture"
   keywords: "twelve-factor, app-architecture, cloud-native, stateless, configuration, processes"

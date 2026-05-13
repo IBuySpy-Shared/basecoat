@@ -2,7 +2,11 @@
 name: penetration-testing
 title: Penetration Testing & Vulnerability Discovery Patterns
 description: Test case execution, OWASP Top 10 coverage, exploitation techniques, and finding reporting
-compatibility: ["agent:penetration-test"]
+compatibility:
+  editors:
+    - vscode
+  platforms:
+    - github
 metadata:
   domain: security
   maturity: production

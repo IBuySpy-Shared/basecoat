@@ -2,7 +2,11 @@
 name: identity-migration
 title: Identity Migration to ASP.NET Core & Entra ID
 description: Migrate legacy authentication to ASP.NET Core Identity with Entra ID integration, claims-based authentication, and role/password management
-compatibility: ["agent:backend-dev"]
+compatibility:
+  editors:
+    - vscode
+  platforms:
+    - github
 metadata:
   domain: identity
   maturity: production

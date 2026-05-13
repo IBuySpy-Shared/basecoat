@@ -2,7 +2,11 @@
 name: supply-chain-security
 title: Supply Chain Security - SLSA, SBOM, Sigstore
 description: Artifact signing, SBOM generation, provenance tracking, and vulnerability scanning
-compatibility: ["agent:supply-chain-security"]
+compatibility:
+  editors:
+    - vscode
+  platforms:
+    - github
 metadata:
   domain: security
   maturity: production

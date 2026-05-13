@@ -2,7 +2,11 @@
 name: azure-container-apps
 title: Azure Container Apps Deployment & Operations
 description: Deploy, scale, and manage containerized applications on Azure Container Apps with Dapr, revision management, and advanced networking
-compatibility: ["agent:containerization-planner", "agent:devops-engineer"]
+compatibility:
+  editors:
+    - vscode
+  platforms:
+    - github
 metadata:
   domain: infrastructure
   maturity: production
@@ -17,21 +21,24 @@ Azure Container Apps (ACA) is a fully managed serverless container service for b
 
 ## Deployment Patterns
 
-See \eferences/deployment-patterns.md\ for comprehensive deployment pattern examples including:
+See \
+eferences/deployment-patterns.md\ for comprehensive deployment pattern examples including:
 - Basic container deployment
 - Using Azure Container Registry with managed identity
 - Best practices for image management
 
 ## Dapr Integration
 
-See \eferences/dapr-integration.md\ for Dapr integration guidance including:
+See \
+eferences/dapr-integration.md\ for Dapr integration guidance including:
 - Enabling Dapr sidecars
 - State management components
 - Service invocation patterns
 
 ## Scaling Rules
 
-See \eferences/scaling-rules.md\ for scaling configuration including:
+See \
+eferences/scaling-rules.md\ for scaling configuration including:
 - HTTP-based scaling rules
 - KEDA scaling definitions
 - Azure Event Hub scaling
@@ -39,28 +46,32 @@ See \eferences/scaling-rules.md\ for scaling configuration including:
 
 ## Revision Management
 
-See \eferences/revision-management.md\ for revision management including:
+See \
+eferences/revision-management.md\ for revision management including:
 - Creating new revisions
 - Traffic splitting and blue-green deployments
 - Listing and managing revisions
 
 ## Ingress Configuration
 
-See \eferences/ingress-configuration.md\ for ingress setup including:
+See \
+eferences/ingress-configuration.md\ for ingress setup including:
 - External ingress with TLS
 - Internal ingress
 - Custom domains and SSL binding
 
 ## Managed Identity
 
-See \eferences/managed-identity.md\ for managed identity configuration including:
+See \
+eferences/managed-identity.md\ for managed identity configuration including:
 - System-assigned and user-assigned identities
 - Role assignment
 - Key Vault and ACR access patterns
 
 ## Health Probes
 
-See \eferences/health-probes.md\ for health probe configuration including:
+See \
+eferences/health-probes.md\ for health probe configuration including:
 - Liveness probes
 - Readiness probes
 - Startup probes
@@ -68,14 +79,16 @@ See \eferences/health-probes.md\ for health probe configuration including:
 
 ## Azure Container Apps Jobs
 
-See \eferences/container-apps-jobs.md\ for container app jobs including:
+See \
+eferences/container-apps-jobs.md\ for container app jobs including:
 - Scheduled jobs (cron)
 - Event-driven jobs
 - Job scaling and execution
 
 ## Multi-Container Environments
 
-See \eferences/multi-container-environments.md\ for multi-container setup including:
+See \
+eferences/multi-container-environments.md\ for multi-container setup including:
 - Environment creation
 - Internal service-to-service communication
 - DNS naming conventions

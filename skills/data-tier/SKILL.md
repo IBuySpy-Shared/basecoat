@@ -2,7 +2,11 @@
 
 name: data-tier
 description: "Use when designing schemas, writing migrations, reviewing queries, or establishing data access patterns. Provides schema design, migration, query review, and data dictionary templates."
-compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+compatibility:
+  editors:
+    - vscode
+  platforms:
+    - github
 metadata:
   category: "Uncategorized"
   tags: ["uncategorized"]

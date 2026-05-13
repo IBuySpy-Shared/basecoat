@@ -2,7 +2,11 @@
 
 name: observability
 description: "Use when designing instrumentation, telemetry signals, and operational visibility for apps, services, and distributed systems."
-compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+compatibility:
+  editors:
+    - vscode
+  platforms:
+    - github
 metadata:
   category: "Uncategorized"
   tags: ["uncategorized"]

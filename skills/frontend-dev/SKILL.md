@@ -2,7 +2,11 @@
 
 name: frontend-dev
 description: "Use when building UI components, implementing responsive layouts, auditing accessibility, or designing state management. Provides component spec, accessibility checklist, and state management templates."
-compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+compatibility:
+  editors:
+    - vscode
+  platforms:
+    - github
 metadata:
   category: "Uncategorized"
   tags: ["uncategorized"]

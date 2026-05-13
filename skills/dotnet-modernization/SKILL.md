@@ -2,7 +2,11 @@
 name: dotnet-modernization
 title: .NET Modernization
 description: "Structured guidance for .NET modernization from assessment through execution."
-compatibility: ["agent:dotnet-modernization-advisor", "agent:legacy-modernization", "agent:backend-dev"]
+compatibility:
+  editors:
+    - vscode
+  platforms:
+    - github
 metadata:
   domain: dotnet
   maturity: production
