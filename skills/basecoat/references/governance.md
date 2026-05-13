@@ -1,4 +1,4 @@
-# Base Coat Router — Keyword Routing & Governance
+# BaseCoat Router — Keyword Routing & Governance
 
 ## Keyword-to-Agent Routing Table
 

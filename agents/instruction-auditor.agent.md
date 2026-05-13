@@ -118,7 +118,7 @@ Produce a coverage table in the requested `report_format`.
 ### 5. Recommend Sync Commands for Missing Files
 
 For each ❌ Missing entry, emit the sync command that will pull the canonical
-instruction file from Basecoat into the overlay:
+instruction file from BaseCoat into the overlay:
 
 ```powershell
 pwsh scripts/sync-basecoat.ps1 -Include instructions/<expected-file>

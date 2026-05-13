@@ -1,12 +1,12 @@
 ---
-description: "HRM Phase 2 — Formal layer contracts, two-dimensional routing matrix, guidance signals, and agent decomposition scope rules for the Base Coat execution hierarchy."
+description: "HRM Phase 2 — Formal layer contracts, two-dimensional routing matrix, guidance signals, and agent decomposition scope rules for the BaseCoat execution hierarchy."
 applyTo: "**/*"
 distribute: false
 ---
 
 ## HRM Execution — Formal Layer Contracts
 
-> This file defines the Hierarchical Reasoning Model (HRM) execution contract for Base Coat.
+> This file defines the Hierarchical Reasoning Model (HRM) execution contract for BaseCoat.
 > It implements the HRM Phase 2 adoption path from `docs/research/TRM-HRM-investigation.md`.
 > TRM intent classification details are in `instructions/trm-reflexion.instructions.md`.
 

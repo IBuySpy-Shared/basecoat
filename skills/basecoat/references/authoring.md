@@ -1,4 +1,4 @@
-# Base Coat Router — Usage & Authoring
+# BaseCoat Router — Usage & Authoring
 
 ## Usage Modes
 

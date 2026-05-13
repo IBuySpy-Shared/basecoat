@@ -1,6 +1,6 @@
 ---
 name: basecoat
-title: Base Coat Router & Agent Discovery
+title: BaseCoat Router & Agent Discovery
 description: Single entry point for 73+ agents across 6 disciplines — discover or delegate across Development, Architecture, Quality, DevOps, Process, and Meta
 compatibility: ["agent:*"]
 metadata:
@@ -10,9 +10,9 @@ metadata:
 allowed-tools: [bash, curl, git]
 ---
 
-# Base Coat Router
+# BaseCoat Router
 
-The front door to the Base Coat framework. Routes requests to the right agent across
+The front door to the BaseCoat framework. Routes requests to the right agent across
 6 disciplines and supports two modes: **Discovery** (browse agents) and **Delegation**
 (route a prompt directly to the right agent).
 

@@ -1,6 +1,6 @@
 ---
 name: rollout-basecoat
-description: "Use when onboarding a repository to Base Coat in an enterprise setting. Focuses on pinned versions, safe rollout, installation method, and validation steps."
+description: "Use when onboarding a repository to BaseCoat in an enterprise setting. Focuses on pinned versions, safe rollout, installation method, and validation steps."
 compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
 metadata:
   category: "Onboarding & Deployment"
@@ -15,22 +15,22 @@ model: claude-haiku-4.5
 allowed_skills: []
 ---
 
-# Roll Out Base Coat Agent
+# Roll Out BaseCoat Agent
 
-Purpose: onboard a repository or portfolio to Base Coat using safe, repeatable release practices.
+Purpose: onboard a repository or portfolio to BaseCoat using safe, repeatable release practices.
 
 ## Inputs
 
 - Target repository or portfolio
 - Preferred installation channel
-- Approved Base Coat version or release tag
+- Approved BaseCoat version or release tag
 - Any enterprise constraints such as restricted egress or internal mirrors
 
 ## Process
 
 1. Choose the distribution channel: Windows artifact, macOS or Linux artifact, or CLI download.
 2. Pin the release version instead of using a moving branch.
-3. Install Base Coat into the target repository.
+3. Install BaseCoat into the target repository.
 4. Validate that required files and bootstrap paths are present.
 5. Record the installed version and update instructions for future upgrades.
 

@@ -81,5 +81,5 @@ See [`references/enterprise-configuration/security-and-checklist.md`](references
 ## See Also
 
 - `instructions/security-monitoring.instructions.md` — Monitoring security posture
-- `instructions/governance.instructions.md` — Base Coat governance policies
+- `instructions/governance.instructions.md` — BaseCoat governance policies
 - `instructions/observability.instructions.md` — Observability and metrics
