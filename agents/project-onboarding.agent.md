@@ -1,6 +1,6 @@
 ---
 name: project-onboarding
-description: "Single-invocation new repo setup with Basecoat integration. Creates repo, syncs governance framework, configures templates, and logs initial sprint issue."
+description: "Single-invocation new repo setup with BaseCoat integration. Creates repo, syncs governance framework, configures templates, and logs initial sprint issue."
 compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
 metadata:
   category: "Onboarding & Deployment"
@@ -17,7 +17,7 @@ allowed_skills: []
 
 # Project Onboarding Agent
 
-Purpose: stand up a new GitHub repository with Basecoat governance, standard scaffolding, and a first sprint issue — all in a single invocation. Safe to re-run on an existing repo.
+Purpose: stand up a new GitHub repository with BaseCoat governance, standard scaffolding, and a first sprint issue — all in a single invocation. Safe to re-run on an existing repo.
 
 ## Inputs
 
@@ -26,7 +26,7 @@ Purpose: stand up a new GitHub repository with Basecoat governance, standard sca
 - **visibility** — `public` or `private` (default `private`)
 - **sprint_1_goal** — Plain-language objective for the first sprint (used to generate the initial issue with acceptance criteria)
 - **github_org** — GitHub org or user namespace (default: current authenticated user)
-- **basecoat_version** — Basecoat release tag to pin (default: `main`)
+- **basecoat_version** — BaseCoat release tag to pin (default: `main`)
 
 ## Process
 
@@ -66,10 +66,10 @@ gh repo clone "$github_org/$repo_name"
 
 Create the following files at the repo root if they do not already exist:
 
-**`sync.ps1`** — copy from the Basecoat source repo at the pinned version:
+**`sync.ps1`** — copy from the BaseCoat source repo at the pinned version:
 
 ```powershell
-# Pull sync.ps1 from Basecoat at the pinned version
+# Pull sync.ps1 from BaseCoat at the pinned version
 $basecoatRef = "$basecoat_version"   # e.g. "v0.6.0" or "main"
 Invoke-WebRequest `
   -Uri "https://raw.githubusercontent.com/ivegamsft/basecoat/$basecoatRef/sync.ps1" `
@@ -85,15 +85,15 @@ curl -fsSL \
 chmod +x sync.sh
 ```
 
-**`setup.ps1`** — bootstrap script that runs the Basecoat sync and any first-time setup:
+**`setup.ps1`** — bootstrap script that runs the BaseCoat sync and any first-time setup:
 
 ```powershell
 $ErrorActionPreference = 'Stop'
 
 Write-Host '--- Project Setup ---'
 
-# 1. Sync Basecoat governance framework
-Write-Host 'Syncing Basecoat...'
+# 1. Sync BaseCoat governance framework
+Write-Host 'Syncing BaseCoat...'
 & "$PSScriptRoot\sync.ps1"
 
 # 2. Install pre-commit hooks (if .githooks exists after sync)
@@ -170,7 +170,7 @@ $repo_description
    cd $repo_name
    ```
 
-2. Run the setup script to sync Basecoat governance and configure hooks:
+2. Run the setup script to sync BaseCoat governance and configure hooks:
 
    **PowerShell:**
    ```powershell
@@ -184,9 +184,9 @@ $repo_description
 
 3. Start working — all governance instructions, agents, and skills are now available under `.github/base-coat/`.
 
-### Keeping Basecoat Up to Date
+### Keeping BaseCoat Up to Date
 
-Re-run the sync script at any time to pull the latest Basecoat version:
+Re-run the sync script at any time to pull the latest BaseCoat version:
 
 ```powershell
 .\sync.ps1
@@ -208,7 +208,7 @@ See `.github/base-coat/instructions/governance.instructions.md` for the full gov
 See [LICENSE](LICENSE) for details.
 ````
 
-### 4. Sync Basecoat into `.github/base-coat/`
+### 4. Sync BaseCoat into `.github/base-coat/`
 
 Use `sync.ps1` to pull the governance framework at the pinned version. This is the canonical sync mechanism — never copy files manually.
 
@@ -317,9 +317,9 @@ Stage all scaffolded files, commit with a conventional message, and push:
 
 ```bash
 git add -A
-git commit -m "feat: initial project scaffolding with Basecoat integration
+git commit -m "feat: initial project scaffolding with BaseCoat integration
 
-- Synced Basecoat governance framework
+- Synced BaseCoat governance framework
 - Added sync.ps1, sync.sh, setup.ps1
 - Configured .gitignore with secrets protection
 - Added issue templates (feature + bug)
@@ -340,7 +340,7 @@ After completion, report the following:
 |---|---|
 | Repository | `$github_org/$repo_name` — created or already existed |
 | Visibility | `$visibility` |
-| Basecoat version | `$basecoat_version` synced into `.github/base-coat/` |
+| BaseCoat version | `$basecoat_version` synced into `.github/base-coat/` |
 | Sync mechanism | `sync.ps1` / `sync.sh` at repo root |
 | Setup script | `setup.ps1` at repo root |
 | `.gitignore` | Configured with secrets protection |
@@ -377,7 +377,7 @@ $repo_name/
 1. Enable branch protection on `main` (require PR reviews, status checks).
 2. Add CI workflows as needed (lint, build, test).
 3. Begin Sprint 1 — work from the sprint-1 issue created above.
-4. Run `.\sync.ps1` periodically to pick up Basecoat updates.
+4. Run `.\sync.ps1` periodically to pick up BaseCoat updates.
 
 ## Idempotency
 
@@ -385,7 +385,7 @@ This agent is safe to re-run on an existing repository:
 
 - **Repo creation** — skipped if the repo already exists; clones instead.
 - **Root files** — only written if they do not already exist; existing files are preserved.
-- **Basecoat sync** — `sync.ps1` replaces the `.github/base-coat/` directory cleanly on each run.
+- **BaseCoat sync** — `sync.ps1` replaces the `.github/base-coat/` directory cleanly on each run.
 - **Issue templates** — only created if the `.github/ISSUE_TEMPLATE/` directory is missing.
 - **Sprint-1 issue** — a new issue is created each run. Check for duplicates before re-running if this is undesirable.
 

@@ -1,11 +1,11 @@
 ﻿---
-description: "Base Coat repository context and conventions for GitHub Copilot"
+description: "BaseCoat repository context and conventions for GitHub Copilot"
 applyTo: "**/*"
 ---
 
-# Base Coat — Copilot Repository Context
+# BaseCoat — Copilot Repository Context
 
-Base Coat is an enterprise shared library of GitHub Copilot customization assets
+BaseCoat is an enterprise shared library of GitHub Copilot customization assets
 including agents, skills, instruction files, prompt templates, and documentation.
 
 ## Repository Conventions

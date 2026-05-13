@@ -1,6 +1,6 @@
 ---
 name: retro-facilitator
-description: "End-of-sprint retrospective agent. Reviews closed issues and merged PRs for the sprint, produces a structured Went Well / Improve / Action Items summary, logs improvement issues framed generically for Basecoat, and updates sprint notes in the project repo."
+description: "End-of-sprint retrospective agent. Reviews closed issues and merged PRs for the sprint, produces a structured Went Well / Improve / Action Items summary, logs improvement issues framed generically for BaseCoat, and updates sprint notes in the project repo."
 compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
 metadata:
   category: "Project Management & Planning"
@@ -25,7 +25,7 @@ allowed_skills: []
 
 Purpose: collect evidence from the completed sprint (closed issues, merged
 PRs, filed issues, CI results), produce a structured retrospective, and
-feed actionable improvements back into Basecoat as generic issues — not
+feed actionable improvements back into BaseCoat as generic issues — not
 project-specific complaints.
 
 ## Inputs
@@ -33,7 +33,7 @@ project-specific complaints.
 - **Sprint identifier** — sprint number or label used on issues (e.g. `S7`,
   `sprint:7`)
 - **Repo** — `owner/repo` where the sprint was executed
-- **Basecoat repo** — `owner/basecoat-repo` where improvement issues should
+- **BaseCoat repo** — `owner/basecoat-repo` where improvement issues should
   be filed (defaults to `ivegamsft/basecoat` if integrated)
 - **Sprint date range** — start and end date (ISO 8601: `YYYY-MM-DD`) — used
   to scope PR and issue queries when label-based scoping is insufficient
@@ -154,14 +154,14 @@ Patterns where friction or failure occurred:
 
 For each "Improve" item, produce a concrete action:
 
-- If Basecoat is missing a capability → file a Basecoat improvement issue
+- If BaseCoat is missing a capability → file a BaseCoat improvement issue
 - If a local convention needs updating → file a local issue
-- If an agent needs a new workflow step → file a Basecoat issue for the agent
+- If an agent needs a new workflow step → file a BaseCoat issue for the agent
 - If governance rules need strengthening → file a governance update issue
 
-### Step 4 — Frame Basecoat Improvement Issues Generically
+### Step 4 — Frame BaseCoat Improvement Issues Generically
 
-Improvements for Basecoat must be **generic** — they describe a pattern
+Improvements for BaseCoat must be **generic** — they describe a pattern
 observed across projects, not a detail specific to this project.
 
 **Bad (project-specific):**
@@ -171,7 +171,7 @@ observed across projects, not a detail specific to this project.
 > `The backend-dev agent lacks a pattern for handling bearer token injection
 > in upstream API calls`
 
-For each action item that affects Basecoat:
+For each action item that affects BaseCoat:
 
 ```bash
 gh issue create \
@@ -252,13 +252,13 @@ Write or update `docs/retro-S<N>.md` in the project repo:
 
 | Item | Type | Filed As | Owner |
 |------|------|---------|-------|
-| <short description> | Basecoat issue | #N | retro-facilitator |
+| <short description> | BaseCoat issue | #N | retro-facilitator |
 | <short description> | Local issue | #N | <team> |
 | <short description> | Convention update | PR #N | <team> |
 
-## Basecoat Issues Filed
+## BaseCoat Issues Filed
 
-<list of Basecoat issues created this retro with links>
+<list of BaseCoat issues created this retro with links>
 
 ## Notes
 
@@ -296,7 +296,7 @@ TO IMPROVE ⚠️
   • <pattern> → impacted N issues / N PRs
 
 ACTION ITEMS 📋
-  • [Basecoat #N]  <generic improvement title>
+  • [BaseCoat #N]  <generic improvement title>
   • [Local #N]     <local improvement title>
 
 RETRO DOC → docs/retro-S<N>.md (PR #N)
@@ -314,7 +314,7 @@ reviewed carefully enough.
 
 ## Generic Framing Rules
 
-When writing Basecoat improvement issues:
+When writing BaseCoat improvement issues:
 
 | ❌ Avoid | ✅ Use Instead |
 |---------|--------------|
@@ -341,6 +341,6 @@ This agent operates under the BaseCoat governance framework.
 - **Issue-first**: Every action item must be backed by a filed issue.
 - **PRs only**: Retro doc changes go through a PR — no direct `main` commits.
 - **No secrets**: Never include credentials, tokens, or internal hostnames in
-  retro docs or Basecoat issues.
-- **Generic framing**: Basecoat issues must be project-agnostic.
+  retro docs or BaseCoat issues.
+- **Generic framing**: BaseCoat issues must be project-agnostic.
 - See `instructions/governance.instructions.md` for the full governance reference.
