@@ -2,7 +2,11 @@
 
 name: security
 description: "Use when performing security audits, threat modeling, vulnerability assessments, or dependency reviews. Provides OWASP checklists, STRIDE templates, vulnerability report structures, and dependency audit formats."
-compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+compatibility:
+  editors:
+    - vscode
+  platforms:
+    - github
 metadata:
   category: "Uncategorized"
   tags: ["uncategorized"]
@@ -47,4 +51,4 @@ For backend-specific security concerns, pair with the `backend-dev` agent's secu
 
 ## Related Guardrails
 
-- [Security Findings Triage](../../docs/guardrails/security-findings-triage.md) — SLA-based triage process for severity classification, ownership, and remediation tracking
+- [Security Findings Triage](references/security-findings-triage.md) — SLA-based triage process for severity classification, ownership, and remediation tracking

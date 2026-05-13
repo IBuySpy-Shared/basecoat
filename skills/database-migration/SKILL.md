@@ -1,7 +1,11 @@
 ---
 name: database-migration
 description: Zero-downtime database migration patterns, blue-green deployments, rollback strategies, and schema versioning for production systems
-compatibility: "Requires database access tools. Works with VS Code, CLI, and Copilot Coding Agent."
+compatibility:
+  editors:
+    - vscode
+  platforms:
+    - github
 metadata:
   category: "data"
   keywords: "database, migration, flyway, liquibase, zero-downtime, blue-green"
@@ -93,5 +97,5 @@ laptop, an on-premises pipeline, or a third-party SaaS).
 |-------|-------|-----|
 | `Principal '…' could not be found` | SID not yet propagated from Entra to SQL | Wait 1–2 minutes after creating the Entra object; retry `CREATE USER` |
 | `Login failed for user '<token-identified principal>'` | Entra admin not set on the SQL server | Set an Entra admin: `az sql server ad-admin create …` |
-| `Cannot open server … requested by the login` | Client IP not in SQL firewall rules | Add the caller's IP or allow Azure services: `az sql server firewall-rule create --start-ip 0.0.0.0 --end-ip 0.0.0.0` |
+| `Cannot open server … requested by the login` | Client IP not in SQL firewall rules | Add the caller's IP or create a rule with placeholders such as `az sql server firewall-rule create --start-ip <allowed-start-ip> --end-ip <allowed-end-ip>` |
 | `AADSTS700016: Application not found` | Wrong client ID or app not in the correct tenant | Verify `User Id` matches the managed identity client ID, not the object ID |

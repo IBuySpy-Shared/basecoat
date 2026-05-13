@@ -1,7 +1,11 @@
 ---
 name: azure-linux-app-service
 description: Deploy and operate Python, Ruby, and Node.js applications on Azure App Service Linux using PaaS patterns, slot swaps, and log streaming.
-compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+compatibility:
+  editors:
+    - vscode
+  platforms:
+    - github
 metadata:
   category: infrastructure
   keywords: "azure, app-service, linux, python, ruby, nodejs, paas, deployment"
@@ -45,7 +49,7 @@ Set the Linux runtime and startup command before first deploy:
 az webapp config set \
   --resource-group <rg> --name <app> \
   --linux-fx-version "PYTHON|3.11" \
-  --startup-file "gunicorn --bind=0.0.0.0 --timeout 600 myapp:app"
+  --startup-file "gunicorn --bind=<bind-address> --timeout 600 myapp:app"
 ```
 
 Runtime strings per language:
@@ -58,7 +62,7 @@ Runtime strings per language:
 
 Startup command examples:
 
-- Python (Gunicorn): `gunicorn --bind=0.0.0.0 --timeout 600 myapp:app`
+- Python (Gunicorn): `gunicorn --bind=<bind-address> --timeout 600 myapp:app`
 - Ruby (Puma): `bundle exec puma -C config/puma.rb`
 - Node.js: `node server.js` or `npm start`
 
@@ -169,7 +173,7 @@ az webapp create \
 
 az webapp config set \
   --resource-group myRG --name myapp \
-  --startup-file "gunicorn --bind=0.0.0.0 --timeout 600 main:app"
+  --startup-file "gunicorn --bind=<bind-address> --timeout 600 main:app"
 
 az webapp config appsettings set \
   --resource-group myRG --name myapp \
@@ -205,7 +209,7 @@ az webapp deployment slot swap \
 
 | Symptom | Likely cause | Fix |
 |---------|-------------|-----|
-| Container keeps restarting / 503 on startup | Startup command incorrect or app crashes before binding | Check `az webapp log tail`; verify startup file path and port binding (`0.0.0.0`) |
+| Container keeps restarting / 503 on startup | Startup command incorrect or app crashes before binding | Check `az webapp log tail`; verify startup file path and bind address (`<bind-address>`) |
 | `ModuleNotFoundError` on Python app | `requirements.txt` missing or not at repo root | Ensure `requirements.txt` is at root; redeploy with zip including it |
 | Wrong Python/Node version | Runtime not explicitly set | Run `az webapp config set --linux-fx-version "PYTHON\|3.11"` |
 | Health check failing | Endpoint not yet available at startup | Increase startup timeout or fix health check path |
