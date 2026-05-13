@@ -1,6 +1,5 @@
 ---
 name: e2e-testing
-title: E2E Testing - Playwright, Cypress, and Cross-Browser Patterns
 description: Use when designing or hardening production E2E tests with Playwright or Cypress, including flake reduction, CI strategy, and browser coverage
 compatibility: ["agent:e2e-test-strategy", "agent:contract-testing"]
 metadata:

@@ -1,6 +1,5 @@
 ---
 name: domain-driven-design
-title: Domain-Driven Design & CQRS Patterns
 description: Event sourcing, aggregate patterns, bounded contexts, CQRS implementation, and distributed systems patterns
 compatibility: ["agent:architecture"]
 metadata:

@@ -1,7 +1,6 @@
 ---
 name: environment-bootstrap
 description: Automated setup for OIDC federation, state storage, Key Vault, and environment promotion in Azure CI/CD pipelines. Now includes Fabric workspace service principal access automation.
-context: fork
 compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
 metadata:
   category: "Infrastructure & DevOps"

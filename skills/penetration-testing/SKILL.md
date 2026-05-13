@@ -1,6 +1,5 @@
 ---
 name: penetration-testing
-title: Penetration Testing & Vulnerability Discovery Patterns
 description: Test case execution, OWASP Top 10 coverage, exploitation techniques, and finding reporting
 compatibility: ["agent:penetration-test"]
 metadata:

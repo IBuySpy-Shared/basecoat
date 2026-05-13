@@ -1,6 +1,5 @@
 ---
 name: azure-container-apps
-title: Azure Container Apps Deployment & Operations
 description: Deploy, scale, and manage containerized applications on Azure Container Apps with Dapr, revision management, and advanced networking
 compatibility: ["agent:containerization-planner", "agent:devops-engineer"]
 metadata:
