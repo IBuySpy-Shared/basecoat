@@ -14,100 +14,20 @@ metadata:
 allowed-tools: [bash, azure-cli, docker, kubectl, terraform]
 ---
 
-
 # Azure Container Apps Skill
 
-Azure Container Apps (ACA) is a fully managed serverless container service for building and deploying modern applications at scale. This skill covers deployment patterns, Dapr integration, scaling strategies, revision management, and multi-container environments.
+Deploy and operate containerized workloads on ACA with Dapr, revision management, and KEDA-based scaling.
 
-## Deployment Patterns
+## Reference Files
 
-See \
-eferences/deployment-patterns.md\ for comprehensive deployment pattern examples including:
-
-- Basic container deployment
-- Using Azure Container Registry with managed identity
-- Best practices for image management
-
-## Dapr Integration
-
-See \
-eferences/dapr-integration.md\ for Dapr integration guidance including:
-
-- Enabling Dapr sidecars
-- State management components
-- Service invocation patterns
-
-## Scaling Rules
-
-See \
-eferences/scaling-rules.md\ for scaling configuration including:
-
-- HTTP-based scaling rules
-- KEDA scaling definitions
-- Azure Event Hub scaling
-- Custom metrics
-
-## Revision Management
-
-See \
-eferences/revision-management.md\ for revision management including:
-
-- Creating new revisions
-- Traffic splitting and blue-green deployments
-- Listing and managing revisions
-
-## Ingress Configuration
-
-See \
-eferences/ingress-configuration.md\ for ingress setup including:
-
-- External ingress with TLS
-- Internal ingress
-- Custom domains and SSL binding
-
-## Managed Identity
-
-See \
-eferences/managed-identity.md\ for managed identity configuration including:
-
-- System-assigned and user-assigned identities
-- Role assignment
-- Key Vault and ACR access patterns
-
-## Health Probes
-
-See \
-eferences/health-probes.md\ for health probe configuration including:
-
-- Liveness probes
-- Readiness probes
-- Startup probes
-- Configuration via CLI, YAML, and Bicep
-
-## Azure Container Apps Jobs
-
-See \
-eferences/container-apps-jobs.md\ for container app jobs including:
-
-- Scheduled jobs (cron)
-- Event-driven jobs
-- Job scaling and execution
-
-## Multi-Container Environments
-
-See \
-eferences/multi-container-environments.md\ for multi-container setup including:
-
-- Environment creation
-- Internal service-to-service communication
-- DNS naming conventions
-
-## Bicep Templates
-
-For complete infrastructure-as-code examples, see the detailed reference sections above for Bicep template snippets embedded in each deployment pattern.
-
-## Related Topics
-
-- **Container Registry**: Manage container images with Azure Container Registry
-- **Azure Functions**: Serverless compute for event-driven workloads
-- **App Service**: Alternative platform for application hosting
+| File | Contents |
+|------|----------|
+| [deployment-patterns.md](references/deployment-patterns.md) | Basic deployment, ACR + managed identity, image management |
+| [dapr-integration.md](references/dapr-integration.md) | Dapr sidecars, state management, service invocation |
+| [scaling-rules.md](references/scaling-rules.md) | HTTP, KEDA, Event Hub, and custom metric scaling |
+| [revision-management.md](references/revision-management.md) | Revisions, traffic splitting, blue-green deploys |
+| [ingress-configuration.md](references/ingress-configuration.md) | External/internal ingress, TLS, custom domains |
+| [managed-identity.md](references/managed-identity.md) | System/user identities, role assignment, Key Vault access |
+| [health-probes.md](references/health-probes.md) | Liveness, readiness, startup probes (CLI/YAML/Bicep) |
+| [container-apps-jobs.md](references/container-apps-jobs.md) | Scheduled and event-driven jobs, job scaling |
+| [multi-container-environments.md](references/multi-container-environments.md) | Environment setup, internal service communication |
