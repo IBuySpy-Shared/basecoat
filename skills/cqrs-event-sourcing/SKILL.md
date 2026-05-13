@@ -35,7 +35,7 @@ CQRS separates read and write logic:
 - **Queries**: Operations that retrieve state (GetOrder, ListOrders).
 - **Events**: Records of state changes that occurred (OrderCreated, OrderShipped).
 
-**Benefits**
+## Benefits
 
 - Independent scaling of read and write models
 - Optimized read models for specific query patterns
@@ -43,7 +43,7 @@ CQRS separates read and write logic:
 - Better support for event-driven architectures
 - Audit trail and temporal queries
 
-**Trade-offs**
+## Trade-offs
 
 - Eventual consistency between write and read models
 - Increased operational complexity
@@ -51,7 +51,7 @@ CQRS separates read and write logic:
 
 ## Core Flow
 
-```
+```text
 User → Command → Command Handler → Event Store → Events → Event Bus
                                                             ↓
                                                     Event Handlers
