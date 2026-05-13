@@ -34,7 +34,7 @@ The operator continuously reconciles actual cluster state with declared desired 
 
 ## Workflow
 
-```
+```text
 Developer → commits manifests to Git
            ↓
 GitOps Operator (Flux/ArgoCD) detects change

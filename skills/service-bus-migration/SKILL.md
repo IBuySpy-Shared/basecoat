@@ -21,6 +21,7 @@ Comprehensive guidance for migrating enterprise messaging systems from Microsoft
 ## Quick Navigation
 
 **New to this migration?** Start here:
+
 1. Review [Migration Patterns](references/migration-patterns.md) for strategy options
 2. Study [Dead-Letter & Retry](references/dead-letter-and-retry.md) for resilience
 3. Explore [Advanced Patterns](references/advanced-patterns.md) for hybrid bridge and transactional messaging

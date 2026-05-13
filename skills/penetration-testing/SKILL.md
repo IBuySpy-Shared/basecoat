@@ -29,7 +29,7 @@ reconnaissance, vulnerability discovery, exploitation, and reporting.
 
 ## Test Execution Flow
 
-```
+```text
 1. Scope definition → agree on target URLs, IP ranges, allowed techniques
 2. Reconnaissance   → enumerate endpoints, gather tech stack info
 3. Vulnerability discovery → OWASP Top 10 test cases

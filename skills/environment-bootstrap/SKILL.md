@@ -32,6 +32,7 @@ The Environment Bootstrap Skill provides a complete setup for establishing secur
 
 See \
 eferences/oidc-federation.md\ for complete OIDC federation setup instructions including:
+
 - Creating Entra ID applications
 - Configuring federated credentials
 - Assigning RBAC roles
@@ -43,6 +44,7 @@ eferences/oidc-federation.md\ for complete OIDC federation setup instructions in
 
 See \
 eferences/terraform-bicep-state-storage.md\ for state storage setup including:
+
 - Storage account creation and configuration
 - Blob container and backend setup
 - Bicep templates for state management
@@ -52,6 +54,7 @@ eferences/terraform-bicep-state-storage.md\ for state storage setup including:
 
 See \
 eferences/azure-keyvault-provisioning.md\ for Key Vault setup including:
+
 - Key Vault creation and RBAC configuration
 - Secret management for CI/CD
 - Bicep templates for infrastructure-as-code
@@ -60,6 +63,7 @@ eferences/azure-keyvault-provisioning.md\ for Key Vault setup including:
 
 See \
 eferences/github-actions-secrets.md\ for GitHub Actions integration including:
+
 - Workflow configuration with Azure credentials
 - Retrieving secrets from Key Vault
 - Setting GitHub repository secrets
@@ -68,6 +72,7 @@ eferences/github-actions-secrets.md\ for GitHub Actions integration including:
 
 See \
 eferences/environment-promotion.md\ for multi-environment promotion including:
+
 - Dev→Staging→Prod promotion strategies
 - Approval gates and manual controls
 - GitHub Environments configuration
@@ -77,6 +82,7 @@ eferences/environment-promotion.md\ for multi-environment promotion including:
 
 See \
 eferences/workload-identity-federation.md\ for pod-level authentication including:
+
 - AKS prerequisites and setup
 - Federated credentials for Kubernetes pods
 - Service account configuration
@@ -86,6 +92,7 @@ eferences/workload-identity-federation.md\ for pod-level authentication includin
 
 See \
 eferences/troubleshooting.md\ for common issues and solutions including:
+
 - OIDC token exchange failures
 - State storage access issues
 - Key Vault access denied errors
@@ -95,6 +102,7 @@ eferences/troubleshooting.md\ for common issues and solutions including:
 
 See \
 eferences/fabric-workspace-access.md\ for Fabric workspace automation including:
+
 - Creating service principals for Fabric access
 - Assigning workspace roles via REST API
 - Storing credentials in Key Vault
