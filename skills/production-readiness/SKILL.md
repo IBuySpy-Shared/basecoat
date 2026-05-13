@@ -1,7 +1,12 @@
 ---
 name: production-readiness
+title: Production Readiness Review & Release Management
 description: PRR gates, business continuity planning, disaster recovery procedures, and FMEA templates
-compatibility: ["agent:production-readiness"]
+compatibility:
+  editors:
+    - vscode
+  platforms:
+    - github
 metadata:
   domain: operations
   maturity: production

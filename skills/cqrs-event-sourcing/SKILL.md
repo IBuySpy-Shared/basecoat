@@ -1,7 +1,11 @@
 ---
 name: cqrs-event-sourcing
 description: CQRS (Command Query Responsibility Segregation) and Event Sourcing patterns for scalable, auditable, distributed systems. Covers command execution, event storage, read model synchronization, eventual consistency, and event replay.
-compatibility: ["backend-dev", "middleware-dev", "data-tier"]
+compatibility:
+  editors:
+    - vscode
+  platforms:
+    - github
 metadata:
   category: "Architecture & Design"
   tags: ["cqrs", "event-sourcing", "event-driven", "distributed-systems", "data-persistence"]

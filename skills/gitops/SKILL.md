@@ -1,7 +1,11 @@
 ---
 name: gitops
 description: GitOps fundamentals, Flux/ArgoCD workflows, desired-state reconciliation, multi-cluster topology, and secrets management patterns
-compatibility: "Requires kubectl and Git. Works with VS Code, CLI, and Copilot Coding Agent."
+compatibility:
+  editors:
+    - vscode
+  platforms:
+    - github
 metadata:
   category: "infrastructure"
   keywords: "gitops, flux, argocd, kubernetes, desired-state, declarative"

@@ -1,7 +1,11 @@
 ---
 name: dev-containers
 description: VS Code Dev Containers for reproducible development environments. Covers devcontainer.json configuration, Docker image selection, feature references, VS Code extensions in containers, GitHub Codespaces setup, and environment reproducibility.
-compatibility: ["devops-engineer", "backend-dev", "frontend-dev"]
+compatibility:
+  editors:
+    - vscode
+  platforms:
+    - github
 metadata:
   category: "Development & Operations"
   tags: ["dev-containers", "docker", "codespaces", "devcontainer", "reproducible-environments"]

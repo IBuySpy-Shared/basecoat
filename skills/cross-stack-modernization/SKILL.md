@@ -1,7 +1,11 @@
 ---
 name: cross-stack-modernization
 description: Language-agnostic application modernization patterns including strangler fig, anti-corruption layer, risk scoring, and dependency extraction sequencing.
-compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+compatibility:
+  editors:
+    - vscode
+  platforms:
+    - github
 metadata:
   category: modernization
   keywords: "modernization, strangler-fig, anti-corruption-layer, refactor, rewrite, migration, legacy"

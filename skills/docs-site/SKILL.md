@@ -1,7 +1,11 @@
 ---
 name: docs-site
 description: Scaffold a MkDocs Material documentation site for any GitHub repository — generates mkdocs.yml, landing page, getting-started guide, CI deploy workflow, and optional Mermaid architecture diagrams.
-compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+compatibility:
+  editors:
+    - vscode
+  platforms:
+    - github
 metadata:
   category: "Documentation"
   tags: ["mkdocs", "documentation", "github-pages", "mermaid"]

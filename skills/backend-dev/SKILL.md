@@ -2,7 +2,11 @@
 
 name: backend-dev
 description: "Use when implementing APIs, service layers, or data access patterns. Provides API spec templates, service scaffolds, error catalog structure, and repository pattern boilerplate."
-compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+compatibility:
+  editors:
+    - vscode
+  platforms:
+    - github
 metadata:
   category: "Uncategorized"
   tags: ["uncategorized"]

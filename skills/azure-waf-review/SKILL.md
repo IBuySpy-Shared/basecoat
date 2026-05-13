@@ -2,7 +2,12 @@
 
 name: azure-waf-review
 description: "Use when performing an Azure Well-Architected Framework (WAF) assessment against a workload, IaC templates, or architecture description. Covers all five pillars: Reliability, Security, Cost Optimization, Operational Excellence, and Performance Efficiency. Produces scored assessments, prioritized findings, and Bicep/Terraform remediation snippets."
-compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+context: fork
+compatibility:
+  editors:
+    - vscode
+  platforms:
+    - github
 metadata:
   category: "Uncategorized"
   tags: ["uncategorized"]

@@ -2,7 +2,11 @@
 
 name: performance-profiling
 description: "Use when code is slow, latency regressed, or a hot path needs measurement. Covers profiling best practices, baseline capture, bottleneck isolation, and post-fix verification."
-compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+compatibility:
+  editors:
+    - vscode
+  platforms:
+    - github
 metadata:
   category: "Uncategorized"
   tags: ["uncategorized"]
