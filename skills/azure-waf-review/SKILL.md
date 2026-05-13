@@ -1,7 +1,7 @@
 ---
 
 name: azure-waf-review
-description: "Use when performing an Azure Well-Architected Framework (WAF) assessment against a workload, IaC templates, or architecture description. Covers all five pillars: Reliability, Security, Cost Optimization, Operational Excellence, and Performance Efficiency. Produces scored assessments, prioritized findings, and Bicep/Terraform remediation snippets."
+description: "Use when assessing an Azure workload against the Well-Architected Framework and prioritizing remediation. USE FOR: run an Azure Well-Architected review, score a workload across WAF pillars, review Terraform or Bicep for reliability and security gaps, prioritize remediation actions, assess an architecture before production. DO NOT USE FOR: penetration testing, incident response triage, writing new product features."
 context: fork
 compatibility:
   editors:

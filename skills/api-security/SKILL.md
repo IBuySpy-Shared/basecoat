@@ -1,7 +1,7 @@
 ---
 name: api-security
 title: OWASP API Security Top 10 Patterns
-description: API authentication, authorization, input validation, rate limiting, and protection patterns
+description: "Use when securing REST or GraphQL APIs against common auth, authorization, validation, and abuse risks. USE FOR: secure JWT authentication for an API, add rate limiting to endpoints, review API authorization flaws, harden GraphQL queries and mutations, prevent SQL injection in API handlers. DO NOT USE FOR: network firewall design, frontend styling work, general cloud cost reviews."
 compatibility:
   editors:
     - vscode

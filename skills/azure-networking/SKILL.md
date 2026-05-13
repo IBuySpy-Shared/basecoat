@@ -1,7 +1,7 @@
 ---
 
 name: azure-networking
-description: "Use when designing Azure networking architectures: hub-spoke VNet topologies, private endpoints, Private DNS zones, NSG rules, Azure Firewall policies, and route tables for hybrid or multi-region connectivity."
+description: "Use when designing Azure network topology, private connectivity, and traffic control patterns. USE FOR: design a hub-spoke VNet topology, set up private endpoints and Private DNS zones, author an NSG rule matrix, create forced-tunneling route tables, review hybrid connectivity on Azure. DO NOT USE FOR: identity role assignments, Kubernetes app manifests, non-Azure CDN setup."
 compatibility:
   editors:
     - vscode

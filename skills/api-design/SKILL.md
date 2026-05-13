@@ -1,7 +1,7 @@
 ---
 
 name: api-design
-description: "Use when designing, reviewing, or evolving API contracts. Provides OpenAPI templates, breaking-change checklists, versioning decision trees, and governance checklists."
+description: "Use when designing or reviewing API contracts, versioning decisions, and governance standards. USE FOR: design a REST API contract, review an OpenAPI diff for breaking changes, choose an API versioning strategy, draft GraphQL schema changes, create a deprecation or sunset plan. DO NOT USE FOR: implementing request handlers, tuning database indexes, penetration testing an API."
 compatibility:
   editors:
     - vscode

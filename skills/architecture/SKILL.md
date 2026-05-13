@@ -1,7 +1,7 @@
 ---
 
 name: architecture
-description: "Use when designing systems, recording architecture decisions, evaluating technologies, or assessing architectural risks. Provides C4 diagram templates, ADR format, technology selection matrices, and risk registers."
+description: "Use when shaping system architecture, documenting decisions, and evaluating cross-cutting tradeoffs. USE FOR: design a system architecture, create a C4 diagram, write an ADR for a platform choice, compare technology options with a matrix, assess architectural risks and mitigations. DO NOT USE FOR: implementing endpoints, fixing CI failures, pixel-perfect UI design."
 compatibility:
   editors:
     - vscode
