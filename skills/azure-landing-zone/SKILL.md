@@ -1,7 +1,7 @@
 ---
 
 name: azure-landing-zone
-description: "Use when designing or scaffolding Azure enterprise-scale landing zones (ESLZ) following the Cloud Adoption Framework. Provides IaC templates for management groups, hub networking, policy assignments, and landing zone vending."
+description: "Use when designing Azure enterprise-scale landing zones aligned to the Cloud Adoption Framework. USE FOR: design an Azure landing zone, scaffold a management group hierarchy, create a hub networking platform subscription, assign a regulatory policy initiative, vend a new application landing zone. DO NOT USE FOR: single-resource app deployment, AWS organization design, application code generation."
 compatibility:
   editors:
     - vscode

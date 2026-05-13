@@ -1,7 +1,7 @@
 ---
 name: service-bus-migration
 title: MSMQ to Azure Service Bus Migration
-description: Migrate enterprise messaging from MSMQ to Azure Service Bus with patterns for mapping, serialization, resilience, and hybrid bridge architecture
+description: "Use when migrating enterprise messaging from MSMQ to Azure Service Bus with phased cutover and resilience patterns. USE FOR: map MSMQ queues to topics and subscriptions, design hybrid bridge for zero-downtime cutover, convert binary messages to JSON, implement retry and dead-letter handling, plan Service Bus migration phases. DO NOT USE FOR: greenfield Kafka architecture, unrelated REST API migration."
 compatibility:
   editors:
     - vscode
@@ -21,6 +21,7 @@ Comprehensive guidance for migrating enterprise messaging systems from Microsoft
 ## Quick Navigation
 
 **New to this migration?** Start here:
+
 1. Review [Migration Patterns](references/migration-patterns.md) for strategy options
 2. Study [Dead-Letter & Retry](references/dead-letter-and-retry.md) for resilience
 3. Explore [Advanced Patterns](references/advanced-patterns.md) for hybrid bridge and transactional messaging

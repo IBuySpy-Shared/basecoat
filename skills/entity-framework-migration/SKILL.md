@@ -1,7 +1,7 @@
 ---
 name: entity-framework-migration
 title: Entity Framework Migration
-description: "Guidance for migrating Entity Framework legacy codebases to modern EF Core patterns."
+description: "Use when modernizing legacy Entity Framework data layers to EF Core with help for model mapping, DbContext refactors, phased cutovers, and migration risk review. USE FOR: migrate EF6 to EF Core, refactor DbContext configuration, convert model mappings and conventions, plan phased database cutover, validate query compatibility after migration. DO NOT USE FOR: greenfield ORM selection, raw SQL tuning only, non-.NET data pipelines."
 compatibility:
   editors:
     - vscode

@@ -1,7 +1,7 @@
 ---
 
 name: azure-policy
-description: "Use when authoring custom Azure Policy definitions, bundling initiatives, designing DeployIfNotExists remediation tasks, generating KQL compliance dashboard queries, or mapping policies to regulatory frameworks (CIS, NIST 800-53, ISO 27001). Covers policy-as-code authoring, parameter design, initiative composition, and compliance reporting."
+description: "Use when authoring Azure Policy definitions, initiatives, remediation tasks, and compliance reporting assets. USE FOR: write an Azure Policy to require tags, create a policy initiative for CIS controls, build a DeployIfNotExists remediation, generate a KQL compliance dashboard query, restrict allowed VM SKUs. DO NOT USE FOR: application business logic, Azure RBAC role selection, packet capture troubleshooting."
 compatibility:
   editors:
     - vscode

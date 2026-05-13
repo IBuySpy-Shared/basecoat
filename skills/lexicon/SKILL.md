@@ -1,7 +1,7 @@
 ---
 
 name: lexicon
-description: "Use when establishing or auditing a project's taxonomy, vocabulary, ontology, and brand voice. Defines canonical terms, classification hierarchies, concept relationships, and tone-of-voice — then audits existing content for drift."
+description: "Use when defining or auditing a project's vocabulary, taxonomy, ontology, and brand voice so docs, agents, and prompts use consistent canonical terms. USE FOR: create project lexicon file, audit docs for terminology drift, define naming taxonomy for assets, detect off-brand tone or vibe mismatches, standardize canonical product terms. DO NOT USE FOR: copyediting grammar only, generating logos or visuals, source code refactoring unrelated to language."
 compatibility:
   editors:
     - vscode
@@ -42,7 +42,7 @@ and audit tooling.
 
 **Invoke:**
 
-```
+```text
 Use the lexicon skill in define mode. Scan the project and establish the vocabulary,
 taxonomy, ontology, and brand voice. Persist to .lexicon.md.
 ```
@@ -61,7 +61,7 @@ Output is a findings report with severity (Critical / High / Medium / Low) and f
 
 **Invoke:**
 
-```
+```text
 Use the lexicon skill in audit mode. Load .lexicon.md and scan all docs and assets
 for vocabulary drift, taxonomy inconsistencies, and tone violations. Report findings
 by severity with file references.
@@ -72,12 +72,14 @@ by severity with file references.
 ## When to Use
 
 **Define mode:**
+
 - Starting a new project and establishing its identity
 - After rebranding, renaming, or a major scope change
 - When multiple authors are working on the same system and speaking differently
 - Before a public launch where coherence matters
 
 **Audit mode:**
+
 - Before any public release
 - After merging large documentation PRs
 - When contributors report confusion about what terms mean
@@ -105,21 +107,25 @@ Record what is clear and what is ambiguous before proceeding.
 Ask only what cannot be inferred from the codebase:
 
 **Vocabulary:**
+
 - Is there an official name (single canonical spelling) vs. informal variants in use?
 - Are there terms that should never appear in output (deprecated, off-brand, incorrect)?
 - Any terms specific to this domain that need explicit definition?
 
 **Taxonomy:**
+
 - How should assets/concepts be grouped at the top level?
 - Are there sub-categories? What is the nesting depth?
 - Are any categories temporary (sprint-specific) vs. permanent?
 
 **Ontology:**
+
 - Which concepts depend on which? (e.g., "a skill is used by an agent")
 - Are there inheritance relationships? (e.g., "a task agent is a type of agent")
 - Are there exclusion relationships? (e.g., "instructions are not skills")
 
 **Theme and vibe:**
+
 - Describe the project's personality in 3 words.
 - What should it explicitly NOT sound like? (anti-references)
 - Formal or conversational? Dense or accessible? Technical or domain-agnostic?
@@ -146,21 +152,25 @@ Use the [`audit-checklist.md`](audit-checklist.md) as your structured checklist.
 For each check, grep the relevant file set and record violations with file and line number.
 
 **Vocabulary checks:**
+
 - Grep for deprecated terms and synonyms listed in the vocabulary registry
 - Flag any use of a synonym where the canonical term should appear
 - Flag any capitalization variant that contradicts the canonical spelling
 
 **Taxonomy checks:**
+
 - Compare category labels in asset frontmatter to the taxonomy defined in `.lexicon.md`
 - Flag assets with no category or with a category not in the registry
 - Flag assets whose category doesn't match their content
 
 **Ontology checks:**
+
 - Search for references to concepts not defined in the ontology
 - Flag relationships implied in content that contradict the ontology
   (e.g., a skill described as "an agent")
 
 **Theme/vibe checks:**
+
 - Scan headings and lead sentences for tone markers
 - Flag document-level tone mismatches (e.g., a casual opener in a formal governance doc)
 - Flag anti-vocabulary usage

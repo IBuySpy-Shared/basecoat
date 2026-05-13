@@ -1,7 +1,7 @@
 ---
 
 name: security
-description: "Use when performing security audits, threat modeling, vulnerability assessments, or dependency reviews. Provides OWASP checklists, STRIDE templates, vulnerability report structures, and dependency audit formats."
+description: "Use when auditing code, modeling threats, or reviewing dependencies for exploitable weaknesses. USE FOR: run OWASP security review, create STRIDE threat model, scan for hardcoded secrets, audit dependencies for CVEs, write structured vulnerability report. DO NOT USE FOR: live incident response handling, general performance tuning."
 compatibility:
   editors:
     - vscode
