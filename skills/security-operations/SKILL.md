@@ -22,6 +22,7 @@ Use this skill when implementing threat detection, secrets management, audit log
 
 See \
 eferences/threat-detection-patterns.md\ for threat detection guidance including:
+
 - Authentication attack detection (Azure AD anomalies, Kubernetes API attacks)
 - Data access anomalies (database queries, Azure Blob Storage)
 - Privilege escalation detection (RBAC role changes)
@@ -31,6 +32,7 @@ eferences/threat-detection-patterns.md\ for threat detection guidance including:
 
 See \
 eferences/secrets-management.md\ for secrets management including:
+
 - Automated credential rotation (Kubernetes, Python scripts)
 - Secret access auditing with HashiCorp Vault
 - Rotation policies and schedules
@@ -40,6 +42,7 @@ eferences/secrets-management.md\ for secrets management including:
 
 See \
 eferences/audit-logging.md\ for centralized audit logging including:
+
 - ELK Stack configuration (Filebeat, Elasticsearch, Logstash)
 - Log parsing and enrichment
 - Immutable audit trails with Azure Blob Storage
@@ -49,6 +52,7 @@ eferences/audit-logging.md\ for centralized audit logging including:
 
 See \
 eferences/incident-response-automation.md\ for incident response automation including:
+
 - Alert triage and prioritization
 - False positive detection
 - Threat intelligence correlation
@@ -59,6 +63,7 @@ eferences/incident-response-automation.md\ for incident response automation incl
 
 See \
 eferences/monitoring-metrics.md\ for security metrics and monitoring including:
+
 - Key security metrics to track
 - Alert configuration patterns
 - Dashboarding strategies
@@ -67,6 +72,7 @@ eferences/monitoring-metrics.md\ for security metrics and monitoring including:
 
 See \
 eferences/security-operations-playbooks.md\ for incident response runbooks and playbooks including:
+
 - Common incident types and responses
 - Escalation procedures
 - Post-incident analysis templates
