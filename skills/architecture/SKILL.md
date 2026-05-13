@@ -17,22 +17,7 @@ allowed-tools: ["bash", "git", "grep", "find"]
 
 # Architecture Skill
 
-Use this skill when the task involves system design, architecture documentation, technology evaluation, or risk assessment at the architecture level.
-
-## When to Use
-
-- Designing a new system or decomposing an existing one into services and components
-- Creating C4 context, container, or component diagrams
-- Recording an architecture decision (ADR)
-- Evaluating competing technologies for a project
-- Identifying and tracking architectural risks
-- Reviewing cross-cutting concerns (auth, observability, data residency, resilience)
-
-## How to Invoke
-
-Reference this skill by attaching `skills/architecture/SKILL.md` to your agent context, or instruct the agent:
-
-> Use the architecture skill. Apply the C4 diagram template for the system context, record the database decision as an ADR, and evaluate the messaging options using the tech selection matrix.
+System design, architecture documentation, technology evaluation, and risk assessment at the architecture level.
 
 ## Templates in This Skill
 
@@ -45,6 +30,4 @@ Reference this skill by attaching `skills/architecture/SKILL.md` to your agent c
 
 ## Agent Pairing
 
-This skill is designed to be used alongside the `solution-architect` agent. The agent drives the architecture workflow; this skill provides the reference templates and standards.
-
-For implementation details, hand off to domain-specific agents: `backend-dev` for API and service design, `frontend-dev` for UI architecture, and `data-tier` for database and storage design.
+Use with `solution-architect` agent. Hand off to `backend-dev` for API/service design, `frontend-dev` for UI architecture, `data-tier` for database and storage design.

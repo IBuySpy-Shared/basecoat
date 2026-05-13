@@ -26,13 +26,6 @@ Eliminates "works on my machine" by bundling runtimes, tools, and extensions in 
 | [`references/configuration.md`](references/configuration.md) | devcontainer.json structure (minimal & full), image selection, features, extensions, port forwarding, mounts |
 | [`references/workflows.md`](references/workflows.md) | GitHub Codespaces, CI integration, Docker Compose, lifecycle hooks, best practices |
 
-## Benefits
-
-- **Reproducible** — identical setup on laptop, CI, and Codespaces
-- **Zero local toolchain** — all dependencies in the container
-- **Fast onboarding** — clone repo and open in container
-- **CI parity** — dev environment matches build/test environment
-
 ## Minimal Config
 
 ```json
@@ -50,8 +43,3 @@ Eliminates "works on my machine" by bundling runtimes, tools, and extensions in 
 - Pin feature and image versions — avoid `latest`
 - Never embed credentials in `Dockerfile` or `devcontainer.json`
 - Use `postCreateCommand` scripts for idempotent setup
-
-## References
-
-- [Dev Containers Specification](https://containers.dev/)
-- [GitHub Codespaces](https://docs.github.com/codespaces)

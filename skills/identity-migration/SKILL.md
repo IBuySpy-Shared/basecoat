@@ -20,14 +20,6 @@ Migrate legacy ASP.NET Membership systems to ASP.NET Core Identity with Azure En
 integration. Covers user model conversion, password hash compatibility, claims-based auth,
 role migration, OIDC setup, and hybrid local + Entra ID scenarios.
 
-## Quick Start
-
-1. Implement `LegacyPasswordHasher` for backward-compatible password verification.
-2. Run the database migration SQL to copy users and roles to Identity tables.
-3. Configure OIDC in `ConfigureServices` pointing to `AzureAd` configuration section.
-4. Apply claims transformation to convert legacy roles to claims.
-5. Follow the migration checklist in `references/testing-checklist.md`.
-
 ## Reference Files
 
 | File | Contents |
@@ -42,9 +34,3 @@ role migration, OIDC setup, and hybrid local + Entra ID scenarios.
 - **IClaimsTransformation** — converts Identity roles to claims on each request
 - **Hybrid auth** — `AddCookie` + `AddMicrosoftIdentityWebApp` for local + Entra ID
 - **Never store secrets** in `appsettings.json` — use Key Vault or environment variables
-
-## References
-
-- Microsoft Identity Platform Documentation
-- ASP.NET Core Identity Documentation
-- Azure Entra ID Integration Guide (`docs/integrations/AZURE_AD_INTEGRATION_GUIDE.md`)

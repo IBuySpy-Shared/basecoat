@@ -20,20 +20,6 @@ allowed-tools: ["bash", "git", "grep", "find"]
 Estimate per-session Copilot CLI cost, analyze model-routing efficiency, track agent dispatch
 patterns, and document which GitHub Copilot usage APIs exist.
 
-## When to Use
-
-- Estimating cost for a completed or in-progress Copilot CLI session
-- Analyzing which sub-agent dispatches are driving the most token consumption
-- Choosing the right model tier for a task to minimize cost without sacrificing quality
-- Auditing agent workflows for routing inefficiencies
-- Generating an ROI report (issues resolved versus estimated spend)
-- Documenting which Copilot usage APIs are available versus missing
-
-## How to Invoke
-
-> Use the copilot-usage-analytics skill. Apply the session cost estimate template and the
-> model-routing recommendation template to the current session's dispatch log.
-
 ## Reference Files
 
 | File | Contents |
@@ -46,12 +32,6 @@ patterns, and document which GitHub Copilot usage APIs exist.
 | Template | Purpose |
 |---|---|
 | `templates/session-cost-estimate-template.md` | Per-session cost breakdown by dispatch, model, and estimated token usage |
-| `templates/model-routing-recommendation-template.md` | Structured recommendations for right-sizing model selection per task type |
-| `templates/api-landscape.md` | Reference map of GitHub Copilot usage APIs — what exists, what is missing, and current workarounds |
+| `templates/model-routing-recommendation-template.md` | Recommendations for right-sizing model selection per task type |
+| `templates/api-landscape.md` | Reference map of GitHub Copilot usage APIs — what exists, what is missing, and workarounds |
 | `templates/usage-report.md` | Automated-style usage report with Handlebars placeholders for tooling integration |
-
-## Key Patterns
-
-- **Metrics API**: `GET /orgs/{org}/copilot/metrics/reports/organization-28-day/latest` — returns NDJSON; requires `admin:org` or `read:org`
-- **Self-track costs**: GitHub does not expose per-session cost data; use the estimation workflow
-- **ROI**: always include issues resolved alongside cost — cost alone is not actionable

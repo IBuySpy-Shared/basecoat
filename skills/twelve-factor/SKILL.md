@@ -15,7 +15,7 @@ allowed-tools: "search/codebase"
 
 # 12-Factor App Methodology
 
-The 12-Factor App is a methodology for building modern, scalable, cloud-native applications.
+The 12-Factor App methodology for building modern, scalable, cloud-native applications.
 
 ## Quick Navigation
 
@@ -40,22 +40,3 @@ The 12-Factor App is a methodology for building modern, scalable, cloud-native a
 | 10 | Dev/Prod parity | Keep environments identical |
 | 11 | Logs | Treat logs as event streams (stdout) |
 | 12 | Admin tasks | Run in same environment as app |
-
-## Audit Checklist
-
-Run before every deployment:
-
-- [ ] Single repo; all code in Git
-- [ ] Explicit lock file; no system-level dependencies
-- [ ] Secrets in env vars; nothing hardcoded
-- [ ] Backing service URLs from config; swappable without code change
-- [ ] Immutable build artifact; separate release and run stages
-- [ ] No in-memory session state; no local file writes
-- [ ] App self-contained; binds to a port
-- [ ] Horizontal scaling possible; processes are interchangeable
-- [ ] Startup < 10s; SIGTERM handled gracefully
-- [ ] Dev and prod use identical OS, language runtime, and DB versions
-- [ ] Logs written to stdout only
-- [ ] Admin tasks run with same image and config as the app
-
-See `references/factors-1-6.md` and `references/factors-7-12.md` for full patterns and examples.

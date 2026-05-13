@@ -17,22 +17,7 @@ allowed-tools: ["bash", "git", "grep", "find"]
 
 # Security Skill
 
-Use this skill when the task involves auditing code for security vulnerabilities, modeling threats, reviewing dependencies for known CVEs, or enforcing secure coding standards.
-
-## When to Use
-
-- Performing an OWASP Top 10 review on an application
-- Conducting STRIDE threat modeling for a new feature or architecture change
-- Scanning for hardcoded secrets or credentials in source code
-- Auditing dependency manifests for known vulnerabilities
-- Documenting security findings in a structured vulnerability report
-- Reviewing code for secure coding compliance
-
-## How to Invoke
-
-Reference this skill by attaching `skills/security/SKILL.md` to your agent context, or instruct the agent:
-
-> Use the security skill. Apply the OWASP checklist and STRIDE threat model template to the modules being audited.
+Audit code for security vulnerabilities, model threats, review dependencies for known CVEs, and enforce secure coding standards.
 
 ## Templates in This Skill
 
@@ -45,9 +30,7 @@ Reference this skill by attaching `skills/security/SKILL.md` to your agent conte
 
 ## Agent Pairing
 
-This skill is designed to be used alongside the `security-analyst` agent. The agent drives the audit workflow; this skill provides the reference templates and checklists.
-
-For backend-specific security concerns, pair with the `backend-dev` agent's security defaults. For frontend-specific concerns (CSP, XSS, CORS), pair with the `frontend-dev` agent.
+Use with `security-analyst` agent. For backend security pair with `backend-dev`; for frontend security (CSP, XSS, CORS) pair with `frontend-dev`.
 
 ## Related Guardrails
 
