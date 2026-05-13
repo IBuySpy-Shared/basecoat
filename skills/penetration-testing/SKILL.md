@@ -1,7 +1,7 @@
 ---
 name: penetration-testing
 title: Penetration Testing & Vulnerability Discovery Patterns
-description: Test case execution, OWASP Top 10 coverage, exploitation techniques, and finding reporting
+description: "Use when executing authorized penetration tests, validating OWASP risks, or producing exploit-backed findings. USE FOR: test for SQL injection or SSRF, run OWASP Top 10 web assessment, validate broken access control, reproduce API auth bypass, write penetration test findings report. DO NOT USE FOR: testing without authorization, destructive load testing in production."
 compatibility:
   editors:
     - vscode

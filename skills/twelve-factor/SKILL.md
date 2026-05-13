@@ -1,6 +1,6 @@
 ---
 name: twelve-factor
-description: "12-Factor App methodology: codebase, dependencies, configuration, backing services, build/run/release, processes, port binding, concurrency, disposability, dev/prod parity, logs, and admin tasks"
+description: "Use when auditing or redesigning an app for cloud-native 12-Factor practices. USE FOR: move config from code to environment, check stateless process design, separate build release and run stages, verify logs go to stdout, assess dev and prod parity. DO NOT USE FOR: pixel-level UI design, vendor-specific service pricing comparisons."
 compatibility:
   editors:
     - vscode

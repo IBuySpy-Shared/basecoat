@@ -1,7 +1,7 @@
 ---
 name: security-operations
 title: Security Operations & Threat Detection
-description: Threat detection patterns, SIEM rules, secrets management, audit logging, and incident response automation
+description: "Use when implementing threat detection, audit logging, secret rotation, or incident response automation. USE FOR: write SIEM or KQL detection rules, automate secret rotation workflow, centralize security audit logs, build security alert triage playbook, monitor cloud or Kubernetes threats. DO NOT USE FOR: one-time app pentest reports, feature UX design."
 compatibility:
   editors:
     - vscode
