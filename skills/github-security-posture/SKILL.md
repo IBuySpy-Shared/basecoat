@@ -18,22 +18,8 @@ allowed-tools: ["bash", "git", "grep", "find"]
 # GitHub Security Posture Skill
 
 Audit GitHub organization and repository security settings with traffic-light scoring and
-remediation guidance. Covers org-level configs, rulesets, secret scanning, push protection,
+remediation guidance. Covers org configs, rulesets, secret scanning, push protection,
 Dependabot alerts, branch protection, and CODEOWNERS.
-
-## When to Use
-
-- Auditing GitHub org-level code security configurations
-- Checking repository rulesets and branch protection rules
-- Verifying secret scanning and push protection status
-- Triaging open Dependabot or code scanning alerts
-- Producing a traffic-light posture report for a security review
-- Generating remediation commands for failing security checks
-
-## How to Invoke
-
-> Use the github-security-posture skill. Run all org-level and repo-level checks, score each
-> finding with the traffic-light rubric, and produce the posture report.
 
 ## Reference Files
 

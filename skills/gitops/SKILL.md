@@ -27,29 +27,14 @@ The operator continuously reconciles actual cluster state with declared desired 
 
 ## Core Principles
 
-1. **Declarative** — define desired state in Git, not imperative commands
-2. **Versioned & Immutable** — all changes tracked in Git history
-3. **Pulled, not Pushed** — operators pull from Git; CI/CD does not push to clusters
-4. **Continuously Reconciled** — operator detects drift and auto-corrects
-
-## Workflow
-
-```text
-Developer → commits manifests to Git
-           ↓
-GitOps Operator (Flux/ArgoCD) detects change
-           ↓
-Pulls manifests → applies to cluster (kubectl apply)
-           ↓
-Continuously checks: actual state == desired state?
-           ↓ (if drift detected)
-Auto-reconciles
-```
+- **Declarative** — desired state in Git, not imperative commands
+- **Versioned & Immutable** — all changes tracked in Git history
+- **Pulled, not Pushed** — operators pull from Git; CI/CD does not push to clusters
+- **Continuously Reconciled** — operator detects drift and auto-corrects
 
 ## Best Practices
 
-- Separate config by environment — use directory structure (`clusters/prod/`, `clusters/staging/`)
-- Never use `latest` image tags — pin explicit versions
-- Require PR approval before merging to main (cluster config changes are production changes)
-- Never run `kubectl apply` manually — commit the manifest and let the operator apply it
-- Alert if the GitOps operator falls out of sync for more than 5 minutes
+- Separate config by environment (`clusters/prod/`, `clusters/staging/`)
+- Pin explicit image versions — never use `latest`
+- Require PR approval before merging cluster config changes
+- Never run `kubectl apply` manually — commit and let the operator apply

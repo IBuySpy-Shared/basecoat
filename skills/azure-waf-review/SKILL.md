@@ -21,19 +21,6 @@ allowed-tools: ["bash", "git", "grep", "find"]
 Assess Azure workloads against the five WAF pillars, generate scored findings reports, and
 produce prioritized remediation guidance with Bicep/Terraform templates.
 
-## When to Use
-
-- Evaluating a workload description, architecture diagram, or IaC templates against WAF pillars
-- Generating a structured WAF assessment report with per-pillar scores
-- Prioritizing architectural improvements by impact and implementation effort
-- Producing Bicep or Terraform remediation snippets for identified gaps
-- Conducting a pre-production architecture review for Azure-hosted workloads
-
-## How to Invoke
-
-> Use the azure-waf-review skill. Accept the IaC templates below, assess them against all five
-> WAF pillars, score each pillar, and produce a remediation action plan with Bicep snippets.
-
 ## Reference Files
 
 | File | Contents |
