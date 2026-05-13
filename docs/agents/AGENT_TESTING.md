@@ -117,6 +117,41 @@ Different test levels should run at different times.
 
 This staged model keeps routine validation fast while reserving the most expensive evaluations for the moments when they matter most.
 
+## Waza CLI — Known Protocol Mismatch
+
+**Issue:** [#823](https://github.com/IBuySpy-Shared/basecoat/issues/823)
+
+When running `azd waza run` or invoking the waza CLI tool against skills locally, you may encounter:
+
+```text
+copilot failed to start: SDK protocol version mismatch: SDK expects version 2,
+but server reports version 3. Please update your SDK or server to ensure compatibility
+```
+
+**Root cause:** The waza CLI bundles a GitHub Copilot SDK that expects protocol version 2.
+GitHub Copilot now reports protocol version 3. The waza tool must be updated to bundle
+a compatible SDK version — this is not a BaseCoat repository issue.
+
+**Workaround:** Use the repository's built-in eval harness instead:
+
+```powershell
+pwsh scripts/eval-assets.ps1 -CaseFile tests/evals/smoke.behavior.json
+```
+
+This harness evaluates agent behavior using mock responses and does not depend on the
+Copilot SDK protocol. It runs in CI weekly via the `behavioral-eval.yml` workflow.
+
+**Supported version matrix:**
+
+| Component | Protocol | Status |
+|-----------|----------|--------|
+| waza CLI (last tested) | v2 | ❌ Incompatible with current Copilot |
+| GitHub Copilot server | v3 | ✅ Current |
+| `scripts/eval-assets.ps1` | n/a | ✅ No SDK dependency |
+
+**Resolution:** When the waza project releases a version that bundles Copilot SDK v3+,
+`azd waza run` will work again. Until then, use the built-in harness for all evals.
+
 ## Tooling Options
 
 Several implementation approaches work well for agent evals.
