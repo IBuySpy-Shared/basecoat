@@ -87,6 +87,8 @@ See `CONTRIBUTING.md` for detailed guidelines.
 
 ## Related Documentation
 
-- [Architecture Decision Records](docs/adr/)
-- [Operational Runbooks](docs/runbooks/)
-- [Changelog](CHANGELOG.md)
+<!-- TODO: Replace these placeholder paths with repository-specific locations. -->
+
+- `Architecture Decision Records` — `<path-to-adr-directory>`
+- `Operational Runbooks` — `<path-to-runbooks-directory>`
+- `Changelog` — `<path-to-changelog-file>`

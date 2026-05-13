@@ -1,7 +1,11 @@
 ---
 name: container-migration
 description: Scaffold containerization of a legacy app for Azure Container Apps or Kubernetes — generates Dockerfile, health probe endpoint, managed identity config, ACR push/pull workflow, and ACA Bicep module.
-compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+compatibility:
+  editors:
+    - vscode
+  platforms:
+    - github
 metadata:
   category: infrastructure
   keywords: "docker, containers, azure-container-apps, aks, kubernetes, acr, dockerfile, health-check, bicep"
@@ -33,7 +37,7 @@ Use this skill when the user asks to:
 |---|---|---|---|
 | `app_stack` | ✅ | — | `dotnet`, `python`, `java`, `node`, or `ruby` |
 | `app_entry_point` | ✅ | — | Main entry point (e.g. `MyApp.dll`, `app.py`, `target/*.jar`, `server.js`) |
-| `port` | ✅ | 8080 | Port the app listens on |
+| `port` | ✅ | `<port>` | Port the app listens on |
 | `target_platform` | ✅ | — | `aca` (Container Apps), `aks` (Kubernetes), or `acr-only` (just ACR workflow) |
 | `managed_identity` | ❌ | true | Wire up managed identity in container config |
 | `app_name` | ❌ | — | Used for naming ACA/AKS resources |
@@ -86,9 +90,9 @@ WORKDIR /app
 RUN adduser --disabled-password --gecos "" appuser
 COPY --from=build /app/publish .
 USER appuser
-EXPOSE 8080
+EXPOSE <port>
 HEALTHCHECK --interval=30s --timeout=5s --retries=3 \
-  CMD curl -f http://localhost:8080/healthz || exit 1
+  CMD curl -f http://localhost:<port>/healthz || exit 1
 ENTRYPOINT ["dotnet", "MyApp.dll"]
 ```
 
@@ -184,7 +188,7 @@ Create `infra/container-app.bicep` with a `containerApp` resource:
 param appName string
 param location string = resourceGroup().location
 param containerImage string
-param port int = 8080
+param port int
 param minReplicas int = 1
 param maxReplicas int = 3
 

@@ -2,7 +2,11 @@
 
 name: azure-networking
 description: "Use when designing Azure networking architectures: hub-spoke VNet topologies, private endpoints, Private DNS zones, NSG rules, Azure Firewall policies, and route tables for hybrid or multi-region connectivity."
-compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+compatibility:
+  editors:
+    - vscode
+  platforms:
+    - github
 metadata:
   category: "Uncategorized"
   tags: ["uncategorized"]
@@ -45,7 +49,7 @@ Reference this skill by attaching `skills/azure-networking/SKILL.md` to your age
 - Always route internet-bound traffic through Azure Firewall or an NVA in the hub; do not leave spoke subnets with direct internet egress.
 - Private endpoint DNS zones must be linked to every VNet that needs name resolution — document each link explicitly.
 - NSG rules must include both allow and explicit deny entries; do not rely solely on default deny.
-- Do not use `0.0.0.0/0` in NSG allow rules without a compensating Firewall or WAF layer.
+- Do not use overly broad source CIDRs such as `<any-source-cidr>` in NSG allow rules without a compensating Firewall or WAF layer.
 - Scope this skill to network-layer design. For identity/RBAC, defer to the `security` skill; for IaC authoring, defer to `devops` or the `terraform`/`bicep` instructions.
 
 ## Templates in This Skill

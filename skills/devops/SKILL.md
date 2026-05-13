@@ -2,7 +2,11 @@
 
 name: devops
 description: "Use when designing CI/CD pipelines, writing IaC templates, planning deployments, or setting up observability. Provides workflow templates, deployment checklists, rollback runbooks, and environment promotion guides."
-compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+compatibility:
+  editors:
+    - vscode
+  platforms:
+    - github
 metadata:
   category: "Uncategorized"
   tags: ["uncategorized"]
@@ -43,7 +47,7 @@ Reference this skill by attaching `skills/devops/SKILL.md` to your agent context
 
 | Guardrail | When to apply |
 |---|---|
-| [`runner-routing.md`](../../docs/guardrails/runner-routing.md) | Choosing self-hosted vs GitHub-hosted runners; routing patterns and fallback strategy |
+| [`references/runner-routing.md`](references/runner-routing.md) | Choosing self-hosted vs GitHub-hosted runners; routing patterns and fallback strategy |
 
 ## Agent Pairing
 

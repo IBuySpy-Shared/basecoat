@@ -177,7 +177,7 @@ runs-on: >-
 
 Always add `timeout-minutes` to self-hosted jobs so the workflow fails fast when the runner pool is scaled to zero rather than waiting indefinitely.
 
-See [docs/guardrails/runner-routing.md](../../docs/guardrails/runner-routing.md) for the full decision matrix, hybrid pipeline patterns, and anti-patterns.
+See [references/runner-routing.md](references/runner-routing.md) for the decision matrix, hybrid pipeline pattern, and anti-patterns.
 
 ## Customization Notes
 

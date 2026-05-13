@@ -54,5 +54,5 @@ We will **{decision}** because **{primary reason}**.
 ## References
 
 - [Azure Landing Zones](https://aka.ms/alz)
-- [CAF: {relevant section}]({url})
+- [Cloud Adoption Framework landing zones](https://learn.microsoft.com/azure/cloud-adoption-framework/ready/landing-zone/)
 - Related ADRs: ADR-{NUMBER}
