@@ -2,7 +2,11 @@
 
 name: sprint-management
 description: "Use when planning sprints, running retrospectives, grooming backlogs, or managing sprint ceremonies. Provides templates for sprint planning, retrospectives, and backlog refinement."
-compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+compatibility:
+  editors:
+    - vscode
+  platforms:
+    - github
 metadata:
   category: "Uncategorized"
   tags: ["uncategorized"]

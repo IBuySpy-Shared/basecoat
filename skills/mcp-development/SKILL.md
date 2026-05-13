@@ -2,7 +2,11 @@
 
 name: mcp-development
 description: "Use when building MCP servers, defining tools, or configuring transports. Provides server scaffolds, tool definition templates, and transport configuration boilerplate."
-compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+compatibility:
+  editors:
+    - vscode
+  platforms:
+    - github
 metadata:
   category: "Uncategorized"
   tags: ["uncategorized"]

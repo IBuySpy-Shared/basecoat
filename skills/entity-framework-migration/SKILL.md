@@ -1,12 +1,21 @@
 ---
 name: entity-framework-migration
+title: Entity Framework Migration
 description: "Guidance for migrating Entity Framework legacy codebases to modern EF Core patterns."
-compatibility: ["agent:dotnet-modernization-advisor", "agent:data-tier", "agent:backend-dev"]
+compatibility:
+  editors:
+    - vscode
+  platforms:
+    - github
 metadata:
   domain: data
   maturity: production
   audience: [backend-dev, data-engineer, platform-engineer]
 allowed-tools: [bash, dotnet, ef-core, sqlcmd, pwsh]
+author: IBuySpy-Shared
+version: 1.0.0
+category: data
+tags: [dotnet, entity-framework, ef-core, migration]
 ---
 
 ## Entity Framework Migration

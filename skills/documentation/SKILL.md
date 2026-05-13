@@ -2,7 +2,11 @@
 
 name: documentation
 description: "Use when writing or improving technical documentation, READMEs, ADRs, runbooks, or implementing docs-as-code practices. Provides templates for common documentation types."
-compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+compatibility:
+  editors:
+    - vscode
+  platforms:
+    - github
 metadata:
   category: "Uncategorized"
   tags: ["uncategorized"]

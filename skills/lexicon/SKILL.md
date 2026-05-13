@@ -2,7 +2,11 @@
 
 name: lexicon
 description: "Use when establishing or auditing a project's taxonomy, vocabulary, ontology, and brand voice. Defines canonical terms, classification hierarchies, concept relationships, and tone-of-voice — then audits existing content for drift."
-compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+compatibility:
+  editors:
+    - vscode
+  platforms:
+    - github
 metadata:
   category: "Design & Governance"
   tags: ["taxonomy", "vocabulary", "ontology", "brand-voice", "audit", "naming", "consistency"]

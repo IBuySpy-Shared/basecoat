@@ -2,7 +2,11 @@
 
 name: azure-identity
 description: "Use when designing Azure identity architectures — RBAC role assignments, managed identities, Entra ID app registrations, conditional access policies, or workload identity federation for CI/CD. Covers zero trust patterns, PIM, and GitHub OIDC."
-compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+compatibility:
+  editors:
+    - vscode
+  platforms:
+    - github
 metadata:
   category: "Uncategorized"
   tags: ["uncategorized"]

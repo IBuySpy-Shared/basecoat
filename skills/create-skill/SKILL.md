@@ -2,7 +2,11 @@
 
 name: create-skill
 description: "Use when creating a new reusable skill for instructions, workflows, or domain guidance. Covers folder layout, frontmatter, discovery language, templates, and validation steps."
-compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+compatibility:
+  editors:
+    - vscode
+  platforms:
+    - github
 metadata:
   category: "Uncategorized"
   tags: ["uncategorized"]

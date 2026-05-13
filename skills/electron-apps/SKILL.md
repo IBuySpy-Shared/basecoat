@@ -2,7 +2,12 @@
 
 name: electron-apps
 description: Use when building secure, production-ready Electron desktop apps with best practices for IPC, CSP, state management, testing, packaging, and updates.
-compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+applyTo: agent-electron-developer, agent-desktop-engineer
+compatibility:
+  editors:
+    - vscode
+  platforms:
+    - github
 metadata:
   category: "Uncategorized"
   tags: ["uncategorized"]

@@ -2,7 +2,11 @@
 
 name: handoff
 description: "Use when ending a session, rotating context, or transferring work to another agent. Provides structured handoff templates that preserve both reasoning and mechanical state."
-compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
+compatibility:
+  editors:
+    - vscode
+  platforms:
+    - github
 metadata:
   category: "Uncategorized"
   tags: ["uncategorized"]
