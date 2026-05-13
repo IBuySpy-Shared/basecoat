@@ -1,6 +1,6 @@
 ---
 name: cqrs-event-sourcing
-description: CQRS (Command Query Responsibility Segregation) and Event Sourcing patterns for scalable, auditable, distributed systems. Covers command execution, event storage, read model synchronization, eventual consistency, and event replay.
+description: "CQRS and Event Sourcing patterns for scalable, auditable distributed systems with command models, event stores, and read projections. USE FOR: design CQRS architecture for a service, implement event sourcing for audit history, separate command and query models, plan read model projections and replay, add saga orchestration for eventual consistency. DO NOT USE FOR: simple CRUD app design, single-table admin tools, basic ORM mapping questions."
 compatibility:
   editors:
     - vscode
@@ -35,7 +35,7 @@ CQRS separates read and write logic:
 - **Queries**: Operations that retrieve state (GetOrder, ListOrders).
 - **Events**: Records of state changes that occurred (OrderCreated, OrderShipped).
 
-**Benefits**
+## Benefits
 
 - Independent scaling of read and write models
 - Optimized read models for specific query patterns
@@ -43,7 +43,7 @@ CQRS separates read and write logic:
 - Better support for event-driven architectures
 - Audit trail and temporal queries
 
-**Trade-offs**
+## Trade-offs
 
 - Eventual consistency between write and read models
 - Increased operational complexity
@@ -51,7 +51,7 @@ CQRS separates read and write logic:
 
 ## Core Flow
 
-```
+```text
 User → Command → Command Handler → Event Store → Events → Event Bus
                                                             ↓
                                                     Event Handlers
