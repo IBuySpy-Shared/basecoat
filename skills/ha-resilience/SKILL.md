@@ -1,6 +1,5 @@
 ---
 name: ha-resilience
-title: High-Availability & Resilience Design Patterns
 description: Use when designing multi-AZ/region resilience with circuit breakers, retries, chaos testing, and SRE practices
 compatibility: ["agent:ha-architect"]
 metadata:

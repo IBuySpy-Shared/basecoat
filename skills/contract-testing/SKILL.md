@@ -1,6 +1,5 @@
 ---
 name: contract-testing
-title: Contract Testing & Integration Patterns
 description: "Use when implementing consumer-driven contracts, Pact verification, mutation testing, or integration test orchestration."
 compatibility: ["agent:contract-testing"]
 metadata:

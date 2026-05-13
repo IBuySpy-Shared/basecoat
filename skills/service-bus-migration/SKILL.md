@@ -1,6 +1,5 @@
 ---
 name: service-bus-migration
-title: MSMQ to Azure Service Bus Migration
 description: Migrate enterprise messaging from MSMQ to Azure Service Bus with patterns for mapping, serialization, resilience, and hybrid bridge architecture
 compatibility: ["agent:backend-dev", "agent:devops-engineer"]
 metadata:

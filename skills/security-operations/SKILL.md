@@ -1,6 +1,5 @@
 ---
 name: security-operations
-title: Security Operations & Threat Detection
 description: Threat detection patterns, SIEM rules, secrets management, audit logging, and incident response automation
 compatibility: ["agent:security-operations"]
 metadata:
