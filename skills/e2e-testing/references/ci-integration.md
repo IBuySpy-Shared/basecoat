@@ -1,4 +1,12 @@
-# E2E Testing — CI Integration & Flakiness Prevention
+# E2E Testing — CI Integration, Flakiness Prevention & Core Principles
+
+## Core Principles
+
+1. **No magic sleeps** — use smart waits (`waitForSelector`, `cy.contains().should(...)`)
+2. **Test IDs over CSS selectors** — `data-testid` attributes are the most robust locators
+3. **Isolate tests** — each test creates its own data; no shared state between tests
+4. **Mock external services** — never hit real third-party APIs in E2E tests
+5. **Deterministic environments** — use Docker for consistent browser and app versions
 
 ## GitHub Actions Cross-Browser Matrix
 
