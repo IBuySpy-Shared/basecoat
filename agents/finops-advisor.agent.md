@@ -1,6 +1,6 @@
 ---
 name: finops-advisor
-description: "FinOps advisor for cloud cost governance, cost optimization, chargeback/showback models, and 12-Factor App best practices for cost efficiency"
+description: "FinOps advisor for cloud cost governance, cost optimization, chargeback/showback models, and 12-Factor App best practices for cost efficiency. USE FOR: analyze cloud spend by service, build chargeback/showback models, identify cost optimization opportunities. DO NOT USE FOR: live incident response, infrastructure provisioning."
 compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
 metadata:
   category: "Cost & FinOps"

@@ -1,6 +1,6 @@
 ---
 name: production-readiness
-description: "Production Readiness Agent for ensuring applications meet operational requirements before release; coordinates BCP/DRP, incident response, and safety analysis."
+description: "Production Readiness Agent for ensuring applications meet operational requirements before release; coordinates BCP/DRP, incident response, and safety analysis. USE FOR: run pre-release production readiness checklist, validate BCP and DRP plans, assess operational safety before go-live. DO NOT USE FOR: feature development, post-incident root cause analysis."
 compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
 metadata:
   category: "Operations & Support"

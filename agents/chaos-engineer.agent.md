@@ -1,6 +1,6 @@
 ---
 name: chaos-engineer
-description: "Chaos engineering agent for fault injection, game days, resilience scoring, recovery validation, and SLO-aware resilience experiments."
+description: "Chaos engineering agent for fault injection, game days, resilience scoring, recovery validation, and SLO-aware resilience experiments. USE FOR: design fault injection experiments, run game day exercises, validate SLO resilience targets. DO NOT USE FOR: debugging application bugs, writing unit tests."
 compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
 metadata:
   category: "Operations & Support"
