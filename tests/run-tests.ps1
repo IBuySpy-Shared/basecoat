@@ -44,6 +44,23 @@ function Assert-Equal {
 Write-Host 'Running validate-basecoat.ps1...'
 ./scripts/validate-basecoat.ps1
 
+Write-Host 'Checking eval.yaml presence for all skills...'
+$skillsDir = Join-Path $repoRoot 'skills'
+$missingEval = @()
+Get-ChildItem $skillsDir -Directory | ForEach-Object {
+    $evalPath = Join-Path $_.FullName 'eval.yaml'
+    if (-not (Test-Path $evalPath)) {
+        $missingEval += $_.Name
+    }
+}
+if ($missingEval.Count -gt 0) {
+    $missing = $missingEval -join ', '
+    Write-Host "  eval.yaml CI gate FAILED: $($missingEval.Count) skill(s) missing eval.yaml: $missing" -ForegroundColor Red
+    Write-FailureLog 'eval-yaml-gate' "Missing eval.yaml in: $missing"
+    exit 1
+}
+Write-Host "  eval.yaml CI gate passed: all $((Get-ChildItem $skillsDir -Directory).Count) skills have eval.yaml" -ForegroundColor Green
+
 Write-Host 'Running package-basecoat.ps1...'
 ./scripts/package-basecoat.ps1
 
