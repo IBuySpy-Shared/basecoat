@@ -1,6 +1,6 @@
 ---
 name: self-healing-ci
-description: "Automated CI failure analysis, log parsing, and pipeline remediation with retry strategies, flaky test detection, dependency resolution, and cache invalidation."
+description: "Automated CI failure analysis, log parsing, and pipeline remediation with retry strategies, flaky test detection, dependency resolution, and cache invalidation. USE FOR: auto-remediate CI failures, quarantine flaky tests, resolve build dependency and cache errors. DO NOT USE FOR: designing CI pipeline architecture, code-level debugging."
 compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
 metadata:
   category: "CI/CD & Automation"
