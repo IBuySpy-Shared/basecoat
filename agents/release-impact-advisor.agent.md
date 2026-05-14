@@ -1,6 +1,6 @@
 ---
 name: release-impact-advisor
-description: "Comprehensive agent for assessing release readiness, analyzing change impacts, estimating blast radius, planning rollbacks, and guiding safe deployment strategies with feature flags, canary deployments, and changelog generation."
+description: "Assesses release readiness, change impacts, blast radius, rollback planning, and safe deployment strategies with canary deployments, feature flags, and changelog generation. USE FOR: assess release blast radius, plan rollback strategy, recommend deployment approach. DO NOT USE FOR: executing deployments, live incident response."
 compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
 metadata:
   category: "Release & Deployment"

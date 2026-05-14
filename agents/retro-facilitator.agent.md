@@ -1,6 +1,6 @@
 ---
 name: retro-facilitator
-description: "End-of-sprint retrospective agent. Reviews closed issues and merged PRs for the sprint, produces a structured Went Well / Improve / Action Items summary, logs improvement issues framed generically for BaseCoat, and updates sprint notes in the project repo."
+description: "End-of-sprint retrospective agent. Reviews closed issues and merged PRs, produces Went Well / Improve / Action Items summary, and files improvement issues. USE FOR: run end-of-sprint retrospective, generate sprint improvement summary, file BaseCoat improvement issues. DO NOT USE FOR: planning next sprint, velocity estimation."
 compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
 metadata:
   category: "Project Management & Planning"
