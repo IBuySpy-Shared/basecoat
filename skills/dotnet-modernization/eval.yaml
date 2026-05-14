@@ -9,7 +9,7 @@ scenarios:
     input: "Can you help me create a phased upgrade plan to move our app from .NET Framework to .NET 8?"
     expect_activation: true
   - id: "pos-3"
-    input: "We hit some breaking API changes when migrating to .NET 6 — how do I remediate them?"
+    input: "We hit breaking API changes when migrating to .NET 6 — how do I remediate them?"
     expect_activation: true
   - id: "neg-1"
     input: "Scaffold a brand-new ASP.NET Core 8 web API project for me from scratch."

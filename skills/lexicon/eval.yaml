@@ -15,5 +15,5 @@ scenarios:
     input: "Proofread this paragraph and fix any grammar or punctuation errors."
     expect_activation: false
   - id: "neg-2"
-    input: "Rename all variables named `data` to `payload` throughout our codebase."
+    input: "Rename all variables named 'data' to 'payload' throughout our codebase."
     expect_activation: false

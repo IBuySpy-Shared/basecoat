@@ -9,7 +9,7 @@ scenarios:
     input: "How should I structure multi-environment Kubernetes manifests across dev, staging, and prod with ArgoCD?"
     expect_activation: true
   - id: "pos-3"
-    input: "Our cluster keeps drifting from the desired state — what's the best way to handle drift reconciliation with GitOps?"
+    input: "Our cluster keeps drifting from desired state — what's the best way to handle drift reconciliation with GitOps?"
     expect_activation: true
   - id: "neg-1"
     input: "Write a kubectl runbook for manually rolling back a deployment in an emergency."
