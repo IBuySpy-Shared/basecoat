@@ -1,6 +1,6 @@
 ---
 name: guardrail
-description: "Guardrail validation agent for checking outputs against safety, quality, compliance, and formatting rules before delivery."
+description: "Guardrail validation agent for checking outputs against safety, quality, compliance, and formatting rules before delivery. USE FOR: validate agent output against safety rules, enforce quality gates on generated content, check compliance formatting before delivery. DO NOT USE FOR: writing new code or content, debugging application errors."
 compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
 metadata:
   category: "Security & Compliance"

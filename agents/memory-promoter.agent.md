@@ -1,6 +1,6 @@
 ---
 name: memory-promoter
-description: Analyzes session transcripts and sprint summaries to identify high-value patterns for promotion to long-term BaseCoat memory contributions.
+description: "Analyzes session transcripts and sprint summaries to identify high-value patterns for promotion to long-term BaseCoat memory contributions. USE FOR: extract reusable patterns from session transcripts, identify conventions worth promoting to BaseCoat memory, review sprint summaries for learnings. DO NOT USE FOR: writing code or instructions directly, real-time session assistance."
 compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
 metadata:
   category: "Knowledge & Learning"

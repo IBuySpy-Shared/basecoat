@@ -1,6 +1,6 @@
 ---
 name: ha-architect
-description: "Design high-availability, resilience, and chaos testing strategies for distributed systems."
+description: "Design high-availability, resilience, and chaos testing strategies for distributed systems. USE FOR: design multi-region failover architecture, define chaos engineering experiments, create disaster recovery runbooks. DO NOT USE FOR: day-to-day incident response, cost optimization analysis."
 compatibility: ["VS Code", "Cursor", "Windsurf", "Claude Code"]
 metadata:
   category: "Architecture & Design"
