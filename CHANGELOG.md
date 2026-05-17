@@ -4,6 +4,46 @@ All notable changes to this repository should be recorded in this file.
 
 ## Unreleased
 
+## 3.27.0 - 2026-05-17
+
+## 3.27.0 - 2026-05-17
+
+### Added
+- feat(sprint-7): MCP staging smoke test, changelog automation, CI pass-rate, RCA specs (#816)
+- feat(skills): add eval.yaml routing suites batch4 (#836) (#853)
+- feat(skills): add eval.yaml routing suites batch2 (#836) (#854)
+- feat(skills): add eval.yaml routing suites batch3 (#836) (#855)
+- feat(skills): add eval.yaml routing suites batch1 (#836) (#856)
+- feat(scripts): add eval stub generator and skill audit CI (#850 #852) (#859)
+- feat(tests): add CI gate for missing eval.yaml (#851) (#860)
+- feat(agents): add routing triggers to agents batch3 (#29) (#865)
+- feat(agents): add routing triggers to agents batch2 (#29) (#866)
+- feat(ceremonies): ship composable sprint/git/governance functionality chunk (#885)
+- feat: add generate-agents-doc.ps1 for AGENTS.md regeneration (#871)
+
+### Changed
+- chore(sprint-7): publish clean sprint closeout (#805)
+- chore(deps): bump azure/login from 1384c340ab2dda50fed2bee3041d1d87018aa5e8 to a457da9ea143d694b1b9c7c869ebb04ebe844ef5 (#808)
+- chore(deps): bump actions/upload-artifact from 4 to 7 (#809)
+- chore(deps): bump docker/setup-buildx-action from 3.10.0 to 4.0.0 (#810)
+- chore(deps): bump github/gh-aw-actions from 0.71.5 to 0.73.0 (#811)
+- chore(deps): bump hashicorp/setup-terraform from 2 to 4 (#812)
+- docs(testing): document Waza SDK v2/v3 protocol mismatch (#823) (#847)
+- docs(agents): regenerate AGENTS.md with all 82 agents (#864)
+- Align supply-chain-security agent skills metadata and reference formatting (#892)
+- Require bash for commit scanner execution test and stop mutating LASTEXITCODE (#889)
+
+### Fixed
+- fix(docs): standardize brand name to BaseCoat (#830) (#837)
+- fix(skills): fix broken links and replace hardcoded IPs (#835) (#839)
+- fix(skills): remove disallowed frontmatter fields (#832) (#838)
+- fix(skills): add agentskills.io compatibility maps (#831) (#840)
+- fix(skills): add routing triggers to skills A-B (#834) (#842)
+- fix(skills): add routing triggers to skills C-D (#834) (#845)
+- fix(skills): reduce SKILL.md token budget batch2 (#833) (#848)
+- fix: correct MkDocs Material logo configuration in mkdocs.yml (#870)
+- fix(eval-stubs): guard empty positive scenarios and centralize fallback negative scenario (#890)
+
 ## 3.26.0 - 2026-05-11
 
 ### Changed
@@ -1183,3 +1223,5 @@ None — v3.0.0 maintains backward compatibility with v2.x patterns.
 - Added sync scripts for PowerShell and bash consumers
 - Added starter instructions, prompts, skills, and agent files
 - Added inventory and version metadata
+
+
