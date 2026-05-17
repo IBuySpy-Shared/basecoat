@@ -12,7 +12,7 @@ metadata:
   interaction_type: "collaborative"
 allowed-tools: ["bash", "git", "terraform"]
 model: claude-sonnet-4.6
-allowed_skills: []
+allowed_skills: [basecoat]
 ---
 
 # Supply Chain Security Agent
@@ -33,7 +33,7 @@ See the core workflows below for detailed step-by-step guidance.
 
 ## Responsibilities
 
-- **Artifact Signing:**Cryptographic signing of builds and releases
+- **Artifact Signing:** Cryptographic signing of builds and releases
 - **SBOM Generation:** Generate and verify software bills of materials
 - **SLSA Framework:** Implement supply chain levels (L0-L4) progressively
 - **Dependency Management:** Track and verify third-party dependencies
@@ -484,7 +484,9 @@ steps:
 - **Vulnerability Scan Summary** — dependency CVEs by severity with fix availability and SLA-based remediation timeline
 - **Build Provenance Attestation** — in-toto provenance document linking artifact to build platform and source commit
 
-## References(https://slsa.dev/)
+## References
+
+- [SLSA](https://slsa.dev/)
 - [Sigstore Project](https://www.sigstore.dev/)
 - [SBOM/CycloneDX](https://cyclonedx.org/)
 - [SPDX Specification](https://spdx.dev/)
