@@ -12,16 +12,31 @@
 #>
 
 param(
-    [string]$OutputPath = (Join-Path $PSScriptRoot ".." "docs" "agents" "AGENTS.md")
+    [string]$OutputPath = (Join-Path $PSScriptRoot ".." "docs" "agents" "AGENTS.md"),
+    [string]$RepositoryUrl
 )
 
 $ErrorActionPreference = 'Stop'
 
 $repoRoot = Split-Path -Parent $PSScriptRoot
 $agentsDir = Join-Path $repoRoot "agents"
+$maxDescriptionLength = 220
+
+if (-not $RepositoryUrl) {
+    $originUrl = (git -C $repoRoot config --get remote.origin.url) 2>$null
+    if ($originUrl -match '^https://github\.com/([^/]+/[^/]+?)(?:\.git)?$') {
+        $RepositoryUrl = "https://github.com/$($Matches[1])"
+    }
+    elseif ($originUrl -match '^git@github\.com:([^/]+/[^/]+?)(?:\.git)?$') {
+        $RepositoryUrl = "https://github.com/$($Matches[1])"
+    }
+    else {
+        $RepositoryUrl = 'https://github.com/IBuySpy-Shared/basecoat'
+    }
+}
 
 if (-not (Test-Path $agentsDir)) {
-    throw "Agents directory not found: $agentsDir"
+    throw "Agents directory not found at: $agentsDir"
 }
 
 $agentRows = @()
@@ -34,13 +49,55 @@ Get-ChildItem -Path $agentsDir -Filter "*.agent.md" -File | Sort-Object Name | F
 
     $frontmatter = $Matches[1]
     $defaultName = $_.Name -replace '\.agent\.md$', ''
-    $name = if ($frontmatter -match '(?m)^name:\s*(.+)\s*$') { $Matches[1].Trim().Trim('"') } else { $defaultName }
-    $description = if ($frontmatter -match '(?m)^description:\s*(.+)\s*$') { $Matches[1].Trim().Trim('"') } else { "No description" }
+    $name = $defaultName
+    $description = "No description provided."
+    $lines = $frontmatter -split "\r?\n"
+
+    if ($frontmatter -match '(?m)^name:\s*(.+)\s*$') {
+        $name = $Matches[1].Trim().Trim('"')
+    }
+
+    for ($i = 0; $i -lt $lines.Count; $i++) {
+        if ($lines[$i] -notmatch '^\s*description:\s*(.*)$') {
+            continue
+        }
+
+        $rawDescription = $Matches[1].Trim()
+        # YAML block scalar indicators:
+        # > / >- = folded block, | / |- = literal block
+        if ($rawDescription -in @('>', '|', '>-', '|-')) {
+            $blockLines = @()
+            for ($j = $i + 1; $j -lt $lines.Count; $j++) {
+                $line = $lines[$j]
+                if ($line -match '^[A-Za-z0-9_.-]+:\s*') {
+                    break
+                }
+
+                if ($line -match '^\s{2,}(.*)$') {
+                    $blockLines += $Matches[1]
+                }
+            }
+
+            if ($blockLines.Count -gt 0) {
+                if ($rawDescription.StartsWith('|')) {
+                    $description = ($blockLines -join "`n").Trim()
+                }
+                else {
+                    $description = ($blockLines -join ' ').Trim()
+                }
+            }
+        }
+        elseif ($rawDescription) {
+            $description = $rawDescription.Trim('"')
+        }
+
+        break
+    }
 
     $description = $description -replace '\|', '\|'
     $description = $description -replace '\s+', ' '
-    if ($description.Length -gt 220) {
-        $description = $description.Substring(0, 217) + '...'
+    if ($description.Length -gt $maxDescriptionLength) {
+        $description = $description.Substring(0, $maxDescriptionLength - 3) + '...'
     }
 
     $agentRows += [ordered]@{
@@ -61,7 +118,7 @@ $sb = [System.Text.StringBuilder]::new()
 [void]$sb.AppendLine('|---|---|')
 
 foreach ($row in $agentRows) {
-    $url = "https://github.com/IBuySpy-Shared/basecoat/blob/main/agents/$($row.FileName)"
+    $url = "$RepositoryUrl/blob/main/agents/$($row.FileName)"
     [void]$sb.AppendLine("| [$($row.Name)]($url) | $($row.Description) |")
 }
 
