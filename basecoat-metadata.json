@@ -1,7 +1,7 @@
 {
   "$schema": "basecoat-metadata-schema",
   "version": "3.26.0",
-  "generated": "2026-05-11",
+  "generated": "2026-05-17",
   "categories": {
     "AI & Development": {
       "label": "AI & Development",
@@ -1642,6 +1642,91 @@
       "pairedSkill": "",
       "file": "agents/ux-designer.agent.md",
       "model": "claude-sonnet-4-5",
+      "argumentHint": ""
+    },
+    {
+      "name": "broken-build-troubleshooter",
+      "description": "Use when CI or local builds are failing and the team needs fast, repeatable triage to isolate root cause and restore green status. USE FOR: classify failure signatures, pinpoint failing stage/test/toolchain segment, propose minimal safe remediation, and generate a fix validation checklist. DO NOT USE FOR: feature implementation, long-form architecture documents, or security incident response ownership.",
+      "category": "Meta",
+      "keywords": [
+        "ci",
+        "build",
+        "troubleshooting",
+        "git",
+        "pipeline"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/broken-build-troubleshooter.agent.md",
+      "model": "claude-sonnet-4.6",
+      "argumentHint": ""
+    },
+    {
+      "name": "orphaned-pr-cleanup",
+      "description": "Use when identifying and resolving stale or orphaned pull requests that have no active owner, blocked reviews, or outdated mergeability status. USE FOR: detect PRs without recent activity, classify close/revive/merge candidates, request ownership reassignment, and produce cleanup actions with SLA windows. DO NOT USE FOR: code implementation work, deep architecture design, or replacing release governance decisions.",
+      "category": "Meta",
+      "keywords": [
+        "git",
+        "github",
+        "pull-requests",
+        "triage",
+        "cleanup"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/orphaned-pr-cleanup.agent.md",
+      "model": "claude-sonnet-4.6",
+      "argumentHint": ""
+    },
+    {
+      "name": "sprint-closeout-auditor",
+      "description": "Use when closing a sprint and validating completion evidence before planning the next sprint. USE FOR: verify merged PR coverage, confirm CI health, identify unresolved errors and open issues, check test evidence, and produce carry-forward actions with owners. DO NOT USE FOR: writing feature code, replacing incident postmortems, or long-term roadmap prioritization.",
+      "category": "Meta",
+      "keywords": [
+        "sprint",
+        "closeout",
+        "agile",
+        "governance",
+        "checklist"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/sprint-closeout-auditor.agent.md",
+      "model": "claude-sonnet-4.6",
+      "argumentHint": ""
+    },
+    {
+      "name": "daily-standup-facilitator",
+      "description": "Use when running daily standup ceremonies to surface blockers, dependencies, and near-term execution risk. USE FOR: extract actionable updates, identify blockers needing escalation, map dependencies across team members, and produce a day plan with owners. DO NOT USE FOR: writing feature code, replacing sprint planning, or long-term roadmap analysis.",
+      "category": "Meta",
+      "keywords": [
+        "standup",
+        "agile",
+        "ceremony",
+        "blockers",
+        "coordination"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/daily-standup-facilitator.agent.md",
+      "model": "claude-sonnet-4.6",
+      "argumentHint": ""
+    },
+    {
+      "name": "release-readiness-chair",
+      "description": "Use when facilitating release readiness ceremonies and making explicit go/no-go decisions. USE FOR: collect release evidence across quality, operations, and rollback readiness; identify unresolved launch risks; enforce gate criteria; and publish decision records with owners and due dates. DO NOT USE FOR: implementing feature code, replacing incident response command, or product roadmap planning.",
+      "category": "Meta",
+      "keywords": [
+        "release",
+        "go-no-go",
+        "ceremony",
+        "risk",
+        "governance"
+      ],
+      "aliases": [],
+      "pairedSkill": "",
+      "file": "agents/release-readiness-chair.agent.md",
+      "model": "claude-sonnet-4.6",
       "argumentHint": ""
     }
   ]

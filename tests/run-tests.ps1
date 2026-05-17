@@ -61,6 +61,14 @@ if ($missingEval.Count -gt 0) {
 }
 Write-Host "  eval.yaml CI gate passed: all $((Get-ChildItem $skillsDir -Directory).Count) skills have eval.yaml" -ForegroundColor Green
 
+Write-Host 'Running organized guidance audits...'
+& pwsh -NoProfile -File (Join-Path $repoRoot 'scripts' 'run-guidance-audits.ps1') -FailOnError
+if ($LASTEXITCODE -ne 0) {
+    Write-Host 'Guidance audit run failed' -ForegroundColor Red
+    Write-FailureLog 'run-guidance-audits'
+    exit 1
+}
+
 Write-Host 'Running package-basecoat.ps1...'
 ./scripts/package-basecoat.ps1
 
