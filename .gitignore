@@ -1,5 +1,6 @@
 dist/
 node_modules/
+site/
 
 # =============================================================================
 # Secret & credential files — NEVER commit these
