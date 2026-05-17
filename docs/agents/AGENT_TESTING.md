@@ -30,6 +30,14 @@ pwsh scripts/validate-basecoat.ps1
 
 Structural validation is necessary, but it cannot tell you whether an instruction actually changes model behavior in the intended way.
 
+For agent and skill syntax/best-practice auditing with organized outputs, run:
+
+```powershell
+pwsh scripts/run-guidance-audits.ps1
+```
+
+This writes audit artifacts to `test-results/audits/agents/` and `test-results/audits/skills/`.
+
 ### Level 2 — Behavioral Assertions
 
 Behavioral assertions answer the key question: given a prompt and a specific instruction set, does the agent produce the expected kind of response?
