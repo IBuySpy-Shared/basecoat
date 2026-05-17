@@ -12,8 +12,8 @@ exclude_docs: |
 
 theme:
   name: material
-  logo: material/layers
-  favicon: material/layers
+  icon:
+    logo: material/layers
   palette:
     - scheme: default
       primary: deep purple
