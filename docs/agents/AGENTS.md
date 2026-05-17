@@ -2,14 +2,14 @@
 
 This file lists all available agents in the Base Coat framework.
 
-> **82 agents** available
+> **83 agents** available
 
 | Agent | Description |
 |---|---|
 | [agent-designer](https://github.com/IBuySpy-Shared/basecoat/blob/main/agents/agent-designer.agent.md) | Agent that designs and authors Copilot agent definitions. Use when creating new agents, composing skills, writing agent instructions, or coordinating multi-agent workflows. |
 | [agentops](https://github.com/IBuySpy-Shared/basecoat/blob/main/agents/agentops.agent.md) | AgentOps lifecycle manager for agent versioning, rollout, health monitoring, rollback, and operational governance. Use when deploying, canarying, or retiring agent versions. |
 | [api-designer](https://github.com/IBuySpy-Shared/basecoat/blob/main/agents/api-designer.agent.md) | API designer agent for OpenAPI spec authoring, REST and GraphQL design, versioning strategy, breaking-change detection, and API governance. Use when designing, reviewing, or evolving API contracts. |
-| [api-security](https://github.com/IBuySpy-Shared/basecoat/blob/main/agents/api-security.agent.md) | API Security Agent for comprehensive API threat modeling, OWASP API Security Top 10 assessment, and secure API design. Covers authentication, authorization, rate limiting, and API-specific vulnerab... |
+| [api-security](https://github.com/IBuySpy-Shared/basecoat/blob/main/agents/api-security.agent.md) | API Security Agent for comprehensive API threat modeling, OWASP API Security Top 10 assessment, and secure API design. Covers authentication, authorization, rate limiting, and API-specific vulnerabilities. |
 | [app-inventory](https://github.com/IBuySpy-Shared/basecoat/blob/main/agents/app-inventory.agent.md) | Scans legacy applications to discover dependencies, identify technology stacks, assess migration complexity, and generate architecture diagrams for portfolio analysis. USE FOR: scan legacy app tech... |
 | [azure-landing-zone](https://github.com/IBuySpy-Shared/basecoat/blob/main/agents/azure-landing-zone.agent.md) | Azure Landing Zone (ESLZ) agent for scaffolding enterprise-scale landing zones following Microsoft's Cloud Adoption Framework. Use when designing management group hierarchies, platform subscription... |
 | [backend-dev](https://github.com/IBuySpy-Shared/basecoat/blob/main/agents/backend-dev.agent.md) | Backend development agent for APIs, services, and business logic. Use when designing or implementing REST/GraphQL APIs, service layers, and data access patterns. |
