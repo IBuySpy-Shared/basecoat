@@ -8,6 +8,7 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
+$script:DefaultNegativeScenario = "Tell me a joke about programming"
 
 function Get-FrontmatterDescription {
     param([string]$FilePath)
@@ -70,6 +71,9 @@ function Build-EvalYaml {
 
     # Pad positive scenarios to exactly 3
     $pos = @() + $UseForItems
+    if ($pos.Count -eq 0) {
+        $pos += "Help me with $SkillName"
+    }
     while ($pos.Count -lt 3) {
         $pos += $pos[-1]
     }
@@ -78,7 +82,7 @@ function Build-EvalYaml {
     # Pad negative scenarios to exactly 2
     $neg = @() + $DoNotUseForItems
     if ($neg.Count -lt 2) {
-        $neg += "Tell me a joke about programming"
+        $neg += $script:DefaultNegativeScenario
     }
     $neg = $neg[0..1]
 
