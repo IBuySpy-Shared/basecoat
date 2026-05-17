@@ -104,16 +104,15 @@ try {
     git commit -m '-----BEGIN PRIVATE KEY-----' | Out-Null
 
     $scanScript = Join-Path $repoRoot 'scripts/scan-commit-messages.sh'
-    if (Get-Command bash -ErrorAction SilentlyContinue) {
-        $output = & bash $scanScript 'HEAD~1..HEAD' 2>&1
-        if ($LASTEXITCODE -eq 0) {
-            throw 'Commit message scanner test failed: expected failure for sensitive commit message'
-        }
-
-        $global:LASTEXITCODE = 0
+    $bashCommand = Get-Command bash -ErrorAction SilentlyContinue
+    if (-not $bashCommand) {
+        throw 'Commit message scanner execution test requires bash, but bash is not available in this environment.'
     }
-    else {
-        Write-Host 'Skipping commit message scanner execution test: bash not available in environment.'
+
+    $output = & $bashCommand.Source $scanScript 'HEAD~1..HEAD' 2>&1
+    $scanExitCode = $LASTEXITCODE
+    if ($scanExitCode -eq 0) {
+        throw 'Commit message scanner test failed: expected failure for sensitive commit message'
     }
 }
 finally {
