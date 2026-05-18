@@ -14,6 +14,8 @@ Navigate to: **Settings → Secrets and variables → Actions → New repository
 Use this order to avoid mixed bootstrap/deploy failures:
 
 1. Run `pwsh scripts/bootstrap.ps1` in the repo.
+   - This is the correct bootstrap for BaseCoat repo operations and portal deploy readiness.
+   - Do not substitute `scripts/bootstrap-basecoat.ps1` (consumer-repo adoption) or `scripts/bootstrap-dashboard.ps1` (adoption dashboard setup).
 2. Set portal deploy secrets at repo scope or `staging` environment scope.
 3. Re-run `pwsh scripts/bootstrap.ps1` and verify Phase 3 passes portal secret checks.
 4. Trigger `.github/workflows/portal-deploy.yml`.
