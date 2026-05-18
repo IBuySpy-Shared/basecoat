@@ -1,0 +1,2791 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Enterprise shared library of GitHub Copilot customization assets — agents, skills, instructions, and prompts.">
+      
+      
+      
+        <link rel="canonical" href="https://IBuySpy-Shared.github.io/basecoat/agents/MODEL-DISTRIBUTION/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Model Distribution Matrix - BaseCoat</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="deep-purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#model-distribution-matrix" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="BaseCoat" class="md-header__button md-logo" aria-label="BaseCoat" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12 16 7.36-5.73L21 9l-9-7-9 7 1.63 1.27M12 18.54l-7.38-5.73L3 14.07l9 7 9-7-1.63-1.27z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            BaseCoat
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Model Distribution Matrix
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="deep-purple"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="deep-purple" data-md-color-accent="deep-purple"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/IBuySpy-Shared/basecoat" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    IBuySpy-Shared/basecoat
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../getting-started/" class="md-tabs__link">
+          
+  
+  
+  Getting Started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../reference/QUICK_REFERENCE/" class="md-tabs__link">
+          
+  
+  
+  Asset Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../guides/intent-prefixes/" class="md-tabs__link">
+          
+  
+  
+  How-To Guides
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../memory/" class="md-tabs__link">
+          
+  
+  
+  Memory System
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../architecture/overview/" class="md-tabs__link">
+          
+  
+  
+  Architecture
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../PHILOSOPHY/" class="md-tabs__link">
+          
+  
+  
+  About
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="BaseCoat" class="md-nav__button md-logo" aria-label="BaseCoat" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12 16 7.36-5.73L21 9l-9-7-9 7 1.63 1.27M12 18.54l-7.38-5.73L3 14.07l9 7 9-7-1.63-1.27z"/></svg>
+
+    </a>
+    BaseCoat
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/IBuySpy-Shared/basecoat" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    IBuySpy-Shared/basecoat
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Getting Started
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quickstart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/enterprise-setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enterprise Setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/consumer-sync/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Consumer Sync Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Asset Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Asset Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/QUICK_REFERENCE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/INVENTORY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inventory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/ASSET_REGISTRY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/GOVERNANCE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Governance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How-To Guides
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    How-To Guides
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/intent-prefixes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Intent Prefixes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/integrate-prompt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get Started (integrate prompt)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/customization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Make It Your Own
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/agent-examples/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Agent Examples
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/version-drift/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Version Drift Detection
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/MODEL_OPTIMIZATION/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Model Optimization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/token-optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Token Optimization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/basecoat-yml/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BaseCoat Config (.basecoat.yml)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/ubb-token-guidance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UBB Token Guidance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Memory System
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Memory System
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../memory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../memory/LEARNING_MODEL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Learning Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../memory/triage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Triage Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../memory/CONTRIBUTING/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing Learnings
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../memory/PROCESS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Process
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Architecture
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../diagrams/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Diagrams
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/decisions/adr-001-naming-convention/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR-001 Naming Convention
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/multi-agent-orchestration-patterns/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Multi-Agent Patterns
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    About
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../PHILOSOPHY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Philosophy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../story/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Story
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../metrics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Metrics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../changelog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Changelog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#available-models-18-deployed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Available Models (18 deployed)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Available Models (18 deployed)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#premium-tier-reasoning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Premium Tier (Reasoning)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#standard-tier-balanced" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Standard Tier (Balanced)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fast-tier-speedcost" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fast Tier (Speed/Cost)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#agent-model-assignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Agent → Model Assignment
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Agent → Model Assignment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#reasoning-tier-complex-analysis-architecture-multi-file-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reasoning Tier (Complex analysis, architecture, multi-file changes)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#balanced-tier-standard-implementation-code-generation-reviews" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Balanced Tier (Standard implementation, code generation, reviews)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fast-tier-high-volume-simple-transforms-triage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fast Tier (High-volume, simple transforms, triage)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#skill-model-assignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Skill → Model Assignment
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Skill → Model Assignment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#complex-skills-reasoning-tier" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Complex Skills (Reasoning tier)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#standard-skills-balanced-tier" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Standard Skills (Balanced tier)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lightweight-skills-fast-tier" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lightweight Skills (Fast tier)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#distribution-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Distribution Summary
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Distribution Summary">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#by-primary-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        By Primary Model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fallback-chain-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fallback Chain Strategy
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#selection-heuristics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Selection Heuristics
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cost-optimization-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cost Optimization Notes
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="model-distribution-matrix">Model Distribution Matrix<a class="headerlink" href="#model-distribution-matrix" title="Permanent link">&para;</a></h1>
+<p>Maps each agent and skill to the <strong>specific model</strong> best suited for its workload.
+Use this guide when configuring <code>model:</code> overrides in agent YAML files or when
+selecting models for skill invocations.</p>
+<h2 id="available-models-18-deployed">Available Models (18 deployed)<a class="headerlink" href="#available-models-18-deployed" title="Permanent link">&para;</a></h2>
+<h3 id="premium-tier-reasoning">Premium Tier (Reasoning)<a class="headerlink" href="#premium-tier-reasoning" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Context</th>
+<th>Strengths</th>
+<th>Best For</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Claude Opus 4.7</td>
+<td>standard</td>
+<td>Deep analysis, multi-step plans</td>
+<td>Architecture, security audits</td>
+</tr>
+<tr>
+<td>Claude Opus 4.7 (1M)</td>
+<td>1M tokens</td>
+<td>Entire-codebase reasoning</td>
+<td>Legacy modernization, large repos</td>
+</tr>
+<tr>
+<td>Claude Opus 4.7 High</td>
+<td>standard</td>
+<td>Extended chain-of-thought</td>
+<td>Hard design problems, formal proofs</td>
+</tr>
+<tr>
+<td>Claude Opus 4.7 XHigh</td>
+<td>standard</td>
+<td>Maximum reasoning depth</td>
+<td>Most complex architectural decisions</td>
+</tr>
+<tr>
+<td>Claude Opus 4.6</td>
+<td>standard</td>
+<td>Stable predecessor, proven</td>
+<td>Fallback for Opus 4.7 tasks</td>
+</tr>
+<tr>
+<td>Claude Opus 4.6 (1M)</td>
+<td>1M tokens</td>
+<td>Long-context predecessor</td>
+<td>Fallback for large-context tasks</td>
+</tr>
+<tr>
+<td>Claude Opus 4.5</td>
+<td>standard</td>
+<td>Earlier generation, cost-effective</td>
+<td>Secondary reasoning workloads</td>
+</tr>
+</tbody>
+</table>
+<h3 id="standard-tier-balanced">Standard Tier (Balanced)<a class="headerlink" href="#standard-tier-balanced" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Strengths</th>
+<th>Best For</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Claude Sonnet 4.6</td>
+<td>Latest balanced, improved code</td>
+<td>Preferred for new balanced Claude tasks</td>
+</tr>
+<tr>
+<td>Claude Sonnet 4.5</td>
+<td>Proven stable, good reviews</td>
+<td>Reviews, prose, collaborative work</td>
+</tr>
+<tr>
+<td>Claude Sonnet 4</td>
+<td>Earlier generation</td>
+<td>Cost-effective fallback</td>
+</tr>
+<tr>
+<td>GPT-5.4</td>
+<td>Structured output, IaC</td>
+<td>Config, YAML, pipeline design</td>
+</tr>
+<tr>
+<td>GPT-5.3-Codex</td>
+<td>Newer code model</td>
+<td>Preferred code generation</td>
+</tr>
+<tr>
+<td>GPT-5.2-Codex</td>
+<td>Proven code model</td>
+<td>Stable code fallback</td>
+</tr>
+<tr>
+<td>GPT-5.2</td>
+<td>General purpose</td>
+<td>Secondary balanced tasks</td>
+</tr>
+</tbody>
+</table>
+<h3 id="fast-tier-speedcost">Fast Tier (Speed/Cost)<a class="headerlink" href="#fast-tier-speedcost" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Strengths</th>
+<th>Best For</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Claude Haiku 4.5</td>
+<td>Fast, good reasoning/cost</td>
+<td>Triage, routing, classification</td>
+</tr>
+<tr>
+<td>GPT-5.4 mini</td>
+<td>Structured output, cheap</td>
+<td>Boilerplate, scaffolding, templates</td>
+</tr>
+<tr>
+<td>GPT-5 mini</td>
+<td>Fast general purpose</td>
+<td>Simple transforms, formatting</td>
+</tr>
+<tr>
+<td>GPT-4.1</td>
+<td>Cheapest, fastest</td>
+<td>Guardrails, binary checks, labeling</td>
+</tr>
+</tbody>
+</table>
+<h2 id="agent-model-assignment">Agent → Model Assignment<a class="headerlink" href="#agent-model-assignment" title="Permanent link">&para;</a></h2>
+<h3 id="reasoning-tier-complex-analysis-architecture-multi-file-changes">Reasoning Tier (Complex analysis, architecture, multi-file changes)<a class="headerlink" href="#reasoning-tier-complex-analysis-architecture-multi-file-changes" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Agent</th>
+<th>Primary Model</th>
+<th>Fallback</th>
+<th>Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>api-designer</td>
+<td>Opus 4.7 High</td>
+<td>Opus 4.7</td>
+<td>API contracts benefit from extended reasoning</td>
+</tr>
+<tr>
+<td>containerization-planner</td>
+<td>Claude Opus 4.7</td>
+<td>Opus 4.6</td>
+<td>Broad infra knowledge + long-context planning</td>
+</tr>
+<tr>
+<td>incident-responder</td>
+<td>Opus 4.7</td>
+<td>Opus 4.6</td>
+<td>Real-time multi-signal correlation under pressure</td>
+</tr>
+<tr>
+<td>legacy-modernization</td>
+<td>Opus 4.7 (1M)</td>
+<td>Opus 4.6 (1M)</td>
+<td>Needs entire-codebase context for migration</td>
+</tr>
+<tr>
+<td>policy-as-code-compliance</td>
+<td>Claude Opus 4.7</td>
+<td>Opus 4.5</td>
+<td>Regulatory cross-referencing, policy reasoning</td>
+</tr>
+<tr>
+<td>product-manager</td>
+<td>Claude Opus 4.7</td>
+<td>Opus 4.5</td>
+<td>Strategy synthesis, stakeholder trade-offs</td>
+</tr>
+<tr>
+<td>security-analyst</td>
+<td>Opus 4.7 XHigh</td>
+<td>Opus 4.7</td>
+<td>Exploit chain analysis needs deepest reasoning</td>
+</tr>
+<tr>
+<td>solution-architect</td>
+<td>Opus 4.7 High</td>
+<td>Opus 4.7</td>
+<td>Multi-system design, trade-off evaluation</td>
+</tr>
+<tr>
+<td>strategy-to-automation</td>
+<td>Claude Opus 4.7</td>
+<td>Opus 4.5</td>
+<td>Business-to-technical translation, broad scope</td>
+</tr>
+</tbody>
+</table>
+<h3 id="balanced-tier-standard-implementation-code-generation-reviews">Balanced Tier (Standard implementation, code generation, reviews)<a class="headerlink" href="#balanced-tier-standard-implementation-code-generation-reviews" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Agent</th>
+<th>Primary Model</th>
+<th>Fallback</th>
+<th>Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>agent-designer</td>
+<td>Sonnet 4.6</td>
+<td>Sonnet 4.5</td>
+<td>Structured YAML generation, prompt crafting</td>
+</tr>
+<tr>
+<td>agentops</td>
+<td>GPT-5.4</td>
+<td>GPT-5.2</td>
+<td>Metrics pipelines, structured observability</td>
+</tr>
+<tr>
+<td>app-inventory</td>
+<td>GPT-5.4</td>
+<td>GPT-5.2</td>
+<td>Catalog generation, structured scanning</td>
+</tr>
+<tr>
+<td>backend-dev</td>
+<td>GPT-5.3-Codex</td>
+<td>GPT-5.2-Codex</td>
+<td>Code-heavy implementation tasks</td>
+</tr>
+<tr>
+<td>chaos-engineer</td>
+<td>Sonnet 4.6</td>
+<td>Sonnet 4.5</td>
+<td>Creative failure scenario design</td>
+</tr>
+<tr>
+<td>code-review</td>
+<td>Sonnet 4.6</td>
+<td>Sonnet 4.5</td>
+<td>Nuanced code quality assessment</td>
+</tr>
+<tr>
+<td>data-tier</td>
+<td>GPT-5.3-Codex</td>
+<td>GPT-5.2-Codex</td>
+<td>Schema design, migration scripts</td>
+</tr>
+<tr>
+<td>dataops</td>
+<td>GPT-5.4</td>
+<td>GPT-5.2</td>
+<td>Pipeline configuration, ETL patterns</td>
+</tr>
+<tr>
+<td>devops-engineer</td>
+<td>GPT-5.4</td>
+<td>GPT-5.2</td>
+<td>YAML/IaC generation, workflow design</td>
+</tr>
+<tr>
+<td>exploratory-charter</td>
+<td>Sonnet 4.6</td>
+<td>Sonnet 4.5</td>
+<td>Test strategy requires creative reasoning</td>
+</tr>
+<tr>
+<td>frontend-dev</td>
+<td>GPT-5.3-Codex</td>
+<td>GPT-5.2-Codex</td>
+<td>Component implementation, styling</td>
+</tr>
+<tr>
+<td>infrastructure-deploy</td>
+<td>GPT-5.4</td>
+<td>GPT-5.2</td>
+<td>IaC templates, cloud resource config</td>
+</tr>
+<tr>
+<td>llmops</td>
+<td>Sonnet 4.6</td>
+<td>Sonnet 4.5</td>
+<td>Model serving patterns, prompt management</td>
+</tr>
+<tr>
+<td>manual-test-strategy</td>
+<td>Sonnet 4.6</td>
+<td>Sonnet 4.5</td>
+<td>Human-readable test plans, risk analysis</td>
+</tr>
+<tr>
+<td>mcp-developer</td>
+<td>GPT-5.3-Codex</td>
+<td>GPT-5.2-Codex</td>
+<td>Protocol implementation, SDK code</td>
+</tr>
+<tr>
+<td>middleware-dev</td>
+<td>GPT-5.3-Codex</td>
+<td>GPT-5.2-Codex</td>
+<td>Integration code, middleware patterns</td>
+</tr>
+<tr>
+<td>mlops</td>
+<td>GPT-5.4</td>
+<td>GPT-5.2</td>
+<td>Pipeline orchestration, model registry</td>
+</tr>
+<tr>
+<td>performance-analyst</td>
+<td>Sonnet 4.6</td>
+<td>Sonnet 4.5</td>
+<td>Profiling interpretation, bottleneck analysis</td>
+</tr>
+<tr>
+<td>project-onboarding</td>
+<td>GPT-5.4</td>
+<td>GPT-5.2</td>
+<td>Structured checklists, file scanning</td>
+</tr>
+<tr>
+<td>prompt-coach</td>
+<td>Sonnet 4.6</td>
+<td>Sonnet 4.5</td>
+<td>Prompt quality evaluation, suggestions</td>
+</tr>
+<tr>
+<td>prompt-engineer</td>
+<td>Sonnet 4.6</td>
+<td>Sonnet 4.5</td>
+<td>Prompt crafting, iteration patterns</td>
+</tr>
+<tr>
+<td>release-impact-advisor</td>
+<td>GPT-5.4</td>
+<td>GPT-5.2</td>
+<td>Change impact assessment, dependency scan</td>
+</tr>
+<tr>
+<td>release-manager</td>
+<td>GPT-5.4</td>
+<td>GPT-5.2</td>
+<td>Version management, changelog generation</td>
+</tr>
+<tr>
+<td>retro-facilitator</td>
+<td>Sonnet 4.6</td>
+<td>Sonnet 4.5</td>
+<td>Synthesis of team feedback, themes</td>
+</tr>
+<tr>
+<td>rollout-basecoat</td>
+<td>GPT-5.4</td>
+<td>GPT-5.2</td>
+<td>File sync operations, config management</td>
+</tr>
+<tr>
+<td>sprint-planner</td>
+<td>GPT-5.4</td>
+<td>GPT-5.2</td>
+<td>Capacity estimation, task decomposition</td>
+</tr>
+<tr>
+<td>sre-engineer</td>
+<td>Sonnet 4.6</td>
+<td>Sonnet 4.5</td>
+<td>Alert interpretation, runbook reasoning</td>
+</tr>
+<tr>
+<td>tech-writer</td>
+<td>Sonnet 4.6</td>
+<td>Sonnet 4.5</td>
+<td>Prose quality, documentation structure</td>
+</tr>
+<tr>
+<td>ux-designer</td>
+<td>Sonnet 4.6</td>
+<td>Sonnet 4.5</td>
+<td>Design reasoning, accessibility awareness</td>
+</tr>
+</tbody>
+</table>
+<h3 id="fast-tier-high-volume-simple-transforms-triage">Fast Tier (High-volume, simple transforms, triage)<a class="headerlink" href="#fast-tier-high-volume-simple-transforms-triage" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Agent</th>
+<th>Primary Model</th>
+<th>Fallback</th>
+<th>Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>config-auditor</td>
+<td>GPT-4.1</td>
+<td>GPT-5.4 mini</td>
+<td>Cheapest; pattern matching against known rules</td>
+</tr>
+<tr>
+<td>dependency-lifecycle</td>
+<td>Haiku 4.5</td>
+<td>GPT-5 mini</td>
+<td>Version comparison, changelog scanning</td>
+</tr>
+<tr>
+<td>feedback-loop</td>
+<td>GPT-5.4 mini</td>
+<td>GPT-4.1</td>
+<td>Signal routing, threshold checks</td>
+</tr>
+<tr>
+<td>guardrail</td>
+<td>GPT-4.1</td>
+<td>Haiku 4.5</td>
+<td>Binary pass/fail, fastest enforcement</td>
+</tr>
+<tr>
+<td>issue-triage</td>
+<td>Haiku 4.5</td>
+<td>GPT-5 mini</td>
+<td>Label classification, routing</td>
+</tr>
+<tr>
+<td>memory-curator</td>
+<td>GPT-5.4 mini</td>
+<td>GPT-5 mini</td>
+<td>Deduplication, relevance scoring</td>
+</tr>
+<tr>
+<td>merge-coordinator</td>
+<td>Haiku 4.5</td>
+<td>GPT-5 mini</td>
+<td>Status checks, merge sequencing</td>
+</tr>
+<tr>
+<td>new-customization</td>
+<td>GPT-5.4 mini</td>
+<td>GPT-5 mini</td>
+<td>Template expansion, scaffolding</td>
+</tr>
+<tr>
+<td>self-healing-ci</td>
+<td>Haiku 4.5</td>
+<td>GPT-4.1</td>
+<td>Error pattern matching, retry logic</td>
+</tr>
+</tbody>
+</table>
+<h2 id="skill-model-assignment">Skill → Model Assignment<a class="headerlink" href="#skill-model-assignment" title="Permanent link">&para;</a></h2>
+<h3 id="complex-skills-reasoning-tier">Complex Skills (Reasoning tier)<a class="headerlink" href="#complex-skills-reasoning-tier" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Skill</th>
+<th>Primary Model</th>
+<th>Fallback</th>
+<th>Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>architecture</td>
+<td>Opus 4.7 High</td>
+<td>Opus 4.7</td>
+<td>System design decisions, trade-offs</td>
+</tr>
+<tr>
+<td>azure-landing-zone</td>
+<td>Opus 4.7 (1M)</td>
+<td>Opus 4.7</td>
+<td>Enterprise-scale IaC, large template sets</td>
+</tr>
+<tr>
+<td>azure-waf-review</td>
+<td>GPT-5.4</td>
+<td>Opus 4.5</td>
+<td>WAF pillar cross-referencing, broad assessment</td>
+</tr>
+<tr>
+<td>identity-migration</td>
+<td>Opus 4.7</td>
+<td>Opus 4.6</td>
+<td>Auth flow mapping, security-sensitive migration</td>
+</tr>
+<tr>
+<td>security</td>
+<td>Opus 4.7 XHigh</td>
+<td>Opus 4.7</td>
+<td>Threat modeling, vulnerability analysis</td>
+</tr>
+<tr>
+<td>service-bus-migration</td>
+<td>GPT-5.4</td>
+<td>Sonnet 4.6</td>
+<td>Messaging pattern translation, state handling</td>
+</tr>
+</tbody>
+</table>
+<h3 id="standard-skills-balanced-tier">Standard Skills (Balanced tier)<a class="headerlink" href="#standard-skills-balanced-tier" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Skill</th>
+<th>Primary Model</th>
+<th>Fallback</th>
+<th>Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>agent-design</td>
+<td>Sonnet 4.6</td>
+<td>Sonnet 4.5</td>
+<td>Structured agent spec creation</td>
+</tr>
+<tr>
+<td>api-design</td>
+<td>GPT-5.4</td>
+<td>GPT-5.2</td>
+<td>OpenAPI spec generation, contract design</td>
+</tr>
+<tr>
+<td>app-inventory</td>
+<td>GPT-5.4</td>
+<td>GPT-5.2</td>
+<td>Structured scanning and catalog generation</td>
+</tr>
+<tr>
+<td>azure-container-apps</td>
+<td>GPT-5.4</td>
+<td>GPT-5.2</td>
+<td>Container config, Bicep/ARM templates</td>
+</tr>
+<tr>
+<td>azure-identity</td>
+<td>Sonnet 4.6</td>
+<td>Sonnet 4.5</td>
+<td>Entra ID reasoning, auth patterns</td>
+</tr>
+<tr>
+<td>azure-networking</td>
+<td>GPT-5.4</td>
+<td>GPT-5.2</td>
+<td>VNet/NSG config, IP planning</td>
+</tr>
+<tr>
+<td>azure-policy</td>
+<td>GPT-5.4</td>
+<td>GPT-5.2</td>
+<td>Policy definition JSON, compliance rules</td>
+</tr>
+<tr>
+<td>backend-dev</td>
+<td>GPT-5.3-Codex</td>
+<td>GPT-5.2-Codex</td>
+<td>Implementation patterns, code scaffolds</td>
+</tr>
+<tr>
+<td>basecoat</td>
+<td>Sonnet 4.6</td>
+<td>Sonnet 4.5</td>
+<td>Meta-skill: understands our own conventions</td>
+</tr>
+<tr>
+<td>code-review</td>
+<td>Sonnet 4.6</td>
+<td>Sonnet 4.5</td>
+<td>Nuanced feedback on code quality</td>
+</tr>
+<tr>
+<td>data-tier</td>
+<td>GPT-5.3-Codex</td>
+<td>GPT-5.2-Codex</td>
+<td>Schema scripts, migration generation</td>
+</tr>
+<tr>
+<td>devops</td>
+<td>GPT-5.4</td>
+<td>GPT-5.2</td>
+<td>Pipeline YAML, workflow templates</td>
+</tr>
+<tr>
+<td>documentation</td>
+<td>Sonnet 4.6</td>
+<td>Sonnet 4.5</td>
+<td>Prose quality, clear explanations</td>
+</tr>
+<tr>
+<td>environment-bootstrap</td>
+<td>GPT-5.4</td>
+<td>GPT-5.2</td>
+<td>Setup scripts, dependency resolution</td>
+</tr>
+<tr>
+<td>frontend-dev</td>
+<td>GPT-5.3-Codex</td>
+<td>GPT-5.2-Codex</td>
+<td>Component code, CSS, frameworks</td>
+</tr>
+<tr>
+<td>handoff</td>
+<td>Sonnet 4.6</td>
+<td>Sonnet 4.5</td>
+<td>Context summarization between agents</td>
+</tr>
+<tr>
+<td>human-in-the-loop</td>
+<td>Sonnet 4.6</td>
+<td>Sonnet 4.5</td>
+<td>Decision framing, option presentation</td>
+</tr>
+<tr>
+<td>manual-test-strategy</td>
+<td>Sonnet 4.6</td>
+<td>Sonnet 4.5</td>
+<td>Test scenario reasoning</td>
+</tr>
+<tr>
+<td>mcp-development</td>
+<td>GPT-5.3-Codex</td>
+<td>GPT-5.2-Codex</td>
+<td>Protocol implementation code</td>
+</tr>
+<tr>
+<td>performance-profiling</td>
+<td>Sonnet 4.6</td>
+<td>Sonnet 4.5</td>
+<td>Bottleneck interpretation</td>
+</tr>
+<tr>
+<td>refactoring</td>
+<td>GPT-5.3-Codex</td>
+<td>GPT-5.2-Codex</td>
+<td>Code transformation, pattern application</td>
+</tr>
+<tr>
+<td>sprint-management</td>
+<td>GPT-5.4</td>
+<td>GPT-5.2</td>
+<td>Structured planning, velocity calc</td>
+</tr>
+<tr>
+<td>ux</td>
+<td>Sonnet 4.6</td>
+<td>Sonnet 4.5</td>
+<td>Design feedback, accessibility</td>
+</tr>
+</tbody>
+</table>
+<h3 id="lightweight-skills-fast-tier">Lightweight Skills (Fast tier)<a class="headerlink" href="#lightweight-skills-fast-tier" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Skill</th>
+<th>Primary Model</th>
+<th>Fallback</th>
+<th>Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>create-instruction</td>
+<td>GPT-5.4 mini</td>
+<td>GPT-4.1</td>
+<td>Template-based file generation</td>
+</tr>
+<tr>
+<td>create-skill</td>
+<td>GPT-5.4 mini</td>
+<td>GPT-4.1</td>
+<td>Scaffold from templates</td>
+</tr>
+</tbody>
+</table>
+<h2 id="distribution-summary">Distribution Summary<a class="headerlink" href="#distribution-summary" title="Permanent link">&para;</a></h2>
+<h3 id="by-primary-model">By Primary Model<a class="headerlink" href="#by-primary-model" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Agents</th>
+<th>Skills</th>
+<th>Total</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Claude Opus 4.7</td>
+<td>5</td>
+<td>1</td>
+<td>6</td>
+</tr>
+<tr>
+<td>Claude Opus 4.7 (1M)</td>
+<td>1</td>
+<td>1</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Claude Opus 4.7 High</td>
+<td>2</td>
+<td>1</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Claude Opus 4.7 XHigh</td>
+<td>1</td>
+<td>1</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Claude Sonnet 4.6</td>
+<td>14</td>
+<td>12</td>
+<td>26</td>
+</tr>
+<tr>
+<td>GPT-5.4</td>
+<td>10</td>
+<td>8</td>
+<td>18</td>
+</tr>
+<tr>
+<td>GPT-5.3-Codex</td>
+<td>5</td>
+<td>5</td>
+<td>10</td>
+</tr>
+<tr>
+<td>Claude Haiku 4.5</td>
+<td>5</td>
+<td>0</td>
+<td>5</td>
+</tr>
+<tr>
+<td>GPT-5.4 mini</td>
+<td>3</td>
+<td>2</td>
+<td>5</td>
+</tr>
+<tr>
+<td>GPT-4.1</td>
+<td>2</td>
+<td>0</td>
+<td>2</td>
+</tr>
+<tr>
+<td>GPT-5 mini</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td><strong>49</strong></td>
+<td><strong>31</strong></td>
+<td><strong>80</strong></td>
+</tr>
+</tbody>
+</table>
+<p><em>Note: GPT-5 mini, Sonnet 4, GPT-5.2, Opus 4.5, and Opus 4.6 appear only as fallbacks.</em></p>
+<h3 id="fallback-chain-strategy">Fallback Chain Strategy<a class="headerlink" href="#fallback-chain-strategy" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Premium:  Opus 4.7 XHigh → Opus 4.7 High → Opus 4.7 → Opus 4.6 → Opus 4.5
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>Standard: Sonnet 4.6 → Sonnet 4.5 → Sonnet 4
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>Codex:    GPT-5.3-Codex → GPT-5.2-Codex
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>Infra:    GPT-5.4 → GPT-5.2
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>Fast:     Haiku 4.5 → GPT-5 mini → GPT-4.1
+</code></pre></div>
+<h2 id="selection-heuristics">Selection Heuristics<a class="headerlink" href="#selection-heuristics" title="Permanent link">&para;</a></h2>
+<p>When choosing a model for a new agent or skill:</p>
+<ol>
+<li><strong>Needs deepest reasoning (security, exploit chains)?</strong> → Opus 4.7 XHigh</li>
+<li><strong>Complex architecture or design trade-offs?</strong> → Opus 4.7 High</li>
+<li><strong>Large codebase / huge context needed?</strong> → Opus 4.7 (1M) or Opus 4.6 (1M)</li>
+<li><strong>Cross-domain strategy or regulation?</strong> → <code>Claude Opus 4.7</code></li>
+<li><strong>Generates code as primary output?</strong> → GPT-5.3-Codex (or 5.2-Codex fallback)</li>
+<li><strong>Produces structured config/YAML/IaC?</strong> → GPT-5.4</li>
+<li><strong>Requires nuanced judgment (reviews, prose)?</strong> → Sonnet 4.6</li>
+<li><strong>High-volume classification/routing?</strong> → Haiku 4.5</li>
+<li><strong>Binary pass/fail, cheapest possible?</strong> → GPT-4.1</li>
+<li><strong>Simple transforms, templates?</strong> → GPT-5.4 mini or GPT-5 mini</li>
+</ol>
+<h2 id="cost-optimization-notes">Cost Optimization Notes<a class="headerlink" href="#cost-optimization-notes" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Batch non-urgent work</strong> on fast-tier models where possible</li>
+<li><strong>Use reasoning models sparingly</strong> — only when the task genuinely benefits</li>
+<li><strong>Fallback chains</strong>: If Opus times out, retry on Sonnet (graceful degradation)</li>
+<li><strong>Cache model outputs</strong> for repeated patterns (e.g., same triage rules)</li>
+<li><strong>Monitor token usage</strong> per agent to spot over-provisioned model assignments</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; IBuySpy-Shared contributors. Licensed under MIT.
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/IBuySpy-Shared/basecoat" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.path", "navigation.top", "search.highlight", "search.suggest", "content.code.copy", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
