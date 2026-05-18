@@ -49,12 +49,14 @@ Collect the following from the past 7 days using `gh` CLI:
 Analyze the data and produce a retrospective using the **Went Well / Improve / Action Items** format.
 
 #### Went Well
+
 - Highlight PRs merged, features shipped, and bugs fixed
 - Note CI stability (passing rate)
 - Call out any releases published
 - Recognize quality improvements or coverage increases
 
 #### Improve
+
 - Identify patterns in open issues (accumulation, recurring failure types)
 - Note CI failures and their frequency
 - Explicitly cite CI pass-rate math (`X/Y = Z%`) and any dominant failure conclusions
@@ -62,6 +64,7 @@ Analyze the data and produce a retrospective using the **Went Well / Improve / A
 - Highlight any process friction
 
 #### Action Items
+
 - Convert "Improve" observations into concrete, time-boxed actions
 - Frame generically (applicable to the BaseCoat framework, not one-off project complaints)
 - Each action item should include: **what**, **why**, **owner** (role, not name), **priority**
