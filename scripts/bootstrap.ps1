@@ -249,7 +249,6 @@ if (Test-Path $portalDeployWorkflow) {
 
         $requiredPortalSecrets = @(
             'PORTAL_AZURE_CREDENTIALS',
-            'PORTAL_POSTGRES_ADMIN_PASSWORD',
             'GHCR_PULL_TOKEN'
         )
 
@@ -262,6 +261,7 @@ if (Test-Path $portalDeployWorkflow) {
         }
 
         Write-Host "  ℹ️   PORTAL_AZURE_CREDENTIALS must contain JSON keys: clientId, clientSecret, tenantId, subscriptionId" -ForegroundColor DarkGray
+        Write-Host "  ℹ️   PORTAL_POSTGRES_ADMIN_PASSWORD is optional (Bicep can generate the PostgreSQL admin password)" -ForegroundColor DarkGray
     } catch {
         Write-Warn "Could not verify portal deployment secrets: $_"
     }

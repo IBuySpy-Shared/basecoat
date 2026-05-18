@@ -27,8 +27,8 @@ param containerRegistryPassword string = ''
 param postgresAdminLogin string = 'portaladmin'
 
 @secure()
-@description('PostgreSQL administrator password.')
-param postgresAdminPassword string
+@description('PostgreSQL administrator password. If omitted, Bicep generates one for this deployment.')
+param postgresAdminPassword string = 'Pg!${substring(replace(newGuid(), '-', ''), 0, 20)}Aa1'
 
 @description('PostgreSQL database name.')
 param postgresDatabaseName string = 'portaldb'

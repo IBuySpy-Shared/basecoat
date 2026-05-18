@@ -18,7 +18,10 @@ dashboard images, deploys `main.bicep`, and smoke-tests the exposed endpoints.
 Required secrets and vars:
 
 - `PORTAL_AZURE_CREDENTIALS` (JSON with `clientId`, `clientSecret`, `tenantId`, `subscriptionId`)
-- `PORTAL_POSTGRES_ADMIN_PASSWORD`
 - `GHCR_PULL_TOKEN` (PAT with `read:packages` for pulling GHCR images)
 - `PORTAL_RESOURCE_GROUP` (optional, defaults to `basecoat-portal-staging-rg`)
 - `PORTAL_AZURE_LOCATION` (optional, defaults to `eastus`)
+
+Optional override:
+
+- `PORTAL_POSTGRES_ADMIN_PASSWORD` — if omitted from workflow parameters, `main.bicep` generates a secure admin password per deployment.

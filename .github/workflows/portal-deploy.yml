@@ -98,13 +98,12 @@ jobs:
         shell: bash
         env:
           PORTAL_AZURE_CREDENTIALS: ${{ secrets.PORTAL_AZURE_CREDENTIALS }}
-          PORTAL_POSTGRES_ADMIN_PASSWORD: ${{ secrets.PORTAL_POSTGRES_ADMIN_PASSWORD }}
           GHCR_PULL_TOKEN: ${{ secrets.GHCR_PULL_TOKEN }}
         run: |
           set -euo pipefail
 
           missing=()
-          for secret_name in PORTAL_AZURE_CREDENTIALS PORTAL_POSTGRES_ADMIN_PASSWORD GHCR_PULL_TOKEN; do
+          for secret_name in PORTAL_AZURE_CREDENTIALS GHCR_PULL_TOKEN; do
             if [[ -z "${!secret_name:-}" ]]; then
               missing+=("${secret_name}")
             fi
@@ -160,7 +159,6 @@ jobs:
               frontendImage="${{ needs.build-images.outputs.frontend_image }}" \
               containerRegistryUsername="${{ needs.build-images.outputs.registry_user }}" \
               containerRegistryPassword="${{ secrets.GHCR_PULL_TOKEN }}" \
-              postgresAdminPassword="${{ secrets.PORTAL_POSTGRES_ADMIN_PASSWORD }}" \
             --name "portal-staging-whatif-${{ github.run_id }}-${{ github.run_attempt }}" \
             --no-pretty-print \
             --result-format ResourceIdOnly
@@ -178,7 +176,6 @@ jobs:
               frontendImage="${{ needs.build-images.outputs.frontend_image }}" \
               containerRegistryUsername="${{ needs.build-images.outputs.registry_user }}" \
               containerRegistryPassword="${{ secrets.GHCR_PULL_TOKEN }}" \
-              postgresAdminPassword="${{ secrets.PORTAL_POSTGRES_ADMIN_PASSWORD }}" \
             --name "portal-staging-${{ github.run_number }}" \
             --query properties.outputs \
             --output json)
