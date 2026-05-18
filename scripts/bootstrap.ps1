@@ -112,12 +112,7 @@ function Set-GitHubSecretValue(
 ) {
     if ([string]::IsNullOrWhiteSpace($secretValue)) { return $false }
 
-    if ($environmentName) {
-        $secretValue | gh secret set $secretName -R $repoSlug --env $environmentName 2>$null
-    } else {
-        $secretValue | gh secret set $secretName -R $repoSlug 2>$null
-    }
-
+    $secretValue | gh secret set $secretName -R $repoSlug --env $environmentName 2>$null
     return ($LASTEXITCODE -eq 0)
 }
 
@@ -461,11 +456,11 @@ if ((Test-Path $portalDeployWorkflow) -and -not $Silent) {
     Write-Header "Phase 5 — Optional Portal Deploy"
     if ($script:portalDeployReady) {
         if (Confirm-Step "  Trigger portal-deploy.yml now?") {
-            try {
-                gh workflow run portal-deploy.yml 2>$null | Out-Null
+            gh workflow run portal-deploy.yml -R $repoSlug 2>$null
+            if ($LASTEXITCODE -eq 0) {
                 Write-Check "portal-deploy.yml triggered" $true
-            } catch {
-                Write-Warn "Could not trigger portal-deploy.yml automatically: $_"
+            } else {
+                Write-Warn "Could not trigger portal-deploy.yml (exit code $LASTEXITCODE)."
             }
         } else {
             Write-Host "  Skipped workflow trigger." -ForegroundColor DarkGray
