@@ -279,7 +279,12 @@ Write-Header "Phase 3 — Secrets & Config"
 
 # COPILOT_GITHUB_TOKEN
 try {
-    $secrets = gh secret list 2>$null | Out-String
+    $repoSlug = (gh repo view --json nameWithOwner --jq '.nameWithOwner' 2>$null).Trim()
+    if (-not $repoSlug) {
+        throw "Unable to resolve repository slug"
+    }
+    
+    $secrets = gh secret list -R $repoSlug 2>$null | Out-String
     if ($secrets -match 'COPILOT_GITHUB_TOKEN') {
         Write-Check "COPILOT_GITHUB_TOKEN repo secret present" $true "required for agentic workflows"
     } else {
