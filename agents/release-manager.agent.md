@@ -208,7 +208,7 @@ gh release create "v${NEXT_VERSION}" \
 
 When `--dry-run` is set, the agent performs Steps 1–5 but does **not** commit, tag, push, or create a release. Instead, it prints:
 
-```
+```text
 DRY RUN — Release v<NEXT_VERSION>
   Bump type: <major|minor|patch>
   Current:   <CURRENT_VERSION>
