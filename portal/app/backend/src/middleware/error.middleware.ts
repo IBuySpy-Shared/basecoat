@@ -18,10 +18,11 @@ export const errorHandler = (
   next: NextFunction,
 ) => {
   const timestamp = new Date().toISOString();
+  const requestId = req.requestId ?? 'unknown';
 
   if (error instanceof AppError) {
     logger.warn('Application error', {
-      requestId: req.requestId,
+      requestId,
       code: error.code,
       statusCode: error.statusCode,
       message: error.message,
@@ -32,7 +33,7 @@ export const errorHandler = (
       code: error.code,
       message: error.message,
       timestamp,
-      requestId: req.requestId,
+      requestId,
     };
 
     if (error.details) {
@@ -44,7 +45,7 @@ export const errorHandler = (
 
   // Unexpected errors
   logger.error('Unexpected error', {
-    requestId: req.requestId,
+    requestId,
     name: error.name,
     message: error.message,
     stack: error.stack,
@@ -54,7 +55,7 @@ export const errorHandler = (
     code: 'INTERNAL_SERVER_ERROR',
     message: 'An unexpected error occurred',
     timestamp,
-    requestId: req.requestId,
+    requestId,
   };
 
   if (process.env.NODE_ENV === 'development') {
@@ -73,7 +74,7 @@ export const notFoundHandler = (req: AuthRequest, res: Response) => {
     code: 'NOT_FOUND',
     message: `Route ${req.method} ${req.path} not found`,
     timestamp: new Date().toISOString(),
-    requestId: req.requestId,
+    requestId: req.requestId ?? 'unknown',
   };
 
   res.status(404).json(response);

@@ -2,6 +2,8 @@ import { Response, NextFunction } from 'express';
 import Joi from 'joi';
 import { AuditService } from '@services/audit.service';
 import { AuthRequest } from '@middleware/request.middleware';
+import { AuditStatus, AuditType } from '@models/audit.entity';
+import { Severity } from '@models/finding.entity';
 import { ValidationError } from '@utils/errors';
 
 export class AuditController {
@@ -26,7 +28,7 @@ export class AuditController {
       const audit = await this.auditService.createAudit({
         repositoryId: value.repositoryId,
         createdById: req.userId!,
-        type: value.type,
+        type: value.type as AuditType,
         metadata: value.metadata,
       });
 
@@ -106,7 +108,7 @@ export class AuditController {
         return next(new ValidationError(error.message, { details: error.details }));
       }
 
-      const audit = await this.auditService.updateAuditStatus(id, value.status);
+      const audit = await this.auditService.updateAuditStatus(id, value.status as AuditStatus);
 
       res.json({
         success: true,
@@ -136,7 +138,10 @@ export class AuditController {
         return next(new ValidationError(error.message, { details: error.details }));
       }
 
-      const finding = await this.auditService.addFinding(id, value);
+      const finding = await this.auditService.addFinding(id, {
+        ...value,
+        severity: value.severity as Severity,
+      });
 
       res.status(201).json({
         success: true,
