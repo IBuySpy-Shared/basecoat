@@ -70,6 +70,63 @@ agent to call GitHub APIs from within the agent container.
 
 ---
 
+### `GHCR_PULL_TOKEN`
+
+**Used by:** `mcp-deploy.yml`, `portal-deploy.yml`
+
+**Purpose:** Long-lived GitHub PAT with `read:packages` scope used as the
+container registry pull credential stored in Azure Container Apps. Unlike
+`GITHUB_TOKEN`, this token does not expire when the workflow run ends, so
+Azure can authenticate GHCR on every container restart, scale-out, and
+revision activation.
+
+> ⚠️ Never substitute `GITHUB_TOKEN` here. `GITHUB_TOKEN` is scoped to a
+> single workflow run and will cause image pull failures on any subsequent
+> container lifecycle event.
+
+**How to create:**
+
+1. Go to <https://github.com/settings/tokens?type=beta> (fine-grained PAT)
+2. Set **Resource owner** to your organization
+3. Under **Repository permissions** → **Packages** → set to `Read`
+4. Set expiration to **90 days** (rotate on expiry)
+5. Generate and copy the token immediately
+6. Add as repository secret `GHCR_PULL_TOKEN`
+
+**Rotation schedule:** Rotate every 90 days. Update the secret before the
+token expires to avoid deployment downtime.
+
+---
+
+### `PORTAL_RESOURCE_GROUP`
+
+**Used by:** `portal-deploy.yml`
+
+**Purpose:** Azure resource group name where the portal app infrastructure is
+deployed.
+
+---
+
+### `PORTAL_DB_AAD_ADMIN_OBJECT_ID`
+
+**Used by:** `portal-deploy.yml`
+
+**Purpose:** Object ID of the Entra ID principal (user, group, or service
+principal) that will be granted the PostgreSQL administrator role. The
+PostgreSQL Flexible Server is configured with RBAC-only authentication
+(password auth disabled), so this must be set before the first deployment.
+
+---
+
+### `PORTAL_DB_AAD_ADMIN_LOGIN`
+
+**Used by:** `portal-deploy.yml`
+
+**Purpose:** Display name / login of the Entra ID PostgreSQL administrator
+principal (must match the object ID in `PORTAL_DB_AAD_ADMIN_OBJECT_ID`).
+
+---
+
 ### `STAGING_API_TOKEN`
 
 **Used by:** `performance-baseline-pr-check.yml`
