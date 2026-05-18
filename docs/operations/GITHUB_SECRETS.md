@@ -16,7 +16,7 @@ The bootstrap script generates a structured audit log at `.memory/bootstrap-audi
 - **Detailed check results** (label, status, details)
 - **Warnings and errors** lists for issue tracking
 
-**Optional: Create GitHub issues for critical errors**
+### Creating GitHub issues for critical errors
 
 Run with `-CreateIssues` flag to automatically open a GitHub issue when critical validation errors are found:
 
