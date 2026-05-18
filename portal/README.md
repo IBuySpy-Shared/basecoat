@@ -2,38 +2,91 @@
 
 Full-stack web application for BaseCoat governance, audit, and compliance workflows.
 
-## Structure
+## Workspace
 
 | Directory | Description |
 |---|---|
 | `frontend/` | React 18 + Vite SPA — pages, routing, auth, charts |
 | `backend/` | Express API — GitHub OAuth, JWT, PostgreSQL/Sequelize |
 | `ui/` | `@basecoat/portal-ui` — shared component library + Storybook |
-| `prompts/` | Portal-specific Copilot prompt files (not synced to consumers) |
+| `app/iac/` | Portal app infrastructure modules and deployment notes |
+| `app/db/` | Database migrations, seeds, and backup helpers |
+| `prompts/` | Portal-specific Copilot prompt files |
 
-## Quick Start
+## Local setup
 
-```bash
-cp .env.example .env
-# Edit .env with your GitHub OAuth app credentials
-docker-compose up -d
-```
+1. Install backend dependencies and create its local env file:
 
-Then open <http://localhost:8080>.
+   ```bash
+   cd portal/backend
+   cp .env.example .env
+   npm ci
+   ```
 
-## Environment Variables
+2. Install frontend dependencies:
 
-| Variable | Description | Default |
-|---|---|---|
-| `POSTGRES_PASSWORD` | PostgreSQL password | devpassword |
-| `JWT_SECRET` | JWT signing secret | change-me-in-production |
-| `GITHUB_CLIENT_ID` | GitHub OAuth App client ID | required |
-| `GITHUB_CLIENT_SECRET` | GitHub OAuth App secret | required |
+   ```bash
+   cd ../frontend
+   npm ci
+   ```
 
-## Development
+3. Install the UI package dependencies if you work on shared components:
 
-- **Frontend**: `cd frontend && npm install && npm run dev` (port 5173)
-- **Backend**: `cd backend && npm install && npm run dev` (port 3001)
-- **Component library**: `cd ui && npm install && npm run storybook` (port 6006)
+   ```bash
+   cd ../ui
+   npm ci
+   ```
 
-See [frontend README](./frontend/README.md), [backend README](./backend/README.md), and [ui README](./ui/README.md).
+4. Run the packages you need in separate terminals:
+
+   ```bash
+   cd portal/frontend && npm run dev
+   cd portal/backend && npm run dev
+   cd portal/ui && npm run storybook
+   ```
+
+The frontend defaults to `http://localhost:3000` for the API. Override it with `portal/frontend/.env.local` when needed.
+
+## Testing
+
+Portal PR validation currently runs:
+
+- Frontend Vitest: [`portal/frontend/package.json`](./frontend/package.json)
+- Backend Jest: [`portal/backend/package.json`](./backend/package.json)
+
+Useful commands:
+
+- Frontend: `npm test`, `npm run build`, `npm run lint`, `npm run type-check`
+- Backend: `npm test`, `npm run test:coverage`, `npm run build`, `npm run lint`
+- UI library: `npm run test`, `npm run test:coverage`, `npm run validate`
+
+## Coverage expectations
+
+- Backend coverage should stay above 80%.
+- `portal/ui` targets 80% lines, functions, and statements, and 75% branches.
+- New work should add or update tests rather than lower the existing baseline.
+
+## Deployment
+
+Workflow links:
+
+- [Portal tests](../.github/workflows/portal-tests.yml) — PR Vitest/Jest validation
+- [Portal deploy](../.github/workflows/portal-deploy.yml) — builds images, deploys `portal/app/iac/main.bicep`, and smoke-tests the staging endpoints
+- [PR validation](../.github/workflows/pr-validation.yml) — repo-wide markdown and secret hygiene checks
+- [Secret scanning](../.github/workflows/secret-scan.yml) — warn-only gitleaks scanning and artifact upload
+
+Deployment notes:
+
+- The deploy workflow targets staging only.
+- It uses `PORTAL_AZURE_CREDENTIALS` and `PORTAL_POSTGRES_ADMIN_PASSWORD` from GitHub secrets.
+- `portal/app/iac/README.md` documents the Bicep boundary and required inputs.
+
+## Secret hygiene
+
+- Use `portal/backend/.env.example` as the local template.
+- Keep real secrets out of `.env`, `.env.local`, workflow YAML, and compose files.
+- Never hardcode credentials in GitHub Actions; use `${{ secrets.* }}` or the built-in `GITHUB_TOKEN`.
+- Store Azure credentials and database passwords in GitHub secrets or environments only.
+- Rotate any exposed secret immediately and remove it from history if needed.
+
+See [frontend README](./frontend/README.md), [backend README](./backend/README.md), and [ui README](./ui/README.md) for package-specific details.
