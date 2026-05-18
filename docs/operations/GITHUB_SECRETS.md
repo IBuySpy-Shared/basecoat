@@ -7,6 +7,27 @@ Navigate to: **Settings → Secrets and variables → Actions → New repository
 
 ---
 
+## Bootstrap Audit Logging
+
+The bootstrap script generates a structured audit log at `.memory/bootstrap-audit.json` with all checks, warnings, and errors found during setup. This log includes:
+
+- **Timestamp** of bootstrap run
+- **Pass/fail counts** for all validation checks  
+- **Detailed check results** (label, status, details)
+- **Warnings and errors** lists for issue tracking
+
+**Optional: Create GitHub issues for critical errors**
+
+Run with `-CreateIssues` flag to automatically open a GitHub issue when critical validation errors are found:
+
+```powershell
+pwsh scripts/bootstrap.ps1 -CreateIssues
+```
+
+This is useful for team adoption: each bootstrap run can surface issues requiring attention without manual reporting. The `-CreateIssues` flag is disabled in `-Silent` mode (CI use) to avoid spam.
+
+---
+
 ## Required Secrets
 
 ### Portal deploy bootstrap order (staging)

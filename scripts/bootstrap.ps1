@@ -8,13 +8,20 @@
       Phase 2 — Memory layer    (SQLite init, gitignore guard, optional shared memory sync)
       Phase 3 — Secrets check   (validate secrets and, in interactive mode, optionally configure missing portal deploy secrets)
       Phase 4 — Validation      (validate-basecoat.ps1 + run-tests.ps1)
+    
+    Generates audit log to .memory/bootstrap-audit.json with all checks, warnings, and errors.
+    Optionally creates GitHub issues for critical failures (-CreateIssues flag).
 
 .PARAMETER Silent
-    Suppress interactive prompts. Suitable for CI use.
+    Suppress interactive prompts. Suitable for CI use. Audit log is still generated.
 
 .PARAMETER SkipTests
     Skip Phase 4 test suite run (useful when bootstrapping in environments without all
     test dependencies installed).
+
+.PARAMETER CreateIssues
+    Automatically create GitHub issues for critical errors found during validation.
+    Only works in interactive mode (-Silent disables issue creation).
 
 .PARAMETER SharedMemoryRepo
     Override the shared org memory repo (e.g., 'MyOrg/basecoat-memory').
@@ -27,6 +34,9 @@
     pwsh scripts/bootstrap.ps1 -Silent -SkipTests
 
 .EXAMPLE
+    pwsh scripts/bootstrap.ps1 -CreateIssues
+
+.EXAMPLE
     pwsh scripts/bootstrap.ps1 -SharedMemoryRepo "MyOrg/basecoat-memory"
 #>
 
@@ -34,6 +44,7 @@
 param(
     [switch]$Silent,
     [switch]$SkipTests,
+    [switch]$CreateIssues,
     [string]$SharedMemoryRepo = $env:BASECOAT_SHARED_MEMORY_REPO
 )
 
@@ -108,6 +119,35 @@ function Set-GitHubSecretValue(
     }
 
     return ($LASTEXITCODE -eq 0)
+}
+
+function Write-AuditLog([string]$repoRoot, [hashtable]$auditData) {
+    $memoryDir = Join-Path $repoRoot '.memory'
+    if (-not (Test-Path $memoryDir)) {
+        New-Item -ItemType Directory -Path $memoryDir -Force | Out-Null
+    }
+
+    $auditFile = Join-Path $memoryDir 'bootstrap-audit.json'
+    $auditData | ConvertTo-Json -Depth 10 | Out-File -FilePath $auditFile -Encoding UTF8 -Force
+    return $auditFile
+}
+
+function Create-GitHubIssue(
+    [string]$repoSlug,
+    [string]$title,
+    [string]$body,
+    [string[]]$labels = @()
+) {
+    try {
+        $cmd = @('gh', 'issue', 'create', '-R', $repoSlug, '--title', $title, '--body', $body)
+        foreach ($label in $labels) {
+            $cmd += @('--label', $label)
+        }
+        & $cmd 2>$null
+        return ($LASTEXITCODE -eq 0)
+    } catch {
+        return $false
+    }
 }
 
 # ── repo root detection ───────────────────────────────────────────────────────
@@ -450,6 +490,47 @@ if ($failed -gt 0) {
 }
 if ($script:warnings.Count -gt 0) {
     Write-Host "  Warnings      : $($script:warnings.Count)" -ForegroundColor Yellow
+}
+
+# Build audit report
+$auditReport = @{
+    timestamp      = Get-Date -AsUTC -Format 'o'
+    repo           = $repoSlug
+    mode           = if ($Silent) { 'Silent' } else { 'Interactive' }
+    passed         = $passed
+    failed         = $failed
+    warnings       = $script:warnings.Count
+    errors         = $script:errors.Count
+    checks         = @($script:checks | ForEach-Object { @{ label = $_.label; ok = $_.ok; detail = $_.detail } })
+    warnings_list  = @($script:warnings)
+    errors_list    = @($script:errors)
+}
+
+# Write audit log
+$auditFile = Write-AuditLog -repoRoot $repoRoot -auditData $auditReport
+Write-Host ""
+Write-Host "  📋 Audit log written: $($auditFile | Resolve-Path -Relative)" -ForegroundColor DarkGray
+
+# Optionally create issues for critical errors
+if ($CreateIssues -and $script:errors.Count -gt 0 -and -not $Silent) {
+    Write-Host ""
+    Write-Host "  Creating GitHub issues for critical errors..." -ForegroundColor DarkGray
+    
+    try {
+        $errorBody = @"
+Bootstrap validation found critical errors:
+
+$(($script:errors | ForEach-Object { "- $_" }) -join "`n")
+
+Run \`pwsh scripts/bootstrap.ps1\` to review full details.
+Audit log: \`.memory/bootstrap-audit.json\`
+"@
+        if (Create-GitHubIssue -repoSlug $repoSlug -title "🔴 Bootstrap validation errors" -body $errorBody -labels @('bootstrap', 'critical')) {
+            Write-Host "  ✅ Issue created for critical errors" -ForegroundColor Green
+        }
+    } catch {
+        Write-Host "  ⚠️   Could not create issue: $_" -ForegroundColor Yellow
+    }
 }
 
 if ($script:errors.Count -eq 0 -and $failed -eq 0) {
