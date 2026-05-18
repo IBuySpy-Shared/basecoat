@@ -162,7 +162,7 @@ $gitignorePath = Join-Path $repoRoot '.gitignore'
 $requiredPatterns = @('*.db', '*.sqlite', '.memory/', '.copilot/session-state/')
 $gitignoreContent = if (Test-Path $gitignorePath) { Get-Content $gitignorePath -Raw } else { '' }
 
-$missingPatterns = $requiredPatterns | Where-Object { $gitignoreContent -notmatch [regex]::Escape($_) }
+$missingPatterns = @($requiredPatterns | Where-Object { $gitignoreContent -notmatch [regex]::Escape($_) })
 if ($missingPatterns.Count -eq 0) {
     Write-Check ".gitignore protects memory stores" $true
 } else {
@@ -324,8 +324,8 @@ if (-not $SkipTests) {
 
 Write-Header "Bootstrap Summary"
 
-$passed = ($script:checks | Where-Object { $_.ok }).Count
-$failed = ($script:checks | Where-Object { -not $_.ok }).Count
+$passed = @($script:checks | Where-Object { $_.ok }).Count
+$failed = @($script:checks | Where-Object { -not $_.ok }).Count
 
 Write-Host "  Checks passed : $passed" -ForegroundColor Green
 if ($failed -gt 0) {
