@@ -23,6 +23,12 @@ allowed_skills: []
 
 Routes the next ready wave from the shared factory state.
 
+## Inputs
+
+- `.factory-state.json` from the repository root
+- Current wave and dependency status per workcell
+- Workflow-dispatch targets for each station
+
 ## Workflow
 
 1. Read `.factory-state.json`.
