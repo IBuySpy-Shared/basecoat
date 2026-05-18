@@ -1,9 +1,8 @@
 import { AppDataSource } from '@config/database';
-import { Audit } from '@models/audit.entity';
+import { Audit, AuditStatus, AuditType } from '@models/audit.entity';
 import { User } from '@models/user.entity';
 import { Repository } from '@models/repository.entity';
-import { Finding } from '@models/finding.entity';
-import { FindRepository } from './find.repository';
+import { Finding, FindingStatus, Severity } from '@models/finding.entity';
 import { DatabaseError, NotFoundError, ValidationError } from '@utils/errors';
 import logger from '@config/logger';
 
@@ -12,12 +11,11 @@ export class AuditService {
   private userRepository = AppDataSource.getRepository(User);
   private repositoryRepository = AppDataSource.getRepository(Repository);
   private findingRepository = AppDataSource.getRepository(Finding);
-  private findRepo = new FindRepository();
 
   async createAudit(data: {
     repositoryId: string;
     createdById: string;
-    type: string;
+    type: AuditType;
     metadata?: Record<string, unknown>;
   }) {
     try {
@@ -41,7 +39,7 @@ export class AuditService {
         repositoryId: data.repositoryId,
         createdById: data.createdById,
         type: data.type,
-        status: 'pending',
+        status: AuditStatus.PENDING,
         metadata: data.metadata || {},
       });
 
@@ -134,12 +132,12 @@ export class AuditService {
     }
   }
 
-  async updateAuditStatus(id: string, status: string) {
+  async updateAuditStatus(id: string, status: AuditStatus) {
     try {
       const audit = await this.getAudit(id);
 
       audit.status = status;
-      if (status === 'completed') {
+      if (status === AuditStatus.COMPLETED) {
         audit.completedAt = new Date();
       }
 
@@ -164,7 +162,7 @@ export class AuditService {
   }
 
   async addFinding(auditId: string, data: {
-    severity: string;
+    severity: Severity;
     category: string;
     description: string;
     remediation?: string;
@@ -180,7 +178,7 @@ export class AuditService {
         description: data.description,
         remediation: data.remediation,
         reference: data.reference,
-        status: 'open',
+        status: FindingStatus.OPEN,
       });
 
       const saved = await this.findingRepository.save(finding);
@@ -227,17 +225,5 @@ export class AuditService {
 
       throw new DatabaseError('Failed to delete audit');
     }
-  }
-}
-
-class FindRepository {
-  private repo = AppDataSource.getRepository(Finding);
-
-  create(data: any) {
-    return this.repo.create(data);
-  }
-
-  save(finding: Finding) {
-    return this.repo.save(finding);
   }
 }

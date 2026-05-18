@@ -175,3 +175,9 @@ WAVE*_DAY*_*.md
 *_STATUS.txt
 *_EXECUTIVE_SUMMARY.txt
 
+# Portal app local/runtime artifacts
+portal/app/backend/logs/
+portal/app/backend/.env
+portal/app/backend/.env.*
+portal/app/dashboard/.env
+portal/app/dashboard/.env.*

@@ -9,12 +9,13 @@ export interface AuthRequest extends Request {
     email: string;
     role: string;
   };
-  requestId: string;
+  requestId?: string;
 }
 
 export const requestIdMiddleware = (req: AuthRequest, res: Response, next: NextFunction) => {
-  req.requestId = req.headers['x-request-id'] as string || uuidv4();
-  res.setHeader('x-request-id', req.requestId);
+  const requestId = (req.headers['x-request-id'] as string) || uuidv4();
+  req.requestId = requestId;
+  res.setHeader('x-request-id', requestId);
   next();
 };
 
