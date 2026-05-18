@@ -78,7 +78,8 @@ Workflow links:
 Deployment notes:
 
 - The deploy workflow targets staging only.
-- It uses `PORTAL_AZURE_CREDENTIALS` and `PORTAL_POSTGRES_ADMIN_PASSWORD` from GitHub secrets.
+- It requires `PORTAL_AZURE_CREDENTIALS`, `PORTAL_POSTGRES_ADMIN_PASSWORD`, and `GHCR_PULL_TOKEN` from GitHub secrets (repo or `staging` environment scope).
+- `PORTAL_AZURE_CREDENTIALS` must be valid JSON containing `clientId`, `clientSecret`, `tenantId`, and `subscriptionId`.
 - `portal/app/iac/README.md` documents the Bicep boundary and required inputs.
 
 ## Secret hygiene

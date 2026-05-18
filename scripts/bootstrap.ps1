@@ -227,6 +227,46 @@ try {
     Write-Warn "Could not check repo secrets (needs repo admin access)"
 }
 
+# Portal deployment secrets (if portal deploy workflow is present)
+$portalDeployWorkflow = Join-Path $repoRoot '.github\workflows\portal-deploy.yml'
+if (Test-Path $portalDeployWorkflow) {
+    try {
+        $repoSlug = (gh repo view --json nameWithOwner --jq '.nameWithOwner' 2>$null).Trim()
+        if (-not $repoSlug) {
+            throw "Unable to resolve repository slug"
+        }
+
+        $repoSecretNames = @(
+            gh secret list -R $repoSlug 2>$null |
+                ForEach-Object { ($_ -split '\s+')[0] } |
+                Where-Object { $_ }
+        )
+        $stagingSecretNames = @(
+            gh secret list --env staging -R $repoSlug 2>$null |
+                ForEach-Object { ($_ -split '\s+')[0] } |
+                Where-Object { $_ }
+        )
+
+        $requiredPortalSecrets = @(
+            'PORTAL_AZURE_CREDENTIALS',
+            'PORTAL_POSTGRES_ADMIN_PASSWORD',
+            'GHCR_PULL_TOKEN'
+        )
+
+        foreach ($secretName in $requiredPortalSecrets) {
+            if ($repoSecretNames -contains $secretName -or $stagingSecretNames -contains $secretName) {
+                Write-Check "$secretName available for portal deploy" $true
+            } else {
+                Write-Fail "$secretName missing for portal deploy (set repo secret or staging environment secret)"
+            }
+        }
+
+        Write-Host "  ℹ️   PORTAL_AZURE_CREDENTIALS must contain JSON keys: clientId, clientSecret, tenantId, subscriptionId" -ForegroundColor DarkGray
+    } catch {
+        Write-Warn "Could not verify portal deployment secrets: $_"
+    }
+}
+
 # BASECOAT_SHARED_MEMORY_REPO env var
 if ($SharedMemoryRepo) {
     Write-Check "BASECOAT_SHARED_MEMORY_REPO configured" $true $SharedMemoryRepo
