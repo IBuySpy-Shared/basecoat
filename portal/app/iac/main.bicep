@@ -51,6 +51,9 @@ param dbAadAdminLogin string
 @allowed(['User', 'Group', 'ServicePrincipal'])
 param dbAadAdminPrincipalType string = 'ServicePrincipal'
 
+@description('PostgreSQL database name to create and connect to.')
+param dbDatabaseName string = 'basecoat_portal'
+
 @description('Resource tags.')
 param tags object = {
   environment: environment
@@ -170,9 +173,14 @@ module backendModule './modules/container-app.bicep' = {
     minReplicas: environment == 'prod' ? 1 : 0
     maxReplicas: environment == 'prod' ? 5 : 2
     envVars: [
-      { name: 'NODE_ENV',     value: 'production' }
-      { name: 'PORT',         value: '3000' }
-      { name: 'DB_HOST',      value: postgresModule.outputs.fqdn }
+      { name: 'NODE_ENV',      value: 'production' }
+      { name: 'PORT',          value: '3000' }
+      // PostgreSQL connection — RBAC-only; no password. The app must use an
+      // Azure AD access token (via DefaultAzureCredential) as the password.
+      { name: 'DB_HOST',       value: postgresModule.outputs.fqdn }
+      { name: 'DB_PORT',       value: '5432' }
+      { name: 'DB_NAME',       value: dbDatabaseName }
+      { name: 'DB_SSLMODE',    value: 'require' }
     ]
     tags: tags
   }

@@ -179,11 +179,11 @@ jobs:
 
       - name: Smoke test — health endpoint
         run: |
-          FQDN="${{ steps.infra.outputs.healthUrl }}"
+          HEALTH_URL="${{ steps.infra.outputs.healthUrl }}"
           # Allow up to 8 attempts (80 s) to accommodate cold-start latency
           # when minReplicas=0 on staging.
           for i in 1 2 3 4 5 6 7 8; do
-            STATUS=$(curl -s -o /dev/null -w "%{http_code}" "https://${FQDN}/health" || echo "000")
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" "${HEALTH_URL}" || echo "000")
             echo "  Attempt ${i}: HTTP ${STATUS}"
             if [[ "${STATUS}" == "200" ]]; then
               echo "✅ Health check passed"

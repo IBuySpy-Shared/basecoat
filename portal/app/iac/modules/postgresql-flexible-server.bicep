@@ -25,8 +25,10 @@ param skuName string = 'Standard_D2ds_v4'
 @allowed(['Burstable', 'GeneralPurpose', 'MemoryOptimized'])
 param skuTier string = 'GeneralPurpose'
 
-@description('Storage size in MB.')
-param storageSizeMb int = 32768
+@description('Storage size in GB. Must be a multiple of 1 GB (e.g. 32, 64, 128).')
+@minValue(32)
+@maxValue(16384)
+param storageSizeGb int = 32
 
 @description('Backup retention days.')
 @minValue(7)
@@ -88,7 +90,7 @@ resource postgresServer 'Microsoft.DBforPostgreSQL/flexibleServers@2023-12-01-pr
   properties: {
     version: postgresVersion
     storage: {
-      storageSizeGB: storageSizeMb / 1024
+      storageSizeGB: storageSizeGb
     }
     backup: {
       backupRetentionDays: backupRetentionDays
