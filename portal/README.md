@@ -86,6 +86,9 @@ Deployment notes:
 Deployment bootstrap order:
 
 1. Run repo bootstrap first (`pwsh scripts/bootstrap.ps1`) to initialize prerequisites and secret checks.
+   - Use this script for **this repository's operational setup**.
+   - Do **not** use `bootstrap-basecoat.ps1` here (that script is for adopting BaseCoat into other consumer repos).
+   - Do **not** use `bootstrap-dashboard.ps1` here (that script is only for adoption metrics dashboard setup).
 2. Provision deployment secrets (`PORTAL_AZURE_CREDENTIALS`, `GHCR_PULL_TOKEN`) at repo or `staging` environment scope.
 3. Re-run bootstrap and confirm Phase 3 secret checks pass.
 4. Run validation (`pwsh scripts/validate-basecoat.ps1` then `pwsh tests/run-tests.ps1`).
