@@ -120,7 +120,9 @@ If any key is missing, deploy fails before Azure login.
 
 **Used by:** `.github/workflows/portal-deploy.yml`
 
-**Purpose:** Admin password for PostgreSQL parameterization in Bicep deployment.
+**Purpose:** Optional override for PostgreSQL admin password.
+
+If omitted, `portal/app/iac/main.bicep` generates a secure password per deployment.
 
 ---
 
@@ -131,6 +133,8 @@ If any key is missing, deploy fails before Azure login.
 **Purpose:** Allows Container Apps runtime to pull private images from GHCR.
 
 **Required scope:** `read:packages`
+
+This is deployment/runtime specific (not just build-time): `GITHUB_TOKEN` can push images during workflow execution, but Azure Container Apps needs a separate credential to pull private GHCR images after deployment.
 
 ---
 
