@@ -87,3 +87,6 @@ The `prd-spec-gate.yml` workflow blocks PRs with ≥ 500 line churn or ≥ 12 fi
 that lack PRD and spec links. PRs that only touch risky paths (skills/, agents/,
 instructions/, etc.) below the size threshold get an advisory warning only. Add
 the `skip-prd-spec-check` label to bypass.
+
+Batch PRs should stay within the contributor guideline of 15 files or fewer and
+300 changed lines or fewer unless the PR is a justified mechanical change.

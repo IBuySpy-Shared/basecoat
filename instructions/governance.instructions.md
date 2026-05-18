@@ -25,6 +25,14 @@ These are not suggestions. Every AI agent operating in `ivegamsft/basecoat` must
 - **DB migrations:** Workflows running DB migrations must set `cancel-in-progress: false`. See [`docs/guardrails/db-deployment-concurrency.md`](docs/guardrails/db-deployment-concurrency.md).
 - **Deployment cancellation:** Run a pre-flight check before stopping any in-progress infrastructure deployment. See [`docs/guardrails/deployment-cancellation.md`](docs/guardrails/deployment-cancellation.md).
 
+## Batch PR Size Guideline
+
+- Prefer one issue per PR.
+- Batch only tightly related changes that are reviewable in one pass.
+- Keep batch PRs to **15 files or fewer** and **300 changed lines or fewer** (additions + deletions).
+- If a batch must exceed either limit, split it or document the mechanical reason in the PR description.
+- Large mechanical batches should include validation evidence, a rollback note, and PRD/spec links when the change is high-risk or high-change.
+
 ## Branch Naming
 
 ```text

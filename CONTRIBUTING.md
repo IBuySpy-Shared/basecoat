@@ -57,6 +57,14 @@ No direct commits to `main`. Ever.
 6. **At least one approval** required (human or designated AI reviewer).
 7. **Squash-merge** preferred to keep `main` history clean.
 
+### Batch PR Size Guideline
+
+- Prefer one issue per PR.
+- Batch only tightly related changes that can be reviewed together.
+- Keep batch PRs to **15 files or fewer** and **300 changed lines or fewer** (additions + deletions).
+- If you must exceed either limit, split the work or explain the mechanical reason in the PR description.
+- Large mechanical batches should include a validation summary and rollback note.
+
 **PR Title Format:**
 
 ```text
