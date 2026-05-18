@@ -9,6 +9,19 @@ Navigate to: **Settings → Secrets and variables → Actions → New repository
 
 ## Required Secrets
 
+### Portal deploy bootstrap order (staging)
+
+Use this order to avoid mixed bootstrap/deploy failures:
+
+1. Run `pwsh scripts/bootstrap.ps1` in the repo.
+2. Set portal deploy secrets at repo scope or `staging` environment scope.
+3. Re-run `pwsh scripts/bootstrap.ps1` and verify Phase 3 passes portal secret checks.
+4. Trigger `.github/workflows/portal-deploy.yml`.
+
+The deploy workflow now fails fast in the `Validate deployment secrets` step when required portal secrets are missing or malformed.
+
+---
+
 ### `COPILOT_GITHUB_TOKEN`
 
 **Used by:** `issue-triage.lock.yml`, `code-review-agent.lock.yml`,
@@ -79,6 +92,45 @@ agent to call GitHub APIs from within the agent container.
 **Note:** This workflow is a pre-existing non-blocking failure when the staging
 deployment is not provisioned. CI will report it as failing on every PR; this
 does not block merges since branch protection is not enforced on `main`.
+
+---
+
+### `PORTAL_AZURE_CREDENTIALS`
+
+**Used by:** `.github/workflows/portal-deploy.yml`
+
+**Purpose:** Authenticates Azure CLI actions for staging deployment.
+
+**Required format:** JSON with all keys present:
+
+```json
+{
+  "clientId": "00000000-0000-0000-0000-000000000000",
+  "clientSecret": "<secret>",
+  "tenantId": "00000000-0000-0000-0000-000000000000",
+  "subscriptionId": "00000000-0000-0000-0000-000000000000"
+}
+```
+
+If any key is missing, deploy fails before Azure login.
+
+---
+
+### `PORTAL_POSTGRES_ADMIN_PASSWORD`
+
+**Used by:** `.github/workflows/portal-deploy.yml`
+
+**Purpose:** Admin password for PostgreSQL parameterization in Bicep deployment.
+
+---
+
+### `GHCR_PULL_TOKEN`
+
+**Used by:** `.github/workflows/portal-deploy.yml`
+
+**Purpose:** Allows Container Apps runtime to pull private images from GHCR.
+
+**Required scope:** `read:packages`
 
 ---
 

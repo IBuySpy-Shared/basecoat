@@ -82,6 +82,16 @@ Deployment notes:
 - `PORTAL_AZURE_CREDENTIALS` must be valid JSON containing `clientId`, `clientSecret`, `tenantId`, and `subscriptionId`.
 - `portal/app/iac/README.md` documents the Bicep boundary and required inputs.
 
+Deployment bootstrap order:
+
+1. Run repo bootstrap first (`pwsh scripts/bootstrap.ps1`) to initialize prerequisites and secret checks.
+2. Provision deployment secrets (`PORTAL_AZURE_CREDENTIALS`, `PORTAL_POSTGRES_ADMIN_PASSWORD`, `GHCR_PULL_TOKEN`) at repo or `staging` environment scope.
+3. Re-run bootstrap and confirm Phase 3 secret checks pass.
+4. Run validation (`pwsh scripts/validate-basecoat.ps1` then `pwsh tests/run-tests.ps1`).
+5. Trigger `Portal Deploy` (push to `main` or manual dispatch).
+
+This order prevents chicken-and-egg failures by making secret provisioning the explicit gate before the first Azure login/deploy attempt.
+
 ## Secret hygiene
 
 - Use `portal/backend/.env.example` as the local template.
