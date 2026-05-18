@@ -23,6 +23,12 @@ allowed_skills: []
 
 Curates one coherent state file from intake, labels, and gates.
 
+## Inputs
+
+- Workcell intake YAML payload
+- Current issue labels and milestone context
+- Existing `.factory-state.json` (if present)
+
 ## Workflow
 
 1. Read the Workcell intake and existing issue labels.

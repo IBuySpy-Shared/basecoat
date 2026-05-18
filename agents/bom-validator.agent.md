@@ -23,6 +23,12 @@ allowed_skills: ["bom-validation"]
 
 Validates the workcell BOM before the next station can begin.
 
+## Inputs
+
+- Intake BOM payload
+- Plant registry snapshot
+- Current workcell PR context
+
 ## Workflow
 
 1. Read the intake BOM and plant registry.

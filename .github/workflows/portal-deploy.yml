@@ -1,0 +1,185 @@
+name: Portal Deploy
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "portal/app/**"
+      - ".github/workflows/portal-deploy.yml"
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Target environment"
+        required: true
+        default: staging
+        type: choice
+        options:
+          - staging
+
+permissions:
+  contents: read
+  id-token: write
+  packages: write
+
+env:
+  AZURE_LOCATION: ${{ vars.PORTAL_AZURE_LOCATION || 'eastus' }}
+  AZURE_RESOURCE_GROUP: ${{ vars.PORTAL_RESOURCE_GROUP || 'basecoat-portal-staging-rg' }}
+  REGISTRY_HOST: ghcr.io
+
+jobs:
+  build-images:
+    name: Build and push app images
+    runs-on: ubuntu-latest
+    outputs:
+      image_tag: ${{ steps.meta.outputs.image_tag }}
+      backend_image: ${{ steps.meta.outputs.backend_image }}
+      frontend_image: ${{ steps.meta.outputs.frontend_image }}
+      registry_user: ${{ steps.meta.outputs.registry_user }}
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+
+      - name: Prepare image names
+        id: meta
+        shell: bash
+        run: |
+          set -euo pipefail
+          OWNER_LC="${GITHUB_REPOSITORY_OWNER,,}"
+          IMAGE_TAG="staging-${GITHUB_SHA::7}"
+          echo "registry_user=${OWNER_LC}" >> "$GITHUB_OUTPUT"
+          echo "image_tag=${IMAGE_TAG}" >> "$GITHUB_OUTPUT"
+          echo "backend_image=${REGISTRY_HOST}/${OWNER_LC}/basecoat-portal-backend:${IMAGE_TAG}" >> "$GITHUB_OUTPUT"
+          echo "frontend_image=${REGISTRY_HOST}/${OWNER_LC}/basecoat-portal-dashboard:${IMAGE_TAG}" >> "$GITHUB_OUTPUT"
+
+      - name: Log in to GHCR
+        uses: docker/login-action@74a5d142397b4f367a81961eba4e8cd7edddf772 # v3
+        with:
+          registry: ${{ env.REGISTRY_HOST }}
+          username: ${{ steps.meta.outputs.registry_user }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@4d04d5d9486b7bd6fa91e7baf45bbb4f8b9deedd # v3
+
+      - name: Build and push backend image
+        uses: docker/build-push-action@263435318d21b8e681c14492fe198d362a7d2c83 # v6
+        with:
+          context: portal/app/backend
+          file: portal/app/backend/Dockerfile
+          push: true
+          tags: ${{ steps.meta.outputs.backend_image }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Build and push frontend image
+        uses: docker/build-push-action@263435318d21b8e681c14492fe198d362a7d2c83 # v6
+        with:
+          context: portal/app/dashboard
+          file: portal/app/dashboard/Dockerfile
+          push: true
+          tags: ${{ steps.meta.outputs.frontend_image }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  deploy-staging:
+    name: Deploy staging portal app
+    runs-on: ubuntu-latest
+    needs: build-images
+    environment: staging
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+
+      - name: Azure login
+        uses: azure/login@a457da9ea143d694b1b9c7c869ebb04ebe844ef5 # v2
+        with:
+          creds: ${{ secrets.PORTAL_AZURE_CREDENTIALS }}
+
+      - name: Create resource group
+        shell: bash
+        run: |
+          set -euo pipefail
+          az group create \
+            --name "${AZURE_RESOURCE_GROUP}" \
+            --location "${AZURE_LOCATION}" \
+            --output none
+
+      - name: Validate Bicep
+        shell: bash
+        run: |
+          set -euo pipefail
+          az deployment group what-if \
+            --resource-group "${AZURE_RESOURCE_GROUP}" \
+            --template-file portal/app/iac/main.bicep \
+            --parameters \
+              backendImage="${{ needs.build-images.outputs.backend_image }}" \
+              frontendImage="${{ needs.build-images.outputs.frontend_image }}" \
+              containerRegistryUsername="${{ needs.build-images.outputs.registry_user }}" \
+              containerRegistryPassword="${{ secrets.GITHUB_TOKEN }}" \
+              postgresAdminPassword="${{ secrets.PORTAL_POSTGRES_ADMIN_PASSWORD }}" \
+            --name "portal-staging-whatif-${{ github.run_id }}-${{ github.run_attempt }}" \
+            --no-pretty-print \
+            --result-format ResourceIdOnly
+
+      - name: Deploy portal stack
+        id: deploy
+        shell: bash
+        run: |
+          set -euo pipefail
+          DEPLOYMENT_JSON=$(az deployment group create \
+            --resource-group "${AZURE_RESOURCE_GROUP}" \
+            --template-file portal/app/iac/main.bicep \
+            --parameters \
+              backendImage="${{ needs.build-images.outputs.backend_image }}" \
+              frontendImage="${{ needs.build-images.outputs.frontend_image }}" \
+              containerRegistryUsername="${{ needs.build-images.outputs.registry_user }}" \
+              containerRegistryPassword="${{ secrets.GITHUB_TOKEN }}" \
+              postgresAdminPassword="${{ secrets.PORTAL_POSTGRES_ADMIN_PASSWORD }}" \
+            --name "portal-staging-${{ github.run_number }}" \
+            --query properties.outputs \
+            --output json)
+
+          echo "backend_url=$(echo "${DEPLOYMENT_JSON}" | python3 -c "import json,sys; print(json.load(sys.stdin)['backendUrl']['value'])")" >> "$GITHUB_OUTPUT"
+          echo "frontend_url=$(echo "${DEPLOYMENT_JSON}" | python3 -c "import json,sys; print(json.load(sys.stdin)['frontendUrl']['value'])")" >> "$GITHUB_OUTPUT"
+          echo "database_fqdn=$(echo "${DEPLOYMENT_JSON}" | python3 -c "import json,sys; print(json.load(sys.stdin)['databaseFqdn']['value'])")" >> "$GITHUB_OUTPUT"
+
+      - name: Smoke test backend
+        shell: bash
+        run: |
+          set -euo pipefail
+          URL="${{ steps.deploy.outputs.backend_url }}/health"
+          for attempt in 1 2 3 4 5; do
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" "${URL}" || echo "000")
+            if [[ "${STATUS}" == "200" ]]; then
+              exit 0
+            fi
+            sleep 10
+          done
+          echo "::error::Backend health check failed: ${URL}"
+          exit 1
+
+      - name: Smoke test frontend
+        shell: bash
+        run: |
+          set -euo pipefail
+          URL="${{ steps.deploy.outputs.frontend_url }}"
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" "${URL}" || echo "000")
+          if [[ "${STATUS}" != "200" ]]; then
+            echo "::error::Frontend smoke check failed: ${URL} returned ${STATUS}"
+            exit 1
+          fi
+
+      - name: Summarize deployment
+        shell: bash
+        run: |
+          {
+            echo "### Portal staging deployment"
+            echo ""
+            echo "| Output | Value |"
+            echo "|---|---|"
+            echo "| Backend | ${{ steps.deploy.outputs.backend_url }} |"
+            echo "| Frontend | ${{ steps.deploy.outputs.frontend_url }} |"
+            echo "| PostgreSQL | ${{ steps.deploy.outputs.database_fqdn }} |"
+          } >> "$GITHUB_STEP_SUMMARY"

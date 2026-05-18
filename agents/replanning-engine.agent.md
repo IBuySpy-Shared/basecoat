@@ -23,6 +23,12 @@ allowed_skills: []
 
 Detects when S2 reality has drifted too far from the original estimate.
 
+## Inputs
+
+- S2 assessment output and complexity estimates
+- Current issue scope, labels, and milestone context
+- Replanning threshold policy from project governance
+
 ## Workflow
 
 1. Compare estimated complexity with actual signals from S2 output.

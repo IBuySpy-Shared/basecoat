@@ -23,6 +23,12 @@ allowed_skills: ["s4-rollback-testing"]
 
 Checks whether the new path can safely survive the shadow-mode soak.
 
+## Inputs
+
+- Latest S4 shadow-mode telemetry and live baseline metrics
+- Agreed error-rate, latency, and divergence thresholds
+- Current cutover window and rollback guardrail policy
+
 ## Workflow
 
 1. Read the latest S4 monitoring data.
